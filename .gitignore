@@ -1,0 +1,48 @@
+# Godot 4+ specific
+.godot/
+
+# Mono/C# builds
+.mono/
+data_*/
+export_presets.cfg
+
+# Exported binaries
+*.exe
+*.apk
+*.ipa
+*.x86_64
+*.x86
+*.wasm
+*.zip
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# VS Code
+.vscode/
+
+#C#/.NET
+*.sln
+*.csproj
+*.user
+*.dotCover
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# RL training outputs
+runs/
+checkpoints/
+models/
+tensorboard/
