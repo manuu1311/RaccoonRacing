@@ -5,7 +5,7 @@ All original trademarks, characters, and copyrighted material related to the ori
 ## Roadmap
 
 | Status | Task |
-|---|---|
+|-|---|
 | ⬜ | Game recreation |
 | ⬜ | Online multiplayer support |
 | ⬜ | RL integration |
