@@ -1,0 +1,529 @@
+[gd_scene format=3 uid="uid://8eaagkupeha4"]
+
+[ext_resource type="Texture2D" uid="uid://b2h3b5exen0b6" path="res://Assets/Animations/CharSelection/road1.png" id="1_aeg6n"]
+[ext_resource type="Texture2D" uid="uid://coyerr5laccvk" path="res://Assets/Animations/CharSelection/sky.svg" id="1_gmby4"]
+[ext_resource type="Texture2D" uid="uid://cjf020b145uy5" path="res://Assets/Animations/CharSelection/grass1.png" id="2_4b7jy"]
+[ext_resource type="Texture2D" uid="uid://be1hxm44pnvw5" path="res://Assets/Animations/CharSelection/nearclouds.svg" id="2_dagkv"]
+[ext_resource type="Texture2D" uid="uid://cku3ba5msf4i3" path="res://Assets/Animations/CharSelection/farclouds.svg" id="3_ihsx5"]
+[ext_resource type="Texture2D" uid="uid://duxu8cow2gblm" path="res://Assets/Animations/CharSelection/lines1.png" id="3_nh31l"]
+[ext_resource type="Texture2D" uid="uid://hjp24s2c8g5b" path="res://Assets/Animations/CharSelection/greenbush.png" id="7_4b7jy"]
+[ext_resource type="Texture2D" uid="uid://dqywrdq8ycm5i" path="res://Assets/Animations/CharSelection/emptybush.png" id="7_ju6pi"]
+[ext_resource type="Texture2D" uid="uid://bx6mc24316p35" path="res://Assets/Animations/CharSelection/palm.png" id="7_nh31l"]
+[ext_resource type="Texture2D" uid="uid://dpdjbwrhlhhct" path="res://Assets/Animations/CharSelection/grass2.png" id="7_qnxsf"]
+[ext_resource type="Texture2D" uid="uid://cson3qsyf7pk4" path="res://Assets/Animations/CharSelection/road2.png" id="8_mk0pc"]
+[ext_resource type="Texture2D" uid="uid://dyj0x211s7w7c" path="res://Assets/Animations/CharSelection/lines2.png" id="9_tqy4p"]
+
+[sub_resource type="Animation" id="Animation_gmby4"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NearClouds:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [270.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FarClouds:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-250.0]
+}
+
+[sub_resource type="Animation" id="Animation_dagkv"]
+resource_name = "movingClouds"
+length = 8.571431
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NearClouds:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8.571428),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [270.0, -750.0]
+}
+
+[sub_resource type="Animation" id="Animation_ihsx5"]
+resource_name = "movingCloudsFar"
+length = 17.14286
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FarClouds:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 17.142857),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-250.0, -1082.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ihsx5"]
+_data = {
+&"RESET": SubResource("Animation_gmby4"),
+&"movingClouds": SubResource("Animation_dagkv"),
+&"movingCloudsFar": SubResource("Animation_ihsx5")
+}
+
+[sub_resource type="Animation" id="Animation_gtwtp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ground/Grass:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_4b7jy")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ground/Road:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_aeg6n")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Ground/Lines:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_nh31l")]
+}
+
+[sub_resource type="Animation" id="Animation_ju6pi"]
+resource_name = "backgroundAnimation"
+length = 0.11428857
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ground/Grass:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.057142857),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_4b7jy"), ExtResource("7_qnxsf")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ground/Road:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.057142857),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_aeg6n"), ExtResource("8_mk0pc")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Ground/Lines:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.057142857),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_nh31l"), ExtResource("9_tqy4p")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r6k7f"]
+_data = {
+&"RESET": SubResource("Animation_gtwtp"),
+&"groundAnimation": SubResource("Animation_ju6pi")
+}
+
+[sub_resource type="Animation" id="Animation_4b7jy"]
+resource_name = "DecorationAnimation"
+length = 0.7142886
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bush1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-63.00003, 80), Vector2(-381, 150)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bush1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.18, 0.18), Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bush2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(41, 80.99999), Vector2(313.3, 100)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bush2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.18, 0.18), Vector2(1.5, 1.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Palm1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-81, 80), Vector2(-421, 77)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Palm1:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.18, 0.18), Vector2(1.5, 1.5)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Palm2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(61, 77), Vector2(353.3, 25)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Palm2:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.18, 0.18), Vector2(1.5, 1.5)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("EmptyBush1:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-48, 80), Vector2(-321, 200)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("EmptyBush1:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.18, 0.18), Vector2(1.5, 1.5)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("EmptyBush2:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(30, 82), Vector2(353.3, 155)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("EmptyBush2:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.71428573),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.18, 0.18), Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="Animation" id="Animation_nh31l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bush1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-63.00003, 80)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bush1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.18, 0.18)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bush2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(41, 80.99999)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Bush2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.18, 0.18)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ju6pi"]
+_data = {
+&"DecorationAnimation": SubResource("Animation_4b7jy"),
+&"RESET": SubResource("Animation_nh31l")
+}
+
+[node name="UiCharSelection" type="CanvasLayer" unique_id=2012181980]
+
+[node name="Control" type="Control" parent="." unique_id=1966223495]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Background" type="Control" parent="Control" unique_id=2100392230]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sky" type="TextureRect" parent="Control/Background" unique_id=1535215074]
+layout_mode = 0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 317.0
+offset_bottom = 85.0
+pivot_offset = Vector2(-250, 0)
+texture = ExtResource("1_gmby4")
+
+[node name="NearClouds" type="TextureRect" parent="Control/Background" unique_id=1153186523]
+layout_mode = 0
+offset_left = 270.0
+offset_top = -210.11
+offset_right = 723.0001
+offset_bottom = -58.11
+pivot_offset = Vector2(-250, 0)
+texture = ExtResource("2_dagkv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Background/NearClouds" unique_id=634969884]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_ihsx5")
+autoplay = &"movingClouds"
+
+[node name="FarClouds" type="TextureRect" parent="Control/Background" unique_id=1671664108]
+layout_mode = 0
+offset_left = -250.0
+offset_top = -52.11
+offset_right = 1163.0
+offset_bottom = 84.89
+texture = ExtResource("3_ihsx5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Background/FarClouds" unique_id=1326085855]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_ihsx5")
+autoplay = &"movingCloudsFar"
+
+[node name="Ground" type="Control" parent="Control" unique_id=1309751188]
+anchors_preset = 0
+offset_top = -1.575
+offset_bottom = -1.575
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Ground" unique_id=1822788233]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_r6k7f")
+autoplay = &"groundAnimation"
+
+[node name="Grass" type="TextureRect" parent="Control/Ground" unique_id=1731908285]
+layout_mode = 0
+offset_left = -264.0
+offset_top = 80.345
+offset_right = 324.0
+offset_bottom = 248.345
+texture = ExtResource("2_4b7jy")
+
+[node name="Road" type="TextureRect" parent="Control/Ground" unique_id=386008449]
+layout_mode = 0
+offset_left = -258.63
+offset_top = 79.44499
+offset_right = 317.37
+offset_bottom = 295.44562
+texture = ExtResource("1_aeg6n")
+
+[node name="Lines" type="TextureRect" parent="Control/Ground" unique_id=1841639591]
+layout_mode = 0
+offset_left = -14.845
+offset_top = 87.0
+offset_right = 64.155
+offset_bottom = 293.0
+texture = ExtResource("3_nh31l")
+
+[node name="Decorations" type="Control" parent="Control" unique_id=375490701]
+anchors_preset = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Decorations" unique_id=431613585]
+libraries/ = SubResource("AnimationLibrary_ju6pi")
+autoplay = &"DecorationAnimation"
+
+[node name="EmptyBush1" type="TextureRect" parent="Control/Decorations" unique_id=1257348513]
+layout_mode = 0
+offset_left = -48.0
+offset_top = 80.0
+offset_right = -10.0
+offset_bottom = 117.00016
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("7_ju6pi")
+
+[node name="EmptyBush2" type="TextureRect" parent="Control/Decorations" unique_id=1755270419]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 82.0
+offset_right = 68.00001
+offset_bottom = 119.0
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("7_ju6pi")
+
+[node name="Bush1" type="TextureRect" parent="Control/Decorations" unique_id=1298563505]
+layout_mode = 0
+offset_left = -63.00003
+offset_top = 80.0
+offset_right = 12.9999695
+offset_bottom = 155.0
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("7_4b7jy")
+
+[node name="Bush2" type="TextureRect" parent="Control/Decorations" unique_id=451264416]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 80.99999
+offset_right = 117.00668
+offset_bottom = 156.0
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("7_4b7jy")
+
+[node name="Palm1" type="TextureRect" parent="Control/Decorations" unique_id=282591378]
+layout_mode = 0
+offset_left = -81.0
+offset_top = 80.0
+offset_right = 27.0
+offset_bottom = 218.0
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("7_nh31l")
+
+[node name="Palm2" type="TextureRect" parent="Control/Decorations" unique_id=1369763322]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 77.0
+offset_right = 169.0002
+offset_bottom = 215.0
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("7_nh31l")

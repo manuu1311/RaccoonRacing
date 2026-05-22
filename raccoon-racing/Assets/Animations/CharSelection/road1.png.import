@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnkpf0veo63b0"
-path="res://.godot/imported/417.svg-2dd40eb7d271391e0c90b8ab6d4416f0.ctex"
+uid="uid://b2h3b5exen0b6"
+path="res://.godot/imported/road1.png-f33bc758a2018f8a64f5fb6011863f26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Animations/CharSelection/shapes/417.svg"
-dest_files=["res://.godot/imported/417.svg-2dd40eb7d271391e0c90b8ab6d4416f0.ctex"]
+source_file="res://Assets/Animations/CharSelection/road1.png"
+dest_files=["res://.godot/imported/road1.png-f33bc758a2018f8a64f5fb6011863f26.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckfp1ffr28n12"
-path="res://.godot/imported/418.svg-38ad123644ead14aacc25cd4c409f0c7.ctex"
+uid="uid://cjf020b145uy5"
+path="res://.godot/imported/grass1.png-13f8b16f0fb3bd1b8eaddf60dfd7f01b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Animations/CharSelection/shapes/418.svg"
-dest_files=["res://.godot/imported/418.svg-38ad123644ead14aacc25cd4c409f0c7.ctex"]
+source_file="res://Assets/Animations/CharSelection/grass1.png"
+dest_files=["res://.godot/imported/grass1.png-13f8b16f0fb3bd1b8eaddf60dfd7f01b.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
