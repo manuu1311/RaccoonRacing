@@ -385,6 +385,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m8y3r")
+}, {
+"duration": 1.0,
+"texture": null
 }],
 "loop": false,
 "name": &"intro",
@@ -423,6 +426,8 @@ func _on_start_button_pressed():
 	buttons.hide()
 	logo.hide()
 	play()
+	await animation_finished
+	get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_char_selection.tscn')
 
 
 func _on_how_to_play_button_pressed() -> void:
@@ -430,6 +435,7 @@ func _on_how_to_play_button_pressed() -> void:
 	buttons.hide()
 	logo.hide()
 	play()
+	await animation_finished
 	get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_how_to_play.tscn')
 
 

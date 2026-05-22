@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b2h3b5exen0b6" path="res://Assets/Animations/CharSelection/road1.png" id="1_aeg6n"]
 [ext_resource type="Texture2D" uid="uid://coyerr5laccvk" path="res://Assets/Animations/CharSelection/sky.svg" id="1_gmby4"]
+[ext_resource type="Script" uid="uid://bitjb5fx1xin0" path="res://scripts/CharSelection/ui_char_selection.gd" id="1_tqy4p"]
 [ext_resource type="Texture2D" uid="uid://cjf020b145uy5" path="res://Assets/Animations/CharSelection/grass1.png" id="2_4b7jy"]
 [ext_resource type="Texture2D" uid="uid://be1hxm44pnvw5" path="res://Assets/Animations/CharSelection/nearclouds.svg" id="2_dagkv"]
 [ext_resource type="Texture2D" uid="uid://cku3ba5msf4i3" path="res://Assets/Animations/CharSelection/farclouds.svg" id="3_ihsx5"]
@@ -12,6 +13,16 @@
 [ext_resource type="Texture2D" uid="uid://dpdjbwrhlhhct" path="res://Assets/Animations/CharSelection/grass2.png" id="7_qnxsf"]
 [ext_resource type="Texture2D" uid="uid://cson3qsyf7pk4" path="res://Assets/Animations/CharSelection/road2.png" id="8_mk0pc"]
 [ext_resource type="Texture2D" uid="uid://dyj0x211s7w7c" path="res://Assets/Animations/CharSelection/lines2.png" id="9_tqy4p"]
+[ext_resource type="Texture2D" uid="uid://dioaqtx5mmk0n" path="res://Assets/Images/main_menu/back.png" id="14_gtwtp"]
+[ext_resource type="Texture2D" uid="uid://dp4yjmnoqrwc6" path="res://Assets/Animations/CharSelection/characters/mambopic.png" id="15_obove"]
+[ext_resource type="Texture2D" uid="uid://dmqxmmga4q3k7" path="res://Assets/Animations/CharSelection/characters/shiny2.png" id="16_02813"]
+[ext_resource type="Script" uid="uid://ce4jwo4mrpxcs" path="res://scripts/CharSelection/char.gd" id="16_fi2k8"]
+[ext_resource type="Texture2D" uid="uid://bo5uuxxo5wrsc" path="res://Assets/Animations/CharSelection/characters/mambohover.png" id="17_02813"]
+[ext_resource type="Texture2D" uid="uid://i4d7hsncevdk" path="res://Assets/Animations/CharSelection/characters/shiny3.png" id="17_ar6hf"]
+[ext_resource type="Texture2D" uid="uid://dujvubn3avqnd" path="res://Assets/Animations/CharSelection/characters/mambotext.png" id="18_ar6hf"]
+[ext_resource type="Texture2D" uid="uid://ca7xqhoukm7ys" path="res://Assets/Animations/CharSelection/characters/shiny1.png" id="19_obove"]
+[ext_resource type="Texture2D" uid="uid://ccu7mt8tmpevy" path="res://Assets/Animations/CharSelection/characters/lock.png" id="22_ar6hf"]
+[ext_resource type="FontFile" uid="uid://b6ndjgweysvx0" path="res://Assets/Fonts/2_Arial Black.ttf" id="23_fshb7"]
 
 [sub_resource type="Animation" id="Animation_gmby4"]
 length = 0.001
@@ -378,6 +389,51 @@ _data = {
 &"RESET": SubResource("Animation_nh31l")
 }
 
+[sub_resource type="Animation" id="Animation_fshb7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mambo/Char/Shiny:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("19_obove")]
+}
+
+[sub_resource type="Animation" id="Animation_wpv0k"]
+resource_name = "Shinies"
+length = 0.14286
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mambo/Char/Shiny:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("19_obove"), ExtResource("16_02813"), ExtResource("17_ar6hf")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fe3q7"]
+_data = {
+&"RESET": SubResource("Animation_fshb7"),
+&"Shinies": SubResource("Animation_wpv0k")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_obove"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fi2k8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_02813"]
+
 [node name="UiCharSelection" type="CanvasLayer" unique_id=2012181980]
 
 [node name="Control" type="Control" parent="." unique_id=1966223495]
@@ -391,6 +447,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource("1_tqy4p")
 
 [node name="Background" type="Control" parent="Control" unique_id=2100392230]
 anchors_preset = 0
@@ -527,3 +584,93 @@ offset_right = 169.0002
 offset_bottom = 215.0
 scale = Vector2(0.18, 0.18)
 texture = ExtResource("7_nh31l")
+
+[node name="BackButton" type="TextureButton" parent="Control" unique_id=836593869]
+layout_mode = 0
+offset_left = -12.000015
+offset_top = 217.99998
+offset_right = 80.00003
+offset_bottom = 260.0
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("14_gtwtp")
+
+[node name="Characters" type="Control" parent="Control" unique_id=83292420]
+anchors_preset = 0
+
+[node name="ShinyPlayer" type="AnimationPlayer" parent="Control/Characters" unique_id=1180738923]
+libraries/ = SubResource("AnimationLibrary_fe3q7")
+autoplay = &"Shinies"
+
+[node name="Mambo" type="Control" parent="Control/Characters" unique_id=1271562785]
+anchors_preset = 0
+
+[node name="Char" type="TextureRect" parent="Control/Characters/Mambo" unique_id=189482387]
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 141.0
+texture = ExtResource("15_obove")
+script = ExtResource("16_fi2k8")
+hovertext = ExtResource("17_02813")
+normaltext = ExtResource("18_ar6hf")
+locked = true
+
+[node name="Shiny" type="TextureRect" parent="Control/Characters/Mambo/Char" unique_id=320993902]
+visible = false
+layout_mode = 0
+offset_left = -40.0
+offset_top = -41.5
+offset_right = 184.0
+offset_bottom = 182.5
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("19_obove")
+
+[node name="Label" type="TextureRect" parent="Control/Characters/Mambo/Char" unique_id=1586419805]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 130.0
+offset_right = 129.0
+offset_bottom = 173.0
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("18_ar6hf")
+
+[node name="Button" type="Button" parent="Control/Characters/Mambo/Char" unique_id=1227798374]
+layout_mode = 0
+offset_left = 11.265
+offset_top = 11.93
+offset_right = 133.02504
+offset_bottom = 133.0149
+theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+
+[node name="Lock" type="TextureRect" parent="Control/Characters/Mambo" unique_id=2114148212]
+layout_mode = 0
+offset_left = 93.205
+offset_top = 91.0
+offset_right = 124.20505
+offset_bottom = 132.0
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("22_ar6hf")
+
+[node name="Infotext" type="Label" parent="Control/Characters/Mambo" unique_id=1900743738]
+layout_mode = 0
+offset_left = 11.42
+offset_top = 17.575
+offset_right = 131.42
+offset_bottom = 103.61
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("23_fshb7")
+text = "Complete this and this to unlock!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="mouse_entered" from="Control/BackButton" to="Control" method="_on_back_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/BackButton" to="Control" method="_on_back_button_mouse_exited"]
+[connection signal="pressed" from="Control/BackButton" to="Control" method="_on_back_button_pressed"]
+[connection signal="mouse_entered" from="Control/Characters/Mambo/Char/Button" to="Control/Characters/Mambo/Char" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Characters/Mambo/Char/Button" to="Control/Characters/Mambo/Char" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Characters/Mambo/Char/Button" to="Control/Characters/Mambo/Char" method="_on_pressed"]

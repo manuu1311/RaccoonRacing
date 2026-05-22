@@ -14,10 +14,10 @@ func _ready() -> void:
 
 func _on_back_button_mouse_entered() -> void:
 	ButtonSounds.PlaySound('hover')
-	back_button.position.y-=4
+	back_button.position.y-=3
 
 func _on_back_button_mouse_exited() -> void:
-	back_button.position.y+=4
+	back_button.position.y+=3
 
 
 func _on_back_button_pressed() -> void:

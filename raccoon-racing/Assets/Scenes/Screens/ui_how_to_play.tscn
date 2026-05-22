@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b58i2x4x4ypcl" path="res://Assets/Animations/HowToPlay/8.png" id="6_vnhb3"]
 [ext_resource type="Texture2D" uid="uid://b04udkgoph8f1" path="res://Assets/Animations/HowToPlay/9.png" id="7_kwvad"]
 [ext_resource type="Texture2D" uid="uid://cd8s8gm48dty6" path="res://Assets/Animations/HowToPlay/10.png" id="8_4vb64"]
-[ext_resource type="Texture2D" uid="uid://d3dlqyvgn2uqf" path="res://Assets/Images/31.jpg" id="10_vnhb3"]
+[ext_resource type="Texture2D" uid="uid://d3dlqyvgn2uqf" path="res://Assets/Images/general/31.jpg" id="10_vnhb3"]
 [ext_resource type="Texture2D" uid="uid://cruavtrx7133" path="res://Assets/Animations/HowToPlay/spacekey.png" id="11_kwvad"]
 [ext_resource type="Texture2D" uid="uid://ba7rs4wkwrqkd" path="res://Assets/Animations/HowToPlay/spacetext.png" id="12_4vb64"]
 [ext_resource type="Texture2D" uid="uid://dsymy80o48lky" path="res://Assets/Animations/HowToPlay/keys.svg" id="13_1ubai"]

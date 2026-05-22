@@ -6,6 +6,7 @@ func _ready() -> void:
 	audio_streams = {
 		"hover": preload("res://Assets/Sounds/2366_snd_ButtonOver.mp3"),
 		"click": preload("res://Assets/Sounds/2368_snd_ButtonRelease.mp3"),
+		"warning": preload("res://Assets/Sounds/2365_snd_ButtonWarning.mp3")
 	}
 
 func PlaySound(sound: String)->void:
