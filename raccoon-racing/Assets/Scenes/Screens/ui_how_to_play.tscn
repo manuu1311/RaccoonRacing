@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://bqa3pw56k0ltk"]
+
+[ext_resource type="Texture2D" uid="uid://bp3cu6rot2m6u" path="res://Assets/Animations/HowToPlay/3.png" id="1_11yu6"]
+[ext_resource type="Script" uid="uid://u4m7gjl2os6b" path="res://scripts/how_to_play/ui.gd" id="1_fjyvx"]
+[ext_resource type="Texture2D" uid="uid://bfppkew48nk3v" path="res://Assets/Animations/HowToPlay/4.png" id="2_fjyvx"]
+[ext_resource type="Texture2D" uid="uid://db4scwirsu601" path="res://Assets/Animations/HowToPlay/5.png" id="3_ert0x"]
+[ext_resource type="Texture2D" uid="uid://bthiovjs4yrh2" path="res://Assets/Animations/HowToPlay/6.png" id="4_f6y2s"]
+[ext_resource type="Texture2D" uid="uid://r44rau2hp4nd" path="res://Assets/Animations/HowToPlay/7.png" id="5_awydr"]
+[ext_resource type="Texture2D" uid="uid://b58i2x4x4ypcl" path="res://Assets/Animations/HowToPlay/8.png" id="6_vnhb3"]
+[ext_resource type="Texture2D" uid="uid://b04udkgoph8f1" path="res://Assets/Animations/HowToPlay/9.png" id="7_kwvad"]
+[ext_resource type="Texture2D" uid="uid://cd8s8gm48dty6" path="res://Assets/Animations/HowToPlay/10.png" id="8_4vb64"]
+[ext_resource type="Texture2D" uid="uid://d3dlqyvgn2uqf" path="res://Assets/Images/31.jpg" id="10_vnhb3"]
+[ext_resource type="Texture2D" uid="uid://cruavtrx7133" path="res://Assets/Animations/HowToPlay/spacekey.png" id="11_kwvad"]
+[ext_resource type="Texture2D" uid="uid://ba7rs4wkwrqkd" path="res://Assets/Animations/HowToPlay/spacetext.png" id="12_4vb64"]
+[ext_resource type="Texture2D" uid="uid://dsymy80o48lky" path="res://Assets/Animations/HowToPlay/keys.svg" id="13_1ubai"]
+[ext_resource type="Texture2D" uid="uid://cgqyx58xjcuv3" path="res://Assets/Animations/HowToPlay/arrows.svg" id="14_sfdpj"]
+[ext_resource type="Texture2D" uid="uid://c6mbimvcvcb2d" path="res://Assets/Images/main_menu/howtoplayhover.png" id="15_sfdpj"]
+[ext_resource type="Texture2D" uid="uid://l500hwqfa8gi" path="res://Assets/Images/main_menu/moregamestext.png" id="16_028qb"]
+[ext_resource type="Texture2D" uid="uid://cm7udb05uokaa" path="res://Assets/Images/main_menu/agametext.png" id="17_6n13h"]
+[ext_resource type="Texture2D" uid="uid://dioaqtx5mmk0n" path="res://Assets/Images/main_menu/back.png" id="18_27cdm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ert0x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_11yu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fjyvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ert0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f6y2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_awydr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vnhb3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kwvad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4vb64")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[node name="UiHowToPlay" type="CanvasLayer" unique_id=284695696]
+script = ExtResource("1_fjyvx")
+
+[node name="Control" type="Control" parent="." unique_id=677675221]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 250.0
+offset_top = 250.0
+offset_right = 250.0
+offset_bottom = 250.0
+
+[node name="Background" type="TextureRect" parent="Control" unique_id=2093232150]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_vnhb3")
+
+[node name="ArrowKeys" type="Control" parent="Control" unique_id=1360666426]
+anchors_preset = 0
+offset_left = 16.605
+offset_top = -20.0
+offset_right = 16.605
+offset_bottom = -20.0
+
+[node name="Up" type="TextureRect" parent="Control/ArrowKeys" unique_id=1124323765]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 62.899998
+offset_top = 1.6000004
+offset_right = 109.899994
+offset_bottom = 47.6
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_1ubai")
+
+[node name="Left" type="TextureRect" parent="Control/ArrowKeys" unique_id=1714194624]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 18.650002
+offset_top = 45.6
+offset_right = 65.65
+offset_bottom = 91.6
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_1ubai")
+
+[node name="Right" type="TextureRect" parent="Control/ArrowKeys" unique_id=342810877]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 107.15
+offset_top = 45.6
+offset_right = 154.15
+offset_bottom = 91.6
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_1ubai")
+
+[node name="Down" type="TextureRect" parent="Control/ArrowKeys" unique_id=954385487]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 62.9
+offset_top = 45.6
+offset_right = 109.899994
+offset_bottom = 91.6
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_1ubai")
+
+[node name="Keys" type="TextureRect" parent="Control/ArrowKeys" unique_id=2036143499]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45000002
+anchor_top = 0.5
+anchor_right = 0.45000002
+anchor_bottom = 0.5
+offset_left = 29.905
+offset_top = 10.165
+offset_right = 120.905
+offset_bottom = 67.16502
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("14_sfdpj")
+
+[node name="Space" type="TextureRect" parent="Control" unique_id=1529835443]
+layout_mode = 0
+offset_left = -206.0
+offset_top = 25.885
+offset_right = -9.0
+offset_bottom = 71.885
+texture = ExtResource("11_kwvad")
+
+[node name="Space" type="TextureRect" parent="Control/Space" unique_id=2049888390]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.5
+offset_top = -5.5
+offset_right = 25.5
+offset_bottom = 5.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_4vb64")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Control" unique_id=743085347]
+position = Vector2(42, 9)
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_ert0x")
+frame = 7
+
+[node name="HowToPlayText" type="TextureRect" parent="Control" unique_id=1525630597]
+layout_mode = 0
+offset_left = -95.0
+offset_top = -223.0
+offset_right = 78.0
+offset_bottom = -190.0
+texture = ExtResource("15_sfdpj")
+
+[node name="MoreGames" type="TextureRect" parent="Control" unique_id=2052495085]
+layout_mode = 0
+offset_left = -186.0
+offset_top = 145.0
+offset_right = -2.0
+offset_bottom = 200.0
+texture = ExtResource("16_028qb")
+
+[node name="Agame" type="TextureRect" parent="Control" unique_id=1268745696]
+layout_mode = 0
+offset_left = -98.0
+offset_top = 193.0
+offset_right = 129.0
+offset_bottom = 265.0
+texture = ExtResource("17_6n13h")
+
+[node name="BackButton" type="TextureButton" parent="Control" unique_id=1824049556]
+layout_mode = 0
+offset_left = 67.08
+offset_top = 157.21
+offset_right = 159.08005
+offset_bottom = 199.21
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("18_27cdm")
+
+[connection signal="mouse_entered" from="Control/BackButton" to="." method="_on_back_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/BackButton" to="." method="_on_back_button_mouse_exited"]
+[connection signal="pressed" from="Control/BackButton" to="." method="_on_back_button_pressed"]

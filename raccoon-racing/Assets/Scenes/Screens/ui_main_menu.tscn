@@ -1,15 +1,12 @@
 [gd_scene format=3 uid="uid://c8wmuf22nxpku"]
 
 [ext_resource type="Texture2D" uid="uid://d10u0v8mcm8" path="res://Assets/Animations/mainmenu_sheet.png" id="1_w4jy3"]
-[ext_resource type="Script" uid="uid://cpof66xmxesfy" path="res://scripts/main_menu/ui_animation.gd" id="2_vp43r"]
 [ext_resource type="Script" uid="uid://p8r286dsxrvu" path="res://scripts/main_menu/buttons.gd" id="3_5iyik"]
 [ext_resource type="Texture2D" uid="uid://bx2ji2v8n2jst" path="res://Assets/Images/main_menu/startgame.png" id="3_vp43r"]
 [ext_resource type="Texture2D" uid="uid://wxk1gduo6ab8" path="res://Assets/Images/main_menu/highscores.png" id="3_xjbaf"]
 [ext_resource type="Texture2D" uid="uid://cyl0afie7ggc5" path="res://Assets/Images/main_menu/highscoreshover.png" id="4_rjmma"]
-[ext_resource type="AudioStream" uid="uid://blfag7x7la84c" path="res://Assets/Sounds/2366_snd_ButtonOver.mp3" id="4_v7cgl"]
 [ext_resource type="Texture2D" uid="uid://b7p31okytqec" path="res://Assets/Images/main_menu/startgamehover.png" id="4_xjbaf"]
 [ext_resource type="Texture2D" uid="uid://dqpj6mrosaaw8" path="res://Assets/Images/main_menu/howtoplay.png" id="5_0l03o"]
-[ext_resource type="AudioStream" uid="uid://icxkpxriiig" path="res://Assets/Sounds/2368_snd_ButtonRelease.mp3" id="5_4iwyt"]
 [ext_resource type="Texture2D" uid="uid://c6mbimvcvcb2d" path="res://Assets/Images/main_menu/howtoplayhover.png" id="6_lywav"]
 [ext_resource type="Script" uid="uid://b0io2lbi8q0v2" path="res://scripts/main_menu/logo.gd" id="9_m23ag"]
 [ext_resource type="Texture2D" uid="uid://cpn2u5bbuco5r" path="res://Assets/Images/main_menu/logo.svg" id="10_5iyik"]
@@ -394,6 +391,55 @@ animations = [{
 "speed": 35.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_14row"]
+script/source = "extends AnimatedSprite2D
+class_name MainScreenAnimator
+
+signal main_anim_complete
+@onready var logo: Logo = $\"../Logo\"
+@onready var buttons: UIbuttons = $\"../Buttons\"
+
+func _ready():
+	if not MusicPlayer.playing:
+		MusicPlayer.PlayMusic('main')
+	play(\"intro\")
+	buttons.hide()
+	logo.hide()
+	frame=0
+	frame_changed.connect(_on_frame_changed)
+
+func _on_frame_changed():
+	if frame == 40:
+		pause()
+		buttons.show()
+		#buttons.show_buttons()
+		main_anim_complete.emit()
+		logo.show()
+		#await get_tree().create_timer(2).timeout
+		logo.play_anim()
+
+func _on_start_button_pressed():
+	print('start button pressed')
+	buttons.hide()
+	logo.hide()
+	play()
+
+
+func _on_how_to_play_button_pressed() -> void:
+	print('how to play button pressed')
+	buttons.hide()
+	logo.hide()
+	play()
+	get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_how_to_play.tscn')
+
+
+func _on_high_scores_button_pressed() -> void:
+	print('high scores button pressed')
+	buttons.hide()
+	logo.hide()
+	play()
+"
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0l03o"]
 texture = ExtResource("3_vp43r")
 
@@ -588,12 +634,13 @@ corner_radius_bottom_left = 50
 
 [node name="UI" type="CanvasLayer" unique_id=264051491]
 
-[node name="Background" type="AnimatedSprite2D" parent="." unique_id=1389753678]
+[node name="Background" type="AnimatedSprite2D" parent="." unique_id=1585593124]
 position = Vector2(250, 250)
 sprite_frames = SubResource("SpriteFrames_jua0g")
 animation = &"intro"
 frame = 40
-script = ExtResource("2_vp43r")
+script = SubResource("GDScript_14row")
+metadata/_custom_type_script = "uid://cpof66xmxesfy"
 metadata/_edit_group_ = true
 
 [node name="Buttons" type="Control" parent="." unique_id=1170687748]
@@ -602,7 +649,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_5iyik")
-audio_streams = Array[AudioStream]([ExtResource("4_v7cgl"), ExtResource("5_4iwyt")])
 
 [node name="StartGameButton" type="Button" parent="Buttons" unique_id=1517811359]
 layout_mode = 1
@@ -654,10 +700,6 @@ grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_rjmma")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_qinps")
-
-[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="Buttons" unique_id=434184168]
-stream = ExtResource("4_v7cgl")
-max_polyphony = 5
 
 [node name="Logo" type="CanvasLayer" parent="." unique_id=1841181194]
 script = ExtResource("9_m23ag")
@@ -742,11 +784,11 @@ grow_vertical = 2
 rotation = -2.6005406
 
 [connection signal="mouse_entered" from="Buttons/StartGameButton" to="Buttons" method="_on_mouse_entered"]
-[connection signal="pressed" from="Buttons/StartGameButton" to="Background" method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/StartGameButton" to="Buttons" method="_on_mouse_click"]
+[connection signal="pressed" from="Buttons/StartGameButton" to="Background" method="_on_start_button_pressed"]
 [connection signal="mouse_entered" from="Buttons/HowToPlayButton" to="Buttons" method="_on_mouse_entered"]
-[connection signal="pressed" from="Buttons/HowToPlayButton" to="Background" method="_on_how_to_play_button_pressed"]
 [connection signal="pressed" from="Buttons/HowToPlayButton" to="Buttons" method="_on_mouse_click"]
+[connection signal="pressed" from="Buttons/HowToPlayButton" to="Background" method="_on_how_to_play_button_pressed"]
 [connection signal="mouse_entered" from="Buttons/HighScoresButton" to="Buttons" method="_on_mouse_entered"]
-[connection signal="pressed" from="Buttons/HighScoresButton" to="Background" method="_on_high_scores_button_pressed"]
 [connection signal="pressed" from="Buttons/HighScoresButton" to="Buttons" method="_on_mouse_click"]
+[connection signal="pressed" from="Buttons/HighScoresButton" to="Background" method="_on_high_scores_button_pressed"]

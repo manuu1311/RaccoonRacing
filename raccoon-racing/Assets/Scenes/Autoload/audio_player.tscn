@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://62ic3gann308"]
+
+[ext_resource type="AudioStream" uid="uid://blfag7x7la84c" path="res://Assets/Sounds/2366_snd_ButtonOver.mp3" id="1_r453w"]
+[ext_resource type="Script" uid="uid://dgr8bl747n46h" path="res://scripts/Autoload/ButtonSounds.gd" id="2_ddia5"]
+
+[node name="AudioPlayer" type="AudioStreamPlayer" unique_id=332729240]
+stream = ExtResource("1_r453w")
+max_polyphony = 5
+script = ExtResource("2_ddia5")
