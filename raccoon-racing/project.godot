@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 
 ButtonSounds="*uid://dgr8bl747n46h"
 MusicPlayer="*uid://bfxu6iei27c8q"
+GameData="*uid://1tl2lmg3lc0r"
+UiOverAnimation="*uid://dmkr4vnw6jejh"
 
 [display]
 

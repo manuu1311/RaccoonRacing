@@ -20,9 +20,25 @@
 [ext_resource type="Texture2D" uid="uid://bo5uuxxo5wrsc" path="res://Assets/Animations/CharSelection/characters/mambohover.png" id="17_02813"]
 [ext_resource type="Texture2D" uid="uid://i4d7hsncevdk" path="res://Assets/Animations/CharSelection/characters/shiny3.png" id="17_ar6hf"]
 [ext_resource type="Texture2D" uid="uid://dujvubn3avqnd" path="res://Assets/Animations/CharSelection/characters/mambotext.png" id="18_ar6hf"]
+[ext_resource type="Texture2D" uid="uid://b44cubu66xpxg" path="res://Assets/Animations/CharSelection/characters/rockopic.png" id="18_p3osk"]
 [ext_resource type="Texture2D" uid="uid://ca7xqhoukm7ys" path="res://Assets/Animations/CharSelection/characters/shiny1.png" id="19_obove"]
+[ext_resource type="Texture2D" uid="uid://c47m13yeifhlk" path="res://Assets/Animations/CharSelection/characters/rockohover.png" id="20_a2dju"]
+[ext_resource type="Texture2D" uid="uid://b6mw5f7xp6xah" path="res://Assets/Animations/CharSelection/characters/rockotext.png" id="21_oq6vp"]
 [ext_resource type="Texture2D" uid="uid://ccu7mt8tmpevy" path="res://Assets/Animations/CharSelection/characters/lock.png" id="22_ar6hf"]
 [ext_resource type="FontFile" uid="uid://b6ndjgweysvx0" path="res://Assets/Fonts/2_Arial Black.ttf" id="23_fshb7"]
+[ext_resource type="Texture2D" uid="uid://bsxowwo4ga4h7" path="res://Assets/Animations/CharSelection/characters/vixenpic.png" id="24_i40t4"]
+[ext_resource type="Texture2D" uid="uid://dxmwihphllqnh" path="res://Assets/Animations/CharSelection/characters/banzaipic.png" id="24_p6eop"]
+[ext_resource type="Texture2D" uid="uid://chjjabkhcpl5r" path="res://Assets/Animations/CharSelection/characters/maintext.png" id="24_wpv0k"]
+[ext_resource type="Texture2D" uid="uid://ba3bmoxkqibaa" path="res://Assets/Animations/CharSelection/characters/vixenhover.png" id="25_50fdv"]
+[ext_resource type="Texture2D" uid="uid://c2cq6pi503c20" path="res://Assets/Animations/CharSelection/characters/banzaihover.png" id="25_kgcby"]
+[ext_resource type="Texture2D" uid="uid://8qooronbwomm" path="res://Assets/Animations/CharSelection/characters/vixentext.png" id="26_a0urp"]
+[ext_resource type="Texture2D" uid="uid://ypi1cgfvjb74" path="res://Assets/Animations/CharSelection/characters/banzaitext.png" id="26_upp7w"]
+[ext_resource type="Texture2D" uid="uid://deb4tcbo4aaw0" path="res://Assets/Animations/CharSelection/characters/pingopic.png" id="30_knise"]
+[ext_resource type="Texture2D" uid="uid://cu8orxv2m1rac" path="res://Assets/Animations/CharSelection/characters/pingohover.png" id="31_ar0ea"]
+[ext_resource type="Texture2D" uid="uid://bue3vcngihsnl" path="res://Assets/Animations/CharSelection/characters/pingotext.png" id="32_lpyvn"]
+[ext_resource type="Texture2D" uid="uid://bduuioalmao1u" path="res://Assets/Animations/CharSelection/characters/hudsonpic.png" id="33_75h3l"]
+[ext_resource type="Texture2D" uid="uid://swi3iox1wcxi" path="res://Assets/Animations/CharSelection/characters/hudsonhover.png" id="34_035ol"]
+[ext_resource type="Texture2D" uid="uid://bp3cg4m5rdrb3" path="res://Assets/Animations/CharSelection/characters/hudsontext.png" id="35_hw2rr"]
 
 [sub_resource type="Animation" id="Animation_gmby4"]
 length = 0.001
@@ -394,7 +410,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Mambo/Char/Shiny:texture")
+tracks/0/path = NodePath("Hudson/Char/Shiny:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -412,10 +428,70 @@ step = 0.028571429
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Mambo/Char/Shiny:texture")
+tracks/0/path = NodePath("Hudson/Char/Shiny:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("19_obove"), ExtResource("19_obove"), ExtResource("16_02813"), ExtResource("17_ar6hf")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rocko/Char/Shiny:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("19_obove"), ExtResource("16_02813"), ExtResource("17_ar6hf")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Vixen/Char/Shiny:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("19_obove"), ExtResource("16_02813"), ExtResource("17_ar6hf")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Mambo/Char/Shiny:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("19_obove"), ExtResource("16_02813"), ExtResource("17_ar6hf")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pingo/Char/Shiny:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("19_obove"), ExtResource("16_02813"), ExtResource("17_ar6hf")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Banzai/Char/Shiny:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.057142857, 0.114285715),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
@@ -587,10 +663,10 @@ texture = ExtResource("7_nh31l")
 
 [node name="BackButton" type="TextureButton" parent="Control" unique_id=836593869]
 layout_mode = 0
-offset_left = -12.000015
-offset_top = 217.99998
-offset_right = 80.00003
-offset_bottom = 260.0
+offset_left = -26.525
+offset_top = 186.46
+offset_right = 65.475044
+offset_bottom = 228.46
 scale = Vector2(0.9, 0.9)
 texture_normal = ExtResource("14_gtwtp")
 
@@ -601,49 +677,53 @@ anchors_preset = 0
 libraries/ = SubResource("AnimationLibrary_fe3q7")
 autoplay = &"Shinies"
 
-[node name="Mambo" type="Control" parent="Control/Characters" unique_id=1271562785]
+[node name="Rocko" type="Control" parent="Control/Characters" unique_id=1579452052]
 anchors_preset = 0
+offset_left = -202.0
+offset_top = -160.0
+offset_right = -202.0
+offset_bottom = -160.0
 
-[node name="Char" type="TextureRect" parent="Control/Characters/Mambo" unique_id=189482387]
+[node name="Char" type="TextureRect" parent="Control/Characters/Rocko" unique_id=628455959]
 layout_mode = 0
-offset_right = 144.0
-offset_bottom = 141.0
-texture = ExtResource("15_obove")
+offset_right = 127.0
+offset_bottom = 127.0
+texture = ExtResource("18_p3osk")
+expand_mode = 1
 script = ExtResource("16_fi2k8")
-hovertext = ExtResource("17_02813")
-normaltext = ExtResource("18_ar6hf")
-locked = true
+hovertext = ExtResource("20_a2dju")
+normaltext = ExtResource("21_oq6vp")
+unlockInfo = "Complete cups 3,4 in Normal difficulty to unlock"
 
-[node name="Shiny" type="TextureRect" parent="Control/Characters/Mambo/Char" unique_id=320993902]
-visible = false
+[node name="Shiny" type="TextureRect" parent="Control/Characters/Rocko/Char" unique_id=1109535113]
 layout_mode = 0
-offset_left = -40.0
-offset_top = -41.5
-offset_right = 184.0
-offset_bottom = 182.5
+offset_left = -50.0
+offset_top = -51.5
+offset_right = 174.0
+offset_bottom = 172.5
 pivot_offset = Vector2(112, 112)
 texture = ExtResource("19_obove")
 
-[node name="Label" type="TextureRect" parent="Control/Characters/Mambo/Char" unique_id=1586419805]
+[node name="Label" type="TextureRect" parent="Control/Characters/Rocko/Char" unique_id=1525988129]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 130.0
-offset_right = 129.0
-offset_bottom = 173.0
+offset_left = 7.3
+offset_top = 120.04
+offset_right = 121.30005
+offset_bottom = 167.04001
 pivot_offset = Vector2(112, 112)
-texture = ExtResource("18_ar6hf")
+texture = ExtResource("21_oq6vp")
 
-[node name="Button" type="Button" parent="Control/Characters/Mambo/Char" unique_id=1227798374]
+[node name="Button" type="Button" parent="Control/Characters/Rocko/Char" unique_id=533027872]
 layout_mode = 0
-offset_left = 11.265
-offset_top = 11.93
-offset_right = 133.02504
-offset_bottom = 133.0149
+offset_left = 1.66
+offset_top = 2.5
+offset_right = 123.42001
+offset_bottom = 123.58482
 theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
 
-[node name="Lock" type="TextureRect" parent="Control/Characters/Mambo" unique_id=2114148212]
+[node name="Lock" type="TextureRect" parent="Control/Characters/Rocko" unique_id=921747378]
 layout_mode = 0
 offset_left = 93.205
 offset_top = 91.0
@@ -654,7 +734,7 @@ scale = Vector2(0.58, 0.58)
 pivot_offset = Vector2(15.5, 20.5)
 texture = ExtResource("22_ar6hf")
 
-[node name="Infotext" type="Label" parent="Control/Characters/Mambo" unique_id=1900743738]
+[node name="Infotext" type="Label" parent="Control/Characters/Rocko" unique_id=1635216413]
 layout_mode = 0
 offset_left = 11.42
 offset_top = 17.575
@@ -663,14 +743,397 @@ offset_bottom = 103.61
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("23_fshb7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Vixen" type="Control" parent="Control/Characters" unique_id=626244653]
+anchors_preset = 0
+offset_left = -52.0
+offset_top = -160.0
+offset_right = -52.0
+offset_bottom = -160.0
+
+[node name="Char" type="TextureRect" parent="Control/Characters/Vixen" unique_id=1579295847]
+layout_mode = 0
+offset_right = 127.0
+offset_bottom = 127.0
+texture = ExtResource("24_i40t4")
+script = ExtResource("16_fi2k8")
+hovertext = ExtResource("25_50fdv")
+normaltext = ExtResource("26_a0urp")
+id = 1
+unlockInfo = "Complete cups 3,4 in Normal difficulty to unlock"
+
+[node name="Shiny" type="TextureRect" parent="Control/Characters/Vixen/Char" unique_id=288433264]
+layout_mode = 0
+offset_left = -48.51
+offset_top = -47.0
+offset_right = 175.49
+offset_bottom = 177.0
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("19_obove")
+
+[node name="Label" type="TextureRect" parent="Control/Characters/Vixen/Char" unique_id=1247546252]
+layout_mode = 0
+offset_left = 11.93
+offset_top = 119.585
+offset_right = 130.93018
+offset_bottom = 168.58533
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("26_a0urp")
+
+[node name="Button" type="Button" parent="Control/Characters/Vixen/Char" unique_id=1243361933]
+layout_mode = 0
+offset_left = 1.905
+offset_top = 2.59
+offset_right = 123.665115
+offset_bottom = 123.67493
+theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+
+[node name="Lock" type="TextureRect" parent="Control/Characters/Vixen" unique_id=1371307557]
+layout_mode = 0
+offset_left = 93.205
+offset_top = 91.0
+offset_right = 124.20505
+offset_bottom = 132.0
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("22_ar6hf")
+
+[node name="Infotext" type="Label" parent="Control/Characters/Vixen" unique_id=305028287]
+layout_mode = 0
+offset_left = 4.5
+offset_top = 5.0
+offset_right = 124.49997
+offset_bottom = 91.035
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("23_fshb7")
 text = "Complete this and this to unlock!"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Mambo" type="Control" parent="Control/Characters" unique_id=1568157928]
+anchors_preset = 0
+offset_left = 102.0
+offset_top = -160.0
+offset_right = 102.0
+offset_bottom = -160.0
+
+[node name="Char" type="TextureRect" parent="Control/Characters/Mambo" unique_id=1689094100]
+layout_mode = 0
+offset_right = 127.0
+offset_bottom = 127.0
+texture = ExtResource("15_obove")
+script = ExtResource("16_fi2k8")
+hovertext = ExtResource("17_02813")
+normaltext = ExtResource("18_ar6hf")
+id = 2
+unlockInfo = "COMPLETE CUP 1 IN EASY MODE TO UNLOCK"
+
+[node name="Shiny" type="TextureRect" parent="Control/Characters/Mambo/Char" unique_id=914531245]
+layout_mode = 0
+offset_left = -49.33
+offset_top = -49.12
+offset_right = 174.67
+offset_bottom = 174.88
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("19_obove")
+
+[node name="Label" type="TextureRect" parent="Control/Characters/Mambo/Char" unique_id=480723716]
+layout_mode = 0
+offset_left = 13.25
+offset_top = 122.565
+offset_right = 127.25
+offset_bottom = 165.56506
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("18_ar6hf")
+
+[node name="Button" type="Button" parent="Control/Characters/Mambo/Char" unique_id=766032258]
+layout_mode = 0
+offset_left = 1.865
+offset_top = 3.47
+offset_right = 123.62507
+offset_bottom = 124.5549
+theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+
+[node name="Lock" type="TextureRect" parent="Control/Characters/Mambo" unique_id=111246684]
+layout_mode = 0
+offset_left = 93.205
+offset_top = 91.0
+offset_right = 124.20505
+offset_bottom = 132.0
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("22_ar6hf")
+
+[node name="Infotext" type="Label" parent="Control/Characters/Mambo" unique_id=36005727]
+layout_mode = 0
+offset_left = 1.42
+offset_top = 7.575
+offset_right = 121.42
+offset_bottom = 93.61
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("23_fshb7")
+theme_override_font_sizes/font_size = 12
+text = "Complete this and this to unlock!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Pingo" type="Control" parent="Control/Characters" unique_id=2013960380]
+anchors_preset = 0
+offset_left = -202.0
+offset_top = 10.0
+offset_right = -202.0
+offset_bottom = 10.0
+
+[node name="Char" type="TextureRect" parent="Control/Characters/Pingo" unique_id=2104224602]
+layout_mode = 0
+offset_right = 127.0
+offset_bottom = 127.0
+texture = ExtResource("30_knise")
+script = ExtResource("16_fi2k8")
+hovertext = ExtResource("31_ar0ea")
+normaltext = ExtResource("32_lpyvn")
+id = 3
+unlockInfo = "COMPLETE CUP 2,4 IN EASY MODE TO UNLOCK"
+
+[node name="Shiny" type="TextureRect" parent="Control/Characters/Pingo/Char" unique_id=890624599]
+layout_mode = 0
+offset_left = -48.335
+offset_top = -49.315
+offset_right = 175.66501
+offset_bottom = 174.685
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("19_obove")
+
+[node name="Label" type="TextureRect" parent="Control/Characters/Pingo/Char" unique_id=928764479]
+layout_mode = 0
+offset_left = 13.625
+offset_top = 122.345
+offset_right = 127.625015
+offset_bottom = 171.34503
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("32_lpyvn")
+
+[node name="Button" type="Button" parent="Control/Characters/Pingo/Char" unique_id=658852694]
+layout_mode = 0
+offset_left = 3.4
+offset_top = 3.505
+offset_right = 125.16007
+offset_bottom = 124.5899
+theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+
+[node name="Lock" type="TextureRect" parent="Control/Characters/Pingo" unique_id=903902098]
+layout_mode = 0
+offset_left = 93.205
+offset_top = 91.0
+offset_right = 124.20505
+offset_bottom = 132.0
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("22_ar6hf")
+
+[node name="Infotext" type="Label" parent="Control/Characters/Pingo" unique_id=1198575051]
+layout_mode = 0
+offset_left = 1.42
+offset_top = 7.575
+offset_right = 121.42
+offset_bottom = 93.61
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("23_fshb7")
+theme_override_font_sizes/font_size = 12
+text = "Complete this and this to unlock!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Hudson" type="Control" parent="Control/Characters" unique_id=1271562785]
+anchors_preset = 0
+offset_left = -52.0
+offset_top = 10.0
+offset_right = -52.0
+offset_bottom = 10.0
+
+[node name="Char" type="TextureRect" parent="Control/Characters/Hudson" unique_id=189482387]
+layout_mode = 0
+offset_right = 127.0
+offset_bottom = 127.0
+texture = ExtResource("33_75h3l")
+expand_mode = 1
+script = ExtResource("16_fi2k8")
+hovertext = ExtResource("34_035ol")
+normaltext = ExtResource("35_hw2rr")
+id = 4
+unlockInfo = "COMPLETE CUP 5,6 IN EASY MODE TO UNLOCK"
+
+[node name="Shiny" type="TextureRect" parent="Control/Characters/Hudson/Char" unique_id=320993902]
+layout_mode = 0
+offset_left = -49.44
+offset_top = -49.24
+offset_right = 174.56
+offset_bottom = 174.76
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("19_obove")
+
+[node name="Label" type="TextureRect" parent="Control/Characters/Hudson/Char" unique_id=1586419805]
+layout_mode = 0
+offset_left = 5.565
+offset_top = 122.555
+offset_right = 125.56503
+offset_bottom = 170.555
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("35_hw2rr")
+
+[node name="Button" type="Button" parent="Control/Characters/Hudson/Char" unique_id=1227798374]
+layout_mode = 0
+offset_left = 3.615
+offset_top = 3.33
+offset_right = 125.37501
+offset_bottom = 124.414734
+theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+
+[node name="Lock" type="TextureRect" parent="Control/Characters/Hudson" unique_id=2114148212]
+layout_mode = 0
+offset_left = 93.205
+offset_top = 91.0
+offset_right = 124.20505
+offset_bottom = 132.0
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("22_ar6hf")
+
+[node name="Infotext" type="Label" parent="Control/Characters/Hudson" unique_id=1900743738]
+layout_mode = 0
+offset_left = 1.42
+offset_top = 7.575
+offset_right = 121.42
+offset_bottom = 93.61
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("23_fshb7")
+theme_override_font_sizes/font_size = 12
+text = "Complete this and this to unlock!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Banzai" type="Control" parent="Control/Characters" unique_id=1048093334]
+anchors_preset = 0
+offset_left = 102.0
+offset_top = 10.0
+offset_right = 102.0
+offset_bottom = 10.0
+
+[node name="Char" type="TextureRect" parent="Control/Characters/Banzai" unique_id=1812543110]
+layout_mode = 0
+offset_right = 127.0
+offset_bottom = 127.0
+texture = ExtResource("24_p6eop")
+expand_mode = 1
+script = ExtResource("16_fi2k8")
+hovertext = ExtResource("25_kgcby")
+normaltext = ExtResource("26_upp7w")
+id = 5
+unlockInfo = "COMPLETE ALL CUPS IN NORMAL MODE TO UNLOCK"
+
+[node name="Shiny" type="TextureRect" parent="Control/Characters/Banzai/Char" unique_id=204259098]
+layout_mode = 0
+offset_left = -48.395
+offset_top = -49.175
+offset_right = 175.605
+offset_bottom = 174.825
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("19_obove")
+
+[node name="Label" type="TextureRect" parent="Control/Characters/Banzai/Char" unique_id=2024687845]
+layout_mode = 0
+offset_left = 15.6
+offset_top = 123.625
+offset_right = 135.60014
+offset_bottom = 169.625
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("26_upp7w")
+
+[node name="Button" type="Button" parent="Control/Characters/Banzai/Char" unique_id=819715198]
+layout_mode = 0
+offset_left = 5.59
+offset_top = 3.245
+offset_right = 127.34984
+offset_bottom = 124.32975
+theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+
+[node name="Lock" type="TextureRect" parent="Control/Characters/Banzai" unique_id=1759660974]
+layout_mode = 0
+offset_left = 93.205
+offset_top = 91.0
+offset_right = 124.20505
+offset_bottom = 132.0
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("22_ar6hf")
+
+[node name="Infotext" type="Label" parent="Control/Characters/Banzai" unique_id=2049583760]
+layout_mode = 0
+offset_left = 1.42
+offset_top = 7.575
+offset_right = 121.42
+offset_bottom = 93.61
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("23_fshb7")
+theme_override_font_sizes/font_size = 12
+text = "Complete this and this to unlock!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="GeneralText" type="TextureRect" parent="Control" unique_id=1408851771]
+layout_mode = 0
+offset_left = -243.89
+offset_top = -238.0
+offset_right = 302.11
+offset_bottom = -147.0
+texture = ExtResource("24_wpv0k")
+
 [connection signal="mouse_entered" from="Control/BackButton" to="Control" method="_on_back_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/BackButton" to="Control" method="_on_back_button_mouse_exited"]
 [connection signal="pressed" from="Control/BackButton" to="Control" method="_on_back_button_pressed"]
+[connection signal="mouse_entered" from="Control/Characters/Rocko/Char/Button" to="Control/Characters/Rocko/Char" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Characters/Rocko/Char/Button" to="Control/Characters/Rocko/Char" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Characters/Rocko/Char/Button" to="Control/Characters/Rocko/Char" method="_on_pressed"]
+[connection signal="mouse_entered" from="Control/Characters/Vixen/Char/Button" to="Control/Characters/Vixen/Char" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Characters/Vixen/Char/Button" to="Control/Characters/Vixen/Char" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Characters/Vixen/Char/Button" to="Control/Characters/Vixen/Char" method="_on_pressed"]
 [connection signal="mouse_entered" from="Control/Characters/Mambo/Char/Button" to="Control/Characters/Mambo/Char" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Control/Characters/Mambo/Char/Button" to="Control/Characters/Mambo/Char" method="_on_mouse_exited"]
 [connection signal="pressed" from="Control/Characters/Mambo/Char/Button" to="Control/Characters/Mambo/Char" method="_on_pressed"]
+[connection signal="mouse_entered" from="Control/Characters/Pingo/Char/Button" to="Control/Characters/Pingo/Char" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Characters/Pingo/Char/Button" to="Control/Characters/Pingo/Char" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Characters/Pingo/Char/Button" to="Control/Characters/Pingo/Char" method="_on_pressed"]
+[connection signal="mouse_entered" from="Control/Characters/Hudson/Char/Button" to="Control/Characters/Hudson/Char" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Characters/Hudson/Char/Button" to="Control/Characters/Hudson/Char" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Characters/Hudson/Char/Button" to="Control/Characters/Hudson/Char" method="_on_pressed"]
+[connection signal="mouse_entered" from="Control/Characters/Banzai/Char/Button" to="Control/Characters/Banzai/Char" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Characters/Banzai/Char/Button" to="Control/Characters/Banzai/Char" method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/Characters/Banzai/Char/Button" to="Control/Characters/Banzai/Char" method="_on_pressed"]

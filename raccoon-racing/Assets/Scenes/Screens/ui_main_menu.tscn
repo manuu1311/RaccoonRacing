@@ -640,13 +640,12 @@ corner_radius_bottom_left = 50
 
 [node name="UI" type="CanvasLayer" unique_id=264051491]
 
-[node name="Background" type="AnimatedSprite2D" parent="." unique_id=1585593124]
+[node name="Background" type="AnimatedSprite2D" parent="." unique_id=1148931095]
 position = Vector2(250, 250)
 sprite_frames = SubResource("SpriteFrames_jua0g")
 animation = &"intro"
 frame = 40
 script = SubResource("GDScript_14row")
-metadata/_custom_type_script = "uid://cpof66xmxesfy"
 metadata/_edit_group_ = true
 
 [node name="Buttons" type="Control" parent="." unique_id=1170687748]

@@ -7,7 +7,7 @@ extends TextureRect
 @export var hovertext: Texture2D
 @export var normaltext: Texture2D
 @export var id: int
-@export var locked: bool 
+var locked: bool 
 @export var unlockInfo: String
 
 #greyed out icon transform
@@ -15,6 +15,8 @@ var r_g_b: float = 102.0 / 256.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	locked=GameData.characterLocks[id]
+	infotext.text=unlockInfo
 	infotext.hide()
 	shiny.hide()
 	label.texture=normaltext
@@ -28,6 +30,7 @@ func _ready() -> void:
 
 
 func _on_mouse_entered() -> void:
+	ButtonSounds.PlaySound('hover')
 	if locked:
 		greyout()
 		infotext.show()
@@ -48,7 +51,11 @@ func _on_mouse_exited() -> void:
 
 
 func _on_pressed() -> void:
-	print('pressed')
+	if locked:
+		ButtonSounds.PlaySound('warning')
+	else:
+		ButtonSounds.PlaySound('click')
+		UiOverAnimation.playanim()
 
 func greyout():
 	self.modulate = Color(r_g_b, r_g_b, r_g_b, 1)
