@@ -55,7 +55,10 @@ func _on_pressed() -> void:
 		ButtonSounds.PlaySound('warning')
 	else:
 		ButtonSounds.PlaySound('click')
+		GameData.currentCharacter=id
 		UiOverAnimation.playanim()
+		await  UiOverAnimation.animated_sprite_2d.animation_finished
+		get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_cup.tscn')
 
 func greyout():
 	self.modulate = Color(r_g_b, r_g_b, r_g_b, 1)

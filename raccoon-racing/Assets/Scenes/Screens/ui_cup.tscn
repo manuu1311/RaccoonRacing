@@ -1,0 +1,310 @@
+[gd_scene format=3 uid="uid://cpqqu57kpjwqq"]
+
+[ext_resource type="Script" uid="uid://d22e4y7cwujpb" path="res://scripts/CupSelect/cup_control.gd" id="1_mpbsm"]
+[ext_resource type="Texture2D" uid="uid://uhjt4315chk4" path="res://Assets/Animations/UISelect/backgroundbase.png" id="1_xr3yx"]
+[ext_resource type="Texture2D" uid="uid://hqd6w6yvnxi" path="res://Assets/Animations/UISelect/bggradient.png" id="2_lo0sp"]
+[ext_resource type="FontFile" uid="uid://bvvts4tew4fix" path="res://Assets/Fonts/44_Arial Black.ttf" id="2_q3nyi"]
+[ext_resource type="Texture2D" uid="uid://bg8h0fy6321r8" path="res://Assets/Animations/UISelect/cups/shiny1.png" id="4_n5pa4"]
+[ext_resource type="Texture2D" uid="uid://c0iiosfry5mjd" path="res://Assets/Animations/UISelect/cups/shiny2.png" id="5_w6uiw"]
+[ext_resource type="Texture2D" uid="uid://d0n2wfbuxqvxe" path="res://Assets/Animations/UISelect/cups/shiny3.png" id="6_mpbsm"]
+[ext_resource type="Script" uid="uid://d2ljudub8gfub" path="res://scripts/CupSelect/cup.gd" id="7_tdwvn"]
+[ext_resource type="Texture2D" uid="uid://dob2r1suaellv" path="res://Assets/Animations/UISelect/cups/cup1.png" id="8_3rlsr"]
+[ext_resource type="Texture2D" uid="uid://vu7aa0nyhn88" path="res://Assets/Animations/UISelect/cups/kart.png" id="9_6uye0"]
+[ext_resource type="Texture2D" uid="uid://ckia7wp633ao8" path="res://Assets/Animations/UISelect/cups/gold.png" id="10_3ycji"]
+[ext_resource type="Texture2D" uid="uid://ovwkbqbvkcnq" path="res://Assets/Animations/UISelect/cups/silver.png" id="11_aqrqf"]
+[ext_resource type="Texture2D" uid="uid://jpv64lr7shtc" path="res://Assets/Animations/UISelect/cups/bronze.png" id="12_7j54v"]
+[ext_resource type="Texture2D" uid="uid://ccu7mt8tmpevy" path="res://Assets/Animations/CharSelection/characters/lock.png" id="13_e6g5j"]
+[ext_resource type="FontFile" uid="uid://b6ndjgweysvx0" path="res://Assets/Fonts/2_Arial Black.ttf" id="14_0nxtg"]
+[ext_resource type="Texture2D" uid="uid://dioaqtx5mmk0n" path="res://Assets/Images/main_menu/back.png" id="16_tdwvn"]
+
+[sub_resource type="Animation" id="Animation_q3nyi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lo0sp"]
+resource_name = "sliding"
+length = 0.96667004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-20, 0), Vector2(0, -20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cigcv"]
+_data = {
+&"RESET": SubResource("Animation_q3nyi"),
+&"sliding": SubResource("Animation_lo0sp")
+}
+
+[sub_resource type="Animation" id="Animation_ia3vx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cup1/Img/Shiny:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_n5pa4")]
+}
+
+[sub_resource type="Animation" id="Animation_4q2sj"]
+resource_name = "shinyAnim"
+length = 0.14286
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cup1/Img/Shiny:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4j5vo"]
+_data = {
+&"RESET": SubResource("Animation_ia3vx"),
+&"shinyAnim": SubResource("Animation_4q2sj")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rwrk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2rjpb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qkely"]
+
+[node name="UiCup" type="CanvasLayer" unique_id=1885147626]
+
+[node name="Control" type="Control" parent="." unique_id=1820990992]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("1_mpbsm")
+
+[node name="Background" type="TextureRect" parent="Control" unique_id=868586011]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xr3yx")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Background" unique_id=1160626344]
+libraries/ = SubResource("AnimationLibrary_cigcv")
+autoplay = &"sliding"
+
+[node name="BGGradient" type="TextureRect" parent="Control" unique_id=1154308231]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 500.0
+texture = ExtResource("2_lo0sp")
+
+[node name="CupText" type="Control" parent="Control" unique_id=309096806]
+anchors_preset = 0
+offset_left = 90.0
+offset_top = 12.105
+offset_right = 90.0
+offset_bottom = 12.105
+
+[node name="Outline2" type="Label" parent="Control/CupText" unique_id=1578253098]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 27
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 44
+text = "Cup Selection"
+
+[node name="Outline" type="Label" parent="Control/CupText" unique_id=1790233656]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 44
+text = "Cup Selection"
+
+[node name="MainText" type="Label" parent="Control/CupText" unique_id=12830677]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 44
+text = "Cup Selection"
+
+[node name="Cups" type="Control" parent="Control" unique_id=318320634]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ShinyPlayer" type="AnimationPlayer" parent="Control/Cups" unique_id=1180992230]
+libraries/ = SubResource("AnimationLibrary_4j5vo")
+autoplay = &"shinyAnim"
+
+[node name="Cup1" type="Control" parent="Control/Cups" unique_id=769223802]
+anchors_preset = 0
+offset_left = 31.58
+offset_top = 122.01
+offset_right = 31.58
+offset_bottom = 122.01
+script = ExtResource("7_tdwvn")
+locked = true
+completed = 3
+
+[node name="Img" type="TextureRect" parent="Control/Cups/Cup1" unique_id=375550166]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 72.0
+texture = ExtResource("8_3rlsr")
+
+[node name="Shiny" type="TextureRect" parent="Control/Cups/Cup1/Img" unique_id=1093367838]
+layout_mode = 0
+offset_left = -102.58
+offset_top = -132.125
+offset_right = 287.41998
+offset_bottom = 209.875
+scale = Vector2(1.17, 1)
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("4_n5pa4")
+
+[node name="Vehicle" type="TextureRect" parent="Control/Cups/Cup1/Img" unique_id=837372553]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 91.0
+offset_bottom = 73.0
+texture = ExtResource("9_6uye0")
+
+[node name="Medals" type="Control" parent="Control/Cups/Cup1/Img" unique_id=1461390495]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gold" type="TextureRect" parent="Control/Cups/Cup1/Img/Medals" unique_id=1064626347]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 36.0
+offset_right = 183.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_3ycji")
+
+[node name="Silver" type="TextureRect" parent="Control/Cups/Cup1/Img/Medals" unique_id=1794263842]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 36.0
+offset_right = 207.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_aqrqf")
+
+[node name="Bronze" type="TextureRect" parent="Control/Cups/Cup1/Img/Medals" unique_id=1642595306]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 36.0
+offset_right = 231.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("12_7j54v")
+
+[node name="Button" type="Button" parent="Control/Cups/Cup1/Img" unique_id=1101783617]
+layout_mode = 0
+offset_left = 1.66
+offset_top = 2.5
+offset_right = 206.66
+offset_bottom = 70.5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+
+[node name="Lock" type="TextureRect" parent="Control/Cups/Cup1" unique_id=2127189805]
+layout_mode = 0
+offset_left = 158.99998
+offset_top = 28.999994
+offset_right = 190.00003
+offset_bottom = 69.99999
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("13_e6g5j")
+
+[node name="Infotext" type="Label" parent="Control/Cups/Cup1" unique_id=320142574]
+layout_mode = 0
+offset_left = 31.999985
+offset_top = 5.9999886
+offset_right = 149.99998
+offset_bottom = 65.999985
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 10
+text = "Complete cup 1 and 3 to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="BackButton" type="TextureButton" parent="Control" unique_id=1783351543]
+layout_mode = 0
+offset_left = 236.5
+offset_top = 442.46
+offset_right = 328.50006
+offset_bottom = 484.46
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("16_tdwvn")
+
+[connection signal="mouse_entered" from="Control/Cups/Cup1/Img/Button" to="Control/Cups/Cup1" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Cups/Cup1/Img/Button" to="Control/Cups/Cup1" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control/Cups/Cup1/Img/Button" to="Control" method="_on_button_pressed"]
+[connection signal="mouse_entered" from="Control/BackButton" to="Control" method="_on_back_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/BackButton" to="Control" method="_on_back_button_mouse_exited"]
+[connection signal="pressed" from="Control/BackButton" to="Control" method="_on_back_button_pressed"]
