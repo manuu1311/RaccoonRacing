@@ -90,6 +90,90 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cup2/Img/Shiny:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cup3/Img/Shiny:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cup4/Img/Shiny:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cup5/Img/Shiny:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cup6/Img/Shiny:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cup7/Img/Shiny:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Cup8/Img/Shiny:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4j5vo"]
 _data = {
@@ -147,9 +231,9 @@ texture = ExtResource("2_lo0sp")
 [node name="CupText" type="Control" parent="Control" unique_id=309096806]
 anchors_preset = 0
 offset_left = 90.0
-offset_top = 12.105
+offset_top = 20.0
 offset_right = 90.0
-offset_bottom = 12.105
+offset_bottom = 20.0
 
 [node name="Outline2" type="Label" parent="Control/CupText" unique_id=1578253098]
 layout_mode = 0
@@ -159,9 +243,9 @@ offset_right = 338.98755
 offset_bottom = 53.87
 theme_override_colors/font_color = Color(1, 1, 1, 0)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 27
+theme_override_constants/shadow_outline_size = 31
 theme_override_fonts/font = ExtResource("2_q3nyi")
 theme_override_font_sizes/font_size = 44
 text = "Cup Selection"
@@ -173,7 +257,10 @@ offset_top = 6.675
 offset_right = 341.76257
 offset_bottom = 57.675
 theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_constants/outline_size = 12
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
 theme_override_fonts/font = ExtResource("2_q3nyi")
 theme_override_font_sizes/font_size = 44
 text = "Cup Selection"
@@ -193,8 +280,9 @@ text = "Cup Selection"
 
 [node name="Cups" type="Control" parent="Control" unique_id=318320634]
 anchors_preset = 0
+offset_top = -30.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 10.0
 
 [node name="ShinyPlayer" type="AnimationPlayer" parent="Control/Cups" unique_id=1180992230]
 libraries/ = SubResource("AnimationLibrary_4j5vo")
@@ -202,10 +290,10 @@ autoplay = &"shinyAnim"
 
 [node name="Cup1" type="Control" parent="Control/Cups" unique_id=769223802]
 anchors_preset = 0
-offset_left = 31.58
-offset_top = 122.01
-offset_right = 31.58
-offset_bottom = 122.01
+offset_left = 32.0
+offset_top = 122.0
+offset_right = 32.0
+offset_bottom = 122.0
 script = ExtResource("7_tdwvn")
 locked = true
 completed = 3
@@ -302,6 +390,727 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
 
+[node name="Cup2" type="Control" parent="Control/Cups" unique_id=191826416]
+anchors_preset = 0
+offset_left = 260.0
+offset_top = 122.01
+offset_right = 260.0
+offset_bottom = 122.01
+script = ExtResource("7_tdwvn")
+locked = true
+completed = 3
+id = 1
+
+[node name="Img" type="TextureRect" parent="Control/Cups/Cup2" unique_id=840704939]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 72.0
+texture = ExtResource("8_3rlsr")
+
+[node name="Shiny" type="TextureRect" parent="Control/Cups/Cup2/Img" unique_id=59883454]
+layout_mode = 0
+offset_left = -102.58
+offset_top = -132.125
+offset_right = 287.41998
+offset_bottom = 209.875
+scale = Vector2(1.17, 1)
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("4_n5pa4")
+
+[node name="Vehicle" type="TextureRect" parent="Control/Cups/Cup2/Img" unique_id=1743266274]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 91.0
+offset_bottom = 73.0
+texture = ExtResource("9_6uye0")
+
+[node name="Medals" type="Control" parent="Control/Cups/Cup2/Img" unique_id=352089049]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gold" type="TextureRect" parent="Control/Cups/Cup2/Img/Medals" unique_id=1194667898]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 36.0
+offset_right = 183.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_3ycji")
+
+[node name="Silver" type="TextureRect" parent="Control/Cups/Cup2/Img/Medals" unique_id=1822200440]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 36.0
+offset_right = 207.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_aqrqf")
+
+[node name="Bronze" type="TextureRect" parent="Control/Cups/Cup2/Img/Medals" unique_id=245301355]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 36.0
+offset_right = 231.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("12_7j54v")
+
+[node name="Lock" type="TextureRect" parent="Control/Cups/Cup2" unique_id=1888313632]
+layout_mode = 0
+offset_left = 158.99998
+offset_top = 28.999994
+offset_right = 190.00003
+offset_bottom = 69.99999
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("13_e6g5j")
+
+[node name="Infotext" type="Label" parent="Control/Cups/Cup2" unique_id=1874525841]
+layout_mode = 0
+offset_left = 31.999985
+offset_top = 5.9999886
+offset_right = 149.99998
+offset_bottom = 65.999985
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 10
+text = "Complete cup 1 and 3 to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Control/Cups/Cup2" unique_id=482296714]
+layout_mode = 0
+offset_left = 1.6600018
+offset_top = 2.5
+offset_right = 206.66
+offset_bottom = 70.5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+
+[node name="Cup3" type="Control" parent="Control/Cups" unique_id=908395654]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 210.0
+offset_right = 32.0
+offset_bottom = 210.0
+script = ExtResource("7_tdwvn")
+locked = true
+completed = 3
+id = 2
+
+[node name="Img" type="TextureRect" parent="Control/Cups/Cup3" unique_id=1262703361]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 72.0
+texture = ExtResource("8_3rlsr")
+
+[node name="Shiny" type="TextureRect" parent="Control/Cups/Cup3/Img" unique_id=960992238]
+layout_mode = 0
+offset_left = -102.58
+offset_top = -132.125
+offset_right = 287.41998
+offset_bottom = 209.875
+scale = Vector2(1.17, 1)
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("4_n5pa4")
+
+[node name="Vehicle" type="TextureRect" parent="Control/Cups/Cup3/Img" unique_id=1657107796]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 91.0
+offset_bottom = 73.0
+texture = ExtResource("9_6uye0")
+
+[node name="Medals" type="Control" parent="Control/Cups/Cup3/Img" unique_id=1665142694]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gold" type="TextureRect" parent="Control/Cups/Cup3/Img/Medals" unique_id=1921733466]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 36.0
+offset_right = 183.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_3ycji")
+
+[node name="Silver" type="TextureRect" parent="Control/Cups/Cup3/Img/Medals" unique_id=1032850913]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 36.0
+offset_right = 207.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_aqrqf")
+
+[node name="Bronze" type="TextureRect" parent="Control/Cups/Cup3/Img/Medals" unique_id=705697025]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 36.0
+offset_right = 231.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("12_7j54v")
+
+[node name="Lock" type="TextureRect" parent="Control/Cups/Cup3" unique_id=56533963]
+layout_mode = 0
+offset_left = 158.99998
+offset_top = 28.999994
+offset_right = 190.00003
+offset_bottom = 69.99999
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("13_e6g5j")
+
+[node name="Infotext" type="Label" parent="Control/Cups/Cup3" unique_id=189548281]
+layout_mode = 0
+offset_left = 31.999985
+offset_top = 5.9999886
+offset_right = 149.99998
+offset_bottom = 65.999985
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 10
+text = "Complete cup 1 and 3 to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Control/Cups/Cup3" unique_id=621092334]
+layout_mode = 0
+offset_left = 1.6600018
+offset_top = 2.5
+offset_right = 206.66
+offset_bottom = 70.5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+
+[node name="Cup4" type="Control" parent="Control/Cups" unique_id=1153626590]
+anchors_preset = 0
+offset_left = 260.0
+offset_top = 210.0
+offset_right = 260.0
+offset_bottom = 210.0
+script = ExtResource("7_tdwvn")
+locked = true
+completed = 3
+id = 3
+
+[node name="Img" type="TextureRect" parent="Control/Cups/Cup4" unique_id=475621591]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 72.0
+texture = ExtResource("8_3rlsr")
+
+[node name="Shiny" type="TextureRect" parent="Control/Cups/Cup4/Img" unique_id=1385332913]
+layout_mode = 0
+offset_left = -102.58
+offset_top = -132.125
+offset_right = 287.41998
+offset_bottom = 209.875
+scale = Vector2(1.17, 1)
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("4_n5pa4")
+
+[node name="Vehicle" type="TextureRect" parent="Control/Cups/Cup4/Img" unique_id=1124415108]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 91.0
+offset_bottom = 73.0
+texture = ExtResource("9_6uye0")
+
+[node name="Medals" type="Control" parent="Control/Cups/Cup4/Img" unique_id=2129826263]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gold" type="TextureRect" parent="Control/Cups/Cup4/Img/Medals" unique_id=168414130]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 36.0
+offset_right = 183.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_3ycji")
+
+[node name="Silver" type="TextureRect" parent="Control/Cups/Cup4/Img/Medals" unique_id=1662331111]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 36.0
+offset_right = 207.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_aqrqf")
+
+[node name="Bronze" type="TextureRect" parent="Control/Cups/Cup4/Img/Medals" unique_id=416116601]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 36.0
+offset_right = 231.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("12_7j54v")
+
+[node name="Lock" type="TextureRect" parent="Control/Cups/Cup4" unique_id=928547604]
+layout_mode = 0
+offset_left = 158.99998
+offset_top = 28.999994
+offset_right = 190.00003
+offset_bottom = 69.99999
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("13_e6g5j")
+
+[node name="Infotext" type="Label" parent="Control/Cups/Cup4" unique_id=1192927593]
+layout_mode = 0
+offset_left = 31.999985
+offset_top = 5.9999886
+offset_right = 149.99998
+offset_bottom = 65.999985
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 10
+text = "Complete cup 1 and 3 to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Control/Cups/Cup4" unique_id=1676051598]
+layout_mode = 0
+offset_left = 1.6600018
+offset_top = 2.5
+offset_right = 206.66
+offset_bottom = 70.5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+
+[node name="Cup5" type="Control" parent="Control/Cups" unique_id=1837400641]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 298.0
+offset_right = 32.0
+offset_bottom = 298.0
+script = ExtResource("7_tdwvn")
+locked = true
+completed = 3
+id = 4
+
+[node name="Img" type="TextureRect" parent="Control/Cups/Cup5" unique_id=1602737968]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 72.0
+texture = ExtResource("8_3rlsr")
+
+[node name="Shiny" type="TextureRect" parent="Control/Cups/Cup5/Img" unique_id=299989379]
+layout_mode = 0
+offset_left = -102.58
+offset_top = -132.125
+offset_right = 287.41998
+offset_bottom = 209.875
+scale = Vector2(1.17, 1)
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("4_n5pa4")
+
+[node name="Vehicle" type="TextureRect" parent="Control/Cups/Cup5/Img" unique_id=490150796]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 91.0
+offset_bottom = 73.0
+texture = ExtResource("9_6uye0")
+
+[node name="Medals" type="Control" parent="Control/Cups/Cup5/Img" unique_id=231504739]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gold" type="TextureRect" parent="Control/Cups/Cup5/Img/Medals" unique_id=784063026]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 36.0
+offset_right = 183.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_3ycji")
+
+[node name="Silver" type="TextureRect" parent="Control/Cups/Cup5/Img/Medals" unique_id=1013546183]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 36.0
+offset_right = 207.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_aqrqf")
+
+[node name="Bronze" type="TextureRect" parent="Control/Cups/Cup5/Img/Medals" unique_id=1899023330]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 36.0
+offset_right = 231.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("12_7j54v")
+
+[node name="Lock" type="TextureRect" parent="Control/Cups/Cup5" unique_id=1306265356]
+layout_mode = 0
+offset_left = 158.99998
+offset_top = 28.999994
+offset_right = 190.00003
+offset_bottom = 69.99999
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("13_e6g5j")
+
+[node name="Infotext" type="Label" parent="Control/Cups/Cup5" unique_id=1251451944]
+layout_mode = 0
+offset_left = 31.999985
+offset_top = 5.9999886
+offset_right = 149.99998
+offset_bottom = 65.999985
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 10
+text = "Complete cup 1 and 3 to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Control/Cups/Cup5" unique_id=1951615940]
+layout_mode = 0
+offset_left = 1.6600018
+offset_top = 2.5
+offset_right = 206.66
+offset_bottom = 70.5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+
+[node name="Cup6" type="Control" parent="Control/Cups" unique_id=773169809]
+anchors_preset = 0
+offset_left = 260.0
+offset_top = 298.0
+offset_right = 260.0
+offset_bottom = 298.0
+script = ExtResource("7_tdwvn")
+locked = true
+completed = 3
+id = 5
+
+[node name="Img" type="TextureRect" parent="Control/Cups/Cup6" unique_id=308991981]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 72.0
+texture = ExtResource("8_3rlsr")
+
+[node name="Shiny" type="TextureRect" parent="Control/Cups/Cup6/Img" unique_id=139765328]
+layout_mode = 0
+offset_left = -102.58
+offset_top = -132.125
+offset_right = 287.41998
+offset_bottom = 209.875
+scale = Vector2(1.17, 1)
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("4_n5pa4")
+
+[node name="Vehicle" type="TextureRect" parent="Control/Cups/Cup6/Img" unique_id=1505396963]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 91.0
+offset_bottom = 73.0
+texture = ExtResource("9_6uye0")
+
+[node name="Medals" type="Control" parent="Control/Cups/Cup6/Img" unique_id=1448056334]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gold" type="TextureRect" parent="Control/Cups/Cup6/Img/Medals" unique_id=1630970689]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 36.0
+offset_right = 183.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_3ycji")
+
+[node name="Silver" type="TextureRect" parent="Control/Cups/Cup6/Img/Medals" unique_id=718017550]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 36.0
+offset_right = 207.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_aqrqf")
+
+[node name="Bronze" type="TextureRect" parent="Control/Cups/Cup6/Img/Medals" unique_id=1963566451]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 36.0
+offset_right = 231.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("12_7j54v")
+
+[node name="Lock" type="TextureRect" parent="Control/Cups/Cup6" unique_id=76201826]
+layout_mode = 0
+offset_left = 158.99998
+offset_top = 28.999994
+offset_right = 190.00003
+offset_bottom = 69.99999
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("13_e6g5j")
+
+[node name="Infotext" type="Label" parent="Control/Cups/Cup6" unique_id=1523256756]
+layout_mode = 0
+offset_left = 31.999985
+offset_top = 5.9999886
+offset_right = 149.99998
+offset_bottom = 65.999985
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 10
+text = "Complete cup 1 and 3 to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Control/Cups/Cup6" unique_id=772111031]
+layout_mode = 0
+offset_left = 1.6600018
+offset_top = 2.5
+offset_right = 206.66
+offset_bottom = 70.5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+
+[node name="Cup7" type="Control" parent="Control/Cups" unique_id=946534370]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 386.0
+offset_right = 32.0
+offset_bottom = 386.0
+script = ExtResource("7_tdwvn")
+locked = true
+completed = 3
+id = 6
+
+[node name="Img" type="TextureRect" parent="Control/Cups/Cup7" unique_id=893096359]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 72.0
+texture = ExtResource("8_3rlsr")
+
+[node name="Shiny" type="TextureRect" parent="Control/Cups/Cup7/Img" unique_id=999963429]
+layout_mode = 0
+offset_left = -102.58
+offset_top = -132.125
+offset_right = 287.41998
+offset_bottom = 209.875
+scale = Vector2(1.17, 1)
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("4_n5pa4")
+
+[node name="Vehicle" type="TextureRect" parent="Control/Cups/Cup7/Img" unique_id=1097104862]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 91.0
+offset_bottom = 73.0
+texture = ExtResource("9_6uye0")
+
+[node name="Medals" type="Control" parent="Control/Cups/Cup7/Img" unique_id=375684316]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gold" type="TextureRect" parent="Control/Cups/Cup7/Img/Medals" unique_id=334730281]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 36.0
+offset_right = 183.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_3ycji")
+
+[node name="Silver" type="TextureRect" parent="Control/Cups/Cup7/Img/Medals" unique_id=312690269]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 36.0
+offset_right = 207.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_aqrqf")
+
+[node name="Bronze" type="TextureRect" parent="Control/Cups/Cup7/Img/Medals" unique_id=1968366970]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 36.0
+offset_right = 231.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("12_7j54v")
+
+[node name="Lock" type="TextureRect" parent="Control/Cups/Cup7" unique_id=1360752660]
+layout_mode = 0
+offset_left = 158.99998
+offset_top = 28.999994
+offset_right = 190.00003
+offset_bottom = 69.99999
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("13_e6g5j")
+
+[node name="Infotext" type="Label" parent="Control/Cups/Cup7" unique_id=125053403]
+layout_mode = 0
+offset_left = 31.999985
+offset_top = 5.9999886
+offset_right = 149.99998
+offset_bottom = 65.999985
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 10
+text = "Complete cup 1 and 3 to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Control/Cups/Cup7" unique_id=124563061]
+layout_mode = 0
+offset_left = 1.6600018
+offset_top = 2.5
+offset_right = 206.66
+offset_bottom = 70.5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+
+[node name="Cup8" type="Control" parent="Control/Cups" unique_id=1506406338]
+anchors_preset = 0
+offset_left = 260.0
+offset_top = 386.0
+offset_right = 260.0
+offset_bottom = 386.0
+script = ExtResource("7_tdwvn")
+locked = true
+completed = 3
+id = 7
+
+[node name="Img" type="TextureRect" parent="Control/Cups/Cup8" unique_id=1736952658]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 72.0
+texture = ExtResource("8_3rlsr")
+
+[node name="Shiny" type="TextureRect" parent="Control/Cups/Cup8/Img" unique_id=283510097]
+layout_mode = 0
+offset_left = -102.58
+offset_top = -132.125
+offset_right = 287.41998
+offset_bottom = 209.875
+scale = Vector2(1.17, 1)
+pivot_offset = Vector2(112, 112)
+texture = ExtResource("4_n5pa4")
+
+[node name="Vehicle" type="TextureRect" parent="Control/Cups/Cup8/Img" unique_id=512760332]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 91.0
+offset_bottom = 73.0
+texture = ExtResource("9_6uye0")
+
+[node name="Medals" type="Control" parent="Control/Cups/Cup8/Img" unique_id=1633657690]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gold" type="TextureRect" parent="Control/Cups/Cup8/Img/Medals" unique_id=1069715762]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 36.0
+offset_right = 183.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("10_3ycji")
+
+[node name="Silver" type="TextureRect" parent="Control/Cups/Cup8/Img/Medals" unique_id=732614550]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 36.0
+offset_right = 207.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("11_aqrqf")
+
+[node name="Bronze" type="TextureRect" parent="Control/Cups/Cup8/Img/Medals" unique_id=699662111]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 36.0
+offset_right = 231.0
+offset_bottom = 128.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("12_7j54v")
+
+[node name="Lock" type="TextureRect" parent="Control/Cups/Cup8" unique_id=1849795373]
+layout_mode = 0
+offset_left = 158.99998
+offset_top = 28.999994
+offset_right = 190.00003
+offset_bottom = 69.99999
+rotation = -0.6161012
+scale = Vector2(0.58, 0.58)
+pivot_offset = Vector2(15.5, 20.5)
+texture = ExtResource("13_e6g5j")
+
+[node name="Infotext" type="Label" parent="Control/Cups/Cup8" unique_id=1141860808]
+layout_mode = 0
+offset_left = 31.999985
+offset_top = 5.9999886
+offset_right = 149.99998
+offset_bottom = 65.999985
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 10
+text = "Complete cup 1 and 3 to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Control/Cups/Cup8" unique_id=1658264070]
+layout_mode = 0
+offset_left = 1.6600018
+offset_top = 2.5
+offset_right = 206.66
+offset_bottom = 70.5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+
 [node name="BGFilter" type="TextureRect" parent="Control" unique_id=790340210]
 visible = false
 layout_mode = 0
@@ -310,6 +1119,7 @@ offset_bottom = 500.0
 texture = ExtResource("17_3rlsr")
 
 [node name="Buttons" type="Control" parent="Control" unique_id=811551456]
+visible = false
 anchors_preset = 0
 offset_left = 250.0
 offset_right = 250.0
@@ -584,7 +1394,20 @@ texture_normal = ExtResource("16_tdwvn")
 
 [connection signal="mouse_entered" from="Control/Cups/Cup1/Button" to="Control/Cups/Cup1" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/Cups/Cup1/Button" to="Control/Cups/Cup1" method="_on_button_mouse_exited"]
-[connection signal="pressed" from="Control/Cups/Cup1/Button" to="Control" method="_on_cup_pressed" binds= [0]]
+[connection signal="mouse_entered" from="Control/Cups/Cup2/Button" to="Control/Cups/Cup2" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Cups/Cup2/Button" to="Control/Cups/Cup2" method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="Control/Cups/Cup3/Button" to="Control/Cups/Cup3" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Cups/Cup3/Button" to="Control/Cups/Cup3" method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="Control/Cups/Cup4/Button" to="Control/Cups/Cup4" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Cups/Cup4/Button" to="Control/Cups/Cup4" method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="Control/Cups/Cup5/Button" to="Control/Cups/Cup5" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Cups/Cup5/Button" to="Control/Cups/Cup5" method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="Control/Cups/Cup6/Button" to="Control/Cups/Cup6" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Cups/Cup6/Button" to="Control/Cups/Cup6" method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="Control/Cups/Cup7/Button" to="Control/Cups/Cup7" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Cups/Cup7/Button" to="Control/Cups/Cup7" method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="Control/Cups/Cup8/Button" to="Control/Cups/Cup8" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Cups/Cup8/Button" to="Control/Cups/Cup8" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="Control/Buttons/HardBTN/Button" to="Control/Buttons" method="_on_diff_mouse_entered" binds= [3]]
 [connection signal="mouse_exited" from="Control/Buttons/HardBTN/Button" to="Control/Buttons" method="_on_diff_mouse_exited" binds= [3]]
 [connection signal="pressed" from="Control/Buttons/HardBTN/Button" to="Control" method="_on_diff_pressed" binds= [3]]

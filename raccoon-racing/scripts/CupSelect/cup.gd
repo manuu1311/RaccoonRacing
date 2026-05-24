@@ -5,11 +5,13 @@ extends Control
 @onready var img: TextureRect = $Img
 @onready var medals: Control = $Img/Medals
 @onready var lock: TextureRect = $Lock
+@export var id: int
 #greyed out icon transform
 var r_g_b: float = 102.0 / 256.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	locked=GameData.cupLocks[id]
 	$Img/Medals/Silver.hide()
 	$Img/Medals/Bronze.hide()
 	$Img/Medals/Gold.hide()

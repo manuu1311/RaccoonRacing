@@ -7,11 +7,15 @@ class_name UICupSelection
 var choosing_diff:bool=false
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide_diff_screen()
 	UiOverAnimation.reset_anim_frame()
+	#connect each cup
+	for i in range(8):
+		var button_path = "Cups/Cup" + str(i+1) +"/Button"
+		var cup_button = get_node(button_path) as Button
+		cup_button.pressed.connect(_on_cup_pressed.bind(i))
 
 
 
@@ -55,8 +59,11 @@ func show_diff_screen():
 	
 
 func _on_cup_pressed(id: int) -> void:
-	ButtonSounds.PlaySound('click')
-	GameData.currentCup=id
-	choosing_diff=true
-	buttons.updateLocks(GameData.currentCup)
-	show_diff_screen()
+	if GameData.cupLocks[id]:
+		ButtonSounds.PlaySound('warning')
+	else:
+		ButtonSounds.PlaySound('click')
+		GameData.currentCup=id
+		choosing_diff=true
+		buttons.updateLocks(GameData.currentCup)
+		show_diff_screen()

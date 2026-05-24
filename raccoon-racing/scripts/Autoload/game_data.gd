@@ -29,6 +29,7 @@ func UnlockAllCups():
 		cupWon[i]=3
 	
 
+
 #testing function
 func MidGameData():
 	#won cup 1 in normal, cup 2 in easy, cup 3 in easy
