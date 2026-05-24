@@ -834,7 +834,7 @@ script = ExtResource("16_fi2k8")
 hovertext = ExtResource("17_02813")
 normaltext = ExtResource("18_ar6hf")
 id = 2
-unlockInfo = "COMPLETE CUP 1 IN EASY MODE TO UNLOCK"
+unlockInfo = "COMPLETE CUP 1,3 IN EASY MODE TO UNLOCK"
 
 [node name="Shiny" type="TextureRect" parent="Control/Characters/Mambo/Char" unique_id=914531245]
 layout_mode = 0

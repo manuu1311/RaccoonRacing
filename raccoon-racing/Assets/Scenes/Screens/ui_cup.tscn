@@ -296,7 +296,6 @@ offset_right = 32.0
 offset_bottom = 122.0
 script = ExtResource("7_tdwvn")
 locked = true
-completed = 3
 
 [node name="Img" type="TextureRect" parent="Control/Cups/Cup1" unique_id=375550166]
 layout_mode = 0
@@ -398,7 +397,6 @@ offset_right = 260.0
 offset_bottom = 122.01
 script = ExtResource("7_tdwvn")
 locked = true
-completed = 3
 id = 1
 
 [node name="Img" type="TextureRect" parent="Control/Cups/Cup2" unique_id=840704939]
@@ -501,7 +499,6 @@ offset_right = 32.0
 offset_bottom = 210.0
 script = ExtResource("7_tdwvn")
 locked = true
-completed = 3
 id = 2
 
 [node name="Img" type="TextureRect" parent="Control/Cups/Cup3" unique_id=1262703361]
@@ -604,7 +601,6 @@ offset_right = 260.0
 offset_bottom = 210.0
 script = ExtResource("7_tdwvn")
 locked = true
-completed = 3
 id = 3
 
 [node name="Img" type="TextureRect" parent="Control/Cups/Cup4" unique_id=475621591]
@@ -707,7 +703,6 @@ offset_right = 32.0
 offset_bottom = 298.0
 script = ExtResource("7_tdwvn")
 locked = true
-completed = 3
 id = 4
 
 [node name="Img" type="TextureRect" parent="Control/Cups/Cup5" unique_id=1602737968]
@@ -787,7 +782,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("14_0nxtg")
 theme_override_font_sizes/font_size = 10
-text = "Complete cup 1 and 3 to unlock"
+text = "COMPLETE CUP 1,3 IN EASY MODE TO UNLOCK"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -810,7 +805,6 @@ offset_right = 260.0
 offset_bottom = 298.0
 script = ExtResource("7_tdwvn")
 locked = true
-completed = 3
 id = 5
 
 [node name="Img" type="TextureRect" parent="Control/Cups/Cup6" unique_id=308991981]
@@ -890,7 +884,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("14_0nxtg")
 theme_override_font_sizes/font_size = 10
-text = "Complete cup 1 and 3 to unlock"
+text = "COMPLETE CUP 2,4 IN EASY MODE TO UNLOCK"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -913,7 +907,6 @@ offset_right = 32.0
 offset_bottom = 386.0
 script = ExtResource("7_tdwvn")
 locked = true
-completed = 3
 id = 6
 
 [node name="Img" type="TextureRect" parent="Control/Cups/Cup7" unique_id=893096359]
@@ -993,7 +986,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("14_0nxtg")
 theme_override_font_sizes/font_size = 10
-text = "Complete cup 1 and 3 to unlock"
+text = "COMPLETE CUP 1-6 IN NORMAL MODE TO UNLOCK"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -1016,7 +1009,6 @@ offset_right = 260.0
 offset_bottom = 386.0
 script = ExtResource("7_tdwvn")
 locked = true
-completed = 3
 id = 7
 
 [node name="Img" type="TextureRect" parent="Control/Cups/Cup8" unique_id=1736952658]
@@ -1096,7 +1088,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("14_0nxtg")
 theme_override_font_sizes/font_size = 10
-text = "Complete cup 1 and 3 to unlock"
+text = "COMPLETE CUP 7 IN NORMAL MODE TO UNLOCK"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
