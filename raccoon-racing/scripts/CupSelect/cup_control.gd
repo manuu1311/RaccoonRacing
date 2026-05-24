@@ -1,21 +1,29 @@
 extends Control
 class_name UICupSelection
 
+@onready var bg_filter: TextureRect = $BGFilter
+@onready var cups: Control = $Cups
+@onready var buttons: DifficultyButtons = $Buttons
+var choosing_diff:bool=false
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	hide_diff_screen()
 	UiOverAnimation.reset_anim_frame()
 
 
 
 
-func _on_button_pressed() -> void:
-	pass # Replace with function body.
-
-
 
 func _on_back_button_pressed() -> void:
 	ButtonSounds.PlaySound('click')
-	get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_char_selection.tscn')
+	if choosing_diff:
+		hide_diff_screen()
+		choosing_diff=false
+	else:
+		get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_char_selection.tscn')
 
 
 func _on_back_button_mouse_entered() -> void:
@@ -25,3 +33,30 @@ func _on_back_button_mouse_entered() -> void:
 
 func _on_back_button_mouse_exited() -> void:
 	$BackButton.position.y+=3
+
+
+
+func _on_diff_pressed(diff: int) -> void:
+	if buttons.locks[diff-1]:
+		ButtonSounds.PlaySound('warning')
+	else:
+		ButtonSounds.PlaySound('click')
+
+
+func hide_diff_screen():
+	bg_filter.hide()
+	buttons.hide()
+	
+func show_diff_screen():
+	bg_filter.show()
+	buttons.show()
+	
+	
+	
+
+func _on_cup_pressed(id: int) -> void:
+	ButtonSounds.PlaySound('click')
+	GameData.currentCup=id
+	choosing_diff=true
+	buttons.updateLocks(GameData.currentCup)
+	show_diff_screen()

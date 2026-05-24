@@ -16,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://ccu7mt8tmpevy" path="res://Assets/Animations/CharSelection/characters/lock.png" id="13_e6g5j"]
 [ext_resource type="FontFile" uid="uid://b6ndjgweysvx0" path="res://Assets/Fonts/2_Arial Black.ttf" id="14_0nxtg"]
 [ext_resource type="Texture2D" uid="uid://dioaqtx5mmk0n" path="res://Assets/Images/main_menu/back.png" id="16_tdwvn"]
+[ext_resource type="Texture2D" uid="uid://bnyi1t55w0x7d" path="res://Assets/Animations/UISelect/bgfilter.png" id="17_3rlsr"]
+[ext_resource type="Script" uid="uid://c7o7tjs5cj3ao" path="res://scripts/CupSelect/diffbuttons.gd" id="18_6uye0"]
+[ext_resource type="Texture2D" uid="uid://cjecn85ja7rwr" path="res://Assets/Animations/UISelect/cups/btncontainer.png" id="19_3ycji"]
 
 [sub_resource type="Animation" id="Animation_q3nyi"]
 length = 0.001
@@ -99,6 +102,12 @@ _data = {
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2rjpb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qkely"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aqrqf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6uye0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ycji"]
 
 [node name="UiCup" type="CanvasLayer" unique_id=1885147626]
 
@@ -257,16 +266,6 @@ offset_bottom = 128.0
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("12_7j54v")
 
-[node name="Button" type="Button" parent="Control/Cups/Cup1/Img" unique_id=1101783617]
-layout_mode = 0
-offset_left = 1.66
-offset_top = 2.5
-offset_right = 206.66
-offset_bottom = 70.5
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
-
 [node name="Lock" type="TextureRect" parent="Control/Cups/Cup1" unique_id=2127189805]
 layout_mode = 0
 offset_left = 158.99998
@@ -293,18 +292,308 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Button" type="Button" parent="Control/Cups/Cup1" unique_id=1101783617]
+layout_mode = 0
+offset_left = 1.6600018
+offset_top = 2.5
+offset_right = 206.66
+offset_bottom = 70.5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+
+[node name="BGFilter" type="TextureRect" parent="Control" unique_id=790340210]
+visible = false
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 500.0
+texture = ExtResource("17_3rlsr")
+
+[node name="Buttons" type="Control" parent="Control" unique_id=811551456]
+anchors_preset = 0
+offset_left = 250.0
+offset_right = 250.0
+script = ExtResource("18_6uye0")
+
+[node name="HardBTN" type="TextureRect" parent="Control/Buttons" unique_id=176198723]
+layout_mode = 0
+offset_left = -65.5
+offset_top = 324.0
+offset_right = 65.5
+offset_bottom = 362.0002
+texture = ExtResource("19_3ycji")
+
+[node name="Text" type="Control" parent="Control/Buttons/HardBTN" unique_id=1592145155]
+anchors_preset = 0
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 33.0
+
+[node name="Outline2" type="Label" parent="Control/Buttons/HardBTN/Text" unique_id=2086445546]
+layout_mode = 0
+offset_left = 2.9850006
+offset_top = 2.869995
+offset_right = 133.985
+offset_bottom = 40.869995
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 13
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 24
+text = "Hard"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Control/Buttons/HardBTN/Text" unique_id=1625463896]
+layout_mode = 0
+offset_left = 5.760002
+offset_top = 6.675003
+offset_right = 136.76001
+offset_bottom = 44.675003
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -6
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 24
+text = "Hard"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Control/Buttons/HardBTN/Text" unique_id=879048299]
+layout_mode = 0
+offset_right = 131.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 24
+text = "Hard"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Control/Buttons/HardBTN" unique_id=1868180801]
+layout_mode = 0
+offset_right = 131.0
+offset_bottom = 38.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_aqrqf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6uye0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3ycji")
+
+[node name="NormalBTN" type="TextureRect" parent="Control/Buttons" unique_id=1606365567]
+layout_mode = 0
+offset_left = -65.5
+offset_top = 233.0
+offset_right = 65.5
+offset_bottom = 271.0003
+texture = ExtResource("19_3ycji")
+
+[node name="Text" type="Control" parent="Control/Buttons/NormalBTN" unique_id=1071909937]
+anchors_preset = 0
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 33.0
+
+[node name="Outline2" type="Label" parent="Control/Buttons/NormalBTN/Text" unique_id=511888061]
+layout_mode = 0
+offset_left = 2.9850006
+offset_top = 2.869995
+offset_right = 133.985
+offset_bottom = 40.869995
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 13
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 24
+text = "Normal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Control/Buttons/NormalBTN/Text" unique_id=132484947]
+layout_mode = 0
+offset_left = 5.760002
+offset_top = 6.675003
+offset_right = 136.76001
+offset_bottom = 44.675003
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -6
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 24
+text = "Normal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Control/Buttons/NormalBTN/Text" unique_id=291903100]
+layout_mode = 0
+offset_right = 131.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 24
+text = "Normal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Control/Buttons/NormalBTN" unique_id=1536254942]
+layout_mode = 0
+offset_right = 131.0
+offset_bottom = 38.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_aqrqf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6uye0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3ycji")
+
+[node name="EasyBTN" type="TextureRect" parent="Control/Buttons" unique_id=775562565]
+layout_mode = 0
+offset_left = -65.5
+offset_top = 142.0
+offset_right = 65.5
+offset_bottom = 180.00038
+texture = ExtResource("19_3ycji")
+
+[node name="Text" type="Control" parent="Control/Buttons/EasyBTN" unique_id=1265837271]
+anchors_preset = 0
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 33.0
+
+[node name="Outline2" type="Label" parent="Control/Buttons/EasyBTN/Text" unique_id=1238583350]
+layout_mode = 0
+offset_left = 2.9850006
+offset_top = 2.869995
+offset_right = 133.985
+offset_bottom = 40.869995
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 13
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 24
+text = "Easy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Control/Buttons/EasyBTN/Text" unique_id=151481698]
+layout_mode = 0
+offset_left = 5.760002
+offset_top = 6.675003
+offset_right = 136.76001
+offset_bottom = 44.675003
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -6
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 24
+text = "Easy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Control/Buttons/EasyBTN/Text" unique_id=513533353]
+layout_mode = 0
+offset_right = 131.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 24
+text = "Easy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Control/Buttons/EasyBTN" unique_id=1699615745]
+layout_mode = 0
+offset_right = 131.0
+offset_bottom = 38.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_aqrqf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6uye0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3ycji")
+
+[node name="NormalInfotext" type="Label" parent="Control/Buttons" unique_id=461413740]
+layout_mode = 0
+offset_left = -65.0
+offset_top = 233.0
+offset_right = 66.0
+offset_bottom = 271.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 12
+text = "Complete EASY to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HardInfotext" type="Label" parent="Control/Buttons" unique_id=1295470182]
+layout_mode = 0
+offset_left = -65.0
+offset_top = 324.0
+offset_right = 66.0
+offset_bottom = 362.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 12
+text = "Complete NORMAL to unlock"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="EasyInfotext" type="Label" parent="Control/Buttons" unique_id=434935957]
+layout_mode = 0
+offset_left = -65.0
+offset_top = 142.0
+offset_right = 66.0
+offset_bottom = 180.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("14_0nxtg")
+theme_override_font_sizes/font_size = 12
+text = "Not supposed to happen!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="BackButton" type="TextureButton" parent="Control" unique_id=1783351543]
 layout_mode = 0
-offset_left = 236.5
+offset_left = 209.0
 offset_top = 442.46
-offset_right = 328.50006
+offset_right = 301.00006
 offset_bottom = 484.46
 scale = Vector2(0.9, 0.9)
 texture_normal = ExtResource("16_tdwvn")
 
-[connection signal="mouse_entered" from="Control/Cups/Cup1/Img/Button" to="Control/Cups/Cup1" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="Control/Cups/Cup1/Img/Button" to="Control/Cups/Cup1" method="_on_button_mouse_exited"]
-[connection signal="pressed" from="Control/Cups/Cup1/Img/Button" to="Control" method="_on_button_pressed"]
+[connection signal="mouse_entered" from="Control/Cups/Cup1/Button" to="Control/Cups/Cup1" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/Cups/Cup1/Button" to="Control/Cups/Cup1" method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Control/Cups/Cup1/Button" to="Control" method="_on_cup_pressed" binds= [0]]
+[connection signal="mouse_entered" from="Control/Buttons/HardBTN/Button" to="Control/Buttons" method="_on_diff_mouse_entered" binds= [3]]
+[connection signal="mouse_exited" from="Control/Buttons/HardBTN/Button" to="Control/Buttons" method="_on_diff_mouse_exited" binds= [3]]
+[connection signal="pressed" from="Control/Buttons/HardBTN/Button" to="Control" method="_on_diff_pressed" binds= [3]]
+[connection signal="mouse_entered" from="Control/Buttons/NormalBTN/Button" to="Control/Buttons" method="_on_diff_mouse_entered" binds= [2]]
+[connection signal="mouse_exited" from="Control/Buttons/NormalBTN/Button" to="Control/Buttons" method="_on_diff_mouse_exited" binds= [2]]
+[connection signal="pressed" from="Control/Buttons/NormalBTN/Button" to="Control" method="_on_diff_pressed" binds= [2]]
+[connection signal="mouse_entered" from="Control/Buttons/EasyBTN/Button" to="Control/Buttons" method="_on_diff_mouse_entered" binds= [1]]
+[connection signal="mouse_exited" from="Control/Buttons/EasyBTN/Button" to="Control/Buttons" method="_on_diff_mouse_exited" binds= [1]]
+[connection signal="pressed" from="Control/Buttons/EasyBTN/Button" to="Control" method="_on_diff_pressed" binds= [1]]
 [connection signal="mouse_entered" from="Control/BackButton" to="Control" method="_on_back_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/BackButton" to="Control" method="_on_back_button_mouse_exited"]
 [connection signal="pressed" from="Control/BackButton" to="Control" method="_on_back_button_pressed"]

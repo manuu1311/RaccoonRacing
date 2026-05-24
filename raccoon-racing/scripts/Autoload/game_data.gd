@@ -28,3 +28,11 @@ func UnlockAllCups():
 	for i in range(len(cupWon)):
 		cupWon[i]=3
 	
+
+#testing function
+func MidGameData():
+	#won cup 1 in normal, cup 2 in easy, cup 3 in easy
+	cupWon[0]=2
+	cupWon[2]=1
+	cupWon[1]=1
+	

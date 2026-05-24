@@ -37,6 +37,7 @@ func _ready() -> void:
 
 
 func _on_button_mouse_entered() -> void:
+	ButtonSounds.PlaySound('hover')
 	if locked:
 		$Infotext.show()
 	else:
