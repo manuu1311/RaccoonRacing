@@ -8,3 +8,5 @@ func playanim():
 #reset to the first frame for transparency
 func reset_anim_frame():
 	animated_sprite_2d.frame=0
+	
+	

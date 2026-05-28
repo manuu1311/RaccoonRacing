@@ -399,8 +399,8 @@ script/source = "extends AnimatedSprite2D
 class_name MainScreenAnimator
 
 signal main_anim_complete
-@onready var logo: Logo = $\"../Logo\"
-@onready var buttons: UIbuttons = $\"../Buttons\"
+@onready var logo: Logo = $\"../../Logo\"
+@onready var buttons: UIbuttons = $\"../../Buttons\"
 
 func _ready():
 	if not MusicPlayer.playing:
@@ -422,7 +422,6 @@ func _on_frame_changed():
 		logo.play_anim()
 
 func _on_start_button_pressed():
-	print('start button pressed')
 	buttons.hide()
 	logo.hide()
 	play()
@@ -431,7 +430,6 @@ func _on_start_button_pressed():
 
 
 func _on_how_to_play_button_pressed() -> void:
-	print('how to play button pressed')
 	buttons.hide()
 	logo.hide()
 	play()
@@ -440,7 +438,6 @@ func _on_how_to_play_button_pressed() -> void:
 
 
 func _on_high_scores_button_pressed() -> void:
-	print('high scores button pressed')
 	buttons.hide()
 	logo.hide()
 	play()
@@ -640,7 +637,9 @@ corner_radius_bottom_left = 50
 
 [node name="UI" type="CanvasLayer" unique_id=264051491]
 
-[node name="Background" type="AnimatedSprite2D" parent="." unique_id=1148931095]
+[node name="Dummy" type="CanvasLayer" parent="." unique_id=1069918169]
+
+[node name="Background" type="AnimatedSprite2D" parent="Dummy" unique_id=1148931095]
 position = Vector2(250, 250)
 sprite_frames = SubResource("SpriteFrames_jua0g")
 animation = &"intro"
@@ -766,7 +765,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -241.00003
 offset_top = 108.16499
-offset_right = -232.39993
+offset_right = -232.39987
 offset_bottom = 400.16498
 grow_horizontal = 2
 grow_vertical = 2
@@ -789,11 +788,11 @@ grow_vertical = 2
 rotation = -2.6005406
 
 [connection signal="mouse_entered" from="Buttons/StartGameButton" to="Buttons" method="_on_mouse_entered"]
+[connection signal="pressed" from="Buttons/StartGameButton" to="Dummy/Background" method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/StartGameButton" to="Buttons" method="_on_mouse_click"]
-[connection signal="pressed" from="Buttons/StartGameButton" to="Background" method="_on_start_button_pressed"]
 [connection signal="mouse_entered" from="Buttons/HowToPlayButton" to="Buttons" method="_on_mouse_entered"]
+[connection signal="pressed" from="Buttons/HowToPlayButton" to="Dummy/Background" method="_on_how_to_play_button_pressed"]
 [connection signal="pressed" from="Buttons/HowToPlayButton" to="Buttons" method="_on_mouse_click"]
-[connection signal="pressed" from="Buttons/HowToPlayButton" to="Background" method="_on_how_to_play_button_pressed"]
 [connection signal="mouse_entered" from="Buttons/HighScoresButton" to="Buttons" method="_on_mouse_entered"]
+[connection signal="pressed" from="Buttons/HighScoresButton" to="Dummy/Background" method="_on_high_scores_button_pressed"]
 [connection signal="pressed" from="Buttons/HighScoresButton" to="Buttons" method="_on_mouse_click"]
-[connection signal="pressed" from="Buttons/HighScoresButton" to="Background" method="_on_high_scores_button_pressed"]

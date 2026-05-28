@@ -1,5 +1,7 @@
 extends TextureRect
 
+
+@onready var animator: AnimationPlayer = $"../../../Animator"
 @onready var shiny: TextureRect = $Shiny
 @onready var label: TextureRect = $Label
 @onready var lock: TextureRect = $"../Lock"
@@ -20,10 +22,13 @@ func _ready() -> void:
 	infotext.hide()
 	shiny.hide()
 	label.texture=normaltext
+	lock.hide()
+	label.hide()
+	await animator.animation_finished
+	label.show()
 	if locked:
 		greyout()
-	else:
-		lock.hide()
+		lock.show()
 
 
 

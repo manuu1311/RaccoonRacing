@@ -13,23 +13,12 @@ var cupLocks: Array[bool]=[0,0,0,0,1,1,1,1]
 var cupWon: Array[int]=[0,0,0,0,0,0,0,0]
 #current cup chosen
 var currentCup: int = -1
+#current difficulty chosen
+var currentDifficulty: int=-1
 
-#unlock all characters
-func UnlockAllChars():
-	for i in range(len(characterLocks)):
-		characterLocks[i]=false
-
-#unlock all characters
-func UnlockAllCups():
-	#unlock all cups
-	for i in range(len(cupLocks)):
-		cupLocks[i]=false
-	#set all cups won in hard
-	for i in range(len(cupWon)):
-		cupWon[i]=3
 	
 #update character locks, to unlock new characters after each cup
-func CheckCharacterLocks():
+func CheckCharacterLocks()->void:
 	#mambo: cup 1,2 easy
 	if cupWon[0]>0 and cupWon[1]>0:
 		characterLocks[2]=0
@@ -48,7 +37,7 @@ func CheckCharacterLocks():
 	if check:
 		characterLocks[5]=0
 #update cup locks, to unlock new cups
-func CheckCupLocks():
+func CheckCupLocks()->void:
 	#cup 5: 1,3 easy
 	if cupWon[0]>0 and cupWon[2]>0:
 		cupLocks[4]=0
@@ -69,7 +58,7 @@ func CheckCupLocks():
 		cupLocks[7]=0
 
 #testing function
-func SetMidGameData():
+func SetMidGameData()->void:
 	#won cup 1 in normal, cup 2 in easy, cup 3 in easy
 	cupWon[0]=2
 	cupWon[2]=1
@@ -77,4 +66,11 @@ func SetMidGameData():
 	#update character and cup locks
 	CheckCharacterLocks()
 	CheckCupLocks()
-	
+#complete all cups in hard
+func UnlockAll()->void:
+	for i in range(len(cupWon)):
+		cupWon[i]=3
+	CheckCharacterLocks()
+	CheckCupLocks()
+		
+		

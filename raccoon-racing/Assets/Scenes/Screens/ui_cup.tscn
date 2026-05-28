@@ -15,8 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://jpv64lr7shtc" path="res://Assets/Animations/UISelect/cups/bronze.png" id="12_7j54v"]
 [ext_resource type="Texture2D" uid="uid://ccu7mt8tmpevy" path="res://Assets/Animations/CharSelection/characters/lock.png" id="13_e6g5j"]
 [ext_resource type="FontFile" uid="uid://b6ndjgweysvx0" path="res://Assets/Fonts/2_Arial Black.ttf" id="14_0nxtg"]
+[ext_resource type="Texture2D" uid="uid://cc7ioaln6vovw" path="res://Assets/Animations/UISelect/cups/boat.png" id="16_aqrqf"]
 [ext_resource type="Texture2D" uid="uid://dioaqtx5mmk0n" path="res://Assets/Images/main_menu/back.png" id="16_tdwvn"]
 [ext_resource type="Texture2D" uid="uid://bnyi1t55w0x7d" path="res://Assets/Animations/UISelect/bgfilter.png" id="17_3rlsr"]
+[ext_resource type="Texture2D" uid="uid://hv3lkwjrujpt" path="res://Assets/Animations/UISelect/cups/bart.png" id="17_7j54v"]
 [ext_resource type="Script" uid="uid://c7o7tjs5cj3ao" path="res://scripts/CupSelect/diffbuttons.gd" id="18_6uye0"]
 [ext_resource type="Texture2D" uid="uid://cjecn85ja7rwr" path="res://Assets/Animations/UISelect/cups/btncontainer.png" id="19_3ycji"]
 
@@ -421,7 +423,7 @@ offset_left = -4.0
 offset_top = -4.0
 offset_right = 91.0
 offset_bottom = 73.0
-texture = ExtResource("9_6uye0")
+texture = ExtResource("16_aqrqf")
 
 [node name="Medals" type="Control" parent="Control/Cups/Cup2/Img" unique_id=352089049]
 anchors_preset = 0
@@ -625,7 +627,7 @@ offset_left = -4.0
 offset_top = -4.0
 offset_right = 91.0
 offset_bottom = 73.0
-texture = ExtResource("9_6uye0")
+texture = ExtResource("16_aqrqf")
 
 [node name="Medals" type="Control" parent="Control/Cups/Cup4/Img" unique_id=2129826263]
 anchors_preset = 0
@@ -829,7 +831,7 @@ offset_left = -4.0
 offset_top = -4.0
 offset_right = 91.0
 offset_bottom = 73.0
-texture = ExtResource("9_6uye0")
+texture = ExtResource("16_aqrqf")
 
 [node name="Medals" type="Control" parent="Control/Cups/Cup6/Img" unique_id=1448056334]
 anchors_preset = 0
@@ -931,7 +933,7 @@ offset_left = -4.0
 offset_top = -4.0
 offset_right = 91.0
 offset_bottom = 73.0
-texture = ExtResource("9_6uye0")
+texture = ExtResource("17_7j54v")
 
 [node name="Medals" type="Control" parent="Control/Cups/Cup7/Img" unique_id=375684316]
 anchors_preset = 0
@@ -1033,7 +1035,7 @@ offset_left = -4.0
 offset_top = -4.0
 offset_right = 91.0
 offset_bottom = 73.0
-texture = ExtResource("9_6uye0")
+texture = ExtResource("17_7j54v")
 
 [node name="Medals" type="Control" parent="Control/Cups/Cup8/Img" unique_id=1633657690]
 anchors_preset = 0

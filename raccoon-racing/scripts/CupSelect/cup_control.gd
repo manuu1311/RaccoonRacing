@@ -9,8 +9,6 @@ var choosing_diff:bool=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(GameData.cupWon)
-	GameData.SetMidGameData()
 	hide_diff_screen()
 	UiOverAnimation.reset_anim_frame()
 	#connect each cup
@@ -47,6 +45,8 @@ func _on_diff_pressed(diff: int) -> void:
 		ButtonSounds.PlaySound('warning')
 	else:
 		ButtonSounds.PlaySound('click')
+		GameData.currentDifficulty=diff
+		UiOverAnimation.playanim()
 
 
 func hide_diff_screen():

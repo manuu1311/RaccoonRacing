@@ -7,7 +7,8 @@ func _ready() -> void:
 	audio_streams = {
 		"hover": preload("res://Assets/Sounds/2366_snd_ButtonOver.mp3"),
 		"click": preload("res://Assets/Sounds/2368_snd_ButtonRelease.mp3"),
-		"warning": preload("res://Assets/Sounds/2365_snd_ButtonWarning.mp3")
+		"warning": preload("res://Assets/Sounds/2365_snd_ButtonWarning.mp3"),
+		"secret": preload("res://Assets/Sounds/2332_snd_Ice.mp3")
 	}
 ## Plays a specific UI sound effect based on the provided identifier.
 ## [br][br]
