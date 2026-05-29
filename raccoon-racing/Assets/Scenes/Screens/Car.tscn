@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dxs80hju0etfw"]
+
+[ext_resource type="Texture2D" uid="uid://dyyuhl5b7btx5" path="res://Assets/Images/Vehicles/Cars/wheel1.png" id="1_hhgae"]
+[ext_resource type="Script" uid="uid://b15jbk8xtwyoh" path="res://scripts/Car/car.gd" id="1_kulw5"]
+[ext_resource type="Texture2D" uid="uid://b6uosl4q7kmi7" path="res://Assets/Images/Vehicles/Cars/wheel2.png" id="2_48y4g"]
+[ext_resource type="Texture2D" uid="uid://x4gc6i0xc37i" path="res://Assets/Images/Vehicles/Cars/wheel3.png" id="3_w14iu"]
+[ext_resource type="Texture2D" uid="uid://dcbs83dhh0od1" path="res://Assets/Images/Vehicles/Cars/raccoon/base.png" id="5_yi5bs"]
+[ext_resource type="Texture2D" uid="uid://cadbxy81ojaqk" path="res://Assets/Images/Vehicles/Cars/raccoon/char.png" id="6_fa25q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kulw5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hhgae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_48y4g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w14iu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[node name="Car" type="Node2D" unique_id=694736785]
+script = ExtResource("1_kulw5")
+
+[node name="Visual" type="Node2D" parent="." unique_id=2200433]
+
+[node name="Wheels" type="Node2D" parent="Visual" unique_id=348490112]
+
+[node name="FL" type="AnimatedSprite2D" parent="Visual/Wheels" unique_id=1896957432]
+position = Vector2(-14.25, -13.7)
+rotation = 0.41015238
+sprite_frames = SubResource("SpriteFrames_kulw5")
+autoplay = "default"
+
+[node name="FR" type="AnimatedSprite2D" parent="Visual/Wheels" unique_id=1910666752]
+position = Vector2(15.25, -12.7)
+rotation = 0.41015238
+sprite_frames = SubResource("SpriteFrames_kulw5")
+autoplay = "default"
+
+[node name="RL" type="AnimatedSprite2D" parent="Visual/Wheels" unique_id=779100504]
+position = Vector2(-15.25, 12.7)
+sprite_frames = SubResource("SpriteFrames_kulw5")
+autoplay = "default"
+
+[node name="RR" type="AnimatedSprite2D" parent="Visual/Wheels" unique_id=677702912]
+position = Vector2(16.25, 12.7)
+sprite_frames = SubResource("SpriteFrames_kulw5")
+autoplay = "default"
+
+[node name="Base" type="Sprite2D" parent="Visual" unique_id=1374974715]
+texture = ExtResource("5_yi5bs")
+
+[node name="Char" type="Sprite2D" parent="Visual" unique_id=320982930]
+position = Vector2(-4.5, -5)
+rotation = 0.41015238
+texture = ExtResource("6_fa25q")
+
+[node name="Camera" type="Camera2D" parent="." unique_id=956712359]
