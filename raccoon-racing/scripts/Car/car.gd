@@ -7,6 +7,8 @@ class_name Car
 @onready var character: Sprite2D = $Visual/Char
 @onready var camera: Camera2D = $Camera
 var map:Map
+@onready var player: Player = $Player
+@onready var sounds: CarSounds = $Sounds
 
 var current_vehicle: GameData.VehicleType
 var friction:float=0
@@ -67,8 +69,12 @@ var jumpspeed:float = 0.05
 var downWeight:float=-0.1
 #z layer for jumping
 var airLayer: int=10
+#collision points
+var collisionPoints:Array[Vector2]
 
 func _ready() -> void:
+    #TODO: register only playering player
+    Game.focusCar(self)
     steer_normal()
     current_vehicle=GameData.current_vehicle
     #TODO:actual values
@@ -125,23 +131,16 @@ func _process(_delta: float) -> void:
     else:
         Clearward()
     Update()
-    #TODO:testing, remove
-    if abs(position.x+130)<50 and abs(position.y+145)<50:
-        print('juuumping')
-        JumpBySpeed(0.5)
         
 
 func Forward()->void:
     #TODO: is this necessary?
     #this.AllWheel();
     if isHovercraft():
-        pass
-        #TODO: add sound
-        #this.playHCRunSound();
+        sounds.playHCRunSound()
     if(not bs and friction > bsWheelLength and speed.length() > bsSpeed):
         bs = true;
-        #TODO:add sound
-        #this.playBsSound();
+        sounds.playBsSound()
         bsf = moveAngCar > 0;
 
     if(speed.length() < bsClearSpeed):
@@ -220,7 +219,7 @@ func Update():
     UpdateViewMap()
     UpdateSpeed()
     Jumping()
-    Loopsounds()
+    sounds.Loopsounds()
     var dir_modifier: float = 1.0 if not bsf else -1.0
     if(bs):
         rotation_degrees += 1 * speed.length()*dir_modifier
@@ -230,13 +229,9 @@ func Update():
     if(friction > 40 and speed.length() > 2):
         if(speed.length() > bsSpeed):
             if(friction > 60):
-                pass
-                #TODO: add sound
-                #this.playTurnBsSound(0)
+                sounds.playTurnBsSound(0)
             else:
-                pass
-                #TODO: add sound
-                #this.playTurnBsSound(1);
+                sounds.playTurnBsSound(1)
         spawn_smoke("smoke1",moveAngCar > 0)
         if(friction > 70):
             spawn_smoke("smoke1",moveAngCar < 0)
@@ -305,16 +300,15 @@ func UpdateSpeed()->void:
 func JumpBySpeed(height:float)->void:
     if(jumpCurrheight < heightOverWall):
         jumpCurrheight += height * speed.length() * jumpspeed;
-        #TODO: add sound 
-        #this.playFastSound()
-        #this.playHCJumpSound()
-        #this.playJumpSound()
+        sounds.playFastSound()
+        sounds.playHCJumpSound()
+        sounds.playJumpSound()
         
 func Jump(height:float)->void:
     jumpPrevheight = jumpCurrheight
     jumpCurrheight += height
-    #TODO: add sound
-    #this.playHCJumpSound()
+    sounds.playHCJumpSound()
+    
     
     
 func Jumping()->void:
@@ -327,9 +321,8 @@ func Jumping()->void:
         z_index=0
     if(jumpCurrheight < jumpFloorHeight):
         if(jumpFloorHeight - jumpCurrheight > 0.5):
-            pass
-            #TODO: add sound
-            #this.playHCEndJumpSound()
+            sounds.playHCEndJumpSound()
+            
         jumpCurrheight = (- jumpCurrheight) * jumpSpring
         jumpPrevheight = (- temp_height) * jumpSpring
     else:
@@ -339,13 +332,52 @@ func Jumping()->void:
     visual.scale = Vector2(visual_scale, visual_scale)
 
 
-func Loopsounds()->void:
-    pass
 
 func GetHitCar()->void:
-    pass
+    for other_player in Game.players:
+        if(other_player.playerID != player.playerID):
+            pass
+            #if point collides with other players' points
+            #if(this.Dmc.body.hitTest(this.game.Players[_loc2_].myCar.Dmc.body)):
+                #calculate collisions
+                #this.BeAttacked(this.game.Players[_loc2_].myCar)
+
+   
+ 
 func GetGrassStatus(tx:float, ty:float)->void:
-    pass
+    if(jumpCurrheight > heightOverWall) or player.isResetting:
+        return 
+        
+    var numGrassHits:int = 0
+    #each point in the car
+    var point:int = 1
+    #TODO: result of gethitface, where is it in swf?
+    var isCollision
+    #TODO:remove
+    return
+    #calculate which points collide with grass
+    while(point < 5):
+        #point to global
+        var global_pt:Vector2 = to_global(collisionPoints[point])
+        #_loc3_ = this.ToPointNow(this.Dmc["point" + _loc2_]._x,this.Dmc["point" + _loc2_]._y);
+        global_pt+=Vector2(tx,ty)
+        #TODO: find the actual function
+        isCollision=map.getHitFace(global_pt)
+        #_loc4_ = this.map.edm.GetHitFace(_loc6_,_loc5_)
+        if(isCollision != null):
+            numGrassHits += 1
+        point += 1
+    #if no point collides: return
+    if(numGrassHits == 0):
+            return
+    #else, slow down       
+    speed *= (1.0 - grassGratingNum * numGrassHits)
+    stepx = snapped(speed.x, 0.1)
+    stepy = snapped(speed.y, 0.1)
+    tempx = position.x + stepx;
+    tempy = position.y + stepy;
+    
+    
 func GetHitEvent(tx:float, ty:float)->void:
     pass
 func GetHitStatus(tx:float, ty:float)->void:

@@ -6,6 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://x4gc6i0xc37i" path="res://Assets/Images/Vehicles/Cars/wheel3.png" id="3_w14iu"]
 [ext_resource type="Texture2D" uid="uid://dcbs83dhh0od1" path="res://Assets/Images/Vehicles/Cars/raccoon/base.png" id="5_yi5bs"]
 [ext_resource type="Texture2D" uid="uid://cadbxy81ojaqk" path="res://Assets/Images/Vehicles/Cars/raccoon/char.png" id="6_fa25q"]
+[ext_resource type="Script" uid="uid://dk5eju5uv1u3p" path="res://scripts/Car/player.gd" id="7_yi5bs"]
+[ext_resource type="Script" uid="uid://dleyhiypnj2yx" path="res://scripts/Car/sounds.gd" id="8_fa25q"]
+[ext_resource type="AudioStream" uid="uid://dqxms3hqbr08r" path="res://Assets/Sounds/2359_snd_CarFastSpeed.mp3" id="9_oogh6"]
+[ext_resource type="AudioStream" uid="uid://b7mxq8d4qps7a" path="res://Assets/Sounds/2361_snd_CarRunSpeed (mp3cut.net)(1).mp3" id="10_oogh6"]
+[ext_resource type="AudioStream" uid="uid://c178lr16jl11k" path="res://Assets/Sounds/2363_snd_CarAddSpeed.mp3" id="11_vryto"]
+[ext_resource type="AudioStream" uid="uid://cqtbfp3t68fl4" path="res://Assets/Sounds/2362_snd_CarLostSpeed.mp3" id="12_ygac3"]
+[ext_resource type="AudioStream" uid="uid://63daa3iaifgl" path="res://Assets/Sounds/2357_snd_CarBs.mp3" id="13_ydqe7"]
+[ext_resource type="AudioStream" uid="uid://bdsrgtq7oo8pw" path="res://Assets/Sounds/2356_snd_CarSmallBs.mp3" id="14_goohx"]
+[ext_resource type="AudioStream" uid="uid://bigsua0b6i2l8" path="res://Assets/Sounds/2353_snd_HCAddSpeed.mp3" id="15_u1cwy"]
+[ext_resource type="AudioStream" uid="uid://crps431ckqi82" path="res://Assets/Sounds/2348_snd_HCRun.mp3" id="16_ix02f"]
+[ext_resource type="AudioStream" uid="uid://dh15qshwyy2r6" path="res://Assets/Sounds/2352_snd_HCLostSpeed.mp3" id="17_rt3ho"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kulw5"]
 animations = [{
@@ -62,3 +73,106 @@ rotation = 0.41015238
 texture = ExtResource("6_fa25q")
 
 [node name="Camera" type="Camera2D" parent="." unique_id=956712359]
+
+[node name="Player" type="Node2D" parent="." unique_id=1258468269]
+script = ExtResource("7_yi5bs")
+
+[node name="Sounds" type="Node2D" parent="." unique_id=536299159]
+script = ExtResource("8_fa25q")
+
+[node name="CarFastSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=624929206]
+stream = ExtResource("9_oogh6")
+
+[node name="CarRunSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=928400211]
+stream = ExtResource("10_oogh6")
+parameters/looping = false
+
+[node name="CarAddSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=341326885]
+stream = ExtResource("11_vryto")
+
+[node name="CarLostSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=1977081372]
+stream = ExtResource("12_ygac3")
+
+[node name="CarBs" type="AudioStreamPlayer" parent="Sounds" unique_id=298643805]
+stream = ExtResource("13_ydqe7")
+
+[node name="CarSmallBs" type="AudioStreamPlayer" parent="Sounds" unique_id=723886538]
+stream = ExtResource("14_goohx")
+
+[node name="HCAddSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=1953856050]
+stream = ExtResource("15_u1cwy")
+
+[node name="HCRun" type="AudioStreamPlayer" parent="Sounds" unique_id=821537394]
+stream = ExtResource("16_ix02f")
+
+[node name="HCLostSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=608171593]
+stream = ExtResource("17_rt3ho")
+
+[node name="CarStop" type="AudioStreamPlayer" parent="Sounds" unique_id=447495418]
+stream = ExtResource("14_goohx")
+
+[node name="Jump" type="AudioStreamPlayer" parent="Sounds" unique_id=165611101]
+stream = ExtResource("14_goohx")
+
+[node name="HCJump" type="AudioStreamPlayer" parent="Sounds" unique_id=953354692]
+stream = ExtResource("14_goohx")
+
+[node name="HCBump" type="AudioStreamPlayer" parent="Sounds" unique_id=495644005]
+stream = ExtResource("14_goohx")
+
+[node name="CarBump" type="AudioStreamPlayer" parent="Sounds" unique_id=1657111872]
+stream = ExtResource("14_goohx")
+
+[node name="Missile" type="AudioStreamPlayer" parent="Sounds" unique_id=1771499492]
+stream = ExtResource("14_goohx")
+
+[node name="HCEndJump" type="AudioStreamPlayer" parent="Sounds" unique_id=1982401609]
+stream = ExtResource("14_goohx")
+
+[node name="CarJumpEnd" type="AudioStreamPlayer" parent="Sounds" unique_id=1736232300]
+stream = ExtResource("14_goohx")
+
+[node name="bomb" type="AudioStreamPlayer" parent="Sounds" unique_id=1733320987]
+stream = ExtResource("14_goohx")
+max_polyphony = 3
+
+[node name="Shield" type="AudioStreamPlayer" parent="Sounds" unique_id=1333375410]
+stream = ExtResource("14_goohx")
+max_polyphony = 3
+
+[node name="Petro" type="AudioStreamPlayer" parent="Sounds" unique_id=255270359]
+stream = ExtResource("14_goohx")
+
+[node name="BeSleep" type="AudioStreamPlayer" parent="Sounds" unique_id=1925453179]
+stream = ExtResource("14_goohx")
+
+[node name="Bedump" type="AudioStreamPlayer" parent="Sounds" unique_id=1434263690]
+stream = ExtResource("14_goohx")
+max_polyphony = 5
+
+[node name="dogS" type="AudioStreamPlayer" parent="Sounds" unique_id=499842868]
+stream = ExtResource("14_goohx")
+
+[node name="PandaS" type="AudioStreamPlayer" parent="Sounds" unique_id=1736464265]
+stream = ExtResource("14_goohx")
+
+[node name="PandaSs" type="AudioStreamPlayer" parent="Sounds" unique_id=1142971297]
+stream = ExtResource("14_goohx")
+
+[node name="mine" type="AudioStreamPlayer" parent="Sounds" unique_id=1783466598]
+stream = ExtResource("14_goohx")
+
+[node name="catS" type="AudioStreamPlayer" parent="Sounds" unique_id=164836901]
+stream = ExtResource("14_goohx")
+
+[node name="BearS" type="AudioStreamPlayer" parent="Sounds" unique_id=1361043075]
+stream = ExtResource("14_goohx")
+
+[node name="Ice" type="AudioStreamPlayer" parent="Sounds" unique_id=2085077440]
+stream = ExtResource("14_goohx")
+
+[node name="useSleep" type="AudioStreamPlayer" parent="Sounds" unique_id=1895483511]
+stream = ExtResource("14_goohx")
+
+[node name="oil" type="AudioStreamPlayer" parent="Sounds" unique_id=1343397952]
+stream = ExtResource("14_goohx")
