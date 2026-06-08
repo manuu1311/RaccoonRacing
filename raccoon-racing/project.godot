@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=35
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://st04fndhsei0"
+
 [autoload]
 
 ButtonSounds="*uid://dgr8bl747n46h"
@@ -29,6 +33,14 @@ Game="*uid://da52fyc101u0t"
 window/size/viewport_width=500
 window/size/viewport_height=500
 window/stretch/mode="canvas_items"
+
+[global_group]
+
+Body="Car collision bodies"
+
+[layer_names]
+
+2d_physics/layer_1="Car"
 
 [physics]
 

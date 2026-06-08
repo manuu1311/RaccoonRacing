@@ -1,14 +1,24 @@
 extends Node2D
 class_name Car
 
+@onready var body: Area2D = $Visual/Body
 @onready var visual: Node2D = $Visual
 @onready var fl: AnimatedSprite2D = $Visual/Wheels/FL
 @onready var fr: AnimatedSprite2D = $Visual/Wheels/FR
+@onready var rl: AnimatedSprite2D = $Visual/Wheels/RL
+@onready var rr: AnimatedSprite2D = $Visual/Wheels/RR
 @onready var character: Sprite2D = $Visual/Char
 @onready var camera: Camera2D = $Camera
 var map:Map
+#TODO: should be set by general game class
+@export var playering:bool
+#TODO: actual map
+@onready var map_01: Map = $"../Map01"
 @onready var player: Player = $Player
 @onready var sounds: CarSounds = $Sounds
+#smoke effects
+var smoke_1:=preload("res://Assets/Scenes/Screens/misc/smoke1.tscn")
+var smoke_2:=preload("res://Assets/Scenes/Screens/misc/smoke2.tscn")
 
 var current_vehicle: GameData.VehicleType
 var friction:float=0
@@ -69,12 +79,14 @@ var jumpspeed:float = 0.05
 var downWeight:float=-0.1
 #z layer for jumping
 var airLayer: int=10
+#wall bounce spring
+var wallSpring:float
 #collision points
-var collisionPoints:Array[Vector2]
+var collisionPoints:Array[Node2D]
 
 func _ready() -> void:
-    #TODO: register only playering player
-    Game.focusCar(self)
+    if playering:
+        player.FocusPlayer()
     steer_normal()
     current_vehicle=GameData.current_vehicle
     #TODO:actual values
@@ -84,7 +96,15 @@ func _ready() -> void:
     glideGratingNum = 0.0002
     rollGratingNum = 0.02
     grassGratingNum = 0.01
+    #get collision points from the car scene
+    PopulateCollisions()
+    map=map_01
 
+func PopulateCollisions()->void:
+    var collisions_node:Node2D = $Visual/CollisionPoints
+    for child in collisions_node.get_children():
+        if child is Node2D:
+            collisionPoints.append(child)
 
 func steer_left()->void:
     fr.position=Vector2(16.25,-9.7)
@@ -110,32 +130,22 @@ func steer_normal()->void:
     character.position=Vector2(0,-4)
     character.rotation=0
 
+#start wheel spinning
+func all_wheel()->void:
+    fl.play()
+    fr.play()
+    rl.play()
+    rr.play()
     
-    
-func _process(_delta: float) -> void:
-    var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-    # Handle Steering (X-axis)
-    if input_dir.x > 0:
-        TurnLRight()
-    elif input_dir.x < 0:
-        TurnLeft()
-    else:
-        CancelTurn()
-
-    # Handle Throttle/Brake (Y-axis)
-    if input_dir.y < 0:
-        Forward()  # In Godot 2D, negative Y is UP
-    elif input_dir.y > 0:
-        Backward()
-    else:
-        Clearward()
-    Update()
+func stop_wheel()->void:
+    fl.stop()
+    fr.stop()
+    rl.stop()
+    rr.stop()
         
 
 func Forward()->void:
-    #TODO: is this necessary?
-    #this.AllWheel();
+    all_wheel()
     if isHovercraft():
         sounds.playHCRunSound()
     if(not bs and friction > bsWheelLength and speed.length() > bsSpeed):
@@ -158,8 +168,7 @@ func Forward()->void:
         spawn_smoke('smoke1',false) 
 
 func Backward()->void:
-    #is this necessary?
-    #this.AllWheel()
+    all_wheel()
     if(not bs and bsex <= 0):
         speed += -Vector2(horse, 0).rotated(rotation-PI/2)*0.5
     if abs(get_angle_diff())<40 or isLock:
@@ -235,10 +244,8 @@ func Update():
         spawn_smoke("smoke1",moveAngCar > 0)
         if(friction > 70):
             spawn_smoke("smoke1",moveAngCar < 0)
-    elif(speed.length() > 0.5):
-        pass
-        #TODO: necessary?
-        #AllWheel()
+    elif(speed.length() < 0.5):
+        stop_wheel()
 
 
 #get difference beteween speed angle and sprite angle
@@ -246,8 +253,23 @@ func get_angle_diff()->float:
     return rad_to_deg(angle_difference(speed.angle(), rotation-PI/2))
 
 #spawn smoke particle
-func spawn_smoke(type:String, direction:bool)->void:
-    pass
+func spawn_smoke(type:String, lr:bool)->void:
+
+    if(not isHovercraft() and jumpCurrheight < 1):
+        var smokeinst:Node2D
+        if type=='smoke1':
+            smokeinst=smoke_1.instantiate() as Node2D
+        else:
+            smokeinst=smoke_2.instantiate() as Node2D
+        get_parent().add_child(smokeinst)
+        if(lr):
+            #spawn in third point, with some offset
+            smokeinst.global_position=collisionPoints[2].global_position+Vector2(-5,-7)
+        else:
+            #spawn in fourth point, with some offset
+            smokeinst.global_position=collisionPoints[3].global_position+Vector2(-5,-7)
+        smokeinst.scale=scale
+        smokeinst.rotation = rotation
 
 #start wheel animation
 func StartWheel()->void:
@@ -318,7 +340,7 @@ func Jumping()->void:
         z_index=airLayer
     #TODO: should it be removed?
     else:
-        z_index=0
+        z_index=1
     if(jumpCurrheight < jumpFloorHeight):
         if(jumpFloorHeight - jumpCurrheight > 0.5):
             sounds.playHCEndJumpSound()
@@ -334,13 +356,12 @@ func Jumping()->void:
 
 
 func GetHitCar()->void:
-    for other_player in Game.players:
-        if(other_player.playerID != player.playerID):
-            pass
-            #if point collides with other players' points
-            #if(this.Dmc.body.hitTest(this.game.Players[_loc2_].myCar.Dmc.body)):
-                #calculate collisions
-                #this.BeAttacked(this.game.Players[_loc2_].myCar)
+    var overlapping_areas:Array[Area2D] = body.get_overlapping_areas()
+    for area in overlapping_areas:
+        if area.is_in_group("Body"):
+            #calculate collisions
+            var car:Car=area.get_parent().get_parent() as Car
+            BeAttacked(car)
 
    
  
@@ -351,20 +372,18 @@ func GetGrassStatus(tx:float, ty:float)->void:
     var numGrassHits:int = 0
     #each point in the car
     var point:int = 1
-    #TODO: result of gethitface, where is it in swf?
-    var isCollision
-    #TODO:remove
-    return
+    #TODO: result of gethitface, maybe float?
+    var pointCollided:Vector2
     #calculate which points collide with grass
     while(point < 5):
         #point to global
-        var global_pt:Vector2 = to_global(collisionPoints[point])
+        var global_pt:Vector2 = collisionPoints[point-1].global_position
         #_loc3_ = this.ToPointNow(this.Dmc["point" + _loc2_]._x,this.Dmc["point" + _loc2_]._y);
         global_pt+=Vector2(tx,ty)
         #TODO: find the actual function
-        isCollision=map.getHitFace(global_pt)
+        pointCollided=map.getHitFace(global_pt)
         #_loc4_ = this.map.edm.GetHitFace(_loc6_,_loc5_)
-        if(isCollision != null):
+        if(not is_nan(pointCollided.x)):
             numGrassHits += 1
         point += 1
     #if no point collides: return
@@ -379,9 +398,125 @@ func GetGrassStatus(tx:float, ty:float)->void:
     
     
 func GetHitEvent(tx:float, ty:float)->void:
-    pass
+    if(jumpCurrheight> heightOverWall or player.isResetting):
+        return 
+        
+    var pointid:int = 1
+    var pointpos:Vector2
+    var point: Node2D
+    #TODO: return of getcollisionface, is it bool or float?
+    var isCollided: bool
+    var _loc3_;
+    while(pointid < 5):
+        point=collisionPoints[pointid-1]
+        pointpos=point.position+Vector2(tx,ty)
+        isCollided=map.getCollisionFace(pointpos)
+        #TODO: find actual function and implement in map
+        #_loc3_ = this.map.edevent.GetHitFace(_loc6_,_loc5_);
+        if(isCollided):
+            #TODO: first paramter probably player collision id
+            map.GetHitEventStatus(isCollided,player.playerID)
+            #map.GetHitEventStatus(_loc3_.getId(),player.playerID)
+            return
+        pointid+=1
+    
+
+#maybe returns wall angle?
+func GetHitStatusAng(tx:float,ty:float)->float:
+    for point in collisionPoints:
+        var pointpos:Vector2=point.global_position
+        pointpos+=Vector2(tx,ty)
+        #TODO: output of gethitface, is it bool or float?
+        var pointCollided:Vector2 = map.getHitFace(pointpos)
+        if(not is_nan(pointCollided.x)):
+            for jumpCoord in map.canBeJumpWall:
+                if (jumpCurrheight>heightOverWall and jumpCoord==pointCollided):
+                    return NAN
+            return rad_to_deg(pointCollided.angle())
+    return NAN
+    
+    
+#TODO: randomly put in +-90 deg until it works
+#flash's 0 deg should be equal to godot's 90 deg
 func GetHitStatus(tx:float, ty:float)->void:
-    pass
+    var wallAngle:float = GetHitStatusAng(tx,ty)
+    #TODO: no wall detected
+    if(is_nan(wallAngle)):
+        return 
+        
+    sounds.playbumpsound()
+    var speedwallangle:float=-2*rad_to_deg(angle_difference(speed.angle(),wallAngle))
+    #-pi/2 to account for godot's angle system
+    var poswallangle:float=rad_to_deg(angle_difference(wallAngle,(rotation-PI/2)))
+    var speedwallangle90:float=rad_to_deg(angle_difference(speed.angle(),wallAngle))
+    #format angle
+    speedwallangle90=fmod(speedwallangle90, 180.0)
+    if speedwallangle90>90:
+        speedwallangle90=180-speedwallangle90
+    if speedwallangle90<-90:
+        speedwallangle90+=180
+    speedwallangle90=abs(speedwallangle90)
+    
+    if(poswallangle >= 0 and poswallangle < 45 or poswallangle < -135):
+        rotation_degrees+=(speed.length()+1)/wallSpring*0.02
+
+    if(poswallangle < 0 and poswallangle > -45 or poswallangle > 135):
+        rotation_degrees-=(speed.length()+1)/wallSpring*0.02
+    var loc1:float=rad_to_deg(angle_difference(speed.angle(),wallAngle))
+    if(not loc1>0 and loc1<180):
+        if(abs(speedwallangle) < 60):
+            speedwallangle /= 2;
+        speed=speed.rotated(deg_to_rad(speedwallangle))
+    speed*=(1-wallSpring*(speedwallangle90*abs(abs(poswallangle)-90)/90))
+    speed+=(Vector2(0.1,0).rotated(deg_to_rad(wallAngle+90)))
+    stepx = snapped(speed.x,0.1)
+    stepy = snapped(speed.y,0.1)
+    tempx = position.x + stepx
+    tempy = position.y + stepy
+
+
+func BeAttacked(who: Car)->void:
+    if(who.jumpCurrheight > heightOverWall or jumpCurrheight > heightOverWall):
+        return 
+    if(player.isResetting or who.player.isResetting):
+        return 
+    sounds.playbumpsound()
+    var isInvincible:bool = player.isInvincible
+    var enemyInvincible:bool = who.player.isInvincible;
+    if(player.isSmallState):
+        isInvincible = true
+    if(who.player.isSmallState):
+        enemyInvincible = true
+   
+    var enemySpeed:Vector2
+    if(not (isInvincible and not enemyInvincible)):
+        enemySpeed = who.speed
+    var mySpeed:Vector2
+    if(not(not isInvincible and enemyInvincible)):
+        mySpeed = speed
+    #distance between cars
+    var dist:Vector2=global_position-who.global_position
+    var distsq:float = dist.length_squared()
+    var spring:float = 0.005
+    if(distsq < 2000):
+        spring = 0.005 + 0.05 * (2000 - distsq) / 2000
+    #push vector
+    var pushvector:Vector2 = dist*spring
+    #if enemy is invincible and im not: massive knockback
+    if(not isInvincible and enemyInvincible):
+        speed = enemySpeed+pushvector*40
+        bs = true
+        sounds.playBsSound()
+    #if im invincible and enemy is not: give massive knockback
+    elif(isInvincible and not enemyInvincible):
+        who.speed = mySpeed-pushvector*40
+        who.bs = true
+        sounds.playBsSound()
+    #no one is invincible
+    else:
+        speed = enemySpeed+pushvector
+        who.speed = mySpeed-pushvector
+
 
 #is race type hovercraft?
 func isHovercraft()->bool:

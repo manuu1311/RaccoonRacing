@@ -1,0 +1,241 @@
+[gd_scene format=3 uid="uid://5oxt0vw4l2s0"]
+
+[ext_resource type="Texture2D" uid="uid://rwhdou48g3yo" path="res://Assets/Images/maps/map1/art/penguin.png" id="1_7cahr"]
+[ext_resource type="Texture2D" uid="uid://b1ucgtos7jox1" path="res://Assets/Images/maps/map1/art/dog.png" id="2_mq3ix"]
+[ext_resource type="Texture2D" uid="uid://d0lsc4vx61a7" path="res://Assets/Images/maps/map1/art/Raccoon.png" id="3_xprjl"]
+[ext_resource type="Texture2D" uid="uid://coukpuxrj8jsg" path="res://Assets/Images/maps/map1/art/arm1.png" id="4_a06nw"]
+[ext_resource type="Texture2D" uid="uid://dxkcibpe5hsve" path="res://Assets/Images/maps/map1/art/arm2.png" id="5_ct6ag"]
+[ext_resource type="Texture2D" uid="uid://cdwggphvohunq" path="res://Assets/Images/maps/map1/art/bear.png" id="6_nadmt"]
+
+[sub_resource type="Animation" id="Animation_7np41"]
+resource_name = "Art"
+length = 0.4285743
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spectators/Penguin:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0026603807, 0.25714287, 0.42857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.855, 0.855), Vector2(1, 1), Vector2(0.855, 0.855)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spectators/Dog:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25714287, 0.42857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.855, 0.855), Vector2(1, 1), Vector2(0.855, 0.855)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spectators/Bear:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25714287, 0.42857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.855, 0.855), Vector2(1, 1), Vector2(0.855, 0.855)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Spectators/Penguin2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25714287, 0.42857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.855, 0.855), Vector2(1, 1), Vector2(0.855, 0.855)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Spectators/Dog2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25714287, 0.42857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.855, 0.855), Vector2(1, 1), Vector2(0.855, 0.855)]
+}
+
+[sub_resource type="Animation" id="Animation_acof7"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utwn4"]
+_data = {
+&"Art": SubResource("Animation_7np41"),
+&"RESET": SubResource("Animation_acof7")
+}
+
+[sub_resource type="Animation" id="Animation_qcgvv"]
+resource_name = "Arms"
+length = 0.34286
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arm1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.17210619, 0.34285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.3490658503988659, 0.5235987755982988, -0.3490658503988659]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Arm2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.17142858, 0.34217954),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.3490658503988659, -0.5235987755982988, 0.3490658503988659]
+}
+
+[sub_resource type="Animation" id="Animation_3hu1e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arm1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aaou0"]
+_data = {
+&"Arms": SubResource("Animation_qcgvv"),
+&"RESET": SubResource("Animation_3hu1e")
+}
+
+[node name="Spectators" type="Node2D" unique_id=1528236722]
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=801751716]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_utwn4")
+autoplay = &"Art"
+
+[node name="Penguin" type="Sprite2D" parent="." unique_id=1982935050]
+position = Vector2(28, 66)
+scale = Vector2(0.855, 0.855)
+texture = ExtResource("1_7cahr")
+
+[node name="Dog" type="Sprite2D" parent="." unique_id=607729769]
+position = Vector2(28.2, 134.4)
+scale = Vector2(0.855, 0.855)
+texture = ExtResource("2_mq3ix")
+
+[node name="Raccoon" type="Sprite2D" parent="." unique_id=1916366790]
+position = Vector2(27.5, 99.445)
+scale = Vector2(0.855, 0.855)
+texture = ExtResource("3_xprjl")
+
+[node name="Arms" type="Node2D" parent="Raccoon" unique_id=1147831873]
+modulate = Color(0.98749995, 1, 0, 1)
+show_behind_parent = true
+position = Vector2(-0.815, 0)
+
+[node name="Arm1" type="Sprite2D" parent="Raccoon/Arms" unique_id=592330381]
+position = Vector2(0, 10)
+texture = ExtResource("4_a06nw")
+offset = Vector2(-9, 0)
+
+[node name="Arm2" type="Sprite2D" parent="Raccoon/Arms" unique_id=2131284804]
+position = Vector2(0, -10)
+rotation = 0.34906584
+texture = ExtResource("5_ct6ag")
+offset = Vector2(-9, 0)
+
+[node name="ArmPlayer" type="AnimationPlayer" parent="Raccoon/Arms" unique_id=1691931963]
+libraries/ = SubResource("AnimationLibrary_aaou0")
+autoplay = &"Arms"
+
+[node name="Bear" type="Sprite2D" parent="." unique_id=446542569]
+position = Vector2(27.5, 387.15)
+scale = Vector2(0.855, 0.855)
+texture = ExtResource("6_nadmt")
+
+[node name="Penguin2" type="Sprite2D" parent="." unique_id=598134873]
+position = Vector2(28, 292.65)
+scale = Vector2(0.855, 0.855)
+texture = ExtResource("1_7cahr")
+
+[node name="PenguinC" type="Sprite2D" parent="." unique_id=44901736]
+position = Vector2(28, 262.365)
+scale = Vector2(0.855, 0.855)
+texture = ExtResource("1_7cahr")
+
+[node name="Arms" type="Node2D" parent="PenguinC" unique_id=1518812058]
+modulate = Color(0.19375002, 0.6774999, 1, 1)
+show_behind_parent = true
+position = Vector2(-0.815, 0)
+
+[node name="Arm1" type="Sprite2D" parent="PenguinC/Arms" unique_id=479156790]
+position = Vector2(0, 10)
+texture = ExtResource("4_a06nw")
+offset = Vector2(-9, 0)
+
+[node name="Arm2" type="Sprite2D" parent="PenguinC/Arms" unique_id=1058243671]
+position = Vector2(0, -10)
+rotation = 0.34906584
+texture = ExtResource("5_ct6ag")
+offset = Vector2(-9, 0)
+
+[node name="ArmPlayer" type="AnimationPlayer" parent="PenguinC/Arms" unique_id=392104536]
+libraries/ = SubResource("AnimationLibrary_aaou0")
+autoplay = &"Arms"
+
+[node name="Dog2" type="Sprite2D" parent="." unique_id=243237322]
+position = Vector2(28, 355.3)
+scale = Vector2(0.855, 0.855)
+texture = ExtResource("2_mq3ix")
+
+[node name="DogC" type="Sprite2D" parent="." unique_id=918120447]
+position = Vector2(28, 323.955)
+scale = Vector2(0.855, 0.855)
+texture = ExtResource("2_mq3ix")
+
+[node name="Arms" type="Node2D" parent="DogC" unique_id=2029020909]
+modulate = Color(0.91764706, 0.6431373, 0.25882354, 1)
+show_behind_parent = true
+position = Vector2(-0.815, 0)
+
+[node name="Arm1" type="Sprite2D" parent="DogC/Arms" unique_id=679205021]
+position = Vector2(0, 10)
+texture = ExtResource("4_a06nw")
+offset = Vector2(-9, 0)
+
+[node name="Arm2" type="Sprite2D" parent="DogC/Arms" unique_id=1466323505]
+position = Vector2(0, -10)
+rotation = 0.34906584
+texture = ExtResource("5_ct6ag")
+offset = Vector2(-9, 0)
+
+[node name="ArmPlayer" type="AnimationPlayer" parent="DogC/Arms" unique_id=360951080]
+libraries/ = SubResource("AnimationLibrary_aaou0")
+autoplay = &"Arms"

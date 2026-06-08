@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bu051c0ufg1c"]
+
+[ext_resource type="Texture2D" uid="uid://1hrw147epfvn" path="res://Assets/Images/Vehicles/Cars/smoke/smoke2_1.png" id="1_onmcw"]
+[ext_resource type="Texture2D" uid="uid://rercwd8us6c7" path="res://Assets/Images/Vehicles/Cars/smoke/smoke2_2.png" id="2_sfp0u"]
+[ext_resource type="Texture2D" uid="uid://bv8p5t53gp6dj" path="res://Assets/Images/Vehicles/Cars/smoke/smoke2_3.png" id="3_gjsq7"]
+[ext_resource type="Texture2D" uid="uid://cutw4cpervrs7" path="res://Assets/Images/Vehicles/Cars/smoke/smoke2_4.png" id="4_vfusq"]
+[ext_resource type="Texture2D" uid="uid://cd5qqgc22ytu2" path="res://Assets/Images/Vehicles/Cars/smoke/smoke2_5.png" id="5_wnlpb"]
+[ext_resource type="Texture2D" uid="uid://bo5augffxhr0g" path="res://Assets/Images/Vehicles/Cars/smoke/smoke2_6.png" id="6_mt01j"]
+[ext_resource type="Texture2D" uid="uid://cl2xk4scvqjpq" path="res://Assets/Images/Vehicles/Cars/smoke/smoke2_7.png" id="7_beiac"]
+[ext_resource type="Texture2D" uid="uid://dgyyd724hwipi" path="res://Assets/Images/Vehicles/Cars/smoke/smoke2_8.png" id="8_rjsn4"]
+[ext_resource type="Texture2D" uid="uid://nktmovdoo7fh" path="res://Assets/Images/Vehicles/Cars/smoke/smoke2_9.png" id="9_jtida"]
+[ext_resource type="Script" uid="uid://dehu22ty0m83s" path="res://scripts/Car/smoke_2.gd" id="10_j55yf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rio8k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_onmcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_sfp0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gjsq7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vfusq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wnlpb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mt01j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_beiac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rjsn4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jtida")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[node name="Smoke2" type="AnimatedSprite2D" unique_id=551676915]
+sprite_frames = SubResource("SpriteFrames_rio8k")
+frame = 8
+frame_progress = 1.0
+script = ExtResource("10_j55yf")

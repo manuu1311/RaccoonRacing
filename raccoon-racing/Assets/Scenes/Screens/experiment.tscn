@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://cwouwaihwqmyv"]
 
-[ext_resource type="Texture2D" uid="uid://csd08x421jn6j" path="res://Assets/Images/maps/grasstile.png" id="1_td7gk"]
-[ext_resource type="Texture2D" uid="uid://ofm36yushw8q" path="res://Assets/Images/maps/roadtile.png" id="2_piq2e"]
 [ext_resource type="PackedScene" uid="uid://dxs80hju0etfw" path="res://Assets/Scenes/Screens/Car.tscn" id="2_rrtsn"]
+[ext_resource type="PackedScene" uid="uid://c47mpkqmnemuy" path="res://Assets/Scenes/Screens/Map01.tscn" id="4_vyse4"]
+[ext_resource type="Script" uid="uid://bgxh1wb814frg" path="res://scripts/map/map.gd" id="5_8m37f"]
 
 [node name="Experiment" type="Node2D" unique_id=411329241]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=827092789]
-scale = Vector2(10, 10)
-texture = ExtResource("1_td7gk")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=76026803]
-position = Vector2(-130, -145)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_piq2e")
-
 [node name="Car" parent="." unique_id=694736785 instance=ExtResource("2_rrtsn")]
+z_index = 1
+playering = true
+
+[node name="Car2" parent="." unique_id=464234323 instance=ExtResource("2_rrtsn")]
+z_index = 1
+position = Vector2(200, 200)
+
+[node name="Map01" parent="." unique_id=620435250 instance=ExtResource("4_vyse4")]
+script = ExtResource("5_8m37f")

@@ -41,11 +41,17 @@ var prevSpeed: Vector2=Vector2.ZERO
 @onready var ice: AudioStreamPlayer = $Ice
 @onready var use_sleep: AudioStreamPlayer = $useSleep
 @onready var oil: AudioStreamPlayer = $oil
+var sounds:Array[AudioStreamPlayer]=[]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     hc_add_speed.finished.connect(_on_hc_add_speed_finished)
 
+
+func PopulateSounds()->void:
+    for child in get_children():
+        if child is AudioStreamPlayer:
+            sounds.append(child)
 
 func Loopsounds()->void:
     #distance between car and focus car (player)
@@ -61,10 +67,7 @@ func Loopsounds()->void:
     #prevent sounds from being too loud if there are many cars around
     var totalVolume:float = 0;
     for id in len(Game.players):
-        var otherplayer: Player= Game.players[id]
-        if otherplayer.playerID==player.playerID:
-            continue 
-        #totalVolume += Game.players[id].sounds.soundsVolume;
+        totalVolume += Game.players[id].sounds.soundsVolume;
     
     if(totalVolume > 150):
         soundsVolume *= 150 / totalVolume;
@@ -97,16 +100,16 @@ func Loopsounds()->void:
                 speedScalar = car_add_speed.stream.get_length()*speedScalar 
                 if(not car_add_speed.playing or  abs(speedScalar - car_add_speed.get_playback_position()) > car_add_speed.stream.get_length() / 5):
                     #in seconds
-                    car_add_speed.play(speedScalar / 1000.0)
+                    car_add_speed.play(speedScalar)
                     car_run_speed.stop()
                     car_lost_speed.stop()
             #decelerating
             else:
                 speedScalar=car_lost_speed.stream.get_length()*speedScalar
-                if (not car_lost_speed.playing or abs(speedScalar-car_add_speed.stream.get_length()-car_lost_speed.get_playback_position())>car_add_speed.stream.get_length()):
-                    car_lost_speed.play((car_add_speed.stream.get_length()-speedScalar)/1000)
-                car_run_speed.stop()
-                car_add_speed.stop()
+                if (not car_lost_speed.playing or abs(speedScalar-(car_add_speed.stream.get_length()-car_lost_speed.get_playback_position()))>car_add_speed.stream.get_length()/5):
+                    car_lost_speed.play((car_add_speed.stream.get_length()-speedScalar))
+                    car_run_speed.stop()
+                    car_add_speed.stop()
         prevSpeed = car.speed
 
 func apply_global_sound_settings() -> void:
@@ -114,8 +117,7 @@ func apply_global_sound_settings() -> void:
     # This is a basic conversion curve. 
     var db_volume:float = linear_to_db(clamp(soundsVolume / 100.0, 0.0, 1.0))
     
-    var all_sounds:Array = [car_run_speed, car_add_speed, car_lost_speed, car_fast_speed, car_bs, car_small_bs, hc_add_speed, hc_run, hc_lost_speed]
-    for snd in all_sounds:
+    for snd in sounds:
         if snd:
             snd.volume_db = db_volume
             #TODO: create more buses, one for each car, and replace the first idx
@@ -163,23 +165,23 @@ func playBsSound()->void:
             car_stop.play()
 
 
-func playAddSpeedSound():
+func playAddSpeedSound()->void:
     if not car_add_speed.playing:
         car_add_speed.play()
 
 
-func playJumpSound():
+func playJumpSound()->void:
     if not jump.playing:
         jump.play()
 
 
-func playHCJumpSound():
+func playHCJumpSound()->void:
       if(car.isHovercraft()):
         if not hc_jump.playing:
             hc_jump.play()
 
 
-func playbumpsound():
+func playbumpsound()->void:
       if(car.isHovercraft()):
         if not hc_bump.playing:
             hc_bump.play()
@@ -187,10 +189,10 @@ func playbumpsound():
         if not car_bump.playing:
             car_bump.play()
 
-func playMissileSound():
+func playMissileSound()->void:
     missile.play()
     
-func playHCEndJumpSound():
+func playHCEndJumpSound()->void:
       if(car.isHovercraft()):
         if hc_end_jump.playing:
             hc_end_jump.play()
@@ -198,55 +200,55 @@ func playHCEndJumpSound():
         if car_jump_end.playing:
             car_jump_end.play()
             
-func playerBombSound():
+func playerBombSound()->void:
    bomb.play()
 
-func playShieldSound():
+func playShieldSound()->void:
     shield.play()
     
-func playPetroSound():
+func playPetroSound()->void:
     petro.play()
     
     
-func playBeSleepSound():
+func playBeSleepSound()->void:
     be_sleep.play()
     
-func StopBeSleepSound():
+func StopBeSleepSound()->void:
     be_sleep.stop()
     
-func playBedumpSound():
+func playBedumpSound()->void:
     bedump.play()
     
-func playdogSSound():
+func playdogSSound()->void:
     dog_s.play()
     
-func StopdogSSound():
+func StopdogSSound()->void:
    dog_s.stop()
 
-func playPandaSSound():
+func playPandaSSound()->void:
     panda_s.stop()
     panda_ss.stop()
     panda_ss.play()
     panda_s.play()
     
-func StopPandaSSound():
+func StopPandaSSound()->void:
     panda_s.stop()
     panda_ss.stop()
     
-func playmineSound():
+func playmineSound()->void:
     mine.play()
 
-func playCatSSound():
+func playCatSSound()->void:
     cat_s.play()
     
-func playBearSSound():
+func playBearSSound()->void:
     bear_s.play()
     
-func playIceSound():
+func playIceSound()->void:
     ice.play()
     
-func playuseSleepSound():
+func playuseSleepSound()->void:
     use_sleep.play()
     
-func playoilSound():
+func playoilSound()->void:
     oil.play()

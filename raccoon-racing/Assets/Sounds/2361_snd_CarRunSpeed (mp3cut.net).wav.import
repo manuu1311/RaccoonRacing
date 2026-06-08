@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bkipakueggswe"
+path="res://.godot/imported/2361_snd_CarRunSpeed (mp3cut.net).wav-cd5639a88d21b92416034df8d5096763.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/2361_snd_CarRunSpeed (mp3cut.net).wav"
+dest_files=["res://.godot/imported/2361_snd_CarRunSpeed (mp3cut.net).wav-cd5639a88d21b92416034df8d5096763.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
