@@ -3,9 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://dyyuhl5b7btx5" path="res://Assets/Images/Vehicles/Cars/wheel1.png" id="1_hhgae"]
 [ext_resource type="Script" uid="uid://b15jbk8xtwyoh" path="res://scripts/Car/car.gd" id="1_kulw5"]
 [ext_resource type="Texture2D" uid="uid://b6uosl4q7kmi7" path="res://Assets/Images/Vehicles/Cars/wheel2.png" id="2_48y4g"]
+[ext_resource type="Texture2D" uid="uid://bfidlu0o8xd62" path="res://Assets/Images/Vehicles/Cars/raccoon/hcroll1.png" id="2_uonho"]
+[ext_resource type="Texture2D" uid="uid://ce8pc6peh7qlj" path="res://Assets/Images/Vehicles/Cars/raccoon/hcroll2.png" id="3_cvqbw"]
 [ext_resource type="Texture2D" uid="uid://x4gc6i0xc37i" path="res://Assets/Images/Vehicles/Cars/wheel3.png" id="3_w14iu"]
+[ext_resource type="Texture2D" uid="uid://p2xqi6sqy1kf" path="res://Assets/Images/Vehicles/Cars/raccoon/hovercraft.png" id="5_et7sh"]
 [ext_resource type="Texture2D" uid="uid://dcbs83dhh0od1" path="res://Assets/Images/Vehicles/Cars/raccoon/base.png" id="5_yi5bs"]
 [ext_resource type="Texture2D" uid="uid://cadbxy81ojaqk" path="res://Assets/Images/Vehicles/Cars/raccoon/char.png" id="6_fa25q"]
+[ext_resource type="Texture2D" uid="uid://cejqqjir0m5ib" path="res://Assets/Images/Vehicles/Cars/raccoon/hcback.png" id="6_hrg02"]
 [ext_resource type="Script" uid="uid://dk5eju5uv1u3p" path="res://scripts/Car/player.gd" id="7_yi5bs"]
 [ext_resource type="Script" uid="uid://dleyhiypnj2yx" path="res://scripts/Car/sounds.gd" id="8_fa25q"]
 [ext_resource type="AudioStream" uid="uid://dqxms3hqbr08r" path="res://Assets/Sounds/2359_snd_CarFastSpeed.mp3" id="9_oogh6"]
@@ -40,7 +44,7 @@
 [ext_resource type="AudioStream" uid="uid://dgxtto25lcl3q" path="res://Assets/Sounds/2331_snd_useSleep.mp3" id="38_rual8"]
 [ext_resource type="AudioStream" uid="uid://dyj1hbsh4ocxo" path="res://Assets/Sounds/2329_snd_oil.mp3" id="39_yblkr"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_kulw5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_hrg02"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -59,6 +63,20 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vi2p3"]
 size = Vector2(24, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kulw5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uonho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cvqbw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
 
 [node name="Car" type="Node2D" unique_id=694736785]
 script = ExtResource("1_kulw5")
@@ -80,36 +98,63 @@ position = Vector2(14, 18.5)
 position = Vector2(-14, 18.5)
 
 [node name="Car" type="Node2D" parent="Visual" unique_id=1493641787]
+visible = false
 
 [node name="Wheels" type="Node2D" parent="Visual/Car" unique_id=348490112]
 
 [node name="FL" type="AnimatedSprite2D" parent="Visual/Car/Wheels" unique_id=1896957432]
 position = Vector2(-15.25, -13.7)
-sprite_frames = SubResource("SpriteFrames_kulw5")
+sprite_frames = SubResource("SpriteFrames_hrg02")
 
 [node name="FR" type="AnimatedSprite2D" parent="Visual/Car/Wheels" unique_id=1910666752]
 position = Vector2(16.25, -12.7)
-sprite_frames = SubResource("SpriteFrames_kulw5")
+sprite_frames = SubResource("SpriteFrames_hrg02")
 autoplay = "default"
 
 [node name="RL" type="AnimatedSprite2D" parent="Visual/Car/Wheels" unique_id=779100504]
 position = Vector2(-15.25, 12.7)
-sprite_frames = SubResource("SpriteFrames_kulw5")
+sprite_frames = SubResource("SpriteFrames_hrg02")
 autoplay = "default"
 
 [node name="RR" type="AnimatedSprite2D" parent="Visual/Car/Wheels" unique_id=677702912]
 position = Vector2(16.25, 12.7)
-sprite_frames = SubResource("SpriteFrames_kulw5")
+sprite_frames = SubResource("SpriteFrames_hrg02")
 autoplay = "default"
 
 [node name="Base" type="Sprite2D" parent="Visual/Car" unique_id=1374974715]
 texture = ExtResource("5_yi5bs")
 
 [node name="Body" type="Area2D" parent="Visual" unique_id=2020702737 groups=["Body"]]
+visible = false
 
 [node name="Area" type="CollisionShape2D" parent="Visual/Body" unique_id=1565125744]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_vi2p3")
+
+[node name="Hovercraft" type="Node2D" parent="Visual" unique_id=1153981437]
+
+[node name="Base" type="Sprite2D" parent="Visual/Hovercraft" unique_id=638717607]
+texture = ExtResource("5_et7sh")
+
+[node name="Exhausts" type="Node2D" parent="Visual/Hovercraft" unique_id=957505120]
+
+[node name="Exhaust1" type="Sprite2D" parent="Visual/Hovercraft/Exhausts" unique_id=1341358522]
+position = Vector2(-11, 33)
+texture = ExtResource("6_hrg02")
+
+[node name="Steam" type="AnimatedSprite2D" parent="Visual/Hovercraft/Exhausts/Exhaust1" unique_id=200057376]
+position = Vector2(0, 6.78)
+sprite_frames = SubResource("SpriteFrames_kulw5")
+autoplay = "default"
+
+[node name="Exhaust2" type="Sprite2D" parent="Visual/Hovercraft/Exhausts" unique_id=51208263]
+position = Vector2(11, 33)
+texture = ExtResource("6_hrg02")
+
+[node name="Steam" type="AnimatedSprite2D" parent="Visual/Hovercraft/Exhausts/Exhaust2" unique_id=911442971]
+position = Vector2(0, 6.78)
+sprite_frames = SubResource("SpriteFrames_kulw5")
+autoplay = "default"
 
 [node name="Char" type="Sprite2D" parent="Visual" unique_id=320982930]
 texture = ExtResource("6_fa25q")

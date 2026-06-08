@@ -6,6 +6,10 @@ class_name Car
 @onready var fr: AnimatedSprite2D = $Visual/Car/Wheels/FR
 @onready var rl: AnimatedSprite2D = $Visual/Car/Wheels/RL
 @onready var rr: AnimatedSprite2D = $Visual/Car/Wheels/RR
+@onready var exhaust_1: Sprite2D = $Visual/Hovercraft/Exhausts/Exhaust1
+@onready var exhaust_2: Sprite2D = $Visual/Hovercraft/Exhausts/Exhaust2
+@onready var car: Node2D = $Visual/Car
+@onready var hovercraft: Node2D = $Visual/Hovercraft
 
 @onready var body: Area2D = $Visual/Body
 @onready var visual: Node2D = $Visual
@@ -22,7 +26,7 @@ var map:Map
 var smoke_1:=preload("res://Assets/Scenes/Screens/misc/smoke1.tscn")
 var smoke_2:=preload("res://Assets/Scenes/Screens/misc/smoke2.tscn")
 
-var current_vehicle: GameData.VehicleType
+@onready var current_vehicle: GameData.VehicleType=GameData.current_vehicle
 var friction:float=0
 #state: drifting
 var bs:bool=false
@@ -89,6 +93,13 @@ var collisionPoints:Array[Node2D]
 func _ready() -> void:
     if playering:
         player.FocusPlayer()
+    if isHovercraft():
+        print('hiding!')
+        car.hide()
+        hovercraft.show()
+    else:
+        car.show()
+        hovercraft.hide()
     steer_normal()
     current_vehicle=GameData.current_vehicle
     #TODO:actual values
@@ -109,28 +120,48 @@ func PopulateCollisions()->void:
             collisionPoints.append(child)
 
 func steer_left()->void:
-    fr.position=Vector2(16.25,-9.7)
-    fr.rotation=deg_to_rad(-23.5)
-    fl.position=Vector2(-15.25,-9.7)
-    fl.rotation=deg_to_rad(-23.5)
     character.position=Vector2(4.5,-5)
     character.rotation=deg_to_rad(-23.5)
+    if isHovercraft():
+        exhaust_1.position=Vector2(-14,32)
+        exhaust_1.rotation=deg_to_rad(20)
+        exhaust_2.position=Vector2(8.75,32)
+        exhaust_2.rotation=deg_to_rad(20)
+    else:
+        fr.position=Vector2(16.25,-9.7)
+        fr.rotation=deg_to_rad(-23.5)
+        fl.position=Vector2(-15.25,-9.7)
+        fl.rotation=deg_to_rad(-23.5)
     
 func steer_right()->void:
-    fr.position=Vector2(15.25,-9.7)
-    fr.rotation=deg_to_rad(23.5)
-    fl.position=Vector2(-16.25,-9.7)
-    fl.rotation=deg_to_rad(23.5)
     character.position=Vector2(-4.5,-5)
     character.rotation=deg_to_rad(23.5)
+    if isHovercraft():
+        exhaust_1.position=Vector2(-8.75,32)
+        exhaust_1.rotation=deg_to_rad(-20)
+        exhaust_2.position=Vector2(14,32)
+        exhaust_2.rotation=deg_to_rad(-20)
+    else:
+        fr.position=Vector2(15.25,-9.7)
+        fr.rotation=deg_to_rad(23.5)
+        fl.position=Vector2(-16.25,-9.7)
+        fl.rotation=deg_to_rad(23.5)
+        
     
 func steer_normal()->void:
-    fr.position=Vector2(16.25,-12.7)
-    fr.rotation=0
-    fl.position=Vector2(-15.25,-12.7)
-    fl.rotation=0
     character.position=Vector2(0,-4)
     character.rotation=0
+    if isHovercraft():
+        exhaust_1.position=Vector2(-11,33)
+        exhaust_1.rotation=deg_to_rad(0)
+        exhaust_2.position=Vector2(11,33)
+        exhaust_2.rotation=deg_to_rad(0)
+    else:
+        fr.position=Vector2(16.25,-12.7)
+        fr.rotation=0
+        fl.position=Vector2(-15.25,-12.7)
+        fl.rotation=0
+        
 
 #start wheel spinning
 func all_wheel()->void:
@@ -256,7 +287,6 @@ func get_angle_diff()->float:
 
 #spawn smoke particle
 func spawn_smoke(type:String, lr:bool)->void:
-
     if(not isHovercraft() and jumpCurrheight < 1):
         var smokeinst:Node2D
         if type=='smoke1':
@@ -279,7 +309,25 @@ func StartWheel()->void:
     
 #manage water-related particles
 func Water()->void:
-    pass
+    var targetpos:Vector2
+    var smokeinst:Node2D
+    var tempscale:float
+    if(jumpCurrheight < 1):
+        smokeinst=smoke_2.instantiate() as Node2D
+        get_parent().add_child(smokeinst)
+        if(randi()%2 == 1):
+            targetpos=collisionPoints[3].position+Vector2(-2.5,21.5)
+        else:
+            targetpos=collisionPoints[2].position+Vector2(-8.5,21.5)
+        
+        tempscale=(randi_range(30, 69)) / 100.0*scale.x
+        smokeinst.scale=Vector2(tempscale,tempscale)
+        targetpos=to_global(targetpos+Vector2(randi_range(-4, 4),0))
+        smokeinst.global_position.x=targetpos.x
+        smokeinst.global_position.y=targetpos.y
+        smokeinst.rotation=rotation
+        #is it true?
+        smokeinst.z_index=0
 
 #update car position
 func UpdateCarPos()->void:
@@ -362,8 +410,8 @@ func GetHitCar()->void:
     for area in overlapping_areas:
         if area.is_in_group("Body"):
             #calculate collisions
-            var car:Car=area.get_parent().get_parent() as Car
-            BeAttacked(car)
+            var caropp:Car=area.get_parent().get_parent() as Car
+            BeAttacked(caropp)
 
    
  
