@@ -1,12 +1,14 @@
 extends Node2D
 class_name Car
 
+
+@onready var fl: AnimatedSprite2D = $Visual/Car/Wheels/FL
+@onready var fr: AnimatedSprite2D = $Visual/Car/Wheels/FR
+@onready var rl: AnimatedSprite2D = $Visual/Car/Wheels/RL
+@onready var rr: AnimatedSprite2D = $Visual/Car/Wheels/RR
+
 @onready var body: Area2D = $Visual/Body
 @onready var visual: Node2D = $Visual
-@onready var fl: AnimatedSprite2D = $Visual/Wheels/FL
-@onready var fr: AnimatedSprite2D = $Visual/Wheels/FR
-@onready var rl: AnimatedSprite2D = $Visual/Wheels/RL
-@onready var rr: AnimatedSprite2D = $Visual/Wheels/RR
 @onready var character: Sprite2D = $Visual/Char
 @onready var camera: Camera2D = $Camera
 var map:Map
@@ -275,7 +277,7 @@ func spawn_smoke(type:String, lr:bool)->void:
 func StartWheel()->void:
     pass
     
-#manage water-related physics
+#manage water-related particles
 func Water()->void:
     pass
 

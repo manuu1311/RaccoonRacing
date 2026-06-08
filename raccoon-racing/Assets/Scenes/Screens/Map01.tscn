@@ -1,25 +1,45 @@
 [gd_scene format=4 uid="uid://c47mpkqmnemuy"]
 
+[ext_resource type="Script" uid="uid://b2aytwdpf56q5" path="res://scripts/map/map_01.gd" id="1_5t2vj"]
 [ext_resource type="Texture2D" uid="uid://bu1ctalm3yxd1" path="res://Assets/Images/maps/map1/bg.jpg" id="1_k0tgv"]
 [ext_resource type="Texture2D" uid="uid://cu0ob251yd53b" path="res://Assets/Images/maps/map1/top1/text.svg" id="3_vcr05"]
 [ext_resource type="Texture2D" uid="uid://cbdojmvf4dpvx" path="res://Assets/Images/maps/map1/field.png" id="3_wyk1f"]
+[ext_resource type="Texture2D" uid="uid://bx6mc24316p35" path="res://Assets/Animations/CharSelection/palm.png" id="4_hgma5"]
 [ext_resource type="PackedScene" uid="uid://5oxt0vw4l2s0" path="res://Assets/Scenes/Screens/misc/spectators.tscn" id="4_j8q5m"]
+[ext_resource type="Texture2D" uid="uid://bve7xhm06ck4q" path="res://Assets/Images/maps/map1/top1/palms.png" id="4_uq8rh"]
+[ext_resource type="Texture2D" uid="uid://66gstkp8oi2b" path="res://Assets/Images/maps/map1/top1/tree.png" id="5_cbjuo"]
 [ext_resource type="Texture2D" uid="uid://dksh0xvmesvhj" path="res://Assets/Images/maps/map1/art/Bar/1_of_35.svg" id="5_g6uhf"]
 [ext_resource type="Texture2D" uid="uid://bbptpaercygvi" path="res://Assets/Images/maps/map1/art/Bar/2_of_35.svg" id="6_1wst3"]
+[ext_resource type="Texture2D" uid="uid://0p2es7n2yjd7" path="res://Assets/Images/maps/map1/top1/hotel.png" id="6_ydph5"]
 [ext_resource type="Texture2D" uid="uid://btvgqgagn063g" path="res://Assets/Images/maps/map1/art/Bar/3_of_35.svg" id="7_6i52m"]
+[ext_resource type="Texture2D" uid="uid://bld3xkbp766nd" path="res://Assets/Images/maps/map1/top1/celeb.png" id="7_jp4xw"]
+[ext_resource type="Texture2D" uid="uid://dp7oigh42quy8" path="res://Assets/Images/maps/map1/top2/bear.png" id="8_82ocw"]
+[ext_resource type="Texture2D" uid="uid://hjp24s2c8g5b" path="res://Assets/Animations/CharSelection/greenbush.png" id="8_iksjr"]
 [ext_resource type="Texture2D" uid="uid://pjqi1xkfd0e0" path="res://Assets/Images/maps/map1/art/Bar/4_of_35.svg" id="8_m761x"]
 [ext_resource type="Texture2D" uid="uid://bkauxv6rh1sa2" path="res://Assets/Images/maps/map1/art/Bar/5_of_35.svg" id="9_pxfmk"]
+[ext_resource type="Texture2D" uid="uid://d0cuc71l5ij28" path="res://Assets/Images/maps/map1/top2/lamp.png" id="9_tg3j4"]
 [ext_resource type="Texture2D" uid="uid://bj6p168h1kudo" path="res://Assets/Images/maps/map1/art/Bar/6_of_35.svg" id="10_uq8rh"]
+[ext_resource type="Texture2D" uid="uid://o4wu8onsniax" path="res://Assets/Images/maps/map1/top2/halfbush.png" id="10_vhpuo"]
 [ext_resource type="Texture2D" uid="uid://ch1ei0m76ho46" path="res://Assets/Images/maps/map1/art/Bar/7_of_35.svg" id="11_cbjuo"]
+[ext_resource type="Texture2D" uid="uid://cje4fbwr8f8ca" path="res://Assets/Images/maps/map1/top2/bridge.png" id="11_nqew3"]
+[ext_resource type="Texture2D" uid="uid://csfgli3tvfokm" path="res://Assets/Images/maps/map1/top2/nails.png" id="12_ggo7n"]
 [ext_resource type="Texture2D" uid="uid://bk44c4ei3l4gw" path="res://Assets/Images/maps/map1/art/Bar/8_of_35.svg" id="12_ydph5"]
 [ext_resource type="Texture2D" uid="uid://bovp7nskeic1n" path="res://Assets/Images/maps/map1/art/Bar/9_of_35.svg" id="13_jp4xw"]
+[ext_resource type="Texture2D" uid="uid://b6pf4w2ag2byr" path="res://Assets/Images/maps/map1/top2/greenbuilding.png" id="13_q5pq8"]
+[ext_resource type="Texture2D" uid="uid://mkp4p6d6ntc0" path="res://Assets/Images/maps/map1/top2/road.png" id="14_cnnnd"]
 [ext_resource type="Texture2D" uid="uid://leqvve2avho8" path="res://Assets/Images/maps/map1/art/Bar/10_of_35.svg" id="14_iksjr"]
 [ext_resource type="Texture2D" uid="uid://215vxc3w3ig2" path="res://Assets/Images/maps/map1/art/Bar/11_of_35.svg" id="15_p5ch6"]
+[ext_resource type="Texture2D" uid="uid://6qnpwe43cewv" path="res://Assets/Images/maps/map1/top2/handrail.png" id="15_tlwm8"]
+[ext_resource type="Texture2D" uid="uid://cni8ex23l0kep" path="res://Assets/Images/maps/map1/top2/overpass.png" id="16_3jts0"]
 [ext_resource type="Texture2D" uid="uid://dyd8hy2m51m4r" path="res://Assets/Images/maps/map1/art/Bar/12_of_35.svg" id="16_ga8hf"]
 [ext_resource type="Texture2D" uid="uid://boxulmoag1h0j" path="res://Assets/Images/maps/map1/art/Bar/13_of_35.svg" id="17_2i7sn"]
+[ext_resource type="Texture2D" uid="uid://dqywrdq8ycm5i" path="res://Assets/Animations/CharSelection/emptybush.png" id="17_hive5"]
+[ext_resource type="Texture2D" uid="uid://ykkfl7bvr24p" path="res://Assets/Images/maps/map1/top2/wood.png" id="18_0s0q4"]
 [ext_resource type="Texture2D" uid="uid://uo0v1dlspvyx" path="res://Assets/Images/maps/map1/art/Bar/14_of_35.svg" id="18_y0j6b"]
 [ext_resource type="Texture2D" uid="uid://5kxqmjkr1tbr" path="res://Assets/Images/maps/map1/art/Bar/15_of_35.svg" id="19_8ng3l"]
+[ext_resource type="Texture2D" uid="uid://b2l2jimqc0r3i" path="res://Assets/Images/maps/map1/top2/sign.png" id="19_deqhp"]
 [ext_resource type="Texture2D" uid="uid://c3lxe5mnsf4wl" path="res://Assets/Images/maps/map1/art/Bar/16_of_35.svg" id="20_d8qi4"]
+[ext_resource type="Texture2D" uid="uid://c38qrgtidt10o" path="res://Assets/Images/maps/map1/top2/agame.png" id="20_hnxd3"]
 [ext_resource type="Texture2D" uid="uid://clgdk1pjdfrf1" path="res://Assets/Images/maps/map1/art/Bar/17_of_35.svg" id="21_asl0e"]
 [ext_resource type="Texture2D" uid="uid://2f661c8brf4" path="res://Assets/Images/maps/map1/art/Bar/18_of_35.svg" id="22_m07oa"]
 [ext_resource type="Texture2D" uid="uid://cm7j4405p7du7" path="res://Assets/Images/maps/map1/art/Bar/19_of_35.svg" id="23_y7vjw"]
@@ -277,6 +297,7 @@ _data = {
 }
 
 [node name="Map01" type="Node2D" unique_id=620435250]
+script = ExtResource("1_5t2vj")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=461600533]
 
@@ -296,17 +317,222 @@ rotation = 2.708751
 scale = Vector2(0.491, 0.47)
 texture = ExtResource("3_wyk1f")
 
-[node name="Top1" type="Node2D" parent="Visuals/Ground" unique_id=1227328974]
+[node name="Top2" type="Node2D" parent="Visuals/Ground" unique_id=1434025032]
+z_index = 15
+position = Vector2(-417.5, -437.5)
 
-[node name="Sprite2D" type="Sprite2D" parent="Visuals/Ground/Top1" unique_id=829548071]
+[node name="Palm1" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1157784072]
+position = Vector2(-166.76, -452.5)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_hgma5")
+
+[node name="Palm2" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1550546698]
+position = Vector2(-462.5, -504.21)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_hgma5")
+
+[node name="Celeb" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=637791707]
+position = Vector2(1462.23, 1864.04)
+texture = ExtResource("7_jp4xw")
+
+[node name="RaccoonRacing" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1436070504]
+position = Vector2(1250.5, 1816.645)
+rotation = -0.47996554
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("3_vcr05")
+
+[node name="Tree" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1937567080]
+position = Vector2(932.81, 1738.775)
+texture = ExtResource("5_cbjuo")
+
+[node name="Tree2" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=627267082]
+position = Vector2(320.525, 1582.46)
+texture = ExtResource("5_cbjuo")
+
+[node name="Bear1" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1195906036]
+position = Vector2(795.82, 1711.885)
+texture = ExtResource("8_82ocw")
+
+[node name="Bear2" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=529353617]
+position = Vector2(621.395, 1663.945)
+texture = ExtResource("8_82ocw")
+
+[node name="Bear3" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=2064634867]
+position = Vector2(440.085, 1619.845)
+texture = ExtResource("8_82ocw")
+
+[node name="Lamp" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1820955744]
+position = Vector2(220.7, 1577.875)
+rotation = 0.33161256
+texture = ExtResource("9_tg3j4")
+
+[node name="Lamp2" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=934892198]
+position = Vector2(15.04, 1528.29)
+rotation = 0.33161256
+texture = ExtResource("9_tg3j4")
+
+[node name="Celeb2" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1537862373]
+position = Vector2(-113.135, 1503.425)
+rotation = 0.5934119
+texture = ExtResource("7_jp4xw")
+
+[node name="halfbush" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1976639532]
+position = Vector2(-314.5, 1452.5)
+texture = ExtResource("10_vhpuo")
+
+[node name="halfbush2" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1845470307]
+position = Vector2(-407.5, 1443.5)
+texture = ExtResource("10_vhpuo")
+
+[node name="halfbush3" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1500201180]
+position = Vector2(-511.5, 1426.5)
+texture = ExtResource("10_vhpuo")
+
+[node name="halfbush4" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1178668668]
+position = Vector2(-767.5, 1375.5)
+texture = ExtResource("10_vhpuo")
+
+[node name="halfbush5" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1632958143]
+position = Vector2(-867.5, 1341.5)
+texture = ExtResource("10_vhpuo")
+
+[node name="bridge" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=483045774]
+position = Vector2(-1041.24, 1193.07)
+rotation = 0.47647488
+scale = Vector2(0.966, 1)
+texture = ExtResource("11_nqew3")
+
+[node name="nails" type="Sprite2D" parent="Visuals/Ground/Top2/bridge" unique_id=175964556]
+position = Vector2(0.945, -7.62)
+rotation = -0.4590216
+scale = Vector2(0.98, 0.98)
+texture = ExtResource("12_ggo7n")
+
+[node name="GreenBuilding" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=552504237]
+position = Vector2(820.49, 1295.06)
+scale = Vector2(0.959, 0.959)
+texture = ExtResource("13_q5pq8")
+
+[node name="Road" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=2117360940]
+position = Vector2(1647.76, 1712.495)
+texture = ExtResource("14_cnnnd")
+
+[node name="Rail" type="Sprite2D" parent="Visuals/Ground/Top2/Road" unique_id=1525104744]
+position = Vector2(14.705, 23.515)
+texture = ExtResource("15_tlwm8")
+
+[node name="Overpass" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1065652524]
+position = Vector2(2115.23, 1018.59)
+texture = ExtResource("16_3jts0")
+
+[node name="Tree" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=1566074726]
+position = Vector2(-202.72998, -179.09003)
+scale = Vector2(1.36, 1.36)
+texture = ExtResource("17_hive5")
+
+[node name="Wood" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=162573083]
+position = Vector2(-153.72998, -178.09009)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Wood2" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=1087403419]
+position = Vector2(-60.729973, -199.09003)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Wood3" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=1789628645]
+position = Vector2(43.27005, -212.09003)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Wood4" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=1718755589]
+position = Vector2(128.27005, -208.09006)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Wood5" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=1992986869]
+position = Vector2(215.27007, -188.09006)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Wood6" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=842814776]
+position = Vector2(-139.72998, 61.910004)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Wood7" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=2093965571]
+position = Vector2(-54.729973, 34.910034)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Wood8" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=1136600459]
+position = Vector2(40.27005, 26.909973)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Wood9" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=1513254387]
+position = Vector2(124.27005, 31.910034)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Wood10" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=1131509294]
+position = Vector2(205.26994, 46.909973)
+scale = Vector2(1.16, 1.16)
+texture = ExtResource("18_0s0q4")
+
+[node name="Warning" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=846227246]
+position = Vector2(102.27, -141.34)
+texture = ExtResource("19_deqhp")
+
+[node name="Warning2" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=1316575436]
+position = Vector2(102.27, -52.07)
+texture = ExtResource("19_deqhp")
+
+[node name="Agame" type="Sprite2D" parent="Visuals/Ground/Top2/Overpass" unique_id=623357123]
+position = Vector2(-1346.405, -1147.615)
+rotation = 0.40840703
+scale = Vector2(0.73, 0.73)
+texture = ExtResource("20_hnxd3")
+
+[node name="Top1" type="Node2D" parent="Visuals/Ground" unique_id=1227328974]
+z_index = 15
+
+[node name="RaccoonRacing" type="Sprite2D" parent="Visuals/Ground/Top1" unique_id=829548071]
 position = Vector2(-784, 1107.0001)
 rotation = -1.129228
 texture = ExtResource("3_vcr05")
 
+[node name="Palms" type="Sprite2D" parent="Visuals/Ground/Top1" unique_id=1816110330]
+position = Vector2(-940.025, -587.22)
+texture = ExtResource("4_uq8rh")
+
+[node name="Tree" type="Sprite2D" parent="Visuals/Ground/Top1" unique_id=687252001]
+position = Vector2(250.49, 1519.66)
+texture = ExtResource("5_cbjuo")
+
+[node name="Hotel" type="Sprite2D" parent="Visuals/Ground/Top1" unique_id=1550540394]
+position = Vector2(371.61, -311.86)
+texture = ExtResource("6_ydph5")
+
+[node name="Celeb" type="Sprite2D" parent="Visuals/Ground/Top1" unique_id=1047714210]
+position = Vector2(-667.115, -921.755)
+rotation = 0.42760566
+texture = ExtResource("7_jp4xw")
+
+[node name="Celeb2" type="Sprite2D" parent="Visuals/Ground/Top1" unique_id=898054914]
+position = Vector2(-1274.925, -1085.74)
+rotation = 0.65449846
+texture = ExtResource("7_jp4xw")
+
+[node name="Bush" type="Sprite2D" parent="Visuals/Ground/Top1" unique_id=867719452]
+position = Vector2(-1556.0001, 305.00006)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_iksjr")
+
 [node name="Decorations" type="Node2D" parent="Visuals/Ground" unique_id=765487880]
+z_index = 15
 
 [node name="Art" type="Node2D" parent="Visuals/Ground/Decorations" unique_id=2025703090]
-z_index = 2
 position = Vector2(-417.5, -437.5)
 
 [node name="Spectators1" type="Node2D" parent="Visuals/Ground/Decorations/Art" unique_id=516569557]

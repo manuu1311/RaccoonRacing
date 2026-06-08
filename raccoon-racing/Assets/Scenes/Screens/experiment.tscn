@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dxs80hju0etfw" path="res://Assets/Scenes/Screens/Car.tscn" id="2_rrtsn"]
 [ext_resource type="PackedScene" uid="uid://c47mpkqmnemuy" path="res://Assets/Scenes/Screens/Map01.tscn" id="4_vyse4"]
-[ext_resource type="Script" uid="uid://bgxh1wb814frg" path="res://scripts/map/map.gd" id="5_8m37f"]
 
 [node name="Experiment" type="Node2D" unique_id=411329241]
 
@@ -15,4 +14,3 @@ z_index = 1
 position = Vector2(200, 200)
 
 [node name="Map01" parent="." unique_id=620435250 instance=ExtResource("4_vyse4")]
-script = ExtResource("5_8m37f")
