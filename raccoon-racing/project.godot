@@ -34,6 +34,10 @@ window/size/viewport_width=500
 window/size/viewport_height=500
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/place_helper/plugin.cfg")
+
 [global_group]
 
 Body="Car collision bodies"

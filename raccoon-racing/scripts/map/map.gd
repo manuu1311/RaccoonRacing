@@ -10,6 +10,9 @@ var grassGratingNum:float = 0.01
 #TODO: are they saved as vec2?
 var canBeJumpWall:Array[Vector2]
 # Called when the node enters the scene tree for the first time.
+#offsets useful for minimap
+var offsethc: Vector2
+var offsetcar:Vector2
 
 func _ready() -> void:
 	if GameData.current_vehicle==GameData.VehicleType.CAR:

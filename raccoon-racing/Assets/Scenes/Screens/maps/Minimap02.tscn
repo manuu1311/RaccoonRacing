@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ca4r2hxwtcb1x"]
+
+[ext_resource type="Texture2D" uid="uid://b430wyoy8167p" path="res://Assets/Images/maps/mapview.png" id="1_btai5"]
+[ext_resource type="Texture2D" uid="uid://do52n13erdphe" path="res://Assets/Images/maps/map1/minimaphc.png" id="2_btai5"]
+
+[node name="Minimap02" type="CanvasLayer" unique_id=1433147747]
+
+[node name="View" type="TextureRect" parent="." unique_id=1378546748]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -146.29999
+offset_top = -135.25
+offset_right = -5.299988
+offset_bottom = -4.25
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_btai5")
+
+[node name="MapSprite" type="Sprite2D" parent="View" unique_id=460737866]
+position = Vector2(70.5, 65.5)
+texture = ExtResource("2_btai5")

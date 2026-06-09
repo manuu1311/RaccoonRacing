@@ -10,6 +10,8 @@ class_name Car
 @onready var exhaust_2: Sprite2D = $Visual/Hovercraft/Exhausts/Exhaust2
 @onready var car: Node2D = $Visual/Car
 @onready var hovercraft: Node2D = $Visual/Hovercraft
+#character id,to set sprites
+var CharID:int=0
 
 @onready var body: Area2D = $Visual/Body
 @onready var visual: Node2D = $Visual
@@ -19,13 +21,16 @@ var map:Map
 #TODO: should be set by general game class
 @export var playering:bool
 #TODO: actual map
-@onready var map_01: Map = $"../Map01"
+@onready var map_01: Map = $"../Map"
 @onready var player: Player = $Player
 @onready var sounds: CarSounds = $Sounds
 #smoke effects
-var smoke_1:=preload("res://Assets/Scenes/Screens/misc/smoke1.tscn")
-var smoke_2:=preload("res://Assets/Scenes/Screens/misc/smoke2.tscn")
-
+var smoke_1:Resource=preload("res://Assets/Scenes/Screens/misc/smoke1.tscn")
+var smoke_2:Resource=preload("res://Assets/Scenes/Screens/misc/smoke2.tscn")
+var carView:Resource
+var carViewInstance:Sprite2D
+#minimap center position reference
+var carViewCenterPos:Vector2
 @onready var current_vehicle: GameData.VehicleType=GameData.current_vehicle
 var friction:float=0
 #state: drifting
@@ -93,8 +98,10 @@ var collisionPoints:Array[Node2D]
 func _ready() -> void:
     if playering:
         player.FocusPlayer()
+        carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
+    else:
+        carView=preload("res://Assets/Scenes/Screens/maps/CarViewOpp.tscn")
     if isHovercraft():
-        print('hiding!')
         car.hide()
         hovercraft.show()
     else:
@@ -112,7 +119,19 @@ func _ready() -> void:
     #get collision points from the car scene
     PopulateCollisions()
     map=map_01
-
+    DeferredSetup.call_deferred()
+    
+func DeferredSetup()->void:
+    #add car view to minimap
+    var view_sprite:Sprite2D = map.get_node("Minimap/View/MapSprite")
+    if isHovercraft():
+        carViewCenterPos=map.offsethc
+    else:
+        carViewCenterPos=map.offsetcar
+    carViewInstance = carView.instantiate()
+    view_sprite.add_child(carViewInstance)
+    
+    
 func PopulateCollisions()->void:
     var collisions_node:Node2D = $Visual/CollisionPoints
     for child in collisions_node.get_children():
@@ -210,9 +229,7 @@ func Backward()->void:
 
 func Clearward()->void:
       if isHovercraft():
-        pass
-        #TODO: stop engine sound
-        #this.stopHCRunSound();
+        sounds.stopHCRunSound()
 
 
 
@@ -344,7 +361,8 @@ func UpdateCarPos()->void:
 
 #update camera:is it necessary??
 func UpdateViewMap()->void:
-    pass
+    carViewInstance.position=carViewCenterPos+position*map.scaledTimes
+    carViewInstance.rotation=rotation-PI/2
 
 func UpdateSpeed()->void:
     var dir:int
@@ -388,7 +406,6 @@ func Jumping()->void:
     jumpCurrheight += jumpCurrheight - jumpPrevheight + downWeight
     if(jumpCurrheight > 1):
         z_index=airLayer
-    #TODO: should it be removed?
     else:
         z_index=1
     if(jumpCurrheight < jumpFloorHeight):
@@ -567,6 +584,9 @@ func BeAttacked(who: Car)->void:
         speed = enemySpeed+pushvector
         who.speed = mySpeed-pushvector
 
+#TODO: change sprites according to character
+func SetSprites()->void:
+    pass
 
 #is race type hovercraft?
 func isHovercraft()->bool:
