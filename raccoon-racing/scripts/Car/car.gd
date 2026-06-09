@@ -361,7 +361,7 @@ func UpdateCarPos()->void:
 
 #update camera:is it necessary??
 func UpdateViewMap()->void:
-    carViewInstance.position=carViewCenterPos+position*map.scaledTimes
+    carViewInstance.position=carViewCenterPos+position*map.ScaledTimes
     carViewInstance.rotation=rotation-PI/2
 
 func UpdateSpeed()->void:
