@@ -134,7 +134,7 @@ func DeferredSetup()->void:
     
 func PopulateCollisions()->void:
     var collisions_node:Node2D = $Visual/CollisionPoints
-    for child in collisions_node.get_children():
+    for child:Node in collisions_node.get_children():
         if child is Node2D:
             collisionPoints.append(child)
 
@@ -424,7 +424,7 @@ func Jumping()->void:
 
 func GetHitCar()->void:
     var overlapping_areas:Array[Area2D] = body.get_overlapping_areas()
-    for area in overlapping_areas:
+    for area:Area2D in overlapping_areas:
         if area.is_in_group("Body"):
             #calculate collisions
             var caropp:Car=area.get_parent().get_parent() as Car
@@ -490,13 +490,13 @@ func GetHitEvent(tx:float, ty:float)->void:
 
 #maybe returns wall angle?
 func GetHitStatusAng(tx:float,ty:float)->float:
-    for point in collisionPoints:
+    for point:Node2D in collisionPoints:
         var pointpos:Vector2=point.global_position
         pointpos+=Vector2(tx,ty)
         #TODO: output of gethitface, is it bool or float?
         var pointCollided:Vector2 = map.getHitFace(pointpos)
         if(not is_nan(pointCollided.x)):
-            for jumpCoord in map.canBeJumpWall:
+            for jumpCoord:Vector2 in map.canBeJumpWall:
                 if (jumpCurrheight>heightOverWall and jumpCoord==pointCollided):
                     return NAN
             return rad_to_deg(pointCollided.angle())
