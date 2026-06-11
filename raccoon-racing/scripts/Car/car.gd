@@ -448,8 +448,7 @@ func GetGrassStatus(tx:float, ty:float)->void:
         #_loc3_ = this.ToPointNow(this.Dmc["point" + _loc2_]._x,this.Dmc["point" + _loc2_]._y);
         global_pt+=Vector2(tx,ty)
         #TODO: find the actual function
-        pointCollided=map.getHitFace(global_pt)
-        #_loc4_ = this.map.edm.GetHitFace(_loc6_,_loc5_)
+        pointCollided=map.edm.getHitFace(global_pt)
         if(not is_nan(pointCollided.x)):
             numGrassHits += 1
         point += 1
@@ -471,16 +470,13 @@ func GetHitEvent(tx:float, ty:float)->void:
     var pointid:int = 1
     var pointpos:Vector2
     var point: Node2D
-    #TODO: return of getcollisionface, is it bool or float?
-    var isCollided: bool
+    var isCollided: Vector2
     var _loc3_;
     while(pointid < 5):
         point=collisionPoints[pointid-1]
         pointpos=point.position+Vector2(tx,ty)
-        isCollided=map.getCollisionFace(pointpos)
-        #TODO: find actual function and implement in map
-        #_loc3_ = this.map.edevent.GetHitFace(_loc6_,_loc5_);
-        if(isCollided):
+        isCollided=map.edevent.getHitFace(pointpos)
+        if(isCollided!=null):
             #TODO: first paramter probably player collision id
             map.GetHitEventStatus(isCollided,player.playerID)
             #map.GetHitEventStatus(_loc3_.getId(),player.playerID)
@@ -494,7 +490,7 @@ func GetHitStatusAng(tx:float,ty:float)->float:
         var pointpos:Vector2=point.global_position
         pointpos+=Vector2(tx,ty)
         #TODO: output of gethitface, is it bool or float?
-        var pointCollided:Vector2 = map.getHitFace(pointpos)
+        var pointCollided:Vector2 = map.ed.getHitFace(pointpos)
         if(not is_nan(pointCollided.x)):
             for jumpCoord:Vector2 in map.canBeJumpWall:
                 if (jumpCurrheight>heightOverWall and jumpCoord==pointCollided):

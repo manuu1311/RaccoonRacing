@@ -11,3 +11,7 @@ func AddLine(x1:float,y1:float,x2:float,y2:float)->EdLine:
 
 func ReTidyFace()->void:
 	pass
+
+
+func getHitFace(point:Vector2)->Vector2:
+	return Vector2(NAN,NAN)

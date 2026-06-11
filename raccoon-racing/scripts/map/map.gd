@@ -357,14 +357,9 @@ func GetMapSize() -> Vector2:
     var final_height = raw_height * tlp.scale.y
     
     return Vector2(final_width, final_height)
-
-
-func getHitFace(point:Vector2)->Vector2:
-    return Vector2(NAN,NAN)
     
-func getCollisionFace(point:Vector2)->bool:
-    return false
+
     
-#TODO: first argument in output of getcollisionface
+#TODO: first argument in output of gethitface
 func GetHitEventStatus(varx,playerid:int)->void:
     pass
