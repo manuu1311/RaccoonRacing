@@ -1,6 +1,8 @@
 extends Node2D
 class_name Map
 
+#flag to draw collisions, debug 
+@export var drawcollision:bool=false
 var ed:Ed
 var edm:Ed
 var edevent:Ed
@@ -49,7 +51,7 @@ var WallsArr:Array[Array]
 @onready var top2: Node2D = $Visuals/Ground/Top2
 #jump wall points
 #TODO: are they saved as vec2?
-var canBeJumpWall:Array[Vector2]
+var canBeJumpWall:Array[int]
 # Called when the node enters the scene tree for the first time.
 #offsets useful for minimap
 var offsethc: Vector2
@@ -68,7 +70,14 @@ func InitMap()->void:
     InitPoints()
     #TODO: enable after implementation
     #InitEventInMap()
+    #debug collisions
+    if drawcollision:
+        modulate=Color(1,1,1,0.5)
+        queue_redraw()
    
+
+func _draw() -> void:
+    ed.draw_debug_geometry(self)
 
 
 func InitWalls()->void:
@@ -167,6 +176,9 @@ func AddJumpEdLine(x1:float,y1:float,x2:float,y2:float)->void:
    
 #TODO: double check if it is correct 
 func InitGrass() -> void:
+    #added safety check, godot is stricter than flash
+    if GrassNum<1:
+        return
     var group_idx: int = 0
     var first_grass: Marker2D
     var grass_idx: int

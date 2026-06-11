@@ -299,6 +299,7 @@ _data = {
 }
 
 [node name="Map01" type="Node2D" unique_id=620435250]
+modulate = Color(1, 1, 1, 0.49411765)
 script = ExtResource("1_5t2vj")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=461600533]
@@ -577,6 +578,7 @@ position = Vector2(-21, 0)
 texture = ExtResource("63_dadfc")
 
 [node name="minimapvisual" type="Node2D" parent="." unique_id=325889203]
+visible = false
 position = Vector2(116, 341)
 
 [node name="Sprite2D" type="Sprite2D" parent="minimapvisual" unique_id=860954693]

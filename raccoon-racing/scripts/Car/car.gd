@@ -96,6 +96,7 @@ var wallSpring:float
 var collisionPoints:Array[Node2D]
 
 func _ready() -> void:
+    map=map_01
     if playering:
         player.FocusPlayer()
         carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
@@ -118,8 +119,9 @@ func _ready() -> void:
     grassGratingNum = 0.01
     #get collision points from the car scene
     PopulateCollisions()
-    map=map_01
     DeferredSetup.call_deferred()
+    #TODO: game manager should spawn the car in the right position
+    global_position=Vector2(-1600,0)
     
 func DeferredSetup()->void:
     #add car view to minimap
@@ -130,6 +132,8 @@ func DeferredSetup()->void:
         carViewCenterPos=map.offsetcar
     carViewInstance = carView.instantiate()
     view_sprite.add_child(carViewInstance)
+    #set variables
+    wallSpring=map.Wallspring
     
     
 func PopulateCollisions()->void:
@@ -361,7 +365,7 @@ func UpdateCarPos()->void:
 
 #update camera:is it necessary??
 func UpdateViewMap()->void:
-    carViewInstance.position=carViewCenterPos+position*map.ScaledTimes
+    carViewInstance.position=carViewCenterPos+global_position*map.ScaledTimes
     carViewInstance.rotation=rotation-PI/2
 
 func UpdateSpeed()->void:
@@ -381,7 +385,6 @@ func UpdateSpeed()->void:
         var slide_magnitude: float = speed.length() * (glideGratingNum * int(90 - friction))
         var slide_force: Vector2 = speed.orthogonal() * dir
         slide_force = slide_force.normalized() * slide_magnitude
-
         #apply the force
         speed += slide_force
 
@@ -440,7 +443,7 @@ func GetGrassStatus(tx:float, ty:float)->void:
     #each point in the car
     var point:int = 1
     #TODO: result of gethitface, maybe float?
-    var pointCollided:Vector2
+    var lineCollided:EdLine
     #calculate which points collide with grass
     while(point < 5):
         #point to global
@@ -448,14 +451,14 @@ func GetGrassStatus(tx:float, ty:float)->void:
         #_loc3_ = this.ToPointNow(this.Dmc["point" + _loc2_]._x,this.Dmc["point" + _loc2_]._y);
         global_pt+=Vector2(tx,ty)
         #TODO: find the actual function
-        pointCollided=map.edm.getHitFace(global_pt)
-        if(not is_nan(pointCollided.x)):
+        lineCollided=map.edm.getHitFace(global_pt)
+        if(lineCollided!=null):
             numGrassHits += 1
         point += 1
     #if no point collides: return
     if(numGrassHits == 0):
             return
-    #else, slow down       
+    #else, slow down     
     speed *= (1.0 - grassGratingNum * numGrassHits)
     stepx = snapped(speed.x, 0.1)
     stepy = snapped(speed.y, 0.1)
@@ -470,11 +473,11 @@ func GetHitEvent(tx:float, ty:float)->void:
     var pointid:int = 1
     var pointpos:Vector2
     var point: Node2D
-    var isCollided: Vector2
+    var isCollided: EdLine
     var _loc3_;
     while(pointid < 5):
         point=collisionPoints[pointid-1]
-        pointpos=point.position+Vector2(tx,ty)
+        pointpos=point.global_position+Vector2(tx,ty)
         isCollided=map.edevent.getHitFace(pointpos)
         if(isCollided!=null):
             #TODO: first paramter probably player collision id
@@ -490,12 +493,12 @@ func GetHitStatusAng(tx:float,ty:float)->float:
         var pointpos:Vector2=point.global_position
         pointpos+=Vector2(tx,ty)
         #TODO: output of gethitface, is it bool or float?
-        var pointCollided:Vector2 = map.ed.getHitFace(pointpos)
-        if(not is_nan(pointCollided.x)):
-            for jumpCoord:Vector2 in map.canBeJumpWall:
-                if (jumpCurrheight>heightOverWall and jumpCoord==pointCollided):
+        var lineCollided:EdLine = map.ed.getHitFace(pointpos)
+        if(lineCollided!=null):
+            for jumpCoord:int in map.canBeJumpWall:
+                if (jumpCurrheight>heightOverWall and jumpCoord==lineCollided.getId()):
                     return NAN
-            return rad_to_deg(pointCollided.angle())
+            return (lineCollided.GetAngle())
     return NAN
     
     
@@ -503,10 +506,9 @@ func GetHitStatusAng(tx:float,ty:float)->float:
 #flash's 0 deg should be equal to godot's 90 deg
 func GetHitStatus(tx:float, ty:float)->void:
     var wallAngle:float = GetHitStatusAng(tx,ty)
-    #TODO: no wall detected
+    #no wall detected
     if(is_nan(wallAngle)):
         return 
-        
     sounds.playbumpsound()
     var speedwallangle:float=-2*rad_to_deg(angle_difference(speed.angle(),wallAngle))
     #-pi/2 to account for godot's angle system
@@ -519,17 +521,16 @@ func GetHitStatus(tx:float, ty:float)->void:
     if speedwallangle90<-90:
         speedwallangle90+=180
     speedwallangle90=abs(speedwallangle90)
-    
     if(poswallangle >= 0 and poswallangle < 45 or poswallangle < -135):
-        rotation_degrees+=(speed.length()+1)/wallSpring*0.02
-
+        rotation_degrees+=(speed.length()+1)*0.02/wallSpring
     if(poswallangle < 0 and poswallangle > -45 or poswallangle > 135):
-        rotation_degrees-=(speed.length()+1)/wallSpring*0.02
+        rotation_degrees-=(speed.length()+1)*0.02/wallSpring
     var loc1:float=rad_to_deg(angle_difference(speed.angle(),wallAngle))
     if(not loc1>0 and loc1<180):
         if(abs(speedwallangle) < 60):
             speedwallangle /= 2;
         speed=speed.rotated(deg_to_rad(speedwallangle))
+
     speed*=(1-wallSpring*(speedwallangle90*abs(abs(poswallangle)-90)/90))
     speed+=(Vector2(0.1,0).rotated(deg_to_rad(wallAngle+90)))
     stepx = snapped(speed.x,0.1)

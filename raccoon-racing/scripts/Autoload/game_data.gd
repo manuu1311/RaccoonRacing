@@ -17,7 +17,7 @@ var currentCup: int = -1
 var currentDifficulty: int=-1
 #car/hovercraft mode
 enum VehicleType { CAR, HOVERCRAFT }
-var current_vehicle: VehicleType = VehicleType.HOVERCRAFT
+var current_vehicle: VehicleType = VehicleType.CAR
 
 	
 #update character locks, to unlock new characters after each cup

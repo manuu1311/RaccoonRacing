@@ -11,8 +11,5 @@ script = ExtResource("1_piq2e")
 z_index = 1
 playering = true
 
-[node name="Car2" parent="." unique_id=464234323 instance=ExtResource("2_rrtsn")]
-z_index = 1
-position = Vector2(200, 200)
-
 [node name="Map" parent="." unique_id=620435250 instance=ExtResource("4_vyse4")]
+drawcollision = true
