@@ -21,4 +21,5 @@ texture = ExtResource("1_0r3vn")
 
 [node name="MapSprite" type="Sprite2D" parent="View" unique_id=1481314275]
 position = Vector2(70.5, 65.5)
+scale = Vector2(0.959, 0.959)
 texture = ExtResource("2_0r3vn")

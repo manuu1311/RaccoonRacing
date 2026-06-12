@@ -62,7 +62,6 @@
 [ext_resource type="Texture2D" uid="uid://bbc6sch1qtevs" path="res://Assets/Images/maps/map1/art/wood.svg" id="40_cvi6c"]
 [ext_resource type="Texture2D" uid="uid://cpehiepfj4vxy" path="res://Assets/Images/maps/map1/art/text.svg" id="41_5pgpt"]
 [ext_resource type="Texture2D" uid="uid://di66w3jli32lu" path="res://Assets/Images/maps/sprites/DefineSprite_1362_Map01_dt2/dt2.png" id="63_dadfc"]
-[ext_resource type="Texture2D" uid="uid://cewd2f7inhkqd" path="res://Assets/Images/maps/sprites/DefineSprite_1359_Map01_dt1/dt1.png" id="64_jenl8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q6fms"]
 texture = ExtResource("1_k0tgv")
@@ -298,9 +297,12 @@ _data = {
 &"startgraphic": SubResource("Animation_wr2gh")
 }
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6s1yp"]
+load_path = "res://.godot/imported/1.png-579bc15caaf5c2529d675807e9d276ae.ctex"
+
 [node name="Map01" type="Node2D" unique_id=620435250]
-modulate = Color(1, 1, 1, 0.49411765)
 script = ExtResource("1_5t2vj")
+drawcollision = null
 
 [node name="Visuals" type="Node2D" parent="." unique_id=461600533]
 
@@ -321,7 +323,6 @@ scale = Vector2(0.491, 0.47)
 texture = ExtResource("3_wyk1f")
 
 [node name="Top2" type="Node2D" parent="Visuals/Ground" unique_id=1434025032]
-visible = false
 z_index = 15
 position = Vector2(-417.5, -437.5)
 
@@ -499,7 +500,6 @@ scale = Vector2(0.73, 0.73)
 texture = ExtResource("20_hnxd3")
 
 [node name="Top1" type="Node2D" parent="Visuals/Ground" unique_id=1227328974]
-visible = false
 z_index = 15
 
 [node name="RaccoonRacing" type="Sprite2D" parent="Visuals/Ground/Top1" unique_id=829548071]
@@ -538,7 +538,6 @@ texture = ExtResource("8_iksjr")
 z_index = 15
 
 [node name="Art" type="Node2D" parent="Visuals/Ground/Decorations" unique_id=2025703090]
-visible = false
 position = Vector2(-417.5, -437.5)
 
 [node name="Spectators1" type="Node2D" parent="Visuals/Ground/Decorations/Art" unique_id=516569557]
@@ -578,11 +577,11 @@ position = Vector2(-21, 0)
 texture = ExtResource("63_dadfc")
 
 [node name="minimapvisual" type="Node2D" parent="." unique_id=325889203]
-visible = false
-position = Vector2(116, 341)
+position = Vector2(126.915, 349.79)
 
 [node name="Sprite2D" type="Sprite2D" parent="minimapvisual" unique_id=860954693]
-texture = ExtResource("64_jenl8")
+scale = Vector2(0.959, 0.959)
+texture = SubResource("CompressedTexture2D_6s1yp")
 
 [node name="PointsCar" type="Node2D" parent="." unique_id=432608956]
 position = Vector2(-11.915, 69.015)

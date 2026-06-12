@@ -23,7 +23,8 @@ var PointNum:int
 #TODO: maybe take markers from the scene
 var Points:Array[Vector2]
 #TODO: same as above
-var PropPointArr;
+var PropPointArr:Array[int]
+var StartPosArr:Array[Marker2D]
 var PropboxNum:int
 #changed from original one
 var IsHovercraft:bool
@@ -56,11 +57,16 @@ var canBeJumpWall:Array[int]
 #offsets useful for minimap
 var offsethc: Vector2
 var offsetcar:Vector2
+var PointsPath:String
 
 func _ready() -> void:
     if GameData.current_vehicle==GameData.VehicleType.CAR:
         #hide top2
         top2.hide()
+        PointsPath='PointsCar'
+    else:
+        top2.show()
+        PointsPath='PointsHC'
 
 func InitMap()->void:
     CupMapj=0
@@ -70,11 +76,21 @@ func InitMap()->void:
     InitPoints()
     #TODO: enable after implementation
     #InitEventInMap()
+    InitStartPos()
     #debug collisions
     if drawcollision:
         modulate=Color(1,1,1,0.5)
         queue_redraw()
-   
+    
+
+func InitStartPos()->void:
+    var newmarker:Marker2D
+    var id:int=0
+    newmarker=get_node_or_null(PointsPath+'/Flags/StartPos'+str(id))
+    while newmarker!=null:
+        StartPosArr.append(newmarker)
+        id+=1
+        newmarker=get_node_or_null(PointsPath+'/Flags/StartPos'+str(id))
 
 func _draw() -> void:
     ed.draw_debug_geometry(self)
@@ -95,7 +111,7 @@ func InitNormalWall()->void:
         firstwall=null
         var wallid:int = 0;
         while(wallid < WallNum):
-            var markerpath:String="PointsCar/Walls"+str(igroupnum)+"/wall"
+            var markerpath:String=PointsPath+"/Walls"+str(igroupnum)+"/wall"
             currentwall= get_node_or_null(markerpath+str(wallid)) as Marker2D
             if(currentwall==null):
                 wallid += 1
@@ -139,7 +155,7 @@ func InitJumpWall()->void:
         _loc6_ = null;
         _loc4_ = 0;
         while(_loc4_ < JumpWallNum):
-            var markerpath:String="PointsCar/Jumpwalls"+str(_loc7_)+"/jumpwall"
+            var markerpath:String=PointsPath+"/Jumpwalls"+str(_loc7_)+"/jumpwall"
             _loc2_ = get_node_or_null(markerpath+str(_loc4_)) as Marker2D
             if(_loc2_==null):
                 _loc4_ = _loc4_ + 1
@@ -191,7 +207,7 @@ func InitGrass() -> void:
         grass_idx = 0
 
         while grass_idx < GroupGrassNum:
-            var marker_path := "PointsCar/GroupGrass" + str(group_idx) + "/GroupGrass"
+            var marker_path := PointsPath+"/GroupGrass" + str(group_idx) + "/GroupGrass"
             current = get_node_or_null(marker_path + str(grass_idx)) as Marker2D
 
             if current == null:
@@ -236,7 +252,7 @@ func InitGrass() -> void:
 
     while group_idx < GrassNum:
         var grass = get_node_or_null(
-            "PointsCar/Grass" + str(group_idx)
+            PointsPath+"/Grass" + str(group_idx)
         ) as Node2D
 
         if grass == null:
@@ -265,7 +281,7 @@ func InitPoints()->void:
     var ipoint:int = 0
     var point:Marker2D
     while(ipoint < PointNum):
-        point = get_node_or_null("PointsCar/Points/"+str(ipoint))
+        point = get_node_or_null(PointsPath+"/Points/"+str(ipoint))
         if(point!=null):
             Points.append(point.global_position)
         ipoint +=1
@@ -367,7 +383,6 @@ func GetMapSize() -> Vector2:
     # 4. Multiply by the node's scale to account for stretching/shrinking
     var final_width = raw_width * tlp.scale.x
     var final_height = raw_height * tlp.scale.y
-    
     return Vector2(final_width, final_height)
     
 

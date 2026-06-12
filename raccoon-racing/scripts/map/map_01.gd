@@ -12,7 +12,7 @@ func _ready() -> void:
     #exporting: 0.06666666666666666
     ScaledTimes=0.03333333333333333
     offsethc=Vector2(-0.7,0)
-    offsetcar=Vector2(-3.867,-11.367)
+    offsetcar=Vector2(-4.233,-11.67)
     JumpWallGroupNum = 10
     JumpWallNum = 100;
     WallGroupNum = 10;

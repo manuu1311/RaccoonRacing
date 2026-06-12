@@ -90,9 +90,8 @@ func getHitFace(point:Vector2)->EdLine:
     var cellx:int = int((point.x - minX) / LengthX);
     var celly:int = int((point.y - minY) / LengthY);
     var i:int = 0
-
-    if len(SurfaceArr)<=cellx or len(SurfaceArr[cellx])<=celly:
-        return null
+    if cellx<0 or cellx>=len(SurfaceArr):return null
+    if celly<0 or celly>=len(SurfaceArr[cellx]):return null
     while(i < len(SurfaceArr[cellx][celly])):
         if(SurfaceArr[cellx][celly][i].HitTest(point.x,point.y)):
             return SurfaceArr[cellx][celly][i];
@@ -134,19 +133,15 @@ func draw_debug_geometry(overlay_node: Node2D) -> void:
         
         if shape is EdLine:
             
-            var direction = (shape.p2 - shape.p1).normalized()
-            # Get the perpendicular vector for thickness (rotated 90 degrees counter-clockwise)
-            var perpendicular = Vector2(-direction.y, direction.x) 
-            var thickness_vector = perpendicular * shape.LineWidth
+            var right = Vector2.RIGHT.rotated(deg_to_rad(shape.ang))
+            var down  = Vector2.DOWN.rotated(deg_to_rad(shape.ang))
 
-            # Calculate the 4 corners based on the EDLine definition
-            var corner1 = shape.p1
-            var corner2 = shape.p2
-            var corner3 = shape.p2 + thickness_vector
-            var corner4 = shape.p1 + thickness_vector
+            var length = (Vector2(shape.p2.x - shape.p1.x, shape.p2.y - shape.p1.y)
+                        .rotated(deg_to_rad(-shape.ang))).x
 
-            var polygon_points = PackedVector2Array([corner1, corner2, corner3, corner4, corner1])
+            var A = shape.p1
+            var B = shape.p1 + right * length
+            var C = B + down * shape.LineWidth
+            var D = A + down * shape.LineWidth
 
-            # Draw it as an outline
-            overlay_node.draw_polyline(polygon_points, debug_color, 2.0)
-            print(shape.GetAngle())
+            overlay_node.draw_polyline(PackedVector2Array([A,B,C,D,A]), debug_color, 2)

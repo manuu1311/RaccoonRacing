@@ -110,13 +110,6 @@ func _ready() -> void:
         hovercraft.hide()
     steer_normal()
     current_vehicle=GameData.current_vehicle
-    #TODO:actual values
-    #rollGratingNum=map.rollGratingNum
-    #glideGratingNum=map.glideGratingNum
-    #grassGratingNum=map.grassGratingNum
-    glideGratingNum = 0.0002
-    rollGratingNum = 0.02
-    grassGratingNum = 0.01
     #get collision points from the car scene
     PopulateCollisions()
     DeferredSetup.call_deferred()
@@ -134,6 +127,9 @@ func DeferredSetup()->void:
     view_sprite.add_child(carViewInstance)
     #set variables
     wallSpring=map.Wallspring
+    rollGratingNum=map.RollGratingNum
+    glideGratingNum=map.GlideGratingNum
+    grassGratingNum=map.GrassGratingNum
     
     
 func PopulateCollisions()->void:
@@ -447,11 +443,11 @@ func GetGrassStatus(tx:float, ty:float)->void:
     #calculate which points collide with grass
     while(point < 5):
         #point to global
-        var global_pt:Vector2 = collisionPoints[point-1].global_position
+        var pt:Vector2 = collisionPoints[point-1].position
         #_loc3_ = this.ToPointNow(this.Dmc["point" + _loc2_]._x,this.Dmc["point" + _loc2_]._y);
-        global_pt+=Vector2(tx,ty)
+        pt+=Vector2(tx,ty)
         #TODO: find the actual function
-        lineCollided=map.edm.getHitFace(global_pt)
+        lineCollided=map.edm.getHitFace(pt)
         if(lineCollided!=null):
             numGrassHits += 1
         point += 1
@@ -477,7 +473,8 @@ func GetHitEvent(tx:float, ty:float)->void:
     var _loc3_;
     while(pointid < 5):
         point=collisionPoints[pointid-1]
-        pointpos=point.global_position+Vector2(tx,ty)
+        #TODO: is it correct?
+        pointpos=point.position+Vector2(tx,ty)
         isCollided=map.edevent.getHitFace(pointpos)
         if(isCollided!=null):
             #TODO: first paramter probably player collision id
@@ -490,7 +487,7 @@ func GetHitEvent(tx:float, ty:float)->void:
 #maybe returns wall angle?
 func GetHitStatusAng(tx:float,ty:float)->float:
     for point:Node2D in collisionPoints:
-        var pointpos:Vector2=point.global_position
+        var pointpos:Vector2=point.position
         pointpos+=Vector2(tx,ty)
         #TODO: output of gethitface, is it bool or float?
         var lineCollided:EdLine = map.ed.getHitFace(pointpos)
@@ -505,17 +502,25 @@ func GetHitStatusAng(tx:float,ty:float)->float:
 #TODO: randomly put in +-90 deg until it works
 #flash's 0 deg should be equal to godot's 90 deg
 func GetHitStatus(tx:float, ty:float)->void:
-    var wallAngle:float = GetHitStatusAng(tx,ty)
+    var wallAngledeg:float =GetHitStatusAng(tx,ty)
     #no wall detected
-    if(is_nan(wallAngle)):
+    if(is_nan(wallAngledeg)):
         return 
     sounds.playbumpsound()
-    var speedwallangle:float=-2*rad_to_deg(angle_difference(speed.angle(),wallAngle))
+    var speedangle:float=speed.angle()
+    var wallAngle :float= deg_to_rad(wallAngledeg)
+    var speedwallangle:float=wrapf(
+        -2*rad_to_deg(speedangle-wallAngle),
+        -180.0,
+        180.0
+    )
     #-pi/2 to account for godot's angle system
-    var poswallangle:float=rad_to_deg(angle_difference(wallAngle,(rotation-PI/2)))
-    var speedwallangle90:float=rad_to_deg(angle_difference(speed.angle(),wallAngle))
-    #format angle
-    speedwallangle90=fmod(speedwallangle90, 180.0)
+    var poswallangle:float=wrapf(
+        rad_to_deg(wallAngle-rotation-PI/2),
+        -180.0,
+        180.0
+    )
+    var speedwallangle90:float=fmod(rad_to_deg(speedangle-wallAngle),180.0)
     if speedwallangle90>90:
         speedwallangle90=180-speedwallangle90
     if speedwallangle90<-90:
@@ -525,16 +530,20 @@ func GetHitStatus(tx:float, ty:float)->void:
         rotation_degrees+=(speed.length()+1)*0.02/wallSpring
     if(poswallangle < 0 and poswallangle > -45 or poswallangle > 135):
         rotation_degrees-=(speed.length()+1)*0.02/wallSpring
-    var loc1:float=rad_to_deg(angle_difference(speed.angle(),wallAngle))
-    if(not loc1>0 and loc1<180):
+    var loc1:float=wrapf(
+        rad_to_deg(speedangle-wallAngle),
+        -180.0,
+        180
+    )
+    if(not (loc1>0 and loc1<180)):
         if(abs(speedwallangle) < 60):
-            speedwallangle /= 2;
+            speedwallangle *=0.5
         speed=speed.rotated(deg_to_rad(speedwallangle))
 
     speed*=(1-wallSpring*(speedwallangle90*abs(abs(poswallangle)-90)/90))
-    speed+=(Vector2(0.1,0).rotated(deg_to_rad(wallAngle+90)))
-    stepx = snapped(speed.x,0.1)
-    stepy = snapped(speed.y,0.1)
+    speed+=(Vector2(0.1,0).rotated(deg_to_rad(wallAngledeg+90)))
+    stepx = int(speed.x * 10.0) / 10.0
+    stepy = int(speed.y * 10.0) / 10.0
     tempx = position.x + stepx
     tempy = position.y + stepy
 
