@@ -302,7 +302,6 @@ load_path = "res://.godot/imported/1.png-579bc15caaf5c2529d675807e9d276ae.ctex"
 
 [node name="Map01" type="Node2D" unique_id=620435250]
 script = ExtResource("1_5t2vj")
-drawcollision = null
 
 [node name="Visuals" type="Node2D" parent="." unique_id=461600533]
 
@@ -577,6 +576,7 @@ position = Vector2(-21, 0)
 texture = ExtResource("63_dadfc")
 
 [node name="minimapvisual" type="Node2D" parent="." unique_id=325889203]
+visible = false
 position = Vector2(126.915, 349.79)
 
 [node name="Sprite2D" type="Sprite2D" parent="minimapvisual" unique_id=860954693]

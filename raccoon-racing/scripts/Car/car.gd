@@ -97,11 +97,6 @@ var collisionPoints:Array[Node2D]
 
 func _ready() -> void:
     map=map_01
-    if playering:
-        player.FocusPlayer()
-        carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
-    else:
-        carView=preload("res://Assets/Scenes/Screens/maps/CarViewOpp.tscn")
     if isHovercraft():
         car.hide()
         hovercraft.show()
@@ -113,11 +108,15 @@ func _ready() -> void:
     #get collision points from the car scene
     PopulateCollisions()
     DeferredSetup.call_deferred()
-    #TODO: game manager should spawn the car in the right position
-    global_position=Vector2(-1600,0)
+
     
 func DeferredSetup()->void:
     #add car view to minimap
+    if playering:
+        player.FocusPlayer()
+        carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
+    else:
+        carView=preload("res://Assets/Scenes/Screens/maps/CarViewOpp.tscn")
     var view_sprite:Sprite2D = map.get_node("Minimap/View/MapSprite")
     if isHovercraft():
         carViewCenterPos=map.offsethc
@@ -557,9 +556,9 @@ func BeAttacked(who: Car)->void:
     var isInvincible:bool = player.isInvincible
     var enemyInvincible:bool = who.player.isInvincible;
     if(player.isSmallState):
-        isInvincible = true
-    if(who.player.isSmallState):
         enemyInvincible = true
+    if(who.player.isSmallState):
+        isInvincible = true
    
     var enemySpeed:Vector2
     if(not (isInvincible and not enemyInvincible)):
