@@ -18,14 +18,23 @@ func _ready() -> void:
     minimap_instance.name = "Minimap"
     map.add_child(minimap_instance)
     #TODO: where is it actually implemented? what are the references like?
-    for i in range(len(map.StartPosArr)):
+    for i in range(GameData.humanplayers):
         var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
-        add_child(carinstance)
+        carinstance.setup(map,i,true)
+        fcsCar=carinstance
+        Game.fcsCar=carinstance
+        HumanCarController.new(carinstance)
+        add_child(carinstance)     
         carinstance.global_position=map.StartPosArr[i].global_position
-        if i==0:
-            carinstance.playering=true
-        else:
-            carinstance.playering=false
+        
+    for i in range(GameData.aiplayers):
+        var id:int=i+GameData.humanplayers
+        var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
+        carinstance.setup(map,id,false)
+        AICarController.new(carinstance)
+        add_child(carinstance)
+        carinstance.global_position=map.StartPosArr[id].global_position
+
     
     
     

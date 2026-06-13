@@ -12,7 +12,7 @@ class_name Car
 @onready var hovercraft: Node2D = $Visual/Hovercraft
 #character id,to set sprites
 var CharID:int=0
-
+var playerID:int=0
 @onready var body: Area2D = $Visual/Body
 @onready var visual: Node2D = $Visual
 @onready var character: Sprite2D = $Visual/Char
@@ -21,8 +21,6 @@ var map:Map
 #TODO: should be set by general game class
 @export var playering:bool
 #TODO: actual map
-@onready var map_01: Map = $"../Map"
-@onready var player: Player = $Player
 @onready var sounds: CarSounds = $Sounds
 #smoke effects
 var smoke_1:Resource=preload("res://Assets/Scenes/Screens/misc/smoke1.tscn")
@@ -94,9 +92,19 @@ var airLayer: int=10
 var wallSpring:float
 #collision points
 var collisionPoints:Array[Node2D]
+#player params
+var isInvincible:bool=false
+var isSmallState:bool=false
+var isResetting:bool=false
+
+
+
+func setup(gamemap:Map,id:int,gameplayering:bool) -> void:
+    map=gamemap
+    playerID=id
+    playering=gameplayering
 
 func _ready() -> void:
-    map=map_01
     if isHovercraft():
         car.hide()
         hovercraft.show()
@@ -113,7 +121,6 @@ func _ready() -> void:
 func DeferredSetup()->void:
     #add car view to minimap
     if playering:
-        player.FocusPlayer()
         carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
     else:
         carView=preload("res://Assets/Scenes/Screens/maps/CarViewOpp.tscn")
@@ -295,7 +302,8 @@ func Update():
             spawn_smoke("smoke1",moveAngCar < 0)
     elif(speed.length() < 0.5):
         stop_wheel()
-
+    else:
+        all_wheel()
 
 #get difference beteween speed angle and sprite angle
 func get_angle_diff()->float:
@@ -319,9 +327,7 @@ func spawn_smoke(type:String, lr:bool)->void:
         smokeinst.scale=scale
         smokeinst.rotation = rotation
 
-#start wheel animation
-func StartWheel()->void:
-    pass
+
     
 #manage water-related particles
 func Water()->void:
@@ -426,12 +432,14 @@ func GetHitCar()->void:
         if area.is_in_group("Body"):
             #calculate collisions
             var caropp:Car=area.get_parent().get_parent() as Car
-            BeAttacked(caropp)
+            #not sure
+            if playerID < caropp.playerID:
+                BeAttacked(caropp)
 
    
  
 func GetGrassStatus(tx:float, ty:float)->void:
-    if(jumpCurrheight > heightOverWall) or player.isResetting:
+    if(jumpCurrheight > heightOverWall) or isResetting:
         return 
         
     var numGrassHits:int = 0
@@ -462,7 +470,7 @@ func GetGrassStatus(tx:float, ty:float)->void:
     
     
 func GetHitEvent(tx:float, ty:float)->void:
-    if(jumpCurrheight> heightOverWall or player.isResetting):
+    if(jumpCurrheight> heightOverWall or isResetting):
         return 
         
     var pointid:int = 1
@@ -472,13 +480,10 @@ func GetHitEvent(tx:float, ty:float)->void:
     var _loc3_;
     while(pointid < 5):
         point=collisionPoints[pointid-1]
-        #TODO: is it correct?
         pointpos=point.position+Vector2(tx,ty)
         isCollided=map.edevent.getHitFace(pointpos)
         if(isCollided!=null):
-            #TODO: first paramter probably player collision id
-            map.GetHitEventStatus(isCollided,player.playerID)
-            #map.GetHitEventStatus(_loc3_.getId(),player.playerID)
+            map.GetHitEventStatus(isCollided,playerID)
             return
         pointid+=1
     
@@ -550,14 +555,14 @@ func GetHitStatus(tx:float, ty:float)->void:
 func BeAttacked(who: Car)->void:
     if(who.jumpCurrheight > heightOverWall or jumpCurrheight > heightOverWall):
         return 
-    if(player.isResetting or who.player.isResetting):
+    if(isResetting or who.isResetting):
         return 
     sounds.playbumpsound()
-    var isInvincible:bool = player.isInvincible
-    var enemyInvincible:bool = who.player.isInvincible;
-    if(player.isSmallState):
+    var isInvincible:bool = isInvincible
+    var enemyInvincible:bool = who.isInvincible;
+    if(isSmallState):
         enemyInvincible = true
-    if(who.player.isSmallState):
+    if(isSmallState):
         isInvincible = true
    
     var enemySpeed:Vector2

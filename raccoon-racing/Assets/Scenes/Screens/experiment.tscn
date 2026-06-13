@@ -7,3 +7,4 @@
 script = ExtResource("1_piq2e")
 
 [node name="Map" parent="." unique_id=620435250 instance=ExtResource("4_vyse4")]
+drawcollision = null

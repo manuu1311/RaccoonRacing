@@ -163,7 +163,6 @@ texture = ExtResource("6_fa25q")
 
 [node name="Player" type="Node2D" parent="." unique_id=1258468269]
 script = ExtResource("7_yi5bs")
-playering = null
 
 [node name="Sounds" type="Node2D" parent="." unique_id=536299159]
 script = ExtResource("8_fa25q")

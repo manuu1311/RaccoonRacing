@@ -1,23 +1,8 @@
-extends Node2D
-class_name  Player
+extends CarController
+class_name HumanCarController
 
-var isResetting:bool=false
-#star invincibility (why on player?)
-var isInvincible:bool=false
-#TODO: what is this?
-var isSmallState:bool=false
-@onready var sounds: CarSounds = $"../Sounds"
-@onready var car: Car = $".."
-@export var playering:bool
-
-
-  
-    
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-    #TODO: use actual ai flag
-    if not car.playering:
-        car.Update()
-        return
     var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 
     # Handle Steering (X-axis)
@@ -36,6 +21,3 @@ func _process(_delta: float) -> void:
     else:
         car.Clearward()
     car.Update()
-    
-    
-    
