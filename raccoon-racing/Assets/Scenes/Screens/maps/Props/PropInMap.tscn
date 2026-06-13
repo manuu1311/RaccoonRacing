@@ -1,3 +1,82 @@
 [gd_scene format=3 uid="uid://b4nx8ltk38c28"]
 
+[ext_resource type="Texture2D" uid="uid://gxgoijjbjxka" path="res://Assets/Images/maps/Props/cube.png" id="1_arpfm"]
+[ext_resource type="Script" uid="uid://8qv2prqdogux" path="res://scripts/map/Props/prop_in_map.gd" id="1_vt37a"]
+
+[sub_resource type="Animation" id="Animation_vt37a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8avk0"]
+resource_name = "cube"
+length = 0.8571457
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.42857143, 0.85714287),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 0.6), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.42857143, 0.85714287),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.141592653589793, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fu2jj"]
+_data = {
+&"RESET": SubResource("Animation_vt37a"),
+&"cube": SubResource("Animation_8avk0")
+}
+
 [node name="PropInMap" type="Node2D" unique_id=1147383761]
+script = ExtResource("1_vt37a")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=101901993]
+texture = ExtResource("1_arpfm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=1397878309]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_fu2jj")
+autoplay = &"cube"
+
+[node name="Timer" type="Timer" parent="." unique_id=1364119973]
+wait_time = 3.0
+one_shot = true

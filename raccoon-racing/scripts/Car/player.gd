@@ -10,6 +10,8 @@ var isSmallState:bool=false
 var PlayerID:int
 enum control_type{HUMAN,AI,MULTIPLAYER,RLTRAINING,RL}
 var current_control:control_type
+##position in the race, int
+var current_race_position:int
 
 func _init(id:int,control:control_type) -> void:
     PlayerID=id
@@ -19,3 +21,5 @@ func IsPlayering()->bool:
     return current_control==control_type.HUMAN
     
     
+func RunPropBox(x:float,y:float)->void:
+    pass

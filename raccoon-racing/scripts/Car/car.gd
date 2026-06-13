@@ -18,7 +18,6 @@ var playerID:int=0
 @onready var character: Sprite2D = $Visual/Char
 @onready var camera: Camera2D = $Camera
 var map:Map
-#TODO: should be set by general game class
 @export var playering:bool
 #TODO: actual map
 @onready var sounds: CarSounds = $Sounds
@@ -445,7 +444,6 @@ func GetGrassStatus(tx:float, ty:float)->void:
     var numGrassHits:int = 0
     #each point in the car
     var point:int = 1
-    #TODO: result of gethitface, maybe float?
     var lineCollided:EdLine
     #calculate which points collide with grass
     while(point < 5):
@@ -453,7 +451,6 @@ func GetGrassStatus(tx:float, ty:float)->void:
         var pt:Vector2 = collisionPoints[point-1].position
         #_loc3_ = this.ToPointNow(this.Dmc["point" + _loc2_]._x,this.Dmc["point" + _loc2_]._y);
         pt+=Vector2(tx,ty)
-        #TODO: find the actual function
         lineCollided=map.edm.getHitFace(pt)
         if(lineCollided!=null):
             numGrassHits += 1
@@ -476,14 +473,14 @@ func GetHitEvent(tx:float, ty:float)->void:
     var pointid:int = 1
     var pointpos:Vector2
     var point: Node2D
-    var isCollided: EdLine
+    var collided: EdLine
     var _loc3_;
     while(pointid < 5):
         point=collisionPoints[pointid-1]
         pointpos=point.position+Vector2(tx,ty)
-        isCollided=map.edevent.getHitFace(pointpos)
-        if(isCollided!=null):
-            map.GetHitEventStatus(isCollided,playerID)
+        collided=map.edevent.getHitFace(pointpos)
+        if(collided!=null):
+            map.GetHitEventStatus(collided.getId(),playerID)
             return
         pointid+=1
     
@@ -493,7 +490,6 @@ func GetHitStatusAng(tx:float,ty:float)->float:
     for point:Node2D in collisionPoints:
         var pointpos:Vector2=point.position
         pointpos+=Vector2(tx,ty)
-        #TODO: output of gethitface, is it bool or float?
         var lineCollided:EdLine = map.ed.getHitFace(pointpos)
         if(lineCollided!=null):
             for jumpCoord:int in map.canBeJumpWall:
@@ -503,7 +499,6 @@ func GetHitStatusAng(tx:float,ty:float)->float:
     return NAN
     
     
-#TODO: randomly put in +-90 deg until it works
 #flash's 0 deg should be equal to godot's 90 deg
 func GetHitStatus(tx:float, ty:float)->void:
     var wallAngledeg:float =GetHitStatusAng(tx,ty)

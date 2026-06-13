@@ -2,7 +2,7 @@ extends Node2D
 class_name Map
 
 #flag to draw collisions, debug 
-@export var drawcollision:bool=false
+@export var drawcollision:bool=true
 var ed:Ed
 var edm:Ed
 var edevent:Ed
@@ -88,7 +88,9 @@ func InitStartPos()->void:
         newmarker=get_node_or_null(PointsPath+'/Flags/StartPos'+str(id))
 
 func _draw() -> void:
-    ed.draw_debug_geometry(self)
+    if drawcollision:
+        ed.draw_debug_geometry(self)
+        edevent.draw_debug_geometry(self)
 
 
 func InitWalls()->void:
@@ -283,24 +285,22 @@ func InitPoints()->void:
 
     
 func InitEventInMap()->void:
-    return
     Events = []
     var _loc3_:int;
     var _loc2_:Marker2D;
-    var _loc4_:float;
-    _loc3_ = 0;
+    _loc3_ = 1;
     while(_loc3_ < PropboxNum):
-        _loc2_=get_node_or_null(PointsPath+'/Propbox'+str(_loc3_)) as Marker2D
-        #if(_loc2_==null):
-            #break;
-        #_loc4_ = _loc2_.rotation;
-        #_loc2_._rotation = 0;
-        ##Events.append()
-        ##this.Events.push(new as.EventsInMap.PropInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
-        #_loc2_.swapDepths(20000);
-        #_loc2_.removeMovieClip();
-        #_loc3_ = _loc3_ + 1;
-    #_loc3_ = 0;
+        _loc2_=get_node_or_null(PointsPath+'/Propbox/propbox'+str(_loc3_)) as Marker2D
+        if(_loc2_==null):
+            break;
+        var newprop:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/PropInMap.tscn").instantiate() as EventInMap
+        _loc2_.rotation = 0.0;
+        var scaled_size:Vector2 = newprop.get_node("Sprite2D").texture.get_size() * newprop.get_node("Sprite2D").global_scale
+        newprop.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
+        add_child(newprop)
+        Events.append(newprop)
+        _loc3_ = _loc3_ + 1;
+    _loc3_ = 0;
     #while(_loc3_ < this.JumpNum):
         #_loc2_ = this.ViewDmc.detector["jump" + _loc3_];
         #if(!_loc2_):
@@ -346,8 +346,12 @@ func InitEventInMap()->void:
         #_loc2_.swapDepths(20000);
         #_loc2_.removeMovieClip();
         #_loc3_ = _loc3_ + 1;
-    #this.edevent.ReTidyFace();
+    edevent.ReTidyFace();
 
+    
+func AddEventInMap(event: EventInMap)->void:
+      Events.append(event);
+      edevent.ReTidyFace();
     
 @warning_ignore("narrowing_conversion")
 func StartCupMap(num:int=NAN,w:int=NAN,h:int=NAN)->void:
@@ -382,6 +386,10 @@ func GetMapSize() -> Vector2:
     
 
     
-#TODO: first argument in output of gethitface
-func GetHitEventStatus(varx,playerid:int)->void:
-    pass
+func GetHitEventStatus(eventid:int,playerid:int)->void:
+    var _loc2_:int = 0;
+    while(_loc2_ < Events.size()):
+        if(Events[_loc2_].edface.getId() == eventid):
+            Events[_loc2_].GetHitEventStatus(playerid);
+            return 
+        _loc2_ = _loc2_ + 1;
