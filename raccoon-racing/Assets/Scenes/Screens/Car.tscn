@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dcbs83dhh0od1" path="res://Assets/Images/Vehicles/Cars/raccoon/base.png" id="5_yi5bs"]
 [ext_resource type="Texture2D" uid="uid://cadbxy81ojaqk" path="res://Assets/Images/Vehicles/Cars/raccoon/char.png" id="6_fa25q"]
 [ext_resource type="Texture2D" uid="uid://cejqqjir0m5ib" path="res://Assets/Images/Vehicles/Cars/raccoon/hcback.png" id="6_hrg02"]
-[ext_resource type="Script" uid="uid://dk5eju5uv1u3p" path="res://scripts/Car/player.gd" id="7_yi5bs"]
 [ext_resource type="Script" uid="uid://dleyhiypnj2yx" path="res://scripts/Car/sounds.gd" id="8_fa25q"]
 [ext_resource type="AudioStream" uid="uid://dqxms3hqbr08r" path="res://Assets/Sounds/2359_snd_CarFastSpeed.mp3" id="9_oogh6"]
 [ext_resource type="AudioStream" uid="uid://bkipakueggswe" path="res://Assets/Sounds/2361_snd_CarRunSpeed (mp3cut.net).wav" id="10_vi2p3"]
@@ -160,9 +159,6 @@ autoplay = "default"
 texture = ExtResource("6_fa25q")
 
 [node name="Camera" type="Camera2D" parent="." unique_id=956712359]
-
-[node name="Player" type="Node2D" parent="." unique_id=1258468269]
-script = ExtResource("7_yi5bs")
 
 [node name="Sounds" type="Node2D" parent="." unique_id=536299159]
 script = ExtResource("8_fa25q")

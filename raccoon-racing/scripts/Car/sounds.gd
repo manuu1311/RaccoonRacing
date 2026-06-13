@@ -7,7 +7,6 @@ var soundsVolume: float = 1.0
 var sounds_pen: float = 0.0 
 var prevSpeed: Vector2=Vector2.ZERO
 @onready var car: Car = $".."
-@onready var player: Player = $"../Player"
 
 #all sound players
 @onready var car_fast_speed: AudioStreamPlayer = $CarFastSpeed

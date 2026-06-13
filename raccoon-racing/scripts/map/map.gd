@@ -6,10 +6,9 @@ class_name Map
 var ed:Ed
 var edm:Ed
 var edevent:Ed
+var Events:Array[EventInMap]
 var AddspeedNum: int
 var BsNum:int
-#TODO: what is it? looks like array of linewidth
-var CanBeJumpWall
 var GrassNum:int
 var GroupGrassGroupNum:int
 var GroupGrassNum:int
@@ -17,12 +16,9 @@ var JumpNum:int
 var JumpWallGroupNum:int
 var JumpWallNum:int
 var LapsTotal:int
-#TODO: array of lines i guess?
 var LinePointArr:Array[int]
 var PointNum:int
-#TODO: maybe take markers from the scene
 var Points:Array[Vector2]
-#TODO: same as above
 var PropPointArr:Array[int]
 var StartPosArr:Array[Marker2D]
 var PropboxNum:int
@@ -32,7 +28,6 @@ var WallGroupNum:int
 var WallNum:int
 var WanPointArr:Array[int]
 var ScaledTimes:float
-#TODO: int or float?
 var TileWidth:int= 0
 var TileHeight:int = 0
 var TileNum:int = 0
@@ -51,7 +46,6 @@ var Wallspring:float
 var WallsArr:Array[Array]
 @onready var top2: Node2D = $Visuals/Ground/Top2
 #jump wall points
-#TODO: are they saved as vec2?
 var canBeJumpWall:Array[int]
 # Called when the node enters the scene tree for the first time.
 #offsets useful for minimap
@@ -61,10 +55,12 @@ var PointsPath:String
 
 func _ready() -> void:
     if GameData.current_vehicle==GameData.VehicleType.CAR:
+        IsHovercraft=false
         #hide top2
         top2.hide()
         PointsPath='PointsCar'
     else:
+        IsHovercraft=true
         top2.show()
         PointsPath='PointsHC'
 
@@ -74,8 +70,7 @@ func InitMap()->void:
     InitWalls()
     InitGrass()
     InitPoints()
-    #TODO: enable after implementation
-    #InitEventInMap()
+    InitEventInMap()
     InitStartPos()
     #debug collisions
     if drawcollision:
@@ -287,72 +282,72 @@ func InitPoints()->void:
         ipoint +=1
 
     
-#TODO: implement prop events
-'''
 func InitEventInMap()->void:
+    return
     Events = []
-    var _loc3_;
-    var _loc2_;
-    var _loc4_;
+    var _loc3_:int;
+    var _loc2_:Marker2D;
+    var _loc4_:float;
     _loc3_ = 0;
-    while(_loc3_ < this.PropboxNum):
-        _loc2_ = this.ViewDmc.detector["propbox" + _loc3_];
-        if(!_loc2_):
-            break;
-        _loc4_ = _loc2_._rotation;
-        _loc2_._rotation = 0;
-        #this.Events.push(new as.EventsInMap.PropInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
-        _loc2_.swapDepths(20000);
-        _loc2_.removeMovieClip();
-        _loc3_ = _loc3_ + 1;
-    _loc3_ = 0;
-    while(_loc3_ < this.JumpNum):
-        _loc2_ = this.ViewDmc.detector["jump" + _loc3_];
-        if(!_loc2_):
-            break;
-        _loc4_ = _loc2_._rotation;
-        _loc2_._rotation = 0;
-        #this.Events.push(new as.EventsInMap.JumpInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
-        _loc2_.swapDepths(20000);
-        _loc2_.removeMovieClip();
-        _loc3_ = _loc3_ + 1;
-    _loc3_ = 0;
-    while(_loc3_ < this.AddspeedNum):
-        _loc2_ = this.ViewDmc.detector["addspeed" + _loc3_];
-        if(!_loc2_):
-            break;
-        _loc4_ = _loc2_._rotation;
-        _loc2_._rotation = 0;
-        #this.Events.push(new as.EventsInMap.AddSpeedInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
-        _loc2_.swapDepths(20000);
-        _loc2_.removeMovieClip();
-        _loc3_ = _loc3_ + 1;
-    _loc3_ = 0;
-    while(_loc3_ < this.BsNum):
-        _loc2_ = this.ViewDmc.detector["bs" + _loc3_];
-        if(!_loc2_):
-            break;
-        _loc4_ = _loc2_._rotation;
-        _loc2_._rotation = 0;
-        #this.Events.push(new as.EventsInMap.BsInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
-        _loc2_.swapDepths(20000);
-        _loc2_.removeMovieClip();
-        _loc3_ = _loc3_ + 1;
-    _loc3_ = 0;
-    var _loc5_;
-    while(_loc3_ < this.MoO):
-        _loc2_ = this.ViewDmc.detector["Moo" + _loc3_];
-        if(!_loc2_):
-            break
-        #_loc5_ = this.PropMc.attachMovie("map_ball" + as.GameDate.GetMapId(),"map_ball" + this._game.moveObject.length,this.PropMc.getNextHighestDepth());
-        _loc5_._x = _loc2_._x;
-        _loc5_._y = _loc2_._y;
-        #this._game.moveObject.push(new as.Prop.MoveObject(this._game,this,_loc5_,true,true));
-        _loc2_.swapDepths(20000);
-        _loc2_.removeMovieClip();
-        _loc3_ = _loc3_ + 1;
-    this.edevent.ReTidyFace();
-'''
+    while(_loc3_ < PropboxNum):
+        _loc2_=get_node_or_null(PointsPath+'/Propbox'+str(_loc3_)) as Marker2D
+        #if(_loc2_==null):
+            #break;
+        #_loc4_ = _loc2_.rotation;
+        #_loc2_._rotation = 0;
+        ##Events.append()
+        ##this.Events.push(new as.EventsInMap.PropInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
+        #_loc2_.swapDepths(20000);
+        #_loc2_.removeMovieClip();
+        #_loc3_ = _loc3_ + 1;
+    #_loc3_ = 0;
+    #while(_loc3_ < this.JumpNum):
+        #_loc2_ = this.ViewDmc.detector["jump" + _loc3_];
+        #if(!_loc2_):
+            #break;
+        #_loc4_ = _loc2_._rotation;
+        #_loc2_._rotation = 0;
+        ##this.Events.push(new as.EventsInMap.JumpInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
+        #_loc2_.swapDepths(20000);
+        #_loc2_.removeMovieClip();
+        #_loc3_ = _loc3_ + 1;
+    #_loc3_ = 0;
+    #while(_loc3_ < this.AddspeedNum):
+        #_loc2_ = this.ViewDmc.detector["addspeed" + _loc3_];
+        #if(!_loc2_):
+            #break;
+        #_loc4_ = _loc2_._rotation;
+        #_loc2_._rotation = 0;
+        ##this.Events.push(new as.EventsInMap.AddSpeedInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
+        #_loc2_.swapDepths(20000);
+        #_loc2_.removeMovieClip();
+        #_loc3_ = _loc3_ + 1;
+    #_loc3_ = 0;
+    #while(_loc3_ < this.BsNum):
+        #_loc2_ = this.ViewDmc.detector["bs" + _loc3_];
+        #if(!_loc2_):
+            #break;
+        #_loc4_ = _loc2_._rotation;
+        #_loc2_._rotation = 0;
+        ##this.Events.push(new as.EventsInMap.BsInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
+        #_loc2_.swapDepths(20000);
+        #_loc2_.removeMovieClip();
+        #_loc3_ = _loc3_ + 1;
+    #_loc3_ = 0;
+    #var _loc5_;
+    #while(_loc3_ < this.MoO):
+        #_loc2_ = this.ViewDmc.detector["Moo" + _loc3_];
+        #if(!_loc2_):
+            #break
+        ##_loc5_ = this.PropMc.attachMovie("map_ball" + as.GameDate.GetMapId(),"map_ball" + this._game.moveObject.length,this.PropMc.getNextHighestDepth());
+        #_loc5_._x = _loc2_._x;
+        #_loc5_._y = _loc2_._y;
+        ##this._game.moveObject.push(new as.Prop.MoveObject(this._game,this,_loc5_,true,true));
+        #_loc2_.swapDepths(20000);
+        #_loc2_.removeMovieClip();
+        #_loc3_ = _loc3_ + 1;
+    #this.edevent.ReTidyFace();
+
     
 @warning_ignore("narrowing_conversion")
 func StartCupMap(num:int=NAN,w:int=NAN,h:int=NAN)->void:
