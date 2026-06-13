@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://byruq1hlmcxok"]
+
+[ext_resource type="Texture2D" uid="uid://dc2ax4yt4keqj" path="res://Assets/Images/maps/Props/bs.png" id="1_2xihf"]
+[ext_resource type="Script" uid="uid://cs26a771p2qd2" path="res://scripts/map/Props/bs_in_map.gd" id="1_v6el1"]
+
+[node name="BsInMap" type="Node2D" unique_id=1330638608]
+script = ExtResource("1_v6el1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=212316671]
+texture = ExtResource("1_2xihf")

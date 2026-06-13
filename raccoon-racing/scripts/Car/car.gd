@@ -35,7 +35,7 @@ var bs:bool=false
 #turn drifting threshold
 var bsWheelLength :int= 80
 #speed drifting threshold
-var bsSpeed:int=4
+var bsSpeed:int=9
 #speed
 var speed:Vector2=Vector2.ZERO
 #speed angle relative to sprite angle (i guess) 
@@ -55,6 +55,8 @@ var maxRotationWheel: float=4
 var isAtIce: bool=false
 #locked state
 var isLock:bool=false
+#sleeping
+var isSleep:bool
 #car power
 var horse:float=0.3
 #is the car upside down?
@@ -284,7 +286,7 @@ func Update():
     UpdateSpeed()
     Jumping()
     sounds.Loopsounds()
-    var dir_modifier: float = 1.0 if not bsf else -1.0
+    var dir_modifier: float = 1.0 if bsf else -1.0
     if(bs):
         rotation_degrees += 1 * speed.length()*dir_modifier
     if(bsex > 0):
@@ -296,9 +298,9 @@ func Update():
                 sounds.playTurnBsSound(0)
             else:
                 sounds.playTurnBsSound(1)
-        spawn_smoke("smoke1",moveAngCar > 0)
+        spawn_smoke("smoke1",moveAngCar < 0)
         if(friction > 70):
-            spawn_smoke("smoke1",moveAngCar < 0)
+            spawn_smoke("smoke1",moveAngCar > 0)
     elif(speed.length() < 0.5):
         stop_wheel()
     else:
@@ -474,7 +476,6 @@ func GetHitEvent(tx:float, ty:float)->void:
     var pointpos:Vector2
     var point: Node2D
     var collided: EdLine
-    var _loc3_;
     while(pointid < 5):
         point=collisionPoints[pointid-1]
         pointpos=point.position+Vector2(tx,ty)

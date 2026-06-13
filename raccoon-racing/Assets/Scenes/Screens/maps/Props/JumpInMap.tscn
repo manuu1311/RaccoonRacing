@@ -1,27 +1,10 @@
 [gd_scene format=3 uid="uid://b212ektsdfn65"]
 
 [ext_resource type="Script" uid="uid://xsyvxxy8cstm" path="res://scripts/map/Props/jump_in_map.gd" id="1_h1bbf"]
-[ext_resource type="Texture2D" uid="uid://d2fsjoxdio8cr" path="res://Assets/Images/maps/Props/addspeed1.png" id="2_b1fnm"]
-[ext_resource type="Texture2D" uid="uid://y7yw5nxiw8gu" path="res://Assets/Images/maps/Props/addspeed2.png" id="3_tbwkm"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_tahvn"]
-animations = [{
-"frames": [{
-"duration": 11.0,
-"texture": ExtResource("2_b1fnm")
-}, {
-"duration": 11.0,
-"texture": ExtResource("3_tbwkm")
-}],
-"loop": true,
-"name": &"default",
-"speed": 35.0
-}]
+[ext_resource type="Texture2D" uid="uid://dajmigfa8iml3" path="res://Assets/Images/maps/Props/jumppad.png" id="2_cqe7p"]
 
 [node name="JumpInMap" type="Node2D" unique_id=1367505087]
 script = ExtResource("1_h1bbf")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=479155288]
-sprite_frames = SubResource("SpriteFrames_tahvn")
-autoplay = "default"
-frame_progress = 0.61050665
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1111118736]
+texture = ExtResource("2_cqe7p")

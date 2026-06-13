@@ -1,12 +1,18 @@
 extends EventInMap
 
-
+var IsActivated:bool=true
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
     super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
     global_position=Vector2(x,y)
     rotation=angle
+    IsActivated=true
     
     
 func GetHitEventStatus(PlayerId:int):
-    GameData.PlayersArr[PlayerId].car.JumpBySpeed(0.5)
+    if(IsActivated):
+        var car:Car=GameData.PlayersArr[PlayerId].car
+        if(not car.isInvincible):
+            car.bsf = car.speed.angle() > rotation;
+            car.bs = true;
+            car.sounds.playBsSound()

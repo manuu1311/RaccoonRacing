@@ -288,52 +288,57 @@ func InitEventInMap()->void:
     Events = []
     var _loc3_:int;
     var _loc2_:Marker2D;
-    _loc3_ = 1;
+    _loc3_ = 0;
     while(_loc3_ < PropboxNum):
         _loc2_=get_node_or_null(PointsPath+'/Propbox/propbox'+str(_loc3_)) as Marker2D
         if(_loc2_==null):
             break;
         var newprop:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/PropInMap.tscn").instantiate() as EventInMap
-        _loc2_.rotation = 0.0;
-        var scaled_size:Vector2 = newprop.get_node("Sprite2D").texture.get_size() * newprop.get_node("Sprite2D").global_scale
+        var scaled_size:Vector2 = newprop.get_node("Sprite2D").texture.get_size() *0.7
         newprop.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
+        _loc2_.rotation = 0.0;
         add_child(newprop)
         Events.append(newprop)
         _loc3_ = _loc3_ + 1;
     _loc3_ = 0;
-    #while(_loc3_ < this.JumpNum):
-        #_loc2_ = this.ViewDmc.detector["jump" + _loc3_];
-        #if(!_loc2_):
-            #break;
-        #_loc4_ = _loc2_._rotation;
-        #_loc2_._rotation = 0;
-        ##this.Events.push(new as.EventsInMap.JumpInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
-        #_loc2_.swapDepths(20000);
-        #_loc2_.removeMovieClip();
-        #_loc3_ = _loc3_ + 1;
-    #_loc3_ = 0;
-    #while(_loc3_ < this.AddspeedNum):
-        #_loc2_ = this.ViewDmc.detector["addspeed" + _loc3_];
-        #if(!_loc2_):
-            #break;
-        #_loc4_ = _loc2_._rotation;
-        #_loc2_._rotation = 0;
-        ##this.Events.push(new as.EventsInMap.AddSpeedInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
-        #_loc2_.swapDepths(20000);
-        #_loc2_.removeMovieClip();
-        #_loc3_ = _loc3_ + 1;
-    #_loc3_ = 0;
-    #while(_loc3_ < this.BsNum):
-        #_loc2_ = this.ViewDmc.detector["bs" + _loc3_];
-        #if(!_loc2_):
-            #break;
-        #_loc4_ = _loc2_._rotation;
-        #_loc2_._rotation = 0;
-        ##this.Events.push(new as.EventsInMap.BsInMap(this.PropMc,this,_loc2_._x,_loc2_._y,_loc2_._width,_loc2_._height,_loc4_));
-        #_loc2_.swapDepths(20000);
-        #_loc2_.removeMovieClip();
-        #_loc3_ = _loc3_ + 1;
-    #_loc3_ = 0;
+    while(_loc3_ < JumpNum):
+        _loc2_=get_node_or_null(PointsPath+'/Props/addspeed'+str(_loc3_)) as Marker2D
+        if(not _loc2_):
+            break;
+        var newspeed:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/SpeedInMap.tscn").instantiate() as EventInMap
+        var scaled_size:Vector2=Vector2(87,89)
+        newspeed.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
+        _loc2_.rotation = 0;
+        add_child(newspeed)
+        Events.append(newspeed)
+        _loc3_ = _loc3_ + 1;
+    _loc3_ = 0;
+    while(_loc3_ < JumpNum):
+        _loc2_=get_node_or_null(PointsPath+'/Props/jump'+str(_loc3_)) as Marker2D
+        if(not _loc2_):
+            break;
+        var newjump:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/JumpInMap.tscn").instantiate() as EventInMap
+        #hardcoded because its animated sprite2d
+        var scaled_size:Vector2 = newjump.get_node("Sprite2D").texture.get_size()
+        newjump.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
+        _loc2_.rotation = 0;
+        add_child(newjump)
+        Events.append(newjump)
+        _loc3_ = _loc3_ + 1;
+    _loc3_ = 0;
+    while(_loc3_ < BsNum):
+        _loc2_=get_node_or_null(PointsPath+'/Props/bs'+str(_loc3_)) as Marker2D
+        if(not _loc2_):
+            break;
+        var newbs:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/BsInMap.tscn").instantiate() as EventInMap
+        #hardcoded because its animated sprite2d
+        var scaled_size:Vector2 = newbs.get_node("Sprite2D").texture.get_size()
+        newbs.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
+        _loc2_.rotation = 0;
+        add_child(newbs)
+        Events.append(newbs)
+        _loc3_ = _loc3_ + 1;
+    _loc3_ = 0;
     #var _loc5_;
     #while(_loc3_ < this.MoO):
         #_loc2_ = this.ViewDmc.detector["Moo" + _loc3_];

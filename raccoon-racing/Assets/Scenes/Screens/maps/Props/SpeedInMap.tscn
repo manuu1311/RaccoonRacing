@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dcexlo8nik6h"]
+
+[ext_resource type="Texture2D" uid="uid://d2fsjoxdio8cr" path="res://Assets/Images/maps/Props/addspeed1.png" id="1_6jo4e"]
+[ext_resource type="Script" uid="uid://h324h5b7fkhi" path="res://scripts/map/Props/speed_in_map.gd" id="1_uhu0p"]
+[ext_resource type="Texture2D" uid="uid://y7yw5nxiw8gu" path="res://Assets/Images/maps/Props/addspeed2.png" id="2_uhu0p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1b8h"]
+animations = [{
+"frames": [{
+"duration": 11.0,
+"texture": ExtResource("1_6jo4e")
+}, {
+"duration": 11.0,
+"texture": ExtResource("2_uhu0p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[node name="SpeedInMap" type="Node2D" unique_id=306184605]
+script = ExtResource("1_uhu0p")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1960846486]
+sprite_frames = SubResource("SpriteFrames_v1b8h")
+autoplay = "default"

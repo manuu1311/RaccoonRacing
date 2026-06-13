@@ -61,6 +61,7 @@
 [ext_resource type="Texture2D" uid="uid://dth3wgw76lhjg" path="res://Assets/Images/maps/map1/art/Bar/35_of_35.svg" id="39_hnxd3"]
 [ext_resource type="Texture2D" uid="uid://bbc6sch1qtevs" path="res://Assets/Images/maps/map1/art/wood.svg" id="40_cvi6c"]
 [ext_resource type="Texture2D" uid="uid://cpehiepfj4vxy" path="res://Assets/Images/maps/map1/art/text.svg" id="41_5pgpt"]
+[ext_resource type="Texture2D" uid="uid://cewd2f7inhkqd" path="res://Assets/Images/maps/sprites/DefineSprite_1359_Map01_dt1/dt1.png" id="63_bpx3j"]
 [ext_resource type="Texture2D" uid="uid://di66w3jli32lu" path="res://Assets/Images/maps/sprites/DefineSprite_1362_Map01_dt2/dt2.png" id="63_dadfc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q6fms"]
@@ -297,11 +298,9 @@ _data = {
 &"startgraphic": SubResource("Animation_wr2gh")
 }
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6s1yp"]
-load_path = "res://.godot/imported/1.png-579bc15caaf5c2529d675807e9d276ae.ctex"
-
 [node name="Map01" type="Node2D" unique_id=620435250]
 script = ExtResource("1_5t2vj")
+drawcollision = false
 
 [node name="Visuals" type="Node2D" parent="." unique_id=461600533]
 
@@ -577,11 +576,10 @@ texture = ExtResource("63_dadfc")
 
 [node name="minimapvisual" type="Node2D" parent="." unique_id=325889203]
 visible = false
-position = Vector2(126.915, 349.79)
+position = Vector2(115.385, 341.74)
 
 [node name="Sprite2D" type="Sprite2D" parent="minimapvisual" unique_id=860954693]
-scale = Vector2(0.959, 0.959)
-texture = SubResource("CompressedTexture2D_6s1yp")
+texture = ExtResource("63_bpx3j")
 
 [node name="PointsCar" type="Node2D" parent="." unique_id=432608956]
 position = Vector2(-11.915, 69.015)
@@ -1079,7 +1077,7 @@ position = Vector2(-1136.3232, 1598.6289)
 [node name="propbox19" type="Marker2D" parent="PointsCar/Propbox" unique_id=1431576743]
 position = Vector2(-1006.96326, 1293.2689)
 
-[node name="propbox20" type="Marker2D" parent="PointsCar/Propbox" unique_id=710726744]
+[node name="propbox0" type="Marker2D" parent="PointsCar/Propbox" unique_id=710726744]
 position = Vector2(-1167.1232, 1375.9889)
 
 [node name="Props" type="Node2D" parent="PointsCar" unique_id=1641100593]
@@ -1090,3 +1088,11 @@ rotation = 0.4712389
 
 [node name="bs0" type="Marker2D" parent="PointsCar/Props" unique_id=943895504]
 position = Vector2(1378.01, 454.7591)
+
+[node name="addspeed0" type="Marker2D" parent="PointsCar/Props" unique_id=813600922]
+position = Vector2(1262.915, -18.015076)
+rotation = 3.1415927
+
+[node name="addspeed1" type="Marker2D" parent="PointsCar/Props" unique_id=1454246175]
+position = Vector2(259.91504, 1348.9849)
+rotation = -1.2304571

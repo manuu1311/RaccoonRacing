@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dyyuhl5b7btx5" path="res://Assets/Images/Vehicles/Cars/wheel1.png" id="1_hhgae"]
 [ext_resource type="Script" uid="uid://b15jbk8xtwyoh" path="res://scripts/Car/car.gd" id="1_kulw5"]
 [ext_resource type="Texture2D" uid="uid://b6uosl4q7kmi7" path="res://Assets/Images/Vehicles/Cars/wheel2.png" id="2_48y4g"]
-[ext_resource type="Texture2D" uid="uid://ddpo5kvbjkq6j" path="res://Assets/Images/maps/carview.png" id="2_hrg02"]
 [ext_resource type="Texture2D" uid="uid://bfidlu0o8xd62" path="res://Assets/Images/Vehicles/Cars/hcroll1.png" id="2_uonho"]
 [ext_resource type="Texture2D" uid="uid://ce8pc6peh7qlj" path="res://Assets/Images/Vehicles/Cars/hcroll2.png" id="3_cvqbw"]
 [ext_resource type="Texture2D" uid="uid://x4gc6i0xc37i" path="res://Assets/Images/Vehicles/Cars/wheel3.png" id="3_w14iu"]
@@ -88,26 +87,14 @@ script = ExtResource("1_kulw5")
 [node name="Point1" type="Node2D" parent="Visual/CollisionPoints" unique_id=1495456838]
 position = Vector2(-19, -22)
 
-[node name="Sprite2D" type="Sprite2D" parent="Visual/CollisionPoints/Point1" unique_id=549617273]
-texture = ExtResource("2_hrg02")
-
 [node name="Point2" type="Node2D" parent="Visual/CollisionPoints" unique_id=1554048574]
 position = Vector2(19, -22)
-
-[node name="Sprite2D" type="Sprite2D" parent="Visual/CollisionPoints/Point2" unique_id=27185929]
-texture = ExtResource("2_hrg02")
 
 [node name="Point3" type="Node2D" parent="Visual/CollisionPoints" unique_id=542908899]
 position = Vector2(14, 18.5)
 
-[node name="Sprite2D" type="Sprite2D" parent="Visual/CollisionPoints/Point3" unique_id=2146484120]
-texture = ExtResource("2_hrg02")
-
 [node name="Point4" type="Node2D" parent="Visual/CollisionPoints" unique_id=608888366]
 position = Vector2(-14, 18.5)
-
-[node name="Sprite2D" type="Sprite2D" parent="Visual/CollisionPoints/Point4" unique_id=258476670]
-texture = ExtResource("2_hrg02")
 
 [node name="Car" type="Node2D" parent="Visual" unique_id=1493641787]
 visible = false
