@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cjtb48b01dhql"]
+
+[ext_resource type="Script" uid="uid://bfsk3nbg1ngmk" path="res://scripts/map/Props/moo_in_map.gd" id="1_8p54l"]
+[ext_resource type="Texture2D" uid="uid://bekneejfnls8i" path="res://Assets/Images/maps/Props/volleyball.png" id="2_8p54l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsd02"]
+size = Vector2(60, 60)
+
+[node name="MooInMap" type="Node2D" unique_id=1710284698]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_8p54l")
+
+[node name="Visual" type="Sprite2D" parent="." unique_id=642883593]
+texture = ExtResource("2_8p54l")
+
+[node name="CollisionPoint" type="Marker2D" parent="." unique_id=549372276]
+
+[node name="Body" type="Area2D" parent="." unique_id=1557291401]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body" unique_id=153156499]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_dsd02")

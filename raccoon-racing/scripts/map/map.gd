@@ -340,6 +340,17 @@ func InitEventInMap()->void:
         _loc3_ = _loc3_ + 1;
     _loc3_ = 0;
     #var _loc5_;
+    while(_loc3_ < BsNum):
+        _loc2_=get_node_or_null(PointsPath+'/Props/moo'+str(_loc3_)) as Marker2D
+        if(not _loc2_):
+            break;
+        var newmoo:MoveObject=preload("res://Assets/Scenes/Screens/maps/Props/MooInMap.tscn").instantiate() as MoveObject
+        newmoo.setup(self,true,true)
+        _loc2_.rotation = 0;
+        newmoo.global_position=_loc2_.global_position
+        add_child(newmoo)
+        _loc3_ = _loc3_ + 1;
+    _loc3_ = 0;
     #while(_loc3_ < this.MoO):
         #_loc2_ = this.ViewDmc.detector["Moo" + _loc3_];
         #if(!_loc2_):
