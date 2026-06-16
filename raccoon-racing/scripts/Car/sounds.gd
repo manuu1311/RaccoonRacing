@@ -40,6 +40,7 @@ var prevSpeed: Vector2=Vector2.ZERO
 @onready var ice: AudioStreamPlayer = $Ice
 @onready var use_sleep: AudioStreamPlayer = $useSleep
 @onready var oil: AudioStreamPlayer = $oil
+@onready var get_prop: AudioStreamPlayer = $GetProp
 var sounds:Array[AudioStreamPlayer]=[]
 
 # Called when the node enters the scene tree for the first time.
@@ -132,7 +133,10 @@ func playHCRunSound()->void:
 func _on_hc_add_speed_finished()->void:
     if not hc_run.is_playing():
         hc_run.play()
-        
+
+func GetProp()->void:
+    get_prop.play()   
+    
 func stopHCRunSound()->void:
     if(hc_add_speed.playing or hc_run.playing):
         hc_add_speed.stop()

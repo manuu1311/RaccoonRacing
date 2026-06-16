@@ -1098,5 +1098,5 @@ position = Vector2(259.91504, 1348.9849)
 rotation = -1.2304571
 
 [node name="moo0" type="Marker2D" parent="PointsCar/Props" unique_id=307320619]
-position = Vector2(-1122.085, -902.015)
+position = Vector2(-255.08496, -497.01505)
 rotation = -1.2304571

@@ -17,6 +17,7 @@ func _ready() -> void:
 		minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap02.tscn").instantiate()
 	minimap_instance.name = "Minimap"
 	map.add_child(minimap_instance)
+	map.deferredInit()
 	#TODO: where is it actually implemented? what are the references like?
 	for i:int in GameData.OrderInfo: 
 		var player:Player=GameData.PlayersArr[i]

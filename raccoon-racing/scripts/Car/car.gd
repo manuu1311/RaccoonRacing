@@ -26,8 +26,6 @@ var smoke_1:Resource=preload("res://Assets/Scenes/Screens/misc/smoke1.tscn")
 var smoke_2:Resource=preload("res://Assets/Scenes/Screens/misc/smoke2.tscn")
 var carView:Resource
 var carViewInstance:Sprite2D
-#minimap center position reference
-var carViewCenterPos:Vector2
 @onready var current_vehicle: GameData.VehicleType=GameData.current_vehicle
 var friction:float=0
 #state: drifting
@@ -97,6 +95,7 @@ var collisionPoints:Array[Node2D]
 var isInvincible:bool=false
 var isSmallState:bool=false
 var isResetting:bool=false
+var isUseShield:bool=false
 
 
 
@@ -125,11 +124,7 @@ func DeferredSetup()->void:
         carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
     else:
         carView=preload("res://Assets/Scenes/Screens/maps/CarViewOpp.tscn")
-    var view_sprite:Sprite2D = map.get_node("Minimap/View/MapSprite")
-    if isHovercraft():
-        carViewCenterPos=map.offsethc
-    else:
-        carViewCenterPos=map.offsetcar
+    var view_sprite:Sprite2D = map.minimap
     carViewInstance = carView.instantiate()
     view_sprite.add_child(carViewInstance)
     #set variables
@@ -367,7 +362,7 @@ func UpdateCarPos()->void:
 
 #update camera:is it necessary??
 func UpdateViewMap()->void:
-    carViewInstance.position=carViewCenterPos+global_position*map.ScaledTimes
+    carViewInstance.position=map.offset+global_position*map.ScaledTimes
     carViewInstance.rotation=rotation-PI/2
 
 func UpdateSpeed()->void:
@@ -589,6 +584,11 @@ func BeAttacked(who: Car)->void:
     else:
         speed = enemySpeed+pushvector
         who.speed = mySpeed-pushvector
+
+#TODO:implement
+##delete props in car
+func DelPropByType(id:int)->void:
+    pass
 
 #TODO: change sprites according to character
 func SetSprites()->void:

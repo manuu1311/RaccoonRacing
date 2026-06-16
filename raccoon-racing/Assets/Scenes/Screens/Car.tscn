@@ -42,6 +42,7 @@
 [ext_resource type="AudioStream" uid="uid://dg4047041kq0n" path="res://Assets/Sounds/2332_snd_Ice.mp3" id="37_bo005"]
 [ext_resource type="AudioStream" uid="uid://dgxtto25lcl3q" path="res://Assets/Sounds/2331_snd_useSleep.mp3" id="38_rual8"]
 [ext_resource type="AudioStream" uid="uid://dyj1hbsh4ocxo" path="res://Assets/Sounds/2329_snd_oil.mp3" id="39_yblkr"]
+[ext_resource type="AudioStream" uid="uid://blbcidvwm37j" path="res://Assets/Sounds/2367_snd_GetProp.mp3" id="43_hrg02"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hrg02"]
 animations = [{
@@ -258,3 +259,7 @@ stream = ExtResource("38_rual8")
 
 [node name="oil" type="AudioStreamPlayer" parent="Sounds" unique_id=1343397952]
 stream = ExtResource("39_yblkr")
+
+[node name="GetProp" type="AudioStreamPlayer" parent="Sounds" unique_id=2117472786]
+stream = ExtResource("43_hrg02")
+max_polyphony = 4

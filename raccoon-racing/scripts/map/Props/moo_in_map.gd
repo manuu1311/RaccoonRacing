@@ -13,20 +13,23 @@ var stepy:float
 var tempx:float;
 var tempy:float;
 var moveAngCar:float
+var collisions:Array[Marker2D]
 
-@onready var collision_point: Marker2D = $CollisionPoint
 @onready var body: Area2D = $Body
 
 
 func setup(mapinst:Map,ishitcar:bool,ishitwall:bool)->void:
     #change sprite
     if GameData.currentMap==0:
-        $Visual.texture=preload("res://Assets/Images/maps/Props/volleyball.png")
-        scale=Vector2(0.4,0.4)
+        $Visual.texture=preload("res://Assets/Images/maps/Props/frisbee.png")
+        scale=Vector2(0.65,0.65)
+        modulate=Color(1,1,0.66,1)
+        for i in range(4):
+            collisions.append(get_node("Collisions/CollisionPoint"+str(i+1)))
     else:
         $Visual.texture=preload("res://Assets/Images/maps/Props/moo.png")
         scale=Vector2(1.0,1.0)
-    
+        collisions.append(get_node("Collisions/CollisionPoint0"))
     map=mapinst
     IsHitCar=ishitcar
     IsHitWall=ishitwall
@@ -43,7 +46,7 @@ func _process(_delta: float) -> void:
     UpdateCarPos();
     UpdateSpeed();
     if(bsEx > 0):
-        rotation_degrees += min(bsEx,50);
+        rotation_degrees += min(bsEx,30);
         bsEx = bsEx - 1;
    
 func UpdateCarPos()->void:
@@ -78,8 +81,8 @@ func BeAttacked(Who:Car)->void:
         if(distsq < 2000):
             spring = 0.005 + 0.05 * (2000 - distsq) / 2000
         var pushvector:Vector2=dist*spring
-        speed = enemyspeed+pushvector*40
-        bsEx = 40;
+        speed = enemyspeed+pushvector*15
+        bsEx = 120;
 
 func GetHitStatus(tx:float,ty:float)->void:
     var wallAngledeg:float =GetHitStatusAng(tx,ty)
@@ -110,9 +113,9 @@ func GetHitStatus(tx:float,ty:float)->void:
             speedwallangle90+=180
         speedwallangle90=abs(speedwallangle90)
         if(poswallangle >= 0 and poswallangle < 45 or poswallangle < -135):
-            rotation_degrees+=(speed.length()+1)*0.02/map.Wallspring
+            rotation_degrees+=(speed.length()+1)*0.1/map.Wallspring
         if(poswallangle < 0 and poswallangle > -45 or poswallangle > 135):
-            rotation_degrees-=(speed.length()+1)*0.02/map.Wallspring
+            rotation_degrees-=(speed.length()+1)*0.1/map.Wallspring
         var loc1:float=wrapf(
             rad_to_deg(speedangle-wallAngle),
             -180.0,
@@ -123,7 +126,7 @@ func GetHitStatus(tx:float,ty:float)->void:
                 speedwallangle *=0.5
             speed=speed.rotated(deg_to_rad(speedwallangle))
 
-        speed*=(1-map.Wallspring*(speedwallangle90*abs(abs(poswallangle)-90)/90))
+        speed*=(1-map.Wallspring/2*(speedwallangle90*abs(abs(poswallangle)-90)/90))
         speed+=(Vector2(0.1,0).rotated(deg_to_rad(wallAngledeg+90)))
         stepx = int(speed.x * 10.0) / 10.0
         stepy = int(speed.y * 10.0) / 10.0
@@ -131,12 +134,13 @@ func GetHitStatus(tx:float,ty:float)->void:
         tempy = position.y + stepy
 
 func GetHitStatusAng(tx:float, ty:float)->float:
-    var _loc3_:Vector2 = collision_point.position
-    var _loc5_:float = tx + _loc3_.x;
-    var _loc4_:float = ty + _loc3_.y;
-    var _loc2_:EdLine = map.ed.getHitFace(Vector2(_loc5_,_loc4_));
-    if(_loc2_ != null):
-        return _loc2_.GetAngle();
+    for collpoint:Marker2D in collisions:
+        var _loc3_:Vector2 = collpoint.position
+        var _loc5_:float = tx + _loc3_.x;
+        var _loc4_:float = ty + _loc3_.y;
+        var _loc2_:EdLine = map.ed.getHitFace(Vector2(_loc5_,_loc4_));
+        if(_loc2_ != null):
+            return _loc2_.GetAngle();
     return NAN
 
 
@@ -147,7 +151,7 @@ func UpdateSpeed()->void:
     if(friction > 90):
         friction = 180 - friction;
     var dragFactor:float=(0.02 + int(friction) * 0.0008)
-    speed *= max(0.0, 1.0 - dragFactor)
+    speed *= max(0.0, 1.0 - dragFactor/2)
     if(moveAngCar < 90 and moveAngCar > 0 or moveAngCar < -90):
         dir = -1;
     else:

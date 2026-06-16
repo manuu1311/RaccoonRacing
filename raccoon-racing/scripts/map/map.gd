@@ -51,7 +51,9 @@ var canBeJumpWall:Array[int]
 #offsets useful for minimap
 var offsethc: Vector2
 var offsetcar:Vector2
+var offset:Vector2
 var PointsPath:String
+var minimap:Sprite2D
 
 func _ready() -> void:
     if GameData.current_vehicle==GameData.VehicleType.CAR:
@@ -76,7 +78,13 @@ func InitMap()->void:
     if drawcollision:
         modulate=Color(1,1,1,0.5)
         queue_redraw()
-    
+        
+func deferredInit()->void:
+    minimap=get_node("Minimap/View/MapSprite") 
+    if IsHovercraft:
+        offset=offsethc
+    else:
+        offset=offsetcar
 
 func InitStartPos()->void:
     var newmarker:Marker2D
@@ -307,23 +315,10 @@ func InitEventInMap()->void:
             break;
         var newspeed:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/SpeedInMap.tscn").instantiate() as EventInMap
         var scaled_size:Vector2=Vector2(87,89)
+        add_child(newspeed)
         newspeed.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
         _loc2_.rotation = 0;
-        add_child(newspeed)
         Events.append(newspeed)
-        _loc3_ = _loc3_ + 1;
-    _loc3_ = 0;
-    while(_loc3_ < JumpNum):
-        _loc2_=get_node_or_null(PointsPath+'/Props/jump'+str(_loc3_)) as Marker2D
-        if(not _loc2_):
-            break;
-        var newjump:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/JumpInMap.tscn").instantiate() as EventInMap
-        #hardcoded because its animated sprite2d
-        var scaled_size:Vector2 = newjump.get_node("Sprite2D").texture.get_size()
-        newjump.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
-        _loc2_.rotation = 0;
-        add_child(newjump)
-        Events.append(newjump)
         _loc3_ = _loc3_ + 1;
     _loc3_ = 0;
     while(_loc3_ < BsNum):
@@ -345,29 +340,39 @@ func InitEventInMap()->void:
         if(not _loc2_):
             break;
         var newmoo:MoveObject=preload("res://Assets/Scenes/Screens/maps/Props/MooInMap.tscn").instantiate() as MoveObject
+        add_child(newmoo)
         newmoo.setup(self,true,true)
         _loc2_.rotation = 0;
         newmoo.global_position=_loc2_.global_position
-        add_child(newmoo)
         _loc3_ = _loc3_ + 1;
     _loc3_ = 0;
-    #while(_loc3_ < this.MoO):
-        #_loc2_ = this.ViewDmc.detector["Moo" + _loc3_];
-        #if(!_loc2_):
-            #break
-        ##_loc5_ = this.PropMc.attachMovie("map_ball" + as.GameDate.GetMapId(),"map_ball" + this._game.moveObject.length,this.PropMc.getNextHighestDepth());
-        #_loc5_._x = _loc2_._x;
-        #_loc5_._y = _loc2_._y;
-        ##this._game.moveObject.push(new as.Prop.MoveObject(this._game,this,_loc5_,true,true));
-        #_loc2_.swapDepths(20000);
-        #_loc2_.removeMovieClip();
-        #_loc3_ = _loc3_ + 1;
+    while(_loc3_ < JumpNum):
+        _loc2_=get_node_or_null(PointsPath+'/Props/jump'+str(_loc3_)) as Marker2D
+        if(not _loc2_):
+            break;
+        var newjump:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/JumpInMap.tscn").instantiate() as EventInMap
+        #hardcoded because its animated sprite2d
+        var scaled_size:Vector2 = newjump.get_node("Sprite2D").texture.get_size()
+        newjump.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
+        _loc2_.rotation = 0;
+        add_child(newjump)
+        Events.append(newjump)
+        _loc3_ = _loc3_ + 1;
+    _loc3_ = 0;
     edevent.ReTidyFace();
 
     
 func AddEventInMap(event: EventInMap)->void:
       Events.append(event);
       edevent.ReTidyFace();
+#TODO:implement
+func DelEventInMap(id:int)->void:
+    var _loc2_:int = 0;
+    while(_loc2_ < Events.size()):
+        if(Events[_loc2_].edface.getId() == id):
+            Events[_loc2_].del();
+            Events.remove_at(_loc2_)
+        _loc2_ = _loc2_ + 1;
     
 @warning_ignore("narrowing_conversion")
 func StartCupMap(num:int=NAN,w:int=NAN,h:int=NAN)->void:

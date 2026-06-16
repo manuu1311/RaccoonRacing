@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://dkr4yblxtiu1e"]
+
+[ext_resource type="Script" uid="uid://diqnnhsxymc0m" path="res://scripts/map/Props/honey_bomb_in_map.gd" id="1_6j2te"]
+[ext_resource type="Texture2D" uid="uid://b32jk1cdsk473" path="res://Assets/Images/maps/Props/honeybombanim/1.png" id="2_6sr3x"]
+[ext_resource type="Texture2D" uid="uid://d0vnxlvgct1xv" path="res://Assets/Images/maps/Props/honeybombanim/2.png" id="3_8sof1"]
+[ext_resource type="Texture2D" uid="uid://cy6rkeyafvrgy" path="res://Assets/Images/maps/Props/bombeffect/1.png" id="3_qshn2"]
+[ext_resource type="Texture2D" uid="uid://c0enajdh0pug3" path="res://Assets/Images/maps/Props/honeybombanim/3.png" id="4_7wai5"]
+[ext_resource type="Texture2D" uid="uid://b13mb8l2p05w6" path="res://Assets/Images/maps/Props/bombeffect/2.png" id="4_dg6yh"]
+[ext_resource type="Texture2D" uid="uid://bftacheiplvwt" path="res://Assets/Images/maps/Props/bombeffect/3.png" id="5_6sr3x"]
+[ext_resource type="Texture2D" uid="uid://dmfruk0ocer7c" path="res://Assets/Images/maps/Props/honeybombanim/4.png" id="5_b1pit"]
+[ext_resource type="Texture2D" uid="uid://j7j2nr10u02w" path="res://Assets/Images/maps/Props/honeybombanim/5.png" id="6_0ktv4"]
+[ext_resource type="Texture2D" uid="uid://ckms3vs7uphue" path="res://Assets/Images/maps/Props/bombeffect/4.png" id="6_8sof1"]
+[ext_resource type="Texture2D" uid="uid://csbsjlgvewhhf" path="res://Assets/Images/maps/Props/bombeffect/5.png" id="7_7wai5"]
+[ext_resource type="Texture2D" uid="uid://b2k43v60qhbj8" path="res://Assets/Images/maps/Props/bombeffect/6.png" id="8_b1pit"]
+[ext_resource type="Texture2D" uid="uid://7gvx066tqyxq" path="res://Assets/Images/maps/Props/bombeffect/7.png" id="9_0ktv4"]
+[ext_resource type="Texture2D" uid="uid://3cw7j33doph5" path="res://Assets/Images/maps/Props/bombeffect/8.png" id="10_1fv3o"]
+[ext_resource type="Texture2D" uid="uid://fmxkmxji413j" path="res://Assets/Images/maps/Props/bombeffect/9.png" id="11_nvf10"]
+[ext_resource type="Texture2D" uid="uid://cbmxelldxuw4r" path="res://Assets/Images/maps/Props/bombeffect/10.png" id="12_e5vpu"]
+[ext_resource type="Texture2D" uid="uid://bd8eowkgrp8qx" path="res://Assets/Images/maps/Props/bombeffect/11.png" id="13_g7et5"]
+[ext_resource type="Texture2D" uid="uid://8wmbq2yav471" path="res://Assets/Images/maps/Props/bombeffect/12.png" id="14_isu4x"]
+[ext_resource type="Texture2D" uid="uid://cwyv285wpnbyv" path="res://Assets/Images/maps/Props/bombeffect/13.png" id="15_pqsii"]
+[ext_resource type="Texture2D" uid="uid://b56wosmysa3h6" path="res://Assets/Images/maps/Props/bombeffect/14.png" id="16_uvddm"]
+[ext_resource type="Texture2D" uid="uid://dymibfgaevit7" path="res://Assets/Images/maps/Props/bombeffect/15.png" id="17_kvfde"]
+[ext_resource type="Texture2D" uid="uid://cu3bqky47op1g" path="res://Assets/Images/maps/Props/bombeffect/16.png" id="18_lan60"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1fv3o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6sr3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8sof1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7wai5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b1pit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0ktv4")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jvtuy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qshn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dg6yh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6sr3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8sof1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7wai5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b1pit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0ktv4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_1fv3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_nvf10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_e5vpu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_g7et5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_isu4x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pqsii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_uvddm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_kvfde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_lan60")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[node name="HoneyBombInMap" type="Node2D" unique_id=1972364801]
+script = ExtResource("1_6j2te")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1855379171]
+sprite_frames = SubResource("SpriteFrames_1fv3o")
+autoplay = "default"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2041306023]
+sprite_frames = SubResource("SpriteFrames_jvtuy")
