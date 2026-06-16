@@ -1,11 +1,6 @@
 extends Node2D
 class_name  Player
 
-var isResetting:bool=false
-#star invincibility (why on player?)
-var isInvincible:bool=false
-#TODO: what is this?
-var isSmallState:bool=false
 var car: Car
 var PlayerID:int
 enum control_type{HUMAN,AI,MULTIPLAYER,RLTRAINING,RL}
@@ -14,6 +9,7 @@ var current_control:control_type
 var current_race_position:int
 ##different playering and ais(for difficulty i guess?)
 var player_type:int
+var alldistance:int
 
 func _init(id:int,control:control_type) -> void:
     PlayerID=id
@@ -36,3 +32,6 @@ func RunPropBox(x:float,y:float)->void:
     #this.PorpBoxRunTimerId = as.Timer.AddTimer(this,"GetProp",_loc2_,_loc3_);
     #this.game.uiManage.StartPropBox(_loc2_,_loc3_);
     #this.game.uiManage.propmove(x,y);
+
+func ClearPropBox(id:int=10)->void:
+    pass

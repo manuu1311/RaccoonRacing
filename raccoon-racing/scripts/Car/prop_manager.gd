@@ -3,7 +3,7 @@ class_name PropManager
 
 var IsUseShield:bool;
 var player:Player;
-var propArr:Array[int];
+var propArr:Array[Prop];
 var NowPorpId:int = 0;
 
 func PropManage(playerinst:Player)->void:
@@ -12,8 +12,8 @@ func PropManage(playerinst:Player)->void:
     IsUseShield = false;
 
 func run()->void:
-    var _loc2_:id = 0;
-    while(_loc2_ < propArr.length):
+    var _loc2_:int = 0;
+    while(_loc2_ < propArr.size()):
         propArr[_loc2_].run();
         _loc2_ = _loc2_ + 1;
 
@@ -33,7 +33,7 @@ func UseProp()->void:
             while(_loc2_ < GameData.PlayersArr.size()):
                 var newplayer:Player=GameData.PlayersArr[_loc2_]
                 if(newplayer.PlayerID != player.PlayerID):
-                    if(not newplayer.isResetting and not newplayer.isInvincible):
+                    if(not newplayer.car.isResetting and not newplayer.car.isInvincible):
                         pass
                         #TODO:sleep
                         #this.game.Players[_loc2_].prop.propArr.push(new as.Prop.PropSleep(this.game,this.game.Players[_loc2_]));
@@ -76,116 +76,75 @@ func UseProp()->void:
             ClearPropBox();
             return;
         9:
-        match(this.player.PlayerType):
-            case 0:
-                this.propArr.push(new as.Prop.PropHoneyBomb(this.game,this.player));
-                this.ClearPropBox();
-                break;
-            case 1:
-                this.propArr.push(new as.Prop.PropPetro(this.game,this.player));
-                this.NowPorpId = 8;
-                this.player.ClearPropBox(8);
-                break;
-            case 2:
-                this.propArr.push(new as.Prop.PropFurballs(this.game,this.player));
-                this.ClearPropBox();
-                break;
-            case 3:
-                this.propArr.push(new as.Prop.PropIceTrail(this.game,this.player));
-                this.ClearPropBox();
-                break;
-            case 4:
-                this.propArr.push(new as.Prop.PropBone(this.game,this.player));
-                this.ClearPropBox();
-                break;
-            case 5:
-                var j = 0;
-                while(j < this.game.Players.length)
-                {
-                    if(this.game.Players[j].Id != this.player.Id)
-                    {
-                    if(!this.game.Players[j].IsInvincible)
-                    {
-                        if(!this.game.Players[j].IsReSeting)
-                        {
-                            if(this.game.Players[j].Alldistance >= this.player.Alldistance)
-                            {
-                                _loc4_ = this.game.Players[j].myCar.Dmc._x - this.player.myCar.Dmc._x;
-                                _loc3_ = this.game.Players[j].myCar.Dmc._y - this.player.myCar.Dmc._y;
-                                _loc5_ = _loc4_ * _loc4_ + _loc3_ * _loc3_;
-                                if(_loc5_ < 100000)
-                                {
-                                this.game.Players[j].prop.propArr.push(new as.Prop.PropShrinkRay(this.game,this.game.Players[j],this.player));
-                                this.ClearPropBox();
-                                break;
-                                }
-                            }
-                        }
-                    }
-                    }
-                    j++;
-                }
-                if(j >= this.game.Players.length)
-                {
-                    this.propArr.push(new as.Prop.PropShrinkRay(this.game,this.player,null));
-                    this.ClearPropBox();
-                }
-                break;
-            default:
-                as.MessageBox.ShowMessage("Error  UseProp Playertype");
-        }
-        return;
-        default:
-        as.MessageBox.ShowMessage("Error UseProp Id");
-        return;
-    }
-}
-function ClearPropBox()
-{
-    this.NowPorpId = 0;
-    this.player.ClearPropBox();
-}
-function Delprop(prop)
-{
-    var _loc2_ = 0;
-    while(_loc2_ < this.propArr.length)
-    {
-        if(this.propArr[_loc2_] == prop)
-        {
-        this.propArr[_loc2_].del();
-        this.propArr.splice(_loc2_,1);
-        false;
-        return undefined;
-        }
+            match(player.player_type):
+                0:
+                    #this.propArr.push(new as.Prop.PropHoneyBomb(this.game,this.player));
+                    ClearPropBox();
+                1:
+                    #this.propArr.push(new as.Prop.PropPetro(this.game,this.player));
+                    NowPorpId = 8;
+                    player.ClearPropBox(8);
+                2:
+                    #this.propArr.push(new as.Prop.PropFurballs(this.game,this.player));
+                    ClearPropBox();
+                3:
+                    #this.propArr.push(new as.Prop.PropIceTrail(this.game,this.player));
+                    ClearPropBox();
+                4:
+                    #this.propArr.push(new as.Prop.PropBone(this.game,this.player));
+                    ClearPropBox();
+                5:
+                    var j:int = 0;
+                    while(j < GameData.PlayersArr.size()):
+                        var newplayer:Player=GameData.PlayersArr[j]
+                        if(newplayer.PlayerID!=player.PlayerID): 
+                            if(not newplayer.car.isResetting and not newplayer.car.isInvincible):
+                                if(newplayer.alldistance >= player.alldistance):
+                                    var dist:Vector2=newplayer.car.global_position-player.car.global_position
+                                    var distsq:float=dist.length_squared()
+                                    if(distsq < 100000):
+                                        #this.game.Players[j].prop.propArr.push(new as.Prop.PropShrinkRay(this.game,this.game.Players[j],this.player));
+                                        ClearPropBox();
+
+                        j+=1;
+                    if(j >= GameData.PlayersArr.size()):
+                        #this.propArr.push(new as.Prop.PropShrinkRay(this.game,this.player,null));
+                        ClearPropBox();
+                #default
+                _:
+                    pass
+                    #TODO:message..
+                    #as.MessageBox.ShowMessage("Error  UseProp Playertype");
+            return;
+        #default
+        _:
+            pass
+            #TODO:message=
+            #as.MessageBox.ShowMessage("Error UseProp Id");
+    return;
+
+func ClearPropBox()->void:
+    NowPorpId = 0;
+    player.ClearPropBox();
+
+
+func Delprop(prop:Prop)->void:
+    var _loc2_:int = 0;
+    while(_loc2_ < propArr.size()):
+        if(propArr[_loc2_] == prop):
+            propArr.remove_at(_loc2_)
+            return 
         _loc2_ = _loc2_ + 1;
-    }
-}
-function IsHavePropType(typeid)
-{
-    var _loc2_ = 0;
-    while(_loc2_ < this.propArr.length)
-    {
-        if(this.propArr[_loc2_].proptype == typeid)
-        {
-        return true;
-        }
-        _loc2_ = _loc2_ + 1;
-    }
-    return false;
-}
-function Delpropbytype(typeid)
-{
-    var _loc2_ = 0;
-    while(_loc2_ < this.propArr.length)
-    {
-        if(this.propArr[_loc2_].proptype == typeid)
-        {
-        this.propArr[_loc2_].del();
-        delete this.propArr[_loc2_];
-        this.propArr.splice(_loc2_,1);
-        _loc2_ = _loc2_ - 1;
-        }
-        _loc2_ = _loc2_ + 1;
-    }
-}
-}
+
+func IsHavePropType(typeid:int)->bool:
+    for prop in propArr:
+        if prop.proptype == typeid:
+            return true
+    return false
+
+
+func del_prop_by_type(type_id: int) -> void:
+    for i in range(propArr.size() - 1, -1, -1):
+        if propArr[i].proptype == type_id:
+            propArr[i].del()
+            propArr.remove_at(i)
