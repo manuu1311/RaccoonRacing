@@ -21,6 +21,6 @@ func _process(_delta: float) -> void:
 			player.car.Backward()
 		else:
 			player.car.Clearward()
-		if Input.is_key_pressed(KEY_SPACE) or Input.is_key_pressed(KEY_Z):
+		if Input.is_action_just_released("Special"):
 			player.UseProp()
-	player.car.Update()
+	player.Update()

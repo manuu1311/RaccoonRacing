@@ -12,13 +12,12 @@ func _init(playerinst:Player)->void:
     IsUseShield = false;
 
 func run()->void:
-    var _loc2_:int = 0;
-    while(_loc2_ < propArr.size()):
-        propArr[_loc2_].run();
-        _loc2_ = _loc2_ + 1;
+    for propinst:Prop in propArr:
+        propinst.run()
 
 
 func UseProp()->void:
+    print('gotit',NowPorpId)
     var _loc2_:int;
     match(NowPorpId):
         0:
@@ -71,26 +70,26 @@ func UseProp()->void:
             ClearPropBox();
             return;
         8:
-            #TODO:boost
-            #this.propArr.push(new as.Prop.PropPetro(this.game,this.player));
+            propArr.append(PetroProp.new(player))
             ClearPropBox();
             return;
         9:
-            match(player.player_type):
-                0:
-                    #this.propArr.push(new as.Prop.PropHoneyBomb(this.game,this.player));
-                    ClearPropBox();
+            match(player.charid):
                 1:
-                    #this.propArr.push(new as.Prop.PropPetro(this.game,this.player));
+                    print('yaa')
+                    propArr.append(PetroProp.new(player))
                     NowPorpId = 8;
                     player.ClearPropBox(8);
                 2:
                     #this.propArr.push(new as.Prop.PropFurballs(this.game,this.player));
                     ClearPropBox();
                 3:
-                    #this.propArr.push(new as.Prop.PropIceTrail(this.game,this.player));
+                    #this.propArr.push(new as.Prop.PropHoneyBomb(this.game,this.player));
                     ClearPropBox();
                 4:
+                    #this.propArr.push(new as.Prop.PropIceTrail(this.game,this.player));
+                    ClearPropBox();
+                5:
                     #this.propArr.push(new as.Prop.PropBone(this.game,this.player));
                     ClearPropBox();
                 5:
@@ -125,7 +124,7 @@ func UseProp()->void:
 
 func ClearPropBox()->void:
     NowPorpId = 0;
-    player.ClearPropBox();
+    player.ClearPropBox(NowPorpId);
 
 
 func Delprop(prop:Prop)->void:

@@ -3,12 +3,13 @@ class_name Prop
 
 
 var player:Player;
+var proptype:int
 
-func setup(playerinst:Player)->void:
-    player = playerinst;
+func _init(playerinst:Player)->void:
+	player = playerinst;
 
 func run()->void:
-    pass
+	pass
 
 func del()->void:
-    pass
+	pass

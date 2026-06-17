@@ -28,6 +28,7 @@ var smoke_2:Resource=preload("res://Assets/Scenes/Screens/misc/smoke2.tscn")
 var carView:Resource
 var carViewInstance:Sprite2D
 @onready var current_vehicle: GameData.VehicleType=GameData.current_vehicle
+@onready var prop_effector: PropEffector = $PropEffector
 var friction:float=0
 #state: drifting
 var bs:bool=false
