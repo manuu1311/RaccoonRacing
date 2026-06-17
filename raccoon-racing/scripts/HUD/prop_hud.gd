@@ -18,6 +18,7 @@ var propoksound:AudioStream=preload("res://Assets/Sounds/2370_snd_PropBoxOk.mp3"
 @onready var shaderplayer: AnimationPlayer = $Control/shaderplayer
 @onready var icon: AnimatedSprite2D = $Control/Icon
 @onready var shiny: AnimatedSprite2D = $Control/Shiny
+signal prop_visible
 
 
 
@@ -62,6 +63,7 @@ func RunPropBox()->void:
 		icon.frame=PropId
 		timer.stop()
 		itemready=true	
+		prop_visible.emit()
 		return
 		
 func propmove(x:float,y:float)->void:

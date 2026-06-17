@@ -26,11 +26,11 @@ var OrderInfo:Array[int]=[]
 func _ready() -> void:
 	PlayersArr.append(Player.new(0,Player.control_type.HUMAN))
 	OrderInfo.append(0)
-	PlayersArr.append(Player.new(1,Player.control_type.AI))
+	PlayersArr.append(AIPlayer.new(1,Player.control_type.AI))
 	OrderInfo.append(1)
-	PlayersArr.append(Player.new(2,Player.control_type.AI))
+	PlayersArr.append(AIPlayer.new(2,Player.control_type.AI))
 	OrderInfo.append(2)
-	PlayersArr.append(Player.new(3,Player.control_type.AI))
+	PlayersArr.append(AIPlayer.new(3,Player.control_type.AI))
 	OrderInfo.append(3)
 
 #update character locks, to unlock new characters after each cup

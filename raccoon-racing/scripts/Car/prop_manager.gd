@@ -17,7 +17,6 @@ func run()->void:
 
 
 func UseProp()->void:
-    print('gotit',NowPorpId)
     var _loc2_:int;
     match(NowPorpId):
         0:
@@ -76,7 +75,6 @@ func UseProp()->void:
         9:
             match(player.charid):
                 1:
-                    print('yaa')
                     propArr.append(PetroProp.new(player))
                     NowPorpId = 8;
                     player.ClearPropBox(8);

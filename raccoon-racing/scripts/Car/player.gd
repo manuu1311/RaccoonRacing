@@ -13,14 +13,17 @@ var current_race_position:int
 var alldistance:int
 var prop:PropManager
 var PropBoxRunTimerId:int=-1
+var CanUseProp:bool=false
 
 func _init(id:int,control:control_type) -> void:
     PlayerID=id
     current_control=control
     prop=PropManager.new(self)
+    
 
 func SetCar(carinst:Car)->void:
     car=carinst
+    car.prop_hud.prop_visible.connect(ResetUse)
 
 func IsPlayering()->bool:
     return current_control==control_type.HUMAN
@@ -59,7 +62,10 @@ func GetPropPer()->int:
     return 9
     #return randi_range(0,8)
 
+func ResetUse()->void:
+    CanUseProp=true
 
 func UseProp()->void:
-    if(IsPlayering() && not car.isSleep):
+    if(IsPlayering() && not car.isSleep and CanUseProp):
         prop.UseProp()
+        CanUseProp=false
