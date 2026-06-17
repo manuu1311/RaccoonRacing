@@ -22,6 +22,7 @@ func run()->void:
 func delme()->void:
     await player.car.get_tree().create_timer(UseTime).timeout
     player.ResetUse()
+    player.car.prop_effector.StopPetro()
     if is_instance_valid(self):
         player.prop.Delprop(self);
 

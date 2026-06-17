@@ -210,7 +210,8 @@ func playShieldSound()->void:
     shield.play()
     
 func playPetroSound()->void:
-    petro.play()
+    if not petro.playing:
+        petro.play()
     
     
 func playBeSleepSound()->void:

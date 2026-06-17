@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://c34nd747ob86i"]
+
+[ext_resource type="Script" uid="uid://bycmd5gtpiixo" path="res://scripts/Car/Props/petro_effect.gd" id="1_6xasm"]
+[ext_resource type="Texture2D" uid="uid://br1uflkfiu016" path="res://Assets/Images/Vehicles/PropEffects/Petro/Ball/1.png" id="1_r5pnj"]
+[ext_resource type="Texture2D" uid="uid://wfo7wj8mtojj" path="res://Assets/Images/Vehicles/PropEffects/Petro/Ball/2.png" id="2_6xasm"]
+[ext_resource type="Texture2D" uid="uid://dya4qshva3gow" path="res://Assets/Images/Vehicles/PropEffects/Petro/Ball/3.png" id="3_an6si"]
+[ext_resource type="Texture2D" uid="uid://rqgehpt6hp6d" path="res://Assets/Images/Vehicles/PropEffects/Petro/Ball/4.png" id="4_e6oh4"]
+[ext_resource type="Texture2D" uid="uid://cpdw67o6bbhh6" path="res://Assets/Images/Vehicles/PropEffects/Petro/Ball/5.png" id="5_j4sli"]
+[ext_resource type="Texture2D" uid="uid://24syxl3nnekv" path="res://Assets/Images/Vehicles/PropEffects/Petro/Ball/6.png" id="6_gmqtp"]
+[ext_resource type="Texture2D" uid="uid://dv7n8w6jfyg5f" path="res://Assets/Images/Vehicles/PropEffects/Petro/Ball/7.png" id="7_nxkj3"]
+[ext_resource type="Texture2D" uid="uid://dhhq1lotd537f" path="res://Assets/Images/Vehicles/PropEffects/Petro/CarBoost/1.png" id="8_jrjgl"]
+[ext_resource type="Texture2D" uid="uid://c5rv0ekmhhx5q" path="res://Assets/Images/Vehicles/PropEffects/Petro/CarBoost/2.png" id="9_q42lf"]
+[ext_resource type="Texture2D" uid="uid://sdxyh8an35p8" path="res://Assets/Images/Vehicles/PropEffects/Petro/CarBoost/3.png" id="10_bcilb"]
+[ext_resource type="Texture2D" uid="uid://cdt36bp8omijk" path="res://Assets/Images/Vehicles/PropEffects/Petro/CarBoost/4.png" id="11_x6wkg"]
+[ext_resource type="Texture2D" uid="uid://d386pveifgr1k" path="res://Assets/Images/Vehicles/PropEffects/Petro/CarBoost/5.png" id="12_wu7sn"]
+[ext_resource type="Texture2D" uid="uid://bt8mu0hxggb26" path="res://Assets/Images/Vehicles/PropEffects/Petro/CarBoost/6.png" id="13_u82a6"]
+[ext_resource type="Texture2D" uid="uid://d4a86gdw16qw" path="res://Assets/Images/Vehicles/PropEffects/Petro/CarBoost/7.png" id="14_w7ja0"]
+[ext_resource type="Texture2D" uid="uid://dll1vpstxvmhl" path="res://Assets/Images/Vehicles/PropEffects/Petro/HCBoost/1.png" id="15_1bpoc"]
+[ext_resource type="Texture2D" uid="uid://lv8qttdl0kl2" path="res://Assets/Images/Vehicles/PropEffects/Petro/HCBoost/2.png" id="16_o7clo"]
+[ext_resource type="Texture2D" uid="uid://bc81rbqyof0jn" path="res://Assets/Images/Vehicles/PropEffects/Petro/HCBoost/3.png" id="17_3gt54"]
+[ext_resource type="Texture2D" uid="uid://b8t5hyk761gsb" path="res://Assets/Images/Vehicles/PropEffects/Petro/HCBoost/4.png" id="18_36rd5"]
+[ext_resource type="Texture2D" uid="uid://d02vp47nb5yor" path="res://Assets/Images/Vehicles/PropEffects/Petro/HCBoost/5.png" id="19_gigxv"]
+[ext_resource type="Texture2D" uid="uid://cny6jlfd2q7dh" path="res://Assets/Images/Vehicles/PropEffects/Petro/HCBoost/6.png" id="20_h7x58"]
+[ext_resource type="Texture2D" uid="uid://dplc2kuixveg8" path="res://Assets/Images/Vehicles/PropEffects/Petro/HCBoost/7.png" id="21_uxem7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ro766"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_1bpoc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_o7clo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_3gt54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_36rd5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_gigxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_h7x58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_uxem7")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4usax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_jrjgl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_q42lf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_bcilb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_x6wkg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_wu7sn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_u82a6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_w7ja0")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gfkhw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r5pnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6xasm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_an6si")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e6oh4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_j4sli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gmqtp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nxkj3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[node name="Petro" type="Node2D" unique_id=235573505]
+script = ExtResource("1_6xasm")
+
+[node name="HCBoost" type="AnimatedSprite2D" parent="." unique_id=97638986]
+visible = false
+position = Vector2(0, 48)
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_ro766")
+
+[node name="CarBoost" type="AnimatedSprite2D" parent="." unique_id=1340618399]
+position = Vector2(0, 48)
+rotation = -1.5707964
+sprite_frames = SubResource("SpriteFrames_4usax")
+
+[node name="Ball" type="AnimatedSprite2D" parent="." unique_id=127445746]
+position = Vector2(0, 8.33)
+sprite_frames = SubResource("SpriteFrames_gfkhw")
