@@ -6,7 +6,7 @@ var player:Player;
 var propArr:Array[Prop];
 var NowPorpId:int = 0;
 
-func PropManage(playerinst:Player)->void:
+func _init(playerinst:Player)->void:
     player = playerinst;
     propArr = []
     IsUseShield = false;

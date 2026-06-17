@@ -1,7 +1,7 @@
 extends Node
 class_name CarController
 
-var car:Car
+var player:Player
 
-func _init(carinst:Car) -> void:
-	car=carinst
+func _init(playerinst:Player) -> void:
+	player=playerinst

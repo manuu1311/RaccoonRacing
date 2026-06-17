@@ -43,6 +43,7 @@
 [ext_resource type="AudioStream" uid="uid://dgxtto25lcl3q" path="res://Assets/Sounds/2331_snd_useSleep.mp3" id="38_rual8"]
 [ext_resource type="AudioStream" uid="uid://dyj1hbsh4ocxo" path="res://Assets/Sounds/2329_snd_oil.mp3" id="39_yblkr"]
 [ext_resource type="AudioStream" uid="uid://blbcidvwm37j" path="res://Assets/Sounds/2367_snd_GetProp.mp3" id="43_hrg02"]
+[ext_resource type="PackedScene" uid="uid://c571ojyvvjnqr" path="res://Assets/Scenes/Screens/HUD/PropHUD.tscn" id="44_nbhsi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hrg02"]
 animations = [{
@@ -263,3 +264,5 @@ stream = ExtResource("39_yblkr")
 [node name="GetProp" type="AudioStreamPlayer" parent="Sounds" unique_id=2117472786]
 stream = ExtResource("43_hrg02")
 max_polyphony = 4
+
+[node name="PropHud" parent="." unique_id=1104215152 instance=ExtResource("44_nbhsi")]

@@ -24,14 +24,14 @@ func _ready() -> void:
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
 		if player.IsPlayering():
 			carinstance.setup(map,player.PlayerID,true)
-			carinstance.add_child(HumanCarController.new(carinstance))
+			carinstance.add_child(HumanCarController.new(player))
 			Game.fcsCar=carinstance
 		else:
 			carinstance.setup(map,player.PlayerID,false)
-			carinstance.add_child(AICarController.new(carinstance))
+			carinstance.add_child(AICarController.new(player))
 		add_child(carinstance)
 		carinstance.global_position=map.StartPosArr[i].global_position
-		player.car=carinstance
+		player.SetCar(carinstance)
 
 	
 	

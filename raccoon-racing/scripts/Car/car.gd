@@ -2,6 +2,7 @@ extends Node2D
 class_name Car
 
 
+@onready var prop_hud: PropHud = $PropHud
 @onready var fl: AnimatedSprite2D = $Visual/Car/Wheels/FL
 @onready var fr: AnimatedSprite2D = $Visual/Car/Wheels/FR
 @onready var rl: AnimatedSprite2D = $Visual/Car/Wheels/RL
@@ -132,6 +133,8 @@ func DeferredSetup()->void:
     rollGratingNum=map.RollGratingNum
     glideGratingNum=map.GlideGratingNum
     grassGratingNum=map.GrassGratingNum
+    #hud setup
+    prop_hud.DeferredInit(GameData.PlayersArr[playerID].charid)
     
     
 func PopulateCollisions()->void:

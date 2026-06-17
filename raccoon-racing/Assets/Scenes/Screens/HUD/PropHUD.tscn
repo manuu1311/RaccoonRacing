@@ -1,0 +1,304 @@
+[gd_scene format=3 uid="uid://c571ojyvvjnqr"]
+
+[ext_resource type="Script" uid="uid://bo82hnkalecqc" path="res://scripts/HUD/prop_hud.gd" id="1_qv0in"]
+[ext_resource type="AudioStream" uid="uid://qcqcad4ohxh3" path="res://Assets/Sounds/2369_snd_PropBoxRun.mp3" id="2_4ljhm"]
+[ext_resource type="Texture2D" uid="uid://dxx43nvumvd7o" path="res://Assets/Images/hud/Prop/box.png" id="3_ly58y"]
+[ext_resource type="Texture2D" uid="uid://bf5y420erixtw" path="res://Assets/Images/maps/shapes/179.png" id="4_5tw6s"]
+[ext_resource type="Texture2D" uid="uid://d3ppat8kw1cxc" path="res://Assets/Images/maps/shapes/181.png" id="5_d28ny"]
+[ext_resource type="Texture2D" uid="uid://b4bcjcdfsuhy" path="res://Assets/Images/maps/shapes/183.png" id="6_rct78"]
+[ext_resource type="Texture2D" uid="uid://dtffiktela6j6" path="res://Assets/Images/maps/shapes/185.png" id="7_0jc17"]
+[ext_resource type="Texture2D" uid="uid://h5u1ptwgxakd" path="res://Assets/Images/hud/Prop/shine_effect/186.png" id="8_4r0kv"]
+[ext_resource type="Texture2D" uid="uid://blf8m3561dpbr" path="res://Assets/Images/hud/Prop/Icons/149.png" id="9_ovnim"]
+[ext_resource type="Texture2D" uid="uid://dl8me64twj1aw" path="res://Assets/Images/hud/Prop/Icons/151.png" id="10_g4i6o"]
+[ext_resource type="Texture2D" uid="uid://d2qivkvamhwhy" path="res://Assets/Images/hud/Prop/Icons/153.png" id="11_17dvd"]
+[ext_resource type="Texture2D" uid="uid://c1vxasgitc5mw" path="res://Assets/Images/hud/Prop/Icons/155.png" id="12_2uuci"]
+[ext_resource type="Texture2D" uid="uid://cxoqfvalob6le" path="res://Assets/Images/hud/Prop/Icons/157.png" id="13_xu5ik"]
+[ext_resource type="Texture2D" uid="uid://b8m3wxb2kloua" path="res://Assets/Images/hud/Prop/Icons/159.png" id="14_kikre"]
+[ext_resource type="Texture2D" uid="uid://tvu7g14ytj0f" path="res://Assets/Images/hud/Prop/Icons/161.png" id="15_8xrt8"]
+[ext_resource type="Texture2D" uid="uid://jyhtmw37c6ny" path="res://Assets/Images/hud/Prop/Icons/163.png" id="16_k54r1"]
+[ext_resource type="Texture2D" uid="uid://gxgoijjbjxka" path="res://Assets/Images/maps/Props/cube.png" id="17_2066p"]
+
+[sub_resource type="Animation" id="Animation_ly58y"]
+resource_name = "Appear"
+length = 0.40000287
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.22857143, 0.25714287, 0.2857143, 0.31428573, 0.34285715, 0.37142858),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -109), Vector2(0, 0), Vector2(0, -10), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_d28ny"]
+resource_name = "Disappear"
+length = 0.08571714
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08571429),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -109)]
+}
+
+[sub_resource type="Animation" id="Animation_5tw6s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../propmove:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../propmove:material:shader_parameter/effect_strength")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../propmove:material:shader_parameter/blur_amount")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, 25)]
+}
+
+[sub_resource type="Animation" id="Animation_4tshs"]
+resource_name = "propmove"
+length = 0.22857429
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../propmove:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22857143),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="Animation" id="Animation_2066p"]
+resource_name = "shader"
+length = 0.45714572
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../propmove:material:shader_parameter/effect_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.31428573, 0.45714286),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../propmove:material:shader_parameter/blur_amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.22857143, 0.45714286),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.86, 0.86), Vector2(0, 0), Vector2(25, 25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d28ny"]
+_data = {
+&"Appear": SubResource("Animation_ly58y"),
+&"Disappear": SubResource("Animation_d28ny"),
+&"RESET": SubResource("Animation_5tw6s"),
+&"propmove": SubResource("Animation_4tshs"),
+&"shader": SubResource("Animation_2066p")
+}
+
+[sub_resource type="Shader" id="Shader_w65gf"]
+code = "shader_type canvas_item;
+
+uniform float effect_strength : hint_range(0.0, 1.0) = 0.0;
+uniform vec2 blur_amount = vec2(25.0, 25.0);
+uniform vec4 mult_term = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 add_term = vec4(1.0, 1.0, 1.0, 0.0);
+
+// Number of samples per axis — increase for quality, costs performance
+const int SAMPLES = 4;
+
+void fragment() {
+    vec2 tex_size = vec2(textureSize(TEXTURE, 0));
+    vec2 current_blur = (blur_amount / tex_size) * effect_strength;
+
+    vec4 blurred_color = vec4(0.0);
+    float total_weight = 0.0;
+
+    // Sweep uniformly across the full blur radius (not just at the edges)
+    for (int x = -SAMPLES; x <= SAMPLES; x++) {
+        for (int y = -SAMPLES; y <= SAMPLES; y++) {
+            vec2 offset = (vec2(float(x), float(y)) / float(SAMPLES)) * current_blur;
+            blurred_color += texture(TEXTURE, UV + offset);
+            total_weight += 1.0;
+        }
+    }
+    blurred_color /= total_weight;
+
+    // Your color transform (unchanged)
+    vec4 flash_color = blurred_color * mult_term;
+    flash_color.rgb += add_term.rgb * blurred_color.a;
+    flash_color.a += add_term.a;
+    flash_color = clamp(flash_color, 0.0, 1.0);
+
+    vec4 original_color = texture(TEXTURE, UV);
+    COLOR = mix(original_color, flash_color, effect_strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6lxvn"]
+shader = SubResource("Shader_w65gf")
+shader_parameter/effect_strength = 0.0
+shader_parameter/blur_amount = Vector2(25, 25)
+shader_parameter/mult_term = Vector4(0, 0, 0, 1)
+shader_parameter/add_term = Vector4(1, 1, 1, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ls7wu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ovnim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_g4i6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_17dvd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2uuci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_xu5ik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_kikre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_8xrt8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_k54r1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3yhn6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5tw6s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_d28ny")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rct78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0jc17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4r0kv")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[node name="PropHud" type="CanvasLayer" unique_id=1104215152]
+script = ExtResource("1_qv0in")
+
+[node name="PropBoxRun" type="AudioStreamPlayer" parent="." unique_id=1741382320]
+stream = ExtResource("2_4ljhm")
+
+[node name="Timer" type="Timer" parent="." unique_id=1324673907]
+wait_time = 0.05
+
+[node name="Control" type="Node2D" parent="." unique_id=304001713]
+position = Vector2(250, 51.965)
+
+[node name="Visual" type="Node2D" parent="Control" unique_id=156729835]
+
+[node name="Box" type="Sprite2D" parent="Control/Visual" unique_id=1592081584]
+texture = ExtResource("3_ly58y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Visual" unique_id=1032233705]
+libraries/ = SubResource("AnimationLibrary_d28ny")
+autoplay = &"Appear"
+
+[node name="propmove" type="Sprite2D" parent="Control" unique_id=1234583628]
+texture_filter = 2
+material = SubResource("ShaderMaterial_6lxvn")
+position = Vector2(-8, 110.035)
+texture = ExtResource("17_2066p")
+
+[node name="propmoveplayer" type="AnimationPlayer" parent="Control" unique_id=102626058]
+root_node = NodePath("../Visual")
+libraries/ = SubResource("AnimationLibrary_d28ny")
+autoplay = &"propmove"
+
+[node name="shaderplayer" type="AnimationPlayer" parent="Control" unique_id=524617367]
+root_node = NodePath("../Visual")
+libraries/ = SubResource("AnimationLibrary_d28ny")
+
+[node name="Icon" type="AnimatedSprite2D" parent="Control" unique_id=1579730704]
+sprite_frames = SubResource("SpriteFrames_ls7wu")
+
+[node name="Shiny" type="AnimatedSprite2D" parent="Control" unique_id=507432389]
+sprite_frames = SubResource("SpriteFrames_3yhn6")
+frame = 4
+frame_progress = 1.0
