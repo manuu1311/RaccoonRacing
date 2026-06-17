@@ -32,7 +32,6 @@ func DeferredInit(id: int)->void:
 	var charicon:Texture2D = load("res://Assets/Images/hud/Prop/Icons/"+str(charid)+".png")
 	icon.sprite_frames.add_frame("default",charicon)
 
-#TODO: finish implementation
 func StartPropBox(runtime:float,id:int):
 	PlayPropRun()
 	if itemready or PropId!=-1:
@@ -75,17 +74,18 @@ func propmove(x:float,y:float)->void:
 	propparticle.show()
 	propparticle.global_position = pos
 	propparticle.scale = Vector2(0.5, 0.5) 
-	
 	# Calculate a middle peak
 	var xoffset:int=randi_range(-200,200)
-	var yoffset:int=randi_range(25,150)
+	var yoffset:int=randi_range(50,150)
 	var mid_pos:Vector2 = pos + Vector2(xoffset,yoffset) 
 	
 	activetween=create_tween()
 
-	activetween.tween_property(propparticle, "global_position", mid_pos, 0.3)\
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	activetween.parallel().tween_property(propparticle, "scale", Vector2(1.2, 1.2), 0.3)\
+	activetween.tween_property(propparticle, "global_position:x", mid_pos.x, 0.3)\
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	activetween.parallel().tween_property(propparticle, "global_position:y", mid_pos.y, 0.3)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	activetween.parallel().tween_property(propparticle, "scale", Vector2(0.75, 0.75), 0.3)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 	var fly_duration: float = 0.2
@@ -127,6 +127,6 @@ func PlayPropOk()->void:
 func PropUsed()->void:
 	PropId=-1
 	itemready=false
-	hide()
+	animation_player.play("Disappear")
 	icon.hide()
-	propparticle.hide()
+	#propparticle.hide()
