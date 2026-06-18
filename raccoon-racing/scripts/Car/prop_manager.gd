@@ -44,8 +44,7 @@ func UseProp()->void:
             ClearPropBox();
             return
         3:
-            #TODO:shield
-            #this.propArr.push(new as.Prop.PropShield(this.game,this.player));
+            propArr.append(ShieldProp.new(player))
             ClearPropBox();
             return;
         4:

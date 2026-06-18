@@ -5,6 +5,7 @@ class_name PropEffector
 const effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
 var IsHovercraft:bool
 @onready var invincible: AnimatedSprite2D = $"../Visual/TopEffect/Invincible"
+@onready var shield: AnimatedSprite2D = $"../Visual/TopEffect/Shield"
 
 func _ready() -> void:
     IsHovercraft=car.isHovercraft()
@@ -39,4 +40,10 @@ func StopInvincible()->void:
     invincible.hide()
     invincible.stop()
     
+ 
+func AddShield()->void:
+    shield.play("default")
+    car.sounds.playShieldSound()
     
+func RemoveShield()->void:
+    shield.play("fade")   

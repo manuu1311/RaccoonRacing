@@ -13,59 +13,91 @@
 [ext_resource type="Script" uid="uid://dleyhiypnj2yx" path="res://scripts/Car/sounds.gd" id="8_fa25q"]
 [ext_resource type="AudioStream" uid="uid://dqxms3hqbr08r" path="res://Assets/Sounds/2359_snd_CarFastSpeed.mp3" id="9_oogh6"]
 [ext_resource type="AudioStream" uid="uid://bkipakueggswe" path="res://Assets/Sounds/2361_snd_CarRunSpeed (mp3cut.net).wav" id="10_vi2p3"]
+[ext_resource type="Texture2D" uid="uid://kbq4uf2mxq0h" path="res://Assets/Images/Vehicles/PropEffects/Shield/1.png" id="11_p73u4"]
 [ext_resource type="Texture2D" uid="uid://cy4pi6484vnle" path="res://Assets/Images/Vehicles/PropEffects/Invincible/1.png" id="11_t1hys"]
 [ext_resource type="AudioStream" uid="uid://c178lr16jl11k" path="res://Assets/Sounds/2363_snd_CarAddSpeed.mp3" id="11_vryto"]
 [ext_resource type="Texture2D" uid="uid://ctbsey6bkvbcf" path="res://Assets/Images/Vehicles/PropEffects/Invincible/2.png" id="12_g5aty"]
+[ext_resource type="Texture2D" uid="uid://bqnhf2hx7n75q" path="res://Assets/Images/Vehicles/PropEffects/Shield/2.png" id="12_impm6"]
 [ext_resource type="AudioStream" uid="uid://cqtbfp3t68fl4" path="res://Assets/Sounds/2362_snd_CarLostSpeed.mp3" id="12_ygac3"]
 [ext_resource type="Texture2D" uid="uid://dg8hmqtxoi6oj" path="res://Assets/Images/Vehicles/PropEffects/Invincible/3.png" id="13_7naah"]
+[ext_resource type="Texture2D" uid="uid://b2mjf7xbk6qu3" path="res://Assets/Images/Vehicles/PropEffects/Shield/3.png" id="13_x7emf"]
 [ext_resource type="AudioStream" uid="uid://63daa3iaifgl" path="res://Assets/Sounds/2357_snd_CarBs.mp3" id="13_ydqe7"]
 [ext_resource type="AudioStream" uid="uid://bdsrgtq7oo8pw" path="res://Assets/Sounds/2356_snd_CarSmallBs.mp3" id="14_goohx"]
 [ext_resource type="Texture2D" uid="uid://qglrxtkw3wsf" path="res://Assets/Images/Vehicles/PropEffects/Invincible/4.png" id="14_l5uxh"]
+[ext_resource type="Texture2D" uid="uid://5o8cuuiimfub" path="res://Assets/Images/Vehicles/PropEffects/Shield/4.png" id="14_u0hq8"]
+[ext_resource type="Texture2D" uid="uid://dy5x0fqn8vn8k" path="res://Assets/Images/Vehicles/PropEffects/Shield/5.png" id="15_2ogls"]
 [ext_resource type="Texture2D" uid="uid://cyqyb2gajwb61" path="res://Assets/Images/Vehicles/PropEffects/Invincible/5.png" id="15_oymt8"]
 [ext_resource type="AudioStream" uid="uid://bigsua0b6i2l8" path="res://Assets/Sounds/2353_snd_HCAddSpeed.mp3" id="15_u1cwy"]
+[ext_resource type="Texture2D" uid="uid://6vkmhqrujvaf" path="res://Assets/Images/Vehicles/PropEffects/Shield/6.png" id="16_60v8o"]
 [ext_resource type="AudioStream" uid="uid://crps431ckqi82" path="res://Assets/Sounds/2348_snd_HCRun.mp3" id="16_ix02f"]
 [ext_resource type="Texture2D" uid="uid://l4kw8cehburu" path="res://Assets/Images/Vehicles/PropEffects/Invincible/6.png" id="16_ltjf2"]
+[ext_resource type="Texture2D" uid="uid://db4lwcsh4ct8x" path="res://Assets/Images/Vehicles/PropEffects/Shield/7.png" id="17_j4yar"]
 [ext_resource type="AudioStream" uid="uid://dh15qshwyy2r6" path="res://Assets/Sounds/2352_snd_HCLostSpeed.mp3" id="17_rt3ho"]
 [ext_resource type="Texture2D" uid="uid://dpuis5e058dg5" path="res://Assets/Images/Vehicles/PropEffects/Invincible/7.png" id="17_w5wt2"]
+[ext_resource type="Texture2D" uid="uid://bvu21xvlt4gr4" path="res://Assets/Images/Vehicles/PropEffects/Shield/8.png" id="18_p2ijm"]
 [ext_resource type="Texture2D" uid="uid://d4dby6u0tauh0" path="res://Assets/Images/Vehicles/PropEffects/Invincible/8.png" id="18_rs6ql"]
 [ext_resource type="AudioStream" uid="uid://s23w1l5eaoas" path="res://Assets/Sounds/2360_snd_CarStop.mp3" id="18_vi2p3"]
 [ext_resource type="Texture2D" uid="uid://dp2paip7y6orv" path="res://Assets/Images/Vehicles/PropEffects/Invincible/9.png" id="19_jbwoq"]
 [ext_resource type="AudioStream" uid="uid://8dcdqxjg2u1o" path="res://Assets/Sounds/2330_snd_Jump.mp3" id="19_uonho"]
+[ext_resource type="Texture2D" uid="uid://y6j0hjtb0qpi" path="res://Assets/Images/Vehicles/PropEffects/Shield/9.png" id="19_we1h4"]
+[ext_resource type="Texture2D" uid="uid://w75vq6i8ux1h" path="res://Assets/Images/Vehicles/PropEffects/Shield/10.png" id="20_2b1x6"]
 [ext_resource type="AudioStream" uid="uid://yblj5bymkfma" path="res://Assets/Sounds/1_snd_HCJump.mp3" id="20_cvqbw"]
 [ext_resource type="Texture2D" uid="uid://bmg14uvsb4s4v" path="res://Assets/Images/Vehicles/PropEffects/Invincible/10.png" id="20_pgolu"]
 [ext_resource type="AudioStream" uid="uid://yqcft152ygqs" path="res://Assets/Sounds/2346_snd_HCbump.mp3" id="21_et7sh"]
 [ext_resource type="Texture2D" uid="uid://b51wv2vn5o5u7" path="res://Assets/Images/Vehicles/PropEffects/Invincible/11.png" id="21_myila"]
+[ext_resource type="Texture2D" uid="uid://o658uvk3ngk0" path="res://Assets/Images/Vehicles/PropEffects/Shield/11.png" id="21_xpdxn"]
+[ext_resource type="Texture2D" uid="uid://d31il85lkjg7s" path="res://Assets/Images/Vehicles/PropEffects/Shield/12.png" id="22_ah6lx"]
 [ext_resource type="AudioStream" uid="uid://dr20w68u5bv23" path="res://Assets/Sounds/2354_snd_Carbump.mp3" id="22_hrg02"]
 [ext_resource type="Texture2D" uid="uid://coj6rmqe70anr" path="res://Assets/Images/Vehicles/PropEffects/Invincible/12.png" id="22_ww84v"]
 [ext_resource type="Texture2D" uid="uid://buiuuk1a2uk1i" path="res://Assets/Images/Vehicles/PropEffects/Invincible/13.png" id="23_byfph"]
+[ext_resource type="Texture2D" uid="uid://btokg1yao3ar6" path="res://Assets/Images/Vehicles/PropEffects/Shield/13.png" id="23_fj1e4"]
 [ext_resource type="AudioStream" uid="uid://b8ruxikri57de" path="res://Assets/Sounds/2343_snd_Missile.mp3" id="23_nbhsi"]
 [ext_resource type="Texture2D" uid="uid://drekintnlq0a1" path="res://Assets/Images/Vehicles/PropEffects/Invincible/14.png" id="24_cc2dh"]
+[ext_resource type="Texture2D" uid="uid://5ilino55pvlt" path="res://Assets/Images/Vehicles/PropEffects/Shield/14.png" id="24_t3qre"]
 [ext_resource type="AudioStream" uid="uid://dyb0l68ngxdp1" path="res://Assets/Sounds/2347_snd_HCEndJump.mp3" id="24_y3ihi"]
+[ext_resource type="Texture2D" uid="uid://dhqwo51i8y57u" path="res://Assets/Images/Vehicles/PropEffects/Shield/15.png" id="25_sc3hc"]
 [ext_resource type="AudioStream" uid="uid://be62pp7lfcgmv" path="res://Assets/Sounds/2355_snd_CarJumpEnd.mp3" id="25_x1plf"]
 [ext_resource type="Texture2D" uid="uid://q7abg4xatni4" path="res://Assets/Images/Vehicles/PropEffects/Invincible/15.png" id="25_xkrvs"]
 [ext_resource type="Texture2D" uid="uid://cdiavdbby3p7g" path="res://Assets/Images/Vehicles/PropEffects/Invincible/16.png" id="26_7i0d1"]
 [ext_resource type="AudioStream" uid="uid://k1mkdyha6mhc" path="res://Assets/Sounds/2345_snd_bomb.mp3" id="26_e766x"]
+[ext_resource type="Texture2D" uid="uid://ba6tim5ncqqxs" path="res://Assets/Images/Vehicles/PropEffects/Shield/16.png" id="26_xmm4f"]
 [ext_resource type="AudioStream" uid="uid://mbtw4xe2p7b2" path="res://Assets/Sounds/2342_snd_Shield.mp3" id="27_2ofb7"]
+[ext_resource type="Texture2D" uid="uid://bj5e41qisolus" path="res://Assets/Images/Vehicles/PropEffects/Shield/17.png" id="27_t73eh"]
 [ext_resource type="Texture2D" uid="uid://jcw4g4cns4ig" path="res://Assets/Images/Vehicles/PropEffects/Invincible/17.png" id="27_xjbkb"]
+[ext_resource type="Texture2D" uid="uid://ccihf2mkn5iic" path="res://Assets/Images/Vehicles/PropEffects/Shield/18.png" id="28_05jwu"]
 [ext_resource type="Texture2D" uid="uid://bbhlki1ewikbl" path="res://Assets/Images/Vehicles/PropEffects/Invincible/18.png" id="28_mvx0s"]
 [ext_resource type="AudioStream" uid="uid://djyhlurd0ffxu" path="res://Assets/Sounds/2344_snd_Petro.mp3" id="28_rkvpl"]
+[ext_resource type="Texture2D" uid="uid://bugcc8b5gknby" path="res://Assets/Images/Vehicles/PropEffects/Shield/19.png" id="29_cia5p"]
 [ext_resource type="AudioStream" uid="uid://w170ucrw7xwn" path="res://Assets/Sounds/2341_snd_BeSleep.mp3" id="29_hgp48"]
 [ext_resource type="Texture2D" uid="uid://bgtkksk7wq68s" path="res://Assets/Images/Vehicles/PropEffects/Invincible/19.png" id="29_kxi05"]
+[ext_resource type="Texture2D" uid="uid://cg6yew5kj3nxq" path="res://Assets/Images/Vehicles/PropEffects/Shield/20.png" id="30_1qhvo"]
 [ext_resource type="AudioStream" uid="uid://bvmfxxxomu5w2" path="res://Assets/Sounds/2340_snd_Bedump.mp3" id="30_prn00"]
 [ext_resource type="Texture2D" uid="uid://dipblm2f05u58" path="res://Assets/Images/Vehicles/PropEffects/Invincible/20.png" id="30_tefcr"]
 [ext_resource type="AudioStream" uid="uid://d3r18dkw0bg1m" path="res://Assets/Sounds/2339_snd_dogS.mp3" id="31_11m81"]
 [ext_resource type="Texture2D" uid="uid://piqinlxrfdrm" path="res://Assets/Images/Vehicles/PropEffects/Invincible/21.png" id="31_nh1uf"]
+[ext_resource type="Texture2D" uid="uid://dr22rv3bm4u0" path="res://Assets/Images/Vehicles/PropEffects/Shield/21.png" id="31_nt8od"]
 [ext_resource type="AudioStream" uid="uid://deojywl63qptd" path="res://Assets/Sounds/2338_snd_PandaS.mp3" id="32_aqpyp"]
 [ext_resource type="Texture2D" uid="uid://b1ede58mptxud" path="res://Assets/Images/Vehicles/PropEffects/Invincible/22.png" id="32_uw8vk"]
+[ext_resource type="Texture2D" uid="uid://c6t3rkfors870" path="res://Assets/Images/Vehicles/PropEffects/Shield/22.png" id="32_vq1yo"]
 [ext_resource type="Texture2D" uid="uid://ba1jk61uqu8kb" path="res://Assets/Images/Vehicles/PropEffects/Invincible/23.png" id="33_3ht3m"]
 [ext_resource type="AudioStream" uid="uid://chf8qn1hvio4v" path="res://Assets/Sounds/2337_snd_PandaSs.mp3" id="33_ibijk"]
+[ext_resource type="Texture2D" uid="uid://ba67hxjqx03vc" path="res://Assets/Images/Vehicles/PropEffects/Shield/23.png" id="33_oeyoo"]
 [ext_resource type="Texture2D" uid="uid://c0a3stju0motu" path="res://Assets/Images/Vehicles/PropEffects/Invincible/24.png" id="34_81dpc"]
+[ext_resource type="Texture2D" uid="uid://bv6jj0l17n8wt" path="res://Assets/Images/Vehicles/PropEffects/Shield/24.png" id="34_m2vjb"]
 [ext_resource type="AudioStream" uid="uid://c13wii8gbwl1g" path="res://Assets/Sounds/2335_snd_mine.mp3" id="34_ytavi"]
 [ext_resource type="AudioStream" uid="uid://bbf1x5mlxlm2w" path="res://Assets/Sounds/2334_snd_catS.mp3" id="35_1hvai"]
+[ext_resource type="Texture2D" uid="uid://bfeit1tujm352" path="res://Assets/Images/Vehicles/PropEffects/Shield/25.png" id="35_dn0ev"]
+[ext_resource type="Texture2D" uid="uid://d16aluawf26js" path="res://Assets/Images/Vehicles/PropEffects/Shield/26.png" id="36_7eqpj"]
 [ext_resource type="AudioStream" uid="uid://0m4540sq50p8" path="res://Assets/Sounds/2333_snd_BearS.mp3" id="36_628tp"]
+[ext_resource type="Texture2D" uid="uid://wodp3cso8tfr" path="res://Assets/Images/Vehicles/PropEffects/Shield/27.png" id="37_6tkxn"]
 [ext_resource type="AudioStream" uid="uid://dg4047041kq0n" path="res://Assets/Sounds/2332_snd_Ice.mp3" id="37_bo005"]
+[ext_resource type="Texture2D" uid="uid://0x7rl2o3w58v" path="res://Assets/Images/Vehicles/PropEffects/Shield/28.png" id="38_6dakb"]
 [ext_resource type="AudioStream" uid="uid://dgxtto25lcl3q" path="res://Assets/Sounds/2331_snd_useSleep.mp3" id="38_rual8"]
+[ext_resource type="Texture2D" uid="uid://gqykntvr3buf" path="res://Assets/Images/Vehicles/PropEffects/Shield/29.png" id="39_x7qic"]
 [ext_resource type="AudioStream" uid="uid://dyj1hbsh4ocxo" path="res://Assets/Sounds/2329_snd_oil.mp3" id="39_yblkr"]
+[ext_resource type="Texture2D" uid="uid://cdinpc5qmtqm7" path="res://Assets/Images/Vehicles/PropEffects/Shield/30.png" id="40_vh2oy"]
+[ext_resource type="Texture2D" uid="uid://qi0esf6a620w" path="res://Assets/Images/Vehicles/PropEffects/Shield/31.png" id="41_kd55f"]
+[ext_resource type="Texture2D" uid="uid://cw84bv43kcq41" path="res://Assets/Images/Vehicles/PropEffects/Shield/32.png" id="42_jqlsr"]
 [ext_resource type="AudioStream" uid="uid://blbcidvwm37j" path="res://Assets/Sounds/2367_snd_GetProp.mp3" id="43_hrg02"]
 [ext_resource type="PackedScene" uid="uid://c571ojyvvjnqr" path="res://Assets/Scenes/Screens/HUD/PropHUD.tscn" id="44_nbhsi"]
 [ext_resource type="Script" uid="uid://bok46w1yirp6v" path="res://scripts/Car/Props/prop_effector.gd" id="45_y3ihi"]
@@ -101,6 +133,115 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fnvew"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_p73u4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_impm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_x7emf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u0hq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_2ogls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_60v8o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_j4yar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_p2ijm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_we1h4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_2b1x6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_xpdxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ah6lx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_fj1e4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_t3qre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_sc3hc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_xmm4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_t73eh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_05jwu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_cia5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_1qhvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_nt8od")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_vq1yo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_oeyoo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_m2vjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_dn0ev")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_7eqpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_6tkxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_6dakb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_x7qic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_vh2oy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_kd55f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_jqlsr")
+}],
+"loop": false,
+"name": &"fade",
 "speed": 35.0
 }]
 
@@ -270,7 +411,12 @@ texture = ExtResource("6_fa25q")
 
 [node name="TopEffect" type="Node2D" parent="Visual" unique_id=1043317544]
 
+[node name="Shield" type="AnimatedSprite2D" parent="Visual/TopEffect" unique_id=1993234318]
+position = Vector2(-3.25, -1.835)
+sprite_frames = SubResource("SpriteFrames_fnvew")
+
 [node name="Invincible" type="AnimatedSprite2D" parent="Visual/TopEffect" unique_id=1054076645]
+visible = false
 sprite_frames = SubResource("SpriteFrames_80i56")
 frame = 7
 frame_progress = 0.55258214

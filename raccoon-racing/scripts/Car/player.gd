@@ -60,7 +60,7 @@ func ClearPropBox(id:int)->void:
 
 
 func GetPropPer()->int:
-    return 1
+    return 3
     #return randi_range(0,8)
 
 func ResetUse()->void:
