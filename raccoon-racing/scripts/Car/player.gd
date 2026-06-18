@@ -14,6 +14,7 @@ var alldistance:int
 var prop:PropManager
 var PropBoxRunTimerId:int=-1
 var CanUseProp:bool=false
+var IsUsingProp:bool=false
 
 func _init(id:int,control:control_type) -> void:
     PlayerID=id
@@ -59,13 +60,13 @@ func ClearPropBox(id:int)->void:
 
 
 func GetPropPer()->int:
-    return 9
+    return 1
     #return randi_range(0,8)
 
 func ResetUse()->void:
     CanUseProp=true
 
 func UseProp()->void:
-    if(IsPlayering() && not car.isSleep and CanUseProp):
+    if(IsPlayering() && not car.isSleep and CanUseProp and !IsUsingProp):
         prop.UseProp()
         CanUseProp=false

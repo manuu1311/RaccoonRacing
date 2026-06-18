@@ -23,7 +23,7 @@ func UseProp()->void:
             return;
         #invincible
         1:
-            #this.propArr.push(new as.Prop.PropInvincible(this.game,this.player));
+            propArr.append(InvincibleProp.new(player))
             ClearPropBox();
             return;
         2:
@@ -129,6 +129,7 @@ func Delprop(prop:Prop)->void:
     var _loc2_:int = 0;
     while(_loc2_ < propArr.size()):
         if(propArr[_loc2_] == prop):
+            propArr[_loc2_].del()
             propArr.remove_at(_loc2_)
             return 
         _loc2_ = _loc2_ + 1;

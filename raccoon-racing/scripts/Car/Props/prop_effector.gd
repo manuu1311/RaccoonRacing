@@ -4,10 +4,11 @@ class_name PropEffector
 @export var car:Car
 const effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
 var IsHovercraft:bool
+@onready var invincible: AnimatedSprite2D = $"../Visual/TopEffect/Invincible"
 
 func _ready() -> void:
     IsHovercraft=car.isHovercraft()
-    GameData
+    invincible.hide()
     
 ##boost
 func AddPetro()->void:
@@ -24,3 +25,18 @@ func AddPetro()->void:
     
 func StopPetro()->void:
     pass
+    
+    
+func AddInvincible(newhorse:float)->void:
+    car.horse*=newhorse
+    car.isInvincible=true
+    invincible.show()
+    invincible.play()
+    
+func StopInvincible()->void:
+    car.horse=car.carhorse
+    car.isInvincible=false
+    invincible.hide()
+    invincible.stop()
+    
+    

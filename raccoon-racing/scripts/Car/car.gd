@@ -11,7 +11,7 @@ class_name Car
 @onready var exhaust_2: Sprite2D = $Visual/Hovercraft/Exhausts/Exhaust2
 @onready var car: Node2D = $Visual/Car
 @onready var hovercraft: Node2D = $Visual/Hovercraft
-@onready var bottom_effect: Node2D = $BottomEffect
+@onready var bottom_effect: Node2D = $Visual/BottomEffect
 #character id,to set sprites
 var CharID:int=0
 var playerID:int=0
@@ -59,7 +59,8 @@ var isLock:bool=false
 #sleeping
 var isSleep:bool
 #car power
-var horse:float=0.3
+var horse:float
+var carhorse:float=0.3
 #is the car upside down?
 var isBack:bool
 #step movement in frame
@@ -108,6 +109,7 @@ func setup(gamemap:Map,id:int,gameplayering:bool) -> void:
     playering=gameplayering
 
 func _ready() -> void:
+    horse=carhorse
     if isHovercraft():
         car.hide()
         hovercraft.show()
@@ -554,18 +556,18 @@ func BeAttacked(who: Car)->void:
     if(isResetting or who.isResetting):
         return 
     sounds.playbumpsound()
-    var isInvincible:bool = isInvincible
+    var isInvincibletemp:bool = isInvincible
     var enemyInvincible:bool = who.isInvincible;
     if(isSmallState):
         enemyInvincible = true
     if(isSmallState):
-        isInvincible = true
+        isInvincibletemp = true
    
     var enemySpeed:Vector2
-    if(not (isInvincible and not enemyInvincible)):
+    if(not (isInvincibletemp and not enemyInvincible)):
         enemySpeed = who.speed
     var mySpeed:Vector2
-    if(not(not isInvincible and enemyInvincible)):
+    if(not(not isInvincibletemp and enemyInvincible)):
         mySpeed = speed
     #distance between cars
     var dist:Vector2=global_position-who.global_position
@@ -576,12 +578,12 @@ func BeAttacked(who: Car)->void:
     #push vector
     var pushvector:Vector2 = dist*spring
     #if enemy is invincible and im not: massive knockback
-    if(not isInvincible and enemyInvincible):
+    if(not isInvincibletemp and enemyInvincible):
         speed = enemySpeed+pushvector*40
         bs = true
         sounds.playBsSound()
     #if im invincible and enemy is not: give massive knockback
-    elif(isInvincible and not enemyInvincible):
+    elif(isInvincibletemp and not enemyInvincible):
         who.speed = mySpeed-pushvector*40
         who.bs = true
         sounds.playBsSound()
@@ -590,10 +592,6 @@ func BeAttacked(who: Car)->void:
         speed = enemySpeed+pushvector
         who.speed = mySpeed-pushvector
 
-#TODO:implement
-##delete props in car
-func DelPropByType(id:int)->void:
-    pass
 
 #TODO: change sprites according to character
 func SetSprites()->void:
