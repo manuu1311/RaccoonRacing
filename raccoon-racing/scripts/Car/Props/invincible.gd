@@ -16,15 +16,15 @@ func _init(playerinst:Player)->void:
 	delme()
 
 
-func run():
+func run()->void:
 	pass
 	
-func delme():
+func delme()->void:
 	await player.car.get_tree().create_timer(UseTime).timeout
 	player.IsUsingProp=false
 	if(player.PlayerID==0):
 		MusicPlayer.PlayMusic("map"+str(GameData.currentMap))
 	player.prop.Delprop(self);
 	
-func del():	
+func del()->void:
 	player.car.prop_effector.StopInvincible()

@@ -15,58 +15,62 @@ var prop:PropManager
 var PropBoxRunTimerId:int=-1
 var CanUseProp:bool=false
 var IsUsingProp:bool=false
+var NowPointId:int
+var OrderId:int
 
 func _init(id:int,control:control_type) -> void:
-    PlayerID=id
-    current_control=control
-    prop=PropManager.new(self)
-    
+	PlayerID=id
+	#TODO: manage ordering
+	OrderId=id
+	current_control=control
+	prop=PropManager.new(self)
+	
 
 func SetCar(carinst:Car)->void:
-    car=carinst
-    car.prop_hud.prop_visible.connect(ResetUse)
+	car=carinst
+	car.prop_hud.prop_visible.connect(ResetUse)
 
 func IsPlayering()->bool:
-    return current_control==control_type.HUMAN
-    
-    
+	return current_control==control_type.HUMAN
+	
+	
 func Update()->void:
-    car.Update()
-    prop.run() 
-    UpdatePoint()
+	car.Update()
+	prop.run() 
+	UpdatePoint()
   
 
 func UpdatePoint()->void:
-    pass
+	pass
 
  
 func RunPropBox(x:float,y:float)->void:
-    car.sounds.GetProp()
-    if not car.prop_hud.itemready:
-        car.prop_hud.propmove(x,y)
-    if prop.NowPorpId!=0:
-        return
-    GetProp(GetPropPer())
-    car.prop_hud.StartPropBox(1.5,prop.NowPorpId)
+	car.sounds.GetProp()
+	if not car.prop_hud.itemready:
+		car.prop_hud.propmove(x,y)
+	if prop.NowPorpId!=0:
+		return
+	GetProp(GetPropPer())
+	car.prop_hud.StartPropBox(1.5,prop.NowPorpId)
 
 
-            
+			
 
 func GetProp(propid:int)->void:
-    prop.NowPorpId=propid
+	prop.NowPorpId=propid
 
 func ClearPropBox(id:int)->void:
-    car.prop_hud.PropUsed(id)
+	car.prop_hud.PropUsed(id)
 
 
 func GetPropPer()->int:
-    return 3
-    #return randi_range(0,8)
+	return 7
+	#return randi_range(0,8)
 
 func ResetUse()->void:
-    CanUseProp=true
+	CanUseProp=true
 
 func UseProp()->void:
-    if(IsPlayering() && not car.isSleep and CanUseProp and !IsUsingProp):
-        prop.UseProp()
-        CanUseProp=false
+	if(IsPlayering() && not car.isSleep and CanUseProp and !IsUsingProp):
+		prop.UseProp()
+		CanUseProp=false

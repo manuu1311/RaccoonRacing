@@ -6,10 +6,12 @@ const effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tsc
 var IsHovercraft:bool
 @onready var invincible: AnimatedSprite2D = $"../Visual/TopEffect/Invincible"
 @onready var shield: AnimatedSprite2D = $"../Visual/TopEffect/Shield"
+@onready var bomb: AnimatedSprite2D = $"../Visual/TopEffect/Bomb"
 
 func _ready() -> void:
     IsHovercraft=car.isHovercraft()
     invincible.hide()
+    bomb.hide()
     
 ##boost
 func AddPetro()->void:
@@ -47,3 +49,8 @@ func AddShield()->void:
     
 func RemoveShield()->void:
     shield.play("fade")   
+
+func PlayBomb(pos:Vector2)->void:
+    bomb.show()
+    bomb.global_position=pos
+    bomb.play()

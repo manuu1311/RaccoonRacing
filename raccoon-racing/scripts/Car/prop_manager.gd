@@ -48,8 +48,7 @@ func UseProp()->void:
             ClearPropBox();
             return;
         4:
-            #TODO:mine
-            #this.propArr.push(new as.Prop.PropMine(this.game,this.player));
+            propArr.append(MineProp.new(player))
             ClearPropBox();
             return;
         5:
@@ -63,8 +62,7 @@ func UseProp()->void:
             ClearPropBox();
             return;
         7:
-            #TODO:boost
-            #propArr.push(new as.Prop.PropOil(this.game,this.player));
+            propArr.append(OilProp.new(player))
             ClearPropBox();
             return;
         8:

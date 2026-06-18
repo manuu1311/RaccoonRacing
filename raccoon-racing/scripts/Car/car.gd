@@ -12,6 +12,7 @@ class_name Car
 @onready var car: Node2D = $Visual/Car
 @onready var hovercraft: Node2D = $Visual/Hovercraft
 @onready var bottom_effect: Node2D = $Visual/BottomEffect
+@onready var top_effect: Node2D = $Visual/TopEffect
 #character id,to set sprites
 var CharID:int=0
 var playerID:int=0

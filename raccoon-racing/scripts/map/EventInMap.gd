@@ -9,6 +9,7 @@ var width:float;
 var x:float;
 var y:float;
 var edface:EdRectangle
+var IsActivated:bool
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
 	self.x = xinst;

@@ -42,7 +42,7 @@ func StartPropBox(runtime:float,id:int):
 	PropBoxRunTime=int(runtime*1000)
 	PropId=id-1
 	icon.hide()
-	if not animation_player.is_playing():
+	if animation_player.current_animation!="Appear":
 		animation_player.play("Appear")
 	
 func RunPropBox()->void:

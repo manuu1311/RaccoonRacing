@@ -330,7 +330,6 @@ func InitEventInMap()->void:
         var scaled_size:Vector2 = newbs.get_node("Sprite2D").texture.get_size()
         newbs.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
         _loc2_.rotation = 0;
-        add_child(newbs)
         Events.append(newbs)
         _loc3_ = _loc3_ + 1;
     _loc3_ = 0;
@@ -365,6 +364,7 @@ func InitEventInMap()->void:
 func AddEventInMap(event: EventInMap)->void:
       Events.append(event);
       edevent.ReTidyFace();
+    
 #TODO:implement
 func DelEventInMap(id:int)->void:
     var _loc2_:int = 0;

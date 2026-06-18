@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dxaat7gt5u1a8"]
+
+[ext_resource type="Script" uid="uid://dfwnw7t1h46nj" path="res://scripts/map/Props/missile_in_map.gd" id="1_hr52w"]
+
+[node name="MissileInMap" type="Node2D" unique_id=515147464]
+script = ExtResource("1_hr52w")
