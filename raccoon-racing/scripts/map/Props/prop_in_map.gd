@@ -10,7 +10,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	scale=Vector2(0.7,0.7)
 	global_position=Vector2(x,y)
 
-func GetHitEventStatus(PlayerId:int):
+func GetHitEventStatus(PlayerId:int)->void:
 	if(visible):
 		var player:Player=GameData.PlayersArr[PlayerId]
 		player.RunPropBox(global_position.x,global_position.y)
@@ -24,5 +24,5 @@ func ReShowProp()->void:
 	show();
 	
 #TODO: is this necessary?
-func del():
+func del()->void:
 	queue_free()

@@ -20,7 +20,7 @@ func _init(x1:float,y1:float,x2:float,y2:float) -> void:
 	p2 = Vector2(x2,y2)
 	ang = rad_to_deg(atan2(y2 - y1, x2 - x1))
 	IsActivated = true
-	var _loc4_ = Vector2(LineWidth,0);
+	var _loc4_:Vector2 = Vector2(LineWidth,0);
 	_loc4_=_loc4_.rotated(deg_to_rad(ang-90));
 	var _loc3_:Array[Vector2] = [
 		p1,
@@ -33,7 +33,7 @@ func _init(x1:float,y1:float,x2:float,y2:float) -> void:
 	minY = _loc3_[0].y;
 	maxY = _loc3_[0].y;
 	for i in range(1, _loc3_.size()):
-		var pt = _loc3_[i]
+		var pt:Vector2 = _loc3_[i]
 		if pt.x < self.minX: self.minX = pt.x
 		if pt.x > self.maxX: self.maxX = pt.x
 		if pt.y < self.minY: self.minY = pt.y

@@ -12,11 +12,11 @@ var LockAim:bool = false;
 func _init(playerinst:Player)->void:
     super(playerinst);
     proptype = 6;
-    SetDmc();
     Aimplayer = SetAimPlayer();
     HomingMissile=preload(
         "res://Assets/Scenes/Screens/maps/Props/MissileInMap.tscn"
     ).instantiate() as MissileInMap
+    print('this',HomingMissile)
     HomingMissileView=preload(
         "res://Assets/Scenes/Screens/maps/MissileView.tscn"
     ).instantiate() as Sprite2D
@@ -24,6 +24,7 @@ func _init(playerinst:Player)->void:
     HomingMissile.onhitcarfun=OnHitCar.bind(
         Aimplayer.car,Aimplayer.PlayerID
         )
+    SetDmc();
     
 
 func SetDmc()->void:
@@ -49,6 +50,7 @@ func run()->void:
     UpdatePoint();
     HomingMissile.Update();
     HomingMissile.AddPetro();
+    UpdateView()
 
 
 func OnHitStatus()->void:
@@ -75,11 +77,11 @@ func AutoPlay()->void:
     HomingMissile.DoAction(0);
     var targetangle:float;
     if(NowPointId == Aimplayer.NowPointId || LockAim):
-        var dist=Aimplayer.car.global_position-HomingMissile.global_position
+        var dist:Vector2=Aimplayer.car.global_position-HomingMissile.global_position
         targetangle = rad_to_deg(atan2(dist.y, dist.x))
         LockAim = true;
     else:
-        var dist=Aimplayer.car.map.Points[NowPointId]-HomingMissile.global_position
+        var dist:Vector2=Aimplayer.car.map.Points[NowPointId]-HomingMissile.global_position
         targetangle = rad_to_deg(atan2(dist.y, dist.x))
     var anglediff:float=targetangle-HomingMissile.rotation_degrees
     anglediff = wrapf(anglediff, -180.0, 180.0)

@@ -34,7 +34,7 @@ func DeferredInit(id: int)->void:
 	icon.sprite_frames.add_frame("default",charicon)
 	
 
-func StartPropBox(runtime:float,id:int):
+func StartPropBox(runtime:float,id:int)->void:
 	PlayPropRun()
 	if itemready or PropId!=-1:
 		return
@@ -71,7 +71,7 @@ func propmove(x:float,y:float)->void:
 		activetween.kill()
 		
 	var camera:Camera2D= get_viewport().get_camera_2d()
-	var pos = camera.get_viewport().get_screen_transform() * camera.get_canvas_transform() * Vector2(x,y)
+	var pos:Vector2 = camera.get_viewport().get_screen_transform() * camera.get_canvas_transform() * Vector2(x,y)
 	propmoveplayer.play()
 	shaderplayer.play("shader")
 	propparticle.show()

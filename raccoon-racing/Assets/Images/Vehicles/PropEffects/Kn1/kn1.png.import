@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctbsey6bkvbcf"
-path="res://.godot/imported/2.png-dc67458f0932e68d5d0682ccef81724c.ctex"
+uid="uid://dworixgdubkxb"
+path="res://.godot/imported/kn1.png-c2573bf4571f36f44f4bd1a3905f9cc0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Vehicles/PropEffects/sprites/DefineSprite_2228_car_Invincible/2.png"
-dest_files=["res://.godot/imported/2.png-dc67458f0932e68d5d0682ccef81724c.ctex"]
+source_file="res://Assets/Images/Vehicles/PropEffects/Kn1/kn1.png"
+dest_files=["res://.godot/imported/kn1.png-c2573bf4571f36f44f4bd1a3905f9cc0.ctex"]
 
 [params]
 

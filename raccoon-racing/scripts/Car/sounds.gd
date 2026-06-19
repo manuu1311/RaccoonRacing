@@ -121,7 +121,7 @@ func apply_global_sound_settings() -> void:
         if snd:
             snd.volume_db = db_volume
             #TODO: create more buses, one for each car, and replace the first idx
-    var panner = AudioServer.get_bus_effect(0, 0) as AudioEffectPanner
+    var panner:AudioEffectPanner = AudioServer.get_bus_effect(0, 0) as AudioEffectPanner
     panner.pan = sounds_pen
 
 func playHCRunSound()->void:

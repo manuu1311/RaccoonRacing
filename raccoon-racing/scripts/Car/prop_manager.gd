@@ -52,7 +52,7 @@ func UseProp()->void:
 			ClearPropBox();
 			return;
 		6:
-			#TODO: missile
+			propArr.append(HomingMissileProp.new(player))
 			#this.propArr.push(new as.Prop.PropHomingMissile(this.game,this.player));
 			ClearPropBox();
 			return;

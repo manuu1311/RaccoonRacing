@@ -36,7 +36,7 @@ func SetCar(carinst:Car)->void:
 func IsPlayering()->bool:
     return current_control==control_type.HUMAN
 
-func Update():
+func Update()->void:
     UpdatePoint()
     car.Update()
     prop.run()
@@ -90,7 +90,7 @@ func ClearPropBox(id:int)->void:
 
 
 func GetPropPer()->int:
-    return 2
+    return 6
     var _loc5_:int = randi_range(1,99);
     if(charid == 1 && OrderId == 0 && PlayerID == 0):
         _loc5_ = randi_range(0,89);

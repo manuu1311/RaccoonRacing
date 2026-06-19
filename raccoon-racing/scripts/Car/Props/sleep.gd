@@ -18,7 +18,7 @@ func delme()->void:
 	player.prop.Delprop(self);
 	
 	
-func del():
+func del()->void:
 	player.car.prop_effector.StopSleep()
 	player.car.sounds.StopBeSleepSound();
 	player.car.isSleep = false;

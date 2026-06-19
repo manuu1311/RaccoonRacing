@@ -8,8 +8,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-func register(player:Player):
+func register(player:Player)->void:
 	players.append(player)
 
-func focusCar(car:Car):
+func focusCar(car:Car)->void:
 	fcsCar=car

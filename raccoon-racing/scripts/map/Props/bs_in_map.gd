@@ -8,7 +8,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	IsActivated=true
 	
 	
-func GetHitEventStatus(PlayerId:int):
+func GetHitEventStatus(PlayerId:int)->void:
 	if(IsActivated):
 		var car:Car=GameData.PlayersArr[PlayerId].car
 		if(not car.isInvincible):

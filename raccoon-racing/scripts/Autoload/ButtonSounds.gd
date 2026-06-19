@@ -20,7 +20,7 @@ func _ready() -> void:
 ## [br]
 ## - [code]"warning"[/code]
 func PlaySound(sound: String)->void:
-	var new_stream = audio_streams.get(sound)
+	var new_stream:Variant = audio_streams.get(sound)
 	
 	if new_stream:
 		stream = new_stream

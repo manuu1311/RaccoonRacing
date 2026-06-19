@@ -89,9 +89,7 @@ func GetHitStatus(tx:float,ty:float)->void:
 	#no wall detected
 	if(is_nan(wallAngledeg)):
 		return 
-	var _loc4_;
-	var _loc2_;
-	var _loc5_;
+
 	if IsHitWall:
 		var speedangle:float=speed.angle()
 		var wallAngle :float= deg_to_rad(wallAngledeg)

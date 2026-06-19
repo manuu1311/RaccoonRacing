@@ -279,7 +279,7 @@ func CancelTurn()->void:
     steer_normal()
 
 
-func Update():
+func Update()->void:
     if isHovercraft():
         Water()
     if(not isLock):
@@ -425,7 +425,7 @@ func Jumping()->void:
     else:
         jumpPrevheight = temp_height
     jumpFloorHeight = 0 
-    var visual_scale = 1.0 + (jumpCurrheight * 0.0175)
+    var visual_scale:float = 1.0 + (jumpCurrheight * 0.0175)
     visual.scale = Vector2(visual_scale, visual_scale)
 
 

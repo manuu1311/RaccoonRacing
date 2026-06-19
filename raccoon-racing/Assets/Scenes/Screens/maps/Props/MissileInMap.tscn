@@ -1,6 +1,28 @@
 [gd_scene format=3 uid="uid://dxaat7gt5u1a8"]
 
 [ext_resource type="Script" uid="uid://dfwnw7t1h46nj" path="res://scripts/map/Props/missile_in_map.gd" id="1_hr52w"]
+[ext_resource type="Texture2D" uid="uid://ceja5xfgtt1y0" path="res://Assets/Images/Vehicles/PropEffects/Missile/missile.png" id="2_0asrg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hf5jq"]
+size = Vector2(12, 67)
 
 [node name="MissileInMap" type="Node2D" unique_id=515147464]
 script = ExtResource("1_hr52w")
+
+[node name="BottomEffect" type="Node2D" parent="." unique_id=748057439]
+position = Vector2(0, 40.365)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=461482575]
+z_index = 1
+texture = ExtResource("2_0asrg")
+
+[node name="Body" type="Area2D" parent="." unique_id=1089807848]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body" unique_id=1567347251]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_hf5jq")
+
+[node name="Collisions" type="Node2D" parent="." unique_id=628965708]
+
+[node name="CollisionPoint0" type="Marker2D" parent="Collisions" unique_id=296217415]
+position = Vector2(0, -27)

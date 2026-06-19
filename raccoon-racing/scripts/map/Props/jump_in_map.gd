@@ -3,10 +3,10 @@ extends EventInMap
 
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
-    super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
-    global_position=Vector2(x,y)
-    rotation=angle
-    
-    
-func GetHitEventStatus(PlayerId:int):
-    GameData.PlayersArr[PlayerId].car.JumpBySpeed(0.5)
+	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
+	global_position=Vector2(x,y)
+	rotation=angle
+	
+	
+func GetHitEventStatus(PlayerId:int)->void:
+	GameData.PlayersArr[PlayerId].car.JumpBySpeed(0.5)

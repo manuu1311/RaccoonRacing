@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://bfheckuc367ec"]
 
+[ext_resource type="Texture2D" uid="uid://dxise6bkcwdy1" path="res://Assets/Images/Vehicles/PropEffects/Missile/view.png" id="1_7xr5d"]
+
 [node name="MissileView" type="Sprite2D" unique_id=1827317120]
+texture = ExtResource("1_7xr5d")

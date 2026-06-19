@@ -106,7 +106,7 @@ func getHitFace(point:Vector2)->EdLine:
 func del_ed(ed_id: int) -> void:
 	# 1. Clean out the 2D grid cells safely
 	for col in SurfaceArr:
-		for cell_list in col:
+		for cell_list:Array in col:
 			for i in range(cell_list.size() - 1, -1, -1):
 				if cell_list[i].id == ed_id:
 					cell_list.remove_at(i)
@@ -132,15 +132,15 @@ func draw_debug_geometry(overlay_node: Node2D) -> void:
 		
 		if shape is EdLine:
 			
-			var right = Vector2.RIGHT.rotated(deg_to_rad(shape.ang))
-			var down  = Vector2.UP.rotated(deg_to_rad(shape.ang))
+			var right:Vector2 = Vector2.RIGHT.rotated(deg_to_rad(shape.ang))
+			var down:Vector2  = Vector2.UP.rotated(deg_to_rad(shape.ang))
 
-			var length = (Vector2(shape.p2.x - shape.p1.x, shape.p2.y - shape.p1.y)
+			var length:float = (Vector2(shape.p2.x - shape.p1.x, shape.p2.y - shape.p1.y)
 						.rotated(deg_to_rad(-shape.ang))).x
 
-			var A = shape.p1
-			var B = shape.p1 + right * length
-			var C = B + down * shape.LineWidth
-			var D = A + down * shape.LineWidth
+			var A:Vector2 = shape.p1
+			var B:Vector2 = shape.p1 + right * length
+			var C:Vector2 = B + down * shape.LineWidth
+			var D:Vector2 = A + down * shape.LineWidth
 
 			overlay_node.draw_polyline(PackedVector2Array([A,B,C,D,A]), debug_color, 2)

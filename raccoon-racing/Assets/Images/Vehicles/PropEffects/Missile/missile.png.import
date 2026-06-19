@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q7abg4xatni4"
-path="res://.godot/imported/15.png-ce8649d3fbc7843ed06c3f3a6cf2ee1c.ctex"
+uid="uid://ceja5xfgtt1y0"
+path="res://.godot/imported/missile.png-35b37d5de633a0a6098deeef22b615db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Vehicles/PropEffects/sprites/DefineSprite_2228_car_Invincible/15.png"
-dest_files=["res://.godot/imported/15.png-ce8649d3fbc7843ed06c3f3a6cf2ee1c.ctex"]
+source_file="res://Assets/Images/Vehicles/PropEffects/Missile/missile.png"
+dest_files=["res://.godot/imported/missile.png-35b37d5de633a0a6098deeef22b615db.ctex"]
 
 [params]
 

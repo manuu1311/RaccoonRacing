@@ -32,7 +32,7 @@ var TileWidth:int= 0
 var TileHeight:int = 0
 var TileNum:int = 0
 var CupMapi:int = 0
-var CupMapj = 0
+var CupMapj:int = 0
 var MapBy:int = 10000
 var MapTy:int = -10000
 var MapLx:int = -10000
@@ -153,8 +153,8 @@ func InitJumpWall()->void:
     var _loc7_:int = 0;
     var _loc6_:Marker2D
     var _loc4_:int
-    var _loc2_;
-    var _loc3_;
+    var _loc2_:Marker2D;
+    var _loc3_:int;
     var _loc5_:Marker2D
     while(_loc7_ < JumpWallGroupNum):
         _loc6_ = null;
@@ -256,14 +256,14 @@ func InitGrass() -> void:
     group_idx = 0
 
     while group_idx < GrassNum:
-        var grass = get_node_or_null(
+        var grass:Marker2D = get_node_or_null(
             PointsPath+"/Grass" + str(group_idx)
-        ) as Node2D
+        ) as Marker2D
 
         if grass == null:
             break
 
-        var rotation_deg = grass.rotation_degrees
+        var rotation_deg:float = grass.rotation_degrees
 
         grass.rotation_degrees = 0
 
@@ -397,12 +397,12 @@ func GetMapSize() -> Vector2:
     var tile_size: Vector2 = tlp.tile_set.tile_size
     
     # 3. Calculate the raw pixel size (Total Tiles * Tile Size)
-    var raw_width = rect.size.x * tile_size.x
-    var raw_height = rect.size.y * tile_size.y
+    var raw_width:float = rect.size.x * tile_size.x
+    var raw_height:float = rect.size.y * tile_size.y
     
     # 4. Multiply by the node's scale to account for stretching/shrinking
-    var final_width = raw_width * tlp.scale.x
-    var final_height = raw_height * tlp.scale.y
+    var final_width:float = raw_width * tlp.scale.x
+    var final_height:float = raw_height * tlp.scale.y
     return Vector2(final_width, final_height)
     
 
