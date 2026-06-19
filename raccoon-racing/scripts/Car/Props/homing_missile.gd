@@ -102,8 +102,12 @@ func UpdatePoint()->void:
     var between:float=player.car.map.Points[NowPointId].distance_to(_loc4_)
     if(tonext + 200 < between || tocurr < 200):
         NowPointId += 1;
-        if(NowPointId >= player.map.Points.size()):
+        if(NowPointId >= player.car.map.Points.size()):
             NowPointId = 0;
 
+func UpdateView()->void:
+    HomingMissileView.position=player.car.map.offset+HomingMissile.global_position*player.car.map.ScaledTimes
+    HomingMissileView.rotation=HomingMissile.rotation-PI/2
+
 func delme()->void:
-    pass
+    player.prop.Delprop(self)

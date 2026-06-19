@@ -28,6 +28,10 @@ GameData="*uid://1tl2lmg3lc0r"
 UiOverAnimation="*uid://dmkr4vnw6jejh"
 Game="*uid://da52fyc101u0t"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
 [display]
 
 window/size/viewport_width=500
@@ -37,6 +41,14 @@ window/stretch/mode="canvas_items"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/place_helper/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Assets/Images/": "gray",
+"res://Assets/Scenes/": "teal",
+"res://scripts/": "purple"
+}
 
 [global_group]
 

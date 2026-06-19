@@ -7,6 +7,9 @@ var IsHovercraft:bool
 @onready var invincible: AnimatedSprite2D = $"../Visual/TopEffect/Invincible"
 @onready var shield: AnimatedSprite2D = $"../Visual/TopEffect/Shield"
 @onready var bomb: AnimatedSprite2D = $"../Visual/TopEffect/Bomb"
+@onready var get_sleep: AnimatedSprite2D = $"../Visual/TopEffect/GetSleep"
+@onready var car_sleep: AnimatedSprite2D = $"../Visual/TopEffect/CarSleep"
+@onready var give_sleep: AnimatedSprite2D = $"../Visual/TopEffect/GiveSleep"
 
 func _ready() -> void:
     IsHovercraft=car.isHovercraft()
@@ -54,3 +57,18 @@ func PlayBomb(pos:Vector2)->void:
     bomb.show()
     bomb.global_position=pos
     bomb.play()
+
+#TODO: hud animation
+func PlaySleep()->void:
+    get_sleep.play()
+    car_sleep.play()
+    car.sounds.playBeSleepSound()
+
+func StopSleep()->void:
+    get_sleep.stop()
+    car_sleep.stop()
+    car.sounds.StopBeSleepSound()
+    
+func SleepShotArt(_id:int)->void:
+    give_sleep.play()
+    car.sounds.playuseSleepSound();
