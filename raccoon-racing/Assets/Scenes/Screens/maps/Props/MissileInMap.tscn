@@ -10,19 +10,23 @@ size = Vector2(12, 67)
 script = ExtResource("1_hr52w")
 
 [node name="BottomEffect" type="Node2D" parent="." unique_id=748057439]
-position = Vector2(0, 40.365)
+position = Vector2(-35.925, 0)
+rotation = 1.5707964
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=461482575]
 z_index = 1
+rotation = 1.5707964
 texture = ExtResource("2_0asrg")
 
 [node name="Body" type="Area2D" parent="." unique_id=1089807848]
+rotation = 1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body" unique_id=1567347251]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hf5jq")
 
 [node name="Collisions" type="Node2D" parent="." unique_id=628965708]
+rotation = 1.5707964
 
 [node name="CollisionPoint0" type="Marker2D" parent="Collisions" unique_id=296217415]
 position = Vector2(0, -27)

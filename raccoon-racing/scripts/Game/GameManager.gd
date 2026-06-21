@@ -23,11 +23,11 @@ func _ready() -> void:
 		var player:Player=GameData.PlayersArr[i]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
 		if player.IsPlayering():
-			carinstance.setup(map,player.PlayerID,true)
+			carinstance.setup(map,player.PlayerID,true,player)
 			carinstance.add_child(HumanCarController.new(player))
 			Game.fcsCar=carinstance
 		else:
-			carinstance.setup(map,player.PlayerID,false)
+			carinstance.setup(map,player.PlayerID,false,player)
 			carinstance.add_child(AICarController.new(player))
 		add_child(carinstance)
 		carinstance.global_position=map.StartPosArr[i].global_position
@@ -36,8 +36,8 @@ func _ready() -> void:
 	
 	
 	
-func register(player:Player):
+func register(player:Player)->void:
 	players.append(player)
 
-func focusCar(car:Car):
+func focusCar(car:Car)->void:
 	fcsCar=car

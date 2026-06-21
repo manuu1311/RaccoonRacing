@@ -69,6 +69,7 @@ func GetHitCar()->void:
 func BeAttacked(Who:Car)->void:
 	if(Who.isResetting):
 		return 
+	OnHitCar(Who)
 	var enemyspeed:Vector2
 	if(IsHitCar):
 		if(Who.jumpCurrheight > Who.heightOverWall):
@@ -84,12 +85,15 @@ func BeAttacked(Who:Car)->void:
 		speed = enemyspeed+pushvector*15
 		bsEx = 120;
 
+func OnHitCar(_Who:Car)->void:
+	return
+
 func GetHitStatus(tx:float,ty:float)->void:
 	var wallAngledeg:float =GetHitStatusAng(tx,ty)
 	#no wall detected
 	if(is_nan(wallAngledeg)):
 		return 
-
+	OnHitStatus()
 	if IsHitWall:
 		var speedangle:float=speed.angle()
 		var wallAngle :float= deg_to_rad(wallAngledeg)
@@ -140,6 +144,9 @@ func GetHitStatusAng(tx:float, ty:float)->float:
 		if(_loc2_ != null):
 			return _loc2_.GetAngle();
 	return NAN
+
+func OnHitStatus()->void:
+	return
 
 
 func UpdateSpeed()->void:

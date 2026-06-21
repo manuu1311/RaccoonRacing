@@ -101,23 +101,7 @@
 [ext_resource type="AudioStream" uid="uid://blbcidvwm37j" path="res://Assets/Sounds/2367_snd_GetProp.mp3" id="43_hrg02"]
 [ext_resource type="PackedScene" uid="uid://c571ojyvvjnqr" path="res://Assets/Scenes/Screens/HUD/PropHUD.tscn" id="44_nbhsi"]
 [ext_resource type="Script" uid="uid://bok46w1yirp6v" path="res://scripts/Car/Props/prop_effector.gd" id="45_y3ihi"]
-[ext_resource type="Texture2D" uid="uid://bpawxx1n3t1le" path="res://Assets/Images/Vehicles/PropEffects/Bomb/1.png" id="67_05jwu"]
-[ext_resource type="Texture2D" uid="uid://ddqxeau46ypov" path="res://Assets/Images/Vehicles/PropEffects/Bomb/2.png" id="68_cia5p"]
-[ext_resource type="Texture2D" uid="uid://c2axej54rqsoq" path="res://Assets/Images/Vehicles/PropEffects/Bomb/3.png" id="69_1qhvo"]
-[ext_resource type="Texture2D" uid="uid://cl36qfxltuoh6" path="res://Assets/Images/Vehicles/PropEffects/Bomb/4.png" id="70_nt8od"]
-[ext_resource type="Texture2D" uid="uid://wcn7ccp2aubk" path="res://Assets/Images/Vehicles/PropEffects/Bomb/5.png" id="71_vq1yo"]
-[ext_resource type="Texture2D" uid="uid://cm2hwyxake5lc" path="res://Assets/Images/Vehicles/PropEffects/Bomb/6.png" id="72_oeyoo"]
-[ext_resource type="Texture2D" uid="uid://dfe36iymc2hu0" path="res://Assets/Images/Vehicles/PropEffects/Bomb/7.png" id="73_m2vjb"]
-[ext_resource type="Texture2D" uid="uid://ccos4kbbmurfo" path="res://Assets/Images/Vehicles/PropEffects/Bomb/8.png" id="74_dn0ev"]
-[ext_resource type="Texture2D" uid="uid://ls0u77jgpi8b" path="res://Assets/Images/Vehicles/PropEffects/Bomb/9.png" id="75_7eqpj"]
-[ext_resource type="Texture2D" uid="uid://boelapov7o7f8" path="res://Assets/Images/Vehicles/PropEffects/Bomb/10.png" id="76_6tkxn"]
-[ext_resource type="Texture2D" uid="uid://cy67q6myaasgx" path="res://Assets/Images/Vehicles/PropEffects/Bomb/11.png" id="77_6dakb"]
-[ext_resource type="Texture2D" uid="uid://bwnipp71oo3nt" path="res://Assets/Images/Vehicles/PropEffects/Bomb/12.png" id="78_x7qic"]
-[ext_resource type="Texture2D" uid="uid://brwi5dhoeab2q" path="res://Assets/Images/Vehicles/PropEffects/Bomb/13.png" id="79_vh2oy"]
-[ext_resource type="Texture2D" uid="uid://b04pvk3bjxmjc" path="res://Assets/Images/Vehicles/PropEffects/Bomb/14.png" id="80_kd55f"]
-[ext_resource type="Texture2D" uid="uid://b0nbwffxhk0ss" path="res://Assets/Images/Vehicles/PropEffects/Bomb/15.png" id="81_jqlsr"]
-[ext_resource type="Texture2D" uid="uid://cwescjnjlurl1" path="res://Assets/Images/Vehicles/PropEffects/Bomb/16.png" id="82_fnvew"]
-[ext_resource type="Texture2D" uid="uid://db4nh0kawv2ir" path="res://Assets/Images/Vehicles/PropEffects/Bomb/17.png" id="83_1blam"]
+[ext_resource type="PackedScene" uid="uid://cp1qhvg4vv6ts" path="res://Assets/Scenes/Screens/PropEffects/bomb.tscn" id="67_baxum"]
 [ext_resource type="Texture2D" uid="uid://c5ulw0snpg3wb" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/1.png" id="84_2ro8a"]
 [ext_resource type="Texture2D" uid="uid://cho5f1j00wx6j" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/2.png" id="85_sr7gs"]
 [ext_resource type="Texture2D" uid="uid://daso361mdy21b" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/3.png" id="86_kaye6"]
@@ -461,68 +445,6 @@ animations = [{
 "texture": ExtResource("34_81dpc")
 }],
 "loop": true,
-"name": &"default",
-"speed": 35.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_cog8r"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("67_05jwu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("68_cia5p")
-}, {
-"duration": 1.0,
-"texture": ExtResource("69_1qhvo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("70_nt8od")
-}, {
-"duration": 1.0,
-"texture": ExtResource("71_vq1yo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("72_oeyoo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("73_m2vjb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("74_dn0ev")
-}, {
-"duration": 1.0,
-"texture": ExtResource("75_7eqpj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("76_6tkxn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("77_6dakb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("78_x7qic")
-}, {
-"duration": 1.0,
-"texture": ExtResource("79_vh2oy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("80_kd55f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("81_jqlsr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("82_fnvew")
-}, {
-"duration": 1.0,
-"texture": ExtResource("83_1blam")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_p73u4")
-}],
-"loop": false,
 "name": &"default",
 "speed": 35.0
 }]
@@ -1016,10 +938,7 @@ sprite_frames = SubResource("SpriteFrames_80i56")
 frame = 7
 frame_progress = 0.55258214
 
-[node name="Bomb" type="AnimatedSprite2D" parent="Visual/TopEffect" unique_id=125249098]
-sprite_frames = SubResource("SpriteFrames_cog8r")
-frame = 17
-frame_progress = 1.0
+[node name="Bomb" parent="Visual/TopEffect" unique_id=980782167 instance=ExtResource("67_baxum")]
 
 [node name="GetSleep" type="AnimatedSprite2D" parent="Visual/TopEffect" unique_id=162284623]
 position = Vector2(0, -117)

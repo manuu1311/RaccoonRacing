@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dfcd0yf0xuvb"]
+
+[ext_resource type="Texture2D" uid="uid://dworixgdubkxb" path="res://Assets/Images/Vehicles/PropEffects/Kn1/kn1.png" id="1_e25e7"]
+[ext_resource type="Script" uid="uid://cc5d5y5qou0vh" path="res://scripts/map/Props/propkn1_in_map.gd" id="1_nyfy2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyfy2"]
+size = Vector2(12, 67)
+
+[node name="Propkn1InMap" type="Node2D" unique_id=882607727]
+script = ExtResource("1_nyfy2")
+
+[node name="BottomEffect" type="Node2D" parent="." unique_id=253487415]
+position = Vector2(-36.685, 0)
+rotation = 1.5707964
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=392713200]
+z_index = 1
+rotation = 1.5707964
+texture = ExtResource("1_e25e7")
+
+[node name="Body" type="Area2D" parent="." unique_id=239712691]
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body" unique_id=328512795]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_nyfy2")
+
+[node name="Collisions" type="Node2D" parent="." unique_id=1930161422]
+rotation = 1.5707964
+
+[node name="CollisionPoint0" type="Marker2D" parent="Collisions" unique_id=2034520081]
+position = Vector2(0, -27)

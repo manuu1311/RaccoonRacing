@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cp1qhvg4vv6ts"]
+
+[ext_resource type="Texture2D" uid="uid://bpawxx1n3t1le" path="res://Assets/Images/Vehicles/PropEffects/Bomb/1.png" id="1_82mnx"]
+[ext_resource type="Texture2D" uid="uid://ddqxeau46ypov" path="res://Assets/Images/Vehicles/PropEffects/Bomb/2.png" id="2_4spcq"]
+[ext_resource type="Texture2D" uid="uid://c2axej54rqsoq" path="res://Assets/Images/Vehicles/PropEffects/Bomb/3.png" id="3_bnj6f"]
+[ext_resource type="Texture2D" uid="uid://cl36qfxltuoh6" path="res://Assets/Images/Vehicles/PropEffects/Bomb/4.png" id="4_53hy8"]
+[ext_resource type="Texture2D" uid="uid://wcn7ccp2aubk" path="res://Assets/Images/Vehicles/PropEffects/Bomb/5.png" id="5_urle2"]
+[ext_resource type="Texture2D" uid="uid://cm2hwyxake5lc" path="res://Assets/Images/Vehicles/PropEffects/Bomb/6.png" id="6_863l7"]
+[ext_resource type="Texture2D" uid="uid://dfe36iymc2hu0" path="res://Assets/Images/Vehicles/PropEffects/Bomb/7.png" id="7_af1yx"]
+[ext_resource type="Texture2D" uid="uid://ccos4kbbmurfo" path="res://Assets/Images/Vehicles/PropEffects/Bomb/8.png" id="8_d6eb6"]
+[ext_resource type="Texture2D" uid="uid://ls0u77jgpi8b" path="res://Assets/Images/Vehicles/PropEffects/Bomb/9.png" id="9_iikwi"]
+[ext_resource type="Texture2D" uid="uid://boelapov7o7f8" path="res://Assets/Images/Vehicles/PropEffects/Bomb/10.png" id="10_mi3cb"]
+[ext_resource type="Texture2D" uid="uid://cy67q6myaasgx" path="res://Assets/Images/Vehicles/PropEffects/Bomb/11.png" id="11_853yd"]
+[ext_resource type="Texture2D" uid="uid://bwnipp71oo3nt" path="res://Assets/Images/Vehicles/PropEffects/Bomb/12.png" id="12_gen8g"]
+[ext_resource type="Texture2D" uid="uid://brwi5dhoeab2q" path="res://Assets/Images/Vehicles/PropEffects/Bomb/13.png" id="13_x4b25"]
+[ext_resource type="Texture2D" uid="uid://b04pvk3bjxmjc" path="res://Assets/Images/Vehicles/PropEffects/Bomb/14.png" id="14_mkwas"]
+[ext_resource type="Texture2D" uid="uid://b0nbwffxhk0ss" path="res://Assets/Images/Vehicles/PropEffects/Bomb/15.png" id="15_5bpel"]
+[ext_resource type="Texture2D" uid="uid://cwescjnjlurl1" path="res://Assets/Images/Vehicles/PropEffects/Bomb/16.png" id="16_7nki0"]
+[ext_resource type="Texture2D" uid="uid://db4nh0kawv2ir" path="res://Assets/Images/Vehicles/PropEffects/Bomb/17.png" id="17_axvvv"]
+[ext_resource type="Texture2D" uid="uid://kbq4uf2mxq0h" path="res://Assets/Images/Vehicles/PropEffects/Shield/1.png" id="18_ibc5e"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cog8r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_82mnx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4spcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bnj6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_53hy8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_urle2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_863l7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_af1yx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_d6eb6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_iikwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mi3cb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_853yd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_gen8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_x4b25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_mkwas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5bpel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_7nki0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_axvvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ibc5e")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[node name="Bomb" type="AnimatedSprite2D" unique_id=980782167]
+sprite_frames = SubResource("SpriteFrames_cog8r")
+frame = 17
+frame_progress = 1.0

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dq20jlmltcuhq"]
+
+[ext_resource type="Script" uid="uid://b0k22b3srl51j" path="res://scripts/map/Props/furballs_in_map.gd" id="1_xif3h"]
+[ext_resource type="Texture2D" uid="uid://c8q3r7ec3gr17" path="res://Assets/Images/Vehicles/PropEffects/Furball/furball.png" id="2_q41wo"]
+[ext_resource type="PackedScene" uid="uid://cp1qhvg4vv6ts" path="res://Assets/Scenes/Screens/PropEffects/bomb.tscn" id="2_sir00"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sir00"]
+size = Vector2(12, 12)
+
+[node name="FurballsInMap" type="Node2D" unique_id=910801965]
+script = ExtResource("1_xif3h")
+
+[node name="BombEffect" parent="." unique_id=980782167 instance=ExtResource("2_sir00")]
+position = Vector2(0, -10.32)
+
+[node name="BottomEffect" type="Node2D" parent="." unique_id=1981871789]
+rotation = 1.5707964
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=644315335]
+z_index = 1
+rotation = 1.5707964
+texture = ExtResource("2_q41wo")
+
+[node name="Body" type="Area2D" parent="." unique_id=1367345373]
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body" unique_id=1557768629]
+shape = SubResource("RectangleShape2D_sir00")
+
+[node name="Collisions" type="Node2D" parent="." unique_id=2108966892]
+rotation = 1.5707964
+
+[node name="CollisionPoint0" type="Marker2D" parent="Collisions" unique_id=1726968693]

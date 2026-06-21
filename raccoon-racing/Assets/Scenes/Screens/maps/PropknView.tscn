@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://chia6ijb5o7wx"]
+
+[ext_resource type="Texture2D" uid="uid://cu12rpk0wmy6u" path="res://Assets/Images/Vehicles/PropEffects/Kn1/view.png" id="1_kp4rt"]
+
+[node name="PropknView" type="Sprite2D" unique_id=397072774]
+texture = ExtResource("1_kp4rt")

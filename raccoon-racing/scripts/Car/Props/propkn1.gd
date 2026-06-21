@@ -1,9 +1,9 @@
 extends Prop
-class_name HomingMissileProp
+class_name Propkn1Prop
 
 
 var Aimplayer:Player;
-var HomingMissile:MissileInMap;
+var HomingMissile:Propkn1InMap;
 var HomingMissileView:Sprite2D
 var NowPointId:int;
 var EndTime:float = 30000;
@@ -11,15 +11,14 @@ var LockAim:bool = false;
 
 func _init(playerinst:Player)->void:
 	super(playerinst);
-	proptype = 6;
+	proptype = 5;
 	Aimplayer = SetAimPlayer();
 	HomingMissile=preload(
-        "res://Assets/Scenes/Screens/maps/Props/MissileInMap.tscn"
-	).instantiate() as MissileInMap
+        "res://Assets/Scenes/Screens/maps/Props/Propkn1InMap.tscn"
+	).instantiate() as Propkn1InMap
 	HomingMissileView=preload(
-        "res://Assets/Scenes/Screens/maps/MissileView.tscn"
+        "res://Assets/Scenes/Screens/maps/PropknView.tscn"
 	).instantiate() as Sprite2D
-	HomingMissile.onhitstatfun=OnHitStatus
 	HomingMissile.aimed=Aimplayer.PlayerID
 	HomingMissile.MissileHit.connect(delme)
 	SetDmc();
@@ -28,7 +27,7 @@ func _init(playerinst:Player)->void:
 func SetDmc()->void:
 	player.car.map.add_child(HomingMissile)
 	HomingMissile.global_position=player.car.global_position+Vector2(-25,0).rotated(player.car.rotation)
-	HomingMissile.rotation=player.car.rotation-PI/2
+	HomingMissile.rotation=player.car.rotation
 	var view_sprite:Sprite2D = player.car.map.minimap
 	view_sprite.add_child(HomingMissileView)
 	HomingMissile.speed=player.car.speed
@@ -40,7 +39,7 @@ func SetDmc()->void:
 
 #TODO: is that mess really needed?
 func SetAimPlayer()->Player:
-	return GameData.PlayersArr[GameData.OrderInfo[player.OrderId-1]]
+	return GameData.PlayersArr[0]
 
 
 func run()->void:
@@ -65,7 +64,7 @@ func AutoPlay()->void:
 	else:
 		var dist:Vector2=Aimplayer.car.map.Points[NowPointId]-HomingMissile.global_position
 		targetangle = rad_to_deg(atan2(dist.y, dist.x))
-	var anglediff:float=targetangle-HomingMissile.rotation_degrees
+	var anglediff:float=targetangle-HomingMissile.rotation_degrees+90
 	anglediff = wrapf(anglediff, -180.0, 180.0)
 	if(anglediff > 5 && anglediff < 180):
 		HomingMissile.DoAction(3);
@@ -91,7 +90,7 @@ func UpdatePoint()->void:
 
 func UpdateView()->void:
 	HomingMissileView.position=player.car.map.offset+HomingMissile.global_position*player.car.map.ScaledTimes
-	HomingMissileView.rotation=HomingMissile.rotation
+	HomingMissileView.rotation=HomingMissile.rotation-PI/2
 
 func delme()->void:
 	player.prop.Delprop(self)

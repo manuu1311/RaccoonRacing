@@ -14,6 +14,7 @@ class_name Car
 @onready var bottom_effect: Node2D = $Visual/BottomEffect
 @onready var top_effect: Node2D = $Visual/TopEffect
 #character id,to set sprites
+var player:Player
 var CharID:int=0
 var playerID:int=0
 @onready var body: Area2D = $Visual/Body
@@ -104,10 +105,11 @@ var isUseShield:bool=false
 
 
 
-func setup(gamemap:Map,id:int,gameplayering:bool) -> void:
+func setup(gamemap:Map,id:int,gameplayering:bool,playerinst:Player) -> void:
     map=gamemap
     playerID=id
     playering=gameplayering
+    player=playerinst
 
 func _ready() -> void:
     horse=carhorse

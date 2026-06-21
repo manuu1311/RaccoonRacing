@@ -548,7 +548,6 @@ position = Vector2(-1301.255, 69.774994)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals/Ground/Decorations/Art/Start" unique_id=1945525215]
 sprite_frames = SubResource("SpriteFrames_0mnyw")
-frame = 28
 
 [node name="Wood" type="Sprite2D" parent="Visuals/Ground/Decorations/Art/Start" unique_id=777018326]
 position = Vector2(0, 45.45)

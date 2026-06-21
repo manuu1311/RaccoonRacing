@@ -285,8 +285,8 @@ func InitPoints()->void:
     Points = []
     var ipoint:int = 0
     var point:Marker2D
-    while(ipoint < PointNum):
-        point = get_node_or_null(PointsPath+"/Points/"+str(ipoint))
+    while(ipoint < PointNum+1):
+        point = get_node_or_null(PointsPath+"/Points/point"+str(ipoint))
         if(point!=null):
             Points.append(point.global_position)
         ipoint +=1

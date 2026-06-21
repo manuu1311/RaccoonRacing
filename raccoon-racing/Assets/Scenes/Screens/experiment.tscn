@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://c47mpkqmnemuy" path="res://Assets/Scenes/Screens/maps/Map01.tscn" id="4_vyse4"]
 
 [node name="Experiment" type="Node2D" unique_id=411329241]
-position = Vector2(0, -1)
 script = ExtResource("1_piq2e")
 
 [node name="Map" parent="." unique_id=620435250 instance=ExtResource("4_vyse4")]

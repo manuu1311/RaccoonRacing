@@ -47,13 +47,11 @@ func UseProp()->void:
 			ClearPropBox();
 			return;
 		5:
-			#TODO:propkn1
-			#this.propArr.push(new as.Prop.Propkn1(this.game,this.player));
+			propArr.append(Propkn1Prop.new(player))
 			ClearPropBox();
 			return;
 		6:
 			propArr.append(HomingMissileProp.new(player))
-			#this.propArr.push(new as.Prop.PropHomingMissile(this.game,this.player));
 			ClearPropBox();
 			return;
 		7:
@@ -71,7 +69,7 @@ func UseProp()->void:
 					NowPorpId = 8;
 					player.ClearPropBox(8);
 				2:
-					#this.propArr.push(new as.Prop.PropFurballs(this.game,this.player));
+					propArr.append(FurballsProp.new(player))
 					ClearPropBox();
 				3:
 					#this.propArr.push(new as.Prop.PropHoneyBomb(this.game,this.player));
