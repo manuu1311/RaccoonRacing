@@ -938,10 +938,10 @@ libraries/ = SubResource("AnimationLibrary_1tcci")
 libraries/ = SubResource("AnimationLibrary_1tcci")
 
 [node name="Area2D" type="Area2D" parent="Visual/BottomEffect/Circler" unique_id=908327653]
-position = Vector2(0, -48.020004)
+position = Vector2(-8.396083e-06, -48.020004)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/BottomEffect/Circler/Area2D" unique_id=1582227620]
-position = Vector2(0, -0.98999786)
+position = Vector2(-8.56918e-06, -0.98999786)
 shape = SubResource("RectangleShape2D_xqylm")
 
 [node name="CollisionPoints" type="Node2D" parent="Visual" unique_id=11894153]

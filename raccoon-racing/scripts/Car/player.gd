@@ -5,12 +5,12 @@ var car: Car
 var PlayerID:int
 #TODO: should be set by game manager
 ##character id 1-6
-var charid:int=5
+var charid:int=6
 enum control_type{HUMAN,AI,MULTIPLAYER,RLTRAINING,RL}
 var current_control:control_type
 ##position in the race, int
 var current_race_position:int
-var alldistance:int
+var alldistance:int=0
 var prop:PropManager
 var PropBoxRunTimerId:int=-1
 var CanUseProp:bool=false

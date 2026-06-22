@@ -80,22 +80,24 @@ func UseProp()->void:
 				5:
 					propArr.append(BoneProp.new(player))
 					ClearPropBox();
-				5:
+				6:
 					var j:int = 0;
 					while(j < GameData.PlayersArr.size()):
 						var newplayer:Player=GameData.PlayersArr[j]
 						if(newplayer.PlayerID!=player.PlayerID): 
 							if(not newplayer.car.isResetting and not newplayer.car.isInvincible):
-								if(newplayer.alldistance >= player.alldistance):
+								#TODO: greater than, not smaller than
+								if(newplayer.alldistance <= player.alldistance):
 									var dist:Vector2=newplayer.car.global_position-player.car.global_position
 									var distsq:float=dist.length_squared()
 									if(distsq < 100000):
-										#this.game.Players[j].prop.propArr.push(new as.Prop.PropShrinkRay(this.game,this.game.Players[j],this.player));
+										newplayer.prop.propArr.append(ShrinkProp.new(newplayer,player.car))
 										ClearPropBox();
-
+										break
 						j+=1;
 					if(j >= GameData.PlayersArr.size()):
-						#this.propArr.push(new as.Prop.PropShrinkRay(this.game,this.player,null));
+						print('nooneshere')
+						player.prop.propArr.append(ShrinkProp.new(player,null))
 						ClearPropBox();
 				#default
 				_:

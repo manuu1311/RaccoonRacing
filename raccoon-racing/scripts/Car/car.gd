@@ -33,6 +33,7 @@ var carViewInstance:Sprite2D
 @onready var current_vehicle: GameData.VehicleType=GameData.current_vehicle
 @onready var prop_effector: PropEffector = $PropEffector
 var friction:float=0
+var shrinkscale:float=1
 #state: drifting
 var bs:bool=false
 #turn drifting threshold
@@ -432,7 +433,7 @@ func Jumping()->void:
         jumpPrevheight = temp_height
     jumpFloorHeight = 0 
     var visual_scale:float = 1.0 + (jumpCurrheight * 0.0175)
-    visual.scale = Vector2(visual_scale, visual_scale)
+    visual.scale = Vector2(visual_scale*shrinkscale, visual_scale*shrinkscale)
 
 
 
@@ -567,7 +568,7 @@ func BeAttacked(who: Car)->void:
     var enemyInvincible:bool = who.isInvincible;
     if(isSmallState):
         enemyInvincible = true
-    if(isSmallState):
+    if(who.isSmallState):
         isInvincibletemp = true
    
     var enemySpeed:Vector2

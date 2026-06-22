@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://qf1myemhg1q5"]
+
+[ext_resource type="Script" uid="uid://stmwnu6j7u3t" path="res://scripts/map/Props/shrinkray_in_map.gd" id="1_d7hjx"]
+[ext_resource type="Texture2D" uid="uid://lw8osvfc72rb" path="res://Assets/Images/Vehicles/PropEffects/ShrinkRay/particle.png" id="1_rbuyt"]
+
+[node name="ShrinkInMap" type="Node2D" unique_id=1394869220]
+script = ExtResource("1_d7hjx")
+
+[node name="Start" type="Sprite2D" parent="." unique_id=833906581]
+position = Vector2(154, 165)
+texture = ExtResource("1_rbuyt")
+
+[node name="PointLight2D" type="PointLight2D" parent="Start" unique_id=27171373]
+color = Color(1, 0.2, 0, 1)
+energy = 1.2
+
+[node name="End" type="Sprite2D" parent="." unique_id=1023666966]
+position = Vector2(255, 143)
+texture = ExtResource("1_rbuyt")
+
+[node name="PointLight2D" type="PointLight2D" parent="End" unique_id=1170452181]
+color = Color(1, 0.2, 0, 1)
+energy = 1.2
+
+[node name="LineGlow" type="Line2D" parent="." unique_id=1368811329]
+points = PackedVector2Array(254, 139)
+width = 16.0
+default_color = Color(1, 0.13333334, 0, 0.5019608)
+
+[node name="LineMid" type="Line2D" parent="." unique_id=1951733616]
+width = 6.0
+default_color = Color(1, 0.53333336, 0, 0.8)
+
+[node name="LineCore" type="Line2D" parent="." unique_id=1564074774]
+width = 2.0
