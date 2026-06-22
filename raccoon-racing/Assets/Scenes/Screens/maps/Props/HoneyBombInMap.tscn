@@ -106,8 +106,16 @@ animations = [{
 script = ExtResource("1_6j2te")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1855379171]
+position = Vector2(40.535, 0)
 sprite_frames = SubResource("SpriteFrames_1fv3o")
 autoplay = "default"
+frame = 4
+frame_progress = 1.0
+flip_v = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2041306023]
+position = Vector2(64.375, -11)
 sprite_frames = SubResource("SpriteFrames_jvtuy")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1464373087]
+position = Vector2(64.86, -1)

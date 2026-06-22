@@ -8,7 +8,6 @@ var PId:int;
 
 func _init(playerinst:Player)->void:
 	Furballs1=preload("res://Assets/Scenes/Screens/maps/Props/FurballsInMap.tscn")
-	var effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/bomb.tscn")
 	super(playerinst)
 	proptype = 9;
 	FurballArr = []
@@ -20,6 +19,7 @@ func _init(playerinst:Player)->void:
 		_loc5_.rotated(deg_to_rad(_loc4_ * 360 / 6));
 		var furballinst:FurballsInMap=Furballs1.instantiate() as FurballsInMap
 		player.car.map.add_child(furballinst)
+		furballinst.setup(player.car.map,0,0)
 		furballinst.speed=player.car.speed
 		furballinst.petrolength=10
 		furballinst.petrowidth=0.5

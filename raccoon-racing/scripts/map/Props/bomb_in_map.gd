@@ -14,7 +14,6 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	map.add_child(self)
 	map.minimap.add_child(bombview)
 	bombview.position=map.offset+global_position*map.ScaledTimes
-	IsActivated = true;
 	animated_sprite_2d.hide()
 
 

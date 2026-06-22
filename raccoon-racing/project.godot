@@ -36,6 +36,7 @@ gdscript/warnings/untyped_declaration=1
 
 window/size/viewport_width=500
 window/size/viewport_height=500
+window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 
 [editor_plugins]

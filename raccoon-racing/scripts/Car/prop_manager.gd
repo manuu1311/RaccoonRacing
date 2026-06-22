@@ -72,13 +72,13 @@ func UseProp()->void:
 					propArr.append(FurballsProp.new(player))
 					ClearPropBox();
 				3:
-					#this.propArr.push(new as.Prop.PropHoneyBomb(this.game,this.player));
+					propArr.append(HoneyProp.new(player))
 					ClearPropBox();
 				4:
-					#this.propArr.push(new as.Prop.PropIceTrail(this.game,this.player));
+					propArr.append(IceTrailProp.new(player))
 					ClearPropBox();
 				5:
-					#this.propArr.push(new as.Prop.PropBone(this.game,this.player));
+					propArr.append(BoneProp.new(player))
 					ClearPropBox();
 				5:
 					var j:int = 0;

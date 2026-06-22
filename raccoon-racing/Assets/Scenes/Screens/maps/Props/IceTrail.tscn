@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bsp2c7g6rc7vh"]
+
+[ext_resource type="Script" uid="uid://c4vj6w1kpvulg" path="res://scripts/map/Props/icetrail_in_map.gd" id="1_ksg6s"]
+[ext_resource type="Texture2D" uid="uid://bbwn65s7jubkg" path="res://Assets/Images/general/2178_PropIceTrail.png" id="2_6w8v5"]
+
+[node name="IceTrail" type="Node2D" unique_id=1402138502]
+z_index = 1
+script = ExtResource("1_ksg6s")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=652234715]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=431450279]
+
+[node name="Polygon2D" type="Polygon2D" parent="Area2D" unique_id=1525887140]
+texture_repeat = 2
+texture = ExtResource("2_6w8v5")

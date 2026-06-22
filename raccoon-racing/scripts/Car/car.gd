@@ -54,6 +54,10 @@ var bsex:int=0
 var carRotationWheel: float=1
 #car maximum rotation
 var maxRotationWheel: float=4
+#car rotation speed
+var DefaultRotationWheel: float=1
+#car maximum rotation
+var DefaultmaxRotationWheel: float=4
 #is on ice?
 var isAtIce: bool=false
 #locked state
@@ -372,7 +376,7 @@ func UpdateCarPos()->void:
 
 #update camera:is it necessary??
 func UpdateViewMap()->void:
-    carViewInstance.position=map.offset+global_position*map.ScaledTimes
+    carViewInstance.position=map.offset+global_position*map.ScaledTimes/0.9589
     carViewInstance.rotation=rotation-PI/2
 
 func UpdateSpeed()->void:
@@ -595,6 +599,27 @@ func BeAttacked(who: Car)->void:
         speed = enemySpeed+pushvector
         who.speed = mySpeed-pushvector
 
+
+func SetOnIce()->void:
+    if isInvincible:
+        return
+    isAtIce=true
+    maxRotationWheel *= DefaultmaxRotationWheel* 1.2;
+    carRotationWheel *= DefaultRotationWheel * 1.2;
+    isAtIce = true;
+    glideGratingNum = 0;
+    rollGratingNum = 0;
+    grassGratingNum = 0;
+    wallSpring = 0.5;
+    
+func OutOfIce()->void:
+    maxRotationWheel = DefaultmaxRotationWheel
+    carRotationWheel = DefaultRotationWheel 
+    isAtIce=false
+    wallSpring=map.Wallspring
+    rollGratingNum=map.RollGratingNum
+    glideGratingNum=map.GlideGratingNum
+    grassGratingNum=map.GrassGratingNum
 
 #TODO: change sprites according to character
 func SetSprites()->void:
