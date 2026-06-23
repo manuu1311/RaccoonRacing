@@ -66,6 +66,4 @@ func delme()->void:
     player.prop.Delprop(self)
     
 func del()->void:
-    attacker.sounds.StopPandaSSound()
-    player.car.sounds.StopPandaSSound()
     queue_free()

@@ -7,6 +7,7 @@ var cars:Array[Car]
 var fcsCar:Car
 #TODO: should be created
 @onready var map: Map = $Map
+@onready var hud: HUDManager = $Hud
 
 func _ready() -> void:
 	#TODO: also select maps accordingly
@@ -26,6 +27,7 @@ func _ready() -> void:
 			carinstance.setup(map,player.PlayerID,true,player)
 			carinstance.add_child(HumanCarController.new(player))
 			Game.fcsCar=carinstance
+			player.SetHud(hud,carinstance)
 		else:
 			carinstance.setup(map,player.PlayerID,false,player)
 			carinstance.add_child(AICarController.new(player))
@@ -40,4 +42,5 @@ func register(player:Player)->void:
 	players.append(player)
 
 func focusCar(car:Car)->void:
+	GameData.FocusCar=car
 	fcsCar=car

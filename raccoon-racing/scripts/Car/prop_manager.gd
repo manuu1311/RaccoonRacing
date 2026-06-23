@@ -96,7 +96,6 @@ func UseProp()->void:
 										break
 						j+=1;
 					if(j >= GameData.PlayersArr.size()):
-						print('nooneshere')
 						player.prop.propArr.append(ShrinkProp.new(player,null))
 						ClearPropBox();
 				#default

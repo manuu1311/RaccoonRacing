@@ -16,11 +16,15 @@ var currentCup: int = -1
 #current difficulty chosen
 var currentDifficulty: int=-1
 var currentMap:int=1
+var currentLaps:int=3
 #car/hovercraft mode
 enum VehicleType { CAR, HOVERCRAFT }
 var current_vehicle: VehicleType = VehicleType.CAR
 var PlayersArr:Array[Player]=[]
 var OrderInfo:Array[int]=[]
+var FocusCar:Car
+##array to store info about best lap times in the 4 cups
+var BestTimes:Array[float]=[0.0,0.0,0.0,0.0]
 
 #TODO: actually edit the players
 func _ready() -> void:

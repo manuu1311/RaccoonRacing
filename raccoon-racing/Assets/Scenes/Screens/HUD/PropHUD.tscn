@@ -296,6 +296,7 @@ root_node = NodePath("../Visual")
 libraries/ = SubResource("AnimationLibrary_d28ny")
 
 [node name="Icon" type="AnimatedSprite2D" parent="Control" unique_id=1579730704]
+position = Vector2(1, 3)
 sprite_frames = SubResource("SpriteFrames_ls7wu")
 
 [node name="Shiny" type="AnimatedSprite2D" parent="Control" unique_id=507432389]
