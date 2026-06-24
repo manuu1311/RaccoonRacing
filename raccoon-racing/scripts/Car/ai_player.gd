@@ -2,7 +2,6 @@ extends Player
 class_name AIPlayer
 
 var AiPlayering:bool=false
-var AiReflect:int=10
 var AiUsePropReflect:int=150
 var ResetTimer:Timer
 var AiResetTime:int=10
@@ -182,19 +181,22 @@ func ActionCar(action:int)->void:
          DoAction(action);
 
 func DoAction(action:int)->void:
-    match(action):
-        -1:
-            car.Clearward()
-        0:
-            car.Forward()
-        1:
-            car.Backward()
-        2:
-            car.TurnLeft();
-        3:
-            car.TurnLRight();
-        _:
-            car.CancelTurn()
+    if car.jumpCurrheight<1:
+        match(action):
+            -1:
+                car.Clearward()
+            0:
+                car.Forward()
+            1:
+                car.Backward()
+            2:
+                car.TurnLeft();
+            3:
+                car.TurnLRight();
+            4:
+                car.CancelTurn()
+            _:
+                car.CancelTurn()
             
 func Stoprace()->void:
       AiPlayering = false;

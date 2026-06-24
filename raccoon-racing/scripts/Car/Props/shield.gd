@@ -15,12 +15,9 @@ func run()->void:
 	pass
 	
 func delme()->void:
-	print('ohoh')
 	await player.car.get_tree().create_timer(UseTime).timeout
-	print('ya')
 	player.prop.Delprop(self);
 
 func del()->void:
-	print('oki')
 	player.prop.IsUseShield = false;
 	player.car.prop_effector.RemoveShield()

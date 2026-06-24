@@ -6,15 +6,24 @@ class_name HUDManager
 @onready var char_hud: CharHud = $CharHud
 var FocusCar:Car
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
+func Hide()->void:
+	prop_hud.hide()
+	speed_hud.hide()
+	char_hud.hide()
+
+func setup() -> void:
+	prop_hud.show()
+	speed_hud.show()
+	char_hud.show()
+	char_hud.setup() 
 
 
 func SetCar(car:Car)->void:
 	FocusCar=car
 	prop_hud.DeferredInit(car.player.charid)
 	prop_hud.prop_visible.connect(car.player.ResetUse)
-	speed_hud.SetCar(car)
+	speed_hud.SetCar(FocusCar)
 
 func PropItemReady()->bool:
 	return prop_hud.itemready
@@ -29,3 +38,6 @@ func StartPropBox(runtime:float,id:int)->void:
 
 func updatelap()->void:
 	speed_hud.on_lap_completed()
+
+func play_overtake(overtaker:int, overtaken:int)->void:
+	char_hud.play_overtake(overtaker,overtaken)

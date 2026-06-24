@@ -5,7 +5,7 @@ extends EventInMap
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
 	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
 	global_position=Vector2(x,y)
-	rotation=angle
+	rotation_degrees=angle
 	
 	
 func GetHitEventStatus(PlayerId:int)->void:

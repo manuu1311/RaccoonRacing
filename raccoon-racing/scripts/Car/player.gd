@@ -8,8 +8,6 @@ var PlayerID:int
 var charid:int=6
 enum control_type{HUMAN,AI,MULTIPLAYER,RLTRAINING,RL}
 var current_control:control_type
-##position in the race, int
-var current_race_position:int
 var alldistance:int=0
 var prop:PropManager
 var PropBoxRunTimerId:int=-1
@@ -17,10 +15,11 @@ var CanUseProp:bool=false
 var IsUsingProp:bool=false
 var NowPointId:int
 var OrderId:int
-var LapsLock:bool
-var Laps:int
+var LapsLock:bool=true
+var Laps:int=1
 var distance:int
 var hud:HUDManager
+var AiReflect:int
 
 func _init(id:int,control:control_type) -> void:
     PlayerID=id
@@ -35,6 +34,7 @@ func SetCar(carinst:Car)->void:
     
 func SetHud(hudinst:HUDManager,carinst:Car)->void:
     hud=hudinst
+    hud.setup()
     hud.SetCar(carinst)
     
 
@@ -60,14 +60,18 @@ func StartRace()->void:
 func UpdatePoint() -> void:
     if !IsPlayering():
         return
+        
     var _loc4_: Vector2
     if NowPointId + 1 < car.map.Points.size():
         _loc4_ = car.map.Points[NowPointId + 1]
     else:
         _loc4_ = car.map.Points[0]
 
+    # _loc6_ in flash: distance from car to NEXT waypoint
     var tonext: float = _loc4_.distance_to(car.global_position)
+    # _loc5_ in flash: total distance between current waypoint and next waypoint
     var between: float = car.map.Points[NowPointId].distance_to(_loc4_)
+    
     distance = car.map.Points[NowPointId].distance_to(car.global_position)
 
     if NowPointId == 0 and !LapsLock:
@@ -77,17 +81,51 @@ func UpdatePoint() -> void:
 
     WinJudge() 
 
-    if tonext + 200 < between || distance < 200:
+    # Waypoint progression logic
+    if tonext + 200 < between or distance < 200:
         NowPointId += 1
         if NowPointId >= car.map.Points.size():
             NowPointId = 0
-            if hud!=null:
+            if hud != null:
                 hud.updatelap()
 
-func WinJudge()->void:
-    pass
+func WinJudge() -> void:
+    if NowPointId == 1:
+        LapsLock = false
+        
+    if NowPointId == 0 and !LapsLock:
+        var win_pos: Vector2 = car.map.get_win_pos() # Assuming map has this method
+        var win_to_point_0: float = win_pos.distance_to(car.map.Points[0])
+        
+        # distance is the car's distance to Points[0] (the next waypoint)
+        if distance < win_to_point_0:
+            if Laps == car.map.LapsTotal:
+                FinishRace()
+                return
+                
+            Laps += 1
+            
+            # If this is the main player (ID 0)
+            if PlayerID == 0: # Or whatever variable holds this car's unique ID
+                game.uiManage.ClearLapRecordTime()
+                
+                if Laps == car.map.LapsTotal:
+                    # Replace with your actual UI/Notification system call
+                    MessageBox.show_message("FINAL LAP", 3000, 1, Vector2(0, -50))
+                else:
+                    # Replace with your actual formatted string/localization system call
+                    var lap_text = "LAP %d/%d" % [Laps, car.map.LapsTotal]
+                    MessageBox.show_message(lap_text, 3000, 1, Vector2(0, -50))
+            
+            LapsLock = true
 
- 
+#TODO: race over
+func FinishRace()->void:
+    return
+
+#TODO: show message about lap completion
+func ShowMessage(message:String)->void:
+    return
 
 func RunPropBox(x:float,y:float)->void:
     car.sounds.GetProp()
@@ -110,7 +148,6 @@ func ClearPropBox(id:int)->void:
 
 
 func GetPropPer()->int:
-    return 9
     var _loc5_:int = randi_range(1,99);
     if(charid == 1 && OrderId == 0 && PlayerID == 0):
         _loc5_ = randi_range(0,89);

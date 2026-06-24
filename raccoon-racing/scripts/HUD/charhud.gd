@@ -14,7 +14,7 @@ var textures:Array[Texture]=[
 var active_tweens: Dictionary = {}  # TextureRect -> Tween
 var pending_moves: Dictionary = {}  # TextureRect -> destination_index
 
-func _ready() -> void:
+func setup() -> void:
 	for i in range(vbox.get_children().size()):
 		var rect:TextureRect=vbox.get_child(i) as TextureRect
 		rect.texture=textures[GameData.PlayersArr[i].charid]

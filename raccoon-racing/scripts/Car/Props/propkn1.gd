@@ -97,4 +97,5 @@ func delme()->void:
 
 func del()->void:
 	HomingMissile.queue_free()
+	HomingMissileView.queue_free()
 	queue_free()

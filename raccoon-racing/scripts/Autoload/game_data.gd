@@ -5,7 +5,7 @@ extends Node
 #3:pingo 4:hudson 5:banzai
 var characterLocks: Array[bool]=[0,0,1,1,1,1]
 #current character chosen
-var currentCharacter: int=-1
+var currentCharacter: int=1
 #cup info: lock
 var cupLocks: Array[bool]=[0,0,0,0,1,1,1,1]
 #cup info: which cups were won, in which difficulty
@@ -14,28 +14,28 @@ var cupWon: Array[int]=[0,0,0,0,0,0,0,0]
 #current cup chosen
 var currentCup: int = -1
 #current difficulty chosen
-var currentDifficulty: int=-1
+var currentDifficulty: int=0
 var currentMap:int=1
 var currentLaps:int=3
 #car/hovercraft mode
 enum VehicleType { CAR, HOVERCRAFT }
-var current_vehicle: VehicleType = VehicleType.CAR
+var current_vehicle: VehicleType = VehicleType.HOVERCRAFT
 var PlayersArr:Array[Player]=[]
 var OrderInfo:Array[int]=[]
+var DistanceInfo:Array[int]=[]
 var FocusCar:Car
 ##array to store info about best lap times in the 4 cups
 var BestTimes:Array[float]=[0.0,0.0,0.0,0.0]
+var AiLevel:Array[Array]
 
-#TODO: actually edit the players
+
 func _ready() -> void:
-	PlayersArr.append(Player.new(0,Player.control_type.HUMAN))
-	OrderInfo.append(0)
-	PlayersArr.append(AIPlayer.new(1,Player.control_type.AI))
-	OrderInfo.append(1)
-	PlayersArr.append(AIPlayer.new(2,Player.control_type.AI))
-	OrderInfo.append(2)
-	PlayersArr.append(AIPlayer.new(3,Player.control_type.AI))
-	OrderInfo.append(3)
+	AiLevel=[
+		[[18,100,false],[20,100,false],[22,200,false]],
+		[[15,80,true],[18,80,false],[20,80,false]],
+		[[10,30,true],[12,40,true],[15,60,true]],
+	]
+
 
 #update character locks, to unlock new characters after each cup
 func CheckCharacterLocks()->void:
@@ -77,6 +77,28 @@ func CheckCupLocks()->void:
 	if cupWon[6]>1:
 		cupLocks[7]=0
 
+func PopulatePlayers()->void:
+	var newplayer:Player
+	newplayer=Player.new(0,Player.control_type.HUMAN)
+	PlayersArr.append(newplayer)
+	OrderInfo.append(0)
+	DistanceInfo.append(0)
+	newplayer=AIPlayer.new(1,Player.control_type.AI)
+	PlayersArr.append(newplayer)
+	newplayer.AiReflect=AiLevel[currentDifficulty][0][0]
+	OrderInfo.append(1)
+	DistanceInfo.append(1)
+	newplayer=AIPlayer.new(2,Player.control_type.AI)
+	PlayersArr.append(newplayer)
+	newplayer.AiReflect=AiLevel[currentDifficulty][1][0]
+	OrderInfo.append(2)
+	DistanceInfo.append(2)
+	newplayer=AIPlayer.new(3,Player.control_type.AI)
+	PlayersArr.append(newplayer)
+	newplayer.AiReflect=AiLevel[currentDifficulty][2][0]
+	OrderInfo.append(3)
+	DistanceInfo.append(3)
+	
 #testing function
 func SetMidGameData()->void:
 	#won cup 1 in normal, cup 2 in easy, cup 3 in easy

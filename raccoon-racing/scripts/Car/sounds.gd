@@ -9,38 +9,39 @@ var prevSpeed: Vector2=Vector2.ZERO
 @onready var car: Car = $".."
 
 #all sound players
-@onready var car_fast_speed: AudioStreamPlayer = $CarFastSpeed
-@onready var car_run_speed: AudioStreamPlayer = $CarRunSpeed
-@onready var car_add_speed: AudioStreamPlayer = $CarAddSpeed
-@onready var car_lost_speed: AudioStreamPlayer = $CarLostSpeed
-@onready var car_bs: AudioStreamPlayer = $CarBs
-@onready var car_small_bs: AudioStreamPlayer = $CarSmallBs
-@onready var hc_add_speed: AudioStreamPlayer = $HCAddSpeed
-@onready var hc_run: AudioStreamPlayer = $HCRun
-@onready var hc_lost_speed: AudioStreamPlayer = $HCLostSpeed
-@onready var car_stop: AudioStreamPlayer = $CarStop
-@onready var jump: AudioStreamPlayer = $Jump
-@onready var hc_jump: AudioStreamPlayer = $HCJump
-@onready var hc_bump: AudioStreamPlayer = $HCBump
-@onready var car_bump: AudioStreamPlayer = $CarBump
-@onready var missile: AudioStreamPlayer = $Missile
-@onready var hc_end_jump: AudioStreamPlayer = $HCEndJump
-@onready var car_jump_end: AudioStreamPlayer = $CarJumpEnd
-@onready var bomb: AudioStreamPlayer = $bomb
-@onready var shield: AudioStreamPlayer = $Shield
-@onready var petro: AudioStreamPlayer = $Petro
-@onready var be_sleep: AudioStreamPlayer = $BeSleep
-@onready var bedump: AudioStreamPlayer = $Bedump
-@onready var dog_s: AudioStreamPlayer = $dogS
-@onready var panda_s: AudioStreamPlayer = $PandaS
-@onready var panda_ss: AudioStreamPlayer = $PandaSs
-@onready var mine: AudioStreamPlayer = $mine
-@onready var cat_s: AudioStreamPlayer = $catS
-@onready var bear_s: AudioStreamPlayer = $BearS
-@onready var ice: AudioStreamPlayer = $Ice
-@onready var use_sleep: AudioStreamPlayer = $useSleep
-@onready var oil: AudioStreamPlayer = $oil
-@onready var get_prop: AudioStreamPlayer = $GetProp
+@onready var car_fast_speed: AudioStreamPlayer2D = $CarFastSpeed
+@onready var car_run_speed: AudioStreamPlayer2D = $CarRunSpeed
+@onready var car_add_speed: AudioStreamPlayer2D = $CarAddSpeed
+@onready var car_lost_speed: AudioStreamPlayer2D = $CarLostSpeed
+@onready var car_bs: AudioStreamPlayer2D = $CarBs
+@onready var car_small_bs: AudioStreamPlayer2D = $CarSmallBs
+@onready var hc_add_speed: AudioStreamPlayer2D = $HCAddSpeed
+@onready var hc_run: AudioStreamPlayer2D = $HCRun
+@onready var hc_lost_speed: AudioStreamPlayer2D = $HCLostSpeed
+@onready var car_stop: AudioStreamPlayer2D = $CarStop
+@onready var jump: AudioStreamPlayer2D = $Jump
+@onready var hc_jump: AudioStreamPlayer2D = $HCJump
+@onready var hc_bump: AudioStreamPlayer2D = $HCBump
+@onready var car_bump: AudioStreamPlayer2D = $CarBump
+@onready var missile: AudioStreamPlayer2D = $Missile
+@onready var hc_end_jump: AudioStreamPlayer2D = $HCEndJump
+@onready var car_jump_end: AudioStreamPlayer2D = $CarJumpEnd
+@onready var bomb: AudioStreamPlayer2D = $bomb
+@onready var shield: AudioStreamPlayer2D = $Shield
+@onready var petro: AudioStreamPlayer2D = $Petro
+@onready var be_sleep: AudioStreamPlayer2D = $BeSleep
+@onready var bedump: AudioStreamPlayer2D = $Bedump
+@onready var dog_s: AudioStreamPlayer2D = $dogS
+@onready var panda_s: AudioStreamPlayer2D = $PandaS
+@onready var panda_ss: AudioStreamPlayer2D = $PandaSs
+@onready var mine: AudioStreamPlayer2D = $mine
+@onready var cat_s: AudioStreamPlayer2D = $catS
+@onready var bear_s: AudioStreamPlayer2D = $BearS
+@onready var ice: AudioStreamPlayer2D = $Ice
+@onready var use_sleep: AudioStreamPlayer2D = $useSleep
+@onready var oil: AudioStreamPlayer2D = $oil
+@onready var get_prop: AudioStreamPlayer2D = $GetProp
+
 var sounds:Array[AudioStreamPlayer]=[]
 
 # Called when the node enters the scene tree for the first time.
@@ -50,79 +51,93 @@ func _ready() -> void:
 
 func PopulateSounds()->void:
     for child in get_children():
-        if child is AudioStreamPlayer:
+        if child is AudioStreamPlayer2D:
             sounds.append(child)
-
-func Loopsounds()->void:
-    #distance between car and focus car (player)
-    var dx: float = global_position.x - Game.fcsCar.global_position.x
-    var dy: float = global_position.y - Game.fcsCar.global_position.y
-    var dist_sqr: float = (dx * dx) + (dy * dy)
-    soundsVolume = (160000.0 - dist_sqr) / 1600.0
-    if(dist_sqr > 1000):
-        soundsVolume -= 20
-    if(soundsVolume < 0):
-        soundsVolume = 0;
-        return 
-    #prevent sounds from being too loud if there are many cars around
-    var totalVolume:float = 0;
-    for id in len(Game.players):
-        totalVolume += Game.players[id].sounds.soundsVolume;
-    
-    if(totalVolume > 150):
-        soundsVolume *= 150 / totalVolume;
-    #Calculate Panning 
-    var as2_pen: float = ((dx - 400.0) / 4.0) + 100.0
-    as2_pen = clamp(as2_pen, -100.0, 100.0)
-    #normalise between -1 and 1
-    sounds_pen = as2_pen / 100.0
-    #apply new settings
-    apply_global_sound_settings()
-    #this.sounds.changeAllSoundVolumeAndPan(this.soundsVolume,this.soundsPen);
-    #pitch and state calculation
-    var speedScalar:float = car.speed.length() / 16;
-    var speedOffset:float=0;
-    if(not car.isHovercraft()):
-        if(car_fast_speed.playing and car_fast_speed.get_playback_position() < 0.4):
-            return 
-        if(speedScalar > 0.8):
-            car_add_speed.stop()
-            car_lost_speed.stop()
-            if not car_run_speed.is_playing():
-                car_run_speed.play()
-        else:
-            if car.speed.length() <= 3.0:
-                speedOffset = 0.0
+            if car == GameData.FocusCar:
+                # Replace with a non-spatial player
+                var flat := AudioStreamPlayer.new()
+                flat.stream = child.stream
+                flat.volume_db = child.volume_db
+                flat.bus = child.bus
+                flat.autoplay = child.autoplay
+                flat.name = child.name + "_flat"
+                add_child(flat)
+                child.queue_free()
+                sounds.append(flat)
             else:
-                speedOffset = 0.05
-            #is accelerating?
-            if(car.speed.length() > prevSpeed.length() - speedOffset):
-                speedScalar = car_add_speed.stream.get_length()*speedScalar 
-                if(not car_add_speed.playing or  abs(speedScalar - car_add_speed.get_playback_position()) > car_add_speed.stream.get_length() / 5):
-                    #in seconds
-                    car_add_speed.play(speedScalar)
-                    car_run_speed.stop()
-                    car_lost_speed.stop()
-            #decelerating
-            else:
-                speedScalar=car_lost_speed.stream.get_length()*speedScalar
-                if (not car_lost_speed.playing or abs(speedScalar-(car_add_speed.stream.get_length()-car_lost_speed.get_playback_position()))>car_add_speed.stream.get_length()/5):
-                    car_lost_speed.play((car_add_speed.stream.get_length()-speedScalar))
-                    car_run_speed.stop()
-                    car_add_speed.stop()
-        prevSpeed = car.speed
+                sounds.append(child)
+                
 
-func apply_global_sound_settings() -> void:
-    # Flash volume went up to ~100+. Godot uses decibels (0 dB is full, -60 dB is silent)
-    # This is a basic conversion curve. 
-    var db_volume:float = linear_to_db(clamp(soundsVolume / 100.0, 0.0, 1.0))
-    
-    for snd in sounds:
-        if snd:
-            snd.volume_db = db_volume
-            #TODO: create more buses, one for each car, and replace the first idx
-    var panner:AudioEffectPanner = AudioServer.get_bus_effect(0, 0) as AudioEffectPanner
-    panner.pan = sounds_pen
+#func Loopsounds()->void:
+    ##distance between car and focus car (player)
+    #var dx: float = global_position.x - GameData.FocusCar.global_position.x
+    #var dy: float = global_position.y - GameData.FocusCar.global_position.y
+    #var dist_sqr: float = (dx * dx) + (dy * dy)
+    #soundsVolume = (160000.0 - dist_sqr) / 1600.0
+    #if(dist_sqr > 1000):
+        #soundsVolume -= 20
+    #if(soundsVolume < 0):
+        #soundsVolume = 0;
+        #return 
+    ##prevent sounds from being too loud if there are many cars around
+    #var totalVolume:float = 0;
+    #for id in len(GameData.PlayersArr):
+        #totalVolume += GameData.PlayersArr[id].car.sounds.soundsVolume;
+    #
+    #if(totalVolume > 150):
+        #soundsVolume *= 150 / totalVolume;
+    ##Calculate Panning 
+    #var as2_pen: float = ((dx - 400.0) / 4.0) + 100.0
+    #as2_pen = clamp(as2_pen, -100.0, 100.0)
+    ##normalise between -1 and 1
+    #sounds_pen = as2_pen / 100.0
+    ##apply new settings
+    #apply_global_sound_settings()
+    ##this.sounds.changeAllSoundVolumeAndPan(this.soundsVolume,this.soundsPen);
+    ##pitch and state calculation
+    #var speedScalar:float = car.speed.length() / 16;
+    #var speedOffset:float=0;
+    #if(not car.isHovercraft()):
+        #if(car_fast_speed.playing and car_fast_speed.get_playback_position() < 0.4):
+            #return 
+        #if(speedScalar > 0.8):
+            #car_add_speed.stop()
+            #car_lost_speed.stop()
+            #if not car_run_speed.is_playing():
+                #car_run_speed.play()
+        #else:
+            #if car.speed.length() <= 3.0:
+                #speedOffset = 0.0
+            #else:
+                #speedOffset = 0.05
+            ##is accelerating?
+            #if(car.speed.length() > prevSpeed.length() - speedOffset):
+                #speedScalar = car_add_speed.stream.get_length()*speedScalar 
+                #if(not car_add_speed.playing or  abs(speedScalar - car_add_speed.get_playback_position()) > car_add_speed.stream.get_length() / 5):
+                    ##in seconds
+                    #car_add_speed.play(speedScalar)
+                    #car_run_speed.stop()
+                    #car_lost_speed.stop()
+            ##decelerating
+            #else:
+                #speedScalar=car_lost_speed.stream.get_length()*speedScalar
+                #if (not car_lost_speed.playing or abs(speedScalar-(car_add_speed.stream.get_length()-car_lost_speed.get_playback_position()))>car_add_speed.stream.get_length()/5):
+                    #car_lost_speed.play((car_add_speed.stream.get_length()-speedScalar))
+                    #car_run_speed.stop()
+                    #car_add_speed.stop()
+        #prevSpeed = car.speed
+
+#func apply_global_sound_settings() -> void:
+    ## Flash volume went up to ~100+. Godot uses decibels (0 dB is full, -60 dB is silent)
+    ## This is a basic conversion curve. 
+    #var db_volume:float = linear_to_db(clamp(soundsVolume / 100.0, 0.0, 1.0))
+    #
+    #for snd in sounds:
+        #if snd:
+            #snd.volume_db = db_volume
+            ##TODO: create more buses, one for each car, and replace the first idx
+    #var panner:AudioEffectPanner = AudioServer.get_bus_effect(0, 0) as AudioEffectPanner
+    #panner.pan = sounds_pen
 
 func playHCRunSound()->void:
     hc_lost_speed.stop()

@@ -1052,109 +1052,171 @@ sprite_frames = SubResource("SpriteFrames_h50x8")
 frame = 42
 frame_progress = 1.0
 
-[node name="Camera" type="Camera2D" parent="." unique_id=956712359]
-
 [node name="Sounds" type="Node2D" parent="." unique_id=536299159]
 script = ExtResource("8_fa25q")
 
-[node name="CarFastSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=624929206]
+[node name="CarFastSpeed" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1514566462]
 stream = ExtResource("9_oogh6")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="CarRunSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=928400211]
+[node name="CarRunSpeed" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1656674843]
 stream = ExtResource("10_vi2p3")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="CarAddSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=341326885]
+[node name="CarAddSpeed" type="AudioStreamPlayer2D" parent="Sounds" unique_id=304361683]
 stream = ExtResource("11_vryto")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="CarLostSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=1977081372]
+[node name="CarLostSpeed" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1898675125]
 stream = ExtResource("12_ygac3")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="CarBs" type="AudioStreamPlayer" parent="Sounds" unique_id=298643805]
+[node name="CarBs" type="AudioStreamPlayer2D" parent="Sounds" unique_id=522373720]
 stream = ExtResource("13_ydqe7")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="CarSmallBs" type="AudioStreamPlayer" parent="Sounds" unique_id=723886538]
+[node name="CarSmallBs" type="AudioStreamPlayer2D" parent="Sounds" unique_id=912546912]
 stream = ExtResource("14_goohx")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="HCAddSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=1953856050]
+[node name="HCAddSpeed" type="AudioStreamPlayer2D" parent="Sounds" unique_id=265912342]
 stream = ExtResource("15_u1cwy")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="HCRun" type="AudioStreamPlayer" parent="Sounds" unique_id=821537394]
+[node name="HCRun" type="AudioStreamPlayer2D" parent="Sounds" unique_id=809733849]
 stream = ExtResource("16_ix02f")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="HCLostSpeed" type="AudioStreamPlayer" parent="Sounds" unique_id=608171593]
+[node name="HCLostSpeed" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1983740818]
 stream = ExtResource("17_rt3ho")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="CarStop" type="AudioStreamPlayer" parent="Sounds" unique_id=447495418]
+[node name="CarStop" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1997459263]
 stream = ExtResource("18_vi2p3")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="Jump" type="AudioStreamPlayer" parent="Sounds" unique_id=165611101]
+[node name="Jump" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1804166714]
 stream = ExtResource("19_uonho")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="HCJump" type="AudioStreamPlayer" parent="Sounds" unique_id=953354692]
+[node name="HCJump" type="AudioStreamPlayer2D" parent="Sounds" unique_id=748785641]
 stream = ExtResource("20_cvqbw")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="HCBump" type="AudioStreamPlayer" parent="Sounds" unique_id=495644005]
+[node name="HCBump" type="AudioStreamPlayer2D" parent="Sounds" unique_id=992399701]
 stream = ExtResource("21_et7sh")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="CarBump" type="AudioStreamPlayer" parent="Sounds" unique_id=1657111872]
+[node name="CarBump" type="AudioStreamPlayer2D" parent="Sounds" unique_id=2018589454]
 stream = ExtResource("22_hrg02")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="Missile" type="AudioStreamPlayer" parent="Sounds" unique_id=1771499492]
+[node name="Missile" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1111128217]
 stream = ExtResource("23_nbhsi")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="HCEndJump" type="AudioStreamPlayer" parent="Sounds" unique_id=1982401609]
+[node name="HCEndJump" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1117577224]
 stream = ExtResource("24_y3ihi")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="CarJumpEnd" type="AudioStreamPlayer" parent="Sounds" unique_id=1736232300]
+[node name="CarJumpEnd" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1932172247]
 stream = ExtResource("25_x1plf")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="bomb" type="AudioStreamPlayer" parent="Sounds" unique_id=1733320987]
+[node name="bomb" type="AudioStreamPlayer2D" parent="Sounds" unique_id=645423225]
 stream = ExtResource("26_e766x")
+max_distance = 750.0
+attenuation = 0.18946469
 max_polyphony = 3
 
-[node name="Shield" type="AudioStreamPlayer" parent="Sounds" unique_id=1333375410]
+[node name="Shield" type="AudioStreamPlayer2D" parent="Sounds" unique_id=169059799]
 stream = ExtResource("27_2ofb7")
+max_distance = 750.0
+attenuation = 0.18946469
 max_polyphony = 3
 
-[node name="Petro" type="AudioStreamPlayer" parent="Sounds" unique_id=255270359]
+[node name="Petro" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1029048390]
 stream = ExtResource("28_rkvpl")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="BeSleep" type="AudioStreamPlayer" parent="Sounds" unique_id=1925453179]
+[node name="BeSleep" type="AudioStreamPlayer2D" parent="Sounds" unique_id=503330145]
 stream = ExtResource("29_hgp48")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="Bedump" type="AudioStreamPlayer" parent="Sounds" unique_id=1434263690]
+[node name="Bedump" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1450931491]
 stream = ExtResource("30_prn00")
+max_distance = 750.0
+attenuation = 0.18946469
 max_polyphony = 5
 
-[node name="dogS" type="AudioStreamPlayer" parent="Sounds" unique_id=499842868]
+[node name="dogS" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1040636684]
 stream = ExtResource("31_11m81")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="PandaS" type="AudioStreamPlayer" parent="Sounds" unique_id=1736464265]
+[node name="PandaS" type="AudioStreamPlayer2D" parent="Sounds" unique_id=138599112]
 stream = ExtResource("32_aqpyp")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="PandaSs" type="AudioStreamPlayer" parent="Sounds" unique_id=1142971297]
+[node name="PandaSs" type="AudioStreamPlayer2D" parent="Sounds" unique_id=60104771]
 stream = ExtResource("33_ibijk")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="mine" type="AudioStreamPlayer" parent="Sounds" unique_id=1783466598]
+[node name="mine" type="AudioStreamPlayer2D" parent="Sounds" unique_id=227214939]
 stream = ExtResource("34_ytavi")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="catS" type="AudioStreamPlayer" parent="Sounds" unique_id=164836901]
+[node name="catS" type="AudioStreamPlayer2D" parent="Sounds" unique_id=999888182]
 stream = ExtResource("35_1hvai")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="BearS" type="AudioStreamPlayer" parent="Sounds" unique_id=1361043075]
+[node name="BearS" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1871293182]
 stream = ExtResource("36_628tp")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="Ice" type="AudioStreamPlayer" parent="Sounds" unique_id=2085077440]
+[node name="Ice" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1153271279]
 stream = ExtResource("37_bo005")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="useSleep" type="AudioStreamPlayer" parent="Sounds" unique_id=1895483511]
+[node name="useSleep" type="AudioStreamPlayer2D" parent="Sounds" unique_id=193706795]
 stream = ExtResource("38_rual8")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="oil" type="AudioStreamPlayer" parent="Sounds" unique_id=1343397952]
+[node name="oil" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1707432091]
 stream = ExtResource("39_yblkr")
+max_distance = 750.0
+attenuation = 0.18946469
 
-[node name="GetProp" type="AudioStreamPlayer" parent="Sounds" unique_id=2117472786]
+[node name="GetProp" type="AudioStreamPlayer2D" parent="Sounds" unique_id=74060029]
 stream = ExtResource("43_hrg02")
+max_distance = 750.0
+attenuation = 0.18946469
 max_polyphony = 4
 
 [node name="PropHud" parent="." unique_id=1104215152 instance=ExtResource("44_nbhsi")]

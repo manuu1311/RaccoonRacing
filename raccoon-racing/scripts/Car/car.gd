@@ -19,7 +19,6 @@ var playerID:int=0
 @onready var body: Area2D = $Visual/Body
 @onready var visual: Node2D = $Visual
 @onready var character: Sprite2D = $Visual/Char
-@onready var camera: Camera2D = $Camera
 var map:Map
 @export var playering:bool
 #TODO: actual map
@@ -144,6 +143,7 @@ func DeferredSetup()->void:
     rollGratingNum=map.RollGratingNum
     glideGratingNum=map.GlideGratingNum
     grassGratingNum=map.GrassGratingNum
+    SetSprites()
     
     
 func PopulateCollisions()->void:
@@ -292,7 +292,7 @@ func Update()->void:
     UpdateViewMap()
     UpdateSpeed()
     Jumping()
-    sounds.Loopsounds()
+    #sounds.Loopsounds()
     var dir_modifier: float = 1.0 if bsf else -1.0
     if(bs):
         rotation_degrees += 1 * speed.length()*dir_modifier
@@ -372,7 +372,7 @@ func UpdateCarPos()->void:
     position.x = tempx
     position.y = tempy
 
-#update camera:is it necessary??
+
 func UpdateViewMap()->void:
     carViewInstance.position=map.offset+global_position*map.ScaledTimes/0.9589
     carViewInstance.rotation=rotation-PI/2
@@ -627,9 +627,30 @@ func OutOfIce()->void:
     glideGratingNum=map.GlideGratingNum
     grassGratingNum=map.GrassGratingNum
 
-#TODO: change sprites according to character
 func SetSprites()->void:
-    pass
+    var basepath:String="res://Assets/Images/Vehicles/Cars/"
+    var charname:String
+    if CharID==1:
+        charname='raccoon'
+    elif CharID==2:
+        charname='cat'
+    elif CharID==3:
+        charname='bear'
+    elif CharID==4:
+        charname='penguin'
+    elif CharID==5:
+        charname='dog'
+    elif CharID==6:
+        charname='panda'
+    var base: Sprite2D = $Visual/Car/Base
+    base.texture=load(basepath+charname+'/base.png')
+    var hc: Sprite2D = $Visual/Hovercraft/Base
+    hc.texture=load(basepath+charname+'/hovercraft.png')
+    exhaust_1.texture=load(basepath+charname+'/hcback.png')
+    exhaust_2.texture=load(basepath+charname+'/hcback.png')
+    character.texture=load(basepath+charname+'/char.png')
+    
+
 
 #is race type hovercraft?
 func isHovercraft()->bool:

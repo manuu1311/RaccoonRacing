@@ -5,7 +5,7 @@
 
 [node name="Minimap02" type="CanvasLayer" unique_id=1433147747]
 
-[node name="View" type="TextureRect" parent="." unique_id=1378546748]
+[node name="View" type="TextureRect" parent="." unique_id=7595152]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -19,6 +19,7 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("1_btai5")
 
-[node name="MapSprite" type="Sprite2D" parent="View" unique_id=460737866]
+[node name="MapSprite" type="Sprite2D" parent="View" unique_id=767367177]
 position = Vector2(70.5, 65.5)
+scale = Vector2(0.959, 0.959)
 texture = ExtResource("2_btai5")
