@@ -8,6 +8,7 @@ var fcsCar:Car
 #TODO: should be created
 @onready var map: Map = $Map
 @onready var hud: HUDManager = $Hud
+@onready var sound_manager: GameSoundManager = $SoundManager
 
 func _ready() -> void:
 	#TODO: also select maps accordingly
@@ -23,7 +24,7 @@ func _ready() -> void:
 	for i:int in GameData.OrderInfo: 
 		var player:Player=GameData.PlayersArr[i]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
-		if player.IsPlayering():
+		if player.current_control==player.control_type.HUMAN:
 			carinstance.setup(map,player.PlayerID,true,player)
 			carinstance.add_child(HumanCarController.new(player))
 			Game.fcsCar=carinstance
@@ -37,6 +38,10 @@ func _ready() -> void:
 
 	
 	
+func RaceStart()->void:
+	for player:Player in GameData.PlayersArr:
+		player.StartRace()
+	
 	
 func register(player:Player)->void:
 	players.append(player)
@@ -44,3 +49,8 @@ func register(player:Player)->void:
 func focusCar(car:Car)->void:
 	GameData.FocusCar=car
 	fcsCar=car
+
+func CoolEffects()->void:
+	sound_manager.PlaySound('levelstart')
+	await get_tree().create_timer(3).timeout
+	

@@ -33,8 +33,11 @@ func SetCar(carinst:Car)->void:
 func _process(_delta: float) -> void:
 	if updating:
 		return
-		
-	var speed:int=int(car.speed.length()*10)
+	var speed:int
+	if car.isLock:
+		speed=0
+	else:
+		speed=int(car.speed.length()*10)
 	label.text = str(speed)
 	animated_sprite_2d.frame = int(speed / 30)
 	

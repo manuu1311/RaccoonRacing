@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://cehj3k48xb3su"]
 
+[ext_resource type="Script" uid="uid://b0jhw1e62c28t" path="res://scripts/HUD/HUD.gd" id="1_12x6x"]
 [ext_resource type="PackedScene" uid="uid://c571ojyvvjnqr" path="res://Assets/Scenes/Screens/HUD/PropHUD.tscn" id="1_oibfu"]
 [ext_resource type="PackedScene" uid="uid://b20xg5bmjnfvd" path="res://Assets/Scenes/Screens/HUD/SpeedHud.tscn" id="2_p0rt3"]
 [ext_resource type="PackedScene" uid="uid://t8tj8b4rkyij" path="res://Assets/Scenes/Screens/HUD/CharHud.tscn" id="4_12x6x"]
 
 [node name="Hud" type="Node" unique_id=929271289]
+script = ExtResource("1_12x6x")
 
 [node name="PropHud" parent="." unique_id=1104215152 instance=ExtResource("1_oibfu")]
 

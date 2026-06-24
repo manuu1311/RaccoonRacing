@@ -61,7 +61,7 @@ var DefaultmaxRotationWheel: float=4
 #is on ice?
 var isAtIce: bool=false
 #locked state
-var isLock:bool=false
+var isLock:bool=true
 #sleeping
 var isSleep:bool
 #car power
@@ -597,6 +597,14 @@ func BeAttacked(who: Car)->void:
         speed = enemySpeed+pushvector
         who.speed = mySpeed-pushvector
 
+func Reset(newpos:Vector2,newangle:float)->void:
+    global_position=newpos
+    rotation=newangle
+    scale=Vector2(1,1)
+    visual.scale=Vector2(1,1)
+    jumpCurrheight=0
+    jumpPrevheight=0
+    Update();
 
 func SetOnIce()->void:
     if isInvincible:
