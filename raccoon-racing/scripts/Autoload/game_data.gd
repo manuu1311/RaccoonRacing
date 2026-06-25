@@ -14,14 +14,15 @@ var cupWon: Array[int]=[0,0,0,0,0,0,0,0]
 #current cup chosen
 var currentCup: int = 0
 #current difficulty chosen
-var currentDifficulty: int=0
+var currentDifficulty: int=2
 var currentMap:int=1
 var currentLaps:int=3
 #car/hovercraft mode
 enum VehicleType { CAR, HOVERCRAFT }
-var current_vehicle: VehicleType = VehicleType.HOVERCRAFT
+var current_vehicle: VehicleType = VehicleType.CAR
 var PlayersArr:Array[Player]=[]
 var OrderInfo:Array[int]=[]
+var PointsInfo:Array[int]
 var FocusCar:Car
 ##array to store info about best lap times in the 4 cups
 var BestTimes:Array[float]=[0.0,0.0,0.0,0.0]
@@ -111,3 +112,7 @@ func UnlockAll()->void:
 	CheckCupLocks()
 		
 		
+##record new win in cup with current difficulty
+func RecordWin()->void:
+	if cupWon[currentCup]<currentDifficulty:
+		cupWon[currentCup]=currentDifficulty

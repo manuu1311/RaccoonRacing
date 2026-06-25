@@ -13,6 +13,7 @@ var AiNowPushButton:int
 func RunPropBox(x:float,y:float)->void:
     pass
 
+
 func Update()->void:
     if(AiPlayering && car.playering):
         AutoPlay();

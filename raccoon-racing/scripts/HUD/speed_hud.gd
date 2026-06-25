@@ -74,3 +74,6 @@ func on_lap_completed() -> void:
 	updating = true
 	await get_tree().create_timer(2).timeout
 	updating = false
+
+func stop()->void:
+	updating=true

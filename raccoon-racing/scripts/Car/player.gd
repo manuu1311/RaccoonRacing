@@ -20,6 +20,7 @@ var Laps:int=1
 var distance:int
 var hud:HUDManager
 var AiReflect:int
+signal racefinished
 
 func _init(id:int,control:control_type) -> void:
     PlayerID=id
@@ -97,7 +98,7 @@ func WinJudge() -> void:
         
         # distance is the car's distance to Points[0] (the next waypoint)
         if distance < win_to_point_0:
-            if Laps == car.map.LapsTotal:
+            if Laps == GameData.currentLaps:
                 FinishRace()
                 return
                 
@@ -105,22 +106,28 @@ func WinJudge() -> void:
             # If this is the main player (ID 0)
             if hud!=null: 
                 hud.updatelap()
-                if Laps == car.map.LapsTotal:
+                if Laps == GameData.currentLaps:
                     # Replace with your actual UI/Notification system call
                     hud.ShowMessage("FINAL LAP")
                 else:
                     # Replace with your actual formatted string/localization system call
-                    var lap_text:String = "LAP %d/%d" % [Laps, car.map.LapsTotal]
+                    var lap_text:String = "LAP %d/%d" % [Laps, GameData.currentLaps]
                     hud.ShowMessage(lap_text)
             
             LapsLock = true
 
-#TODO: race over
-func FinishRace()->void:
-    return
 
+func FinishRace()->void:
+    alldistance = 100000000 * (GameData.PlayersArr.size() - OrderId);
+    Stoprace();
+
+func Stoprace()->void:
+      car.playering = false;
+      racefinished.emit()
 
 func RunPropBox(x:float,y:float)->void:
+    if not car.playering:
+        return
     car.sounds.GetProp()
     if not hud.PropItemReady():
         hud.propmove(x,y)

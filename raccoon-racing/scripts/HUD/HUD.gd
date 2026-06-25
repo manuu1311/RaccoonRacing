@@ -49,3 +49,6 @@ func play_overtake(overtaker:int, overtaken:int)->void:
 func ShowMessage(message:String)->void:
 	lbl321.text=message
 	lbl321_player.play("Messageshow")
+
+func StopRecord()->void:
+	speed_hud.stop()

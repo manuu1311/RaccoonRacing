@@ -4,6 +4,21 @@
 [ext_resource type="PackedScene" uid="uid://cehj3k48xb3su" path="res://Assets/Scenes/Screens/HUD/HUD.tscn" id="3_rrtsn"]
 [ext_resource type="Script" uid="uid://memhlecsyk42" path="res://scripts/Game/sound_manager.gd" id="4_piq2e"]
 [ext_resource type="PackedScene" uid="uid://c47mpkqmnemuy" path="res://Assets/Scenes/Screens/maps/Map01.tscn" id="4_vyse4"]
+[ext_resource type="Texture2D" uid="uid://dn7nt3mtihhn" path="res://Assets/Images/game/finish/1.png" id="5_6ttnx"]
+[ext_resource type="Texture2D" uid="uid://c5k0abksngnfh" path="res://Assets/Images/game/finish/2.png" id="6_b4twu"]
+[ext_resource type="Texture2D" uid="uid://uxwty2nltrnj" path="res://Assets/Images/game/finish/3.png" id="7_1acdu"]
+[ext_resource type="Texture2D" uid="uid://dlvhfnc8n2fdj" path="res://Assets/Images/game/finish/4.png" id="8_awsq6"]
+[ext_resource type="Texture2D" uid="uid://cx5jgk2igxxnx" path="res://Assets/Images/game/finish/5.png" id="9_s14cw"]
+[ext_resource type="Texture2D" uid="uid://b8cgvo5xo7w2s" path="res://Assets/Images/game/finish/6.png" id="10_2f22y"]
+[ext_resource type="Texture2D" uid="uid://d14vor5b0sb1u" path="res://Assets/Images/game/finish/7.png" id="11_0s3ci"]
+[ext_resource type="Texture2D" uid="uid://cy1kge340sjiu" path="res://Assets/Images/game/finish/8.png" id="12_gul4c"]
+[ext_resource type="Texture2D" uid="uid://dhm3vwa3jue5l" path="res://Assets/Images/game/finish/9.png" id="13_8o81i"]
+[ext_resource type="Texture2D" uid="uid://c5wmxkb4lu25a" path="res://Assets/Images/game/finish/10.png" id="14_mo4ej"]
+[ext_resource type="Texture2D" uid="uid://mau1b7sjj52n" path="res://Assets/Images/game/finish/11.png" id="15_78i6o"]
+[ext_resource type="Texture2D" uid="uid://b267h6gqu1f0l" path="res://Assets/Images/game/finish/12.png" id="16_1t75w"]
+[ext_resource type="Texture2D" uid="uid://dclsslp8k0hyy" path="res://Assets/Images/game/finish/13.png" id="17_hnd8c"]
+[ext_resource type="Texture2D" uid="uid://cq4xfe1yvy5gc" path="res://Assets/Images/game/finish/14.png" id="18_2xs42"]
+[ext_resource type="Texture2D" uid="uid://e7u6tavnglm8" path="res://Assets/Images/game/finish/15.png" id="19_no6kj"]
 
 [sub_resource type="Environment" id="Environment_td7gk"]
 glow_enabled = true
@@ -94,10 +109,64 @@ _data = {
 &"RESET": SubResource("Animation_piq2e")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ttnx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_6ttnx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_b4twu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1acdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_awsq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_s14cw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2f22y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_0s3ci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_gul4c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8o81i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_mo4ej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_78i6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_1t75w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_hnd8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_2xs42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_no6kj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Experiment" type="Node2D" unique_id=411329241]
 script = ExtResource("1_piq2e")
 
 [node name="Map" parent="." unique_id=620435250 instance=ExtResource("4_vyse4")]
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1501903731]
 environment = SubResource("Environment_td7gk")
@@ -116,8 +185,8 @@ transform = Transform2D(0.5, 0, 0, 0.5, 150, 125)
 custom_minimum_size = Vector2(200, 200)
 offset_left = 150.0
 offset_top = 150.0
-offset_right = 350.00012
-offset_bottom = 355.00006
+offset_right = 681.0
+offset_bottom = 650.0
 scale = Vector2(2.6, 2.6)
 pivot_offset = Vector2(100, 100)
 theme_override_colors/font_color = Color(0.8603393, 0.9375, 0.05566405, 1)
@@ -133,6 +202,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="321Player" type="AnimationPlayer" parent="321" unique_id=861274524]
 libraries/ = SubResource("AnimationLibrary_vyse4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="321" unique_id=1388537590]
+position = Vector2(200, 200)
+sprite_frames = SubResource("SpriteFrames_6ttnx")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1078716222]
 

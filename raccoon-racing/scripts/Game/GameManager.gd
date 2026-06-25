@@ -11,6 +11,7 @@ var fcsCar:Car
 @onready var sound_manager: GameSoundManager = $SoundManager
 @onready var lbl321: Label = $"321/321"
 @onready var lbl321_player: AnimationPlayer = $"321/321Player"
+@onready var finish: AnimatedSprite2D = $"321/Finish"
 var MoveSceneCenterSpeed:int = 2;
 var MoveSceneAngleSpeed:float = 0.2;
 @onready var camera: Camera2D = $Camera2D
@@ -47,6 +48,7 @@ func _ready() -> void:
             player.charid=GameData.currentCharacter
             available_ids.erase(GameData.currentCharacter)
             available_ids.shuffle()
+            player.racefinished.connect(Racestop)
         else:
             carinstance.setup(map,player.PlayerID,false,player)
             carinstance.add_child(AICarController.new(player))
@@ -162,3 +164,44 @@ func UpdateOrderResult() -> void:
             # Trigger HUD animation
             if hud and hud.has_method("play_overtake"):
                 hud.play_overtake(i, old_index)
+
+
+func Racestop()->void:
+    hud.StopRecord()
+    MusicPlayer.FadeOutAndStop(3)
+    if(fcsCar.player.OrderId == 0):
+        sound_manager.PlaySound("finish",0.0)
+    else:
+        sound_manager.PlaySound("failed",0.0)
+    ShowFinishEffect();
+
+
+
+func ShowFinishEffect()->void:
+    finish.play()
+    await get_tree().create_timer(3).timeout
+    UiOverAnimation.playanim()
+    BackToMain()
+
+#TODO: implement
+func BackToMain()->void:
+    return
+    #as.GameDate.RecordPlayerSorce(this.OrderInfo);
+    #as.GameDate.NowTotalScores += as.GameDate.getMapCompletesScores(as.GameDate.SelectCapId,as.GameDate.NowCupLevel,as.GameDate.SelectLevelId,as.GameDate.RecordTime,as.GameDate.RecordPoint[0][2]);
+    #if(as.GameDate.RecordCUPTime == null)
+    #{
+        #as.GameDate.RecordCUPTime = as.GameDate.RecordTime;
+    #}
+    #else
+    #{
+        #as.GameDate.RecordCUPTime += as.GameDate.RecordTime;
+    #}
+    #this.RaceOver();
+    #this.uiManage.DelGameUi();
+    #if(this.__Debug__)
+    #{
+        #this.uiManage.ShowMainScreen();
+        #return undefined;
+    #}
+    #this.uiManage.ShowUiScores();
+    #this.gameSounds.StartMusic("stat");

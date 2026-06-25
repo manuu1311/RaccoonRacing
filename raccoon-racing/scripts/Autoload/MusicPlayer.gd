@@ -1,7 +1,7 @@
 extends AudioStreamPlayer
 
 var audio_streams:Dictionary[String, AudioStream]
-
+var fade_tween: Tween
 
 func _ready() -> void:
 	audio_streams = {
@@ -22,3 +22,15 @@ func PlayMusic(music: String)->void:
 		play()
 	else:
 		push_warning("Music '" + music + "' not found in audio_streams dictionary")
+
+
+func FadeOutAndStop(fade_duration: float = 0.5) -> void:
+	if not playing:
+		return
+		
+	if fade_tween and fade_tween.is_valid():
+		fade_tween.kill()
+		
+	fade_tween = create_tween()
+	fade_tween.tween_property(self, "volume_db", -40.0, fade_duration)
+	fade_tween.tween_callback(stop)
