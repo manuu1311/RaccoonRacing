@@ -181,27 +181,10 @@ func ShowFinishEffect()->void:
     finish.play()
     await get_tree().create_timer(3).timeout
     UiOverAnimation.playanim()
+    await UiOverAnimation.animated_sprite_2d.animation_finished
     BackToMain()
 
-#TODO: implement
+
 func BackToMain()->void:
+    get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_scores.tscn")
     return
-    #as.GameDate.RecordPlayerSorce(this.OrderInfo);
-    #as.GameDate.NowTotalScores += as.GameDate.getMapCompletesScores(as.GameDate.SelectCapId,as.GameDate.NowCupLevel,as.GameDate.SelectLevelId,as.GameDate.RecordTime,as.GameDate.RecordPoint[0][2]);
-    #if(as.GameDate.RecordCUPTime == null)
-    #{
-        #as.GameDate.RecordCUPTime = as.GameDate.RecordTime;
-    #}
-    #else
-    #{
-        #as.GameDate.RecordCUPTime += as.GameDate.RecordTime;
-    #}
-    #this.RaceOver();
-    #this.uiManage.DelGameUi();
-    #if(this.__Debug__)
-    #{
-        #this.uiManage.ShowMainScreen();
-        #return undefined;
-    #}
-    #this.uiManage.ShowUiScores();
-    #this.gameSounds.StartMusic("stat");

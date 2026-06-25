@@ -402,7 +402,7 @@ signal main_anim_complete
 @onready var logo: Logo = $\"../../Logo\"
 @onready var buttons: UIbuttons = $\"../../Buttons\"
 
-func _ready():
+func _ready()->void:
 	if not MusicPlayer.playing:
 		MusicPlayer.PlayMusic('main')
 	play(\"intro\")
@@ -411,7 +411,7 @@ func _ready():
 	frame=0
 	frame_changed.connect(_on_frame_changed)
 
-func _on_frame_changed():
+func _on_frame_changed()->void:
 	if frame == 40:
 		pause()
 		buttons.show()
@@ -421,7 +421,7 @@ func _on_frame_changed():
 		#await get_tree().create_timer(2).timeout
 		logo.play_anim()
 
-func _on_start_button_pressed():
+func _on_start_button_pressed()->void:
 	buttons.hide()
 	logo.hide()
 	play()

@@ -13,6 +13,18 @@ var cupLocks: Array[bool]=[0,0,0,0,1,1,1,1]
 var cupWon: Array[int]=[0,0,0,0,0,0,0,0]
 #current cup chosen
 var currentCup: int = 0
+##array info for each cup:
+##[mapid,lapnum,type] for each map
+var cupInfo:Array[Array]=[
+	[[1,3,VehicleType.CAR],[2,2,VehicleType.CAR]],
+	[[1,3,VehicleType.HOVERCRAFT],[2,2,VehicleType.HOVERCRAFT]],
+	[[3,2,VehicleType.CAR],[1,3,VehicleType.CAR]],
+	[[3,2,VehicleType.HOVERCRAFT],[1,3,VehicleType.HOVERCRAFT]],
+	[[4,3,VehicleType.CAR],[2,2,VehicleType.CAR],[3,2,VehicleType.CAR]],
+	[[4,3,VehicleType.HOVERCRAFT],[3,2,VehicleType.HOVERCRAFT],[2,2,VehicleType.HOVERCRAFT]],
+	[[2,3,VehicleType.CAR],[1,2,VehicleType.HOVERCRAFT],[3,2,VehicleType.CAR],[4,3,VehicleType.HOVERCRAFT]],
+	[[2,4,VehicleType.HOVERCRAFT],[1,3,VehicleType.CAR],[3,3,VehicleType.HOVERCRAFT],[4,4,VehicleType.CAR]]
+]
 #current difficulty chosen
 var currentDifficulty: int=2
 var currentMap:int=1

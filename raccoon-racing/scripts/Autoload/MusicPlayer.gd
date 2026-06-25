@@ -10,7 +10,8 @@ func _ready() -> void:
 			"map2": preload("res://Assets/Sounds/2326_snd_map2.mp3"),
 			"map3": preload("res://Assets/Sounds/2325_snd_map3.mp3"),
 			"map4": preload("res://Assets/Sounds/2324_snd_map4.mp3"),
-			"invincible":preload("res://Assets/Sounds/2319_snd_invincilble.mp3")
+			"invincible":preload("res://Assets/Sounds/2319_snd_invincilble.mp3"),
+			"stats":preload("res://Assets/Sounds/2318_snd_stat.mp3")
 		}
 
 func PlayMusic(music: String)->void:

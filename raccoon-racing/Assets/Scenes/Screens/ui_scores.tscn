@@ -1,0 +1,218 @@
+[gd_scene format=3 uid="uid://btdlt0uau5yqq"]
+
+[ext_resource type="Script" uid="uid://bdruf1v5vdgan" path="res://scripts/Scores/ui_scores.gd" id="1_m44wg"]
+[ext_resource type="Texture2D" uid="uid://bkbr3glflwe78" path="res://Assets/Animations/Scores/background.png" id="2_yqwi5"]
+[ext_resource type="Texture2D" uid="uid://cu8oomlcwk2sw" path="res://Assets/Animations/Scores/gradientbg.png" id="3_xsj34"]
+[ext_resource type="Texture2D" uid="uid://cy8bvk0nry17j" path="res://Assets/Animations/Scores/light.png" id="4_1ya6s"]
+[ext_resource type="Texture2D" uid="uid://c2s35hd03hcxu" path="res://Assets/Animations/Scores/gradientbg2.png" id="5_xsj34"]
+[ext_resource type="Texture2D" uid="uid://hjp24s2c8g5b" path="res://Assets/Animations/CharSelection/greenbush.png" id="6_i2oi5"]
+[ext_resource type="Texture2D" uid="uid://dqywrdq8ycm5i" path="res://Assets/Animations/CharSelection/emptybush.png" id="7_kpbv8"]
+
+[sub_resource type="Animation" id="Animation_i2oi5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("light1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kpbv8"]
+resource_name = "lights"
+length = 2.2857172
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("light1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1428572, 2.2857144),
+"transitions": PackedFloat32Array(-1.6245047, -1.6245052, 2),
+"update": 0,
+"values": [-0.5235987755982988, 0.5235987755982988, -0.5235987755982988]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("light2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1428572, 2.2857144),
+"transitions": PackedFloat32Array(-1.6245047, -1.6245052, 2),
+"update": 0,
+"values": [0.5235987755982988, -0.5235987755982988, 0.5235987755982988]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("light3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1428572, 2.2857144),
+"transitions": PackedFloat32Array(-1.6245047, -1.6245052, 2),
+"update": 0,
+"values": [-0.5235987755982988, 0.5235987755982988, -0.5235987755982988]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("light4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.1428572, 2.2857144),
+"transitions": PackedFloat32Array(-1.6245047, -1.6245052, 2),
+"update": 0,
+"values": [0.5235987755982988, -0.5235987755982988, 0.5235987755982988]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a30fl"]
+_data = {
+&"RESET": SubResource("Animation_i2oi5"),
+&"lights": SubResource("Animation_kpbv8")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i2oi5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kpbv8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a30fl"]
+
+[node name="UiScores" type="CanvasLayer" unique_id=1836238246]
+script = ExtResource("1_m44wg")
+
+[node name="Background" type="Node2D" parent="." unique_id=2018799200]
+position = Vector2(250, 250)
+
+[node name="background" type="Sprite2D" parent="Background" unique_id=1810767346]
+texture = ExtResource("2_yqwi5")
+
+[node name="gradient" type="Sprite2D" parent="Background" unique_id=739325360]
+position = Vector2(0, 195)
+texture = ExtResource("3_xsj34")
+
+[node name="light1" type="Sprite2D" parent="Background" unique_id=580912359]
+position = Vector2(-200, 309)
+texture = ExtResource("4_1ya6s")
+offset = Vector2(0, -275)
+
+[node name="light2" type="Sprite2D" parent="Background" unique_id=708323196]
+position = Vector2(-128, 309)
+rotation = 0.5235988
+texture = ExtResource("4_1ya6s")
+offset = Vector2(0, -275)
+
+[node name="light3" type="Sprite2D" parent="Background" unique_id=185204842]
+position = Vector2(129, 309)
+rotation = -0.5235988
+texture = ExtResource("4_1ya6s")
+offset = Vector2(0, -275)
+
+[node name="light4" type="Sprite2D" parent="Background" unique_id=645103249]
+position = Vector2(200, 309)
+rotation = 0.5235988
+texture = ExtResource("4_1ya6s")
+offset = Vector2(0, -275)
+
+[node name="gradient2" type="Sprite2D" parent="Background" unique_id=1042274604]
+position = Vector2(-2, -15.355)
+texture = ExtResource("5_xsj34")
+
+[node name="greenbush1" type="Sprite2D" parent="Background" unique_id=852059255]
+position = Vector2(205, 201)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_i2oi5")
+
+[node name="greenbush2" type="Sprite2D" parent="Background" unique_id=858877262]
+position = Vector2(-205, 201)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_i2oi5")
+
+[node name="emptybush1" type="Sprite2D" parent="Background" unique_id=1772888984]
+position = Vector2(144, 218)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_kpbv8")
+
+[node name="emptybush4" type="Sprite2D" parent="Background" unique_id=163058669]
+position = Vector2(-144, 218)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_kpbv8")
+
+[node name="emptybush2" type="Sprite2D" parent="Background" unique_id=618686084]
+position = Vector2(97, 238)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_kpbv8")
+
+[node name="emptybush3" type="Sprite2D" parent="Background" unique_id=993590510]
+position = Vector2(-97, 238)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_kpbv8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background" unique_id=1983777008]
+libraries/ = SubResource("AnimationLibrary_a30fl")
+autoplay = &"lights"
+
+[node name="Text" type="Node" parent="." unique_id=1331342153]
+
+[node name="ContinueButton" type="Node2D" parent="Text" unique_id=1830113593]
+
+[node name="shadow" type="Label" parent="Text/ContinueButton" unique_id=228393224]
+offset_left = 70.69
+offset_top = 406.26
+offset_right = 438.69
+offset_bottom = 451.26
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 17
+theme_override_constants/shadow_outline_size = 21
+theme_override_font_sizes/font_size = 25
+text = "Press Space to continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maintext" type="Label" parent="Text/ContinueButton" unique_id=1948971535]
+offset_left = 68.0
+offset_top = 403.0
+offset_right = 436.0
+offset_bottom = 448.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Press Space to continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Text/ContinueButton" unique_id=1767248069]
+offset_left = 108.0
+offset_top = 415.0
+offset_right = 402.0
+offset_bottom = 444.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i2oi5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kpbv8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a30fl")
+
+[node name="Label" type="Node2D" parent="Text" unique_id=1738051923]
+
+[node name="Label" type="Label" parent="Text/Label" unique_id=470998784]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="mouse_entered" from="Text/ContinueButton/Button" to="." method="_on_continue_mouse_entered"]
+[connection signal="mouse_exited" from="Text/ContinueButton/Button" to="." method="_on_continue_mouse_exited"]
+[connection signal="pressed" from="Text/ContinueButton/Button" to="." method="_on_continue_pressed"]
