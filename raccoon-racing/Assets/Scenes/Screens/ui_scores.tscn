@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c2s35hd03hcxu" path="res://Assets/Animations/Scores/gradientbg2.png" id="5_xsj34"]
 [ext_resource type="Texture2D" uid="uid://hjp24s2c8g5b" path="res://Assets/Animations/CharSelection/greenbush.png" id="6_i2oi5"]
 [ext_resource type="Texture2D" uid="uid://dqywrdq8ycm5i" path="res://Assets/Animations/CharSelection/emptybush.png" id="7_kpbv8"]
+[ext_resource type="FontFile" uid="uid://dhqkn2g7x12vn" path="res://Assets/Fonts/1010__sans.ttf" id="8_kpbv8"]
 
 [sub_resource type="Animation" id="Animation_i2oi5"]
 length = 0.001
@@ -210,8 +211,20 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_a30fl")
 [node name="Label" type="Node2D" parent="Text" unique_id=1738051923]
 
 [node name="Label" type="Label" parent="Text/Label" unique_id=470998784]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 52.0
+offset_top = 99.0
+offset_right = 302.0
+offset_bottom = 122.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("8_kpbv8")
+theme_override_font_sizes/font_size = 23
+text = "Rank           Name           Points"
 
 [connection signal="mouse_entered" from="Text/ContinueButton/Button" to="." method="_on_continue_mouse_entered"]
 [connection signal="mouse_exited" from="Text/ContinueButton/Button" to="." method="_on_continue_mouse_exited"]
