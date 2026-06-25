@@ -39,7 +39,7 @@ func SetDmc()->void:
 
 #TODO: is that mess really needed?
 func SetAimPlayer()->Player:
-	return GameData.PlayersArr[0]
+	return GameData.PlayersArr[GameData.OrderInfo[0]]
 
 
 func run()->void:

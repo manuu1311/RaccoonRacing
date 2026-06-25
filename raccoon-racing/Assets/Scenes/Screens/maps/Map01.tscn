@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://b2l2jimqc0r3i" path="res://Assets/Images/maps/map1/top2/sign.png" id="19_deqhp"]
 [ext_resource type="Texture2D" uid="uid://c3lxe5mnsf4wl" path="res://Assets/Images/maps/map1/art/Bar/16_of_35.svg" id="20_d8qi4"]
 [ext_resource type="Texture2D" uid="uid://c38qrgtidt10o" path="res://Assets/Images/maps/map1/top2/agame.png" id="20_hnxd3"]
+[ext_resource type="Texture2D" uid="uid://crsxhwhuxx0kv" path="res://Assets/Images/maps/map1/top2/poster.png" id="21_6s1yp"]
 [ext_resource type="Texture2D" uid="uid://clgdk1pjdfrf1" path="res://Assets/Images/maps/map1/art/Bar/17_of_35.svg" id="21_asl0e"]
 [ext_resource type="Texture2D" uid="uid://2f661c8brf4" path="res://Assets/Images/maps/map1/art/Bar/18_of_35.svg" id="22_m07oa"]
 [ext_resource type="Texture2D" uid="uid://cm7j4405p7du7" path="res://Assets/Images/maps/map1/art/Bar/19_of_35.svg" id="23_y7vjw"]
@@ -494,6 +495,11 @@ position = Vector2(-1346.405, -1147.615)
 rotation = 0.40840703
 scale = Vector2(0.73, 0.73)
 texture = ExtResource("20_hnxd3")
+
+[node name="Poster" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=58233468]
+position = Vector2(1581.605, -83.635)
+scale = Vector2(0.959, 0.959)
+texture = ExtResource("21_6s1yp")
 
 [node name="Top1" type="Node2D" parent="Visuals/Ground" unique_id=1227328974]
 z_index = 15

@@ -133,7 +133,6 @@ func SetSceneAngleExpand(nowPos:Vector2, nowCarAngle:float)->void:
     
     
 func UpdateOrderResult() -> void:
-    GameData
     # 1. Sort the players by distance descending
     var sorted_players: Array[Player] = GameData.PlayersArr.duplicate()
     sorted_players.sort_custom(func(a: Player, b: Player) -> bool: 

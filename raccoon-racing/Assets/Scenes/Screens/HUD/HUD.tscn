@@ -5,6 +5,134 @@
 [ext_resource type="PackedScene" uid="uid://b20xg5bmjnfvd" path="res://Assets/Scenes/Screens/HUD/SpeedHud.tscn" id="2_p0rt3"]
 [ext_resource type="PackedScene" uid="uid://t8tj8b4rkyij" path="res://Assets/Scenes/Screens/HUD/CharHud.tscn" id="4_12x6x"]
 
+[sub_resource type="Animation" id="Animation_rrtsn"]
+resource_name = "321"
+length = 0.6285743
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("321:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.17142858, 0.2, 0.22857143, 0.25714287, 0.45714286, 0.4857143, 0.5142857, 0.54285717, 0.5714286, 0.62857145),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(150, 150), Vector2(150, 150), Vector2(155, 145), Vector2(150, 150), Vector2(152, 148), Vector2(150, 150), Vector2(150, 150), Vector2(150, 160), Vector2(150, 150), Vector2(150, 130), Vector2(150, 100), Vector2(150, 50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("321:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.54285717, 0.62857145),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("321:theme_override_font_sizes/font_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14285715),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [150, 50]
+}
+
+[sub_resource type="Animation" id="Animation_12x6x"]
+resource_name = "Messageshow"
+length = 0.6285743
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("321:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.17142858, 0.2, 0.22857143, 0.25714287, 0.45714286, 0.4857143, 0.5142857, 0.54285717, 0.5714286, 0.62857145),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(5, -5), Vector2(0, 0), Vector2(2, -2), Vector2(0, 0), Vector2(0, 0), Vector2(0, 10), Vector2(0, 0), Vector2(0, -20), Vector2(0, -50), Vector2(0, -100)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("321:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.54285717, 0.62857145),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("321:theme_override_font_sizes/font_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14285715),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [150, 50]
+}
+
+[sub_resource type="Animation" id="Animation_piq2e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("321:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("321:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [52]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("321:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(150, 150)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_12x6x"]
+_data = {
+&"321": SubResource("Animation_rrtsn"),
+&"Messageshow": SubResource("Animation_12x6x"),
+&"RESET": SubResource("Animation_piq2e")
+}
+
 [node name="Hud" type="Node" unique_id=929271289]
 script = ExtResource("1_12x6x")
 
@@ -13,3 +141,28 @@ script = ExtResource("1_12x6x")
 [node name="SpeedHud" parent="." unique_id=1795174785 instance=ExtResource("2_p0rt3")]
 
 [node name="CharHud" parent="." unique_id=558009715 instance=ExtResource("4_12x6x")]
+
+[node name="321" type="CanvasLayer" parent="." unique_id=121105425]
+offset = Vector2(150, 125)
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 150, 125)
+
+[node name="321" type="Label" parent="321" unique_id=788540478]
+custom_minimum_size = Vector2(500, 500)
+offset_top = -100.0
+offset_right = 500.0
+offset_bottom = 400.0
+pivot_offset = Vector2(250, 250)
+theme_override_colors/font_color = Color(0.8603393, 0.9375, 0.05566405, 1)
+theme_override_colors/font_shadow_color = Color(0.8980392, 0.03137255, 0.03137255, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 52
+text = "Lap1/2"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="321Player" type="AnimationPlayer" parent="321" unique_id=1415020121]
+libraries/ = SubResource("AnimationLibrary_12x6x")

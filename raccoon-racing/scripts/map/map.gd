@@ -22,6 +22,7 @@ var Points:Array[Vector2]
 var PropPointArr:Array[int]
 var StartPosArr:Array[Marker2D]
 var PropboxNum:int
+var WinPosition:Vector2
 #changed from original one
 var IsHovercraft:bool
 var WallGroupNum:int
@@ -90,6 +91,8 @@ func InitStartPos()->void:
     var newmarker:Marker2D
     var id:int=0
     newmarker=get_node_or_null(PointsPath+'/Flags/StartPos'+str(id))
+    var WinPositionmarker:Marker2D=get_node_or_null(PointsPath+'/Flags/WinPos') as Marker2D
+    WinPosition=WinPositionmarker.global_position
     while newmarker!=null:
         StartPosArr.append(newmarker)
         id+=1

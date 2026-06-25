@@ -12,7 +12,7 @@ var cupLocks: Array[bool]=[0,0,0,0,1,1,1,1]
 #0: not won, 1:easy, 2:normal, 3:hard
 var cupWon: Array[int]=[0,0,0,0,0,0,0,0]
 #current cup chosen
-var currentCup: int = -1
+var currentCup: int = 0
 #current difficulty chosen
 var currentDifficulty: int=0
 var currentMap:int=1
@@ -22,7 +22,6 @@ enum VehicleType { CAR, HOVERCRAFT }
 var current_vehicle: VehicleType = VehicleType.HOVERCRAFT
 var PlayersArr:Array[Player]=[]
 var OrderInfo:Array[int]=[]
-var DistanceInfo:Array[int]=[]
 var FocusCar:Car
 ##array to store info about best lap times in the 4 cups
 var BestTimes:Array[float]=[0.0,0.0,0.0,0.0]
@@ -82,22 +81,18 @@ func PopulatePlayers()->void:
 	newplayer=Player.new(0,Player.control_type.HUMAN)
 	PlayersArr.append(newplayer)
 	OrderInfo.append(0)
-	DistanceInfo.append(0)
 	newplayer=AIPlayer.new(1,Player.control_type.AI)
 	PlayersArr.append(newplayer)
 	newplayer.AiReflect=AiLevel[currentDifficulty][0][0]
 	OrderInfo.append(1)
-	DistanceInfo.append(1)
 	newplayer=AIPlayer.new(2,Player.control_type.AI)
 	PlayersArr.append(newplayer)
 	newplayer.AiReflect=AiLevel[currentDifficulty][1][0]
 	OrderInfo.append(2)
-	DistanceInfo.append(2)
 	newplayer=AIPlayer.new(3,Player.control_type.AI)
 	PlayersArr.append(newplayer)
 	newplayer.AiReflect=AiLevel[currentDifficulty][2][0]
 	OrderInfo.append(3)
-	DistanceInfo.append(3)
 	
 #testing function
 func SetMidGameData()->void:

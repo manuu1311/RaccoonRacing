@@ -86,15 +86,13 @@ func UpdatePoint() -> void:
         NowPointId += 1
         if NowPointId >= car.map.Points.size():
             NowPointId = 0
-            if hud != null:
-                hud.updatelap()
 
 func WinJudge() -> void:
     if NowPointId == 1:
         LapsLock = false
         
     if NowPointId == 0 and !LapsLock:
-        var win_pos: Vector2 = car.map.get_win_pos() # Assuming map has this method
+        var win_pos: Vector2 = car.map.WinPosition # Assuming map has this method
         var win_to_point_0: float = win_pos.distance_to(car.map.Points[0])
         
         # distance is the car's distance to Points[0] (the next waypoint)
@@ -104,18 +102,16 @@ func WinJudge() -> void:
                 return
                 
             Laps += 1
-            
             # If this is the main player (ID 0)
-            if PlayerID == 0: # Or whatever variable holds this car's unique ID
-                game.uiManage.ClearLapRecordTime()
-                
+            if hud!=null: 
+                hud.updatelap()
                 if Laps == car.map.LapsTotal:
                     # Replace with your actual UI/Notification system call
-                    MessageBox.show_message("FINAL LAP", 3000, 1, Vector2(0, -50))
+                    hud.ShowMessage("FINAL LAP")
                 else:
                     # Replace with your actual formatted string/localization system call
-                    var lap_text = "LAP %d/%d" % [Laps, car.map.LapsTotal]
-                    MessageBox.show_message(lap_text, 3000, 1, Vector2(0, -50))
+                    var lap_text:String = "LAP %d/%d" % [Laps, car.map.LapsTotal]
+                    hud.ShowMessage(lap_text)
             
             LapsLock = true
 
@@ -123,9 +119,6 @@ func WinJudge() -> void:
 func FinishRace()->void:
     return
 
-#TODO: show message about lap completion
-func ShowMessage(message:String)->void:
-    return
 
 func RunPropBox(x:float,y:float)->void:
     car.sounds.GetProp()

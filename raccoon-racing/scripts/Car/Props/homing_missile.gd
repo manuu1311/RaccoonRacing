@@ -97,5 +97,6 @@ func delme()->void:
 	player.prop.Delprop(self)
 
 func del()->void:
+	HomingMissileView.queue_free()
 	HomingMissile.queue_free()
 	queue_free()
