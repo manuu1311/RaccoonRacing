@@ -20,6 +20,7 @@ var Laps:int=1
 var distance:int
 var hud:HUDManager
 var AiReflect:int
+var ScorePoints:int=0
 signal racefinished
 
 func _init(id:int,control:control_type) -> void:
