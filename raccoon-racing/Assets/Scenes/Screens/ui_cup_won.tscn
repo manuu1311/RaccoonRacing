@@ -1,3 +1,1026 @@
 [gd_scene format=3 uid="uid://cuji3rne0fdex"]
 
+[ext_resource type="Texture2D" uid="uid://bkbr3glflwe78" path="res://Assets/Animations/Scores/background.png" id="1_gns1o"]
+[ext_resource type="Script" uid="uid://bty7j2h3ae8mb" path="res://scripts/Scores/ui_cup_won.gd" id="1_jwxe0"]
+[ext_resource type="Texture2D" uid="uid://cu8oomlcwk2sw" path="res://Assets/Animations/Scores/gradientbg.png" id="2_jse6j"]
+[ext_resource type="Texture2D" uid="uid://cy8bvk0nry17j" path="res://Assets/Animations/Scores/light.png" id="3_a3wrh"]
+[ext_resource type="Texture2D" uid="uid://c2s35hd03hcxu" path="res://Assets/Animations/Scores/gradientbg2.png" id="4_mwiaq"]
+[ext_resource type="Texture2D" uid="uid://b6djtsvx5j5xc" path="res://Assets/Animations/CupWon/Trophy/1.png" id="5_w2abl"]
+[ext_resource type="Texture2D" uid="uid://dc68of06emjxa" path="res://Assets/Animations/CupWon/Trophy/2.png" id="6_jfnlh"]
+[ext_resource type="Texture2D" uid="uid://g5gx46qhjdjs" path="res://Assets/Animations/CupWon/Trophy/3.png" id="7_o20pk"]
+[ext_resource type="Texture2D" uid="uid://bpyv33oggd2an" path="res://Assets/Animations/CupWon/Trophy/4.png" id="8_w6wbt"]
+[ext_resource type="Texture2D" uid="uid://ic0d3r7yhisc" path="res://Assets/Animations/CupWon/Trophy/5.png" id="9_arhpt"]
+[ext_resource type="Texture2D" uid="uid://b5npb58d35dxu" path="res://Assets/Animations/CupWon/Trophy/6.png" id="10_lw8pj"]
+[ext_resource type="Texture2D" uid="uid://c78nld181l1pn" path="res://Assets/Animations/CupWon/Trophy/7.png" id="11_dqhhr"]
+[ext_resource type="Texture2D" uid="uid://jpv64lr7shtc" path="res://Assets/Animations/UISelect/cups/bronze.png" id="12_jse6j"]
+[ext_resource type="Texture2D" uid="uid://bvj3faen8hbc5" path="res://Assets/Animations/CupWon/Ink/9.png" id="14_nnnlj"]
+[ext_resource type="Texture2D" uid="uid://docjgcf28qbdj" path="res://Assets/Animations/CupWon/Ink/1.png" id="15_f5bee"]
+[ext_resource type="Texture2D" uid="uid://dfxwbajc0pki0" path="res://Assets/Animations/CupWon/Ink/2.png" id="16_yoyxl"]
+[ext_resource type="Texture2D" uid="uid://d3cjg7aeq6ewx" path="res://Assets/Animations/CupWon/Ink/3.png" id="17_vqbx2"]
+[ext_resource type="Texture2D" uid="uid://dph8h75cuwlt2" path="res://Assets/Animations/CupWon/Ink/4.png" id="18_2lalv"]
+[ext_resource type="Texture2D" uid="uid://bfjdmyl4o3cbk" path="res://Assets/Animations/CupWon/Ink/5.png" id="19_6svlv"]
+[ext_resource type="Texture2D" uid="uid://codnfotknokh7" path="res://Assets/Animations/CupWon/Ink/6.png" id="20_lglm0"]
+[ext_resource type="Texture2D" uid="uid://delo2gjnfnmy5" path="res://Assets/Animations/CupWon/Ink/7.png" id="21_4j6uy"]
+[ext_resource type="Texture2D" uid="uid://b1a2pyc32cexu" path="res://Assets/Animations/CupWon/Ink/8.png" id="22_5a2ft"]
+[ext_resource type="Texture2D" uid="uid://dp4yjmnoqrwc6" path="res://Assets/Animations/CharSelection/characters/mambopic.png" id="23_nnnlj"]
+
+[sub_resource type="Animation" id="Animation_i2oi5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("light1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kpbv8"]
+resource_name = "lights"
+length = 2.2857172
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("light1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1428572, 2.2857144),
+"transitions": PackedFloat32Array(-1.6245047, -1.6245052, 2),
+"update": 0,
+"values": [-0.5235987755982988, 0.5235987755982988, -0.5235987755982988]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("light2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1428572, 2.2857144),
+"transitions": PackedFloat32Array(-1.6245047, -1.6245052, 2),
+"update": 0,
+"values": [0.5235987755982988, -0.5235987755982988, 0.5235987755982988]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("light3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1428572, 2.2857144),
+"transitions": PackedFloat32Array(-1.6245047, -1.6245052, 2),
+"update": 0,
+"values": [-0.5235987755982988, 0.5235987755982988, -0.5235987755982988]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("light4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.1428572, 2.2857144),
+"transitions": PackedFloat32Array(-1.6245047, -1.6245052, 2),
+"update": 0,
+"values": [0.5235987755982988, -0.5235987755982988, 0.5235987755982988]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jwxe0"]
+_data = {
+&"RESET": SubResource("Animation_i2oi5"),
+&"lights": SubResource("Animation_kpbv8")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nnnlj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f5bee"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yoyxl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vqbx2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_w2abl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jfnlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o20pk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w6wbt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_arhpt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lw8pj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dqhhr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="Animation" id="Animation_jse6j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("maintext:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a3wrh"]
+resource_name = "brighty"
+length = 0.34286
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("maintext:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.17142858, 0.34285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("maintext:theme_override_colors/font_outline_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.17142858, 0.34285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(0.99607843, 0, 0, 1), Color(1, 1, 0, 1), Color(0.99607843, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mwiaq"]
+_data = {
+&"RESET": SubResource("Animation_jse6j"),
+&"brighty": SubResource("Animation_a3wrh")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_matuy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_nnnlj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_f5bee")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yoyxl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_vqbx2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_2lalv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_6svlv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_lglm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_4j6uy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_5a2ft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_nnnlj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="Animation" id="Animation_dqhhr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CupCompleted:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CupCompleted/shadow/ColorRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CupCompleted/maintext/ColorRect:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CupCompleted/shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CupCompleted/maintext:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Trophy/Effects/Single/ink:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Trophy/Effects/Single2/ink:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Trophy/Trophy:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Trophy/Rainbow:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Trophy/Text:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Trophy/Text:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Trophy/TextOutline:self_modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Trophy/TextOutline:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jwxe0"]
+resource_name = "shiny"
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CupCompleted:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.14285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CupCompleted/shadow/ColorRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.34212106, 0.37142858, 0.42857143),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CupCompleted/maintext/ColorRect:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.34212106, 0.37142858, 0.42857143),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CupCompleted/shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.14285715, 0.22857143, 0.2857143, 0.31428573, 0.34285715),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.3, 1.3), Vector2(1.3, 1.3), Vector2(0.9, 0.9), Vector2(1.2, 1.2), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CupCompleted/maintext:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.14285715, 0.22857143, 0.2857143, 0.31428573, 0.34285715),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.3, 1.3), Vector2(1.3, 1.3), Vector2(0.9, 0.9), Vector2(1.2, 1.2), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Trophy/Effects/Single/ink:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.42857143, 0.6857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 0, 9]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Trophy/Effects/Single2/ink:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.71428573, 0.9714286),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 0, 9]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Trophy/Trophy:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.41890824, 0.6, 0.6857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Trophy/Rainbow:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.71428573, 0.8857143),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 0, 6]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Trophy/Text:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.74285716, 0.82857144, 0.8857143, 0.9438191, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.4), Vector2(0.4, 0.4), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Trophy/Text:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.74285716, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Trophy/TextOutline:self_modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.74285716, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Trophy/TextOutline:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.74285716, 0.82857144, 0.8857143, 0.9438191, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.4, 0.4), Vector2(0.4, 0.4), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nnnlj"]
+_data = {
+&"RESET": SubResource("Animation_dqhhr"),
+&"shiny": SubResource("Animation_jwxe0")
+}
+
 [node name="UiCupWon" type="CanvasLayer" unique_id=1663479219]
+script = ExtResource("1_jwxe0")
+metadata/_edit_vertical_guides_ = [-111.0]
+
+[node name="Won" type="Node2D" parent="." unique_id=43115198]
+
+[node name="Background" type="Node2D" parent="Won" unique_id=665448909]
+position = Vector2(250, 250)
+
+[node name="background" type="Sprite2D" parent="Won/Background" unique_id=31611645]
+texture = ExtResource("1_gns1o")
+
+[node name="gradient" type="Sprite2D" parent="Won/Background" unique_id=1736626251]
+position = Vector2(0, 195)
+texture = ExtResource("2_jse6j")
+
+[node name="light1" type="Sprite2D" parent="Won/Background" unique_id=1934371544]
+position = Vector2(-200, 309)
+texture = ExtResource("3_a3wrh")
+offset = Vector2(0, -275)
+
+[node name="light2" type="Sprite2D" parent="Won/Background" unique_id=899203208]
+position = Vector2(-128, 309)
+rotation = 0.5235988
+texture = ExtResource("3_a3wrh")
+offset = Vector2(0, -275)
+
+[node name="light3" type="Sprite2D" parent="Won/Background" unique_id=1837475989]
+position = Vector2(129, 309)
+rotation = -0.5235988
+texture = ExtResource("3_a3wrh")
+offset = Vector2(0, -275)
+
+[node name="light4" type="Sprite2D" parent="Won/Background" unique_id=423014565]
+position = Vector2(200, 309)
+rotation = 0.5235988
+texture = ExtResource("3_a3wrh")
+offset = Vector2(0, -275)
+
+[node name="gradient2" type="Sprite2D" parent="Won/Background" unique_id=1189041913]
+position = Vector2(-2, 46.0725)
+scale = Vector2(1, 0.594538)
+texture = ExtResource("4_mwiaq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Won/Background" unique_id=1780077886]
+libraries/ = SubResource("AnimationLibrary_jwxe0")
+autoplay = &"lights"
+
+[node name="ContinueButton" type="Node2D" parent="Won" unique_id=1052897730]
+
+[node name="shadow" type="Label" parent="Won/ContinueButton" unique_id=1565457805]
+offset_left = 70.69
+offset_top = 406.26
+offset_right = 438.69
+offset_bottom = 451.26
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 17
+theme_override_constants/shadow_outline_size = 21
+theme_override_font_sizes/font_size = 25
+text = "Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maintext" type="Label" parent="Won/ContinueButton" unique_id=1710249172]
+offset_left = 68.0
+offset_top = 403.0
+offset_right = 436.0
+offset_bottom = 448.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Won/ContinueButton" unique_id=1666044084]
+offset_left = 108.0
+offset_top = 415.0
+offset_right = 402.0
+offset_bottom = 444.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nnnlj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_f5bee")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yoyxl")
+
+[node name="Text" type="Node2D" parent="Won" unique_id=46922943]
+
+[node name="CupCompleted" type="Node2D" parent="Won/Text" unique_id=177809450]
+
+[node name="shadow" type="Label" parent="Won/Text/CupCompleted" unique_id=1707851736]
+clip_children = 2
+offset_left = 69.055
+offset_top = 19.44
+offset_right = 437.055
+offset_bottom = 64.44
+pivot_offset = Vector2(184, 22.5)
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 25
+text = "Cup Completed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Won/Text/CupCompleted/shadow" unique_id=2055533396]
+layout_mode = 0
+offset_left = 90.255
+offset_right = 279.78
+offset_bottom = 46.11
+
+[node name="maintext" type="Label" parent="Won/Text/CupCompleted" unique_id=66296925]
+clip_children = 2
+offset_left = 69.0
+offset_top = 19.0
+offset_right = 437.0
+offset_bottom = 64.0
+pivot_offset = Vector2(184, 22.5)
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 25
+text = "Cup Completed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Won/Text/CupCompleted/maintext" unique_id=524750047]
+layout_mode = 0
+offset_left = 90.255
+offset_right = 279.78
+offset_bottom = 46.11
+
+[node name="Challenge" type="Node2D" parent="Won/Text" unique_id=1110914039]
+
+[node name="maintext" type="Label" parent="Won/Text/Challenge" unique_id=1983691614]
+offset_left = 52.515
+offset_top = 209.575
+offset_right = 452.515
+offset_bottom = 259.57538
+theme_override_colors/font_color = Color(0.029648429, 0.15494528, 0.41250002, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.03137255, 0.101960786, 0.24705882, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 19
+text = "Can you also beat this cup in normal mode?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Trophy" type="Node2D" parent="Won/Text" unique_id=211961334]
+
+[node name="Rainbow" type="AnimatedSprite2D" parent="Won/Text/Trophy" unique_id=586947104]
+position = Vector2(262, 158)
+scale = Vector2(0.67, 0.67)
+sprite_frames = SubResource("SpriteFrames_vqbx2")
+
+[node name="Trophy" type="Sprite2D" parent="Won/Text/Trophy" unique_id=517905941]
+position = Vector2(265, 141)
+texture = ExtResource("12_jse6j")
+
+[node name="TextOutline" type="Label" parent="Won/Text/Trophy" unique_id=1886376325]
+clip_children = 2
+offset_left = 158.0
+offset_top = 112.0
+offset_right = 368.0
+offset_bottom = 143.0
+pivot_offset = Vector2(105, 15.5)
+theme_override_colors/font_color = Color(0.21470144, 0.61875, 0.17595704, 1)
+theme_override_colors/font_outline_color = Color(0.06285914, 0.2625, 0.043476555, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 3
+theme_override_font_sizes/font_size = 22
+text = "The trophy is yours!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Text" type="Label" parent="Won/Text/Trophy" unique_id=2109626870]
+self_modulate = Color(1, 1, 1, 0)
+clip_children = 2
+offset_left = 158.0
+offset_top = 112.0
+offset_right = 368.0
+offset_bottom = 143.0
+pivot_offset = Vector2(105, 15.5)
+theme_override_colors/font_color = Color(0.21470144, 0.61875, 0.17595704, 1)
+theme_override_constants/shadow_outline_size = 3
+theme_override_font_sizes/font_size = 22
+text = "The trophy is yours!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Won/Text/Trophy/Text" unique_id=1216599337]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 5.0
+offset_right = 211.0
+offset_bottom = 13.0
+color = Color(0.6080236, 0.921875, 0.57905275, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Won/Text/Trophy/Text" unique_id=99910926]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 13.49
+offset_right = 211.0
+offset_bottom = 19.000002
+color = Color(0.36739406, 0.784375, 0.3309082, 1)
+
+[node name="Cuptime" type="Node2D" parent="Won/Text/Trophy" unique_id=193835308]
+position = Vector2(0, 17.935)
+
+[node name="Record" type="Node2D" parent="Won/Text/Trophy/Cuptime" unique_id=446793164]
+visible = false
+
+[node name="General" type="Node2D" parent="Won/Text/Trophy/Cuptime/Record" unique_id=476602844]
+position = Vector2(-8.28, 0)
+
+[node name="shadow" type="Label" parent="Won/Text/Trophy/Cuptime/Record/General" unique_id=201485121]
+offset_left = 3.0550003
+offset_top = 154.44
+offset_right = 371.19
+offset_bottom = 199.44
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 25
+text = "Cup time:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maintext" type="Label" parent="Won/Text/Trophy/Cuptime/Record/General" unique_id=453454985]
+offset_left = 3.0
+offset_top = 154.0
+offset_right = 371.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(0.940625, 0.940625, 0.3850684, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 25
+text = "Cup time:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewRecord" type="Node2D" parent="Won/Text/Trophy/Cuptime/Record" unique_id=1928746479]
+position = Vector2(210.505, 0)
+
+[node name="maintext" type="Label" parent="Won/Text/Trophy/Cuptime/Record/NewRecord" unique_id=2018386827]
+offset_left = 3.0
+offset_top = 154.0
+offset_right = 371.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "New Record"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Won/Text/Trophy/Cuptime/Record/NewRecord" unique_id=180103449]
+libraries/ = SubResource("AnimationLibrary_mwiaq")
+autoplay = &"brighty"
+
+[node name="Time" type="Node2D" parent="Won/Text/Trophy/Cuptime/Record" unique_id=1158696854]
+position = Vector2(94.39, 1.725)
+
+[node name="shadow" type="Label" parent="Won/Text/Trophy/Cuptime/Record/Time" unique_id=889865590]
+offset_left = 3.0550003
+offset_top = 154.44
+offset_right = 371.19
+offset_bottom = 199.44
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 19
+text = "02'04'05"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maintext" type="Label" parent="Won/Text/Trophy/Cuptime/Record/Time" unique_id=333045471]
+offset_left = 3.0
+offset_top = 154.0
+offset_right = 371.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(0.940625, 0.940625, 0.3850684, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 19
+text = "02'04'05"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NoRecord" type="Node2D" parent="Won/Text/Trophy/Cuptime" unique_id=823021552]
+position = Vector2(35.275, 0)
+
+[node name="General" type="Node2D" parent="Won/Text/Trophy/Cuptime/NoRecord" unique_id=341692990]
+position = Vector2(-8.28, 0)
+
+[node name="shadow" type="Label" parent="Won/Text/Trophy/Cuptime/NoRecord/General" unique_id=445519908]
+offset_left = 3.0550003
+offset_top = 154.44
+offset_right = 371.19
+offset_bottom = 199.44
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 25
+text = "Cup time:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maintext" type="Label" parent="Won/Text/Trophy/Cuptime/NoRecord/General" unique_id=1710876288]
+offset_left = 3.0
+offset_top = 154.0
+offset_right = 371.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(0.940625, 0.940625, 0.3850684, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 25
+text = "Cup time:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Node2D" parent="Won/Text/Trophy/Cuptime/NoRecord" unique_id=1309816530]
+position = Vector2(94.39, 1.725)
+
+[node name="shadow" type="Label" parent="Won/Text/Trophy/Cuptime/NoRecord/Time" unique_id=821367463]
+offset_left = 3.0550003
+offset_top = 154.44
+offset_right = 371.19
+offset_bottom = 199.44
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 19
+text = "02'04'05"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maintext" type="Label" parent="Won/Text/Trophy/Cuptime/NoRecord/Time" unique_id=1605278836]
+offset_left = 3.0
+offset_top = 154.0
+offset_right = 371.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(0.940625, 0.940625, 0.3850684, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 19
+text = "02'04'05"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Effects" type="Node2D" parent="Won/Text/Trophy" unique_id=1507768659]
+
+[node name="Single" type="Node2D" parent="Won/Text/Trophy/Effects" unique_id=386626422]
+
+[node name="ink" type="AnimatedSprite2D" parent="Won/Text/Trophy/Effects/Single" unique_id=1270724360]
+clip_children = 1
+position = Vector2(269, 135)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_matuy")
+
+[node name="ColorRect" type="ColorRect" parent="Won/Text/Trophy/Effects/Single/ink" unique_id=1239919088]
+offset_left = -251.66664
+offset_top = -168.33331
+offset_right = 243.33336
+offset_bottom = 183.33334
+
+[node name="Single2" type="Node2D" parent="Won/Text/Trophy/Effects" unique_id=528401660]
+position = Vector2(-154.23, 0)
+
+[node name="ink" type="AnimatedSprite2D" parent="Won/Text/Trophy/Effects/Single2" unique_id=378298016]
+clip_children = 1
+position = Vector2(269, 135)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_matuy")
+
+[node name="ColorRect" type="ColorRect" parent="Won/Text/Trophy/Effects/Single2/ink" unique_id=1658786586]
+offset_left = -251.66664
+offset_top = -173.33333
+offset_right = 243.33336
+offset_bottom = 183.33336
+color = Color(0.50187504, 0.9048007, 0.9125, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Won/Text" unique_id=1636122137]
+libraries/ = SubResource("AnimationLibrary_nnnlj")
+autoplay = &"shiny"
+
+[node name="Unlocks" type="Node2D" parent="Won/Text" unique_id=94538453]
+
+[node name="Char" type="Node2D" parent="Won/Text/Unlocks" unique_id=630688760]
+position = Vector2(0, -16.58)
+
+[node name="maintext" type="Label" parent="Won/Text/Unlocks/Char" unique_id=1834917560]
+offset_left = 52.515
+offset_top = 334.755
+offset_right = 452.515
+offset_bottom = 384.75552
+theme_override_colors/font_color = Color(0.029648429, 0.15494528, 0.41250002, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.03137255, 0.101960786, 0.24705882, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 15
+text = "New driver unlocked! You can now play as Mambo!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="Sprite2D" parent="Won/Text/Unlocks/Char" unique_id=2129642436]
+position = Vector2(261, 398.265)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("23_nnnlj")
+
+[node name="Cup" type="Node2D" parent="Won/Text/Unlocks" unique_id=1801128702]
+position = Vector2(0, -70.91)
+
+[node name="maintext" type="Label" parent="Won/Text/Unlocks/Cup" unique_id=201850400]
+offset_left = 52.515
+offset_top = 334.755
+offset_right = 452.515
+offset_bottom = 384.75552
+theme_override_colors/font_color = Color(0.029648429, 0.15494528, 0.41250002, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.03137255, 0.101960786, 0.24705882, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 15
+text = "Cup 4 is now available. Good luck!"
+vertical_alignment = 1
+
+[node name="Lost" type="Node2D" parent="." unique_id=1185404279]
+position = Vector2(269, 150)

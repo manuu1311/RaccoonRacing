@@ -26,6 +26,7 @@ var cupInfo:Array[Array]=[
 	[[2,4,VehicleType.HOVERCRAFT],[1,3,VehicleType.CAR],[3,3,VehicleType.HOVERCRAFT],[4,4,VehicleType.CAR]]
 ]
 #current difficulty chosen
+##0-1-2
 var currentDifficulty: int=2
 var currentMap:int=1
 var currentLaps:int=3
@@ -36,7 +37,7 @@ var PlayersArr:Array[Player]=[]
 var OrderInfo:Array[int]=[]
 var Ranking:Array[int]=[]
 var FocusCar:Car
-##array to store info about best lap times in the 4 cups
+##array to store info about best lap times in the 4 circuits
 var BestTimes:Array[float]=[0.0,0.0,0.0,0.0]
 var AiLevel:Array[Array]
 ##current time in the cup, useful for calculating total time at 
@@ -60,16 +61,22 @@ func _ready() -> void:
 
 
 #update character locks, to unlock new characters after each cup
-func CheckCharacterLocks()->void:
+func CheckCharacterLocks()->int:
 	#mambo: cup 1,2 easy
 	if cupWon[0]>0 and cupWon[1]>0:
-		characterLocks[2]=0
+		if characterLocks[2]:
+			characterLocks[2]=0
+			return 3
 	#pingo: cup 2,4 easy
 	if cupWon[1]>0 and cupWon[3]>0:
-		characterLocks[3]=0
+		if characterLocks[3]:
+			characterLocks[3]=0
+			return 4
 	#hudson: cup 5,6 easy
 	if cupWon[4]>0 and cupWon[5]>0:
-		characterLocks[4]=0
+		if characterLocks[4]:
+			characterLocks[4]=0
+			return 5
 	#banzai: all cups normal
 	var check: bool = true
 	for cup in cupWon:
@@ -77,15 +84,22 @@ func CheckCharacterLocks()->void:
 			check=false
 			break
 	if check:
-		characterLocks[5]=0
+		if characterLocks[5]:
+			characterLocks[5]=0
+			return 6
+	return 0
 #update cup locks, to unlock new cups
-func CheckCupLocks()->void:
+func CheckCupLocks()->int:
 	#cup 5: 1,3 easy
 	if cupWon[0]>0 and cupWon[2]>0:
-		cupLocks[4]=0
+		if cupLocks[4]:
+			cupLocks[4]=0
+			return 5
 	#cup 6: 2,4 easy
 	if cupWon[1]>0 and cupWon[3]>0:
-		cupLocks[5]=0
+		if cupLocks[5]:
+			cupLocks[5]=0
+			return 6
 	#cup 7: 1 to 6 normal
 	var check: bool = true
 	for i in range(6):
@@ -94,10 +108,15 @@ func CheckCupLocks()->void:
 			check=false
 			break
 	if check:
-		cupLocks[6]=0
+		if cupLocks[6]:
+			cupLocks[6]=0
+			return 7
 	#cup 8: 7 normal
 	if cupWon[6]>1:
-		cupLocks[7]=0
+		if cupLocks[7]:
+			cupLocks[7]=0
+			return 8
+	return 0
 
 func PopulatePlayers()->void:
 	var newplayer:Player
