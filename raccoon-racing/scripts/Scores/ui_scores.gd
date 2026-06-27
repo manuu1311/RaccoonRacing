@@ -31,10 +31,12 @@ func _ready() -> void:
     GameData.FocusCar=GameData.PlayersArr[0].car
     GameData.OrderInfo=[2,1,3,0]
     GameData.Ranking=[2,1,3,0]
-    GameData.PlayersArr[0].OrderId=0
+    GameData.PlayersArr[0].OrderId=3
     GameData.PlayersArr[1].OrderId=1
-    GameData.PlayersArr[2].OrderId=3
+    GameData.PlayersArr[2].OrderId=0
     GameData.PlayersArr[3].OrderId=2
+    GameData.cupWon[0]=1
+    GameData.cupWon[2]=1
     #FINISH TODO
     MusicPlayer.PlayMusic("stats")
     continuetext.add_theme_color_override("font_color",Color.WHITE)

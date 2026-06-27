@@ -38,11 +38,11 @@ var OrderInfo:Array[int]=[]
 var Ranking:Array[int]=[]
 var FocusCar:Car
 ##array to store info about best lap times in the 4 circuits
-var BestTimes:Array[float]=[0.0,0.0,0.0,0.0]
+var BestTimes:Array[int]=[0,0,0,0]
 var AiLevel:Array[Array]
 ##current time in the cup, useful for calculating total time at 
 ##the end of the cup. added after each race finish
-var CurrentCupTime:float=0.0
+var CurrentCupTime:int=0
 ##[cup,difficulty]:best time for "cup" in the chosen "difficulty"
 var CupTimes:Array[Array]=[
 	[0,0,0],[0,0,0],
@@ -62,8 +62,8 @@ func _ready() -> void:
 
 #update character locks, to unlock new characters after each cup
 func CheckCharacterLocks()->int:
-	#mambo: cup 1,2 easy
-	if cupWon[0]>0 and cupWon[1]>0:
+	#mambo: cup 1,3 easy
+	if cupWon[0]>0 and cupWon[2]>0:
 		if characterLocks[2]:
 			characterLocks[2]=0
 			return 3
@@ -161,3 +161,14 @@ func UnlockAll()->void:
 func RecordWin()->void:
 	if cupWon[currentCup]<currentDifficulty:
 		cupWon[currentCup]=currentDifficulty
+		
+		
+func format_time(msec_total: int) -> String:
+	var total_seconds: int = int(msec_total / 1000)
+	
+	var minutes: int = total_seconds / 60
+	var seconds: int = total_seconds % 60
+	# Divide by 10 to turn 0-999ms into 0-99cs (2 digits)
+	var milliseconds: int = int(msec_total) % 1000 / 10 
+	
+	return "%02d:%02d:%02d" % [minutes, seconds, milliseconds]

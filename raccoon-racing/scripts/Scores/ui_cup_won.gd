@@ -7,7 +7,12 @@ extends CanvasLayer
 @onready var record: Node2D = $Won/Text/Trophy/Cuptime/Record
 @onready var no_record: Node2D = $Won/Text/Trophy/Cuptime/NoRecord
 @onready var chartext: Label = $Won/Text/Unlocks/Char/maintext
-@onready var cuptest: Label = $Won/Text/Unlocks/Cup/maintext
+@onready var cuptext: Label = $Won/Text/Unlocks/Cup/maintext
+@onready var charicon: Sprite2D = $Won/Text/Unlocks/Char/Icon
+@onready var recordshadow: Label = $Won/Text/Trophy/Cuptime/Record/Time/shadow
+@onready var recordtime: Label = $Won/Text/Trophy/Cuptime/Record/Time/maintext
+@onready var norecordshadow: Label = $Won/Text/Trophy/Cuptime/NoRecord/Time/shadow
+@onready var norecordtime: Label = $Won/Text/Trophy/Cuptime/NoRecord/Time/maintext
 var nextdiff:Array[String]=[
 	'Can you also beat this cup in normal mode?',
 	'Can you also beat this cup in normal mode?',
@@ -18,10 +23,28 @@ var cups:Array[Texture]=[
 	preload("res://Assets/Animations/UISelect/cups/silver.png"),
 	preload("res://Assets/Animations/UISelect/cups/gold.png")
 ]
-
+var names:Array[String]=[
+	"",
+	"Rocko","Vixen","Mambo","Pingo","Hudson","Banzai"
+]
+var textures:Array[Texture]=[
+	null,
+	preload("res://Assets/Animations/CharSelection/characters/rockopic.png"),
+	preload("res://Assets/Animations/CharSelection/characters/vixenpic.png"),
+	preload("res://Assets/Animations/CharSelection/characters/mambopic.png"),
+	preload("res://Assets/Animations/CharSelection/characters/pingopic.png"),
+	preload("res://Assets/Animations/CharSelection/characters/hudsonpic.png"),
+	preload("res://Assets/Animations/CharSelection/characters/banzaipic.png")
+	]
+	
 func _ready() -> void:
+	cuptext.hide()
+	chartext.hide()
+	charicon.hide()
 	##player won:
-	if GameData.PlayersArr[GameData.Ranking[0]].car==GameData.FocusCar:
+	if GameData.PlayersArr[GameData.Ranking[0]].car==GameData.FocusCar and 0:
+		print('WON')
+		print(GameData.Ranking)
 		lost.hide()
 		won.show()
 		WonSetup()
@@ -34,14 +57,35 @@ func WonSetup()->void:
 	trophy.texture=cups[GameData.currentDifficulty]
 	maintext.text=nextdiff[GameData.currentDifficulty]
 	#is it a new record?
+	var timetext:String=GameData.format_time(GameData.CurrentCupTime)
 	if GameData.CupTimes[GameData.currentCup][GameData.currentDifficulty]==0 or GameData.CupTimes[GameData.currentCup][GameData.currentDifficulty]>GameData.CurrentCupTime:
 		#if so, store the new time and show the right effect
 		GameData.CupTimes[GameData.currentCup][GameData.currentDifficulty]=GameData.CurrentCupTime
 		record.show()
 		no_record.hide()
+		recordtime.text=timetext
+		recordshadow.text=timetext
 	else:
 		record.hide()
 		no_record.show()
+		norecordtime.text=timetext
+		norecordshadow.text=timetext
 		
+	#store win and check for character unlocks
+	GameData.cupWon[GameData.currentCup]=max(GameData.cupWon[GameData.currentCup],GameData.currentDifficulty)
+	var newcup:int=GameData.CheckCupLocks()
+	var newchar:int=GameData.CheckCharacterLocks()
+	if newcup!=0:
+		cuptext.show()
+		cuptext.text='Cup '+str(newcup)+' is now available. Good luck!'
+	if newchar!=0:
+		chartext.show()
+		charicon.show()
+		charicon.texture=textures[newchar]
+		chartext.text='New driver unlocked! You can now play as '+names[newchar]+'!'
 func LossSetup()->void:
+	pass
+
+
+func OnContinueButtonPressed()->void:
 	pass

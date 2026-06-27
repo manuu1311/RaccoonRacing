@@ -9,13 +9,13 @@ class_name SpeedHud
 
 var timestart: float = 0.0
 var totaltimestart:float
-var current_lap_time: float = 0.0
+var current_lap_time: int = 0
 var currentlap: int = 1
 var totallaps: int
 var updating: bool
 var bestlaptime: float = 0.0
 var car:Car
-var totaltime:float=0.0
+var totaltime:int=0
 
 func _ready() -> void:
 	timestart = Time.get_ticks_msec()

@@ -23,6 +23,53 @@
 [ext_resource type="Texture2D" uid="uid://delo2gjnfnmy5" path="res://Assets/Animations/CupWon/Ink/7.png" id="21_4j6uy"]
 [ext_resource type="Texture2D" uid="uid://b1a2pyc32cexu" path="res://Assets/Animations/CupWon/Ink/8.png" id="22_5a2ft"]
 [ext_resource type="Texture2D" uid="uid://dp4yjmnoqrwc6" path="res://Assets/Animations/CharSelection/characters/mambopic.png" id="23_nnnlj"]
+[ext_resource type="Texture2D" uid="uid://bl4eymghou5bb" path="res://Assets/Animations/CupWon/bg.png" id="24_761je"]
+[ext_resource type="Texture2D" uid="uid://bt0gi55d53e6l" path="res://Assets/Animations/CupWon/sea.png" id="25_4w526"]
+[ext_resource type="Texture2D" uid="uid://dxb3fsn0xxuap" path="res://Assets/Animations/CupWon/Balloon/b1.png" id="26_grcsl"]
+[ext_resource type="Texture2D" uid="uid://ch5kkg4gfbe0a" path="res://Assets/Animations/CupWon/Balloon/b2.png" id="27_7tgdm"]
+[ext_resource type="Texture2D" uid="uid://bs87xnvafjfuh" path="res://Assets/Animations/CupWon/Balloon/b3.png" id="28_ylbtl"]
+[ext_resource type="Texture2D" uid="uid://baqj7ouvpn4k" path="res://Assets/Animations/CupWon/Balloon/ball/1.png" id="29_761je"]
+[ext_resource type="Texture2D" uid="uid://dlxkak2kp42pe" path="res://Assets/Animations/CupWon/Balloon/ball/2.png" id="30_4w526"]
+[ext_resource type="Texture2D" uid="uid://4kxnfwtkt8qq" path="res://Assets/Animations/CupWon/Balloon/ball/3.png" id="31_grcsl"]
+[ext_resource type="Texture2D" uid="uid://28ifbh7lpxtv" path="res://Assets/Animations/CupWon/Balloon/ball/4.png" id="32_7tgdm"]
+[ext_resource type="Texture2D" uid="uid://vdoxq5ciu60b" path="res://Assets/Animations/CupWon/Balloon/ball/5.png" id="33_ylbtl"]
+[ext_resource type="Texture2D" uid="uid://dm8gr2256jsw8" path="res://Assets/Animations/CupWon/Balloon/ball/6.png" id="34_ewtc2"]
+[ext_resource type="Texture2D" uid="uid://b3dlh03kyif7b" path="res://Assets/Animations/CupWon/Balloon/ball/7.png" id="35_ty0o1"]
+[ext_resource type="Texture2D" uid="uid://dt4tkqxn6klr3" path="res://Assets/Animations/CupWon/Balloon/ball/8.png" id="36_43mdl"]
+[ext_resource type="Texture2D" uid="uid://dbyapdemdov5r" path="res://Assets/Animations/CupWon/Balloon/ball/9.png" id="37_2jhfn"]
+[ext_resource type="Texture2D" uid="uid://c1un2e4x0lfbl" path="res://Assets/Animations/CupWon/Balloon/ball/10.png" id="38_0vk7v"]
+[ext_resource type="Texture2D" uid="uid://bcc1l6vyr0tgx" path="res://Assets/Animations/CupWon/Balloon/ball/11.png" id="39_k3k4x"]
+[ext_resource type="Texture2D" uid="uid://c6084uxva6ip1" path="res://Assets/Animations/CupWon/Balloon/ball/12.png" id="40_4ots7"]
+[ext_resource type="Texture2D" uid="uid://wqhnp21asi3m" path="res://Assets/Animations/CupWon/Balloon/ball/13.png" id="41_f50u2"]
+[ext_resource type="Texture2D" uid="uid://be2khs6tnuekk" path="res://Assets/Animations/CupWon/Balloon/ball/14.png" id="42_svx8k"]
+[ext_resource type="Texture2D" uid="uid://cltu5ot8kcr02" path="res://Assets/Animations/CupWon/Balloon/ball/15.png" id="43_6mp3b"]
+[ext_resource type="Texture2D" uid="uid://cpn13su6yec4x" path="res://Assets/Animations/CupWon/Balloon/ball/16.png" id="44_8c4kb"]
+[ext_resource type="Texture2D" uid="uid://sfw5m7wilw67" path="res://Assets/Animations/CupWon/Balloon/ball/17.png" id="45_8wjo7"]
+[ext_resource type="Texture2D" uid="uid://dwtsoq0lguh3u" path="res://Assets/Animations/CupWon/Balloon/ball/18.png" id="46_n2l7o"]
+[ext_resource type="Texture2D" uid="uid://b6l3hiq351a3p" path="res://Assets/Animations/CupWon/Balloon/ball/19.png" id="47_up2pf"]
+[ext_resource type="Texture2D" uid="uid://cs1jmtk3dmhbg" path="res://Assets/Animations/CupWon/Balloon/ball/20.png" id="48_qxmjs"]
+[ext_resource type="Texture2D" uid="uid://c408yvyvu57k6" path="res://Assets/Animations/CupWon/Balloon/ball/21.png" id="49_k3jyt"]
+[ext_resource type="Texture2D" uid="uid://df16l4c8nv3pg" path="res://Assets/Animations/CupWon/Balloon/ball/22.png" id="50_1hf23"]
+[ext_resource type="Texture2D" uid="uid://gwf2rcpldapx" path="res://Assets/Animations/CupWon/Balloon/ball/23.png" id="51_firay"]
+[ext_resource type="Texture2D" uid="uid://bculnxb6vpvis" path="res://Assets/Animations/CupWon/Balloon/ball/24.png" id="52_m35sa"]
+[ext_resource type="Texture2D" uid="uid://buv8h2yblea8e" path="res://Assets/Animations/CupWon/Balloon/ball/25.png" id="53_qefii"]
+[ext_resource type="Texture2D" uid="uid://cwgptkun5v3hc" path="res://Assets/Animations/CupWon/Balloon/ball/26.png" id="54_hxoes"]
+[ext_resource type="Texture2D" uid="uid://rtgvjrs2auj3" path="res://Assets/Animations/CupWon/Gameover/1.png" id="55_bpa5p"]
+[ext_resource type="Texture2D" uid="uid://wvtc26gtwvly" path="res://Assets/Animations/CupWon/Gameover/2.png" id="56_5wy3v"]
+[ext_resource type="Texture2D" uid="uid://dfbhdllyoylqe" path="res://Assets/Animations/CupWon/Gameover/3.png" id="57_ffssu"]
+[ext_resource type="Texture2D" uid="uid://bl01rbpi5d5c3" path="res://Assets/Animations/CupWon/Gameover/4.png" id="58_vy0m1"]
+[ext_resource type="Texture2D" uid="uid://cj8somy18emmc" path="res://Assets/Animations/CupWon/Gameover/5.png" id="59_2ohos"]
+[ext_resource type="Texture2D" uid="uid://da1hcjsibxgi2" path="res://Assets/Animations/CupWon/Gameover/6.png" id="60_fcwvw"]
+[ext_resource type="Texture2D" uid="uid://0hp3gd63lx38" path="res://Assets/Animations/CupWon/Gameover/7.png" id="61_wpgic"]
+[ext_resource type="Texture2D" uid="uid://b32jb5ejn7tc2" path="res://Assets/Animations/CupWon/Gameover/8.png" id="62_2nmjh"]
+[ext_resource type="Texture2D" uid="uid://c2qvwlf0or0tj" path="res://Assets/Animations/CupWon/Gameover/9.png" id="63_o2kf4"]
+[ext_resource type="Texture2D" uid="uid://ca2eqtiwqndqa" path="res://Assets/Animations/CupWon/Gameover/10.png" id="64_8amvm"]
+[ext_resource type="Texture2D" uid="uid://cps7jnn4mg117" path="res://Assets/Animations/CupWon/Gameover/11.png" id="65_f8wr2"]
+[ext_resource type="Texture2D" uid="uid://cgkhrg5s18uy6" path="res://Assets/Animations/CupWon/Gameover/12.png" id="66_5w6s0"]
+[ext_resource type="Texture2D" uid="uid://dtycqycmf5w5j" path="res://Assets/Animations/CupWon/Gameover/13.png" id="67_jvcj8"]
+[ext_resource type="Texture2D" uid="uid://dv1ae7qdo1qkv" path="res://Assets/Animations/CupWon/Gameover/14.png" id="68_hc3i2"]
+[ext_resource type="Texture2D" uid="uid://31kllfqmuupb" path="res://Assets/Animations/CupWon/Gameover/15.png" id="69_pkevt"]
+[ext_resource type="Texture2D" uid="uid://xyss4d30nu4i" path="res://Assets/Animations/CupWon/Gameover/16.png" id="70_hqtnd"]
 
 [sub_resource type="Animation" id="Animation_i2oi5"]
 length = 0.001
@@ -104,6 +151,9 @@ _data = {
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f5bee"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yoyxl"]
+
+[sub_resource type="FontVariation" id="FontVariation_nnnlj"]
+spacing_glyph = 1
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vqbx2"]
 animations = [{
@@ -548,11 +598,216 @@ _data = {
 &"shiny": SubResource("Animation_jwxe0")
 }
 
+[sub_resource type="FontVariation" id="FontVariation_f5bee"]
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_yoyxl"]
+spacing_glyph = 1
+
+[sub_resource type="Animation" id="Animation_kni5o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sea:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-500, 313.835)]
+}
+
+[sub_resource type="Animation" id="Animation_332wv"]
+resource_name = "sea"
+length = 6.857146
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sea:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.857143),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1100, 410), Vector2(1000, 410)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p5vqc"]
+_data = {
+&"RESET": SubResource("Animation_kni5o"),
+&"sea": SubResource("Animation_332wv")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b0r0t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_grcsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_7tgdm")
+}, {
+"duration": 3.0,
+"texture": ExtResource("28_ylbtl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wc53"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_761je")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_4w526")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_grcsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_7tgdm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_ylbtl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_ewtc2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_ty0o1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_43mdl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_2jhfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_0vk7v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_k3k4x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_4ots7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_f50u2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_svx8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_6mp3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_8c4kb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_8wjo7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_n2l7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_up2pf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_qxmjs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_k3jyt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_1hf23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_firay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_m35sa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_qefii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_hxoes")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e75bp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_bpa5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_5wy3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_ffssu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_vy0m1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_2ohos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_fcwvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_wpgic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_2nmjh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_o2kf4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_8amvm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_f8wr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_5w6s0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_jvcj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_hc3i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_pkevt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_hqtnd")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
 [node name="UiCupWon" type="CanvasLayer" unique_id=1663479219]
 script = ExtResource("1_jwxe0")
 metadata/_edit_vertical_guides_ = [-111.0]
 
 [node name="Won" type="Node2D" parent="." unique_id=43115198]
+visible = false
 
 [node name="Background" type="Node2D" parent="Won" unique_id=665448909]
 position = Vector2(250, 250)
@@ -693,17 +948,18 @@ offset_bottom = 46.11
 [node name="Challenge" type="Node2D" parent="Won/Text" unique_id=1110914039]
 
 [node name="maintext" type="Label" parent="Won/Text/Challenge" unique_id=1983691614]
-offset_left = 52.515
+offset_left = 13.0
 offset_top = 209.575
-offset_right = 452.515
+offset_right = 490.485
 offset_bottom = 259.57538
-theme_override_colors/font_color = Color(0.029648429, 0.15494528, 0.41250002, 1)
+theme_override_colors/font_color = Color(0.084003896, 0.31711602, 0.790625, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.03137255, 0.101960786, 0.24705882, 1)
+theme_override_colors/font_outline_color = Color(0.03339843, 0.2065589, 0.5625, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 6
 theme_override_constants/shadow_outline_size = 11
+theme_override_fonts/font = SubResource("FontVariation_nnnlj")
 theme_override_font_sizes/font_size = 19
 text = "Can you also beat this cup in normal mode?"
 horizontal_alignment = 1
@@ -771,7 +1027,6 @@ color = Color(0.36739406, 0.784375, 0.3309082, 1)
 position = Vector2(0, 17.935)
 
 [node name="Record" type="Node2D" parent="Won/Text/Trophy/Cuptime" unique_id=446793164]
-visible = false
 
 [node name="General" type="Node2D" parent="Won/Text/Trophy/Cuptime/Record" unique_id=476602844]
 position = Vector2(-8.28, 0)
@@ -868,6 +1123,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NoRecord" type="Node2D" parent="Won/Text/Trophy/Cuptime" unique_id=823021552]
+visible = false
 position = Vector2(35.275, 0)
 
 [node name="General" type="Node2D" parent="Won/Text/Trophy/Cuptime/NoRecord" unique_id=341692990]
@@ -986,13 +1242,14 @@ offset_left = 52.515
 offset_top = 334.755
 offset_right = 452.515
 offset_bottom = 384.75552
-theme_override_colors/font_color = Color(0.029648429, 0.15494528, 0.41250002, 1)
+theme_override_colors/font_color = Color(0.084003896, 0.31711602, 0.790625, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.03137255, 0.101960786, 0.24705882, 1)
+theme_override_colors/font_outline_color = Color(0.03339843, 0.2065589, 0.5625, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 6
 theme_override_constants/shadow_outline_size = 11
+theme_override_fonts/font = SubResource("FontVariation_f5bee")
 theme_override_font_sizes/font_size = 15
 text = "New driver unlocked! You can now play as Mambo!"
 horizontal_alignment = 1
@@ -1011,16 +1268,111 @@ offset_left = 52.515
 offset_top = 334.755
 offset_right = 452.515
 offset_bottom = 384.75552
-theme_override_colors/font_color = Color(0.029648429, 0.15494528, 0.41250002, 1)
+theme_override_colors/font_color = Color(0.084003896, 0.31711602, 0.790625, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.03137255, 0.101960786, 0.24705882, 1)
+theme_override_colors/font_outline_color = Color(0.03339843, 0.2065589, 0.5625, 1)
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 6
 theme_override_constants/shadow_outline_size = 11
+theme_override_fonts/font = SubResource("FontVariation_yoyxl")
 theme_override_font_sizes/font_size = 15
 text = "Cup 4 is now available. Good luck!"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Lost" type="Node2D" parent="." unique_id=1185404279]
 position = Vector2(269, 150)
+
+[node name="Background" type="Node2D" parent="Lost" unique_id=451558442]
+scale = Vector2(0.67, 0.67)
+
+[node name="TextureRect" type="TextureRect" parent="Lost/Background" unique_id=1615552915]
+offset_left = -404.16
+offset_top = -223.14
+offset_right = 348.84
+offset_bottom = 526.86
+texture = ExtResource("24_761je")
+
+[node name="Sea" type="Sprite2D" parent="Lost/Background" unique_id=1423883260]
+position = Vector2(-500, 313.835)
+texture = ExtResource("25_4w526")
+
+[node name="SeaPlayer" type="AnimationPlayer" parent="Lost/Background" unique_id=1802492187]
+libraries/ = SubResource("AnimationLibrary_p5vqc")
+autoplay = &"sea"
+
+[node name="Balloon" type="Node2D" parent="Lost" unique_id=670424993]
+position = Vector2(0, 89.85)
+scale = Vector2(0.67, 0.67)
+
+[node name="animation" type="AnimatedSprite2D" parent="Lost/Balloon" unique_id=504516394]
+sprite_frames = SubResource("SpriteFrames_b0r0t")
+frame = 1
+frame_progress = 0.5133444
+
+[node name="ball" type="AnimatedSprite2D" parent="Lost/Balloon" unique_id=1056866930]
+self_modulate = Color(0.11945311, 0.41917178, 0.86875, 1)
+position = Vector2(170, 55)
+scale = Vector2(1.15, 1.15)
+sprite_frames = SubResource("SpriteFrames_4wc53")
+autoplay = "default"
+
+[node name="ball2" type="AnimatedSprite2D" parent="Lost/Balloon" unique_id=1652856076]
+position = Vector2(170, 55)
+scale = Vector2(1.025, 1.025)
+sprite_frames = SubResource("SpriteFrames_4wc53")
+autoplay = "default"
+
+[node name="Gameover" type="Node2D" parent="Lost" unique_id=39695171]
+position = Vector2(26.5, -67.035)
+scale = Vector2(0.67, 0.67)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Lost/Gameover" unique_id=86152079]
+sprite_frames = SubResource("SpriteFrames_e75bp")
+autoplay = "default"
+
+[node name="Continue" type="Node2D" parent="Lost" unique_id=384163584]
+position = Vector2(-250, -186.355)
+
+[node name="ContinueButton" type="Node2D" parent="Lost/Continue" unique_id=718261122]
+
+[node name="shadow" type="Label" parent="Lost/Continue/ContinueButton" unique_id=1741649724]
+offset_left = 70.69
+offset_top = 406.26
+offset_right = 438.69
+offset_bottom = 451.26
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 17
+theme_override_constants/shadow_outline_size = 21
+theme_override_font_sizes/font_size = 25
+text = "Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maintext" type="Label" parent="Lost/Continue/ContinueButton" unique_id=1527068394]
+offset_left = 68.0
+offset_top = 403.0
+offset_right = 436.0
+offset_bottom = 448.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Lost/Continue/ContinueButton" unique_id=891942050]
+offset_left = 108.0
+offset_top = 415.0
+offset_right = 402.0
+offset_bottom = 444.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nnnlj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_f5bee")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yoyxl")
