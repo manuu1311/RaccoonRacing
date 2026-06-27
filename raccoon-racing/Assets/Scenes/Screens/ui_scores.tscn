@@ -310,6 +310,10 @@ text = "15"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="diff" type="Sprite2D" parent="Icons/Char" unique_id=1779050093]
+position = Vector2(25, 154)
+scale = Vector2(0.4, 0.4)
+
 [node name="AIchar1" type="Node2D" parent="Icons" unique_id=2060271756]
 position = Vector2(10, 60)
 
@@ -391,6 +395,10 @@ theme_override_font_sizes/font_size = 17
 text = "15"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="diff" type="Sprite2D" parent="Icons/AIchar1" unique_id=1973164397]
+position = Vector2(25, 154)
+scale = Vector2(0.4, 0.4)
 
 [node name="AIchar2" type="Node2D" parent="Icons" unique_id=1106442146]
 position = Vector2(20, 120)
@@ -474,6 +482,10 @@ text = "15"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="diff" type="Sprite2D" parent="Icons/AIchar2" unique_id=666858333]
+position = Vector2(25, 154)
+scale = Vector2(0.4, 0.4)
+
 [node name="AIchar3" type="Node2D" parent="Icons" unique_id=311012984]
 position = Vector2(30, 180)
 
@@ -555,6 +567,10 @@ theme_override_font_sizes/font_size = 17
 text = "15"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="diff" type="Sprite2D" parent="Icons/AIchar3" unique_id=907595370]
+position = Vector2(25, 154)
+scale = Vector2(0.4, 0.4)
 
 [connection signal="mouse_entered" from="Text/ContinueButton/Button" to="." method="_on_continue_mouse_entered"]
 [connection signal="mouse_exited" from="Text/ContinueButton/Button" to="." method="_on_continue_mouse_exited"]

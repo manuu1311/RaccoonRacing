@@ -34,7 +34,7 @@ enum VehicleType { CAR, HOVERCRAFT }
 var current_vehicle: VehicleType = VehicleType.CAR
 var PlayersArr:Array[Player]=[]
 var OrderInfo:Array[int]=[]
-var PointsInfo:Array[int]
+var Ranking:Array[int]=[]
 var FocusCar:Car
 ##array to store info about best lap times in the 4 cups
 var BestTimes:Array[float]=[0.0,0.0,0.0,0.0]
@@ -94,18 +94,22 @@ func PopulatePlayers()->void:
 	newplayer=Player.new(0,Player.control_type.HUMAN)
 	PlayersArr.append(newplayer)
 	OrderInfo.append(0)
+	Ranking.append(0)
 	newplayer=AIPlayer.new(1,Player.control_type.AI)
 	PlayersArr.append(newplayer)
 	newplayer.AiReflect=AiLevel[currentDifficulty][0][0]
 	OrderInfo.append(1)
+	Ranking.append(1)
 	newplayer=AIPlayer.new(2,Player.control_type.AI)
 	PlayersArr.append(newplayer)
 	newplayer.AiReflect=AiLevel[currentDifficulty][1][0]
 	OrderInfo.append(2)
+	Ranking.append(2)
 	newplayer=AIPlayer.new(3,Player.control_type.AI)
 	PlayersArr.append(newplayer)
 	newplayer.AiReflect=AiLevel[currentDifficulty][2][0]
 	OrderInfo.append(3)
+	Ranking.append(3)
 	
 #testing function
 func SetMidGameData()->void:
