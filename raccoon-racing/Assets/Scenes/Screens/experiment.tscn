@@ -157,16 +157,15 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("19_no6kj")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
-"speed": 5.0
+"speed": 35.0
 }]
 
 [node name="Experiment" type="Node2D" unique_id=411329241]
 script = ExtResource("1_piq2e")
 
 [node name="Map" parent="." unique_id=620435250 instance=ExtResource("4_vyse4")]
-visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1501903731]
 environment = SubResource("Environment_td7gk")
@@ -185,8 +184,8 @@ transform = Transform2D(0.5, 0, 0, 0.5, 150, 125)
 custom_minimum_size = Vector2(200, 200)
 offset_left = 150.0
 offset_top = 150.0
-offset_right = 681.0
-offset_bottom = 650.0
+offset_right = 350.00006
+offset_bottom = 355.0
 scale = Vector2(2.6, 2.6)
 pivot_offset = Vector2(100, 100)
 theme_override_colors/font_color = Color(0.8603393, 0.9375, 0.05566405, 1)
@@ -203,7 +202,7 @@ metadata/_edit_use_anchors_ = true
 [node name="321Player" type="AnimationPlayer" parent="321" unique_id=861274524]
 libraries/ = SubResource("AnimationLibrary_vyse4")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="321" unique_id=1388537590]
+[node name="Finish" type="AnimatedSprite2D" parent="321" unique_id=1388537590]
 position = Vector2(200, 200)
 sprite_frames = SubResource("SpriteFrames_6ttnx")
 

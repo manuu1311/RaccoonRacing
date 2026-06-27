@@ -8,15 +8,18 @@ class_name SpeedHud
 @onready var best_time: Label = $BestTime
 
 var timestart: float = 0.0
+var totaltimestart:float
 var current_lap_time: float = 0.0
 var currentlap: int = 1
 var totallaps: int
 var updating: bool
 var bestlaptime: float = 0.0
 var car:Car
+var totaltime:float=0.0
 
 func _ready() -> void:
 	timestart = Time.get_ticks_msec()
+	totaltimestart = Time.get_ticks_msec()
 	totallaps = GameData.currentLaps
 	updating = false
 	
@@ -42,7 +45,8 @@ func _process(_delta: float) -> void:
 	animated_sprite_2d.frame = int(speed / 30)
 	
 	current_lap_time = Time.get_ticks_msec() - timestart
-	time.text = format_time(current_lap_time)
+	totaltime=Time.get_ticks_msec()-totaltimestart
+	time.text = format_time(totaltime)
 
 func format_time(msec_total: float) -> String:
 	var total_seconds: int = int(msec_total / 1000)
@@ -61,6 +65,7 @@ func on_lap_completed() -> void:
 	# Don't check record on "Lap 1" initialization if it's just your 5-second test timer!
 	# (But for real gameplay, see the condition below:)
 	if current_lap_time > 0:
+		time.text=format_time(current_lap_time)
 		# If bestlaptime is 0 (no record yet) OR current lap is faster than previous best
 		if bestlaptime == 0.0 or current_lap_time < bestlaptime:
 			bestlaptime = current_lap_time
