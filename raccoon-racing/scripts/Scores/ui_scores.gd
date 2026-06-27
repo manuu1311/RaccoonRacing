@@ -150,4 +150,4 @@ func _on_continue_mouse_exited() -> void:
 
 
 func _on_continue_pressed() -> void:
-    pass
+    get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_cup_won.tscn")

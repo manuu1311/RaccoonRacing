@@ -39,6 +39,16 @@ var FocusCar:Car
 ##array to store info about best lap times in the 4 cups
 var BestTimes:Array[float]=[0.0,0.0,0.0,0.0]
 var AiLevel:Array[Array]
+##current time in the cup, useful for calculating total time at 
+##the end of the cup. added after each race finish
+var CurrentCupTime:float=0.0
+##[cup,difficulty]:best time for "cup" in the chosen "difficulty"
+var CupTimes:Array[Array]=[
+	[0,0,0],[0,0,0],
+	[0,0,0],[0,0,0],
+	[0,0,0],[0,0,0],
+	[0,0,0],[0,0,0],
+]
 
 
 func _ready() -> void:
