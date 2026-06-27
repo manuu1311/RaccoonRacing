@@ -152,4 +152,7 @@ func _on_continue_mouse_exited() -> void:
 
 
 func _on_continue_pressed() -> void:
-    get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_cup_won.tscn")
+    if GameData.currentStep<GameData.cupInfo[GameData.currentCup].size()-1:
+        get_tree().change_scene_to_file("res://Assets/Scenes/Screens/experiment.tscn")
+    else:
+        get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_cup_won.tscn")

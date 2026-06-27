@@ -1368,7 +1368,7 @@ text = "Continue"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Lost/Continue/ContinueButton" unique_id=891942050]
+[node name="Button" type="Button" parent="Lost/Continue/ContinueButton" unique_id=843789460]
 offset_left = 108.0
 offset_top = 415.0
 offset_right = 402.0
@@ -1376,3 +1376,10 @@ offset_bottom = 444.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nnnlj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_f5bee")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_yoyxl")
+
+[connection signal="mouse_entered" from="Won/ContinueButton/Button" to="." method="OnButtonHoverWin"]
+[connection signal="mouse_exited" from="Won/ContinueButton/Button" to="." method="OnButtonHoverExitWin"]
+[connection signal="pressed" from="Won/ContinueButton/Button" to="." method="OnContinueButtonPressed"]
+[connection signal="mouse_entered" from="Lost/Continue/ContinueButton/Button" to="." method="OnButtonHoverLoss"]
+[connection signal="mouse_exited" from="Lost/Continue/ContinueButton/Button" to="." method="OnButtonHoverExitLoss"]
+[connection signal="pressed" from="Lost/Continue/ContinueButton/Button" to="." method="OnContinueButtonPressed"]

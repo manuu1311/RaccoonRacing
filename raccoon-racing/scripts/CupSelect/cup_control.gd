@@ -39,21 +39,25 @@ func _on_back_button_mouse_exited() -> void:
 	$BackButton.position.y+=3
 
 
-
 func _on_diff_pressed(diff: int) -> void:
 	if buttons.locks[diff-1]:
 		ButtonSounds.PlaySound('warning')
 	else:
 		ButtonSounds.PlaySound('click')
 		GameData.currentDifficulty=diff
+		GameData.currentStep=0
+		GameData.UpdateInfo()
 		UiOverAnimation.playanim()
+		MusicPlayer.FadeOutAndStop(2.5)
+		await UiOverAnimation.animated_sprite_2d.animation_finished
+		get_tree().change_scene_to_file("res://Assets/Scenes/Screens/experiment.tscn")
 
 
-func hide_diff_screen():
+func hide_diff_screen()->void:
 	bg_filter.hide()
 	buttons.hide()
 	
-func show_diff_screen():
+func show_diff_screen()->void:
 	bg_filter.show()
 	buttons.show()
 	

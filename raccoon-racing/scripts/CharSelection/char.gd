@@ -17,7 +17,7 @@ var r_g_b: float = 102.0 / 256.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	locked=GameData.characterLocks[id]
+	locked=GameData.characterLocks[id-1]
 	infotext.text=unlockInfo
 	infotext.hide()
 	shiny.hide()

@@ -6,7 +6,7 @@ var players: Array[Player]
 var cars:Array[Car]
 var fcsCar:Car
 #TODO: should be created
-@onready var map: Map = $Map
+@onready var map: Map
 @onready var hud: HUDManager = $Hud
 @onready var sound_manager: GameSoundManager = $SoundManager
 @onready var lbl321: Label = $"321/321"
@@ -22,18 +22,12 @@ var SceneAngleMoveExpandNowPos:Vector2
 
 
 func _ready() -> void:
+	UiOverAnimation.reset_anim_frame()
+	LoadMap()
 	lbl321.self_modulate=Color.TRANSPARENT
 	stagesize=map.GetMapSize()
 	SceneAngleMoveExpandPos = Vector2(150,0)
 	SceneAngleMoveExpandNowPos = Vector2.ZERO
-	#TODO: also select maps accordingly
-	var minimap_instance:CanvasLayer
-	if GameData.current_vehicle==GameData.VehicleType.CAR:
-		minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap01.tscn").instantiate()
-	else:
-		minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap02.tscn").instantiate()
-	minimap_instance.name = "Minimap"
-	map.add_child(minimap_instance)
 	map.deferredInit()
 	GameData.PopulatePlayers()
 	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
@@ -63,6 +57,39 @@ func _ready() -> void:
 
 	
 	
+func LoadMap()->void:
+	var minimap_instance:CanvasLayer
+	if GameData.currentMap==1:
+		map=preload("res://Assets/Scenes/Screens/maps/Map01.tscn").instantiate() as Map
+		add_child(map)
+		if GameData.current_vehicle==GameData.VehicleType.CAR:
+			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap01.tscn").instantiate()
+		else:
+			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap02.tscn").instantiate()
+	elif GameData.currentMap==2:
+		map=preload("res://Assets/Scenes/Screens/maps/Map02.tscn").instantiate() as Map
+		add_child(map)
+		if GameData.current_vehicle==GameData.VehicleType.CAR:
+			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap11.tscn").instantiate()
+		else:
+			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap12.tscn").instantiate()
+	elif GameData.currentMap==3:
+		map=preload("res://Assets/Scenes/Screens/maps/Map03.tscn").instantiate() as Map
+		add_child(map)
+		if GameData.current_vehicle==GameData.VehicleType.CAR:
+			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap21.tscn").instantiate()
+		else:
+			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap22.tscn").instantiate()
+	elif GameData.currentMap==4:
+		map=preload("res://Assets/Scenes/Screens/maps/Map04.tscn").instantiate() as Map
+		add_child(map)
+		if GameData.current_vehicle==GameData.VehicleType.CAR:
+			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap31.tscn").instantiate()
+		else:
+			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap32.tscn").instantiate()
+	minimap_instance.name = "Minimap"
+	map.add_child(minimap_instance)
+
 func RaceStart()->void:
 	for player:Player in GameData.PlayersArr:
 		player.StartRace()

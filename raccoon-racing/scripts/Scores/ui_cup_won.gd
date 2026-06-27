@@ -13,6 +13,8 @@ extends CanvasLayer
 @onready var recordtime: Label = $Won/Text/Trophy/Cuptime/Record/Time/maintext
 @onready var norecordshadow: Label = $Won/Text/Trophy/Cuptime/NoRecord/Time/shadow
 @onready var norecordtime: Label = $Won/Text/Trophy/Cuptime/NoRecord/Time/maintext
+@onready var continue_buttonwin: Node2D = $Won/ContinueButton
+@onready var continuebuttonloss: Node2D = $Lost/Continue
 var nextdiff:Array[String]=[
 	'Can you also beat this cup in normal mode?',
 	'Can you also beat this cup in normal mode?',
@@ -88,4 +90,13 @@ func LossSetup()->void:
 
 
 func OnContinueButtonPressed()->void:
-	pass
+	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_top_scores.tscn")
+
+func OnButtonHoverWin()->void:
+	continue_buttonwin.position.y-=3
+func OnButtonHoverExitWin()->void:
+	continue_buttonwin.position.y+=3
+func OnButtonHoverLoss()->void:
+	continuebuttonloss.position.y-=3
+func OnButtonHoverExitLoss()->void:
+	continuebuttonloss.position.y+=3

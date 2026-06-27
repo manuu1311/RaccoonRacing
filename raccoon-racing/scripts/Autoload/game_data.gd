@@ -13,6 +13,8 @@ var cupLocks: Array[bool]=[0,0,0,0,1,1,1,1]
 var cupWon: Array[int]=[0,0,0,0,0,0,0,0]
 #current cup chosen
 var currentCup: int = 0
+##curent cup step
+var currentStep:int=0
 ##array info for each cup:
 ##[mapid,lapnum,type] for each map
 var cupInfo:Array[Array]=[
@@ -162,7 +164,12 @@ func RecordWin()->void:
 	if cupWon[currentCup]<currentDifficulty:
 		cupWon[currentCup]=currentDifficulty
 		
-		
+
+func UpdateInfo()->void:
+	currentMap=cupInfo[currentCup][currentStep][0]
+	currentLaps=cupInfo[currentCup][currentStep][1]
+	current_vehicle=cupInfo[currentCup][currentStep][2]
+
 func format_time(msec_total: int) -> String:
 	var total_seconds: int = int(msec_total / 1000)
 	

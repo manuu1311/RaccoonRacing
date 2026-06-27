@@ -403,7 +403,7 @@ signal main_anim_complete
 @onready var buttons: UIbuttons = $\"../../Buttons\"
 
 func _ready()->void:
-	if not MusicPlayer.playing:
+	if not MusicPlayer.playing :
 		MusicPlayer.PlayMusic('main')
 	play(\"intro\")
 	buttons.hide()

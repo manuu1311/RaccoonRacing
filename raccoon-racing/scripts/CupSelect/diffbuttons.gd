@@ -12,7 +12,7 @@ func _ready() -> void:
 	btns=[$EasyBTN,$NormalBTN,$HardBTN]
 	txts=[$EasyInfotext,$NormalInfotext,$HardInfotext]
 
-func updateLocks(id: int):
+func updateLocks(id: int)->void:
 	#was the race won before?
 	var racewon=GameData.cupWon[id]
 	for i in range(3):
