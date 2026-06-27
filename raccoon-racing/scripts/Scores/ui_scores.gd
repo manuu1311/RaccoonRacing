@@ -51,7 +51,7 @@ func _ready() -> void:
         if player.PlayerID==0:
             gradient.self_modulate=Color(0,0.45,0,0.36)
         else:
-            gradient.self_modulate=Color(1,1,1,0.25)
+            gradient.self_modulate=Color(1,1,1,0.1)
         var icon:Sprite2D=positions[i].get_node("Icon")
         icon.texture=textures[player.charid] 
         var lblname:Label=positions[i].get_node("name")

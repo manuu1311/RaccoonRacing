@@ -225,16 +225,17 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 7
 theme_override_fonts/font = ExtResource("8_kpbv8")
 theme_override_font_sizes/font_size = 23
-text = "Rank           Name           Points"
+text = "Rank    Name   Points"
 
 [node name="Icons" type="Node" parent="." unique_id=2101194190]
 
 [node name="Char" type="Node2D" parent="Icons" unique_id=174748870]
+position = Vector2(20, 0)
 
 [node name="gradient" type="Sprite2D" parent="Icons/Char" unique_id=1480587311]
 self_modulate = Color(0, 0.4509804, 0, 0.36862746)
-position = Vector2(236.625, 151.6905)
-scale = Vector2(0.8625, 0.437)
+position = Vector2(196.5, 151.6905)
+scale = Vector2(0.702, 0.437)
 texture = ExtResource("3_xsj34")
 
 [node name="Icon" type="Sprite2D" parent="Icons/Char" unique_id=1115105442]
@@ -243,9 +244,9 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_a30fl")
 
 [node name="name" type="Label" parent="Icons/Char" unique_id=532275467]
-offset_left = 221.25
+offset_left = 165.0
 offset_top = 139.6905
-offset_right = 271.25
+offset_right = 215.00003
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -277,9 +278,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="points" type="Label" parent="Icons/Char" unique_id=1129899140]
-offset_left = 344.25
+offset_left = 235.415
 offset_top = 139.6905
-offset_right = 394.25
+offset_right = 285.41443
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -294,9 +295,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="pointsadd" type="Label" parent="Icons/Char" unique_id=1817116504]
-offset_left = 391.25
+offset_left = 318.525
 offset_top = 139.6905
-offset_right = 441.25
+offset_right = 368.525
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -315,12 +316,12 @@ position = Vector2(25, 154)
 scale = Vector2(0.4, 0.4)
 
 [node name="AIchar1" type="Node2D" parent="Icons" unique_id=2060271756]
-position = Vector2(10, 60)
+position = Vector2(40, 60)
 
 [node name="gradient" type="Sprite2D" parent="Icons/AIchar1" unique_id=1327898207]
-self_modulate = Color(1, 1, 1, 0.23921569)
-position = Vector2(236.625, 151.6905)
-scale = Vector2(0.8625, 0.437)
+self_modulate = Color(1, 1, 1, 0.105882354)
+position = Vector2(196.5, 151.6905)
+scale = Vector2(0.702, 0.437)
 texture = ExtResource("3_xsj34")
 
 [node name="Icon" type="Sprite2D" parent="Icons/AIchar1" unique_id=1426250654]
@@ -329,9 +330,9 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_a30fl")
 
 [node name="name" type="Label" parent="Icons/AIchar1" unique_id=1922774531]
-offset_left = 221.25
+offset_left = 165.0
 offset_top = 139.6905
-offset_right = 271.25
+offset_right = 215.00003
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -363,9 +364,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="points" type="Label" parent="Icons/AIchar1" unique_id=221132258]
-offset_left = 344.25
+offset_left = 235.415
 offset_top = 139.6905
-offset_right = 394.25
+offset_right = 285.41443
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -380,9 +381,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="pointsadd" type="Label" parent="Icons/AIchar1" unique_id=879727379]
-offset_left = 391.25
+offset_left = 318.525
 offset_top = 139.6905
-offset_right = 441.25
+offset_right = 368.525
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -401,12 +402,12 @@ position = Vector2(25, 154)
 scale = Vector2(0.4, 0.4)
 
 [node name="AIchar2" type="Node2D" parent="Icons" unique_id=1106442146]
-position = Vector2(20, 120)
+position = Vector2(60, 120)
 
 [node name="gradient" type="Sprite2D" parent="Icons/AIchar2" unique_id=131682669]
-self_modulate = Color(1, 1, 1, 0.23921569)
-position = Vector2(236.625, 151.6905)
-scale = Vector2(0.8625, 0.437)
+self_modulate = Color(1, 1, 1, 0.105882354)
+position = Vector2(196.5, 151.6905)
+scale = Vector2(0.702, 0.437)
 texture = ExtResource("3_xsj34")
 
 [node name="Icon" type="Sprite2D" parent="Icons/AIchar2" unique_id=174516112]
@@ -415,9 +416,9 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_a30fl")
 
 [node name="name" type="Label" parent="Icons/AIchar2" unique_id=14472045]
-offset_left = 221.25
+offset_left = 165.0
 offset_top = 139.6905
-offset_right = 271.25
+offset_right = 215.00003
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -449,9 +450,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="points" type="Label" parent="Icons/AIchar2" unique_id=1112138302]
-offset_left = 344.25
+offset_left = 235.415
 offset_top = 139.6905
-offset_right = 394.25
+offset_right = 285.41443
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -466,9 +467,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="pointsadd" type="Label" parent="Icons/AIchar2" unique_id=1571187031]
-offset_left = 391.25
+offset_left = 318.525
 offset_top = 139.6905
-offset_right = 441.25
+offset_right = 368.525
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -487,12 +488,12 @@ position = Vector2(25, 154)
 scale = Vector2(0.4, 0.4)
 
 [node name="AIchar3" type="Node2D" parent="Icons" unique_id=311012984]
-position = Vector2(30, 180)
+position = Vector2(80, 180)
 
 [node name="gradient" type="Sprite2D" parent="Icons/AIchar3" unique_id=1884336183]
-self_modulate = Color(1, 1, 1, 0.23921569)
-position = Vector2(236.625, 151.6905)
-scale = Vector2(0.8625, 0.437)
+self_modulate = Color(1, 1, 1, 0.105882354)
+position = Vector2(196.5, 151.6905)
+scale = Vector2(0.702, 0.437)
 texture = ExtResource("3_xsj34")
 
 [node name="Icon" type="Sprite2D" parent="Icons/AIchar3" unique_id=612044561]
@@ -501,9 +502,9 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_a30fl")
 
 [node name="name" type="Label" parent="Icons/AIchar3" unique_id=1867230143]
-offset_left = 221.25
+offset_left = 165.0
 offset_top = 139.6905
-offset_right = 271.25
+offset_right = 215.00003
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -535,9 +536,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="points" type="Label" parent="Icons/AIchar3" unique_id=108439586]
-offset_left = 344.25
+offset_left = 235.415
 offset_top = 139.6905
-offset_right = 394.25
+offset_right = 285.41443
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -552,9 +553,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="pointsadd" type="Label" parent="Icons/AIchar3" unique_id=1439392285]
-offset_left = 391.25
+offset_left = 318.525
 offset_top = 139.6905
-offset_right = 441.25
+offset_right = 368.525
 offset_bottom = 163.6905
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
