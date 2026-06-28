@@ -1,3 +1,1421 @@
-[gd_scene format=3 uid="uid://dsit2dtpfwrw6"]
+[gd_scene format=4 uid="uid://dsit2dtpfwrw6"]
+
+[ext_resource type="Script" uid="uid://dx8rjt8d428ts" path="res://scripts/map/map_02.gd" id="1_vfrq5"]
+[ext_resource type="Texture2D" uid="uid://cs325qudj65o6" path="res://Assets/Images/maps/map2/bg.jpeg" id="2_2kelp"]
+[ext_resource type="Texture2D" uid="uid://chhlo0unxxw6n" path="res://Assets/Images/maps/map2/Art/Flag/1.png" id="3_okyyb"]
+[ext_resource type="Texture2D" uid="uid://cenyac4oy30wf" path="res://Assets/Images/maps/map2/Art/Flag/2.png" id="4_3mf8p"]
+[ext_resource type="Texture2D" uid="uid://bwf3jphi0eyqu" path="res://Assets/Images/maps/map2/Art/Flag/3.png" id="5_x427r"]
+[ext_resource type="Texture2D" uid="uid://dc51t4u20g3ew" path="res://Assets/Images/maps/map2/Art/Flag/4.png" id="6_53s0t"]
+[ext_resource type="Texture2D" uid="uid://clast2p32eaka" path="res://Assets/Images/maps/map2/Art/Flag/5.png" id="7_u33jb"]
+[ext_resource type="Texture2D" uid="uid://d3visymj3evfx" path="res://Assets/Images/maps/map2/Art/Flag/6.png" id="8_lel6n"]
+[ext_resource type="Texture2D" uid="uid://b7haoxq4mb4pp" path="res://Assets/Images/maps/map2/Art/Flag/7.png" id="9_lt7q4"]
+[ext_resource type="Texture2D" uid="uid://ctuuyrl48yt7o" path="res://Assets/Images/maps/map2/Art/Flag/8.png" id="10_f2nhw"]
+[ext_resource type="Texture2D" uid="uid://0sfsptsha2lr" path="res://Assets/Images/maps/map2/Art/Flag/9.png" id="11_0683i"]
+[ext_resource type="Texture2D" uid="uid://dpfgp1nptl7tm" path="res://Assets/Images/maps/map2/Art/Flag/10.png" id="12_jcs6q"]
+[ext_resource type="Texture2D" uid="uid://m30f6vwhd8j1" path="res://Assets/Images/maps/map2/Art/Flag/11.png" id="13_6qtvh"]
+[ext_resource type="Texture2D" uid="uid://cmj4ltc0ib4d5" path="res://Assets/Images/maps/map2/Art/Flag/12.png" id="14_hg2ir"]
+[ext_resource type="Texture2D" uid="uid://bju6pischd8gd" path="res://Assets/Images/maps/map2/Art/Flag/13.png" id="15_wqlei"]
+[ext_resource type="Texture2D" uid="uid://dq55dmggmq1q3" path="res://Assets/Images/maps/map2/Art/Flag/14.png" id="16_uny84"]
+[ext_resource type="Texture2D" uid="uid://cobiuoo7iuew2" path="res://Assets/Images/maps/map2/Art/Flag/15.png" id="17_vfa1f"]
+[ext_resource type="Texture2D" uid="uid://bxkan1fbokg63" path="res://Assets/Images/maps/map2/Art/Flag/16.png" id="18_o242d"]
+[ext_resource type="Texture2D" uid="uid://c7bs1yfgnnxjb" path="res://Assets/Images/maps/map2/Art/Flag/17.png" id="19_a3c15"]
+[ext_resource type="Texture2D" uid="uid://bjixj7c01tui5" path="res://Assets/Images/maps/map2/Art/Flag/18.png" id="20_lnqfc"]
+[ext_resource type="Texture2D" uid="uid://cj4vnbdjmdvbr" path="res://Assets/Images/maps/map2/Art/Flag/19.png" id="21_q36qi"]
+[ext_resource type="Texture2D" uid="uid://c5p5eecsq2xke" path="res://Assets/Images/maps/map2/Art/Flag/20.png" id="22_1n0ya"]
+[ext_resource type="Texture2D" uid="uid://btxr3poq3cw2y" path="res://Assets/Images/maps/map2/Art/Flag/21.png" id="23_jw7t8"]
+[ext_resource type="Texture2D" uid="uid://c2gpxxiqsqi6d" path="res://Assets/Images/maps/map2/Art/Flag/22.png" id="24_l8ud3"]
+[ext_resource type="Texture2D" uid="uid://dqlyl2u31vvw8" path="res://Assets/Images/maps/map2/Art/Flag/23.png" id="25_5piyn"]
+[ext_resource type="Texture2D" uid="uid://81au75gmykt" path="res://Assets/Images/maps/map2/Art/Flag/24.png" id="26_h5g0q"]
+[ext_resource type="Texture2D" uid="uid://wurgctra100n" path="res://Assets/Images/maps/map2/Art/Flag/25.png" id="27_676a2"]
+[ext_resource type="Texture2D" uid="uid://dc6sagxo65lio" path="res://Assets/Images/maps/map2/Art/Wind/1.png" id="28_pax8k"]
+[ext_resource type="Texture2D" uid="uid://blmaj0yj6fg0" path="res://Assets/Images/maps/map2/Art/Wind/2.png" id="29_017rq"]
+[ext_resource type="Texture2D" uid="uid://6aqknlrxj7vi" path="res://Assets/Images/maps/map2/Art/Wind/3.png" id="30_bm5p2"]
+[ext_resource type="Texture2D" uid="uid://qhxr11nw23mr" path="res://Assets/Images/maps/map2/Art/Wind/4.png" id="31_ag00x"]
+[ext_resource type="Texture2D" uid="uid://cjr4rcsvshwo5" path="res://Assets/Images/maps/map2/Art/Wind/5.png" id="32_huh66"]
+[ext_resource type="Texture2D" uid="uid://cr32evaqdspjs" path="res://Assets/Images/maps/map2/Art/Wind/6.png" id="33_tw6x7"]
+[ext_resource type="Texture2D" uid="uid://ciwiiwk1nn58i" path="res://Assets/Images/maps/map2/Art/Wind/7.png" id="34_g3kav"]
+[ext_resource type="Texture2D" uid="uid://d2g3ovqpdmlm0" path="res://Assets/Images/maps/map2/Art/Wind/8.png" id="35_u5ed4"]
+[ext_resource type="Texture2D" uid="uid://ojdpvjirkan1" path="res://Assets/Images/maps/map2/Art/Wind/9.png" id="36_watsn"]
+[ext_resource type="Texture2D" uid="uid://bx218dx1tm3xq" path="res://Assets/Images/maps/map2/Art/Wind/10.png" id="37_d0tgd"]
+[ext_resource type="Texture2D" uid="uid://cm3g4x8royrmr" path="res://Assets/Images/maps/map2/Art/Wind/11.png" id="38_pgur5"]
+[ext_resource type="Texture2D" uid="uid://c5yxo8hll6wvv" path="res://Assets/Images/maps/map2/Art/Wind/12.png" id="39_yuxi8"]
+[ext_resource type="Texture2D" uid="uid://1ciebaucs7nj" path="res://Assets/Images/maps/map2/Art/Wind/13.png" id="40_eupmf"]
+[ext_resource type="Texture2D" uid="uid://8ntk1qc0raf8" path="res://Assets/Images/maps/map2/Art/Wind/14.png" id="41_nduh2"]
+[ext_resource type="Texture2D" uid="uid://cav076m0hs3ac" path="res://Assets/Images/maps/map2/Art/Wind/15.png" id="42_6cqan"]
+[ext_resource type="Texture2D" uid="uid://debxhbj3y2o6k" path="res://Assets/Images/maps/map2/Art/Wind/16.png" id="43_ts4jm"]
+[ext_resource type="Texture2D" uid="uid://b8vmpkf5p6o0n" path="res://Assets/Images/maps/map2/Art/Wind/17.png" id="44_x3rvp"]
+[ext_resource type="Texture2D" uid="uid://cpwoqqiyuqkov" path="res://Assets/Images/maps/map2/Art/Wind/18.png" id="45_iiti2"]
+[ext_resource type="Texture2D" uid="uid://dfbrnq5a8lypb" path="res://Assets/Images/maps/map2/Art/Wind/19.png" id="46_x833n"]
+[ext_resource type="Texture2D" uid="uid://bvu71rx576jx4" path="res://Assets/Images/maps/map2/Art/Wind/20.png" id="47_muxy5"]
+[ext_resource type="Texture2D" uid="uid://dgk5d72s8052x" path="res://Assets/Images/maps/map2/Art/Wind/21.png" id="48_auewt"]
+[ext_resource type="Texture2D" uid="uid://crphnjjd6pnye" path="res://Assets/Images/maps/map2/Art/Wind/22.png" id="49_lqe45"]
+[ext_resource type="Texture2D" uid="uid://burx4064ldnsl" path="res://Assets/Images/maps/map2/Art/Wind/23.png" id="50_nque3"]
+[ext_resource type="Texture2D" uid="uid://jtlkn186shjq" path="res://Assets/Images/maps/map2/Art/Wind/24.png" id="51_035i2"]
+[ext_resource type="Texture2D" uid="uid://dyhvk8da7gsus" path="res://Assets/Images/maps/map2/Art/Wind/25.png" id="52_kbnx5"]
+[ext_resource type="Texture2D" uid="uid://b8mhkeiam4r45" path="res://Assets/Images/maps/map2/Art/Wind/26.png" id="53_8um8t"]
+[ext_resource type="Texture2D" uid="uid://bdh2q5j45db1o" path="res://Assets/Images/maps/map2/Art/Wind/27.png" id="54_hrusl"]
+[ext_resource type="Texture2D" uid="uid://bl3cd0us5lh3l" path="res://Assets/Images/maps/map2/Art/Wind/28.png" id="55_lktcu"]
+[ext_resource type="Texture2D" uid="uid://cdixlqyv3q2fi" path="res://Assets/Images/maps/map2/Art/Wind/29.png" id="56_c6kba"]
+[ext_resource type="Texture2D" uid="uid://b8d6d4smrwi03" path="res://Assets/Images/maps/map2/Art/Wind/30.png" id="57_x4sle"]
+[ext_resource type="Texture2D" uid="uid://b4xb6x5qs8ghk" path="res://Assets/Images/maps/map2/Art/Star/1.png" id="58_8vkwf"]
+[ext_resource type="Texture2D" uid="uid://witg8o2hnvlh" path="res://Assets/Images/maps/map2/Art/Star/2.png" id="59_uumq3"]
+[ext_resource type="Texture2D" uid="uid://cvu6jjrvynoo8" path="res://Assets/Images/maps/map2/Art/Star/3.png" id="60_kan4o"]
+[ext_resource type="Texture2D" uid="uid://dsivo2ebw3uy4" path="res://Assets/Images/maps/map2/Art/Star/4.png" id="61_swyxa"]
+[ext_resource type="Texture2D" uid="uid://b2l3lr868vgc0" path="res://Assets/Images/maps/map2/Art/Star/5.png" id="62_0wqsl"]
+[ext_resource type="Texture2D" uid="uid://bn1ie077ixb1p" path="res://Assets/Images/maps/map2/Art/Star/6.png" id="63_vpun7"]
+[ext_resource type="Texture2D" uid="uid://bddfvt35msshs" path="res://Assets/Images/maps/map2/Art/Star/7.png" id="64_q87gn"]
+[ext_resource type="Texture2D" uid="uid://bx1iis1c1v3gf" path="res://Assets/Images/maps/map2/Art/Star/8.png" id="65_btunh"]
+[ext_resource type="Texture2D" uid="uid://dk4ju2edsj5rr" path="res://Assets/Images/maps/map2/Art/Star/9.png" id="66_6bhgu"]
+[ext_resource type="Texture2D" uid="uid://dh4gkttgqak7w" path="res://Assets/Images/maps/map2/Art/Star/10.png" id="67_p6dt8"]
+[ext_resource type="Texture2D" uid="uid://cpnqpise7fea3" path="res://Assets/Images/maps/map2/Art/Star/11.png" id="68_ktpov"]
+[ext_resource type="Texture2D" uid="uid://eaxi31uojp8s" path="res://Assets/Images/maps/map2/Art/Star/12.png" id="69_ixeu4"]
+[ext_resource type="Texture2D" uid="uid://bf1c0mdo61ria" path="res://Assets/Images/maps/map2/Art/Star/13.png" id="70_4nvg4"]
+[ext_resource type="Texture2D" uid="uid://b1ybcg0w8u5pb" path="res://Assets/Images/maps/map2/Art/Star/14.png" id="71_cohym"]
+[ext_resource type="Texture2D" uid="uid://cj1d3nt5qh5ov" path="res://Assets/Images/maps/map2/Art/Star/15.png" id="72_750x2"]
+[ext_resource type="Texture2D" uid="uid://bak576thh3rjp" path="res://Assets/Images/maps/map2/Art/Star/16.png" id="73_jpawj"]
+[ext_resource type="Texture2D" uid="uid://5u745wbbjljh" path="res://Assets/Images/maps/map2/Art/Star/17.png" id="74_rj731"]
+[ext_resource type="Texture2D" uid="uid://cqeouq8agkk02" path="res://Assets/Images/maps/map2/Art/Star/18.png" id="75_gbslg"]
+[ext_resource type="Texture2D" uid="uid://bxgb6bs3a475t" path="res://Assets/Images/maps/map2/Art/Star/19.png" id="76_f1cdj"]
+[ext_resource type="Texture2D" uid="uid://dtgcc620a00yb" path="res://Assets/Images/maps/map2/Art/Star/20.png" id="77_crcda"]
+[ext_resource type="Texture2D" uid="uid://40rgewntaenm" path="res://Assets/Images/maps/map2/Art/pirate.png" id="78_q36qi"]
+[ext_resource type="Texture2D" uid="uid://dogedm6kwmc5k" path="res://Assets/Images/maps/map2/Art/Redhat/1.png" id="79_1n0ya"]
+[ext_resource type="Texture2D" uid="uid://bn40gfsydrj2r" path="res://Assets/Images/maps/map2/Art/Redhat/2.png" id="80_jw7t8"]
+[ext_resource type="Texture2D" uid="uid://bfkiuaadq106v" path="res://Assets/Images/maps/map2/Art/Redhat/3.png" id="81_l8ud3"]
+[ext_resource type="Texture2D" uid="uid://bhnoc776dfevs" path="res://Assets/Images/maps/map2/Art/Redhat/4.png" id="82_5piyn"]
+[ext_resource type="Texture2D" uid="uid://bqq23cq6g35h3" path="res://Assets/Images/maps/map2/Art/Redhat/5.png" id="83_h5g0q"]
+[ext_resource type="Texture2D" uid="uid://g60xccyj3tos" path="res://Assets/Images/maps/map2/Art/Redhat/6.png" id="84_676a2"]
+[ext_resource type="Texture2D" uid="uid://dfgpxg81lodse" path="res://Assets/Images/maps/map2/Art/Redhat/7.png" id="85_pax8k"]
+[ext_resource type="Texture2D" uid="uid://c6kgsrsu27kj5" path="res://Assets/Images/maps/map2/Art/Redhat/8.png" id="86_017rq"]
+[ext_resource type="Texture2D" uid="uid://dh0b51h36jvn1" path="res://Assets/Images/maps/map2/Art/Redhat/9.png" id="87_bm5p2"]
+[ext_resource type="Texture2D" uid="uid://c5ia7j82iug4h" path="res://Assets/Images/maps/map2/Art/Redhat/10.png" id="88_ag00x"]
+[ext_resource type="Texture2D" uid="uid://ust1f17o23lr" path="res://Assets/Images/maps/map2/Art/Redhat/11.png" id="89_huh66"]
+[ext_resource type="Texture2D" uid="uid://cgjtfrenn2unn" path="res://Assets/Images/maps/map2/Art/Redhat/12.png" id="90_tw6x7"]
+[ext_resource type="Texture2D" uid="uid://d0xmds0ktvh5d" path="res://Assets/Images/maps/map2/Art/Redhat/13.png" id="91_g3kav"]
+[ext_resource type="Texture2D" uid="uid://bjb4d6tlv0wqr" path="res://Assets/Images/maps/map2/Art/Redhat/14.png" id="92_u5ed4"]
+[ext_resource type="Texture2D" uid="uid://cve617p0aythq" path="res://Assets/Images/maps/map2/Art/Redhat/15.png" id="93_watsn"]
+[ext_resource type="Texture2D" uid="uid://s0sxwvinelco" path="res://Assets/Images/maps/map2/Top2/structure.png" id="94_d0tgd"]
+[ext_resource type="Texture2D" uid="uid://dyt82jk6cn8kt" path="res://Assets/Images/maps/map2/Top2/bridge.png" id="95_pgur5"]
+[ext_resource type="Texture2D" uid="uid://d35vo2y4yikjj" path="res://Assets/Images/maps/map2/Top2/flag.png" id="96_yuxi8"]
+[ext_resource type="Texture2D" uid="uid://diyaewt8sax0r" path="res://Assets/Images/maps/map2/sprites/DefineSprite_1369_Map02_dt2/dt2.png" id="97_q36qi"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7fp7c"]
+texture = ExtResource("2_2kelp")
+texture_region_size = Vector2i(1449, 1400)
+0:0/0 = 0
+1:0/0 = 0
+3:0/0 = 0
+3:1/0 = 0
+3:2/0 = 0
+3:3/0 = 0
+3:4/0 = 0
+4:0/0 = 0
+4:1/0 = 0
+4:2/0 = 0
+4:3/0 = 0
+4:4/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+1:1/0 = 0
+1:2/0 = 0
+1:3/0 = 0
+1:4/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+2:3/0 = 0
+2:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lr47s"]
+tile_size = Vector2i(1449, 1400)
+sources/0 = SubResource("TileSetAtlasSource_7fp7c")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fhul2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_okyyb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3mf8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_x427r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_53s0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_u33jb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lel6n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_lt7q4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f2nhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_0683i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jcs6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6qtvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hg2ir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wqlei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_uny84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_vfa1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_o242d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_a3c15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_lnqfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_q36qi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_1n0ya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_jw7t8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_l8ud3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_5piyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_h5g0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_676a2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mngyf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_pax8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_017rq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_bm5p2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ag00x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_huh66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_tw6x7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_g3kav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_u5ed4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_watsn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_d0tgd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_pgur5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_yuxi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_eupmf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_nduh2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_6cqan")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_ts4jm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_x3rvp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_iiti2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_x833n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_muxy5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_auewt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_lqe45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_nque3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_035i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_kbnx5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_8um8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_hrusl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_lktcu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_c6kba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_x4sle")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eupmf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("58_8vkwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_uumq3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_kan4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_swyxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_0wqsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_vpun7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_q87gn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_btunh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_6bhgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_p6dt8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_ktpov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_ixeu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_4nvg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_cohym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_750x2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_jpawj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_rj731")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_gbslg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_f1cdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_crcda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_crcda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_crcda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_crcda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_crcda")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nduh2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("59_uumq3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_kan4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_swyxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_0wqsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_vpun7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_q87gn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_btunh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_6bhgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_p6dt8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_ktpov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_ixeu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_4nvg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_cohym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_750x2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_jpawj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_rj731")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_gbslg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_f1cdj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s783b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("58_8vkwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_uumq3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_kan4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_swyxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_0wqsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_vpun7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_q87gn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_btunh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_6bhgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_p6dt8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_ktpov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_ixeu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_4nvg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_cohym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_750x2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_jpawj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_rj731")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_gbslg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_f1cdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_8vkwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_8vkwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_8vkwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_8vkwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_8vkwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_8vkwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_8vkwf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6cqan"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("79_1n0ya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_jw7t8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_l8ud3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_5piyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_h5g0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_676a2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_pax8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_017rq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_bm5p2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_ag00x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_huh66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_tw6x7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_g3kav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_u5ed4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_watsn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
 
 [node name="Map02" type="Node2D" unique_id=422089434]
+script = ExtResource("1_vfrq5")
+
+[node name="Visuals" type="Node2D" parent="." unique_id=690054057]
+
+[node name="Ground" type="Node2D" parent="Visuals" unique_id=617346799]
+
+[node name="Track" type="Node2D" parent="Visuals/Ground" unique_id=366533797]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Visuals/Ground/Track" unique_id=1695862131]
+scale = Vector2(0.67, 0.67)
+tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAAD+////AAAAAAEAAAD+/wAAAAAAAAIAAAD+/wEAAAAAAAMAAAD+/wIAAAAAAAQAAAD///7/AAABAAAAAAD/////AAABAAEAAAD//wAAAAABAAIAAAD//wEAAAABAAMAAAD//wIAAAABAAQAAAAAAP7/AAACAAAAAAAAAP//AAACAAEAAAAAAAAAAAACAAIAAAAAAAEAAAACAAMAAAAAAAIAAAACAAQAAAABAP7/AAADAAAAAAABAP//AAADAAEAAAABAAAAAAADAAIAAAABAAEAAAADAAMAAAABAAIAAAADAAQAAAACAP7/AAAEAAAAAAACAP//AAAEAAEAAAACAAAAAAAEAAIAAAACAAEAAAAEAAMAAAACAAIAAAAEAAQAAAA=")
+tile_set = SubResource("TileSet_lr47s")
+
+[node name="Art" type="Node2D" parent="Visuals/Ground" unique_id=1120689729]
+
+[node name="Flag" type="AnimatedSprite2D" parent="Visuals/Ground/Art" unique_id=902725725]
+z_index = 16
+position = Vector2(1990, -855)
+sprite_frames = SubResource("SpriteFrames_fhul2")
+autoplay = "default"
+frame = 16
+frame_progress = 0.8868929
+
+[node name="PirateFlag" type="AnimatedSprite2D" parent="Visuals/Ground/Art" unique_id=1632777296]
+position = Vector2(1538, -509.065)
+scale = Vector2(1.185, 1.185)
+sprite_frames = SubResource("SpriteFrames_mngyf")
+autoplay = "default"
+frame = 26
+frame_progress = 0.3094402
+
+[node name="Stars" type="Node2D" parent="Visuals/Ground/Art" unique_id=1738862600]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Stars" unique_id=1566549894]
+position = Vector2(1362, -478)
+sprite_frames = SubResource("SpriteFrames_eupmf")
+autoplay = "default"
+frame = 1
+frame_progress = 0.44796652
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Stars" unique_id=473333772]
+position = Vector2(1438, -346)
+sprite_frames = SubResource("SpriteFrames_nduh2")
+autoplay = "default"
+frame = 10
+frame_progress = 0.799458
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Stars" unique_id=1012604059]
+position = Vector2(1300, -332)
+sprite_frames = SubResource("SpriteFrames_s783b")
+autoplay = "default"
+frame = 3
+frame_progress = 0.24993056
+
+[node name="Pirates" type="Node2D" parent="Visuals/Ground/Art" unique_id=460037937]
+
+[node name="Pirate1" type="Node2D" parent="Visuals/Ground/Art/Pirates" unique_id=1119272645]
+position = Vector2(1669.0001, -435.00006)
+rotation = -1.4835298
+scale = Vector2(0.805, 0.805)
+
+[node name="Body" type="Sprite2D" parent="Visuals/Ground/Art/Pirates/Pirate1" unique_id=41968188]
+texture = ExtResource("78_q36qi")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Pirates/Pirate1" unique_id=1487489593]
+position = Vector2(14.325, -37.49)
+sprite_frames = SubResource("SpriteFrames_6cqan")
+
+[node name="Pirate3" type="Node2D" parent="Visuals/Ground/Art/Pirates" unique_id=309755697]
+position = Vector2(861, -948.00006)
+rotation = -1.7889625
+scale = Vector2(0.805, 0.805)
+
+[node name="Body" type="Sprite2D" parent="Visuals/Ground/Art/Pirates/Pirate3" unique_id=867614688]
+texture = ExtResource("78_q36qi")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Pirates/Pirate3" unique_id=380436180]
+position = Vector2(14.325, -37.49)
+sprite_frames = SubResource("SpriteFrames_6cqan")
+
+[node name="Pirate4" type="Node2D" parent="Visuals/Ground/Art/Pirates" unique_id=1728915074]
+position = Vector2(817.99994, -499.99994)
+rotation = -0.41887903
+scale = Vector2(0.805, 0.805)
+
+[node name="Body" type="Sprite2D" parent="Visuals/Ground/Art/Pirates/Pirate4" unique_id=1748851061]
+texture = ExtResource("78_q36qi")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Pirates/Pirate4" unique_id=1476814306]
+position = Vector2(14.325, -37.49)
+sprite_frames = SubResource("SpriteFrames_6cqan")
+
+[node name="Pirate2" type="Node2D" parent="Visuals/Ground/Art/Pirates" unique_id=557514888]
+position = Vector2(1305, -487)
+rotation = 1.5969763
+scale = Vector2(0.805, 0.805)
+
+[node name="Body" type="Sprite2D" parent="Visuals/Ground/Art/Pirates/Pirate2" unique_id=1984704957]
+texture = ExtResource("78_q36qi")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Pirates/Pirate2" unique_id=1397858174]
+position = Vector2(14.325, -37.49)
+sprite_frames = SubResource("SpriteFrames_6cqan")
+
+[node name="Pirate5" type="Node2D" parent="Visuals/Ground/Art/Pirates" unique_id=811176767]
+position = Vector2(-1114.9995, 1625.9998)
+rotation = -3.0892327
+scale = Vector2(0.805, 0.805)
+
+[node name="Body" type="Sprite2D" parent="Visuals/Ground/Art/Pirates/Pirate5" unique_id=1890261950]
+texture = ExtResource("78_q36qi")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Pirates/Pirate5" unique_id=629005471]
+position = Vector2(14.325, -37.49)
+sprite_frames = SubResource("SpriteFrames_6cqan")
+
+[node name="Pirate6" type="Node2D" parent="Visuals/Ground/Art/Pirates" unique_id=2015879843]
+position = Vector2(-1507, 1520.0001)
+rotation = 2.539454
+scale = Vector2(0.805, 0.805)
+
+[node name="Body" type="Sprite2D" parent="Visuals/Ground/Art/Pirates/Pirate6" unique_id=721319344]
+texture = ExtResource("78_q36qi")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Pirates/Pirate6" unique_id=1297439226]
+position = Vector2(14.325, -37.49)
+sprite_frames = SubResource("SpriteFrames_6cqan")
+
+[node name="Pirate7" type="Node2D" parent="Visuals/Ground/Art/Pirates" unique_id=831259763]
+position = Vector2(221.00002, 1751)
+rotation = 2.9408798
+scale = Vector2(0.805, 0.805)
+
+[node name="Body" type="Sprite2D" parent="Visuals/Ground/Art/Pirates/Pirate7" unique_id=875256362]
+texture = ExtResource("78_q36qi")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Pirates/Pirate7" unique_id=1688243414]
+position = Vector2(14.325, -37.49)
+sprite_frames = SubResource("SpriteFrames_6cqan")
+
+[node name="Pirate8" type="Node2D" parent="Visuals/Ground/Art/Pirates" unique_id=918453938]
+position = Vector2(398, 1883.9999)
+rotation = 3.377212
+scale = Vector2(0.805, 0.805)
+
+[node name="Body" type="Sprite2D" parent="Visuals/Ground/Art/Pirates/Pirate8" unique_id=996996785]
+texture = ExtResource("78_q36qi")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Pirates/Pirate8" unique_id=19069162]
+position = Vector2(14.325, -37.49)
+sprite_frames = SubResource("SpriteFrames_6cqan")
+
+[node name="Pirate9" type="Node2D" parent="Visuals/Ground/Art/Pirates" unique_id=56848906]
+position = Vector2(201, 1960)
+scale = Vector2(0.805, 0.805)
+
+[node name="Body" type="Sprite2D" parent="Visuals/Ground/Art/Pirates/Pirate9" unique_id=670625095]
+texture = ExtResource("78_q36qi")
+
+[node name="Hat" type="AnimatedSprite2D" parent="Visuals/Ground/Art/Pirates/Pirate9" unique_id=397551091]
+position = Vector2(14.325, -37.49)
+sprite_frames = SubResource("SpriteFrames_6cqan")
+
+[node name="Top1" type="Node2D" parent="Visuals/Ground" unique_id=762340441]
+
+[node name="Top2" type="Node2D" parent="Visuals/Ground" unique_id=579021684]
+z_index = 15
+
+[node name="structure" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1691102177]
+position = Vector2(1798.975, -761.28)
+scale = Vector2(1.02, 1.02)
+texture = ExtResource("94_d0tgd")
+
+[node name="bridge" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1958914193]
+position = Vector2(-364, 1345.64)
+rotation = 1.829105
+scale = Vector2(0.755, 0.945)
+texture = ExtResource("95_pgur5")
+
+[node name="flag" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1587188806]
+position = Vector2(941.37, -913.625)
+scale = Vector2(1.02, 1.02)
+texture = ExtResource("96_yuxi8")
+
+[node name="PointsHC" type="Node2D" parent="." unique_id=1232163257]
+
+[node name="PointsCar" type="Node2D" parent="." unique_id=10362549]
+
+[node name="Flags" type="Node2D" parent="PointsCar" unique_id=225663280]
+
+[node name="WinPos" type="Marker2D" parent="PointsCar/Flags" unique_id=1640862203]
+position = Vector2(1600, 1779)
+gizmo_extents = 101.0
+
+[node name="StartPos0" type="Marker2D" parent="PointsCar/Flags" unique_id=1562758574]
+position = Vector2(1545, 1841)
+gizmo_extents = 101.0
+
+[node name="StartPos1" type="Marker2D" parent="PointsCar/Flags" unique_id=837248774]
+position = Vector2(1650, 1841)
+gizmo_extents = 101.0
+
+[node name="StartPos2" type="Marker2D" parent="PointsCar/Flags" unique_id=865243570]
+position = Vector2(1547, 1915)
+gizmo_extents = 101.0
+
+[node name="StartPos3" type="Marker2D" parent="PointsCar/Flags" unique_id=316087267]
+position = Vector2(1648, 1912)
+gizmo_extents = 101.0
+
+[node name="Walls0" type="Node2D" parent="PointsCar" unique_id=1270523930]
+
+[node name="wall1" type="Marker2D" parent="PointsCar/Walls0" unique_id=1775598981]
+position = Vector2(1471.8162, 1639.5802)
+
+[node name="wall2" type="Marker2D" parent="PointsCar/Walls0" unique_id=1030511872]
+position = Vector2(1463.0908, 1386.7974)
+
+[node name="wall3" type="Marker2D" parent="PointsCar/Walls0" unique_id=1407687706]
+position = Vector2(1538.8235, 1177.6313)
+
+[node name="wall4" type="Marker2D" parent="PointsCar/Walls0" unique_id=790718781]
+position = Vector2(1665.7922, 1058.6868)
+
+[node name="wall5" type="Marker2D" parent="PointsCar/Walls0" unique_id=1374743605]
+position = Vector2(1779.9741, 1013.5958)
+
+[node name="wall6" type="Marker2D" parent="PointsCar/Walls0" unique_id=950814641]
+position = Vector2(1923.2468, 984.50494)
+
+[node name="wall7" type="Marker2D" parent="PointsCar/Walls0" unique_id=1450405286]
+position = Vector2(2109.429, 956.8684)
+
+[node name="wall8" type="Marker2D" parent="PointsCar/Walls0" unique_id=859401293]
+position = Vector2(2211.2473, 888.5048)
+
+[node name="wall9" type="Marker2D" parent="PointsCar/Walls0" unique_id=686823170]
+position = Vector2(2256.3381, 809.95935)
+
+[node name="wall10" type="Marker2D" parent="PointsCar/Walls0" unique_id=1431888319]
+position = Vector2(2270.1563, 713.9592)
+
+[node name="wall11" type="Marker2D" parent="PointsCar/Walls0" unique_id=1083867689]
+position = Vector2(2266.5198, 625.23193)
+
+[node name="wall12" type="Marker2D" parent="PointsCar/Walls0" unique_id=96290929]
+position = Vector2(2213.429, 451.4138)
+
+[node name="wall13" type="Marker2D" parent="PointsCar/Walls0" unique_id=560481878]
+position = Vector2(2058.5173, 260.86816)
+
+[node name="wall14" type="Marker2D" parent="PointsCar/Walls0" unique_id=979766955]
+position = Vector2(1961.79, 205.59546)
+
+[node name="wall15" type="Marker2D" parent="PointsCar/Walls0" unique_id=1126796193]
+position = Vector2(1879.6083, 184.50455)
+
+[node name="wall16" type="Marker2D" parent="PointsCar/Walls0" unique_id=26262401]
+position = Vector2(1811.2446, 183.77728)
+
+[node name="wall17" type="Marker2D" parent="PointsCar/Walls0" unique_id=426420357]
+position = Vector2(1750.881, 208.50455)
+
+[node name="wall18" type="Marker2D" parent="PointsCar/Walls0" unique_id=929148913]
+position = Vector2(1475.2445, 445.59546)
+
+[node name="wall19" type="Marker2D" parent="PointsCar/Walls0" unique_id=499639555]
+position = Vector2(1365.4264, 502.3227)
+
+[node name="wall20" type="Marker2D" parent="PointsCar/Walls0" unique_id=1605564597]
+position = Vector2(1243.9718, 512.5045)
+
+[node name="wall21" type="Marker2D" parent="PointsCar/Walls0" unique_id=1523399560]
+position = Vector2(1102.8809, 487.77728)
+
+[node name="wall22" type="Marker2D" parent="PointsCar/Walls0" unique_id=1422911480]
+position = Vector2(993.7899, 428.8682)
+
+[node name="wall23" type="Marker2D" parent="PointsCar/Walls0" unique_id=304525643]
+position = Vector2(140.34589, -222.51979)
+
+[node name="wall24" type="Marker2D" parent="PointsCar/Walls0" unique_id=1020034821]
+position = Vector2(62.75556, -322.51297)
+
+[node name="wall25" type="Marker2D" parent="PointsCar/Walls0" unique_id=922962860]
+position = Vector2(25.71054, -411.8759)
+
+[node name="wall26" type="Marker2D" parent="PointsCar/Walls0" unique_id=398602953]
+position = Vector2(11.1651, -479.51224)
+
+[node name="wall27" type="Marker2D" parent="PointsCar/Walls0" unique_id=93454714]
+position = Vector2(5.346924, -542.785)
+
+[node name="wall28" type="Marker2D" parent="PointsCar/Walls0" unique_id=507359148]
+position = Vector2(30.074188, -633.69403)
+
+[node name="wall29" type="Marker2D" parent="PointsCar/Walls0" unique_id=1934639685]
+position = Vector2(70.07419, -723.14856)
+
+[node name="wall30" type="Marker2D" parent="PointsCar/Walls0" unique_id=2138352725]
+position = Vector2(256.25598, -964.6036)
+
+[node name="wall31" type="Marker2D" parent="PointsCar/Walls0" unique_id=475065718]
+position = Vector2(259.89233, -1006.7854)
+
+[node name="wall32" type="Marker2D" parent="PointsCar/Walls0" unique_id=714896804]
+position = Vector2(250.43782, -1046.7854)
+
+[node name="wall33" type="Marker2D" parent="PointsCar/Walls0" unique_id=696865654]
+position = Vector2(218.43782, -1091.149)
+
+[node name="wall34" type="Marker2D" parent="PointsCar/Walls0" unique_id=339065590]
+position = Vector2(94.07416, -1207.5122)
+
+[node name="wall35" type="Marker2D" parent="PointsCar/Walls0" unique_id=1233295936]
+position = Vector2(-47.74402, -1301.3304)
+
+[node name="wall36" type="Marker2D" parent="PointsCar/Walls0" unique_id=332245559]
+position = Vector2(-121.19856, -1337.6941)
+
+[node name="wall37" type="Marker2D" parent="PointsCar/Walls0" unique_id=1232331707]
+position = Vector2(-856.47156, -1347.8772)
+
+[node name="wall38" type="Marker2D" parent="PointsCar/Walls0" unique_id=1818912766]
+position = Vector2(-1000.47156, -1302.0591)
+
+[node name="wall39" type="Marker2D" parent="PointsCar/Walls0" unique_id=22530706]
+position = Vector2(-1108.8352, -1208.9685)
+
+[node name="wall40" type="Marker2D" parent="PointsCar/Walls0" unique_id=1872439311]
+position = Vector2(-1156.1082, -1082.4229)
+
+[node name="wall41" type="Marker2D" parent="PointsCar/Walls0" unique_id=2042568690]
+position = Vector2(-1159.0172, -972.60474)
+
+[node name="wall42" type="Marker2D" parent="PointsCar/Walls0" unique_id=2133330734]
+position = Vector2(-1100.8347, -847.5141)
+
+[node name="wall43" type="Marker2D" parent="PointsCar/Walls0" unique_id=776143603]
+position = Vector2(-999.0165, -795.1505)
+
+[node name="wall44" type="Marker2D" parent="PointsCar/Walls0" unique_id=220471805]
+position = Vector2(-860.83466, -768.9686)
+
+[node name="wall45" type="Marker2D" parent="PointsCar/Walls0" unique_id=875616006]
+position = Vector2(-483.3799, -749.33276)
+
+[node name="wall46" type="Marker2D" parent="PointsCar/Walls0" unique_id=2085521246]
+position = Vector2(-260.10718, -672.9691)
+
+[node name="wall47" type="Marker2D" parent="PointsCar/Walls0" unique_id=1906462825]
+position = Vector2(-105.925415, -548.60535)
+
+[node name="wall48" type="Marker2D" parent="PointsCar/Walls0" unique_id=583313680]
+position = Vector2(-31.743622, -438.0599)
+
+[node name="wall49" type="Marker2D" parent="PointsCar/Walls0" unique_id=1419886381]
+position = Vector2(8.983704, -304.24164)
+
+[node name="wall50" type="Marker2D" parent="PointsCar/Walls0" unique_id=13795340]
+position = Vector2(26.438263, -127.51437)
+
+[node name="wall51" type="Marker2D" parent="PointsCar/Walls0" unique_id=1365108818]
+position = Vector2(10.438293, 75.39472)
+
+[node name="wall52" type="Marker2D" parent="PointsCar/Walls0" unique_id=2033872949]
+position = Vector2(-81.92532, 264.4856)
+
+[node name="wall53" type="Marker2D" parent="PointsCar/Walls0" unique_id=2005670868]
+position = Vector2(-228.10715, 388.12198)
+
+[node name="wall54" type="Marker2D" parent="PointsCar/Walls0" unique_id=403318296]
+position = Vector2(-632.47095, 527.0311)
+
+[node name="wall55" type="Marker2D" parent="PointsCar/Walls0" unique_id=1698545411]
+position = Vector2(-1113.198, 547.3949)
+
+[node name="wall56" type="Marker2D" parent="PointsCar/Walls0" unique_id=1202950540]
+position = Vector2(-1239.0162, 595.3949)
+
+[node name="wall57" type="Marker2D" parent="PointsCar/Walls0" unique_id=75905464]
+position = Vector2(-1320.4708, 713.2131)
+
+[node name="wall58" type="Marker2D" parent="PointsCar/Walls0" unique_id=555569672]
+position = Vector2(-1322.6525, 841.9404)
+
+[node name="wall59" type="Marker2D" parent="PointsCar/Walls0" unique_id=932595361]
+position = Vector2(-1260.1069, 970.6677)
+
+[node name="wall60" type="Marker2D" parent="PointsCar/Walls0" unique_id=987188769]
+position = Vector2(-1147.3798, 1056.4858)
+
+[node name="wall61" type="Marker2D" parent="PointsCar/Walls0" unique_id=246899353]
+position = Vector2(567.8478, 1505.6094)
+
+[node name="wall62" type="Marker2D" parent="PointsCar/Walls0" unique_id=281803517]
+position = Vector2(720.5751, 1577.6094)
+
+[node name="wall63" type="Marker2D" parent="PointsCar/Walls0" unique_id=493966773]
+position = Vector2(808.575, 1741.973)
+
+[node name="wall64" type="Marker2D" parent="PointsCar/Walls0" unique_id=1144916222]
+position = Vector2(791.1206, 1995.7908)
+
+[node name="wall65" type="Marker2D" parent="PointsCar/Walls0" unique_id=1576306500]
+position = Vector2(858.75696, 2142.6997)
+
+[node name="wall66" type="Marker2D" parent="PointsCar/Walls0" unique_id=501006519]
+position = Vector2(1023.84796, 2246.6997)
+
+[node name="wall67" type="Marker2D" parent="PointsCar/Walls0" unique_id=744565062]
+position = Vector2(1233.3025, 2243.7905)
+
+[node name="wall68" type="Marker2D" parent="PointsCar/Walls0" unique_id=1710106553]
+position = Vector2(1399.848, 2107.0632)
+
+[node name="wall69" type="Marker2D" parent="PointsCar/Walls0" unique_id=167527888]
+position = Vector2(1490.0298, 1867.0634)
+
+[node name="Walls1" type="Node2D" parent="PointsCar" unique_id=442472079]
+
+[node name="wall1" type="Marker2D" parent="PointsCar/Walls1" unique_id=1668472279]
+position = Vector2(1695.8484, 1933.9724)
+
+[node name="wall2" type="Marker2D" parent="PointsCar/Walls1" unique_id=960196756]
+position = Vector2(1651.2931, 2132.2222)
+
+[node name="wall3" type="Marker2D" parent="PointsCar/Walls1" unique_id=1326216734]
+position = Vector2(1552.5571, 2320.0142)
+
+[node name="wall4" type="Marker2D" parent="PointsCar/Walls1" unique_id=718384681]
+position = Vector2(1391.869, 2445.854)
+
+[node name="wall5" type="Marker2D" parent="PointsCar/Walls1" unique_id=205465473]
+position = Vector2(1201.1729, 2521.3572)
+
+[node name="wall6" type="Marker2D" parent="PointsCar/Walls1" unique_id=726483416]
+position = Vector2(1024.0288, 2522.3252)
+
+[node name="wall7" type="Marker2D" parent="PointsCar/Walls1" unique_id=616950720]
+position = Vector2(794.61285, 2415.8452)
+
+[node name="wall8" type="Marker2D" parent="PointsCar/Walls1" unique_id=314491232]
+position = Vector2(685.2288, 2318.0771)
+
+[node name="wall9" type="Marker2D" parent="PointsCar/Walls1" unique_id=422660627]
+position = Vector2(585.52484, 2154.485)
+
+[node name="wall10" type="Marker2D" parent="PointsCar/Walls1" unique_id=1275187048]
+position = Vector2(560.357, 1997.669)
+
+[node name="wall11" type="Marker2D" parent="PointsCar/Walls1" unique_id=1848872779]
+position = Vector2(575.845, 1867.9569)
+
+[node name="wall12" type="Marker2D" parent="PointsCar/Walls1" unique_id=1199392250]
+position = Vector2(588.429, 1801.1649)
+
+[node name="wall13" type="Marker2D" parent="PointsCar/Walls1" unique_id=1843130228]
+position = Vector2(565.197, 1745.0209)
+
+[node name="wall14" type="Marker2D" parent="PointsCar/Walls1" unique_id=522399641]
+position = Vector2(462.589, 1663.7089)
+
+[node name="wall15" type="Marker2D" parent="PointsCar/Walls1" unique_id=355517273]
+position = Vector2(-1235.2833, 1225.2024)
+
+[node name="wall16" type="Marker2D" parent="PointsCar/Walls1" unique_id=1736275354]
+position = Vector2(-1399.8455, 1165.1843)
+
+[node name="wall17" type="Marker2D" parent="PointsCar/Walls1" unique_id=51953453]
+position = Vector2(-1511.1655, 1027.7283)
+
+[node name="wall18" type="Marker2D" parent="PointsCar/Walls1" unique_id=2078548598]
+position = Vector2(-1556.6615, 882.5283)
+
+[node name="wall19" type="Marker2D" parent="PointsCar/Walls1" unique_id=1580119088]
+position = Vector2(-1549.8865, 693.76825)
+
+[node name="wall20" type="Marker2D" parent="PointsCar/Walls1" unique_id=313894368]
+position = Vector2(-1473.4144, 515.65625)
+
+[node name="wall21" type="Marker2D" parent="PointsCar/Walls1" unique_id=1491646610]
+position = Vector2(-1332.0864, 398.5282)
+
+[node name="wall22" type="Marker2D" parent="PointsCar/Walls1" unique_id=565084660]
+position = Vector2(-1152.0385, 353.03223)
+
+[node name="wall23" type="Marker2D" parent="PointsCar/Walls1" unique_id=851826431]
+position = Vector2(-689.3342, 352.06427)
+
+[node name="wall24" type="Marker2D" parent="PointsCar/Walls1" unique_id=1515217666]
+position = Vector2(-544.1342, 314.3123)
+
+[node name="wall25" type="Marker2D" parent="PointsCar/Walls1" unique_id=1224726586]
+position = Vector2(-390.22223, 233.00027)
+
+[node name="wall26" type="Marker2D" parent="PointsCar/Walls1" unique_id=2072246610]
+position = Vector2(-283.74213, 116.8403)
+
+[node name="wall27" type="Marker2D" parent="PointsCar/Walls1" unique_id=581212784]
+position = Vector2(-222.75812, -49.6557)
+
+[node name="wall28" type="Marker2D" parent="PointsCar/Walls1" unique_id=849380320]
+position = Vector2(-224.69409, -231.63971)
+
+[node name="wall29" type="Marker2D" parent="PointsCar/Walls1" unique_id=2105762450]
+position = Vector2(-289.55005, -370.06427)
+
+[node name="wall30" type="Marker2D" parent="PointsCar/Walls1" unique_id=348741629]
+position = Vector2(-427.00604, -498.8083)
+
+[node name="wall31" type="Marker2D" parent="PointsCar/Walls1" unique_id=2103769397]
+position = Vector2(-623.5101, -559.7923)
+
+[node name="wall32" type="Marker2D" parent="PointsCar/Walls1" unique_id=667780057]
+position = Vector2(-1039.7495, -580.1196)
+
+[node name="wall33" type="Marker2D" parent="PointsCar/Walls1" unique_id=1565368903]
+position = Vector2(-1237.2214, -618.83966)
+
+[node name="wall34" type="Marker2D" parent="PointsCar/Walls1" unique_id=307894127]
+position = Vector2(-1371.7734, -706.9277)
+
+[node name="wall35" type="Marker2D" parent="PointsCar/Walls1" unique_id=892721138]
+position = Vector2(-1460.8295, -867.61566)
+
+[node name="wall36" type="Marker2D" parent="PointsCar/Walls1" unique_id=589132240]
+position = Vector2(-1462.7662, -1028.3037)
+
+[node name="wall37" type="Marker2D" parent="PointsCar/Walls1" unique_id=537969835]
+position = Vector2(-1441.4702, -1217.0637)
+
+[node name="wall38" type="Marker2D" parent="PointsCar/Walls1" unique_id=1505256866]
+position = Vector2(-1351.4462, -1368.0717)
+
+[node name="wall39" type="Marker2D" parent="PointsCar/Walls1" unique_id=825666575]
+position = Vector2(-1189.7902, -1491.0079)
+
+[node name="wall40" type="Marker2D" parent="PointsCar/Walls1" unique_id=742046554]
+position = Vector2(-1004.90216, -1552.96)
+
+[node name="wall41" type="Marker2D" parent="PointsCar/Walls1" unique_id=1573703334]
+position = Vector2(-711.59814, -1578.1279)
+
+[node name="wall42" type="Marker2D" parent="PointsCar/Walls1" unique_id=1487017947]
+position = Vector2(-350.5342, -1577.1611)
+
+[node name="wall43" type="Marker2D" parent="PointsCar/Walls1" unique_id=1199296844]
+position = Vector2(-103.694214, -1553.9292)
+
+[node name="wall44" type="Marker2D" parent="PointsCar/Walls1" unique_id=733066710]
+position = Vector2(114.105835, -1470.6812)
+
+[node name="wall45" type="Marker2D" parent="PointsCar/Walls1" unique_id=1995445818]
+position = Vector2(281.56982, -1336.1292)
+
+[node name="wall46" type="Marker2D" parent="PointsCar/Walls1" unique_id=1669531260]
+position = Vector2(449.0338, -1125.1041)
+
+[node name="wall47" type="Marker2D" parent="PointsCar/Walls1" unique_id=1853621575]
+position = Vector2(469.36182, -1075.7361)
+
+[node name="wall48" type="Marker2D" parent="PointsCar/Walls1" unique_id=1798895623]
+position = Vector2(481.9458, -1016.6881)
+
+[node name="wall49" type="Marker2D" parent="PointsCar/Walls1" unique_id=1234167100]
+position = Vector2(470.32983, -954.7361)
+
+[node name="wall50" type="Marker2D" parent="PointsCar/Walls1" unique_id=1513936494]
+position = Vector2(445.1618, -903.43207)
+
+[node name="wall51" type="Marker2D" parent="PointsCar/Walls1" unique_id=1748312060]
+position = Vector2(213.80988, -595.6085)
+
+[node name="wall52" type="Marker2D" parent="PointsCar/Walls1" unique_id=1995699542]
+position = Vector2(210.90588, -552.0485)
+
+[node name="wall53" type="Marker2D" parent="PointsCar/Walls1" unique_id=31058752]
+position = Vector2(209.93787, -485.25653)
+
+[node name="wall54" type="Marker2D" parent="PointsCar/Walls1" unique_id=688825544]
+position = Vector2(237.0419, -404.91254)
+
+[node name="wall55" type="Marker2D" parent="PointsCar/Walls1" unique_id=1312809292]
+position = Vector2(1080.1699, 255.26305)
+
+[node name="wall56" type="Marker2D" parent="PointsCar/Walls1" unique_id=1091703110]
+position = Vector2(1147.9299, 288.17505)
+
+[node name="wall57" type="Marker2D" parent="PointsCar/Walls1" unique_id=194333954]
+position = Vector2(1219.562, 304.63104)
+
+[node name="wall58" type="Marker2D" parent="PointsCar/Walls1" unique_id=919159495]
+position = Vector2(1292.1619, 278.49506)
+
+[node name="wall59" type="Marker2D" parent="PointsCar/Walls1" unique_id=487459768]
+position = Vector2(1658.0662, -6.097046)
+
+[node name="wall60" type="Marker2D" parent="PointsCar/Walls1" unique_id=1765151127]
+position = Vector2(1832.3062, -50.62506)
+
+[node name="wall61" type="Marker2D" parent="PointsCar/Walls1" unique_id=1551165821]
+position = Vector2(2003.6422, -29.329071)
+
+[node name="wall62" type="Marker2D" parent="PointsCar/Walls1" unique_id=1812220520]
+position = Vector2(2295.0105, 189.43887)
+
+[node name="wall63" type="Marker2D" parent="PointsCar/Walls1" unique_id=1588874776]
+position = Vector2(2424.7227, 391.7509)
+
+[node name="wall64" type="Marker2D" parent="PointsCar/Walls1" unique_id=774123309]
+position = Vector2(2483.7705, 648.2709)
+
+[node name="wall65" type="Marker2D" parent="PointsCar/Walls1" unique_id=1518465219]
+position = Vector2(2430.5308, 905.7589)
+
+[node name="wall66" type="Marker2D" parent="PointsCar/Walls1" unique_id=324737334]
+position = Vector2(2335.6667, 1078.063)
+
+[node name="wall67" type="Marker2D" parent="PointsCar/Walls1" unique_id=242934705]
+position = Vector2(2175.947, 1149.6951)
+
+[node name="wall68" type="Marker2D" parent="PointsCar/Walls1" unique_id=72527562]
+position = Vector2(1911.683, 1179.703)
+
+[node name="wall69" type="Marker2D" parent="PointsCar/Walls1" unique_id=349467835]
+position = Vector2(1769.387, 1245.5271)
+
+[node name="wall70" type="Marker2D" parent="PointsCar/Walls1" unique_id=313275756]
+position = Vector2(1685.171, 1357.8152)
+
+[node name="wall71" type="Marker2D" parent="PointsCar/Walls1" unique_id=1898989783]
+position = Vector2(1666.779, 1557.2231)
+
+[node name="Jumpwalls0" type="Node2D" parent="PointsCar" unique_id=125062224]
+
+[node name="Points" type="Node2D" parent="PointsCar" unique_id=2010646415]
+
+[node name="point1" type="Marker2D" parent="PointsCar/Points" unique_id=760740843]
+position = Vector2(1554.7373, 1471.9551)
+
+[node name="point2" type="Marker2D" parent="PointsCar/Points" unique_id=1271853456]
+position = Vector2(1795.6697, 1129.2385)
+
+[node name="point3" type="Marker2D" parent="PointsCar/Points" unique_id=1909625884]
+position = Vector2(2103.5996, 1103.4703)
+
+[node name="point4" type="Marker2D" parent="PointsCar/Points" unique_id=1774555162]
+position = Vector2(2345.8203, 787.8103)
+
+[node name="point5" type="Marker2D" parent="PointsCar/Points" unique_id=2102840582]
+position = Vector2(2213.1138, 204.1615)
+
+[node name="point6" type="Marker2D" parent="PointsCar/Points" unique_id=1777976685]
+position = Vector2(1630.7532, 192.56583)
+
+[node name="point7" type="Marker2D" parent="PointsCar/Points" unique_id=428556379]
+position = Vector2(1468.4141, 360.05887)
+
+[node name="point8" type="Marker2D" parent="PointsCar/Points" unique_id=425701536]
+position = Vector2(1005.8755, 282.75436)
+
+[node name="point9" type="Marker2D" parent="PointsCar/Points" unique_id=270209934]
+position = Vector2(248.29143, -233.89734)
+
+[node name="point10" type="Marker2D" parent="PointsCar/Points" unique_id=881653331]
+position = Vector2(178.71729, -656.4956)
+
+[node name="point11" type="Marker2D" parent="PointsCar/Points" unique_id=248620569]
+position = Vector2(330.74942, -845.8916)
+
+[node name="point12" type="Marker2D" parent="PointsCar/Points" unique_id=1939801557]
+position = Vector2(221.23462, -1180.8778)
+
+[node name="point13" type="Marker2D" parent="PointsCar/Points" unique_id=2020581137]
+position = Vector2(-166.57611, -1414.0798)
+
+[node name="point14" type="Marker2D" parent="PointsCar/Points" unique_id=202947099]
+position = Vector2(-764.3975, -1510.71)
+
+[node name="point15" type="Marker2D" parent="PointsCar/Points" unique_id=1210113567]
+position = Vector2(-1158.6504, -1292.969)
+
+[node name="point16" type="Marker2D" parent="PointsCar/Points" unique_id=490421164]
+position = Vector2(-1253.9926, -1009.51917)
+
+[node name="point17" type="Marker2D" parent="PointsCar/Points" unique_id=19678553]
+position = Vector2(-1045.2703, -699.01324)
+
+[node name="point18" type="Marker2D" parent="PointsCar/Points" unique_id=109189171]
+position = Vector2(-267.07166, -460.6577)
+
+[node name="point19" type="Marker2D" parent="PointsCar/Points" unique_id=1324069969]
+position = Vector2(-157.55707, -190.09137)
+
+[node name="point20" type="Marker2D" parent="PointsCar/Points" unique_id=229070278]
+position = Vector2(-200.07452, 117.838196)
+
+[node name="point21" type="Marker2D" parent="PointsCar/Points" unique_id=222986471]
+position = Vector2(-419.10388, 344.59802)
+
+[node name="point22" type="Marker2D" parent="PointsCar/Points" unique_id=1489864846]
+position = Vector2(-969.2551, 401.2879)
+
+[node name="point23" type="Marker2D" parent="PointsCar/Points" unique_id=103905600]
+position = Vector2(-1308.1064, 572.6462)
+
+[node name="point24" type="Marker2D" parent="PointsCar/Points" unique_id=1542649509]
+position = Vector2(-1398.295, 827.751)
+
+[node name="point25" type="Marker2D" parent="PointsCar/Points" unique_id=896706564]
+position = Vector2(-1179.2655, 1095.74)
+
+[node name="point26" type="Marker2D" parent="PointsCar/Points" unique_id=114660443]
+position = Vector2(353.93982, 1501.5891)
+
+[node name="point27" type="Marker2D" parent="PointsCar/Points" unique_id=900513394]
+position = Vector2(642.5433, 1809.5188)
+
+[node name="point28" type="Marker2D" parent="PointsCar/Points" unique_id=1780616710]
+position = Vector2(650.2737, 2044.009)
+
+[node name="point29" type="Marker2D" parent="PointsCar/Points" unique_id=355933819]
+position = Vector2(1002.0091, 2304.2676)
+
+[node name="point30" type="Marker2D" parent="PointsCar/Points" unique_id=1505478488]
+position = Vector2(1414.2997, 2224.3862)
+
+[node name="point31" type="Marker2D" parent="PointsCar/Points" unique_id=533205426]
+position = Vector2(1557.3132, 1943.5134)
+
+[node name="Propbox" type="Node2D" parent="PointsCar" unique_id=1481135222]
+
+[node name="propbox1" type="Marker2D" parent="PointsCar/Propbox" unique_id=927915119]
+position = Vector2(2131.996, 964.8766)
+
+[node name="propbox2" type="Marker2D" parent="PointsCar/Propbox" unique_id=242408004]
+position = Vector2(2187.3657, 996.8206)
+
+[node name="propbox3" type="Marker2D" parent="PointsCar/Propbox" unique_id=548869494]
+position = Vector2(2234.2168, 1025.5702)
+
+[node name="propbox4" type="Marker2D" parent="PointsCar/Propbox" unique_id=23656420]
+position = Vector2(2284.2625, 1057.5142)
+
+[node name="propbox5" type="Marker2D" parent="PointsCar/Propbox" unique_id=1019664753]
+position = Vector2(880.85645, 316.4135)
+
+[node name="propbox6" type="Marker2D" parent="PointsCar/Propbox" unique_id=1094833832]
+position = Vector2(907.47644, 263.17358)
+
+[node name="propbox7" type="Marker2D" parent="PointsCar/Propbox" unique_id=872964293]
+position = Vector2(939.654, 223.097)
+
+[node name="propbox8" type="Marker2D" parent="PointsCar/Propbox" unique_id=215257653]
+position = Vector2(962.84595, 167.34157)
+
+[node name="propbox9" type="Marker2D" parent="PointsCar/Propbox" unique_id=289081882]
+position = Vector2(-29.547546, -1321.2488)
+
+[node name="propbox10" type="Marker2D" parent="PointsCar/Propbox" unique_id=31237652]
+position = Vector2(-2.9275513, -1367.0353)
+
+[node name="propbox11" type="Marker2D" parent="PointsCar/Propbox" unique_id=1068020869]
+position = Vector2(31.145996, -1413.8865)
+
+[node name="propbox12" type="Marker2D" parent="PointsCar/Propbox" unique_id=1805705781]
+position = Vector2(60.96045, -1456.4785)
+
+[node name="propbox13" type="Marker2D" parent="PointsCar/Propbox" unique_id=1915439708]
+position = Vector2(-663.10333, -737.7389)
+
+[node name="propbox14" type="Marker2D" parent="PointsCar/Propbox" unique_id=1213390006]
+position = Vector2(-687.5937, -689.8229)
+
+[node name="propbox15" type="Marker2D" parent="PointsCar/Propbox" unique_id=26926478]
+position = Vector2(-711.01935, -647.23083)
+
+[node name="propbox16" type="Marker2D" parent="PointsCar/Propbox" unique_id=2104829408]
+position = Vector2(-734.44495, -598.25006)
+
+[node name="propbox17" type="Marker2D" parent="PointsCar/Propbox" unique_id=1785551608]
+position = Vector2(-1340.3816, 446.03918)
+
+[node name="propbox18" type="Marker2D" parent="PointsCar/Propbox" unique_id=1455415197]
+position = Vector2(-1313.1017, 490.03918)
+
+[node name="propbox19" type="Marker2D" parent="PointsCar/Propbox" unique_id=697760198]
+position = Vector2(-1283.1816, 526.99915)
+
+[node name="propbox20" type="Marker2D" parent="PointsCar/Propbox" unique_id=1406509100]
+position = Vector2(-1262.9417, 570.99915)
+
+[node name="propbox21" type="Marker2D" parent="PointsCar/Propbox" unique_id=814759133]
+position = Vector2(801.60034, 2102.5073)
+
+[node name="propbox22" type="Marker2D" parent="PointsCar/Propbox" unique_id=264461505]
+position = Vector2(754.9603, 2121.8672)
+
+[node name="propbox23" type="Marker2D" parent="PointsCar/Propbox" unique_id=1663616704]
+position = Vector2(710.9603, 2150.9072)
+
+[node name="propbox24" type="Marker2D" parent="PointsCar/Propbox" unique_id=600380870]
+position = Vector2(661.68036, 2181.7073)
+
+[node name="Props" type="Node2D" parent="PointsCar" unique_id=1799357510]
+
+[node name="addspeed0" type="Marker2D" parent="PointsCar/Props" unique_id=726726197]
+position = Vector2(806, 160)
+rotation = -0.91629785
+gizmo_extents = 101.0
+
+[node name="addspeed1" type="Marker2D" parent="PointsCar/Props" unique_id=403696415]
+position = Vector2(-293, -1416)
+rotation = 0.12217305
+gizmo_extents = 101.0
+
+[node name="addspeed2" type="Marker2D" parent="PointsCar/Props" unique_id=93351766]
+position = Vector2(-981, 1191)
+rotation = 1.8325957
+gizmo_extents = 101.0
+
+[node name="minimap" type="Sprite2D" parent="." unique_id=93627121]
+position = Vector2(462.7, 481.115)
+texture = ExtResource("97_q36qi")

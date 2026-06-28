@@ -366,6 +366,21 @@ scale = Vector2(0.58, 0.58)
 pivot_offset = Vector2(15.5, 20.5)
 texture = ExtResource("13_e6g5j")
 
+[node name="Label" type="Label" parent="Control/Cups/Cup1" unique_id=1631547968]
+layout_mode = 0
+offset_left = 135.0
+offset_right = 200.00002
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Cup 1"
+
 [node name="Infotext" type="Label" parent="Control/Cups/Cup1" unique_id=320142574]
 layout_mode = 0
 offset_left = 31.999985
@@ -456,6 +471,21 @@ offset_right = 231.0
 offset_bottom = 128.0
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("12_7j54v")
+
+[node name="Label" type="Label" parent="Control/Cups/Cup2" unique_id=140527013]
+layout_mode = 0
+offset_left = 135.0
+offset_right = 200.00002
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Cup 2"
 
 [node name="Lock" type="TextureRect" parent="Control/Cups/Cup2" unique_id=1888313632]
 layout_mode = 0
@@ -559,6 +589,21 @@ offset_bottom = 128.0
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("12_7j54v")
 
+[node name="Label" type="Label" parent="Control/Cups/Cup3" unique_id=1803372515]
+layout_mode = 0
+offset_left = 135.0
+offset_right = 200.00002
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Cup 3"
+
 [node name="Lock" type="TextureRect" parent="Control/Cups/Cup3" unique_id=56533963]
 layout_mode = 0
 offset_left = 158.99998
@@ -660,6 +705,21 @@ offset_right = 231.0
 offset_bottom = 128.0
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("12_7j54v")
+
+[node name="Label" type="Label" parent="Control/Cups/Cup4" unique_id=1036761497]
+layout_mode = 0
+offset_left = 135.0
+offset_right = 200.00002
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Cup 4"
 
 [node name="Lock" type="TextureRect" parent="Control/Cups/Cup4" unique_id=928547604]
 layout_mode = 0
@@ -763,6 +823,21 @@ offset_bottom = 128.0
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("12_7j54v")
 
+[node name="Label" type="Label" parent="Control/Cups/Cup5" unique_id=445189985]
+layout_mode = 0
+offset_left = 135.0
+offset_right = 200.00002
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Cup 5"
+
 [node name="Lock" type="TextureRect" parent="Control/Cups/Cup5" unique_id=1306265356]
 layout_mode = 0
 offset_left = 158.99998
@@ -864,6 +939,21 @@ offset_right = 231.0
 offset_bottom = 128.0
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("12_7j54v")
+
+[node name="Label" type="Label" parent="Control/Cups/Cup6" unique_id=1412747703]
+layout_mode = 0
+offset_left = 135.0
+offset_right = 200.00002
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Cup 6"
 
 [node name="Lock" type="TextureRect" parent="Control/Cups/Cup6" unique_id=76201826]
 layout_mode = 0
@@ -967,6 +1057,21 @@ offset_bottom = 128.0
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("12_7j54v")
 
+[node name="Label" type="Label" parent="Control/Cups/Cup7" unique_id=1741787338]
+layout_mode = 0
+offset_left = 135.0
+offset_right = 200.00002
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Cup 7"
+
 [node name="Lock" type="TextureRect" parent="Control/Cups/Cup7" unique_id=1360752660]
 layout_mode = 0
 offset_left = 158.99998
@@ -1068,6 +1173,21 @@ offset_right = 231.0
 offset_bottom = 128.0
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("12_7j54v")
+
+[node name="Label" type="Label" parent="Control/Cups/Cup8" unique_id=2050777199]
+layout_mode = 0
+offset_left = 135.0
+offset_right = 200.00002
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Cup 8"
 
 [node name="Lock" type="TextureRect" parent="Control/Cups/Cup8" unique_id=1849795373]
 layout_mode = 0

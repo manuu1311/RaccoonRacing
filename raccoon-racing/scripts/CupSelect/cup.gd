@@ -6,6 +6,7 @@ var completed: int
 @onready var medals: Control = $Img/Medals
 @onready var lock: TextureRect = $Lock
 @export var id: int
+@onready var label:Label=$Label
 #greyed out icon transform
 var r_g_b: float = 102.0 / 256.0
 
@@ -53,7 +54,10 @@ func _on_button_mouse_exited() -> void:
 	else:
 		$Img/Shiny.hide()
 
-func greyout():
+func greyout()->void:
 	img.modulate = Color(r_g_b, r_g_b, r_g_b, 1)
-func greyin():
+	label.modulate = Color(r_g_b, r_g_b, r_g_b, 1)
+	
+func greyin()->void:
 	img.modulate = Color(1,1,1, 1)
+	label.modulate = Color(1,1,1, 1)
