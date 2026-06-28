@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ckkbijrsovs32"]
+
+[ext_resource type="Script" uid="uid://dveq6e16hfkl0" path="res://scripts/logo.gd" id="1_28y03"]
+[ext_resource type="Texture2D" uid="uid://b5fjndmdfi85j" path="res://Assets/Images/maps/map2/shapes/250.png" id="2_bpfkn"]
+[ext_resource type="Texture2D" uid="uid://d27spud8321wp" path="res://Assets/Images/maps/map2/shapes/242.png" id="3_td0ea"]
+[ext_resource type="Texture2D" uid="uid://dc3q711f52um2" path="res://Assets/Images/maps/map2/shapes/244.png" id="4_r5h5u"]
+[ext_resource type="Texture2D" uid="uid://dk051de2fv8dp" path="res://Assets/Images/maps/map2/shapes/246.png" id="5_66r2j"]
+
+[node name="Logo" type="Node2D" unique_id=585863891]
+script = ExtResource("1_28y03")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1420846527]
+transparent_bg = true
+size = Vector2i(500, 500)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport" unique_id=1162395572]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1818154924]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_bpfkn")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D" unique_id=1616806639]
+position = Vector2(-210.05, -54.21)
+rotation = 0.008726646
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_td0ea")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D" unique_id=851582793]
+position = Vector2(102.135, 7.52)
+rotation = 0.51487213
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_r5h5u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" unique_id=480225246]
+position = Vector2(-7.04, 86.65)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("5_66r2j")

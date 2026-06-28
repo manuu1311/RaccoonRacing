@@ -1,3 +1,30 @@
 [gd_scene format=3 uid="uid://dkomaql7i1hg1"]
 
+[ext_resource type="Texture2D" uid="uid://b5fjndmdfi85j" path="res://Assets/Images/maps/map2/shapes/250.png" id="1_58y0v"]
+[ext_resource type="Texture2D" uid="uid://d27spud8321wp" path="res://Assets/Images/maps/map2/shapes/242.png" id="2_f4uu0"]
+[ext_resource type="Texture2D" uid="uid://dc3q711f52um2" path="res://Assets/Images/maps/map2/shapes/244.png" id="3_if85b"]
+[ext_resource type="Texture2D" uid="uid://dk051de2fv8dp" path="res://Assets/Images/maps/map2/shapes/246.png" id="4_jd7nb"]
+
 [node name="Minimap21" type="Node2D" unique_id=2143188997]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1317354182]
+position = Vector2(288, 192.065)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_58y0v")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D" unique_id=810830731]
+position = Vector2(-210.05, -54.21)
+rotation = 0.008726646
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_f4uu0")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D" unique_id=119484119]
+position = Vector2(102.135, 7.52)
+rotation = 0.51487213
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("3_if85b")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" unique_id=1228978126]
+position = Vector2(-7.04, 86.65)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_jd7nb")
