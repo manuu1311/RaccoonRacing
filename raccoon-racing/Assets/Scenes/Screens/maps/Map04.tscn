@@ -1,6 +1,9 @@
 [gd_scene format=4 uid="uid://ccn84qrud5yaw"]
 
 [ext_resource type="Texture2D" uid="uid://ca0423ymwcl5b" path="res://Assets/Images/maps/map4/bg.jpeg" id="1_0iund"]
+[ext_resource type="Script" uid="uid://8ci12xvms5ux" path="res://scripts/map/map_04.gd" id="1_3g2hk"]
+[ext_resource type="Texture2D" uid="uid://c2k66qd43nrw4" path="res://Assets/Images/maps/map4/Top2/top.png" id="3_2y1dm"]
+[ext_resource type="PackedScene" uid="uid://bpa6bnjfjm4dy" path="res://Assets/Scenes/Screens/maps/seagull.tscn" id="4_4utwj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hx48j"]
 texture = ExtResource("1_0iund")
@@ -101,7 +104,40 @@ texture_region_size = Vector2i(543, 757)
 tile_size = Vector2i(543, 757)
 sources/0 = SubResource("TileSetAtlasSource_hx48j")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yot4d"]
+texture = ExtResource("3_2y1dm")
+texture_region_size = Vector2i(1366, 637)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gbq76"]
+tile_size = Vector2i(1366, 637)
+sources/0 = SubResource("TileSetAtlasSource_yot4d")
+
 [node name="Map04" type="Node2D" unique_id=2072849281]
+script = ExtResource("1_3g2hk")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=297565233]
 
@@ -118,8 +154,91 @@ tile_set = SubResource("TileSet_l1ysb")
 [node name="Top1" type="Node2D" parent="Visuals" unique_id=23995456]
 
 [node name="Top2" type="Node2D" parent="Visuals" unique_id=1950009038]
+z_index = 15
+position = Vector2(398.36, -76.935)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Visuals/Top2" unique_id=1020647851]
+scale = Vector2(0.667, 0.667)
+tile_map_data = PackedByteArray("AAD9////AAAAAAEAAAD9/wAAAAAAAAIAAAD9/wEAAAAAAAMAAAD9/wIAAAAAAAQAAAD+//7/AAABAAAAAAD+////AAABAAEAAAD+/wAAAAABAAIAAAD+/wEAAAABAAMAAAD+/wIAAAABAAQAAAD///7/AAACAAAAAAD/////AAACAAEAAAD//wAAAAACAAIAAAD//wEAAAACAAMAAAD//wIAAAACAAQAAAAAAP7/AAADAAAAAAAAAP//AAADAAEAAAAAAAAAAAADAAIAAAAAAAEAAAADAAMAAAAAAAIAAAADAAQAAAABAP7/AAAEAAAAAAABAP//AAAEAAEAAAABAAAAAAAEAAIAAAABAAEAAAAEAAMAAAABAAIAAAAEAAQAAAA=")
+tile_set = SubResource("TileSet_gbq76")
 
 [node name="Art" type="Node2D" parent="Visuals" unique_id=1847850032]
+
+[node name="Seagull1" parent="Visuals/Art" unique_id=1701292734 instance=ExtResource("4_4utwj")]
+position = Vector2(-358, 787)
+
+[node name="Seagull2" parent="Visuals/Art" unique_id=1180032118 instance=ExtResource("4_4utwj")]
+position = Vector2(-167, 691)
+scale = Vector2(0.8, 0.8)
+
+[node name="Seagull3" parent="Visuals/Art" unique_id=217516740 instance=ExtResource("4_4utwj")]
+position = Vector2(-261, 826)
+scale = Vector2(0.9, 0.9)
+
+[node name="AnimationPlayer" parent="Visuals/Art/Seagull3" index="0" unique_id=570482519]
+speed_scale = 0.7
+
+[node name="Seagull4" parent="Visuals/Art" unique_id=209260009 instance=ExtResource("4_4utwj")]
+position = Vector2(-403, 558)
+scale = Vector2(0.5, 0.5)
+
+[node name="AnimationPlayer" parent="Visuals/Art/Seagull4" index="0" unique_id=570482519]
+speed_scale = 1.3
+
+[node name="Seagull5" parent="Visuals/Art" unique_id=558718952 instance=ExtResource("4_4utwj")]
+position = Vector2(-190, -721)
+
+[node name="Seagull6" parent="Visuals/Art" unique_id=1351247873 instance=ExtResource("4_4utwj")]
+position = Vector2(-39.000008, -587.9999)
+scale = Vector2(0.8, 0.8)
+
+[node name="Seagull7" parent="Visuals/Art" unique_id=1758560340 instance=ExtResource("4_4utwj")]
+position = Vector2(-261, 826)
+scale = Vector2(0.9, 0.9)
+
+[node name="AnimationPlayer" parent="Visuals/Art/Seagull7" index="0" unique_id=570482519]
+speed_scale = 0.7
+
+[node name="Sprite2D" parent="Visuals/Art/Seagull7" index="1" unique_id=1339515197]
+position = Vector2(-3.3333282, -1557.7778)
+
+[node name="Seagull8" parent="Visuals/Art" unique_id=257865704 instance=ExtResource("4_4utwj")]
+position = Vector2(-403, 558)
+scale = Vector2(0.5, 0.5)
+
+[node name="AnimationPlayer" parent="Visuals/Art/Seagull8" index="0" unique_id=570482519]
+speed_scale = 1.3
+
+[node name="Sprite2D" parent="Visuals/Art/Seagull8" index="1" unique_id=1339515197]
+position = Vector2(475.99997, -1894)
+
+[node name="Seagull9" parent="Visuals/Art" unique_id=1361567771 instance=ExtResource("4_4utwj")]
+position = Vector2(-2011, 141)
+
+[node name="Seagull10" parent="Visuals/Art" unique_id=444818574 instance=ExtResource("4_4utwj")]
+z_index = 15
+position = Vector2(-1903.9999, 333.99994)
+scale = Vector2(0.8, 0.8)
+
+[node name="Seagull11" parent="Visuals/Art" unique_id=1282865215 instance=ExtResource("4_4utwj")]
+position = Vector2(-1878, -90)
+scale = Vector2(0.9, 0.9)
+
+[node name="AnimationPlayer" parent="Visuals/Art/Seagull11" index="0" unique_id=570482519]
+speed_scale = 0.7
+
+[node name="Sprite2D" parent="Visuals/Art/Seagull11" index="1" unique_id=1339515197]
+position = Vector2(-3.3333282, -1557.7778)
+
+[node name="Seagull12" parent="Visuals/Art" unique_id=1845709238 instance=ExtResource("4_4utwj")]
+position = Vector2(-2090, -89)
+scale = Vector2(0.5, 0.5)
+
+[node name="AnimationPlayer" parent="Visuals/Art/Seagull12" index="0" unique_id=570482519]
+speed_scale = 1.3
+
+[node name="Sprite2D" parent="Visuals/Art/Seagull12" index="1" unique_id=1339515197]
+position = Vector2(475.99997, -1894)
 
 [node name="PointsCar" type="Node2D" parent="." unique_id=769861280]
 
@@ -152,3 +271,10 @@ tile_set = SubResource("TileSet_l1ysb")
 [node name="Props" type="Node2D" parent="PointsHC" unique_id=180194628]
 
 [node name="Points" type="Node2D" parent="PointsHC" unique_id=1060291298]
+
+[editable path="Visuals/Art/Seagull3"]
+[editable path="Visuals/Art/Seagull4"]
+[editable path="Visuals/Art/Seagull7"]
+[editable path="Visuals/Art/Seagull8"]
+[editable path="Visuals/Art/Seagull11"]
+[editable path="Visuals/Art/Seagull12"]
