@@ -44,9 +44,7 @@ func _ready() -> void:
 	chartext.hide()
 	charicon.hide()
 	##player won:
-	if GameData.PlayersArr[GameData.Ranking[0]].car==GameData.FocusCar and 0:
-		print('WON')
-		print(GameData.Ranking)
+	if GameData.PlayersArr[GameData.Ranking[0]].car==GameData.FocusCar:
 		lost.hide()
 		won.show()
 		WonSetup()
@@ -90,6 +88,7 @@ func LossSetup()->void:
 
 
 func OnContinueButtonPressed()->void:
+	GameData.ClearPlayers()
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_top_scores.tscn")
 
 func OnButtonHoverWin()->void:

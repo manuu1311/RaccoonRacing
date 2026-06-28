@@ -18,6 +18,7 @@ func PlayMusic(music: String)->void:
 	var new_stream:Variant = audio_streams.get(music)
 	
 	if new_stream:
+		volume_db=0
 		stream = new_stream
 		stream.loop = true
 		play()

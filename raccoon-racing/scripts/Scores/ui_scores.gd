@@ -26,18 +26,19 @@ var names:Array[String]=[
 var scorepoints:Array[int]=[10,8,6,4]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    #TODO: prova
-    GameData.PopulatePlayers()
-    GameData.FocusCar=GameData.PlayersArr[0].car
-    GameData.OrderInfo=[2,1,3,0]
-    GameData.Ranking=[2,1,3,0]
-    GameData.PlayersArr[0].OrderId=3
-    GameData.PlayersArr[1].OrderId=1
-    GameData.PlayersArr[2].OrderId=0
-    GameData.PlayersArr[3].OrderId=2
-    GameData.cupWon[0]=1
-    GameData.cupWon[2]=1
-    #FINISH TODO
+    ##TODO: prova
+    #GameData.PopulatePlayers()
+    #GameData.FocusCar=GameData.PlayersArr[0].car
+    #GameData.OrderInfo=[2,1,3,0]
+    #GameData.Ranking=[2,1,3,0]
+    #GameData.PlayersArr[0].OrderId=3
+    #GameData.PlayersArr[1].OrderId=1
+    #GameData.PlayersArr[2].OrderId=0
+    #GameData.PlayersArr[3].OrderId=2
+    #GameData.cupWon[0]=1
+    #GameData.cupWon[2]=1
+    ##FINISH TODO
+    UiOverAnimation.animated_sprite_2d.frame=0
     MusicPlayer.PlayMusic("stats")
     continuetext.add_theme_color_override("font_color",Color.WHITE)
     var positions:Array[Node2D]= [playerchar,a_ichar_1,a_ichar_2,a_ichar_3]
@@ -103,14 +104,12 @@ func _ready() -> void:
         player.ScorePoints+=scorepoints[player.OrderId]
     var oldranking:Array[int]=GameData.Ranking.duplicate()
     SortRankingArray()
-    print('old.',GameData.Ranking,'new',oldranking)
     for i:int in oldranking.size():
         var orderid:int=oldranking[i]
         var player:Player=GameData.PlayersArr[orderid]
         #second animation now
         var secondtween:Tween=create_tween()
         var newrank:int=GetNewRank(player.PlayerID)
-        print('player ',player.PlayerID,'rank:',newrank,'in plaxe',orderid)
         secondtween.tween_interval(2.0)
         secondtween.tween_property(positions[i],"position",nodepositions[newrank],0.5)
         secondtween.tween_callback(func():
@@ -133,15 +132,11 @@ func GetNewRank(id:int)->int:
     return -1
 
 func SortRankingArray()->void:
-    print(GameData.Ranking)
     GameData.Ranking.sort_custom(func(a:int, b:int)->bool:
        var score_a:int = GameData.PlayersArr[a].ScorePoints
        var score_b:int = GameData.PlayersArr[b].ScorePoints
        return score_a > score_b
     )
-    print(GameData.Ranking)
-    for i in range(4):
-        print(GameData.PlayersArr[i].ScorePoints)
 
 func _on_continue_mouse_entered() -> void:
     continuetext.add_theme_color_override("font_color",Color.YELLOW)
@@ -152,7 +147,11 @@ func _on_continue_mouse_exited() -> void:
 
 
 func _on_continue_pressed() -> void:
-    if GameData.currentStep<GameData.cupInfo[GameData.currentCup].size()-1:
+    GameData.currentStep+=1
+    if GameData.currentStep<GameData.cupInfo[GameData.currentCup].size():
+        MusicPlayer.stop()
+        GameData.UpdateInfo()
+        GameData.OrderInfo=GameData.Ranking
         get_tree().change_scene_to_file("res://Assets/Scenes/Screens/experiment.tscn")
     else:
         get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_cup_won.tscn")

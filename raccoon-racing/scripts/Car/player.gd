@@ -5,7 +5,7 @@ var car: Car
 var PlayerID:int
 #TODO: should be set by game manager
 ##character id 1-6
-var charid:int=6
+var charid:int=0
 enum control_type{HUMAN,AI,MULTIPLAYER,RLTRAINING,RL}
 var current_control:control_type
 var alldistance:int=0
@@ -123,8 +123,9 @@ func FinishRace()->void:
     Stoprace();
 
 func Stoprace()->void:
-      car.playering = false;
-      racefinished.emit()
+    car.playering = false;
+    prop.propArr=[]
+    racefinished.emit()
 
 func RunPropBox(x:float,y:float)->void:
     if not car.playering:

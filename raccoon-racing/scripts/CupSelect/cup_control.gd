@@ -50,6 +50,7 @@ func _on_diff_pressed(diff: int) -> void:
 		UiOverAnimation.playanim()
 		MusicPlayer.FadeOutAndStop(2.5)
 		await UiOverAnimation.animated_sprite_2d.animation_finished
+		GameData.PopulatePlayers()
 		get_tree().change_scene_to_file("res://Assets/Scenes/Screens/experiment.tscn")
 
 

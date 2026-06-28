@@ -597,6 +597,7 @@ animations = [{
 script = ExtResource("1_vfrq5")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=690054057]
+position = Vector2(-485.5, -469)
 
 [node name="Ground" type="Node2D" parent="Visuals" unique_id=617346799]
 
@@ -760,6 +761,7 @@ sprite_frames = SubResource("SpriteFrames_6cqan")
 [node name="Top1" type="Node2D" parent="Visuals/Ground" unique_id=762340441]
 
 [node name="Top2" type="Node2D" parent="Visuals/Ground" unique_id=579021684]
+visible = false
 z_index = 15
 
 [node name="structure" type="Sprite2D" parent="Visuals/Ground/Top2" unique_id=1691102177]
@@ -779,8 +781,876 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("96_yuxi8")
 
 [node name="PointsHC" type="Node2D" parent="." unique_id=1232163257]
+position = Vector2(-485.5, -469)
+
+[node name="Flags" type="Node2D" parent="PointsHC" unique_id=1158699843]
+position = Vector2(22, 0)
+
+[node name="WinPos" type="Marker2D" parent="PointsHC/Flags" unique_id=1032606097]
+position = Vector2(1864.43, 2095.28)
+gizmo_extents = 101.0
+
+[node name="StartPos0" type="Marker2D" parent="PointsHC/Flags" unique_id=1993801307]
+position = Vector2(1774.73, 2142)
+gizmo_extents = 101.0
+
+[node name="StartPos1" type="Marker2D" parent="PointsHC/Flags" unique_id=847312353]
+position = Vector2(1861.29, 2194.97)
+gizmo_extents = 101.0
+
+[node name="StartPos2" type="Marker2D" parent="PointsHC/Flags" unique_id=655087272]
+position = Vector2(1741.045, 2200.195)
+gizmo_extents = 101.0
+
+[node name="StartPos3" type="Marker2D" parent="PointsHC/Flags" unique_id=925819628]
+position = Vector2(1826.64, 2253.875)
+gizmo_extents = 101.0
+
+[node name="Walls0" type="Node2D" parent="PointsHC" unique_id=487855617]
+
+[node name="wall1" type="Marker2D" parent="PointsHC/Walls0" unique_id=1830582465]
+position = Vector2(2315.4065, 1122.6553)
+
+[node name="wall2" type="Marker2D" parent="PointsHC/Walls0" unique_id=1675027766]
+position = Vector2(2429.807, 996.2554)
+
+[node name="wall3" type="Marker2D" parent="PointsHC/Walls0" unique_id=1155671085]
+position = Vector2(2506.607, 805.8554)
+
+[node name="wall4" type="Marker2D" parent="PointsHC/Walls0" unique_id=2008322688]
+position = Vector2(2523.4067, 642.6554)
+
+[node name="wall5" type="Marker2D" parent="PointsHC/Walls0" unique_id=114786605]
+position = Vector2(2508.2068, 491.4554)
+
+[node name="wall6" type="Marker2D" parent="PointsHC/Walls0" unique_id=446943454]
+position = Vector2(2453.006, 331.4554)
+
+[node name="wall7" type="Marker2D" parent="PointsHC/Walls0" unique_id=1632243192]
+position = Vector2(2340.206, 165.85541)
+
+[node name="wall8" type="Marker2D" parent="PointsHC/Walls0" unique_id=709558506]
+position = Vector2(2193.006, 39.455444)
+
+[node name="wall9" type="Marker2D" parent="PointsHC/Walls0" unique_id=1478561847]
+position = Vector2(1999.406, -67.74469)
+
+[node name="wall10" type="Marker2D" parent="PointsHC/Walls0" unique_id=1269562991]
+position = Vector2(1829.806, -82.9447)
+
+[node name="wall11" type="Marker2D" parent="PointsHC/Walls0" unique_id=1790755749]
+position = Vector2(1703.406, -61.344727)
+
+[node name="wall12" type="Marker2D" parent="PointsHC/Walls0" unique_id=1142092485]
+position = Vector2(1549.006, 37.055298)
+
+[node name="wall13" type="Marker2D" parent="PointsHC/Walls0" unique_id=1472212186]
+position = Vector2(1119.406, 155.45499)
+
+[node name="wall14" type="Marker2D" parent="PointsHC/Walls0" unique_id=1973090170]
+position = Vector2(773.806, -118.9447)
+
+[node name="wall15" type="Marker2D" parent="PointsHC/Walls0" unique_id=296964249]
+position = Vector2(643.40607, -216.54468)
+
+[node name="wall16" type="Marker2D" parent="PointsHC/Walls0" unique_id=857689756]
+position = Vector2(528.2062, -265.34448)
+
+[node name="wall17" type="Marker2D" parent="PointsHC/Walls0" unique_id=1267932440]
+position = Vector2(390.60614, -370.14453)
+
+[node name="wall18" type="Marker2D" parent="PointsHC/Walls0" unique_id=1080792836]
+position = Vector2(333.80615, -443.7445)
+
+[node name="wall19" type="Marker2D" parent="PointsHC/Walls0" unique_id=595165432]
+position = Vector2(340.20627, -712.5442)
+
+[node name="wall20" type="Marker2D" parent="PointsHC/Walls0" unique_id=605941651]
+position = Vector2(470.60626, -897.3445)
+
+[node name="wall21" type="Marker2D" parent="PointsHC/Walls0" unique_id=2132170354]
+position = Vector2(510.60626, -966.9446)
+
+[node name="wall22" type="Marker2D" parent="PointsHC/Walls0" unique_id=1319650533]
+position = Vector2(526.60626, -1036.5446)
+
+[node name="wall23" type="Marker2D" parent="PointsHC/Walls0" unique_id=669970196]
+position = Vector2(500.20633, -1131.7449)
+
+[node name="wall24" type="Marker2D" parent="PointsHC/Walls0" unique_id=1306669856]
+position = Vector2(311.40637, -1350.9446)
+
+[node name="wall25" type="Marker2D" parent="PointsHC/Walls0" unique_id=521646221]
+position = Vector2(147.4065, -1482.1447)
+
+[node name="wall26" type="Marker2D" parent="PointsHC/Walls0" unique_id=41168742]
+position = Vector2(-7.793518, -1560.5447)
+
+[node name="wall27" type="Marker2D" parent="PointsHC/Walls0" unique_id=507855224]
+position = Vector2(-606.1935, -1625.3457)
+
+[node name="wall28" type="Marker2D" parent="PointsHC/Walls0" unique_id=543957754]
+position = Vector2(-1002.19336, -1599.7458)
+
+[node name="wall29" type="Marker2D" parent="PointsHC/Walls0" unique_id=1884222536]
+position = Vector2(-1159.7935, -1556.5459)
+
+[node name="wall30" type="Marker2D" parent="PointsHC/Walls0" unique_id=504844515]
+position = Vector2(-1302.1934, -1458.1455)
+
+[node name="wall31" type="Marker2D" parent="PointsHC/Walls0" unique_id=1238548890]
+position = Vector2(-1398.1927, -1325.346)
+
+[node name="wall32" type="Marker2D" parent="PointsHC/Walls0" unique_id=122917383]
+position = Vector2(-1478.1931, -1074.9457)
+
+[node name="wall33" type="Marker2D" parent="PointsHC/Walls0" unique_id=1364966324]
+position = Vector2(-1471.9077, -870.5089)
+
+[node name="wall34" type="Marker2D" parent="PointsHC/Walls0" unique_id=550566273]
+position = Vector2(-1408.7859, -738.7954)
+
+[node name="wall35" type="Marker2D" parent="PointsHC/Walls0" unique_id=757163665]
+position = Vector2(-1307.1859, -645.19543)
+
+[node name="wall36" type="Marker2D" parent="PointsHC/Walls0" unique_id=1292035237]
+position = Vector2(-1151.9858, -586.7954)
+
+[node name="wall37" type="Marker2D" parent="PointsHC/Walls0" unique_id=9089830]
+position = Vector2(-1055.9858, -553.1955)
+
+[node name="wall38" type="Marker2D" parent="PointsHC/Walls0" unique_id=1854472975]
+position = Vector2(-961.58594, -478.79492)
+
+[node name="wall39" type="Marker2D" parent="PointsHC/Walls0" unique_id=1398930687]
+position = Vector2(-887.98584, -361.19495)
+
+[node name="wall40" type="Marker2D" parent="PointsHC/Walls0" unique_id=1636085953]
+position = Vector2(-856.7859, -257.19495)
+
+[node name="wall41" type="Marker2D" parent="PointsHC/Walls0" unique_id=733838353]
+position = Vector2(-847.1859, -122.79492)
+
+[node name="wall42" type="Marker2D" parent="PointsHC/Walls0" unique_id=1368835170]
+position = Vector2(-875.98584, 18.805054)
+
+[node name="wall43" type="Marker2D" parent="PointsHC/Walls0" unique_id=913593489]
+position = Vector2(-954.3867, 172.40527)
+
+[node name="wall44" type="Marker2D" parent="PointsHC/Walls0" unique_id=1375984899]
+position = Vector2(-1027.1868, 252.40527)
+
+[node name="wall45" type="Marker2D" parent="PointsHC/Walls0" unique_id=1125193017]
+position = Vector2(-1157.5868, 320.40527)
+
+[node name="wall46" type="Marker2D" parent="PointsHC/Walls0" unique_id=1180439890]
+position = Vector2(-1300.7867, 358.00525)
+
+[node name="wall47" type="Marker2D" parent="PointsHC/Walls0" unique_id=983122487]
+position = Vector2(-1450.3875, 455.60526)
+
+[node name="wall48" type="Marker2D" parent="PointsHC/Walls0" unique_id=1976159439]
+position = Vector2(-1538.3873, 594.00525)
+
+[node name="wall49" type="Marker2D" parent="PointsHC/Walls0" unique_id=1043091361]
+position = Vector2(-1567.1875, 779.6052)
+
+[node name="wall50" type="Marker2D" parent="PointsHC/Walls0" unique_id=608847618]
+position = Vector2(-1532.7893, 966.8053)
+
+[node name="wall51" type="Marker2D" parent="PointsHC/Walls0" unique_id=1389152063]
+position = Vector2(-1455.1895, 1105.2053)
+
+[node name="wall52" type="Marker2D" parent="PointsHC/Walls0" unique_id=1419232329]
+position = Vector2(-1355.1895, 1187.6052)
+
+[node name="wall53" type="Marker2D" parent="PointsHC/Walls0" unique_id=2124779261]
+position = Vector2(-1123.9897, 1257.205)
+
+[node name="wall54" type="Marker2D" parent="PointsHC/Walls0" unique_id=50285305]
+position = Vector2(-799.1897, 1346.0049)
+
+[node name="wall55" type="Marker2D" parent="PointsHC/Walls0" unique_id=260382757]
+position = Vector2(-715.1897, 1353.2048)
+
+[node name="wall56" type="Marker2D" parent="PointsHC/Walls0" unique_id=1835346425]
+position = Vector2(208.00989, 142.00488)
+
+[node name="wall57" type="Marker2D" parent="PointsHC/Walls0" unique_id=95796946]
+position = Vector2(267.2099, 112.40491)
+
+[node name="wall58" type="Marker2D" parent="PointsHC/Walls0" unique_id=1350448121]
+position = Vector2(361.60992, 90.80487)
+
+[node name="wall59" type="Marker2D" parent="PointsHC/Walls0" unique_id=849456642]
+position = Vector2(471.2099, 89.204895)
+
+[node name="wall60" type="Marker2D" parent="PointsHC/Walls0" unique_id=1273399143]
+position = Vector2(571.2099, 118.00488)
+
+[node name="wall61" type="Marker2D" parent="PointsHC/Walls0" unique_id=534128001]
+position = Vector2(1056.01, 474.00476)
+
+[node name="wall62" type="Marker2D" parent="PointsHC/Walls0" unique_id=297241503]
+position = Vector2(1176.81, 506.80475)
+
+[node name="wall63" type="Marker2D" parent="PointsHC/Walls0" unique_id=1567806327]
+position = Vector2(1348.81, 495.60477)
+
+[node name="wall64" type="Marker2D" parent="PointsHC/Walls0" unique_id=276572613]
+position = Vector2(1458.41, 454.80475)
+
+[node name="wall65" type="Marker2D" parent="PointsHC/Walls0" unique_id=534223102]
+position = Vector2(1767.2098, 203.60477)
+
+[node name="wall66" type="Marker2D" parent="PointsHC/Walls0" unique_id=1170680943]
+position = Vector2(1849.6099, 190.00476)
+
+[node name="wall67" type="Marker2D" parent="PointsHC/Walls0" unique_id=2083239770]
+position = Vector2(1928.8098, 195.60477)
+
+[node name="wall68" type="Marker2D" parent="PointsHC/Walls0" unique_id=996104536]
+position = Vector2(2119.2097, 332.40475)
+
+[node name="wall69" type="Marker2D" parent="PointsHC/Walls0" unique_id=452818033]
+position = Vector2(2204.0098, 465.20465)
+
+[node name="wall70" type="Marker2D" parent="PointsHC/Walls0" unique_id=2031372053]
+position = Vector2(2237.6096, 637.20465)
+
+[node name="wall71" type="Marker2D" parent="PointsHC/Walls0" unique_id=212234645]
+position = Vector2(2233.6096, 776.4046)
+
+[node name="wall72" type="Marker2D" parent="PointsHC/Walls0" unique_id=2012067614]
+position = Vector2(2171.2097, 868.4046)
+
+[node name="wall73" type="Marker2D" parent="PointsHC/Walls0" unique_id=2048148527]
+position = Vector2(2060.0098, 923.6046)
+
+[node name="wall74" type="Marker2D" parent="PointsHC/Walls0" unique_id=254502473]
+position = Vector2(1860.8098, 950.00464)
+
+[node name="wall75" type="Marker2D" parent="PointsHC/Walls0" unique_id=1502205336]
+position = Vector2(1720.0099, 986.00464)
+
+[node name="wall76" type="Marker2D" parent="PointsHC/Walls0" unique_id=189948999]
+position = Vector2(1620.0099, 1040.4045)
+
+[node name="wall77" type="Marker2D" parent="PointsHC/Walls0" unique_id=1987872091]
+position = Vector2(1542.4099, 1101.2046)
+
+[node name="wall78" type="Marker2D" parent="PointsHC/Walls0" unique_id=1169604665]
+position = Vector2(879.21014, 1068.4047)
+
+[node name="wall79" type="Marker2D" parent="PointsHC/Walls0" unique_id=331176887]
+position = Vector2(332.0102, 1066.8047)
+
+[node name="wall80" type="Marker2D" parent="PointsHC/Walls0" unique_id=784452332]
+position = Vector2(145.61017, 1119.6047)
+
+[node name="wall81" type="Marker2D" parent="PointsHC/Walls0" unique_id=356295879]
+position = Vector2(-118.38977, 1362.0048)
+
+[node name="wall82" type="Marker2D" parent="PointsHC/Walls0" unique_id=1642933508]
+position = Vector2(-180.78992, 1518.8048)
+
+[node name="wall83" type="Marker2D" parent="PointsHC/Walls0" unique_id=1458261316]
+position = Vector2(-130.00244, 1674.0295)
+
+[node name="wall84" type="Marker2D" parent="PointsHC/Walls0" unique_id=259655291]
+position = Vector2(238.71759, 2103.4695)
+
+[node name="wall85" type="Marker2D" parent="PointsHC/Walls0" unique_id=1024854254]
+position = Vector2(401.51746, 2222.271)
+
+[node name="wall86" type="Marker2D" parent="PointsHC/Walls0" unique_id=326769106]
+position = Vector2(595.11743, 2338.431)
+
+[node name="wall87" type="Marker2D" parent="PointsHC/Walls0" unique_id=2023799497]
+position = Vector2(968.2375, 2512.6719)
+
+[node name="wall88" type="Marker2D" parent="PointsHC/Walls0" unique_id=510465268]
+position = Vector2(1155.6775, 2530.272)
+
+[node name="wall89" type="Marker2D" parent="PointsHC/Walls0" unique_id=1622039133]
+position = Vector2(1369.5176, 2480.9917)
+
+[node name="wall90" type="Marker2D" parent="PointsHC/Walls0" unique_id=317580471]
+position = Vector2(1548.1575, 2337.5518)
+
+[node name="wall91" type="Marker2D" parent="PointsHC/Walls0" unique_id=1369523477]
+position = Vector2(1724.158, 2069.1506)
+
+[node name="Walls1" type="Node2D" parent="PointsHC" unique_id=1106963444]
+
+[node name="wall1" type="Marker2D" parent="PointsHC/Walls1" unique_id=729953434]
+position = Vector2(1923.6421, 2230.0342)
+
+[node name="wall2" type="Marker2D" parent="PointsHC/Walls1" unique_id=1296614468]
+position = Vector2(1723.9725, 2475.3237)
+
+[node name="wall3" type="Marker2D" parent="PointsHC/Walls1" unique_id=94364644]
+position = Vector2(1574.551, 2610.8608)
+
+[node name="wall4" type="Marker2D" parent="PointsHC/Walls1" unique_id=1716794199]
+position = Vector2(1386.1213, 2692.183)
+
+[node name="wall5" type="Marker2D" parent="PointsHC/Walls1" unique_id=745936589]
+position = Vector2(1191.7411, 2733.1748)
+
+[node name="wall6" type="Marker2D" parent="PointsHC/Walls1" unique_id=683343465]
+position = Vector2(990.0882, 2727.8855)
+
+[node name="wall7" type="Marker2D" parent="PointsHC/Walls1" unique_id=1405258363]
+position = Vector2(793.72455, 2692.8442)
+
+[node name="wall8" type="Marker2D" parent="PointsHC/Walls1" unique_id=1721774193]
+position = Vector2(302.48477, 2434.3325)
+
+[node name="wall9" type="Marker2D" parent="PointsHC/Walls1" unique_id=1253712546]
+position = Vector2(-106.11017, 2093.836)
+
+[node name="wall10" type="Marker2D" parent="PointsHC/Walls1" unique_id=2119118366]
+position = Vector2(-323.63098, 1816.8108)
+
+[node name="wall11" type="Marker2D" parent="PointsHC/Walls1" unique_id=551862354]
+position = Vector2(-404.2921, 1673.3397)
+
+[node name="wall12" type="Marker2D" parent="PointsHC/Walls1" unique_id=741331392]
+position = Vector2(-424.78802, 1598.6289)
+
+[node name="wall13" type="Marker2D" parent="PointsHC/Walls1" unique_id=744020472]
+position = Vector2(-424.12677, 1531.8523)
+
+[node name="wall14" type="Marker2D" parent="PointsHC/Walls1" unique_id=944049249]
+position = Vector2(-412.8871, 1458.4639)
+
+[node name="wall15" type="Marker2D" parent="PointsHC/Walls1" unique_id=803519632]
+position = Vector2(-367.57483, 1364.6075)
+
+[node name="wall16" type="Marker2D" parent="PointsHC/Walls1" unique_id=2096158996]
+position = Vector2(-211.78046, 1133.8505)
+
+[node name="wall17" type="Marker2D" parent="PointsHC/Walls1" unique_id=1209795124]
+position = Vector2(-39.7287, 997.02216)
+
+[node name="wall18" type="Marker2D" parent="PointsHC/Walls1" unique_id=1725154738]
+position = Vector2(171.15869, 883.6759)
+
+[node name="wall19" type="Marker2D" parent="PointsHC/Walls1" unique_id=2113098492]
+position = Vector2(331.46927, 846.1948)
+
+[node name="wall20" type="Marker2D" parent="PointsHC/Walls1" unique_id=2033443706]
+position = Vector2(531.97046, 834.9054)
+
+[node name="wall21" type="Marker2D" parent="PointsHC/Walls1" unique_id=1459548402]
+position = Vector2(838.14105, 851.61383)
+
+[node name="wall22" type="Marker2D" parent="PointsHC/Walls1" unique_id=868963067]
+position = Vector2(1569.4585, 884.9866)
+
+[node name="wall23" type="Marker2D" parent="PointsHC/Walls1" unique_id=429559777]
+position = Vector2(1709.6238, 862.50726)
+
+[node name="wall24" type="Marker2D" parent="PointsHC/Walls1" unique_id=705620133]
+position = Vector2(1823.3428, 811.59814)
+
+[node name="wall25" type="Marker2D" parent="PointsHC/Walls1" unique_id=1252628853]
+position = Vector2(1985.3262, 659.53204)
+
+[node name="wall26" type="Marker2D" parent="PointsHC/Walls1" unique_id=325119972]
+position = Vector2(2009.1282, 549.7799)
+
+[node name="wall27" type="Marker2D" parent="PointsHC/Walls1" unique_id=1670379394]
+position = Vector2(1962.1859, 465.15186)
+
+[node name="wall28" type="Marker2D" parent="PointsHC/Walls1" unique_id=1636636376]
+position = Vector2(1890.781, 425.48242)
+
+[node name="wall29" type="Marker2D" parent="PointsHC/Walls1" unique_id=1938585721]
+position = Vector2(1825.9875, 430.77167)
+
+[node name="wall30" type="Marker2D" parent="PointsHC/Walls1" unique_id=1613232014]
+position = Vector2(1452.4337, 686.6395)
+
+[node name="wall31" type="Marker2D" parent="PointsHC/Walls1" unique_id=1660451086]
+position = Vector2(1283.1774, 715.73047)
+
+[node name="wall32" type="Marker2D" parent="PointsHC/Walls1" unique_id=1222047246]
+position = Vector2(1057.0618, 662.8379)
+
+[node name="wall33" type="Marker2D" parent="PointsHC/Walls1" unique_id=2056244402]
+position = Vector2(502.35092, 366.6395)
+
+[node name="wall34" type="Marker2D" parent="PointsHC/Walls1" unique_id=616550427]
+position = Vector2(406.48315, 352.7552)
+
+[node name="wall35" type="Marker2D" parent="PointsHC/Walls1" unique_id=1919332919]
+position = Vector2(327.14432, 385.1519)
+
+[node name="wall36" type="Marker2D" parent="PointsHC/Walls1" unique_id=723724763]
+position = Vector2(-417.97943, 1307.4662)
+
+[node name="wall37" type="Marker2D" parent="PointsHC/Walls1" unique_id=1728869731]
+position = Vector2(-585.9132, 1479.3672)
+
+[node name="wall38" type="Marker2D" parent="PointsHC/Walls1" unique_id=849020512]
+position = Vector2(-653.3512, 1525.6482)
+
+[node name="wall39" type="Marker2D" parent="PointsHC/Walls1" unique_id=1681344684]
+position = Vector2(-708.2273, 1554.739)
+
+[node name="wall40" type="Marker2D" parent="PointsHC/Walls1" unique_id=1830142719]
+position = Vector2(-771.69824, 1567.9622)
+
+[node name="wall41" type="Marker2D" parent="PointsHC/Walls1" unique_id=666556392]
+position = Vector2(-823.9297, 1574.5737)
+
+[node name="wall42" type="Marker2D" parent="PointsHC/Walls1" unique_id=1675452748]
+position = Vector2(-1402.4386, 1401.3511)
+
+[node name="wall43" type="Marker2D" parent="PointsHC/Walls1" unique_id=444057402]
+position = Vector2(-1567.7278, 1309.4503)
+
+[node name="wall44" type="Marker2D" parent="PointsHC/Walls1" unique_id=33909670]
+position = Vector2(-1704.5857, 1156.0615)
+
+[node name="wall45" type="Marker2D" parent="PointsHC/Walls1" unique_id=212881087]
+position = Vector2(-1782.6023, 974.90454)
+
+[node name="wall46" type="Marker2D" parent="PointsHC/Walls1" unique_id=1243240140]
+position = Vector2(-1799.7915, 775.89636)
+
+[node name="wall47" type="Marker2D" parent="PointsHC/Walls1" unique_id=522286958]
+position = Vector2(-1765.4114, 577.5492)
+
+[node name="wall48" type="Marker2D" parent="PointsHC/Walls1" unique_id=1921226282]
+position = Vector2(-1615.3298, 322.3426)
+
+[node name="wall49" type="Marker2D" parent="PointsHC/Walls1" unique_id=1785432094]
+position = Vector2(-1383.926, 131.26834)
+
+[node name="wall50" type="Marker2D" parent="PointsHC/Walls1" unique_id=323816617]
+position = Vector2(-1215.9922, 22.838593)
+
+[node name="wall51" type="Marker2D" parent="PointsHC/Walls1" unique_id=1903565421]
+position = Vector2(-1101.6139, -142.45068)
+
+[node name="wall52" type="Marker2D" parent="PointsHC/Walls1" unique_id=196679251]
+position = Vector2(-1107.5642, -237.65729)
+
+[node name="wall53" type="Marker2D" parent="PointsHC/Walls1" unique_id=2063399353]
+position = Vector2(-1163.7627, -329.5581)
+
+[node name="wall54" type="Marker2D" parent="PointsHC/Walls1" unique_id=436221315]
+position = Vector2(-1244.4238, -385.75647)
+
+[node name="wall55" type="Marker2D" parent="PointsHC/Walls1" unique_id=1966614784]
+position = Vector2(-1514.1765, -513.36)
+
+[node name="wall56" type="Marker2D" parent="PointsHC/Walls1" unique_id=63658388]
+position = Vector2(-1592.854, -570.2195)
+
+[node name="wall57" type="Marker2D" parent="PointsHC/Walls1" unique_id=2058944357]
+position = Vector2(-1647.0691, -658.1533)
+
+[node name="wall58" type="Marker2D" parent="PointsHC/Walls1" unique_id=74177597]
+position = Vector2(-1705.25, -839.3108)
+
+[node name="wall59" type="Marker2D" parent="PointsHC/Walls1" unique_id=998239783]
+position = Vector2(-1721.7788, -1040.3025)
+
+[node name="wall60" type="Marker2D" parent="PointsHC/Walls1" unique_id=1033786363]
+position = Vector2(-1696.655, -1247.2446)
+
+[node name="wall61" type="Marker2D" parent="PointsHC/Walls1" unique_id=1526882934]
+position = Vector2(-1610.0435, -1432.3687)
+
+[node name="wall62" type="Marker2D" parent="PointsHC/Walls1" unique_id=1596676314]
+position = Vector2(-1481.1195, -1577.8229)
+
+[node name="wall63" type="Marker2D" parent="PointsHC/Walls1" unique_id=847560397]
+position = Vector2(-1311.2021, -1690.2195)
+
+[node name="wall64" type="Marker2D" parent="PointsHC/Walls1" unique_id=1691495477]
+position = Vector2(-915.83044, -1775.5066)
+
+[node name="wall65" type="Marker2D" parent="PointsHC/Walls1" unique_id=1701116191]
+position = Vector2(-319.4668, -1770.8784)
+
+[node name="wall66" type="Marker2D" parent="PointsHC/Walls1" unique_id=1566370655]
+position = Vector2(-19.301025, -1737.1602)
+
+[node name="wall67" type="Marker2D" parent="PointsHC/Walls1" unique_id=1887316186]
+position = Vector2(268.9634, -1655.8398)
+
+[node name="wall68" type="Marker2D" parent="PointsHC/Walls1" unique_id=236422026]
+position = Vector2(605.49243, -1450.22)
+
+[node name="wall69" type="Marker2D" parent="PointsHC/Walls1" unique_id=726439664]
+position = Vector2(729.1288, -1330.5505)
+
+[node name="wall70" type="Marker2D" parent="PointsHC/Walls1" unique_id=1701779445]
+position = Vector2(840.09265, -1271.286)
+
+[node name="wall71" type="Marker2D" parent="PointsHC/Walls1" unique_id=606737535]
+position = Vector2(1909.0972, -516.7311)
+
+[node name="wall72" type="Marker2D" parent="PointsHC/Walls1" unique_id=681445701]
+position = Vector2(2004.9292, -412.18713)
+
+[node name="wall73" type="Marker2D" parent="PointsHC/Walls1" unique_id=1190452816]
+position = Vector2(2518.9377, -1.7553406)
+
+[node name="wall74" type="Marker2D" parent="PointsHC/Walls1" unique_id=655482661]
+position = Vector2(2623.4817, 139.5727)
+
+[node name="wall75" type="Marker2D" parent="PointsHC/Walls1" unique_id=1760637522]
+position = Vector2(2711.5696, 427.06885)
+
+[node name="wall76" type="Marker2D" parent="PointsHC/Walls1" unique_id=746525438]
+position = Vector2(2728.9934, 728.1168)
+
+[node name="wall77" type="Marker2D" parent="PointsHC/Walls1" unique_id=866849645]
+position = Vector2(2675.7527, 1022.38885)
+
+[node name="wall78" type="Marker2D" parent="PointsHC/Walls1" unique_id=22016445]
+position = Vector2(2586.6968, 1189.8529)
+
+[node name="Jumpwalls0" type="Node2D" parent="PointsHC" unique_id=1740450863]
+
+[node name="jumpwall1" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1592411350]
+position = Vector2(908.41895, -1373.8455)
+
+[node name="jumpwall2" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=746389018]
+position = Vector2(713.98645, -648.82336)
+
+[node name="jumpwall3" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1112965516]
+position = Vector2(712.8152, -528.18146)
+
+[node name="jumpwall4" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1599702871]
+position = Vector2(737.41205, -435.65033)
+
+[node name="jumpwall5" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=209831689]
+position = Vector2(777.2356, -399.34064)
+
+[node name="jumpwall6" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1160319913]
+position = Vector2(832.28577, -405.19708)
+
+[node name="jumpwall7" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=802116977]
+position = Vector2(911.93286, -477.8164)
+
+[node name="jumpwall8" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1313008616]
+position = Vector2(988.06604, -593.7732)
+
+[node name="jumpwall9" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=958853334]
+position = Vector2(1193.04, -1293.0277)
+
+[node name="Jumpwalls1" type="Node2D" parent="PointsHC" unique_id=1930995277]
+
+[node name="jumpwall1" type="Marker2D" parent="PointsHC/Jumpwalls1" unique_id=1515024089]
+position = Vector2(1783.5977, -892.22363)
+
+[node name="jumpwall2" type="Marker2D" parent="PointsHC/Jumpwalls1" unique_id=709177631]
+position = Vector2(1179.8561, -407.73962)
+
+[node name="jumpwall3" type="Marker2D" parent="PointsHC/Jumpwalls1" unique_id=65745431]
+position = Vector2(1100.0619, -268.22754)
+
+[node name="jumpwall4" type="Marker2D" parent="PointsHC/Jumpwalls1" unique_id=1124052215]
+position = Vector2(1099.4609, -211.12769)
+
+[node name="jumpwall5" type="Marker2D" parent="PointsHC/Jumpwalls1" unique_id=1853927202]
+position = Vector2(1133.1198, -182.27716)
+
+[node name="jumpwall6" type="Marker2D" parent="PointsHC/Jumpwalls1" unique_id=1060560924]
+position = Vector2(1193.225, -176.86768)
+
+[node name="jumpwall7" type="Marker2D" parent="PointsHC/Jumpwalls1" unique_id=1288111101]
+position = Vector2(1328.4615, -206.92029)
+
+[node name="jumpwall8" type="Marker2D" parent="PointsHC/Jumpwalls1" unique_id=111209174]
+position = Vector2(1956.2708, -656.9353)
+
+[node name="Propbox" type="Node2D" parent="PointsHC" unique_id=329233369]
+
+[node name="propbox0" type="Marker2D" parent="PointsHC/Propbox" unique_id=844611661]
+position = Vector2(2396.8113, 1427.8262)
+
+[node name="propbox1" type="Marker2D" parent="PointsHC/Propbox" unique_id=644854612]
+position = Vector2(2344.891, 1385.5862)
+
+[node name="propbox2" type="Marker2D" parent="PointsHC/Propbox" unique_id=66478139]
+position = Vector2(2296.4912, 1348.6262)
+
+[node name="propbox3" type="Marker2D" parent="PointsHC/Propbox" unique_id=963073053]
+position = Vector2(2234.891, 1312.5461)
+
+[node name="propbox4" type="Marker2D" parent="PointsHC/Propbox" unique_id=311122126]
+position = Vector2(1181.8687, 108.89725)
+
+[node name="propbox5" type="Marker2D" parent="PointsHC/Propbox" unique_id=1684558694]
+position = Vector2(1201.0422, 32.864197)
+
+[node name="propbox6" type="Marker2D" parent="PointsHC/Propbox" unique_id=1376062325]
+position = Vector2(1199.7198, -42.50769)
+
+[node name="propbox7" type="Marker2D" parent="PointsHC/Propbox" unique_id=1113827674]
+position = Vector2(1202.3645, -119.8631)
+
+[node name="propbox8" type="Marker2D" parent="PointsHC/Propbox" unique_id=1540707089]
+position = Vector2(1040.9525, -345.06848)
+
+[node name="propbox9" type="Marker2D" parent="PointsHC/Propbox" unique_id=970391797]
+position = Vector2(955.4491, -402.46118)
+
+[node name="propbox10" type="Marker2D" parent="PointsHC/Propbox" unique_id=770939995]
+position = Vector2(93.506836, -1578.0813)
+
+[node name="propbox11" type="Marker2D" parent="PointsHC/Propbox" unique_id=1169111963]
+position = Vector2(21.100464, -1676.043)
+
+[node name="propbox12" type="Marker2D" parent="PointsHC/Propbox" unique_id=1523901137]
+position = Vector2(-157.78595, -1686.6909)
+
+[node name="propbox13" type="Marker2D" parent="PointsHC/Propbox" unique_id=72722736]
+position = Vector2(-76.861145, -1622.803)
+
+[node name="propbox14" type="Marker2D" parent="PointsHC/Propbox" unique_id=449790880]
+position = Vector2(-1105.6467, -329.71704)
+
+[node name="propbox15" type="Marker2D" parent="PointsHC/Propbox" unique_id=172786650]
+position = Vector2(-1061.99, -371.2442)
+
+[node name="propbox16" type="Marker2D" parent="PointsHC/Propbox" unique_id=1801613794]
+position = Vector2(-1017.2683, -410.64178)
+
+[node name="propbox17" type="Marker2D" parent="PointsHC/Propbox" unique_id=874248533]
+position = Vector2(-972.54675, -453.23376)
+
+[node name="propbox18" type="Marker2D" parent="PointsHC/Propbox" unique_id=2136422207]
+position = Vector2(-936.1658, 1374.528)
+
+[node name="propbox19" type="Marker2D" parent="PointsHC/Propbox" unique_id=1801603781]
+position = Vector2(-839.63684, 1445.2717)
+
+[node name="propbox20" type="Marker2D" parent="PointsHC/Propbox" unique_id=2047125354]
+position = Vector2(-716.0005, 1441.9661)
+
+[node name="propbox21" type="Marker2D" parent="PointsHC/Propbox" unique_id=1451797273]
+position = Vector2(-615.5045, 1361.3049)
+
+[node name="propbox22" type="Marker2D" parent="PointsHC/Propbox" unique_id=837897006]
+position = Vector2(1199.9921, 529.73584)
+
+[node name="propbox23" type="Marker2D" parent="PointsHC/Propbox" unique_id=1331950006]
+position = Vector2(1215.453, 581.2722)
+
+[node name="propbox24" type="Marker2D" parent="PointsHC/Propbox" unique_id=303412460]
+position = Vector2(1227.0486, 626.36646)
+
+[node name="propbox25" type="Marker2D" parent="PointsHC/Propbox" unique_id=685105398]
+position = Vector2(1241.2212, 675.326)
+
+[node name="propbox26" type="Marker2D" parent="PointsHC/Propbox" unique_id=1013970500]
+position = Vector2(-59.622803, 1052.6003)
+
+[node name="propbox27" type="Marker2D" parent="PointsHC/Propbox" unique_id=220355993]
+position = Vector2(-29.209595, 1088.3029)
+
+[node name="propbox28" type="Marker2D" parent="PointsHC/Propbox" unique_id=174746534]
+position = Vector2(2.5259094, 1128.6334)
+
+[node name="propbox29" type="Marker2D" parent="PointsHC/Propbox" unique_id=2047466243]
+position = Vector2(20.377167, 1176.898)
+
+[node name="propbox30" type="Marker2D" parent="PointsHC/Propbox" unique_id=405823008]
+position = Vector2(697.86707, 2629.455)
+
+[node name="propbox31" type="Marker2D" parent="PointsHC/Propbox" unique_id=1046154916]
+position = Vector2(727.17456, 2577.7944)
+
+[node name="propbox32" type="Marker2D" parent="PointsHC/Propbox" unique_id=494441667]
+position = Vector2(754.9918, 2522.6567)
+
+[node name="propbox33" type="Marker2D" parent="PointsHC/Propbox" unique_id=1147981748]
+position = Vector2(783.3058, 2479.4404)
+
+[node name="Props" type="Node2D" parent="PointsHC" unique_id=1397579368]
+
+[node name="jump0" type="Marker2D" parent="PointsHC/Props" unique_id=315014882]
+position = Vector2(1806.245, -455)
+rotation = -0.80285144
+
+[node name="jump1" type="Marker2D" parent="PointsHC/Props" unique_id=688428188]
+position = Vector2(-1367.5001, 1285)
+rotation = 1.9198622
+
+[node name="bs0" type="Marker2D" parent="PointsHC/Props" unique_id=2094178695]
+position = Vector2(401.50024, -504.00024)
+rotation = 3.3684855
+
+[node name="addspeed0" type="Marker2D" parent="PointsHC/Props" unique_id=2146986169]
+position = Vector2(2195.405, -91.24)
+rotation = -0.6457718
+
+[node name="addspeed1" type="Marker2D" parent="PointsHC/Props" unique_id=280209877]
+position = Vector2(2007.39, -259.735)
+rotation = -0.6457718
+
+[node name="addspeed2" type="Marker2D" parent="PointsHC/Props" unique_id=1943706718]
+position = Vector2(1292.5, -760.79)
+rotation = 3.9880774
+
+[node name="addspeed3" type="Marker2D" parent="PointsHC/Props" unique_id=360262499]
+position = Vector2(-485.5, 1243.255)
+rotation = 0.715585
+
+[node name="addspeed4" type="Marker2D" parent="PointsHC/Props" unique_id=2136292467]
+position = Vector2(557.5, 268)
+rotation = 2.0594885
+
+[node name="addspeed5" type="Marker2D" parent="PointsHC/Props" unique_id=36635256]
+position = Vector2(1281.5, 990)
+rotation = -1.4049901
+
+[node name="addspeed6" type="Marker2D" parent="PointsHC/Props" unique_id=1414308769]
+position = Vector2(-88.50003, 1930)
+rotation = 2.364921
+
+[node name="Points" type="Node2D" parent="PointsHC" unique_id=538753298]
+
+[node name="point1" type="Marker2D" parent="PointsHC/Points" unique_id=480136186]
+position = Vector2(2520.7566, 1147.7537)
+
+[node name="point2" type="Marker2D" parent="PointsHC/Points" unique_id=1672350096]
+position = Vector2(2669.8289, 685.6306)
+
+[node name="point3" type="Marker2D" parent="PointsHC/Points" unique_id=1314756291]
+position = Vector2(2413.2117, 125.5459)
+
+[node name="point4" type="Marker2D" parent="PointsHC/Points" unique_id=448737135]
+position = Vector2(1930.8577, -347.22522)
+
+[node name="point5" type="Marker2D" parent="PointsHC/Points" unique_id=1738437576]
+position = Vector2(1347.3474, -110.83954)
+
+[node name="point6" type="Marker2D" parent="PointsHC/Points" unique_id=370288232]
+position = Vector2(1518.7802, -651.7577)
+
+[node name="point7" type="Marker2D" parent="PointsHC/Points" unique_id=477867813]
+position = Vector2(1026.8427, -92.737915)
+
+[node name="point8" type="Marker2D" parent="PointsHC/Points" unique_id=546733853]
+position = Vector2(1363.3193, -768.8861)
+
+[node name="point9" type="Marker2D" parent="PointsHC/Points" unique_id=99284137]
+position = Vector2(755.3186, -272.68915)
+
+[node name="point10" type="Marker2D" parent="PointsHC/Points" unique_id=262516499]
+position = Vector2(812.81775, -1121.3348)
+
+[node name="point11" type="Marker2D" parent="PointsHC/Points" unique_id=1361924423]
+position = Vector2(640.32007, -466.48285)
+
+[node name="point12" type="Marker2D" parent="PointsHC/Points" unique_id=1755109766]
+position = Vector2(516.8033, -1249.1117)
+
+[node name="point13" type="Marker2D" parent="PointsHC/Points" unique_id=1788989857]
+position = Vector2(35.513702, -1619.6616)
+
+[node name="point14" type="Marker2D" parent="PointsHC/Points" unique_id=481883392]
+position = Vector2(-1014.379, -1703.7805)
+
+[node name="point15" type="Marker2D" parent="PointsHC/Points" unique_id=1304349178]
+position = Vector2(-1439.2343, -1451.4231)
+
+[node name="point16" type="Marker2D" parent="PointsHC/Points" unique_id=1985776250]
+position = Vector2(-1571.2681, -1144.7607)
+
+[node name="point17" type="Marker2D" parent="PointsHC/Points" unique_id=676332278]
+position = Vector2(-1548.9073, -778.4695)
+
+[node name="point18" type="Marker2D" parent="PointsHC/Points" unique_id=1880390704]
+position = Vector2(-1228.4022, -531.4357)
+
+[node name="point19" type="Marker2D" parent="PointsHC/Points" unique_id=285477481]
+position = Vector2(-1032.4791, -135.33032)
+
+[node name="point20" type="Marker2D" parent="PointsHC/Points" unique_id=1522079840]
+position = Vector2(-1167.7087, 78.69446)
+
+[node name="point21" type="Marker2D" parent="PointsHC/Points" unique_id=1743976708]
+position = Vector2(-1335.9473, 183.04501)
+
+[node name="point22" type="Marker2D" parent="PointsHC/Points" unique_id=231062763]
+position = Vector2(-1516.9631, 335.3114)
+
+[node name="point23" type="Marker2D" parent="PointsHC/Points" unique_id=1852164347]
+position = Vector2(-1643.6746, 749.51874)
+
+[node name="point24" type="Marker2D" parent="PointsHC/Points" unique_id=694572326]
+position = Vector2(-1571.2678, 1109.421)
+
+[node name="point25" type="Marker2D" parent="PointsHC/Points" unique_id=376110086]
+position = Vector2(-914.2865, 1474.6472)
+
+[node name="point26" type="Marker2D" parent="PointsHC/Points" unique_id=578298589]
+position = Vector2(-518.96643, 1201.2947)
+
+[node name="point27" type="Marker2D" parent="PointsHC/Points" unique_id=1228634198]
+position = Vector2(70.55774, 404.65305)
+
+[node name="point28" type="Marker2D" parent="PointsHC/Points" unique_id=1964651508]
+position = Vector2(657.36914, 358.9731)
+
+[node name="point29" type="Marker2D" parent="PointsHC/Points" unique_id=859972019]
+position = Vector2(915.0508, 519.4386)
+
+[node name="point30" type="Marker2D" parent="PointsHC/Points" unique_id=1156157810]
+position = Vector2(1438.6132, 532.32263)
+
+[node name="point31" type="Marker2D" parent="PointsHC/Points" unique_id=1693234644]
+position = Vector2(1616.6477, 394.11157)
+
+[node name="point32" type="Marker2D" parent="PointsHC/Points" unique_id=1220754993]
+position = Vector2(1998.485, 435.10638)
+
+[node name="point33" type="Marker2D" parent="PointsHC/Points" unique_id=1024151948]
+position = Vector2(2041.8226, 692.78796)
+
+[node name="point34" type="Marker2D" parent="PointsHC/Points" unique_id=346398466]
+position = Vector2(1778.2847, 900.1046)
+
+[node name="point35" type="Marker2D" parent="PointsHC/Points" unique_id=1722795834]
+position = Vector2(1397.6184, 999.6634)
+
+[node name="point36" type="Marker2D" parent="PointsHC/Points" unique_id=1583791294]
+position = Vector2(358.6927, 912.98865)
+
+[node name="point37" type="Marker2D" parent="PointsHC/Points" unique_id=1522958250]
+position = Vector2(-12.602661, 1162.4713)
+
+[node name="point38" type="Marker2D" parent="PointsHC/Points" unique_id=1839457557]
+position = Vector2(-233.97485, 1269.058)
+
+[node name="point39" type="Marker2D" parent="PointsHC/Points" unique_id=808503470]
+position = Vector2(-194.151, 1679.0071)
+
+[node name="point40" type="Marker2D" parent="PointsHC/Points" unique_id=2031002982]
+position = Vector2(137.32129, 2088.955)
+
+[node name="point41" type="Marker2D" parent="PointsHC/Points" unique_id=193230282]
+position = Vector2(663.2267, 2576.2085)
+
+[node name="point42" type="Marker2D" parent="PointsHC/Points" unique_id=2082151696]
+position = Vector2(1343.7405, 2546.9263)
+
+[node name="point43" type="Marker2D" parent="PointsHC/Points" unique_id=1213312796]
+position = Vector2(1706.8373, 2296.2725)
 
 [node name="PointsCar" type="Node2D" parent="." unique_id=10362549]
+position = Vector2(-485.5, -469)
 
 [node name="Flags" type="Node2D" parent="PointsCar" unique_id=225663280]
 
@@ -945,16 +1815,16 @@ position = Vector2(-483.3799, -749.33276)
 position = Vector2(-260.10718, -672.9691)
 
 [node name="wall47" type="Marker2D" parent="PointsCar/Walls0" unique_id=1906462825]
-position = Vector2(-105.925415, -548.60535)
+position = Vector2(-111.5, -549)
 
 [node name="wall48" type="Marker2D" parent="PointsCar/Walls0" unique_id=583313680]
-position = Vector2(-31.743622, -438.0599)
+position = Vector2(-39.49997, -435.99997)
 
 [node name="wall49" type="Marker2D" parent="PointsCar/Walls0" unique_id=1419886381]
-position = Vector2(8.983704, -304.24164)
+position = Vector2(-2.5, -301)
 
 [node name="wall50" type="Marker2D" parent="PointsCar/Walls0" unique_id=13795340]
-position = Vector2(26.438263, -127.51437)
+position = Vector2(10.5, -126.99997)
 
 [node name="wall51" type="Marker2D" parent="PointsCar/Walls0" unique_id=1365108818]
 position = Vector2(10.438293, 75.39472)
@@ -1396,7 +2266,7 @@ position = Vector2(754.9603, 2121.8672)
 [node name="propbox23" type="Marker2D" parent="PointsCar/Propbox" unique_id=1663616704]
 position = Vector2(710.9603, 2150.9072)
 
-[node name="propbox24" type="Marker2D" parent="PointsCar/Propbox" unique_id=600380870]
+[node name="propbox0" type="Marker2D" parent="PointsCar/Propbox" unique_id=600380870]
 position = Vector2(661.68036, 2181.7073)
 
 [node name="Props" type="Node2D" parent="PointsCar" unique_id=1799357510]
@@ -1408,7 +2278,7 @@ gizmo_extents = 101.0
 
 [node name="addspeed1" type="Marker2D" parent="PointsCar/Props" unique_id=403696415]
 position = Vector2(-293, -1416)
-rotation = 0.12217305
+rotation = -1.43117
 gizmo_extents = 101.0
 
 [node name="addspeed2" type="Marker2D" parent="PointsCar/Props" unique_id=93351766]
@@ -1417,5 +2287,5 @@ rotation = 1.8325957
 gizmo_extents = 101.0
 
 [node name="minimap" type="Sprite2D" parent="." unique_id=93627121]
-position = Vector2(462.7, 481.115)
+position = Vector2(-22.8, 12.115)
 texture = ExtResource("97_q36qi")

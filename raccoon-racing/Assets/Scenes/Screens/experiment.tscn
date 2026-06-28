@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager.gd" id="1_piq2e"]
 [ext_resource type="PackedScene" uid="uid://cehj3k48xb3su" path="res://Assets/Scenes/Screens/HUD/HUD.tscn" id="3_rrtsn"]
 [ext_resource type="Script" uid="uid://memhlecsyk42" path="res://scripts/Game/sound_manager.gd" id="4_piq2e"]
-[ext_resource type="PackedScene" uid="uid://c47mpkqmnemuy" path="res://Assets/Scenes/Screens/maps/Map01.tscn" id="4_vyse4"]
 [ext_resource type="Texture2D" uid="uid://dn7nt3mtihhn" path="res://Assets/Images/game/finish/1.png" id="5_6ttnx"]
 [ext_resource type="Texture2D" uid="uid://c5k0abksngnfh" path="res://Assets/Images/game/finish/2.png" id="6_b4twu"]
 [ext_resource type="Texture2D" uid="uid://uxwty2nltrnj" path="res://Assets/Images/game/finish/3.png" id="7_1acdu"]
@@ -164,8 +163,6 @@ animations = [{
 
 [node name="Experiment" type="Node2D" unique_id=411329241]
 script = ExtResource("1_piq2e")
-
-[node name="Map" parent="." unique_id=620435250 instance=ExtResource("4_vyse4")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1501903731]
 environment = SubResource("Environment_td7gk")

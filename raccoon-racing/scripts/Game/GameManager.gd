@@ -29,7 +29,6 @@ func _ready() -> void:
 	SceneAngleMoveExpandPos = Vector2(150,0)
 	SceneAngleMoveExpandNowPos = Vector2.ZERO
 	map.deferredInit()
-	GameData.PopulatePlayers()
 	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
 	for i:int in GameData.OrderInfo: 
 		var player:Player=GameData.PlayersArr[i]
@@ -46,9 +45,14 @@ func _ready() -> void:
 		else:
 			carinstance.setup(map,player.PlayerID,false,player)
 			carinstance.add_child(AICarController.new(player))
-			var newid:int=available_ids.pop_front()
+			var newid:int
+			if player.charid==0:
+				newid=available_ids.pop_front()
+				player.charid=newid
+			else:
+				newid=player.charid
+				available_ids.erase(newid)
 			carinstance.CharID=newid
-			player.charid=newid
 		add_child(carinstance)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		player.SetCar(carinstance)
@@ -108,7 +112,11 @@ func _process(_delta: float) -> void:
 		SetSceneAngleExpand(fcsCar.global_position,fcsCar.rotation-PI/2)
 		SceneCenterMoveToPos()
 		UpdateOrderResult()
-
+	if Input.is_action_just_released("Debug"):
+		Racestop()
+		for player:Player in GameData.PlayersArr:
+			player.car.playering=false
+		
 func CoolEffects()->void:
 	sound_manager.PlaySound('levelstart')
 	await get_tree().create_timer(3).timeout
@@ -213,5 +221,6 @@ func ShowFinishEffect()->void:
 
 
 func BackToMain()->void:
+	GameData.FocusCar.player.racefinished.disconnect(Racestop)
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_scores.tscn")
-	return
+	queue_free()
