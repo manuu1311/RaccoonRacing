@@ -1,6 +1,10 @@
 [gd_scene format=4 uid="uid://m7noqod4rkcs"]
 
 [ext_resource type="Texture2D" uid="uid://mlhlaad625hj" path="res://Assets/Images/maps/map3/bg.jpeg" id="1_txyhf"]
+[ext_resource type="Texture2D" uid="uid://co3n1v80w5xxi" path="res://Assets/Images/maps/map3/Top1/agame.png" id="2_phqpl"]
+[ext_resource type="Texture2D" uid="uid://dtvainwpdkmep" path="res://Assets/Images/maps/map3/Top1/raccoonracing.png" id="3_ui56p"]
+[ext_resource type="Texture2D" uid="uid://bibn10jscgvoy" path="res://Assets/Images/maps/map3/Top1/arrow.png" id="4_85fws"]
+[ext_resource type="Texture2D" uid="uid://dq2unkjtigyhr" path="res://Assets/Images/maps/map3/Top2/building.png" id="5_p4phl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugeru"]
 texture = ExtResource("1_txyhf")
@@ -50,8 +54,94 @@ tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAAD+////AAAAAAEAAAD+/wAAAAAAAAI
 tile_set = SubResource("TileSet_ctv6n")
 
 [node name="Top1" type="Node2D" parent="Visuals" unique_id=92163651]
+visible = false
+scale = Vector2(0.667, 0.667)
+
+[node name="Agame" type="Sprite2D" parent="Visuals/Top1" unique_id=232504374]
+position = Vector2(1757.1215, 2269.8652)
+texture = ExtResource("2_phqpl")
+
+[node name="RR" type="Sprite2D" parent="Visuals/Top1" unique_id=165328881]
+position = Vector2(1677.6611, 2682.159)
+texture = ExtResource("3_ui56p")
+
+[node name="Arrow1" type="Sprite2D" parent="Visuals/Top1" unique_id=55602369]
+position = Vector2(2670.1648, 1784.1078)
+rotation = -1.2915436
+texture = ExtResource("4_85fws")
+
+[node name="Arrow2" type="Sprite2D" parent="Visuals/Top1" unique_id=349597418]
+position = Vector2(2899.5503, 1890.5544)
+rotation = -0.9948377
+texture = ExtResource("4_85fws")
+
+[node name="Arrow4" type="Sprite2D" parent="Visuals/Top1" unique_id=1895415376]
+position = Vector2(-127.43629, 1766.117)
+rotation = 1.7191494
+texture = ExtResource("4_85fws")
+
+[node name="Arrow6" type="Sprite2D" parent="Visuals/Top1" unique_id=771608395]
+position = Vector2(-3505.2473, -1043.4781)
+rotation = -1.5707964
+texture = ExtResource("2_phqpl")
+
+[node name="Arrow7" type="Sprite2D" parent="Visuals/Top1" unique_id=1794857487]
+position = Vector2(61.469265, -1581.7091)
+texture = ExtResource("2_phqpl")
+
+[node name="Arrow5" type="Sprite2D" parent="Visuals/Top1" unique_id=1293021128]
+position = Vector2(-394.3029, 1767.6165)
+rotation = 1.4660766
+texture = ExtResource("4_85fws")
+
+[node name="Arrow3" type="Sprite2D" parent="Visuals/Top1" unique_id=1720256742]
+position = Vector2(3056.9717, 2071.9639)
+rotation = -0.30543262
+texture = ExtResource("4_85fws")
 
 [node name="Top2" type="Node2D" parent="Visuals" unique_id=916182849]
+scale = Vector2(0.667, 0.667)
+
+[node name="Agame" type="Sprite2D" parent="Visuals/Top2" unique_id=284400649]
+position = Vector2(1793.1035, 2251.874)
+texture = ExtResource("2_phqpl")
+
+[node name="Agame2" type="Sprite2D" parent="Visuals/Top2" unique_id=722727284]
+position = Vector2(-3185.907, -988.00604)
+rotation = -1.5707964
+texture = ExtResource("2_phqpl")
+
+[node name="Agame3" type="Sprite2D" parent="Visuals/Top2" unique_id=1136664054]
+position = Vector2(-1118.4408, -1244.3778)
+texture = ExtResource("2_phqpl")
+
+[node name="RR" type="Sprite2D" parent="Visuals/Top2" unique_id=378418839]
+position = Vector2(1674.6627, 2682.159)
+texture = ExtResource("3_ui56p")
+
+[node name="Arrow1" type="Sprite2D" parent="Visuals/Top2" unique_id=1471378829]
+position = Vector2(2449.7751, 1919.0403)
+rotation = -0.3403392
+texture = ExtResource("4_85fws")
+
+[node name="Arrow2" type="Sprite2D" parent="Visuals/Top2" unique_id=1785322141]
+position = Vector2(2499.2505, 2134.9324)
+rotation = -0.12217305
+texture = ExtResource("4_85fws")
+
+[node name="Arrow3" type="Sprite2D" parent="Visuals/Top2" unique_id=1490533207]
+position = Vector2(-568.2159, 1839.5803)
+rotation = 2.539454
+texture = ExtResource("4_85fws")
+
+[node name="Arrow4" type="Sprite2D" parent="Visuals/Top2" unique_id=647790591]
+position = Vector2(-425.78705, 2016.492)
+rotation = 2.539454
+texture = ExtResource("4_85fws")
+
+[node name="Building" type="Sprite2D" parent="Visuals/Top2" unique_id=1949661883]
+position = Vector2(-889.286, -461.357)
+texture = ExtResource("5_p4phl")
 
 [node name="Art" type="Node2D" parent="Visuals" unique_id=483314928]
 
