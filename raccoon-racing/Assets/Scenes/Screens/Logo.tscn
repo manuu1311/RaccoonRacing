@@ -15,9 +15,11 @@ size = Vector2i(500, 500)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="SubViewport" unique_id=1162395572]
+offset = Vector2(250, 250)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1818154924]
-scale = Vector2(0.75, 0.75)
+position = Vector2(288, 192.065)
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("2_bpfkn")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Sprite2D" unique_id=1616806639]
