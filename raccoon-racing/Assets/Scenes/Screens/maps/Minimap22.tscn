@@ -1,3 +1,25 @@
 [gd_scene format=3 uid="uid://csdaoh8id4lt6"]
 
-[node name="Minimap22" type="Node2D" unique_id=1028053029]
+[ext_resource type="Texture2D" uid="uid://b430wyoy8167p" path="res://Assets/Images/maps/mapview.png" id="1_2hagg"]
+[ext_resource type="Texture2D" uid="uid://fbvpu4ku87ej" path="res://Assets/Images/maps/map3/minimap2.png" id="2_7d3ka"]
+
+[node name="Minimap22" type="CanvasLayer" unique_id=102235172]
+
+[node name="View" type="TextureRect" parent="." unique_id=1943200647]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -146.29999
+offset_top = -135.25
+offset_right = -5.299988
+offset_bottom = -4.25
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_2hagg")
+
+[node name="MapSprite" type="Sprite2D" parent="View" unique_id=1074179741]
+position = Vector2(70.5, 65.5)
+scale = Vector2(0.959, 0.959)
+texture = ExtResource("2_7d3ka")

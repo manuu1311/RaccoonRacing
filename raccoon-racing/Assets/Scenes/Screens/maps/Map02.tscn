@@ -610,6 +610,7 @@ tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAAD+////AAAAAAEAAAD+/wAAAAAAAAI
 tile_set = SubResource("TileSet_lr47s")
 
 [node name="Art" type="Node2D" parent="Visuals/Ground" unique_id=1120689729]
+z_index = 15
 
 [node name="Flag" type="AnimatedSprite2D" parent="Visuals/Ground/Art" unique_id=902725725]
 z_index = 16
