@@ -96,7 +96,6 @@
 [ext_resource type="Texture2D" uid="uid://s0sxwvinelco" path="res://Assets/Images/maps/map2/Top2/structure.png" id="94_d0tgd"]
 [ext_resource type="Texture2D" uid="uid://dyt82jk6cn8kt" path="res://Assets/Images/maps/map2/Top2/bridge.png" id="95_pgur5"]
 [ext_resource type="Texture2D" uid="uid://d35vo2y4yikjj" path="res://Assets/Images/maps/map2/Top2/flag.png" id="96_yuxi8"]
-[ext_resource type="Texture2D" path="res://Assets/Images/maps/map2/sprites/DefineSprite_1369_Map02_dt2/dt2.png" id="97_q36qi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7fp7c"]
 texture = ExtResource("2_2kelp")
@@ -2289,5 +2288,5 @@ rotation = 1.8325957
 gizmo_extents = 101.0
 
 [node name="minimap" type="Sprite2D" parent="." unique_id=93627121]
+visible = false
 position = Vector2(-22.8, 12.115)
-texture = ExtResource("97_q36qi")

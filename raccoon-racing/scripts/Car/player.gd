@@ -10,7 +10,6 @@ enum control_type{HUMAN,AI,MULTIPLAYER,RLTRAINING,RL}
 var current_control:control_type
 var alldistance:int=0
 var prop:PropManager
-var PropBoxRunTimerId:int=-1
 var CanUseProp:bool=false
 var IsUsingProp:bool=false
 var NowPointId:int
@@ -118,12 +117,22 @@ func WinJudge() -> void:
             LapsLock = true
 
 
+func ResetPlayer()->void:
+    CanUseProp=false
+    IsUsingProp=false
+    LapsLock=true
+    Laps=1
+    prop.NowPorpId=0
+    NowPointId=0
+    
 func FinishRace()->void:
     alldistance = 100000000 * (GameData.PlayersArr.size() - OrderId);
     Stoprace();
 
 func Stoprace()->void:
     car.playering = false;
+    for propinst:Prop in prop.propArr:
+        propinst.del()
     prop.propArr=[]
     racefinished.emit()
 

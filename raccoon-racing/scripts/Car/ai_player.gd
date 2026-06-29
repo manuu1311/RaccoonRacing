@@ -200,9 +200,13 @@ func DoAction(action:int)->void:
                 car.CancelTurn()
             
 func Stoprace()->void:
-      AiPlayering = false;
-      car.playering = false;
-      ResetTimer.stop()
+    AiPlayering = false;
+    car.playering = false;
+    ResetTimer.stop()
+    for propinst:Prop in prop.propArr:
+        prop.Delprop(propinst)
+    prop.propArr=[]
+    NowPointId=0
 
 func Reset()->void:
     car.playering = false;

@@ -368,7 +368,6 @@ func AddEventInMap(event: EventInMap)->void:
       Events.append(event);
       edevent.ReTidyFace();
     
-#TODO:implement
 func DelEventInMap(id:int)->void:
     var _loc2_:int = 0;
     while(_loc2_ < Events.size()):

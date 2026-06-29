@@ -34,7 +34,7 @@ func _ready() -> void:
 	InitMap()
 	if(IsHovercraft):
 		LinePointArr = [8,26,27]
-		WanPointArr = [0,2,3,4,7,8,10,11,13,17,19,22,26,29,3]
+		WanPointArr = [0,2,3,4,7,8,10,11,13,17,19,22,26,29,31]
 		PropPointArr = [3,8,12,23,31]
 	else:
 		LinePointArr =  [0,1,2,12,13,26,34,35,39,40,42]

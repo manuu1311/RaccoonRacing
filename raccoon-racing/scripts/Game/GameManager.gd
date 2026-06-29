@@ -32,6 +32,7 @@ func _ready() -> void:
 	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
 	for i:int in GameData.OrderInfo: 
 		var player:Player=GameData.PlayersArr[i]
+		player.ResetPlayer()
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
 		if player.current_control==player.control_type.HUMAN:
 			carinstance.setup(map,player.PlayerID,true,player)
