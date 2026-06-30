@@ -117,13 +117,16 @@ func WinJudge() -> void:
             LapsLock = true
 
 
-func ResetPlayer()->void:
+func ResetPlayer(order:int)->void:
     CanUseProp=false
     IsUsingProp=false
     LapsLock=true
     Laps=1
     prop.NowPorpId=0
     NowPointId=0
+    OrderId=order
+    alldistance=-OrderId
+    print(PlayerID,OrderId)
     
 func FinishRace()->void:
     alldistance = 100000000 * (GameData.PlayersArr.size() - OrderId);
@@ -133,8 +136,10 @@ func Stoprace()->void:
     car.playering = false;
     for propinst:Prop in prop.propArr:
         propinst.del()
-    prop.propArr=[]
+    prop.propArr.clear()
     racefinished.emit()
+    if hud!=null:
+        hud.Hide()
 
 func RunPropBox(x:float,y:float)->void:
     if not car.playering:

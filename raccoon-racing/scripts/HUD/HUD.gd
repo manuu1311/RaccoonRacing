@@ -19,6 +19,7 @@ func setup() -> void:
 	speed_hud.show()
 	char_hud.show()
 	char_hud.setup() 
+	speed_hud.Setup()
 	lbl321.self_modulate=Color.TRANSPARENT
 
 

@@ -30,14 +30,14 @@ func _ready() -> void:
 	SceneAngleMoveExpandNowPos = Vector2.ZERO
 	map.deferredInit()
 	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
-	for i:int in GameData.OrderInfo: 
-		var player:Player=GameData.PlayersArr[i]
-		player.ResetPlayer()
+	for i:int in GameData.Ranking.size(): 
+		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
+		player.ResetPlayer(i)
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
 		if player.current_control==player.control_type.HUMAN:
 			carinstance.setup(map,player.PlayerID,true,player)
 			carinstance.add_child(HumanCarController.new(player))
-			focusCar(carinstance)
+			focusCar(player,carinstance)
 			carinstance.CharID=GameData.currentCharacter
 			player.charid=GameData.currentCharacter
 			available_ids.erase(GameData.currentCharacter)
@@ -103,19 +103,21 @@ func RaceStart()->void:
 func register(player:Player)->void:
 	players.append(player)
 
-func focusCar(car:Car)->void:
+func focusCar(player:Player,car:Car)->void:
 	GameData.FocusCar=car
 	fcsCar=car
+	GameData.FocusPlayer=player
 	
 func _process(_delta: float) -> void:
 	if fcsCar!=null:
 		camera.scale=Vector2.ONE*(1 - fcsCar.jumpCurrheight * 0.5)
 		SetSceneAngleExpand(fcsCar.global_position,fcsCar.rotation-PI/2)
 		SceneCenterMoveToPos()
-		UpdateOrderResult()
+		if fcsCar.playering:
+			UpdateOrderResult()
 	if Input.is_action_just_released("Debug"):
-		Racestop()
 		for player:Player in GameData.PlayersArr:
+			player.Stoprace()
 			player.car.playering=false
 		
 func CoolEffects()->void:

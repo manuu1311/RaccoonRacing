@@ -20,7 +20,7 @@ var playerID:int=0
 @onready var visual: Node2D = $Visual
 @onready var character: Sprite2D = $Visual/Char
 var map:Map
-@export var playering:bool
+@export var playering:bool=false
 #TODO: actual map
 @onready var sounds: CarSounds = $Sounds
 #smoke effects
@@ -105,14 +105,15 @@ var isInvincible:bool=false
 var isSmallState:bool=false
 var isResetting:bool=false
 var isUseShield:bool=false
+var isFcsCar:bool
 
 
 
-func setup(gamemap:Map,id:int,gameplayering:bool,playerinst:Player) -> void:
+func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
     map=gamemap
     playerID=id
-    playering=gameplayering
     player=playerinst
+    isFcsCar=control
 
 func _ready() -> void:
     horse=carhorse
@@ -131,7 +132,7 @@ func _ready() -> void:
     
 func DeferredSetup()->void:
     #add car view to minimap
-    if playering:
+    if isFcsCar:
         carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
     else:
         carView=preload("res://Assets/Scenes/Screens/maps/CarViewOpp.tscn")

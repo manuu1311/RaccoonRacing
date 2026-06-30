@@ -4,7 +4,7 @@ extends Map
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
-	offsethc=-Vector2(-3.3,-67)*ScaledTimes
+	offsethc=Vector2(-3.3,-67)*ScaledTimes
 	offsetcar=-Vector2(67,80)*ScaledTimes
 	ScaledTimes=0.02857142857142857
 	

@@ -16,7 +16,7 @@ offset_bottom = 720.0
 scale = Vector2(0.35, 0.35)
 alignment = 1
 
-[node name="Char" type="TextureRect" parent="VBoxContainer" unique_id=1983915327]
+[node name="Char1" type="TextureRect" parent="VBoxContainer" unique_id=1983915327]
 layout_mode = 2
 texture = ExtResource("1_srmbj")
 

@@ -21,6 +21,7 @@ var nextdiff:Array[String]=[
 	'Do you think you can beat your own score again?'
 ]
 var cups:Array[Texture]=[
+	null,
 	preload("res://Assets/Animations/UISelect/cups/bronze.png"),
 	preload("res://Assets/Animations/UISelect/cups/silver.png"),
 	preload("res://Assets/Animations/UISelect/cups/gold.png")
@@ -44,7 +45,7 @@ func _ready() -> void:
 	chartext.hide()
 	charicon.hide()
 	##player won:
-	if GameData.PlayersArr[GameData.Ranking[0]].car==GameData.FocusCar:
+	if GameData.PlayersArr[GameData.Ranking[0]]==GameData.FocusPlayer:
 		lost.hide()
 		won.show()
 		WonSetup()

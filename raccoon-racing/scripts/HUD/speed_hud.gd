@@ -17,7 +17,7 @@ var bestlaptime: float = 0.0
 var car:Car
 var totaltime:int=0
 
-func _ready() -> void:
+func Setup() -> void:
 	timestart = Time.get_ticks_msec()
 	totaltimestart = Time.get_ticks_msec()
 	totallaps = GameData.currentLaps
@@ -29,6 +29,8 @@ func _ready() -> void:
 	
 	# Set initial lap text before timer ends
 	laps.text = str(currentlap) + "/" + str(totallaps)
+
+
 
 func SetCar(carinst:Car)->void:
 	car=carinst

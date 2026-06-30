@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dtvainwpdkmep" path="res://Assets/Images/maps/map3/Top1/raccoonracing.png" id="3_ui56p"]
 [ext_resource type="Texture2D" uid="uid://bibn10jscgvoy" path="res://Assets/Images/maps/map3/Top1/arrow.png" id="4_85fws"]
 [ext_resource type="Texture2D" uid="uid://dq2unkjtigyhr" path="res://Assets/Images/maps/map3/Top2/building.png" id="5_p4phl"]
-[ext_resource type="Texture2D" uid="uid://dgr213y50hl8h" path="res://Assets/Images/maps/map3/dt1.png" id="7_85fws"]
+[ext_resource type="Texture2D" uid="uid://bmynj4fbsa6s" path="res://Assets/Images/maps/map3/minimap1.png" id="7_85fws"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugeru"]
 texture = ExtResource("1_txyhf")
@@ -1472,5 +1472,6 @@ position = Vector2(-1500.4541, 451.6595)
 position = Vector2(-1879.2466, 16.17749)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1532962449]
-position = Vector2(-121.05, -102.425)
+position = Vector2(-67, -80)
+scale = Vector2(35, 35)
 texture = ExtResource("7_85fws")

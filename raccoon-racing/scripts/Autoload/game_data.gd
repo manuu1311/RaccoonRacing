@@ -39,6 +39,7 @@ var PlayersArr:Array[Player]=[]
 var OrderInfo:Array[int]=[]
 var Ranking:Array[int]=[]
 var FocusCar:Car
+var FocusPlayer:Player
 ##array to store info about best lap times in the 4 circuits
 var BestTimes:Array[int]=[0,0,0,0]
 var AiLevel:Array[Array]
@@ -172,6 +173,8 @@ func UpdateInfo()->void:
 
 func ClearPlayers()->void:
     PlayersArr=[]
+    Ranking=[]
+    OrderInfo=[]
 
 func format_time(msec_total: int) -> String:
     var total_seconds: int = int(msec_total / 1000)
