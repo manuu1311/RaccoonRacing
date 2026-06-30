@@ -51,6 +51,12 @@ func ShowMessage(message:String)->void:
 	lbl321.text=message
 	lbl321_player.play("Messageshow")
 
+func SleepEffect(playerid:int)->void:
+	char_hud.SleepEffect(playerid)
+
+func StopSleep()->void:
+	char_hud.StopSleep()
+	
 func StopRecord()->void:
 	speed_hud.stop()
 	GameData.CurrentCupTime+=speed_hud.totaltime

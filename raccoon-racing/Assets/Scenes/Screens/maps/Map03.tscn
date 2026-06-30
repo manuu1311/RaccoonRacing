@@ -43,6 +43,7 @@ sources/0 = SubResource("TileSetAtlasSource_ugeru")
 
 [node name="Map03" type="Node2D" unique_id=2122224565]
 script = ExtResource("1_ui56p")
+drawcollision = false
 
 [node name="Visuals" type="Node2D" parent="." unique_id=1786121657]
 
@@ -57,7 +58,6 @@ tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAAD+////AAAAAAEAAAD+/wAAAAAAAAI
 tile_set = SubResource("TileSet_ctv6n")
 
 [node name="Top1" type="Node2D" parent="Visuals/Ground" unique_id=92163651]
-visible = false
 z_index = 15
 scale = Vector2(0.667, 0.667)
 
@@ -104,7 +104,6 @@ rotation = -0.30543262
 texture = ExtResource("4_85fws")
 
 [node name="Top2" type="Node2D" parent="Visuals/Ground" unique_id=916182849]
-visible = false
 z_index = 15
 scale = Vector2(0.667, 0.667)
 
@@ -1472,6 +1471,7 @@ position = Vector2(-1500.4541, 451.6595)
 position = Vector2(-1879.2466, 16.17749)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1532962449]
+visible = false
 position = Vector2(-67, -80)
 scale = Vector2(35, 35)
 texture = ExtResource("7_85fws")

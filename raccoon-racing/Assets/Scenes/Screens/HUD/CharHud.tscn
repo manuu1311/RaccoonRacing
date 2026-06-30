@@ -4,6 +4,343 @@
 [ext_resource type="Texture2D" uid="uid://b44cubu66xpxg" path="res://Assets/Animations/CharSelection/characters/rockopic.png" id="1_srmbj"]
 [ext_resource type="Texture2D" uid="uid://dxmwihphllqnh" path="res://Assets/Animations/CharSelection/characters/banzaipic.png" id="2_iwi6v"]
 [ext_resource type="Texture2D" uid="uid://bduuioalmao1u" path="res://Assets/Animations/CharSelection/characters/hudsonpic.png" id="3_acq8x"]
+[ext_resource type="Script" uid="uid://dowelkpkjo71h" path="res://scripts/HUD/icon_controller.gd" id="3_soqqs"]
+[ext_resource type="Texture2D" uid="uid://c5ulw0snpg3wb" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/1.png" id="3_v7qdr"]
+[ext_resource type="Texture2D" uid="uid://cho5f1j00wx6j" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/2.png" id="4_soqqs"]
+[ext_resource type="Texture2D" uid="uid://daso361mdy21b" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/3.png" id="5_foedu"]
+[ext_resource type="Texture2D" uid="uid://b4pp5pi0dpcj0" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/4.png" id="6_rl7oy"]
+[ext_resource type="Texture2D" uid="uid://do8dqwtjn8a1y" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/5.png" id="7_nd3ak"]
+[ext_resource type="Texture2D" uid="uid://ixyex7l5vb3m" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/6.png" id="8_11frh"]
+[ext_resource type="Texture2D" uid="uid://r3xwjmn6ya4l" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/7.png" id="9_6ctmn"]
+[ext_resource type="Texture2D" uid="uid://clj2ocx57uq5q" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/8.png" id="10_4b2k4"]
+[ext_resource type="Texture2D" uid="uid://dwcil7lrn2lbw" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/9.png" id="11_i6ood"]
+[ext_resource type="Texture2D" uid="uid://kmonsxff4a5g" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/10.png" id="12_otrnd"]
+[ext_resource type="Texture2D" uid="uid://bhygue3f6omwj" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/11.png" id="13_0k5nn"]
+[ext_resource type="Texture2D" uid="uid://5wqa6dohcb4u" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/12.png" id="14_4i002"]
+[ext_resource type="Texture2D" uid="uid://cbmbixauk4r0v" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/13.png" id="15_yug03"]
+[ext_resource type="Texture2D" uid="uid://dty7cf2hrxa3u" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/14.png" id="16_tuu60"]
+[ext_resource type="Texture2D" uid="uid://3a07hk6ft0fu" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/15.png" id="17_ol7ff"]
+[ext_resource type="Texture2D" uid="uid://dle16q8nuyoow" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/16.png" id="18_yj7e7"]
+[ext_resource type="Texture2D" uid="uid://cnwrwvl01acy" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/17.png" id="19_votqn"]
+[ext_resource type="Texture2D" uid="uid://doe48sac6y44i" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/18.png" id="20_0mpnw"]
+[ext_resource type="Texture2D" uid="uid://v6b80hdqeegv" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/19.png" id="21_rg0wx"]
+[ext_resource type="Texture2D" uid="uid://cw0lgbwigho30" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/20.png" id="22_ql4d5"]
+[ext_resource type="Texture2D" uid="uid://bxnta42ne2cnp" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/21.png" id="23_2lyhb"]
+[ext_resource type="Texture2D" uid="uid://dre6s6317dmh4" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/22.png" id="24_ebrpq"]
+[ext_resource type="Texture2D" uid="uid://bgrbw6h688eqg" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/23.png" id="25_4c75l"]
+[ext_resource type="Texture2D" uid="uid://fjftqm6mtekq" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/24.png" id="26_v7yqg"]
+[ext_resource type="Texture2D" uid="uid://dqccsasstmk2s" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/25.png" id="27_4hbj2"]
+[ext_resource type="Texture2D" uid="uid://donxkl3stg07v" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/26.png" id="28_gnilb"]
+[ext_resource type="Texture2D" uid="uid://8ng658p1hdlx" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/27.png" id="29_winig"]
+[ext_resource type="Texture2D" uid="uid://c0ljmenc7p5i1" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/28.png" id="30_kmj7b"]
+[ext_resource type="Texture2D" uid="uid://qpw8w4nfglac" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/29.png" id="31_lfwd4"]
+[ext_resource type="Texture2D" uid="uid://du75dt3o0tcvl" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/30.png" id="32_stnxc"]
+[ext_resource type="Texture2D" uid="uid://dla6ugycyec7r" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/31.png" id="33_mv3x5"]
+[ext_resource type="Texture2D" uid="uid://b2vvmsj8dbag3" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/32.png" id="34_g6u62"]
+[ext_resource type="Texture2D" uid="uid://xgp5l2b5843f" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/33.png" id="35_3ha6n"]
+[ext_resource type="Texture2D" uid="uid://bsqwu15mg15hs" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/1.png" id="36_vorsw"]
+[ext_resource type="Texture2D" uid="uid://c08ulvimf4f03" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/2.png" id="37_fn1bq"]
+[ext_resource type="Texture2D" uid="uid://bhe70dfrspds7" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/3.png" id="38_q7abk"]
+[ext_resource type="Texture2D" uid="uid://dyfj2x4kf4t1" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/4.png" id="39_hgft6"]
+[ext_resource type="Texture2D" uid="uid://chll5j8w08og3" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/5.png" id="40_nb5jr"]
+[ext_resource type="Texture2D" uid="uid://bewbc7ooat112" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/6.png" id="41_vrnj6"]
+[ext_resource type="Texture2D" uid="uid://w0ibml0nrv3o" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/7.png" id="42_masg4"]
+[ext_resource type="Texture2D" uid="uid://dsry1ke4wlefs" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/8.png" id="43_nin84"]
+[ext_resource type="Texture2D" uid="uid://swek4sen1a16" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/9.png" id="44_55yvs"]
+[ext_resource type="Texture2D" uid="uid://druhxu7v8qxdu" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/10.png" id="45_id856"]
+[ext_resource type="Texture2D" uid="uid://d2sqjy0egq8a3" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/11.png" id="46_l4yjq"]
+[ext_resource type="Texture2D" uid="uid://b64067iem0ftt" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/12.png" id="47_1i0rg"]
+[ext_resource type="Texture2D" uid="uid://dpktqexravtfd" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/13.png" id="48_p8f4n"]
+[ext_resource type="Texture2D" uid="uid://ba82syi0hsvib" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/14.png" id="49_taun3"]
+[ext_resource type="Texture2D" uid="uid://d3l5qduqt5bv4" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/15.png" id="50_je8k1"]
+[ext_resource type="Texture2D" uid="uid://bv6huigqma8sb" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/16.png" id="51_i5f7q"]
+[ext_resource type="Texture2D" uid="uid://dtmbeexf63gdg" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/17.png" id="52_m41xh"]
+[ext_resource type="Texture2D" uid="uid://jkckbs6nston" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/18.png" id="53_i0vgh"]
+[ext_resource type="Texture2D" uid="uid://cb5arsnl46xsn" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/19.png" id="54_k81bt"]
+[ext_resource type="Texture2D" uid="uid://drsu4050eq5ne" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/20.png" id="55_nwe2r"]
+[ext_resource type="Texture2D" uid="uid://pd6wm7j4s2up" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/21.png" id="56_uaayl"]
+[ext_resource type="Texture2D" uid="uid://b2kyxp52xbh2b" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/22.png" id="57_fym1i"]
+[ext_resource type="Texture2D" uid="uid://bkyuew6tvpxqf" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/23.png" id="58_vxihs"]
+[ext_resource type="Texture2D" uid="uid://di2amtrn318qa" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/24.png" id="59_qi234"]
+[ext_resource type="Texture2D" uid="uid://umyqm735blkt" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/25.png" id="60_w67je"]
+[ext_resource type="Texture2D" uid="uid://db2wvmq1x6h4o" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/26.png" id="61_4qhoi"]
+[ext_resource type="Texture2D" uid="uid://c7acp8pm0uo2h" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/27.png" id="62_4k7lj"]
+[ext_resource type="Texture2D" uid="uid://lya5ahiqsc2e" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/28.png" id="63_bbxq1"]
+[ext_resource type="Texture2D" uid="uid://btnsciy6r18kx" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/29.png" id="64_cre8h"]
+[ext_resource type="Texture2D" uid="uid://ddcc4ywry6jin" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/30.png" id="65_dgwx1"]
+[ext_resource type="Texture2D" uid="uid://rgl80ptlsfgd" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/31.png" id="66_xbdg3"]
+[ext_resource type="Texture2D" uid="uid://cm07u865eos80" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/32.png" id="67_w1244"]
+[ext_resource type="Texture2D" uid="uid://4r7sf5b3r4er" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/33.png" id="68_06xru"]
+[ext_resource type="Texture2D" uid="uid://dcasfu5exlyqp" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/34.png" id="69_gcyde"]
+[ext_resource type="Texture2D" uid="uid://b3cetv0eqej6j" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/35.png" id="70_3oah4"]
+[ext_resource type="Texture2D" uid="uid://rcdojcyew38u" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/36.png" id="71_5gt53"]
+[ext_resource type="Texture2D" uid="uid://w0tklh4bgv7n" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/37.png" id="72_uq16s"]
+[ext_resource type="Texture2D" uid="uid://ce0p4mkbq4sho" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/38.png" id="73_v58t1"]
+[ext_resource type="Texture2D" uid="uid://d33151k2dxfkr" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/39.png" id="74_sd6i5"]
+[ext_resource type="Texture2D" uid="uid://t8huoyvgfenj" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/40.png" id="75_0or4p"]
+[ext_resource type="Texture2D" uid="uid://bd6l18bqmfa6a" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/41.png" id="76_00vod"]
+[ext_resource type="Texture2D" uid="uid://cyl7ocnqjwxnv" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/42.png" id="77_fhs42"]
+[ext_resource type="Texture2D" uid="uid://bbxcdxjutprep" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/43.png" id="78_igv0y"]
+[ext_resource type="Texture2D" uid="uid://ql88r0274l65" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/44.png" id="79_tifn0"]
+[ext_resource type="Texture2D" uid="uid://bhuttxofskanc" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/45.png" id="80_b0esk"]
+[ext_resource type="Texture2D" uid="uid://dgeqxn0ot2d36" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/46.png" id="81_1d4ei"]
+[ext_resource type="Texture2D" uid="uid://ctjd2fp2lk1ay" path="res://Assets/Images/Vehicles/PropEffects/Sleep/CarSleep/47.png" id="82_nca0s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8q6op"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_v7qdr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_soqqs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_foedu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rl7oy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nd3ak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_11frh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6ctmn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_4b2k4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_i6ood")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_otrnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_0k5nn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4i002")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_yug03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_tuu60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ol7ff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_yj7e7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_votqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_0mpnw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_rg0wx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ql4d5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_2lyhb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ebrpq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_4c75l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_v7yqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_4hbj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_gnilb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_winig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_kmj7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_lfwd4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_stnxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_mv3x5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_g6u62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_3ha6n")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fp6u3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_vorsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_fn1bq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_q7abk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_hgft6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_nb5jr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_vrnj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_masg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_nin84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_55yvs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_id856")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_l4yjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_1i0rg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_p8f4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_taun3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_je8k1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_i5f7q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_m41xh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_i0vgh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_k81bt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_nwe2r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_uaayl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_fym1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_vxihs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_qi234")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_w67je")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_4qhoi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_4k7lj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_bbxq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_cre8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_dgwx1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_xbdg3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_w1244")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_06xru")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_gcyde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_3oah4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_5gt53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_uq16s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_v58t1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_sd6i5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_0or4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_00vod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_fhs42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_igv0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_tifn0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_b0esk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_1d4ei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_nca0s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 35.0
+}]
 
 [node name="CharHud" type="CanvasLayer" unique_id=558009715]
 script = ExtResource("1_acq8x")
@@ -19,15 +356,67 @@ alignment = 1
 [node name="Char1" type="TextureRect" parent="VBoxContainer" unique_id=1983915327]
 layout_mode = 2
 texture = ExtResource("1_srmbj")
+script = ExtResource("3_soqqs")
+
+[node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char1" unique_id=1737904624]
+position = Vector2(51.24, -83.795)
+sprite_frames = SubResource("SpriteFrames_8q6op")
+frame = 32
+frame_progress = 1.0
+
+[node name="CarSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char1" unique_id=1472434687]
+position = Vector2(170.955, -1.685)
+sprite_frames = SubResource("SpriteFrames_fp6u3")
+frame = 3
+frame_progress = 0.51252085
 
 [node name="Char2" type="TextureRect" parent="VBoxContainer" unique_id=2037577647]
 layout_mode = 2
 texture = ExtResource("2_iwi6v")
+script = ExtResource("3_soqqs")
+
+[node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char2" unique_id=1722994627]
+position = Vector2(51.24, -83.795)
+sprite_frames = SubResource("SpriteFrames_8q6op")
+frame = 32
+frame_progress = 1.0
+
+[node name="CarSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char2" unique_id=489624180]
+position = Vector2(170.955, -1.685)
+sprite_frames = SubResource("SpriteFrames_fp6u3")
+frame = 3
+frame_progress = 0.51252085
 
 [node name="Char3" type="TextureRect" parent="VBoxContainer" unique_id=299576389]
 layout_mode = 2
 texture = ExtResource("3_acq8x")
+script = ExtResource("3_soqqs")
+
+[node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char3" unique_id=1467764452]
+position = Vector2(51.24, -83.795)
+sprite_frames = SubResource("SpriteFrames_8q6op")
+frame = 32
+frame_progress = 1.0
+
+[node name="CarSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char3" unique_id=1628424198]
+position = Vector2(170.955, -1.685)
+sprite_frames = SubResource("SpriteFrames_fp6u3")
+frame = 3
+frame_progress = 0.51252085
 
 [node name="Char4" type="TextureRect" parent="VBoxContainer" unique_id=1861035368]
 layout_mode = 2
 texture = ExtResource("1_srmbj")
+script = ExtResource("3_soqqs")
+
+[node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char4" unique_id=519672426]
+position = Vector2(51.24, -83.795)
+sprite_frames = SubResource("SpriteFrames_8q6op")
+frame = 32
+frame_progress = 1.0
+
+[node name="CarSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char4" unique_id=1924693830]
+position = Vector2(170.955, -1.685)
+sprite_frames = SubResource("SpriteFrames_fp6u3")
+frame = 3
+frame_progress = 0.51252085

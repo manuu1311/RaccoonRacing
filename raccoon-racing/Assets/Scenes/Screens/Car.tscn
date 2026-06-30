@@ -783,6 +783,9 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("206_uc0lh")
+}, {
+"duration": 1.0,
 "texture": ExtResource("164_x8ofc")
 }, {
 "duration": 1.0,
@@ -959,6 +962,7 @@ position = Vector2(14, 18.5)
 position = Vector2(-14, 18.5)
 
 [node name="Car" type="Node2D" parent="Visual" unique_id=1493641787]
+visible = false
 
 [node name="Wheels" type="Node2D" parent="Visual/Car" unique_id=348490112]
 
@@ -992,7 +996,6 @@ position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_vi2p3")
 
 [node name="Hovercraft" type="Node2D" parent="Visual" unique_id=1153981437]
-visible = false
 
 [node name="Base" type="Sprite2D" parent="Visual/Hovercraft" unique_id=638717607]
 texture = ExtResource("5_et7sh")
@@ -1037,20 +1040,14 @@ frame_progress = 0.55258214
 [node name="GetSleep" type="AnimatedSprite2D" parent="Visual/TopEffect" unique_id=162284623]
 position = Vector2(0, -117)
 sprite_frames = SubResource("SpriteFrames_v275i")
-frame = 32
-frame_progress = 1.0
 
 [node name="CarSleep" type="AnimatedSprite2D" parent="Visual/TopEffect" unique_id=1749813381]
 position = Vector2(56, -63)
 sprite_frames = SubResource("SpriteFrames_lpopj")
-frame = 46
-frame_progress = 1.0
 
 [node name="GiveSleep" type="AnimatedSprite2D" parent="Visual/TopEffect" unique_id=822170742]
 position = Vector2(0, -100)
 sprite_frames = SubResource("SpriteFrames_h50x8")
-frame = 42
-frame_progress = 1.0
 
 [node name="Sounds" type="Node2D" parent="." unique_id=536299159]
 script = ExtResource("8_fa25q")

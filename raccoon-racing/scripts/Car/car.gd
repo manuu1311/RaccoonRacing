@@ -20,7 +20,7 @@ var playerID:int=0
 @onready var visual: Node2D = $Visual
 @onready var character: Sprite2D = $Visual/Char
 var map:Map
-@export var playering:bool=false
+@export var playering:bool=true
 #TODO: actual map
 @onready var sounds: CarSounds = $Sounds
 #smoke effects
@@ -347,9 +347,9 @@ func Water()->void:
         smokeinst=smoke_2.instantiate() as Node2D
         get_parent().add_child(smokeinst)
         if(randi()%2 == 1):
-            targetpos=collisionPoints[3].position+Vector2(-2.5,21.5)
+            targetpos=collisionPoints[3].position+Vector2(+3.5,21.5)
         else:
-            targetpos=collisionPoints[2].position+Vector2(-8.5,21.5)
+            targetpos=collisionPoints[2].position+Vector2(-3.5,21.5)
         
         tempscale=(randi_range(30, 69)) / 100.0*scale.x
         smokeinst.scale=Vector2(tempscale,tempscale)
@@ -375,7 +375,7 @@ func UpdateCarPos()->void:
 
 
 func UpdateViewMap()->void:
-    carViewInstance.position=map.offset+global_position*map.ScaledTimes/0.9589
+    carViewInstance.position=map.offset+global_position*map.ScaledTimes
     carViewInstance.rotation=rotation-PI/2
 
 func UpdateSpeed()->void:

@@ -29,6 +29,8 @@ func AddRectangle(x:float,y:float,width:float,height:float,angle:float)->EdRecta
 
 
 func ReTidyFace()->void:  
+	if AddSurfaceArr.size()==0:
+		return
 	var _loc10_:float = AddSurfaceArr[0].maxX;
 	var _loc9_:float = AddSurfaceArr[0].maxY;
 	minX = AddSurfaceArr[0].minX;

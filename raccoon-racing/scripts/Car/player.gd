@@ -126,7 +126,6 @@ func ResetPlayer(order:int)->void:
     NowPointId=0
     OrderId=order
     alldistance=-OrderId
-    print(PlayerID,OrderId)
     
 func FinishRace()->void:
     alldistance = 100000000 * (GameData.PlayersArr.size() - OrderId);
@@ -138,8 +137,6 @@ func Stoprace()->void:
         propinst.del()
     prop.propArr.clear()
     racefinished.emit()
-    if hud!=null:
-        hud.Hide()
 
 func RunPropBox(x:float,y:float)->void:
     if not car.playering:
@@ -164,6 +161,7 @@ func ClearPropBox(id:int)->void:
 
 
 func GetPropPer()->int:
+    return 2
     var _loc5_:int = randi_range(1,99);
     if(charid == 1 && OrderId == 0 && PlayerID == 0):
         _loc5_ = randi_range(0,89);

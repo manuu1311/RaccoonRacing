@@ -793,18 +793,22 @@ gizmo_extents = 101.0
 
 [node name="StartPos0" type="Marker2D" parent="PointsHC/Flags" unique_id=1993801307]
 position = Vector2(1774.73, 2142)
+rotation = 0.5934119
 gizmo_extents = 101.0
 
 [node name="StartPos1" type="Marker2D" parent="PointsHC/Flags" unique_id=847312353]
 position = Vector2(1861.29, 2194.97)
+rotation = 0.5934119
 gizmo_extents = 101.0
 
 [node name="StartPos2" type="Marker2D" parent="PointsHC/Flags" unique_id=655087272]
 position = Vector2(1741.045, 2200.195)
+rotation = 0.5934119
 gizmo_extents = 101.0
 
 [node name="StartPos3" type="Marker2D" parent="PointsHC/Flags" unique_id=925819628]
 position = Vector2(1826.64, 2253.875)
+rotation = 0.5934119
 gizmo_extents = 101.0
 
 [node name="Walls0" type="Node2D" parent="PointsHC" unique_id=487855617]

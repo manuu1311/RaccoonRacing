@@ -16,12 +16,14 @@ var updating: bool
 var bestlaptime: float = 0.0
 var car:Car
 var totaltime:int=0
+var raceOver:bool=false
 
 func Setup() -> void:
 	timestart = Time.get_ticks_msec()
 	totaltimestart = Time.get_ticks_msec()
 	totallaps = GameData.currentLaps
 	updating = false
+	raceOver=false
 	
 	# Load the existing best time from data
 	bestlaptime = GameData.BestTimes[GameData.currentCup]
@@ -46,6 +48,8 @@ func _process(_delta: float) -> void:
 	label.text = str(speed)
 	animated_sprite_2d.frame = int(speed / 30)
 	
+	if raceOver:
+		return
 	current_lap_time = Time.get_ticks_msec() - timestart
 	totaltime=Time.get_ticks_msec()-totaltimestart
 	time.text = format_time(totaltime)
@@ -83,4 +87,4 @@ func on_lap_completed() -> void:
 	updating = false
 
 func stop()->void:
-	updating=true
+	raceOver=true

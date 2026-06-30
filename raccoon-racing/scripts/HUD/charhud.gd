@@ -13,14 +13,28 @@ var textures:Array[Texture]=[
 ]
 var active_tweens: Dictionary = {}  # TextureRect -> Tween
 var pending_moves: Dictionary = {}  # TextureRect -> destination_index
-
+@onready var char_1: IconController = $VBoxContainer/Char1
+@onready var char_2: IconController = $VBoxContainer/Char2
+@onready var char_3: IconController = $VBoxContainer/Char3
+@onready var char_4: IconController = $VBoxContainer/Char4
+var chars:Array[IconController]
 
 func setup() -> void:
+	chars=[char_1,char_2,char_3,char_4]
 	for i in range(vbox.get_children().size()):
-		var rect:TextureRect=vbox.get_child(i) as TextureRect
+		var rect:IconController=vbox.get_child(i) as IconController
 		rect.texture=textures[GameData.PlayersArr[GameData.OrderInfo[i]].charid]
-
-
+		rect.setup(GameData.PlayersArr[GameData.OrderInfo[i]].PlayerID)
+		
+func SleepEffect(playerid:int)->void:
+	for icon:IconController in chars:
+		if icon.playerid==playerid:
+			icon.PlaySleep()
+	
+func StopSleep()->void:
+	for icon:IconController in chars:
+		icon.StopSleep()
+	
 ## Kills a tween group and immediately commits their pending move_child,
 ## so the VBox order always reflects logical reality before the next call reads it.
 func _snap_tween_group(tween: Tween) -> void:

@@ -27,7 +27,7 @@ func _init(playerinst:Player)->void:
 func SetDmc()->void:
 	player.car.map.add_child(HomingMissile)
 	HomingMissile.global_position=player.car.global_position+Vector2(-25,0).rotated(player.car.rotation)
-	HomingMissile.rotation=player.car.rotation
+	HomingMissile.rotation=player.car.rotation-PI/2
 	var view_sprite:Sprite2D = player.car.map.minimap
 	view_sprite.add_child(HomingMissileView)
 	HomingMissile.speed=player.car.speed
@@ -64,7 +64,7 @@ func AutoPlay()->void:
 	else:
 		var dist:Vector2=Aimplayer.car.map.Points[NowPointId]-HomingMissile.global_position
 		targetangle = rad_to_deg(atan2(dist.y, dist.x))
-	var anglediff:float=targetangle-HomingMissile.rotation_degrees+90
+	var anglediff:float=targetangle-HomingMissile.rotation_degrees
 	anglediff = wrapf(anglediff, -180.0, 180.0)
 	if(anglediff > 5 && anglediff < 180):
 		HomingMissile.DoAction(3);
@@ -90,7 +90,7 @@ func UpdatePoint()->void:
 
 func UpdateView()->void:
 	HomingMissileView.position=player.car.map.offset+HomingMissile.global_position*player.car.map.ScaledTimes
-	HomingMissileView.rotation=HomingMissile.rotation-PI/2
+	HomingMissileView.rotation=HomingMissile.rotation
 
 func delme()->void:
 	player.prop.Delprop(self)
