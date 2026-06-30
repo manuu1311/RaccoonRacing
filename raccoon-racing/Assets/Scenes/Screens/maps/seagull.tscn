@@ -4,6 +4,7 @@
 
 [sub_resource type="Animation" id="Animation_ks2qu"]
 length = 0.001
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,6 +45,7 @@ _data = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=570482519]
 libraries/ = SubResource("AnimationLibrary_uedua")
+autoplay = &"RESET"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1339515197]
 position = Vector2(100.75876, -0.9578986)

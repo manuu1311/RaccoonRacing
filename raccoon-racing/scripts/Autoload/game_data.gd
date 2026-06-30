@@ -41,7 +41,7 @@ var Ranking:Array[int]=[]
 var FocusCar:Car
 var FocusPlayer:Player
 ##array to store info about best lap times in the 4 circuits
-var BestTimes:Array[int]=[0,0,0,0]
+var BestTimes:Array[int]=[0,0,0,0,0]
 var AiLevel:Array[Array]
 ##current time in the cup, useful for calculating total time at 
 ##the end of the cup. added after each race finish
@@ -122,6 +122,7 @@ func CheckCupLocks()->int:
     return 0
 
 func PopulatePlayers()->void:
+    print(currentDifficulty)
     var newplayer:Player
     newplayer=Player.new(0,Player.control_type.HUMAN)
     PlayersArr.append(newplayer)
@@ -129,17 +130,17 @@ func PopulatePlayers()->void:
     Ranking.append(0)
     newplayer=AIPlayer.new(1,Player.control_type.AI)
     PlayersArr.append(newplayer)
-    newplayer.AiReflect=AiLevel[currentDifficulty][0][0]
+    newplayer.AiReflect=AiLevel[currentDifficulty-1][0][0]
     OrderInfo.append(1)
     Ranking.append(1)
     newplayer=AIPlayer.new(2,Player.control_type.AI)
     PlayersArr.append(newplayer)
-    newplayer.AiReflect=AiLevel[currentDifficulty][1][0]
+    newplayer.AiReflect=AiLevel[currentDifficulty-1][1][0]
     OrderInfo.append(2)
     Ranking.append(2)
     newplayer=AIPlayer.new(3,Player.control_type.AI)
     PlayersArr.append(newplayer)
-    newplayer.AiReflect=AiLevel[currentDifficulty][2][0]
+    newplayer.AiReflect=AiLevel[currentDifficulty-1][2][0]
     OrderInfo.append(3)
     Ranking.append(3)
     

@@ -26,7 +26,7 @@ func Setup() -> void:
 	raceOver=false
 	
 	# Load the existing best time from data
-	bestlaptime = GameData.BestTimes[GameData.currentCup]
+	bestlaptime = GameData.BestTimes[GameData.currentMap-1]
 	best_time.text = format_time(bestlaptime)
 	
 	# Set initial lap text before timer ends
