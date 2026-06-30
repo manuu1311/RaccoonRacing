@@ -1313,14 +1313,18 @@ frame_progress = 0.5133444
 
 [node name="ball" type="AnimatedSprite2D" parent="Lost/Balloon" unique_id=1056866930]
 self_modulate = Color(0.11945311, 0.41917178, 0.86875, 1)
-position = Vector2(170, 55)
-scale = Vector2(1.15, 1.15)
+position = Vector2(168, 55)
+sprite_frames = SubResource("SpriteFrames_4wc53")
+autoplay = "default"
+
+[node name="ball3" type="AnimatedSprite2D" parent="Lost/Balloon" unique_id=491596231]
+self_modulate = Color(0.11945311, 0.41917178, 0.86875, 1)
+position = Vector2(172, 55)
 sprite_frames = SubResource("SpriteFrames_4wc53")
 autoplay = "default"
 
 [node name="ball2" type="AnimatedSprite2D" parent="Lost/Balloon" unique_id=1652856076]
 position = Vector2(170, 55)
-scale = Vector2(1.025, 1.025)
 sprite_frames = SubResource("SpriteFrames_4wc53")
 autoplay = "default"
 

@@ -46,6 +46,7 @@ var Wallspring:float
 #array containing group walls and their relative walls
 var WallsArr:Array[Array]
 @onready var top2: Node2D = $Visuals/Ground/Top2
+@onready var top1: Node2D = $Visuals/Ground/Top1
 #jump wall points
 var canBeJumpWall:Array[int]
 # Called when the node enters the scene tree for the first time.
@@ -61,10 +62,12 @@ func _ready() -> void:
         IsHovercraft=false
         #hide top2
         top2.hide()
+        top1.show()
         PointsPath='PointsCar'
     else:
         IsHovercraft=true
         top2.show()
+        top1.hide()
         PointsPath='PointsHC'
 
 func InitMap()->void:

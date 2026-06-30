@@ -151,7 +151,7 @@ func _on_continue_pressed() -> void:
     if GameData.currentStep<GameData.cupInfo[GameData.currentCup].size():
         MusicPlayer.stop()
         GameData.UpdateInfo()
-        GameData.OrderInfo=GameData.Ranking
+        GameData.OrderInfo=GameData.Ranking.duplicate()
         for i in GameData.Ranking.size():
             var orderid:int=GameData.Ranking[i]
             GameData.PlayersArr[orderid].OrderId=orderid
