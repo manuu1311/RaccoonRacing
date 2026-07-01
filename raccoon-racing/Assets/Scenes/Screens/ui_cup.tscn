@@ -15,12 +15,19 @@
 [ext_resource type="Texture2D" uid="uid://jpv64lr7shtc" path="res://Assets/Animations/UISelect/cups/bronze.png" id="12_7j54v"]
 [ext_resource type="Texture2D" uid="uid://ccu7mt8tmpevy" path="res://Assets/Animations/CharSelection/characters/lock.png" id="13_e6g5j"]
 [ext_resource type="FontFile" uid="uid://b6ndjgweysvx0" path="res://Assets/Fonts/2_Arial Black.ttf" id="14_0nxtg"]
+[ext_resource type="Texture2D" uid="uid://c2mwi41pdlvfc" path="res://Assets/Animations/UISelect/cups/cup2.png" id="16_6rwrk"]
 [ext_resource type="Texture2D" uid="uid://cc7ioaln6vovw" path="res://Assets/Animations/UISelect/cups/boat.png" id="16_aqrqf"]
 [ext_resource type="Texture2D" uid="uid://dioaqtx5mmk0n" path="res://Assets/Images/main_menu/back.png" id="16_tdwvn"]
 [ext_resource type="Texture2D" uid="uid://bnyi1t55w0x7d" path="res://Assets/Animations/UISelect/bgfilter.png" id="17_3rlsr"]
 [ext_resource type="Texture2D" uid="uid://hv3lkwjrujpt" path="res://Assets/Animations/UISelect/cups/bart.png" id="17_7j54v"]
+[ext_resource type="Texture2D" uid="uid://1o5cr0dye3ka" path="res://Assets/Animations/UISelect/cups/cup3.png" id="18_2rjpb"]
 [ext_resource type="Script" uid="uid://c7o7tjs5cj3ao" path="res://scripts/CupSelect/diffbuttons.gd" id="18_6uye0"]
 [ext_resource type="Texture2D" uid="uid://cjecn85ja7rwr" path="res://Assets/Animations/UISelect/cups/btncontainer.png" id="19_3ycji"]
+[ext_resource type="Texture2D" uid="uid://cmc01qgw8l06t" path="res://Assets/Animations/UISelect/cups/cup4.png" id="19_qkely"]
+[ext_resource type="Texture2D" uid="uid://te4stqn3h0fb" path="res://Assets/Animations/UISelect/cups/cup5.png" id="20_lsqhh"]
+[ext_resource type="Texture2D" uid="uid://cectleostw2vn" path="res://Assets/Animations/UISelect/cups/cup6.png" id="21_u1jg4"]
+[ext_resource type="Texture2D" uid="uid://hpvclwh65680" path="res://Assets/Animations/UISelect/cups/cup7.png" id="22_tke11"]
+[ext_resource type="Texture2D" uid="uid://uwccjy1nbxdw" path="res://Assets/Animations/UISelect/cups/cup8.png" id="24_5pglv"]
 
 [sub_resource type="Animation" id="Animation_q3nyi"]
 length = 0.001
@@ -420,7 +427,7 @@ id = 1
 layout_mode = 0
 offset_right = 208.0
 offset_bottom = 72.0
-texture = ExtResource("8_3rlsr")
+texture = ExtResource("16_6rwrk")
 
 [node name="Shiny" type="TextureRect" parent="Control/Cups/Cup2/Img" unique_id=59883454]
 layout_mode = 0
@@ -537,7 +544,7 @@ id = 2
 layout_mode = 0
 offset_right = 208.0
 offset_bottom = 72.0
-texture = ExtResource("8_3rlsr")
+texture = ExtResource("18_2rjpb")
 
 [node name="Shiny" type="TextureRect" parent="Control/Cups/Cup3/Img" unique_id=960992238]
 layout_mode = 0
@@ -654,7 +661,7 @@ id = 3
 layout_mode = 0
 offset_right = 208.0
 offset_bottom = 72.0
-texture = ExtResource("8_3rlsr")
+texture = ExtResource("19_qkely")
 
 [node name="Shiny" type="TextureRect" parent="Control/Cups/Cup4/Img" unique_id=1385332913]
 layout_mode = 0
@@ -771,7 +778,7 @@ id = 4
 layout_mode = 0
 offset_right = 208.0
 offset_bottom = 72.0
-texture = ExtResource("8_3rlsr")
+texture = ExtResource("20_lsqhh")
 
 [node name="Shiny" type="TextureRect" parent="Control/Cups/Cup5/Img" unique_id=299989379]
 layout_mode = 0
@@ -888,7 +895,7 @@ id = 5
 layout_mode = 0
 offset_right = 208.0
 offset_bottom = 72.0
-texture = ExtResource("8_3rlsr")
+texture = ExtResource("21_u1jg4")
 
 [node name="Shiny" type="TextureRect" parent="Control/Cups/Cup6/Img" unique_id=139765328]
 layout_mode = 0
@@ -1005,7 +1012,7 @@ id = 6
 layout_mode = 0
 offset_right = 208.0
 offset_bottom = 72.0
-texture = ExtResource("8_3rlsr")
+texture = ExtResource("22_tke11")
 
 [node name="Shiny" type="TextureRect" parent="Control/Cups/Cup7/Img" unique_id=999963429]
 layout_mode = 0
@@ -1122,7 +1129,7 @@ id = 7
 layout_mode = 0
 offset_right = 208.0
 offset_bottom = 72.0
-texture = ExtResource("8_3rlsr")
+texture = ExtResource("24_5pglv")
 
 [node name="Shiny" type="TextureRect" parent="Control/Cups/Cup8/Img" unique_id=283510097]
 layout_mode = 0

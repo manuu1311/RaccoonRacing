@@ -117,9 +117,8 @@ func _process(_delta: float) -> void:
         if !fcsCar.isLock:
             UpdateOrderResult()
     if Input.is_action_just_released("Debug"):
-        for player:Player in GameData.PlayersArr:
-            player.Stoprace()
-            player.car.playering=false
+        GameData.FocusPlayer.Stoprace()
+        GameData.FocusPlayer.car.playering=false
         
 func CoolEffects()->void:
     sound_manager.PlaySound('levelstart')
@@ -208,6 +207,10 @@ func UpdateOrderResult() -> void:
 
 
 func Racestop()->void:
+    for player:Player in GameData.PlayersArr:
+        if player.current_control!=player.control_type.HUMAN:
+            player.Stoprace()
+            player.car.playering=false
     hud.StopRecord()
     MusicPlayer.FadeOutAndStop(3)
     if(fcsCar.player.OrderId == 0):

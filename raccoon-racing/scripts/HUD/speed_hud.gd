@@ -75,7 +75,7 @@ func on_lap_completed() -> void:
 		# If bestlaptime is 0 (no record yet) OR current lap is faster than previous best
 		if bestlaptime == 0.0 or current_lap_time < bestlaptime:
 			bestlaptime = current_lap_time
-			GameData.BestTimes[GameData.currentCup] = bestlaptime
+			GameData.BestTimes[GameData.currentMap] = bestlaptime
 			best_time.text = format_time(bestlaptime)
 
 	

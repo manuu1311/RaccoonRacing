@@ -347,9 +347,9 @@ func Water()->void:
         smokeinst=smoke_2.instantiate() as Node2D
         get_parent().add_child(smokeinst)
         if(randi()%2 == 1):
-            targetpos=collisionPoints[3].position+Vector2(+3.5,21.5)
+            targetpos=collisionPoints[3].position+Vector2(-7.5,21.5)
         else:
-            targetpos=collisionPoints[2].position+Vector2(-3.5,21.5)
+            targetpos=collisionPoints[2].position+Vector2(-11.5,21.5)
         
         tempscale=(randi_range(30, 69)) / 100.0*scale.x
         smokeinst.scale=Vector2(tempscale,tempscale)
