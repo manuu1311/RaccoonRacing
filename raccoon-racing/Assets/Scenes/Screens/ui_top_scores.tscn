@@ -1,6 +1,972 @@
 [gd_scene format=3 uid="uid://nc7gn767x073"]
 
 [ext_resource type="Script" uid="uid://dhldtryxihyll" path="res://scripts/Scores/ui_top_scores.gd" id="1_b5g7p"]
+[ext_resource type="Texture2D" uid="uid://uhjt4315chk4" path="res://Assets/Animations/UISelect/backgroundbase.png" id="2_u8dls"]
+[ext_resource type="Texture2D" uid="uid://hqd6w6yvnxi" path="res://Assets/Animations/UISelect/bggradient.png" id="3_k3deg"]
+[ext_resource type="Texture2D" uid="uid://dk051de2fv8dp" path="res://Assets/Images/maps/map2/shapes/246.png" id="4_plmhe"]
+[ext_resource type="Texture2D" uid="uid://dc3q711f52um2" path="res://Assets/Images/maps/map2/shapes/244.png" id="5_8fs17"]
+[ext_resource type="FontFile" uid="uid://dhqkn2g7x12vn" path="res://Assets/Fonts/1010__sans.ttf" id="6_i838u"]
+
+[sub_resource type="Animation" id="Animation_q3nyi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lo0sp"]
+resource_name = "sliding"
+length = 0.96667004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-20, 0), Vector2(0, -20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k3deg"]
+_data = {
+&"RESET": SubResource("Animation_q3nyi"),
+&"sliding": SubResource("Animation_lo0sp")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0g4sg"]
+bg_color = Color(0.921875, 0.5614852, 0.08642578, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plmhe"]
+bg_color = Color(0.92156863, 1, 0.08627451, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8fs17"]
+bg_color = Color(0, 0.628125, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i838u"]
+bg_color = Color(0, 0.909375, 0.72181624, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kcklo"]
+bg_color = Color(0, 0.27640638, 0.7625, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4qrp"]
+bg_color = Color(0.47259772, 0.08627451, 0.92156863, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ly0xn"]
+bg_color = Color(1, 0, 0.9375, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yt71"]
+bg_color = Color(0.690625, 0, 0.5956642, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_plmhe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8fs17"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i838u"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=816403930]
 script = ExtResource("1_b5g7p")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1377548452]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_u8dls")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background" unique_id=307986616]
+libraries/ = SubResource("AnimationLibrary_k3deg")
+autoplay = &"sliding"
+
+[node name="BGGradient" type="TextureRect" parent="." unique_id=47742953]
+offset_right = 500.0
+offset_bottom = 500.0
+texture = ExtResource("3_k3deg")
+
+[node name="Raccoon" type="TextureRect" parent="." unique_id=1389634678]
+offset_left = 370.0
+offset_top = 83.00001
+offset_right = 798.0
+offset_bottom = 608.0
+rotation = 0.6021386
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_plmhe")
+
+[node name="Dog" type="TextureRect" parent="." unique_id=835235379]
+offset_left = -18.000004
+offset_top = 241.00002
+offset_right = 410.0
+offset_bottom = 766.0
+rotation = 0.2443461
+texture = ExtResource("5_8fs17")
+
+[node name="Cups" type="Control" parent="." unique_id=573935311]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 42.025
+offset_right = 40.0
+offset_bottom = 82.02497
+
+[node name="Cup1" type="Control" parent="Cups" unique_id=1040644953]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="Panel" parent="Cups/Cup1" unique_id=214281437]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 71.0
+offset_right = 388.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0g4sg")
+
+[node name="Cupname" type="Label" parent="Cups/Cup1" unique_id=939555477]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 70.0
+offset_right = 104.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 23
+text = "Cup 1"
+horizontal_alignment = 1
+
+[node name="Easy" type="Label" parent="Cups/Cup1" unique_id=1522632422]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 71.0
+offset_right = 204.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal" type="Label" parent="Cups/Cup1" unique_id=755789341]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 71.0
+offset_right = 291.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hard" type="Label" parent="Cups/Cup1" unique_id=1505229255]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 71.0
+offset_right = 371.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cup2" type="Control" parent="Cups" unique_id=1518823432]
+anchors_preset = 0
+offset_left = 12.0
+offset_top = 40.0
+offset_right = 52.0
+offset_bottom = 80.000015
+
+[node name="ColorRect" type="Panel" parent="Cups/Cup2" unique_id=1290586611]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 71.0
+offset_right = 388.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_plmhe")
+
+[node name="Cupname" type="Label" parent="Cups/Cup2" unique_id=2116552331]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 70.0
+offset_right = 104.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 23
+text = "Cup 2"
+horizontal_alignment = 1
+
+[node name="Easy" type="Label" parent="Cups/Cup2" unique_id=835843895]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 71.0
+offset_right = 204.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal" type="Label" parent="Cups/Cup2" unique_id=1779866903]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 71.0
+offset_right = 291.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hard" type="Label" parent="Cups/Cup2" unique_id=152948764]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 71.0
+offset_right = 371.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cup3" type="Control" parent="Cups" unique_id=396858741]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 80.0
+offset_right = 64.0
+offset_bottom = 120.000015
+
+[node name="ColorRect" type="Panel" parent="Cups/Cup3" unique_id=2079205755]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 71.0
+offset_right = 388.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8fs17")
+
+[node name="Cupname" type="Label" parent="Cups/Cup3" unique_id=410757887]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 70.0
+offset_right = 104.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 23
+text = "Cup 3"
+horizontal_alignment = 1
+
+[node name="Easy" type="Label" parent="Cups/Cup3" unique_id=305841890]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 71.0
+offset_right = 204.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal" type="Label" parent="Cups/Cup3" unique_id=730666361]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 71.0
+offset_right = 291.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hard" type="Label" parent="Cups/Cup3" unique_id=1483279522]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 71.0
+offset_right = 371.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cup4" type="Control" parent="Cups" unique_id=1899760401]
+anchors_preset = 0
+offset_left = 36.0
+offset_top = 120.0
+offset_right = 76.0
+offset_bottom = 160.00002
+
+[node name="ColorRect" type="Panel" parent="Cups/Cup4" unique_id=841728775]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 71.0
+offset_right = 388.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_i838u")
+
+[node name="Cupname" type="Label" parent="Cups/Cup4" unique_id=1922117220]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 70.0
+offset_right = 104.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 23
+text = "Cup 4"
+horizontal_alignment = 1
+
+[node name="Easy" type="Label" parent="Cups/Cup4" unique_id=2125310317]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 71.0
+offset_right = 204.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal" type="Label" parent="Cups/Cup4" unique_id=1439141778]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 71.0
+offset_right = 291.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hard" type="Label" parent="Cups/Cup4" unique_id=1160753152]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 71.0
+offset_right = 371.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cup5" type="Control" parent="Cups" unique_id=204547281]
+anchors_preset = 0
+offset_left = 48.0
+offset_top = 160.0
+offset_right = 88.0
+offset_bottom = 200.00002
+
+[node name="ColorRect" type="Panel" parent="Cups/Cup5" unique_id=2054452500]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 71.0
+offset_right = 388.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kcklo")
+
+[node name="Cupname" type="Label" parent="Cups/Cup5" unique_id=722085384]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 70.0
+offset_right = 104.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 23
+text = "Cup 5"
+horizontal_alignment = 1
+
+[node name="Easy" type="Label" parent="Cups/Cup5" unique_id=1002415977]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 71.0
+offset_right = 204.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal" type="Label" parent="Cups/Cup5" unique_id=617143385]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 71.0
+offset_right = 291.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hard" type="Label" parent="Cups/Cup5" unique_id=2008641614]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 71.0
+offset_right = 371.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cup6" type="Control" parent="Cups" unique_id=377220783]
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 200.0
+offset_right = 100.0
+offset_bottom = 240.0
+
+[node name="ColorRect" type="Panel" parent="Cups/Cup6" unique_id=219221382]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 71.0
+offset_right = 388.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4qrp")
+
+[node name="Cupname" type="Label" parent="Cups/Cup6" unique_id=512101358]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 70.0
+offset_right = 104.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 23
+text = "Cup 6"
+horizontal_alignment = 1
+
+[node name="Easy" type="Label" parent="Cups/Cup6" unique_id=2047838906]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 71.0
+offset_right = 204.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal" type="Label" parent="Cups/Cup6" unique_id=1965960263]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 71.0
+offset_right = 291.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hard" type="Label" parent="Cups/Cup6" unique_id=489699117]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 71.0
+offset_right = 371.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cup7" type="Control" parent="Cups" unique_id=249065825]
+anchors_preset = 0
+offset_left = 72.0
+offset_top = 240.0
+offset_right = 112.0
+offset_bottom = 280.0
+
+[node name="ColorRect" type="Panel" parent="Cups/Cup7" unique_id=807406786]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 71.0
+offset_right = 388.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ly0xn")
+
+[node name="Cupname" type="Label" parent="Cups/Cup7" unique_id=903524268]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 70.0
+offset_right = 104.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 23
+text = "Cup 7"
+horizontal_alignment = 1
+
+[node name="Easy" type="Label" parent="Cups/Cup7" unique_id=848605245]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 71.0
+offset_right = 204.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal" type="Label" parent="Cups/Cup7" unique_id=1545418593]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 71.0
+offset_right = 291.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hard" type="Label" parent="Cups/Cup7" unique_id=781851731]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 71.0
+offset_right = 371.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cup8" type="Control" parent="Cups" unique_id=371321508]
+anchors_preset = 0
+offset_left = 84.0
+offset_top = 280.0
+offset_right = 124.0
+offset_bottom = 320.0
+
+[node name="ColorRect" type="Panel" parent="Cups/Cup8" unique_id=601066037]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 71.0
+offset_right = 388.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1yt71")
+
+[node name="Cupname" type="Label" parent="Cups/Cup8" unique_id=1242231486]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 70.0
+offset_right = 104.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 23
+text = "Cup 8"
+horizontal_alignment = 1
+
+[node name="Easy" type="Label" parent="Cups/Cup8" unique_id=1039427740]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 71.0
+offset_right = 204.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Normal" type="Label" parent="Cups/Cup8" unique_id=1786525877]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 71.0
+offset_right = 291.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hard" type="Label" parent="Cups/Cup8" unique_id=782612217]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 71.0
+offset_right = 371.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(1, 0.70980394, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 15
+text = "-'--'--"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Cups" unique_id=2099402639]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 32.0
+offset_right = 353.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0.13820319, 0.7625, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.020181865, 0.20625001, 0.006445313, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 9
+theme_override_fonts/font = ExtResource("6_i838u")
+theme_override_font_sizes/font_size = 23
+text = "Easy    Normal   Hard"
+horizontal_alignment = 1
+
+[node name="Buttons" type="Control" parent="." unique_id=1442020755]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ContinueButton" type="Control" parent="Buttons" unique_id=150725222]
+anchors_preset = 0
+offset_top = 45.7
+offset_bottom = 45.7
+
+[node name="shadow" type="Label" parent="Buttons/ContinueButton" unique_id=979546546]
+layout_mode = 0
+offset_left = 70.69
+offset_top = 406.26
+offset_right = 438.69
+offset_bottom = 451.26
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 17
+theme_override_constants/shadow_outline_size = 21
+theme_override_font_sizes/font_size = 25
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maintext" type="Label" parent="Buttons/ContinueButton" unique_id=1086204442]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 403.0
+offset_right = 436.0
+offset_bottom = 448.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Buttons/ContinueButton" unique_id=2093049224]
+layout_mode = 0
+offset_left = 222.0
+offset_top = 415.0
+offset_right = 289.0
+offset_bottom = 444.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_plmhe")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8fs17")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_i838u")
+
+[node name="Highscores" type="Control" parent="Buttons" unique_id=74047937]
+anchors_preset = 0
+offset_top = -399.86
+offset_bottom = -399.86
+
+[node name="shadow" type="Label" parent="Buttons/Highscores" unique_id=19330089]
+layout_mode = 0
+offset_left = 70.69
+offset_top = 406.26
+offset_right = 438.69
+offset_bottom = 451.26
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 17
+theme_override_constants/shadow_outline_size = 21
+theme_override_font_sizes/font_size = 37
+text = "High Scores"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maintext" type="Label" parent="Buttons/Highscores" unique_id=1270314778]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 403.0
+offset_right = 436.0
+offset_bottom = 448.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.99607843, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 37
+text = "High Scores"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="Buttons/ContinueButton/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/ContinueButton/Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Buttons/ContinueButton/Button" to="." method="_on_button_pressed"]

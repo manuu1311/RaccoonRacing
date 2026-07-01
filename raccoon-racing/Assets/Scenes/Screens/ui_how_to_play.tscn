@@ -3,13 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://bp3cu6rot2m6u" path="res://Assets/Animations/HowToPlay/3.png" id="1_11yu6"]
 [ext_resource type="Script" uid="uid://u4m7gjl2os6b" path="res://scripts/how_to_play/ui.gd" id="1_fjyvx"]
 [ext_resource type="Texture2D" uid="uid://bfppkew48nk3v" path="res://Assets/Animations/HowToPlay/4.png" id="2_fjyvx"]
+[ext_resource type="Texture2D" uid="uid://fj4qvsakraud" path="res://Assets/Images/main_menu/howtoplaybg.png" id="2_sfdpj"]
 [ext_resource type="Texture2D" uid="uid://db4scwirsu601" path="res://Assets/Animations/HowToPlay/5.png" id="3_ert0x"]
 [ext_resource type="Texture2D" uid="uid://bthiovjs4yrh2" path="res://Assets/Animations/HowToPlay/6.png" id="4_f6y2s"]
 [ext_resource type="Texture2D" uid="uid://r44rau2hp4nd" path="res://Assets/Animations/HowToPlay/7.png" id="5_awydr"]
 [ext_resource type="Texture2D" uid="uid://b58i2x4x4ypcl" path="res://Assets/Animations/HowToPlay/8.png" id="6_vnhb3"]
 [ext_resource type="Texture2D" uid="uid://b04udkgoph8f1" path="res://Assets/Animations/HowToPlay/9.png" id="7_kwvad"]
 [ext_resource type="Texture2D" uid="uid://cd8s8gm48dty6" path="res://Assets/Animations/HowToPlay/10.png" id="8_4vb64"]
-[ext_resource type="Texture2D" uid="uid://d3dlqyvgn2uqf" path="res://Assets/Images/general/31.jpg" id="10_vnhb3"]
 [ext_resource type="Texture2D" uid="uid://cruavtrx7133" path="res://Assets/Animations/HowToPlay/spacekey.png" id="11_kwvad"]
 [ext_resource type="Texture2D" uid="uid://ba7rs4wkwrqkd" path="res://Assets/Animations/HowToPlay/spacetext.png" id="12_4vb64"]
 [ext_resource type="Texture2D" uid="uid://dsymy80o48lky" path="res://Assets/Animations/HowToPlay/keys.svg" id="13_1ubai"]
@@ -81,7 +81,7 @@ offset_right = 250.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("10_vnhb3")
+texture = ExtResource("2_sfdpj")
 
 [node name="ArrowKeys" type="Control" parent="Control" unique_id=1360666426]
 anchors_preset = 0

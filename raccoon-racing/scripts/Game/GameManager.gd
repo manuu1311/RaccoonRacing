@@ -207,10 +207,6 @@ func UpdateOrderResult() -> void:
 
 
 func Racestop()->void:
-    for player:Player in GameData.PlayersArr:
-        if player.current_control!=player.control_type.HUMAN:
-            player.Stoprace()
-            player.car.playering=false
     hud.StopRecord()
     MusicPlayer.FadeOutAndStop(3)
     if(fcsCar.player.OrderId == 0):

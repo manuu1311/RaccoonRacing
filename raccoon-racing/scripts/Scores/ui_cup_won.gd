@@ -49,6 +49,7 @@ func _ready() -> void:
 		lost.hide()
 		won.show()
 		WonSetup()
+		GameData.StoreWin()
 	else:
 		won.hide()
 		lost.show()

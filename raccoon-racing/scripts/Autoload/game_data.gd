@@ -46,6 +46,8 @@ var AiLevel:Array[Array]
 ##current time in the cup, useful for calculating total time at 
 ##the end of the cup. added after each race finish
 var CurrentCupTime:int=0
+##current race time
+var CurrentRaceTime:int=0
 ##[cup,difficulty]:best time for "cup" in the chosen "difficulty"
 var CupTimes:Array[Array]=[
     [0,0,0],[0,0,0],
@@ -122,7 +124,7 @@ func CheckCupLocks()->int:
     return 0
 
 func PopulatePlayers()->void:
-    print(currentDifficulty)
+
     var newplayer:Player
     newplayer=Player.new(0,Player.control_type.HUMAN)
     PlayersArr.append(newplayer)
@@ -160,7 +162,12 @@ func UnlockAll()->void:
     CheckCharacterLocks()
     CheckCupLocks()
         
-        
+      
+    
+func StoreWin()->void:
+    CupTimes[currentCup][currentDifficulty-1]=CurrentCupTime
+    CurrentCupTime=0
+      
 ##record new win in cup with current difficulty
 func RecordWin()->void:
     if cupWon[currentCup]<currentDifficulty:

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsp2c7g6rc7vh"]
 
 [ext_resource type="Script" uid="uid://c4vj6w1kpvulg" path="res://scripts/map/Props/icetrail_in_map.gd" id="1_ksg6s"]
-[ext_resource type="Texture2D" uid="uid://bbwn65s7jubkg" path="res://Assets/Images/general/2178_PropIceTrail.png" id="2_6w8v5"]
+[ext_resource type="Texture2D" uid="uid://rh1okvclu8sn" path="res://Assets/Images/Vehicles/PropEffects/IceTrail/trail1.png" id="2_ksg6s"]
 
 [node name="IceTrail" type="Node2D" unique_id=1402138502]
 z_index = 1
@@ -13,4 +13,4 @@ script = ExtResource("1_ksg6s")
 
 [node name="Polygon2D" type="Polygon2D" parent="Area2D" unique_id=1525887140]
 texture_repeat = 2
-texture = ExtResource("2_6w8v5")
+texture = ExtResource("2_ksg6s")

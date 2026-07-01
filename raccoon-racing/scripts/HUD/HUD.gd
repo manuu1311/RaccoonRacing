@@ -60,3 +60,4 @@ func StopSleep()->void:
 func StopRecord()->void:
 	speed_hud.stop()
 	GameData.CurrentCupTime+=speed_hud.totaltime
+	GameData.CurrentRaceTime=speed_hud.totaltime

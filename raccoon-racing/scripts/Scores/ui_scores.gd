@@ -5,6 +5,9 @@ extends CanvasLayer
 @onready var a_ichar_2: Node2D = $Icons/AIchar2
 @onready var a_ichar_3: Node2D = $Icons/AIchar3
 @onready var playerchar: Node2D = $Icons/Char
+@onready var lap_label: Label = $Text/LapInfo/LapLabel
+@onready var racetime: Label = $Text/TimeInfo/Racetime
+@onready var cuptime: Label = $Text/TimeInfo/Cuptime
 var difftextures:Array[Texture]=[
     preload("res://Assets/Animations/Scores/down.png"),
     preload("res://Assets/Animations/Scores/up.png"),
@@ -38,6 +41,7 @@ func _ready() -> void:
     #GameData.cupWon[0]=1
     #GameData.cupWon[2]=1
     ##FINISH TODO
+    CoolTexts()
     UiOverAnimation.animated_sprite_2d.frame=0
     MusicPlayer.PlayMusic("stats")
     continuetext.add_theme_color_override("font_color",Color.WHITE)
@@ -124,7 +128,13 @@ func _ready() -> void:
                 diff.texture=difftextures[0]
         )
         
-        
+       
+func CoolTexts()->void:
+    lap_label.text=str(GameData.currentStep+1)+'/'+str(GameData.cupInfo[GameData.currentCup].size())
+    racetime.text=GameData.format_time(GameData.CurrentRaceTime)
+    cuptime.text=GameData.format_time(GameData.CurrentCupTime)
+     
+    
 func GetNewRank(id:int)->int:
     for i in range(GameData.Ranking.size()):
         if GameData.Ranking[i]==id:

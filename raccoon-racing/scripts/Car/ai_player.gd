@@ -47,7 +47,11 @@ func AutoPlay()->void:
             AiNowPushButtonTime = AiReflect
             AiNowPushButton = 4
 
-    
+
+func ResetPlayer(order:int)->void:
+    AiPlayering=false
+    super(order)
+  
 func AutoUseProp()->void:
     pass
     '''
