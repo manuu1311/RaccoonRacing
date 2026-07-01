@@ -7,3 +7,5 @@ func _on_mouse_entered() -> void:
 	
 func _on_mouse_click() -> void:
 	ButtonSounds.PlaySound('click')
+func _on_wrong_mouse_click()->void:
+	ButtonSounds.PlaySound('warning')

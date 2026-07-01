@@ -46,10 +46,10 @@ func _ready() -> void:
 	charicon.hide()
 	##player won:
 	if GameData.PlayersArr[GameData.Ranking[0]]==GameData.FocusPlayer:
+		GameData.StoreWin()
 		lost.hide()
 		won.show()
 		WonSetup()
-		GameData.StoreWin()
 	else:
 		won.hide()
 		lost.show()

@@ -2,14 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://d10u0v8mcm8" path="res://Assets/Animations/mainmenu_sheet.png" id="1_w4jy3"]
 [ext_resource type="Script" uid="uid://p8r286dsxrvu" path="res://scripts/main_menu/buttons.gd" id="3_5iyik"]
-[ext_resource type="Texture2D" uid="uid://bx2ji2v8n2jst" path="res://Assets/Images/main_menu/startgame.png" id="3_vp43r"]
-[ext_resource type="Texture2D" uid="uid://wxk1gduo6ab8" path="res://Assets/Images/main_menu/highscores.png" id="3_xjbaf"]
-[ext_resource type="Texture2D" uid="uid://cyl0afie7ggc5" path="res://Assets/Images/main_menu/highscoreshover.png" id="4_rjmma"]
-[ext_resource type="Texture2D" uid="uid://b7p31okytqec" path="res://Assets/Images/main_menu/startgamehover.png" id="4_xjbaf"]
-[ext_resource type="Texture2D" uid="uid://dqpj6mrosaaw8" path="res://Assets/Images/main_menu/howtoplay.png" id="5_0l03o"]
-[ext_resource type="Texture2D" uid="uid://c6mbimvcvcb2d" path="res://Assets/Images/main_menu/howtoplayhover.png" id="6_lywav"]
+[ext_resource type="Texture2D" uid="uid://cp0guitt4b8fo" path="res://Assets/Images/main_menu/sprites/startgame.png" id="3_vd7x1"]
+[ext_resource type="Texture2D" uid="uid://cvfb6d5we07n3" path="res://Assets/Images/main_menu/sprites/startgamehover.png" id="4_14row"]
+[ext_resource type="Texture2D" uid="uid://bxjtt2svurqe6" path="res://Assets/Images/main_menu/sprites/howtoplay.png" id="5_5iyik"]
+[ext_resource type="Texture2D" uid="uid://ccgy76tktgtrw" path="res://Assets/Images/main_menu/sprites/howtoplayhover.png" id="6_vd7x1"]
+[ext_resource type="Texture2D" uid="uid://c7mf0ncu8c6wo" path="res://Assets/Images/main_menu/sprites/highscores.png" id="7_14row"]
+[ext_resource type="Texture2D" uid="uid://cmn22pl4q6487" path="res://Assets/Images/main_menu/sprites/highscoreshover.png" id="8_v7cgl"]
+[ext_resource type="Texture2D" uid="uid://gde01ddtp2df" path="res://Assets/Images/main_menu/sprites/moregames.png" id="9_4iwyt"]
 [ext_resource type="Script" uid="uid://b0io2lbi8q0v2" path="res://scripts/main_menu/logo.gd" id="9_m23ag"]
 [ext_resource type="Texture2D" uid="uid://cpn2u5bbuco5r" path="res://Assets/Images/main_menu/logo.svg" id="10_5iyik"]
+[ext_resource type="Texture2D" uid="uid://d3yru56p1uluq" path="res://Assets/Images/main_menu/sprites/moregameshover.png" id="10_gx5lc"]
+[ext_resource type="Texture2D" uid="uid://bjk35vmhhygnw" path="res://Assets/Images/main_menu/sprites/freegames.png" id="11_evr18"]
+[ext_resource type="Texture2D" uid="uid://bowu1n1cuu0m5" path="res://Assets/Images/main_menu/sprites/freegameshover.png" id="12_gtplp"]
 [ext_resource type="Texture2D" uid="uid://cwc6tfc478rhx" path="res://Assets/Images/main_menu/wheel.png" id="12_vd7x1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xjbaf"]
@@ -446,24 +450,36 @@ func _on_high_scores_button_pressed() -> void:
 "
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0l03o"]
-texture = ExtResource("3_vp43r")
+texture = ExtResource("3_vd7x1")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xjbaf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xjbaf"]
-texture = ExtResource("4_xjbaf")
+texture = ExtResource("4_14row")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8whp2"]
-texture = ExtResource("5_0l03o")
+texture = ExtResource("5_5iyik")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m23ag"]
-texture = ExtResource("6_lywav")
+texture = ExtResource("6_vd7x1")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rjmma"]
-texture = ExtResource("3_xjbaf")
+texture = ExtResource("7_14row")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qinps"]
-texture = ExtResource("4_rjmma")
+texture = ExtResource("8_v7cgl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fukie"]
+texture = ExtResource("9_4iwyt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6h45"]
+texture = ExtResource("10_gx5lc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nwu3n"]
+texture = ExtResource("11_evr18")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n0kuj"]
+texture = ExtResource("12_gtplp")
 
 [sub_resource type="Animation" id="Animation_0l03o"]
 resource_name = "LogoShine"
@@ -645,7 +661,7 @@ corner_radius_bottom_left = 50
 position = Vector2(250, 250)
 sprite_frames = SubResource("SpriteFrames_jua0g")
 animation = &"intro"
-frame = 40
+frame = 41
 script = SubResource("GDScript_14row")
 metadata/_edit_group_ = true
 
@@ -663,10 +679,10 @@ anchor_left = 0.823
 anchor_top = 0.44000003
 anchor_right = 0.823
 anchor_bottom = 0.44000003
-offset_left = 296.37997
-offset_top = 186.4
-offset_right = 459.3801
-offset_bottom = 219.4
+offset_left = 284.91498
+offset_top = 174.885
+offset_right = 477.19998
+offset_bottom = 226.44
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_0l03o")
@@ -680,10 +696,10 @@ anchor_left = 0.823
 anchor_top = 0.44000003
 anchor_right = 0.823
 anchor_bottom = 0.44000003
-offset_left = 288.53
-offset_top = 240.4
-offset_right = 461.53
-offset_bottom = 273.4
+offset_left = 276.485
+offset_top = 227.79
+offset_right = 478.43997
+offset_bottom = 281.202
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_8whp2")
@@ -697,15 +713,49 @@ anchor_left = 0.823
 anchor_top = 0.44000003
 anchor_right = 0.823
 anchor_bottom = 0.44000003
-offset_left = 288.08
-offset_top = 292.4
-offset_right = 459.08
-offset_bottom = 325.4
+offset_left = 276.81
+offset_top = 279.57
+offset_right = 478.81
+offset_bottom = 332.9
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_rjmma")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_qinps")
+
+[node name="MoreGamesButton" type="Button" parent="Buttons" unique_id=315608316]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.823
+anchor_top = 0.44000003
+anchor_right = 0.823
+anchor_bottom = 0.44000003
+offset_left = 281.08
+offset_top = 328.4
+offset_right = 481.18497
+offset_bottom = 384.995
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_fukie")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
+theme_override_styles/hover = SubResource("StyleBoxTexture_x6h45")
+
+[node name="FreeGamesButton" type="Button" parent="Buttons" unique_id=1125033170]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.823
+anchor_top = 0.44000003
+anchor_right = 0.823
+anchor_bottom = 0.44000003
+offset_left = 286.08
+offset_top = 379.61
+offset_right = 478.51498
+offset_bottom = 442.03
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_nwu3n")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
+theme_override_styles/hover = SubResource("StyleBoxTexture_n0kuj")
 
 [node name="Logo" type="CanvasLayer" parent="." unique_id=1841181194]
 script = ExtResource("9_m23ag")
@@ -798,3 +848,7 @@ rotation = -2.6005406
 [connection signal="mouse_entered" from="Buttons/HighScoresButton" to="Buttons" method="_on_mouse_entered"]
 [connection signal="pressed" from="Buttons/HighScoresButton" to="Dummy/Background" method="_on_high_scores_button_pressed"]
 [connection signal="pressed" from="Buttons/HighScoresButton" to="Buttons" method="_on_mouse_click"]
+[connection signal="mouse_entered" from="Buttons/MoreGamesButton" to="Buttons" method="_on_mouse_entered"]
+[connection signal="pressed" from="Buttons/MoreGamesButton" to="Buttons" method="_on_wrong_mouse_click"]
+[connection signal="mouse_entered" from="Buttons/FreeGamesButton" to="Buttons" method="_on_mouse_entered"]
+[connection signal="pressed" from="Buttons/FreeGamesButton" to="Buttons" method="_on_wrong_mouse_click"]

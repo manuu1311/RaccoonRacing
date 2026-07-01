@@ -24,10 +24,16 @@
 [ext_resource type="Texture2D" uid="uid://b1a2pyc32cexu" path="res://Assets/Animations/CupWon/Ink/8.png" id="22_5a2ft"]
 [ext_resource type="Texture2D" uid="uid://dp4yjmnoqrwc6" path="res://Assets/Animations/CharSelection/characters/mambopic.png" id="23_nnnlj"]
 [ext_resource type="Texture2D" uid="uid://bl4eymghou5bb" path="res://Assets/Animations/CupWon/bg.png" id="24_761je"]
+[ext_resource type="Texture2D" uid="uid://dprlthdsfocar" path="res://Assets/Animations/CupWon/Snow/1.png" id="24_ty0o1"]
 [ext_resource type="Texture2D" uid="uid://bt0gi55d53e6l" path="res://Assets/Animations/CupWon/sea.png" id="25_4w526"]
+[ext_resource type="Texture2D" uid="uid://dr20unv5a3yv8" path="res://Assets/Animations/CupWon/Snow/2.png" id="25_43mdl"]
+[ext_resource type="Texture2D" uid="uid://dkxd8m6p4jtg2" path="res://Assets/Animations/CupWon/Snow/3.png" id="26_2jhfn"]
 [ext_resource type="Texture2D" uid="uid://dxb3fsn0xxuap" path="res://Assets/Animations/CupWon/Balloon/b1.png" id="26_grcsl"]
+[ext_resource type="Texture2D" uid="uid://dgf881wxni2o1" path="res://Assets/Animations/CupWon/Snow/4.png" id="27_0vk7v"]
 [ext_resource type="Texture2D" uid="uid://ch5kkg4gfbe0a" path="res://Assets/Animations/CupWon/Balloon/b2.png" id="27_7tgdm"]
+[ext_resource type="Texture2D" uid="uid://h25co6h14e2a" path="res://Assets/Animations/CupWon/Snow/5.png" id="28_k3k4x"]
 [ext_resource type="Texture2D" uid="uid://bs87xnvafjfuh" path="res://Assets/Animations/CupWon/Balloon/b3.png" id="28_ylbtl"]
+[ext_resource type="Texture2D" uid="uid://cf6fw3wh8ft58" path="res://Assets/Animations/CupWon/Snow/6.png" id="29_4ots7"]
 [ext_resource type="Texture2D" uid="uid://baqj7ouvpn4k" path="res://Assets/Animations/CupWon/Balloon/ball/1.png" id="29_761je"]
 [ext_resource type="Texture2D" uid="uid://dlxkak2kp42pe" path="res://Assets/Animations/CupWon/Balloon/ball/2.png" id="30_4w526"]
 [ext_resource type="Texture2D" uid="uid://4kxnfwtkt8qq" path="res://Assets/Animations/CupWon/Balloon/ball/3.png" id="31_grcsl"]
@@ -604,6 +610,21 @@ spacing_glyph = 1
 [sub_resource type="FontVariation" id="FontVariation_yoyxl"]
 spacing_glyph = 1
 
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_f50u2"]
+frames = 6
+frame_0/texture = ExtResource("24_ty0o1")
+frame_0/duration = 0.05
+frame_1/texture = ExtResource("25_43mdl")
+frame_1/duration = 0.05
+frame_2/texture = ExtResource("26_2jhfn")
+frame_2/duration = 0.05
+frame_3/texture = ExtResource("27_0vk7v")
+frame_3/duration = 0.05
+frame_4/texture = ExtResource("28_k3k4x")
+frame_4/duration = 0.05
+frame_5/texture = ExtResource("29_4ots7")
+frame_5/duration = 0.05
+
 [sub_resource type="Animation" id="Animation_kni5o"]
 length = 0.001
 tracks/0/type = "value"
@@ -807,7 +828,6 @@ script = ExtResource("1_jwxe0")
 metadata/_edit_vertical_guides_ = [-111.0]
 
 [node name="Won" type="Node2D" parent="." unique_id=43115198]
-visible = false
 
 [node name="Background" type="Node2D" parent="Won" unique_id=665448909]
 position = Vector2(250, 250)
@@ -1281,7 +1301,30 @@ text = "Cup 4 is now available. Good luck!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SnowGenerator" type="CPUParticles2D" parent="Won" unique_id=1828173453]
+position = Vector2(278, 2)
+amount = 16
+texture = SubResource("AnimatedTexture_f50u2")
+lifetime = 5.0
+randomness = 1.0
+fixed_fps = 35
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(200, 1)
+direction = Vector2(0, 1)
+spread = 0.0
+gravity = Vector2(0, 25)
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+scale_amount_min = 0.099999994
+scale_amount_max = 0.29999998
+
 [node name="Lost" type="Node2D" parent="." unique_id=1185404279]
+visible = false
 position = Vector2(269, 150)
 
 [node name="Background" type="Node2D" parent="Lost" unique_id=451558442]

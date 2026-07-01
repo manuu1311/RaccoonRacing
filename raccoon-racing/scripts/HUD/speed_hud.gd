@@ -26,7 +26,12 @@ func Setup() -> void:
 	raceOver=false
 	
 	# Load the existing best time from data
-	bestlaptime = GameData.BestTimes[GameData.currentMap-1]
+	var id:int
+	if GameData.current_vehicle==GameData.VehicleType.CAR:
+		id=0
+	else:
+		id=1
+	bestlaptime = GameData.BestTimes[GameData.currentMap][id]
 	best_time.text = format_time(bestlaptime)
 	
 	# Set initial lap text before timer ends
@@ -75,7 +80,12 @@ func on_lap_completed() -> void:
 		# If bestlaptime is 0 (no record yet) OR current lap is faster than previous best
 		if bestlaptime == 0.0 or current_lap_time < bestlaptime:
 			bestlaptime = current_lap_time
-			GameData.BestTimes[GameData.currentMap] = bestlaptime
+		var id:int
+		if GameData.current_vehicle==GameData.VehicleType.CAR:
+			id=0
+		else:
+			id=1
+			GameData.BestTimes[GameData.currentMap][id] = bestlaptime
 			best_time.text = format_time(bestlaptime)
 
 	
