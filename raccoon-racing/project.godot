@@ -14,7 +14,9 @@ config/name="RaccoonRacing"
 run/main_scene="uid://c8wmuf22nxpku"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=35
+boot_splash/image="uid://d4hcljkb7k4uc"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=2000
 
 [audio]
 
