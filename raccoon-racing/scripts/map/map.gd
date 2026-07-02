@@ -411,6 +411,14 @@ func GetMapSize() -> Vector2:
     return Vector2(final_width, final_height)
     
 
+
+func IsPropPoint(NowPoint:int)->bool:
+    return PropPointArr.has(NowPoint)
+
+func IsWanPoint(NowPoint:int)->bool:
+    return WanPointArr.has(NowPoint)
+func IsLinePoint(NowPoint:int)->bool:
+    return LinePointArr.has(NowPoint)
     
 func GetHitEventStatus(eventid:int,playerid:int)->void:
     var _loc2_:int = 0;

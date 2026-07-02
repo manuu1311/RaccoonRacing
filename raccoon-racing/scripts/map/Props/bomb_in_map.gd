@@ -1,4 +1,5 @@
 extends EventInMap
+class_name BombInMap
 
 var jumphigh:int = 3;
 var bsValume:int = 60;

@@ -3,15 +3,24 @@ class_name AIPlayer
 
 var AiPlayering:bool=false
 var AiUsePropReflect:int=150
+var AiUsePropTime:int=0
 var ResetTimer:Timer
 var AiResetTime:int=10
 var AiLastCheckPoint:int
 var AiNowPushButtonTimeNow:int
 var AiNowPushButtonTime:int
 var AiNowPushButton:int
+var HasProp:bool=false
+var IsOnlyAttPlayer:bool=false
 
-func RunPropBox(x:float,y:float)->void:
-    pass
+func RunPropBox(_x:float,_y:float)->void:
+    if not HasProp:
+        HasProp=true
+        CanUseProp=true
+        var id:int=GetPropPer()
+        await car.get_tree().create_timer(1.5).timeout
+        GetProp(id)
+
 
 
 func Update()->void:
@@ -50,18 +59,18 @@ func AutoPlay()->void:
 
 func ResetPlayer(order:int)->void:
     AiPlayering=false
+    HasProp=false
+    AiUsePropTime=0
     super(order)
   
 func AutoUseProp()->void:
-    pass
-    '''
     AiUsePropTime += 1
     if AiUsePropTime <= AiUsePropReflect:
         return
         
     AiUsePropTime = 0
+    HasProp=false
     
-    # If passing over a property point and don't have shield (assuming 5 is shield)
     if car.map.IsPropPoint(NowPointId) and prop.NowPorpId != 5:
         if IsOnlyAttPlayer:
             return
@@ -72,35 +81,34 @@ func AutoUseProp()->void:
         0:
             return
         1: # Proximity Bomb/Obstacle items
-            for other in game.Players:
-                if other.Id != self.Id:
-                    if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.PlayerType == 2):
+            for other:Player in GameData.PlayersArr:
+                if other.PlayerID != self.PlayerID:
+                    if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.charid == 2):
                         UseProp()
                         return
                     var dist_to_player: float = car.global_position.distance_to(other.car.global_position)
                     if dist_to_player < 300:
-                        if not (IsOnlyAttPlayer and other.Id != 0):
+                        if not (IsOnlyAttPlayer and other.PlayerID != 0):
                            UseProp()
                            return
             # Check map hazards
-            for event_item in game.map.Events:
-                # Replace with your actual class names or group checks
-                if event_item.is_in_group("Bombs"): 
+            for event_item:EventInMap in car.map.Events:
+                if event_item.is_class("BombInMap") or event_item.is_class("BsInMap") or event_item.is_class('HoneyBombInMap'):
                     if car.global_position.distance_to(event_item.global_position) < 300:
                         UseProp()
                         return
         2:
             UseProp()
         3: # Global team item / shield check
-            for other in game.Players:
-                if other.Id != self.Id:
-                    if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.PlayerType == 2):
+            for other:Player in GameData.PlayersArr:
+                if other.PlayerID != self.PlayerID:
+                    if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.charid == 2):
                         UseProp()
                         return
         4, 7: # Offensive targeting missiles/items
-            for other in game.Players:
-                if other.Id != self.Id and not (IsOnlyAttPlayer and other.Id != 0):
-                    if not other.IsInvincible:
+            for other:Player in GameData.PlayersArr:
+                if other.PlayerID != self.PlayerID and not (IsOnlyAttPlayer and other.PlayerID != 0):
+                    if not other.car.isInvincible:
                         if car.global_position.distance_to(other.car.global_position) < 300:
                             var point_delta = NowPointId - other.NowPointId
                             if point_delta > 0 or point_delta < -10 or (point_delta == 0 and distance < other.distance):
@@ -108,19 +116,18 @@ func AutoUseProp()->void:
                                 return
             if car.map.IsWanPoint(NowPointId):
                 if IsOnlyAttPlayer:
-                    if Order >= game.Players.size() - 1:
-                        if game.OrderInfo[0][1] != 0: return
-                    elif game.OrderInfo[Order + 1][1] != 0: 
+                    if OrderId >= GameData.PlayersArr.size() - 1:
+                        if GameData.OrderInfo[0]!= 0: return
+                    elif GameData.OrderInfo[OrderId + 1] != 0: 
                         return
                 UseProp()
         5: # Shield / Boost
-            if Order != 0:
-                if IsOnlyAttPlayer and game.OrderInfo[0][1] != 0:
+            if OrderId != 0:
+                if IsOnlyAttPlayer and GameData.OrderInfo[0] != 0:
                     return
                 UseProp()
         6: # Homing Missile
-            # Replace placeholder logic with your homing selection system
-            if IsOnlyAttPlayer and prop.SetAimPlayer(game, self).Id != 0:
+            if IsOnlyAttPlayer and GameData.OrderInfo[OrderId-1] != 0:
                 return
             UseProp()
         8: # Speed Pad / Nitro Line
@@ -130,12 +137,13 @@ func AutoUseProp()->void:
             _handle_prop_type_nine()
         _:
             push_error("Error UseProp Id")
+    HasProp=false
 
 func _handle_prop_type_nine() -> void:
-    match PlayerType:
-        0, 3:
-            for other in game.Players:
-                if not (IsOnlyAttPlayer and other.Id != 0) and not other.IsInvincible and other.Id != self.Id:
+    match charid:
+        3,4:
+            for other in GameData.PlayersArr:
+                if not (IsOnlyAttPlayer and other.PlayerID != 0) and not other.car.isInvincible and other.PlayerID != self.PlayerID:
                     if car.global_position.distance_to(other.car.global_position) < 300:
                         var point_delta = NowPointId - other.NowPointId
                         if point_delta > 0 or point_delta < -10 or (point_delta == 0 and distance < other.distance):
@@ -143,38 +151,39 @@ func _handle_prop_type_nine() -> void:
                             return
             if car.map.IsWanPoint(NowPointId):
                 if IsOnlyAttPlayer:
-                    if Order >= game.Players.size() - 1:
-                        if game.OrderInfo[0][1] != 0: return
-                    elif game.OrderInfo[Order + 1][1] != 0: 
+                    if OrderId >= GameData.PlayersArr.size() - 1:
+                        if GameData.OrderInfo[0] != 0: 
+                            return
+                    elif GameData.OrderInfo[OrderId + 1] != 0: 
                         return
                 UseProp()
         1:
             if car.map.IsLinePoint(NowPointId):
                 UseProp()
         2:
-            for other in game.Players:
-                if other.Id != self.Id and not (IsOnlyAttPlayer and other.Id != 0):
-                    if not other.IsInvincible and not other.prop.IsUseShield:
+            for other in GameData.PlayersArr:
+                if other.PlayerID != self.PlayerID and not (IsOnlyAttPlayer and other.PlayerID != 0):
+                    if not other.car.isInvincible and not other.prop.IsUseShield:
                         if car.global_position.distance_to(other.car.global_position) < 300:
                             UseProp()
                             return
-        4:
-            for other in game.Players:
-                if other.Id != self.Id and not (IsOnlyAttPlayer and other.Id != 0):
-                    if not other.IsInvincible and car.global_position.distance_to(other.car.global_position) < 300:
+        5:
+            for other in GameData.PlayersArr:
+                if other.PlayerID != self.PlayerID and not (IsOnlyAttPlayer and other.PlayerID != 0):
+                    if not other.car.isInvincible and car.global_position.distance_to(other.car.global_position) < 300:
                         UseProp()
                         return
-        5:
-            for other in game.Players:
-                if not (IsOnlyAttPlayer and other.Id != 0) and other.Id != self.Id:
-                    if not other.IsInvincible and not other.car.isResetting:
-                        if other.Alldistance >= self.Alldistance:
+        6:
+            for other in GameData.PlayersArr:
+                if not (IsOnlyAttPlayer and other.PlayerID != 0) and other.PlayerID != self.PlayerID:
+                    if not other.car.isInvincible and not other.car.isResetting:
+                        if other.alldistance >= self.alldistance:
                             # Original Flash calculation checked squared distance (< 100000)
                             # 100000 squared distance equals ~316.2 pixels distance vector length.
                             if car.global_position.distance_squared_to(other.car.global_position) < 100000:
                                 UseProp()
                                 return
-    '''
+
 
 func AutoReSetCar()->void:
     if(AiLastCheckPoint != NowPointId):

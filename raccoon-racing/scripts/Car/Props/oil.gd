@@ -19,7 +19,8 @@ func _init(playerinst:Player)->void:
     
 func usebomb()->void:
     await player.car.get_tree().create_timer(0.3).timeout
-    bs_in_map.IsActivated = true;
+    if is_instance_valid(bs_in_map):
+        bs_in_map.IsActivated = true;
     delme();
     
 func run()->void:

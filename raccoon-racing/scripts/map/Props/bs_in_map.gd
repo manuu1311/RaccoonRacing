@@ -1,4 +1,5 @@
 extends EventInMap
+class_name BsInMap
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
 	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)

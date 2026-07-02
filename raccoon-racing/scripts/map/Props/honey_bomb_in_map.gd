@@ -1,4 +1,5 @@
 extends EventInMap
+class_name HoneyBombInMap
 
 var jumphigh:int = 2;
 var bsValume:int = 40;

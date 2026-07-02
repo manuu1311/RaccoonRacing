@@ -23,6 +23,5 @@ func GetHitEventStatus(PlayerId:int)->void:
 func ReShowProp()->void:
 	show();
 	
-#TODO: is this necessary?
 func del()->void:
 	queue_free()

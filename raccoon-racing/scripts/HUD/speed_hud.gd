@@ -13,7 +13,7 @@ var current_lap_time: int = 0
 var currentlap: int = 1
 var totallaps: int
 var updating: bool
-var bestlaptime: float = 0.0
+var bestlaptime: int = 0
 var car:Car
 var totaltime:int=0
 var raceOver:bool=false
@@ -78,15 +78,15 @@ func on_lap_completed() -> void:
 	if current_lap_time > 0:
 		time.text=format_time(current_lap_time)
 		# If bestlaptime is 0 (no record yet) OR current lap is faster than previous best
-		if bestlaptime == 0.0 or current_lap_time < bestlaptime:
+		if bestlaptime == 0 or current_lap_time < bestlaptime:
 			bestlaptime = current_lap_time
 		var id:int
 		if GameData.current_vehicle==GameData.VehicleType.CAR:
 			id=0
 		else:
 			id=1
-			GameData.BestTimes[GameData.currentMap][id] = bestlaptime
-			best_time.text = format_time(bestlaptime)
+		GameData.BestTimes[GameData.currentMap][id] = bestlaptime
+		best_time.text = format_time(bestlaptime)
 
 	
 	# Reset timer for the next lap
