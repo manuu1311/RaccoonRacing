@@ -84,7 +84,8 @@ func WonSetup()->void:
 		charicon.show()
 		charicon.texture=textures[newchar]
 		chartext.text='New driver unlocked! You can now play as '+names[newchar]+'!'
-		GameData.StoreWin()
+	GameData.StoreWin()
+	
 func LossSetup()->void:
 	pass
 

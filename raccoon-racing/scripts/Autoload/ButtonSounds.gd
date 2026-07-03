@@ -4,7 +4,6 @@ var audio_streams:Dictionary[String, AudioStream]
 
 
 func _ready() -> void:
-	print('0initialising!')
 	audio_streams = {
 		"hover": preload("res://Assets/Sounds/2366_snd_ButtonOver.mp3"),
 		"click": preload("res://Assets/Sounds/2368_snd_ButtonRelease.mp3"),

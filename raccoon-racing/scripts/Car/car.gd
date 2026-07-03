@@ -547,8 +547,9 @@ func GetHitStatus(tx:float, ty:float)->void:
         if(abs(speedwallangle) < 60):
             speedwallangle *=0.5
         speed=speed.rotated(deg_to_rad(speedwallangle))
-
-    speed*=(1-wallSpring*(speedwallangle90*abs(abs(poswallangle)-90)/90))
+    var wall_hit_factor:float = 1.0 - wallSpring * (speedwallangle90 * abs(abs(poswallangle) - 90) / 90.0)
+    wall_hit_factor = clamp(wall_hit_factor, -5.0, 5.0)
+    speed *= wall_hit_factor
     speed+=(Vector2(0.1,0).rotated(deg_to_rad(wallAngledeg+90)))
     stepx = int(speed.x * 10.0) / 10.0
     stepy = int(speed.y * 10.0) / 10.0
@@ -611,9 +612,8 @@ func SetOnIce()->void:
     if isInvincible:
         return
     isAtIce=true
-    maxRotationWheel *= DefaultmaxRotationWheel* 1.2;
-    carRotationWheel *= DefaultRotationWheel * 1.2;
-    isAtIce = true;
+    maxRotationWheel = DefaultmaxRotationWheel* 1.2;
+    carRotationWheel = DefaultRotationWheel * 1.2;
     glideGratingNum = 0;
     rollGratingNum = 0;
     grassGratingNum = 0;

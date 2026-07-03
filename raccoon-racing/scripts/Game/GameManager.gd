@@ -225,6 +225,9 @@ func ShowFinishEffect()->void:
 	await get_tree().create_timer(3).timeout
 	UiOverAnimation.playanim()
 	await UiOverAnimation.animated_sprite_2d.animation_finished
+	for player:Player in GameData.PlayersArr:
+		if player!=GameData.FocusPlayer:
+			player.Stoprace()
 	BackToMain()
 
 
