@@ -2290,7 +2290,3 @@ gizmo_extents = 101.0
 position = Vector2(-981, 1191)
 rotation = 1.8325957
 gizmo_extents = 101.0
-
-[node name="minimap" type="Sprite2D" parent="." unique_id=93627121]
-visible = false
-position = Vector2(-22.8, 12.115)

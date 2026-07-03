@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://8ci12xvms5ux" path="res://scripts/map/map_04.gd" id="1_3g2hk"]
 [ext_resource type="Texture2D" uid="uid://c2k66qd43nrw4" path="res://Assets/Images/maps/map4/Top2/top.png" id="3_2y1dm"]
 [ext_resource type="PackedScene" uid="uid://bpa6bnjfjm4dy" path="res://Assets/Scenes/Screens/maps/seagull.tscn" id="4_4utwj"]
-[ext_resource type="Texture2D" uid="uid://bygpn5m87s364" path="res://Assets/Images/maps/map4/dt2.png" id="5_2y1dm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hx48j"]
 texture = ExtResource("1_0iund")
@@ -1580,11 +1579,6 @@ position = Vector2(139.83606, 1026.001)
 
 [node name="point22" type="Marker2D" parent="PointsHC/Points" unique_id=1052153836]
 position = Vector2(-57.635864, 852.72894)
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=862561792]
-visible = false
-position = Vector2(-373.745, -176.19)
-texture = ExtResource("5_2y1dm")
 
 [editable path="Visuals/Art/Seagull3"]
 [editable path="Visuals/Art/Seagull4"]

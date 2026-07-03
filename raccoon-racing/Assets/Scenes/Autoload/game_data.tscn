@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cax2vl35eiq0j"]
 
 [ext_resource type="Script" uid="uid://1tl2lmg3lc0r" path="res://scripts/Autoload/game_data.gd" id="1_e7oyl"]
+[ext_resource type="Resource" uid="uid://birujtm06odmp" path="res://Assets/test_save.tres" id="2_2bw0r"]
 
 [node name="GameData" type="Node" unique_id=2096107400]
 script = ExtResource("1_e7oyl")
+debug_save_file = ExtResource("2_2bw0r")

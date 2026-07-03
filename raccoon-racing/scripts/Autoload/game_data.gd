@@ -60,14 +60,51 @@ var CupTimes:Array[Array]=[
 	[0,0,0],[0,0,0],
 ]
 
+const SAVE_PATH = "user://savegame.tres"
+var save_data: SaveData
+var debug_save_file: SaveData=preload("res://Assets/test_save.tres")
 
 func _ready() -> void:
+	print(debug_save_file)
+	load_game()
 	AiLevel=[
 		[[18,100,false],[20,100,false],[22,200,false]],
 		[[15,80,true],[18,80,false],[20,80,false]],
 		[[10,30,true],[12,40,true],[15,60,true]],
 	]
 
+
+func save_game() -> void:
+	# 1. Update the resource with your current game session data
+	save_data.cupWon = cupWon
+	save_data.BestTimes = BestTimes
+	save_data.CupTimes = CupTimes
+	
+	# 2. Save the resource to the device
+	var result = ResourceSaver.save(save_data, SAVE_PATH)
+	if result == OK:
+		print("Game Saved Successfully!")
+
+func load_game() -> void:
+	print('Save path: ',ProjectSettings.globalize_path(SAVE_PATH))
+	# 2. Check if you dragged a custom resource into the inspector for testing
+	if OS.has_feature("editor") and debug_save_file != null:
+		save_data = debug_save_file
+		print("Loaded data directly from Editor Inspector!")
+	# 3. Otherwise, fall back to normal local device saves
+	elif ResourceLoader.exists(SAVE_PATH):
+		save_data = ResourceLoader.load(SAVE_PATH)
+		print("Game Loaded from user storage!")
+	else:
+		save_data = SaveData.new()
+		print("New Save File Created!")
+		
+	# Sync values
+	cupWon = save_data.cupWon
+	BestTimes = save_data.BestTimes
+	CupTimes = save_data.CupTimes
+	characterLocks=save_data.characterLocks
+	cupLocks=save_data.cupLocks
 
 #update character locks, to unlock new characters after each cup
 func CheckCharacterLocks()->int:
@@ -171,6 +208,7 @@ func UnlockAll()->void:
 func StoreWin()->void:
 	CupTimes[currentCup][currentDifficulty-1]=CurrentCupTime
 	CurrentCupTime=0
+	save_game()
 	  
 ##record new win in cup with current difficulty
 func RecordWin()->void:
