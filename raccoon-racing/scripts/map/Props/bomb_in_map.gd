@@ -32,7 +32,7 @@ func GetHitEventStatus(PlayerId:int)->void:
 					car.speed*=0.3
 					car.speed+=(car.global_position-global_position)*0.03
 				else:
-					car.DelPropByType(3)
+					car.player.prop.del_prop_by_type(3)
 			car.sounds.playerBombSound()
 			animated_sprite_2d.show()
 			animated_sprite_2d.play()

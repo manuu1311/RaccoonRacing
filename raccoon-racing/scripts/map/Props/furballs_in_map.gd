@@ -92,7 +92,7 @@ func OnHitCar(Who:Car)->void:
         Who.sounds.playBsSound();
         #car.Speed.plus(new as.Vector(_loc6_,_loc5_).scaleNew(0.1));
     if(Who.player.prop.IsUseShield):
-        Who.player.prop.Delpropbytype(3);
+        Who.player.prop.del_prop_by_type(3);
     speed=Vector2(0,0)
     horse=Vector2(0,0)
     bomb_effect.play()

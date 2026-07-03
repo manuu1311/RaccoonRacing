@@ -111,7 +111,7 @@ func focusCar(player:Player,car:Car)->void:
 	
 func _process(_delta: float) -> void:
 	if fcsCar!=null:
-		camera.scale=Vector2.ONE*(1 - fcsCar.jumpCurrheight * 0.5)
+		camera.zoom=Vector2.ONE*(1 - fcsCar.jumpCurrheight * 0.005)
 		SetSceneAngleExpand(fcsCar.global_position,fcsCar.rotation-PI/2)
 		SceneCenterMoveToPos()
 		if !fcsCar.isLock:
@@ -155,6 +155,9 @@ func SetCenterPos(nowPos:Vector2)->void:
 	if(scenecenterpos.y > map.MapBy):
 		scenecenterpos.y = map.MapBy;
 
+func adjust_camera_zoom(target_zoom: Vector2, delta: float) -> void:
+	# Smoothly interpolates the camera zoom
+	camera.zoom = camera.zoom.lerp(target_zoom, 0.1)
 
 func SceneCenterMoveToPos()->void:
 	var distanceToTarget:Vector2 = scenecenterpos - camera.global_position

@@ -16,7 +16,7 @@ func OnHitCar(car:Car)->void:
 		car.speed+=dist*0.03
 
 	if(car.player.prop.IsUseShield):
-		car.player.prop.Delpropbytype(3);
+		car.player.prop.del_prop_by_type(3);
 
 	car.prop_effector.PlayBomb(global_position)
 	car.sounds.playBedumpSound();

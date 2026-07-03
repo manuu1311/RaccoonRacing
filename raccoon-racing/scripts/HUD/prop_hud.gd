@@ -71,7 +71,7 @@ func propmove(x:float,y:float)->void:
 		activetween.kill()
 		
 	var camera:Camera2D= get_viewport().get_camera_2d()
-	var pos:Vector2 = camera.get_viewport().get_screen_transform() * camera.get_canvas_transform() * Vector2(x,y)
+	var pos:Vector2 = camera.get_canvas_transform() * Vector2(x,y)
 	propmoveplayer.play()
 	shaderplayer.play("shader")
 	propparticle.show()

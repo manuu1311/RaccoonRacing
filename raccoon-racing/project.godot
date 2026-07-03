@@ -15,7 +15,7 @@ run/main_scene="uid://c8wmuf22nxpku"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=35
 boot_splash/image="uid://d4hcljkb7k4uc"
-config/icon="res://icon.svg"
+config/icon="uid://d4hcljkb7k4uc"
 boot_splash/minimum_display_time=2000
 
 [audio]
@@ -32,17 +32,18 @@ Game="*uid://da52fyc101u0t"
 
 [debug]
 
-file_logging/enable_file_logging=true
-file_logging/log_path="res://Assets/utils/logs.log"
 gdscript/warnings/untyped_declaration=1
 
 [display]
 
-window/size/viewport_width=750
-window/size/viewport_height=750
-window/size/mode=3
+window/size/viewport_width=500
+window/size/viewport_height=500
+window/size/resizable=false
 window/size/borderless=true
+window/size/window_width_override=750
+window/size/window_height_override=750
 window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
 
 [editor_plugins]
 
@@ -87,4 +88,5 @@ Debug={
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

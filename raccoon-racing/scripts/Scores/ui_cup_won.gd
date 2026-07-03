@@ -46,7 +46,6 @@ func _ready() -> void:
 	charicon.hide()
 	##player won:
 	if GameData.PlayersArr[GameData.Ranking[0]]==GameData.FocusPlayer:
-		GameData.StoreWin()
 		lost.hide()
 		won.show()
 		WonSetup()
@@ -85,6 +84,7 @@ func WonSetup()->void:
 		charicon.show()
 		charicon.texture=textures[newchar]
 		chartext.text='New driver unlocked! You can now play as '+names[newchar]+'!'
+		GameData.StoreWin()
 func LossSetup()->void:
 	pass
 
