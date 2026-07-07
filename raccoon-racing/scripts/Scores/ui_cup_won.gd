@@ -87,7 +87,7 @@ func WonSetup()->void:
 	GameData.StoreWin()
 	
 func LossSetup()->void:
-	pass
+	GameData.CurrentCupTime=0
 
 
 func OnContinueButtonPressed()->void:

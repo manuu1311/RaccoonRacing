@@ -110,419 +110,419 @@ var isFcsCar:bool
 
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
-    map=gamemap
-    playerID=id
-    player=playerinst
-    isFcsCar=control
+	map=gamemap
+	playerID=id
+	player=playerinst
+	isFcsCar=control
 
 func _ready() -> void:
-    horse=carhorse
-    if isHovercraft():
-        car.hide()
-        hovercraft.show()
-    else:
-        car.show()
-        hovercraft.hide()
-    steer_normal()
-    current_vehicle=GameData.current_vehicle
-    #get collision points from the car scene
-    PopulateCollisions()
-    DeferredSetup.call_deferred()
+	horse=carhorse
+	if isHovercraft():
+		car.hide()
+		hovercraft.show()
+	else:
+		car.show()
+		hovercraft.hide()
+	steer_normal()
+	current_vehicle=GameData.current_vehicle
+	#get collision points from the car scene
+	PopulateCollisions()
+	DeferredSetup.call_deferred()
 
-    
+	
 func DeferredSetup()->void:
-    #add car view to minimap
-    if isFcsCar:
-        carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
-    else:
-        carView=preload("res://Assets/Scenes/Screens/maps/CarViewOpp.tscn")
-    var view_sprite:Sprite2D = map.minimap
-    carViewInstance = carView.instantiate()
-    view_sprite.add_child(carViewInstance)
-    #set variables
-    wallSpring=map.Wallspring
-    rollGratingNum=map.RollGratingNum
-    glideGratingNum=map.GlideGratingNum
-    grassGratingNum=map.GrassGratingNum
-    SetSprites()
-    
-    
+	#add car view to minimap
+	if isFcsCar:
+		carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
+	else:
+		carView=preload("res://Assets/Scenes/Screens/maps/CarViewOpp.tscn")
+	var view_sprite:Sprite2D = map.minimap
+	carViewInstance = carView.instantiate()
+	view_sprite.add_child(carViewInstance)
+	#set variables
+	wallSpring=map.Wallspring
+	rollGratingNum=map.RollGratingNum
+	glideGratingNum=map.GlideGratingNum
+	grassGratingNum=map.GrassGratingNum
+	SetSprites()
+	
+	
 func PopulateCollisions()->void:
-    var collisions_node:Node2D = $Visual/CollisionPoints
-    for child:Node in collisions_node.get_children():
-        if child is Node2D:
-            collisionPoints.append(child)
+	var collisions_node:Node2D = $Visual/CollisionPoints
+	for child:Node in collisions_node.get_children():
+		if child is Node2D:
+			collisionPoints.append(child)
 
 func steer_left()->void:
-    character.position=Vector2(4.5,-5)
-    character.rotation=deg_to_rad(-23.5)
-    if isHovercraft():
-        exhaust_1.position=Vector2(-14,32)
-        exhaust_1.rotation=deg_to_rad(20)
-        exhaust_2.position=Vector2(8.75,32)
-        exhaust_2.rotation=deg_to_rad(20)
-    else:
-        fr.position=Vector2(16.25,-9.7)
-        fr.rotation=deg_to_rad(-23.5)
-        fl.position=Vector2(-15.25,-9.7)
-        fl.rotation=deg_to_rad(-23.5)
-    
+	character.position=Vector2(4.5,-5)
+	character.rotation=deg_to_rad(-23.5)
+	if isHovercraft():
+		exhaust_1.position=Vector2(-14,32)
+		exhaust_1.rotation=deg_to_rad(20)
+		exhaust_2.position=Vector2(8.75,32)
+		exhaust_2.rotation=deg_to_rad(20)
+	else:
+		fr.position=Vector2(16.25,-9.7)
+		fr.rotation=deg_to_rad(-23.5)
+		fl.position=Vector2(-15.25,-9.7)
+		fl.rotation=deg_to_rad(-23.5)
+	
 func steer_right()->void:
-    character.position=Vector2(-4.5,-5)
-    character.rotation=deg_to_rad(23.5)
-    if isHovercraft():
-        exhaust_1.position=Vector2(-8.75,32)
-        exhaust_1.rotation=deg_to_rad(-20)
-        exhaust_2.position=Vector2(14,32)
-        exhaust_2.rotation=deg_to_rad(-20)
-    else:
-        fr.position=Vector2(15.25,-9.7)
-        fr.rotation=deg_to_rad(23.5)
-        fl.position=Vector2(-16.25,-9.7)
-        fl.rotation=deg_to_rad(23.5)
-        
-    
+	character.position=Vector2(-4.5,-5)
+	character.rotation=deg_to_rad(23.5)
+	if isHovercraft():
+		exhaust_1.position=Vector2(-8.75,32)
+		exhaust_1.rotation=deg_to_rad(-20)
+		exhaust_2.position=Vector2(14,32)
+		exhaust_2.rotation=deg_to_rad(-20)
+	else:
+		fr.position=Vector2(15.25,-9.7)
+		fr.rotation=deg_to_rad(23.5)
+		fl.position=Vector2(-16.25,-9.7)
+		fl.rotation=deg_to_rad(23.5)
+		
+	
 func steer_normal()->void:
-    character.position=Vector2(0,-4)
-    character.rotation=0
-    if isHovercraft():
-        exhaust_1.position=Vector2(-11,33)
-        exhaust_1.rotation=deg_to_rad(0)
-        exhaust_2.position=Vector2(11,33)
-        exhaust_2.rotation=deg_to_rad(0)
-    else:
-        fr.position=Vector2(16.25,-12.7)
-        fr.rotation=0
-        fl.position=Vector2(-15.25,-12.7)
-        fl.rotation=0
-        
+	character.position=Vector2(0,-4)
+	character.rotation=0
+	if isHovercraft():
+		exhaust_1.position=Vector2(-11,33)
+		exhaust_1.rotation=deg_to_rad(0)
+		exhaust_2.position=Vector2(11,33)
+		exhaust_2.rotation=deg_to_rad(0)
+	else:
+		fr.position=Vector2(16.25,-12.7)
+		fr.rotation=0
+		fl.position=Vector2(-15.25,-12.7)
+		fl.rotation=0
+		
 
 #start wheel spinning
 func all_wheel()->void:
-    fl.play()
-    fr.play()
-    rl.play()
-    rr.play()
-    
+	fl.play()
+	fr.play()
+	rl.play()
+	rr.play()
+	
 func stop_wheel()->void:
-    fl.stop()
-    fr.stop()
-    rl.stop()
-    rr.stop()
-        
+	fl.stop()
+	fr.stop()
+	rl.stop()
+	rr.stop()
+		
 
 func Forward()->void:
-    all_wheel()
-    if isHovercraft():
-        sounds.playHCRunSound()
-    if(not bs and friction > bsWheelLength and speed.length() > bsSpeed):
-        bs = true;
-        sounds.playBsSound()
-        bsf = moveAngCar > 0;
+	all_wheel()
+	if isHovercraft():
+		sounds.playHCRunSound()
+	if(not bs and friction > bsWheelLength and speed.length() > bsSpeed):
+		bs = true;
+		sounds.playBsSound()
+		bsf = moveAngCar > 0;
 
-    if(speed.length() < bsClearSpeed):
-        bs = false
-        
-    if(not bs and bsex <= 0):
-        if (isAtIce):
-            speed += Vector2(horse,0).rotated(rotation-PI/2) * 0.5
-        else:
-            speed += Vector2(horse,0).rotated(rotation-PI/2)
+	if(speed.length() < bsClearSpeed):
+		bs = false
+		
+	if(not bs and bsex <= 0):
+		if (isAtIce):
+			speed += Vector2(horse,0).rotated(rotation-PI/2) * 0.5
+		else:
+			speed += Vector2(horse,0).rotated(rotation-PI/2)
 
-    # if difference is too large: spawn smoke
-    if abs(get_angle_diff())> 140 or isLock:
-        spawn_smoke('smoke1',true)  
-        spawn_smoke('smoke1',false) 
+	# if difference is too large: spawn smoke
+	if abs(get_angle_diff())> 140 or isLock:
+		spawn_smoke('smoke1',true)  
+		spawn_smoke('smoke1',false) 
 
 func Backward()->void:
-    all_wheel()
-    if(not bs and bsex <= 0):
-        speed += -Vector2(horse, 0).rotated(rotation-PI/2)*0.5
-    if abs(get_angle_diff())<40 or isLock:
-        spawn_smoke("smoke1",true)
-        spawn_smoke("smoke1",false)
+	all_wheel()
+	if(not bs and bsex <= 0):
+		speed += -Vector2(horse, 0).rotated(rotation-PI/2)*0.5
+	if abs(get_angle_diff())<40 or isLock:
+		spawn_smoke("smoke1",true)
+		spawn_smoke("smoke1",false)
 
 func Clearward()->void:
-      if isHovercraft():
-        sounds.stopHCRunSound()
+	  if isHovercraft():
+		sounds.stopHCRunSound()
 
 
 
 func TurnLeft()->void:
-    if(not isLock):
-        if(not isBack):
-            if abs(get_angle_diff())<145:
-                rotation_degrees += -min(speed.length() * carRotationWheel,maxRotationWheel)
-            #facing downwards:
-            else:
-               isBack = true;
-               rotation_degrees += min(speed.length() * carRotationWheel / 2,maxRotationWheel)
-        elif abs(get_angle_diff())<60: 
-            isBack = false;
-            rotation_degrees += - min(speed.length() * carRotationWheel,maxRotationWheel)
-        else:
-            rotation_degrees += min(speed.length() * carRotationWheel / 2,maxRotationWheel)
-        steer_left()
+	if(not isLock):
+		if(not isBack):
+			if abs(get_angle_diff())<145:
+				rotation_degrees += -min(speed.length() * carRotationWheel,maxRotationWheel)
+			#facing downwards:
+			else:
+			   isBack = true;
+			   rotation_degrees += min(speed.length() * carRotationWheel / 2,maxRotationWheel)
+		elif abs(get_angle_diff())<60: 
+			isBack = false;
+			rotation_degrees += - min(speed.length() * carRotationWheel,maxRotationWheel)
+		else:
+			rotation_degrees += min(speed.length() * carRotationWheel / 2,maxRotationWheel)
+		steer_left()
 
 func TurnLRight()->void:
-    if(not isLock):
-        if(not isBack):
-            if abs(get_angle_diff())<145:
-                rotation_degrees += min(speed.length() * carRotationWheel,maxRotationWheel)
-            #facing downwards:
-            else:
-               isBack = true;
-               rotation_degrees += -min(speed.length() * carRotationWheel / 2,maxRotationWheel)
-        elif abs(get_angle_diff())<60: 
-            isBack = false;
-            rotation_degrees += min(speed.length() * carRotationWheel,maxRotationWheel)
-        else:
-            rotation_degrees += -min(speed.length() * carRotationWheel / 2,maxRotationWheel)
-        steer_right()
+	if(not isLock):
+		if(not isBack):
+			if abs(get_angle_diff())<145:
+				rotation_degrees += min(speed.length() * carRotationWheel,maxRotationWheel)
+			#facing downwards:
+			else:
+			   isBack = true;
+			   rotation_degrees += -min(speed.length() * carRotationWheel / 2,maxRotationWheel)
+		elif abs(get_angle_diff())<60: 
+			isBack = false;
+			rotation_degrees += min(speed.length() * carRotationWheel,maxRotationWheel)
+		else:
+			rotation_degrees += -min(speed.length() * carRotationWheel / 2,maxRotationWheel)
+		steer_right()
 
 func CancelTurn()->void:
-    steer_normal()
+	steer_normal()
 
 
 func Update()->void:
-    if isHovercraft():
-        Water()
-    if(not isLock):
-        UpdateCarPos()
-        
-    UpdateViewMap()
-    UpdateSpeed()
-    Jumping()
-    #sounds.Loopsounds()
-    var dir_modifier: float = 1.0 if bsf else -1.0
-    if(bs):
-        rotation_degrees += 1 * speed.length()*dir_modifier
-    if(bsex > 0):
-        rotation_degrees += min(bsex,50) * dir_modifier
-        bsex-=1
-    if(friction > 40 and speed.length() > 2):
-        if(speed.length() > bsSpeed):
-            if(friction > 60):
-                sounds.playTurnBsSound(0)
-            else:
-                sounds.playTurnBsSound(1)
-        spawn_smoke("smoke1",moveAngCar < 0)
-        if(friction > 70):
-            spawn_smoke("smoke1",moveAngCar > 0)
-    elif(speed.length() < 0.5):
-        stop_wheel()
-    else:
-        all_wheel()
+	if isHovercraft():
+		Water()
+	if(not isLock):
+		UpdateCarPos()
+		
+	UpdateViewMap()
+	UpdateSpeed()
+	Jumping()
+	#sounds.Loopsounds()
+	var dir_modifier: float = 1.0 if bsf else -1.0
+	if(bs):
+		rotation_degrees += 1 * speed.length()*dir_modifier
+	if(bsex > 0):
+		rotation_degrees += min(bsex,50) * dir_modifier
+		bsex-=1
+	if(friction > 40 and speed.length() > 2):
+		if(speed.length() > bsSpeed):
+			if(friction > 60):
+				sounds.playTurnBsSound(0)
+			else:
+				sounds.playTurnBsSound(1)
+		spawn_smoke("smoke1",moveAngCar < 0)
+		if(friction > 70):
+			spawn_smoke("smoke1",moveAngCar > 0)
+	elif(speed.length() < 0.5):
+		stop_wheel()
+	else:
+		all_wheel()
 
 #get difference beteween speed angle and sprite angle
 func get_angle_diff()->float:
-    return rad_to_deg(angle_difference(speed.angle(), rotation-PI/2))
+	return rad_to_deg(angle_difference(speed.angle(), rotation-PI/2))
 
 #spawn smoke particle
 func spawn_smoke(type:String, lr:bool)->void:
-    if(not isHovercraft() and jumpCurrheight < 1):
-        var smokeinst:Node2D
-        if type=='smoke1':
-            smokeinst=smoke_1.instantiate() as Node2D
-        else:
-            smokeinst=smoke_2.instantiate() as Node2D
-        get_parent().add_child(smokeinst)
-        if(lr):
-            #spawn in third point, with some offset
-            smokeinst.global_position=collisionPoints[2].global_position+Vector2(-5,-7)
-        else:
-            #spawn in fourth point, with some offset
-            smokeinst.global_position=collisionPoints[3].global_position+Vector2(-5,-7)
-        smokeinst.scale=scale
-        smokeinst.rotation = rotation
+	if(not isHovercraft() and jumpCurrheight < 1):
+		var smokeinst:Node2D
+		if type=='smoke1':
+			smokeinst=smoke_1.instantiate() as Node2D
+		else:
+			smokeinst=smoke_2.instantiate() as Node2D
+		get_parent().add_child(smokeinst)
+		if(lr):
+			#spawn in third point, with some offset
+			smokeinst.global_position=collisionPoints[2].global_position+Vector2(-5,-7)
+		else:
+			#spawn in fourth point, with some offset
+			smokeinst.global_position=collisionPoints[3].global_position+Vector2(-5,-7)
+		smokeinst.scale=scale
+		smokeinst.rotation = rotation
 
 
-    
+	
 #manage water-related particles
 func Water()->void:
-    var targetpos:Vector2
-    var smokeinst:Node2D
-    var tempscale:float
-    if(jumpCurrheight < 1):
-        smokeinst=smoke_2.instantiate() as Node2D
-        get_parent().add_child(smokeinst)
-        if(randi()%2 == 1):
-            targetpos=collisionPoints[3].position+Vector2(-7.5,21.5)
-        else:
-            targetpos=collisionPoints[2].position+Vector2(-11.5,21.5)
-        
-        tempscale=(randi_range(30, 69)) / 100.0*scale.x
-        smokeinst.scale=Vector2(tempscale,tempscale)
-        targetpos=to_global(targetpos+Vector2(randi_range(-4, 4),0))
-        smokeinst.global_position.x=targetpos.x
-        smokeinst.global_position.y=targetpos.y
-        smokeinst.rotation=rotation
-        #is it true?
-        smokeinst.z_index=0
+	var targetpos:Vector2
+	var smokeinst:Node2D
+	var tempscale:float
+	if(jumpCurrheight < 1):
+		smokeinst=smoke_2.instantiate() as Node2D
+		get_parent().add_child(smokeinst)
+		if(randi()%2 == 1):
+			targetpos=collisionPoints[3].position+Vector2(-7.5,21.5)
+		else:
+			targetpos=collisionPoints[2].position+Vector2(-11.5,21.5)
+		
+		tempscale=(randi_range(30, 69)) / 100.0*scale.x
+		smokeinst.scale=Vector2(tempscale,tempscale)
+		targetpos=to_global(targetpos+Vector2(randi_range(-4, 4),0))
+		smokeinst.global_position.x=targetpos.x
+		smokeinst.global_position.y=targetpos.y
+		smokeinst.rotation=rotation
+		#is it true?
+		smokeinst.z_index=0
 
 #update car position
 func UpdateCarPos()->void:
-    GetHitCar()
-    stepx=snapped(speed[0],0.1)
-    stepy=snapped(speed[1],0.1)
-    tempx = position.x + stepx
-    tempy = position.y + stepy
-    GetGrassStatus(tempx,tempy)
-    GetHitEvent(tempx,tempy)
-    GetHitStatus(tempx,tempy)
-    position.x = tempx
-    position.y = tempy
+	GetHitCar()
+	stepx=snapped(speed[0],0.1)
+	stepy=snapped(speed[1],0.1)
+	tempx = position.x + stepx
+	tempy = position.y + stepy
+	GetGrassStatus(tempx,tempy)
+	GetHitEvent(tempx,tempy)
+	GetHitStatus(tempx,tempy)
+	position.x = tempx
+	position.y = tempy
 
 
 func UpdateViewMap()->void:
-    carViewInstance.position=map.offset+global_position*map.ScaledTimes
-    carViewInstance.rotation=rotation-PI/2
+	carViewInstance.position=map.offset+global_position*map.ScaledTimes
+	carViewInstance.rotation=rotation-PI/2
 
 func UpdateSpeed()->void:
-    var dir:int
-    if(jumpCurrheight < 1):
-        moveAngCar = (get_angle_diff())
-        friction = abs(moveAngCar)
-        if(friction > 90):
-            friction = 180 - friction;
-        var dragFactor:float=rollGratingNum + int(friction) * glideGratingNum
-        speed *= max(0.0, 1.0 - dragFactor)
-        if(moveAngCar < 90 and moveAngCar > 0 or moveAngCar < -90):
-            dir = -1;
-        else:
-            dir = 1;
-        #calculate magnitude and direction of force
-        var slide_magnitude: float = speed.length() * (glideGratingNum * int(90 - friction))
-        var slide_force: Vector2 = speed.orthogonal() * dir
-        slide_force = slide_force.normalized() * slide_magnitude
-        #apply the force
-        speed += slide_force
+	var dir:int
+	if(jumpCurrheight < 1):
+		moveAngCar = (get_angle_diff())
+		friction = abs(moveAngCar)
+		if(friction > 90):
+			friction = 180 - friction;
+		var dragFactor:float=rollGratingNum + int(friction) * glideGratingNum
+		speed *= max(0.0, 1.0 - dragFactor)
+		if(moveAngCar < 90 and moveAngCar > 0 or moveAngCar < -90):
+			dir = -1;
+		else:
+			dir = 1;
+		#calculate magnitude and direction of force
+		var slide_magnitude: float = speed.length() * (glideGratingNum * int(90 - friction))
+		var slide_force: Vector2 = speed.orthogonal() * dir
+		slide_force = slide_force.normalized() * slide_magnitude
+		#apply the force
+		speed += slide_force
 
 
 #jump mechanic related to speed
 func JumpBySpeed(height:float)->void:
-    if(jumpCurrheight < heightOverWall):
-        jumpCurrheight += height * speed.length() * jumpspeed;
-        sounds.playFastSound()
-        sounds.playHCJumpSound()
-        sounds.playJumpSound()
-        
+	if(jumpCurrheight < heightOverWall):
+		jumpCurrheight += height * speed.length() * jumpspeed;
+		sounds.playFastSound()
+		sounds.playHCJumpSound()
+		sounds.playJumpSound()
+		
 func Jump(height:float)->void:
-    jumpPrevheight = jumpCurrheight
-    jumpCurrheight += height
-    sounds.playHCJumpSound()
-    
-    
-    
+	jumpPrevheight = jumpCurrheight
+	jumpCurrheight += height
+	sounds.playHCJumpSound()
+	
+	
+	
 func Jumping()->void:
-    var temp_height:float = jumpCurrheight
-    jumpCurrheight += jumpCurrheight - jumpPrevheight + downWeight
-    if(jumpCurrheight > 1):
-        z_index=airLayer
-    else:
-        z_index=1
-    if(jumpCurrheight < jumpFloorHeight):
-        if(jumpFloorHeight - jumpCurrheight > 0.5):
-            sounds.playHCEndJumpSound()
-            
-        jumpCurrheight = (- jumpCurrheight) * jumpSpring
-        jumpPrevheight = (- temp_height) * jumpSpring
-    else:
-        jumpPrevheight = temp_height
-    jumpFloorHeight = 0 
-    var visual_scale:float = 1.0 + (jumpCurrheight * 0.0175)
-    visual.scale = Vector2(visual_scale*shrinkscale, visual_scale*shrinkscale)
+	var temp_height:float = jumpCurrheight
+	jumpCurrheight += jumpCurrheight - jumpPrevheight + downWeight
+	if(jumpCurrheight > 1):
+		z_index=airLayer
+	else:
+		z_index=1
+	if(jumpCurrheight < jumpFloorHeight):
+		if(jumpFloorHeight - jumpCurrheight > 0.5):
+			sounds.playHCEndJumpSound()
+			
+		jumpCurrheight = (- jumpCurrheight) * jumpSpring
+		jumpPrevheight = (- temp_height) * jumpSpring
+	else:
+		jumpPrevheight = temp_height
+	jumpFloorHeight = 0 
+	var visual_scale:float = 1.0 + (jumpCurrheight * 0.0175)
+	visual.scale = Vector2(visual_scale*shrinkscale, visual_scale*shrinkscale)
 
 
 
 func GetHitCar()->void:
-    var overlapping_areas:Array[Area2D] = body.get_overlapping_areas()
-    for area:Area2D in overlapping_areas:
-        if area.is_in_group("Body"):
-            #calculate collisions
-            var caropp:Car=area.get_parent().get_parent() as Car
-            #not sure
-            if playerID < caropp.playerID:
-                BeAttacked(caropp)
+	var overlapping_areas:Array[Area2D] = body.get_overlapping_areas()
+	for area:Area2D in overlapping_areas:
+		if area.is_in_group("Body"):
+			#calculate collisions
+			var caropp:Car=area.get_parent().get_parent() as Car
+			#not sure
+			if playerID < caropp.playerID:
+				BeAttacked(caropp)
 
    
  
 func GetGrassStatus(tx:float, ty:float)->void:
-    if(jumpCurrheight > heightOverWall) or isResetting:
-        return 
-        
-    var numGrassHits:int = 0
-    #each point in the car
-    var point:int = 1
-    var lineCollided:EdLine
-    #calculate which points collide with grass
-    while(point < 5):
-        #point to global
-        var pt:Vector2 = collisionPoints[point-1].position
-        #_loc3_ = this.ToPointNow(this.Dmc["point" + _loc2_]._x,this.Dmc["point" + _loc2_]._y);
-        pt+=Vector2(tx,ty)
-        lineCollided=map.edm.getHitFace(pt)
-        if(lineCollided!=null):
-            numGrassHits += 1
-        point += 1
-    #if no point collides: return
-    if(numGrassHits == 0):
-            return
-    #else, slow down     
-    speed *= (1.0 - grassGratingNum * numGrassHits)
-    stepx = snapped(speed.x, 0.1)
-    stepy = snapped(speed.y, 0.1)
-    tempx = position.x + stepx;
-    tempy = position.y + stepy;
-    
-    
+	if(jumpCurrheight > heightOverWall) or isResetting:
+		return 
+		
+	var numGrassHits:int = 0
+	#each point in the car
+	var point:int = 1
+	var lineCollided:EdLine
+	#calculate which points collide with grass
+	while(point < 5):
+		#point to global
+		var pt:Vector2 = collisionPoints[point-1].position
+		#_loc3_ = this.ToPointNow(this.Dmc["point" + _loc2_]._x,this.Dmc["point" + _loc2_]._y);
+		pt+=Vector2(tx,ty)
+		lineCollided=map.edm.getHitFace(pt)
+		if(lineCollided!=null):
+			numGrassHits += 1
+		point += 1
+	#if no point collides: return
+	if(numGrassHits == 0):
+			return
+	#else, slow down     
+	speed *= (1.0 - grassGratingNum * numGrassHits)
+	stepx = snapped(speed.x, 0.1)
+	stepy = snapped(speed.y, 0.1)
+	tempx = position.x + stepx;
+	tempy = position.y + stepy;
+	
+	
 func GetHitEvent(tx:float, ty:float)->void:
-    if(jumpCurrheight> heightOverWall or isResetting):
-        return 
-        
-    var pointid:int = 1
-    var pointpos:Vector2
-    var point: Node2D
-    var collided: EdLine
-    while(pointid < 5):
-        point=collisionPoints[pointid-1]
-        pointpos=point.position+Vector2(tx,ty)
-        collided=map.edevent.getHitFace(pointpos)
-        if(collided!=null):
-            map.GetHitEventStatus(collided.getId(),playerID)
-            return
-        pointid+=1
-    
+	if(jumpCurrheight> heightOverWall or isResetting):
+		return 
+		
+	var pointid:int = 1
+	var pointpos:Vector2
+	var point: Node2D
+	var collided: EdLine
+	while(pointid < 5):
+		point=collisionPoints[pointid-1]
+		pointpos=point.position+Vector2(tx,ty)
+		collided=map.edevent.getHitFace(pointpos)
+		if(collided!=null):
+			map.GetHitEventStatus(collided.getId(),playerID)
+			return
+		pointid+=1
+	
 
 #maybe returns wall angle?
 func GetHitStatusAng(tx:float,ty:float)->float:
-    for point:Node2D in collisionPoints:
-        var pointpos:Vector2=point.position
-        pointpos+=Vector2(tx,ty)
-        var lineCollided:EdLine = map.ed.getHitFace(pointpos)
-        if(lineCollided!=null):
-            for jumpCoord:int in map.canBeJumpWall:
-                if (jumpCurrheight>heightOverWall and jumpCoord==lineCollided.getId()):
-                    return NAN
-            return (lineCollided.GetAngle())
-    return NAN
-    
-    
+	for point:Node2D in collisionPoints:
+		var pointpos:Vector2=point.position
+		pointpos+=Vector2(tx,ty)
+		var lineCollided:EdLine = map.ed.getHitFace(pointpos)
+		if(lineCollided!=null):
+			for jumpCoord:int in map.canBeJumpWall:
+				if (jumpCurrheight>heightOverWall and jumpCoord==lineCollided.getId()):
+					return NAN
+			return (lineCollided.GetAngle())
+	return NAN
+	
+	
 #flash's 0 deg should be equal to godot's 90 deg
 func GetHitStatus(tx:float, ty:float)->void:
-    var wallAngledeg:float =GetHitStatusAng(tx,ty)
-    #no wall detected
-    if(is_nan(wallAngledeg)):
-        return 
-    sounds.playbumpsound()
-    var speedangle:float=speed.angle()
-    var wallAngle :float= deg_to_rad(wallAngledeg)
-    var speedwallangle:float=wrapf(
-        -2*rad_to_deg(speedangle-wallAngle),
-        -180.0,
-        180.0
-    )
-    #-pi/2 to account for godot's angle system
+	var wallAngledeg:float =GetHitStatusAng(tx,ty)
+	#no wall detected
+	if(is_nan(wallAngledeg)):
+		return 
+	sounds.playbumpsound()
+	var speedangle:float=speed.angle()
+	var wallAngle :float= deg_to_rad(wallAngledeg)
+	var speedwallangle:float=wrapf(
+		-2*rad_to_deg(speedangle-wallAngle),
+		-180.0,
+		180.0
+	)
+	#-pi/2 to account for godot's angle system
     var poswallangle:float=wrapf(
         rad_to_deg(wallAngle-rotation-PI/2),
         -180.0,
@@ -632,24 +632,24 @@ func SetSprites()->void:
     var basepath:String="res://Assets/Images/Vehicles/Cars/"
     var charname:String
     if CharID==1:
-        charname='raccoon'
+		charname='raccoon'
     elif CharID==2:
-        charname='cat'
+		charname='cat'
     elif CharID==3:
-        charname='bear'
+		charname='bear'
     elif CharID==4:
-        charname='penguin'
+		charname='penguin'
     elif CharID==5:
-        charname='dog'
+		charname='dog'
     elif CharID==6:
-        charname='panda'
+		charname='panda'
     var base: Sprite2D = $Visual/Car/Base
-    base.texture=load(basepath+charname+'/base.png')
+	base.texture=load(basepath+charname+'/base.png')
     var hc: Sprite2D = $Visual/Hovercraft/Base
-    hc.texture=load(basepath+charname+'/hovercraft.png')
-    exhaust_1.texture=load(basepath+charname+'/hcback.png')
-    exhaust_2.texture=load(basepath+charname+'/hcback.png')
-    character.texture=load(basepath+charname+'/char.png')
+	hc.texture=load(basepath+charname+'/hovercraft.png')
+	exhaust_1.texture=load(basepath+charname+'/hcback.png')
+	exhaust_2.texture=load(basepath+charname+'/hcback.png')
+	character.texture=load(basepath+charname+'/char.png')
     
 
 
