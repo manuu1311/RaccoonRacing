@@ -29,7 +29,8 @@ func run()->void:
 
 func delme()->void:
     await player.car.map.get_tree().create_timer(grow_time).timeout
-    player.prop.Delprop(self)
+    if is_instance_valid(player.car):
+        player.prop.Delprop(self)
     
 func del()->void:
     queue_free()

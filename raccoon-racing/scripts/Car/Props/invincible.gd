@@ -21,10 +21,11 @@ func run()->void:
 	
 func delme()->void:
 	await player.car.get_tree().create_timer(UseTime).timeout
-	player.IsUsingProp=false
-	if(player.PlayerID==0):
-		MusicPlayer.PlayMusic("map"+str(GameData.currentMap))
-	player.prop.Delprop(self);
+	if is_instance_valid(player.car):
+		player.IsUsingProp=false
+		if(player.PlayerID==0):
+			MusicPlayer.PlayMusic("map"+str(GameData.currentMap))
+		player.prop.Delprop(self);
 	
 func del()->void:
 	player.car.prop_effector.StopInvincible()

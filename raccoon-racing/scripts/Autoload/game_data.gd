@@ -3,14 +3,7 @@ extends Node
 '''
 #TODO: give props depending on orderid only, nothing else
 wall in map 2 is bugged, probably needs to be made upside down
-ui cup select, fade music only after the animation is over
-make sure cup time is reset after each cup over
 after changing character, special character prop icon should be updated
-SCRIPT ERROR: Invalid assignment of property or key 'isResetting' with value of type 'bool' on a base object of type 'previously freed'.
-          at: AIPlayer.RestartRace (res://scripts/Car/ai_player.gd:235)
-          GDScript backtrace (most recent call first):
-              [0] RestartRace (res://scripts/Car/ai_player.gd:235)
-              [1] Reset (res://scripts/Car/ai_player.gd:232)
 nowpointid in player sometimes does not update for some reason
 ice trail is still bugged, makes spin and pushes away, maybe clamp rotation?
 in map 4, seagulls are not flying

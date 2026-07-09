@@ -21,14 +21,15 @@ func usebomb()->void:
 	await player.car.get_tree().create_timer(0.3).timeout
 	if is_instance_valid(bs_in_map):
 		bs_in_map.IsActivated = true;
-	delme();
+		delme();
 	
 func run()->void:
 	pass
 	
 func delme()->void:
 	await player.car.get_tree().create_timer(30).timeout
-	player.prop.Delprop(self);
+	if is_instance_valid(player.car):
+		player.prop.Delprop(self);
 	
 func del()->void:
 	if is_instance_valid(bs_in_map) and is_instance_valid(player.car.map):

@@ -16,7 +16,8 @@ func run()->void:
 	
 func delme()->void:
 	await player.car.get_tree().create_timer(UseTime).timeout
-	player.prop.Delprop(self);
+	if is_instance_valid(player.car):
+		player.prop.Delprop(self);
 
 func del()->void:
 	player.prop.IsUseShield = false;

@@ -32,7 +32,8 @@ func _init(playerinst:Player)->void:
 
 func delme()->void:
     await player.car.get_tree().create_timer(30).timeout
-    player.prop.Delprop(self)
+    if is_instance_valid(player.car):
+        player.prop.Delprop(self)
     
     
 func del()->void:

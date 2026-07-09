@@ -17,7 +17,8 @@ func run()->void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func delme() -> void:
     await player.car.get_tree().create_timer(UseTime).timeout
-    DeleteProp()
+    if is_instance_valid(player.car):
+        DeleteProp()
 
 func DeleteProp()->void:
     player.prop.Delprop(self)
