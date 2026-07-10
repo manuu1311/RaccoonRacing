@@ -1243,16 +1243,16 @@ position = Vector2(-1741.209, -1445.5706)
 
 [node name="Jumpwalls0" type="Node2D" parent="PointsHC" unique_id=524294497]
 
-[node name="jumpwall0" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=944984453]
+[node name="jumpwall3" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=944984453]
 position = Vector2(319.3222, -103.71921)
 
-[node name="jumpwall1" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1279276257]
+[node name="jumpwall2" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1279276257]
 position = Vector2(635.7939, -127.10382)
 
-[node name="jumpwall2" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=414835087]
-position = Vector2(635.2625, 200.44699)
+[node name="jumpwall1" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=414835087]
+position = Vector2(636.2625, 200.44699)
 
-[node name="jumpwall3" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=984065331]
+[node name="jumpwall0" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=984065331]
 position = Vector2(324.494, 204.96278)
 
 [node name="Propbox" type="Node2D" parent="PointsHC" unique_id=1686546624]

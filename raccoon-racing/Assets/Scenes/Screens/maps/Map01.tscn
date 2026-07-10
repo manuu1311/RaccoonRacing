@@ -1532,7 +1532,7 @@ position = Vector2(-1628.4873, -711.49414)
 position = Vector2(-1219.496, -889.76135)
 
 [node name="point3" type="Marker2D" parent="PointsCar/Points" unique_id=987888284]
-position = Vector2(-782.085, -698.015)
+position = Vector2(-782.085, -740.625)
 
 [node name="point4" type="Marker2D" parent="PointsCar/Points" unique_id=1010714239]
 position = Vector2(-406.83414, -532.7648)

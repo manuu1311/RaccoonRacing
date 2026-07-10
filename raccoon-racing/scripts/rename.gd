@@ -2,8 +2,8 @@
 extends EditorScript
 
 # Configure these in the Inspector before running the script!
-@export var base_name: String = "wall"
-@export var total_nodes: int = 25
+@export var base_name: String = "jumpwall"
+@export var total_nodes: int = 4
 @export var starting_index: int = 0
 
 func _run() -> void:

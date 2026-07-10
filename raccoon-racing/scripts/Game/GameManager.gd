@@ -66,33 +66,33 @@ func _ready() -> void:
 func LoadMap()->void:
 	var minimap_instance:CanvasLayer
 	if GameData.currentMap==1:
-		map=preload("res://Assets/Scenes/Screens/maps/Map01.tscn").instantiate() as Map
+		map=load("res://Assets/Scenes/Screens/maps/Map01.tscn").instantiate() as Map
 		add_child(map)
 		if GameData.current_vehicle==GameData.VehicleType.CAR:
-			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap01.tscn").instantiate()
+			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap01.tscn").instantiate()
 		else:
-			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap02.tscn").instantiate()
+			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap02.tscn").instantiate()
 	elif GameData.currentMap==2:
-		map=preload("res://Assets/Scenes/Screens/maps/Map02.tscn").instantiate() as Map
+		map=load("res://Assets/Scenes/Screens/maps/Map02.tscn").instantiate() as Map
 		add_child(map)
 		if GameData.current_vehicle==GameData.VehicleType.CAR:
-			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap11.tscn").instantiate()
+			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap11.tscn").instantiate()
 		else:
-			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap12.tscn").instantiate()
+			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap12.tscn").instantiate()
 	elif GameData.currentMap==3:
-		map=preload("res://Assets/Scenes/Screens/maps/Map03.tscn").instantiate() as Map
+		map=load("res://Assets/Scenes/Screens/maps/Map03.tscn").instantiate() as Map
 		add_child(map)
 		if GameData.current_vehicle==GameData.VehicleType.CAR:
-			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap21.tscn").instantiate()
+			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap21.tscn").instantiate()
 		else:
-			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap22.tscn").instantiate()
+			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap22.tscn").instantiate()
 	elif GameData.currentMap==4:
-		map=preload("res://Assets/Scenes/Screens/maps/Map04.tscn").instantiate() as Map
+		map=load("res://Assets/Scenes/Screens/maps/Map04.tscn").instantiate() as Map
 		add_child(map)
 		if GameData.current_vehicle==GameData.VehicleType.CAR:
-			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap31.tscn").instantiate()
+			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap31.tscn").instantiate()
 		else:
-			minimap_instance = preload("res://Assets/Scenes/Screens/maps/Minimap32.tscn").instantiate()
+			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap32.tscn").instantiate()
 	minimap_instance.name = "Minimap"
 	map.add_child(minimap_instance)
 
