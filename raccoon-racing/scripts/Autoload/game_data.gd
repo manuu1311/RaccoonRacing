@@ -2,6 +2,7 @@ extends Node
 
 '''
 #TODO: give props depending on orderid only, nothing else
+map4, fill empty space with water tiles
 after changing character, special character prop icon should be updated
 ice trail is still bugged, makes spin and pushes away, maybe clamp rotation?
 '''

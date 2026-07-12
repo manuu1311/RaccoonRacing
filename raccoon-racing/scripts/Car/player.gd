@@ -21,7 +21,29 @@ var hud:HUDManager
 var AiReflect:int
 var ScorePoints:int=0
 signal racefinished
-
+'''
+1:become invincible
+2:sleep other players
+3:shield
+4:deploy mine
+5:missile to first player
+6:missile to next player
+7:banana
+8:turbo
+9:character signature:
+	1:double turbo
+	2:bombs
+	3:double mine
+	4:ice trail
+	5:rotating bones
+	6:laser shrink ray
+'''
+const POSITION_PROBABILITIES: Dictionary = {
+	0: [0,  0, 30, 30,  0,  0, 30,  0, 10], # 1st Place
+	1: [5,  0, 15, 20, 5, 15, 15, 15, 10], # 2nd Place
+	2: [10, 10, 5,  5, 15, 20, 5, 20, 10], # 3rd Place
+	3: [15, 20, 0,  0, 20, 15,  0, 20, 10]  # 4th Place
+}
 func _init(id:int,control:control_type) -> void:
 	PlayerID=id
 	#TODO: manage ordering
@@ -159,8 +181,27 @@ func ClearPropBox(id:int)->void:
 	if hud!=null:
 		hud.PropUsed(id)
 
-
 func GetPropPer()->int:
+	# Clamp OrderId to ensure it doesn't break if index goes out of bounds
+	var position: int = clampi(OrderId, 0, 3)
+	
+	# Fetch the weights for the current position
+	var weights: Array = POSITION_PROBABILITIES[position]
+	
+	# Roll a number between 0 and 99 (Total weight = 100)
+	var roll: int = randi_range(0, 99)
+	
+	var running_total: int = 0
+	
+	# Iterate through the weights to find where the roll lands
+	for i in range(weights.size()):
+		running_total += weights[i]
+		if roll < running_total:
+			return i + 1 # Item IDs start at 1, arrays start at 0
+			
+	return 7
+
+func GetPropPer_LEGACY()->int:
 	var _loc5_:int = randi_range(0,99);
 	if(charid == 1 && OrderId == 0 && PlayerID == 0):
 		_loc5_ = randi_range(0,89);

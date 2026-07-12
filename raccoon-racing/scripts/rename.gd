@@ -5,6 +5,7 @@ extends EditorScript
 @export var base_name: String = "jumpwall"
 @export var total_nodes: int = 4
 @export var starting_index: int = 0
+var swappos=false
 
 func _run() -> void:
 	var parent = get_editor_interface().get_selection().get_selected_nodes()
@@ -29,22 +30,23 @@ func _run() -> void:
 
 	# 2. Swap Positions 
 	# We use 'i' as the array index (0 to half_count) to safely swap outer edge pairs.
-	var half_count = total_nodes / 2
-	for i in range(half_count):
-		var opposite_array_index = total_nodes - 1 - i
-		var node_a = target_nodes[i]
-		var node_b = target_nodes[opposite_array_index]
-		
-		if node_a is Node2D and node_b is Node2D:
-			var temp_pos = node_a.position
-			node_a.position = node_b.position
-			node_b.position = temp_pos
-		elif node_a is Node3D and node_b is Node3D:
-			var temp_pos = node_a.position
-			node_a.position = node_b.position
-			node_b.position = temp_pos
+	if swappos:
+		var half_count = total_nodes / 2
+		for i in range(half_count):
+			var opposite_array_index = total_nodes - 1 - i
+			var node_a = target_nodes[i]
+			var node_b = target_nodes[opposite_array_index]
+			
+			if node_a is Node2D and node_b is Node2D:
+				var temp_pos = node_a.position
+				node_a.position = node_b.position
+				node_b.position = temp_pos
+			elif node_a is Node3D and node_b is Node3D:
+				var temp_pos = node_a.position
+				node_a.position = node_b.position
+				node_b.position = temp_pos
 
-	print("Positions successfully swapped for ", total_nodes, " nodes.")
+		print("Positions successfully swapped for ", total_nodes, " nodes.")
 
 	# 3. Rename to TEMPORARY names to prevent duplicate name clashes
 	for i in range(total_nodes):

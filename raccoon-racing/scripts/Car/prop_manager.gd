@@ -15,7 +15,23 @@ func run()->void:
 	for propinst:Prop in propArr:
 		propinst.run()
 
-
+'''
+1:become invincible
+2:sleep other players
+3:shield
+4:deploy mine
+5:missile to first player
+6:missile to next player
+7:banana
+8:turbo
+9:character signature:
+	1:double turbo
+	2:bombs
+	3:double mine
+	4:ice trail
+	5:rotating bones
+	6:laser shrink ray
+'''
 func UseProp()->void:
 	var _loc2_:int;
 	match(NowPorpId):

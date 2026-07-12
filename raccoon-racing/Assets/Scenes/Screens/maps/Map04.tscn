@@ -1116,9 +1116,6 @@ position = Vector2(-206.52008, 915.7245)
 
 [node name="Walls2" type="Node2D" parent="PointsHC" unique_id=379656507]
 
-[node name="wall0" type="Marker2D" parent="PointsHC/Walls2" unique_id=795875665]
-position = Vector2(1116.1847, 976.8726)
-
 [node name="wall1" type="Marker2D" parent="PointsHC/Walls2" unique_id=668591619]
 position = Vector2(1096.778, 973.14056)
 
@@ -1140,20 +1137,11 @@ position = Vector2(835.3151, 151.88855)
 [node name="wall7" type="Marker2D" parent="PointsHC/Walls2" unique_id=446057168]
 position = Vector2(827.6654, 105.99005)
 
-[node name="wall8" type="Marker2D" parent="PointsHC/Walls2" unique_id=717317018]
-position = Vector2(847.88153, -103.28601)
-
 [node name="wall9" type="Marker2D" parent="PointsHC/Walls2" unique_id=1921824944]
 position = Vector2(850.19885, -149.6323)
 
-[node name="wall10" type="Marker2D" parent="PointsHC/Walls2" unique_id=2806361]
-position = Vector2(829.11127, -152.87654)
-
 [node name="wall11" type="Marker2D" parent="PointsHC/Walls2" unique_id=348385326]
 position = Vector2(808.9506, -149.16884)
-
-[node name="wall12" type="Marker2D" parent="PointsHC/Walls2" unique_id=96691326]
-position = Vector2(798.5227, -125.3005)
 
 [node name="wall13" type="Marker2D" parent="PointsHC/Walls2" unique_id=386902754]
 position = Vector2(694.6187, 145.57268)
@@ -1191,20 +1179,17 @@ position = Vector2(425.39465, 984.0311)
 [node name="wall24" type="Marker2D" parent="PointsHC/Walls2" unique_id=1465745467]
 position = Vector2(475.51993, 991.70795)
 
-[node name="wall25" type="Marker2D" parent="PointsHC/Walls2" unique_id=1843767216]
-position = Vector2(1118.7971, 1039.5713)
+[node name="wall25" type="Marker2D" parent="PointsHC/Walls2" unique_id=634476376]
+position = Vector2(1047.8881, 1107.8679)
 
-[node name="wall26" type="Marker2D" parent="PointsHC/Walls2" unique_id=1790587476]
-position = Vector2(1088.1942, 1044.4229)
+[node name="wall26" type="Marker2D" parent="PointsHC/Walls2" unique_id=78254087]
+position = Vector2(1078.1177, 1099.6573)
 
 [node name="wall27" type="Marker2D" parent="PointsHC/Walls2" unique_id=1900629417]
 position = Vector2(1088.9407, 1079.8774)
 
-[node name="wall28" type="Marker2D" parent="PointsHC/Walls2" unique_id=78254087]
-position = Vector2(1078.1177, 1099.6573)
-
-[node name="wall29" type="Marker2D" parent="PointsHC/Walls2" unique_id=634476376]
-position = Vector2(1047.8881, 1107.8679)
+[node name="wall28" type="Marker2D" parent="PointsHC/Walls2" unique_id=1790587476]
+position = Vector2(1088.1942, 1044.4229)
 
 [node name="Walls1" type="Node2D" parent="PointsHC" unique_id=1114490951]
 
