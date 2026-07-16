@@ -243,6 +243,7 @@ speed_scale = 1.3
 position = Vector2(475.99997, -1894)
 
 [node name="PointsCar" type="Node2D" parent="." unique_id=769861280]
+visible = false
 
 [node name="Flags" type="Node2D" parent="PointsCar" unique_id=675706151]
 

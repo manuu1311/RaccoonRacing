@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bnhg8deqf6rsj"]
+
+[ext_resource type="Script" uid="uid://dba1jm8b3m437" path="res://scripts/Network/network_manager.gd" id="1_v7k0f"]
+
+[node name="UiMultiplayerLobby" type="CanvasLayer" unique_id=1628816553]
+script = ExtResource("1_v7k0f")
+
+[node name="HostButton" type="Control" parent="." unique_id=1031518419]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="HostButton" unique_id=2102453522]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 89.0
+offset_right = 267.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 48
+text = "Host"
+
+[node name="JoinButton" type="Control" parent="." unique_id=788650091]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="JoinButton" unique_id=528435700]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 239.0
+offset_right = 321.0
+offset_bottom = 314.0
+theme_override_font_sizes/font_size = 48
+text = "Join"
+
+[node name="LineEdit" type="LineEdit" parent="JoinButton" unique_id=362482360]
+layout_mode = 0
+offset_left = 209.0
+offset_top = 325.0
+offset_right = 325.0
+offset_bottom = 356.0
+placeholder_text = "room id"
+
+[connection signal="pressed" from="HostButton/Button" to="." method="start_host"]
+[connection signal="pressed" from="JoinButton/Button" to="." method="start_client"]
