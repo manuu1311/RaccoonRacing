@@ -70,6 +70,9 @@ const SAVE_PATH = "user://savegame.tres"
 var save_data: SaveData
 var debug_save_file: SaveData=null
 
+###online
+var IsMultiplayer:bool=false
+
 func _ready() -> void:
 	print('Initialising game data')
 	load_game()

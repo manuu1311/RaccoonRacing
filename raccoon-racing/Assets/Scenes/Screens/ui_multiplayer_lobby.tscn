@@ -43,5 +43,5 @@ offset_right = 325.0
 offset_bottom = 356.0
 placeholder_text = "room id"
 
-[connection signal="pressed" from="HostButton/Button" to="." method="start_host"]
-[connection signal="pressed" from="JoinButton/Button" to="." method="start_client"]
+[connection signal="pressed" from="HostButton/Button" to="." method="lobby_host"]
+[connection signal="pressed" from="JoinButton/Button" to="." method="lobby_join"]
