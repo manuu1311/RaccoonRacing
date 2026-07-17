@@ -17,20 +17,20 @@ var textures:Array[Texture]=[
 	]
 @export var rects:Array[TextureRect]
 @export var labels:Array[LineEdit]
+@onready var startctrl: Control = $StartGame
 @onready var starttxt: Label = $StartGame/MainText
 @onready var cuptxt: Label = $CupInfo/Cup
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if NetworkManager.is_host:
-		starttxt.show()
-	else:
-		starttxt.hide()
-		
+func _ready() -> void:		
 	UpdateIconsNames()
 
 
 func UpdateIconsNames()->void:
+	if NetworkManager.is_host:
+		startctrl.show()
+	else:
+		startctrl.hide()
 	#online players connected
 	for i in range(GameData.PlayersArr.size()):
 		var player:Player=GameData.PlayersArr[i]
@@ -58,10 +58,13 @@ func UpdateIconsNames()->void:
 
 
 func UpdateCupInfo()->void:
-	cuptxt.text='CUP '+str(GameData.currentCup)
+	cuptxt.text='CUP '+str(GameData.currentCup+1)
 
 func SendNameUpdate(new_name: String) -> void:
-	ChangeNameRequest.rpc_id(1, new_name,NetworkManager.PlayerID)
+	if NetworkManager.is_host:
+		ChangeNameRequest(new_name,NetworkManager.PlayerID)
+	else:
+		ChangeNameRequest.rpc_id(1, new_name,NetworkManager.PlayerID)
 
 @rpc("any_peer", "call_remote", "reliable")
 func ChangeNameRequest(new_name: String,id:int) -> void:
@@ -71,7 +74,7 @@ func ChangeNameRequest(new_name: String,id:int) -> void:
 	# Find the player in our host list and update their name
 	for player in GameData.PlayersArr:
 		if player.PlayerID == id:
-			player.name = new_name
+			player.OnlineName = new_name
 			break
 			
 	# Broadcast the update to everyone else
@@ -83,7 +86,7 @@ func BroadcastNameUpdate(player_id: int, new_name: String) -> void:
 	# Clients update their local match data
 	for player in GameData.PlayersArr:
 		if player.PlayerID == player_id:
-			player.name = new_name
+			player.OnlineName = new_name
 			break
 	UpdateIconsNames()
 

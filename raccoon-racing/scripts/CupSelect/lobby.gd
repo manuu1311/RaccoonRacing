@@ -16,7 +16,7 @@ var IsLocked:bool=false
 @onready var lobbycodeinput: LineEdit = $LobbyScreen/JoinScreen/TextEdit
 @export var lobby_script: LobbyScene
 var names:Array[String]=[
-	"",
+	"prova",
 	"Rocko","Vixen","Mambo","Pingo","Hudson","Banzai"
 ]
 
@@ -95,15 +95,21 @@ func _on_joinbutton_pressed(_code:String='') -> void:
 	infolbl.show()
 	NetworkManager.lobby_join(lobbycodeinput.text)
 
-func HostLobby()->void:
+func HostLobby(_code:String)->void:
 	var hostid:int=multiplayer.get_unique_id()
 	NetworkManager.NetworkID=hostid
 	var host_player: Player = Player.new(0, Player.control_type.HUMAN)
+	NetworkManager.PlayerID=0
 	host_player.charid = GameData.currentCharacter
+	host_player.OnlineName=names[host_player.charid]
+	GameData.PlayersArr.append(host_player)
+	lobby_script.UpdateIconsNames()
 	set_multiplayer_authority(hostid)
+	GameData.IsMultiplayer=true
 	LobbyTransition()
 
 func LobbyJoined()->void:
+	await get_tree().create_timer(1.0).timeout
 	RegisterPlayer.rpc_id(1,GameData.currentCharacter)
 
 @rpc("any_peer","call_remote","reliable")
@@ -113,15 +119,15 @@ func RegisterPlayer(newcharid:int)->void:
 	var newid:int=GameData.PlayersArr.size()
 	var newplayer:Player=Player.new(newid,Player.control_type.HUMAN)
 	newplayer.charid=newcharid
-	newplayer.name=names[newcharid]
+	newplayer.OnlineName=names[newcharid]
 	GameData.PlayersArr.append(newplayer)
 	lobby_script.UpdateIconsNames()
-	var charids:Array[int]
-	var playernames:Array[String]
+	var charids:Array[int]=[]
+	var playernames:Array[String]=[]
 	for player:Player in GameData.PlayersArr:
-		charids.append(player.PlayerID)
-		playernames.append(player.name)
-	PlayerRegistered.rpc(GameData.PlayersArr,newid)
+		charids.append(player.charid)
+		playernames.append(player.OnlineName)
+	PlayerRegistered.rpc(charids,playernames,newid)
 	
 @rpc("authority","call_remote","reliable")
 func PlayerRegistered(charids:Array[int],playernames:Array[String],playerID:int)->void:
@@ -129,13 +135,14 @@ func PlayerRegistered(charids:Array[int],playernames:Array[String],playerID:int)
 	for i in range(charids.size()):
 		var newplayer:Player=Player.new(i,Player.control_type.HUMAN)
 		newplayer.charid=charids[i]
-		newplayer.name=playernames[i]
+		newplayer.OnlineName=playernames[i]
 		GameData.PlayersArr.append(newplayer)
-	lobby_script.UpdateIconsNames()
 	if not IsLocked and not NetworkManager.is_host:
 		NetworkManager.PlayerID=playerID
 		LobbyTransition()
 		IsLocked=true
+		GameData.IsMultiplayer=true
+	lobby_script.UpdateIconsNames()
 	
 
 func LobbyTransition()->void:
@@ -185,7 +192,8 @@ func _on_peer_disconnected()->void:
 
 
 func _on_startbutton_pressed() -> void:
-	pass # Replace with function body.
+	print('Start button pressed, starting game')
+	Start.rpc()
 
 @rpc('authority','call_local','reliable')
 func Start()->void:
