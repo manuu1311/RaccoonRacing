@@ -189,4 +189,18 @@ func _on_startbutton_pressed() -> void:
 
 @rpc('authority','call_local','reliable')
 func Start()->void:
-	pass
+	GameData.currentDifficulty=GameData.cupWon[GameData.currentCup]
+	GameData.currentStep=0
+	GameData.UpdateInfo()
+	UiOverAnimation.playanim()
+	await UiOverAnimation.animated_sprite_2d.animation_finished
+	MusicPlayer.FadeOutAndStop(2.5)
+	CreateAIPlayers()
+	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
+
+
+func CreateAIPlayers()->void:
+	for i in range(GameData.PlayersArr.size(),4,1):
+		var aiplayer:Player=AIPlayer.new(i,Player.control_type.AI)
+		GameData.PlayersArr.append(aiplayer)
+		aiplayer.AiReflect=lobby_script.difficulty

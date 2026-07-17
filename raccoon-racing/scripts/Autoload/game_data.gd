@@ -14,8 +14,8 @@ var characterLocks: Array[bool]=[0,0,1,1,1,1]
 var currentCharacter: int=1
 #cup info: lock
 var cupLocks: Array[bool]=[0,0,0,0,1,1,1,1]
-#cup info: which cups were won, in which difficulty
-#0: not won, 1:easy, 2:normal, 3:hard
+##cup info: which cups were won, in which difficulty
+##0: not won, 1:easy, 2:normal, 3:hard
 var cupWon: Array[int]=[0,0,0,0,0,0,0,0]
 #current cup chosen
 var currentCup: int = 0

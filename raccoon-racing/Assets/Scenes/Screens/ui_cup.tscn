@@ -246,6 +246,7 @@ offset_bottom = 500.0
 texture = ExtResource("2_lo0sp")
 
 [node name="CupScreen" type="Control" parent="." unique_id=1820990992]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1606,7 +1607,6 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 
 [node name="LobbyScreen" type="Control" parent="Lobby" unique_id=333585633]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

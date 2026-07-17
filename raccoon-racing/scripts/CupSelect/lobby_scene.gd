@@ -1,7 +1,10 @@
 extends Control
 class_name LobbyScene
 
-var difficulties:Array
+#TODO: allow host to change difficulties
+var difficulties:Array=[10]
+##difficulty taken for game start
+var difficulty:int=10
 @export var names:Array[String]
 var textures:Array[Texture]=[
 	preload("res://icon.svg"),

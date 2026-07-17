@@ -13,8 +13,8 @@ func _ready() -> void:
 	UiOverAnimation.reset_anim_frame()
 	#connect each cup
 	for i in range(8):
-		var button_path = "Cups/Cup" + str(i+1) +"/Button"
-		var cup_button = get_node(button_path) as Button
+		var button_path:String = "Cups/Cup" + str(i+1) +"/Button"
+		var cup_button:Button = get_node(button_path) as Button
 		cup_button.pressed.connect(_on_cup_pressed.bind(i))
 
 
