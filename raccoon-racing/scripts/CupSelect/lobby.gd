@@ -82,6 +82,7 @@ func _on_lobby_pressed() -> void:
 			lbltext.add_theme_color_override("font_color",Color.YELLOW)
 			cup_screen.hide()
 			lobby_screen.show()
+			cup_screen.hide_diff_screen()
 
 
 func _on_hostbutton_pressed() -> void:
