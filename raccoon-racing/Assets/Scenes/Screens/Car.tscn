@@ -226,6 +226,8 @@
 [ext_resource type="Texture2D" uid="uid://mpwkyenswufq" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GiveSleep/41.png" id="204_sfoou"]
 [ext_resource type="Texture2D" uid="uid://5locry7to46g" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GiveSleep/42.png" id="205_iv1uf"]
 [ext_resource type="Texture2D" uid="uid://barirfjr3s38j" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GiveSleep/43.png" id="206_uc0lh"]
+[ext_resource type="Script" uid="uid://ckepxlv4m520p" path="res://scripts/Car/input_handler.gd" id="227_xe8o2"]
+[ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="227_xh78s"]
 
 [sub_resource type="Animation" id="Animation_xh78s"]
 resource_name = "Bone"
@@ -1221,3 +1223,11 @@ max_polyphony = 4
 [node name="PropEffector" type="Node" parent="." unique_id=242808958 node_paths=PackedStringArray("car")]
 script = ExtResource("45_y3ihi")
 car = NodePath("..")
+
+[node name="InputHandler" type="Node" parent="." unique_id=1840505980]
+script = ExtResource("227_xe8o2")
+
+[node name="RollbackSynchronizer" type="Node" parent="." unique_id=762178569 node_paths=PackedStringArray("root")]
+script = ExtResource("227_xh78s")
+root = NodePath("..")
+metadata/_custom_type_script = "uid://d350u8evihs1u"

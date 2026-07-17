@@ -12,6 +12,7 @@ class_name Car
 @onready var hovercraft: Node2D = $Visual/Hovercraft
 @onready var bottom_effect: Node2D = $Visual/BottomEffect
 @onready var top_effect: Node2D = $Visual/TopEffect
+@onready var input_handler: InputHandler = $InputHandler
 #character id,to set sprites
 var player:Player
 var CharID:int=0
@@ -106,6 +107,7 @@ var isSmallState:bool=false
 var isResetting:bool=false
 var isUseShield:bool=false
 var isFcsCar:bool
+var controller:CarController
 
 
 
@@ -117,6 +119,7 @@ func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 
 func _ready() -> void:
     horse=carhorse
+    input_handler.setup(player,controller)
     if isHovercraft():
         car.hide()
         hovercraft.show()

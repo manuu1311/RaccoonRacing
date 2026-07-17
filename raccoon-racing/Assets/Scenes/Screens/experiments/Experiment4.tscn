@@ -211,4 +211,4 @@ sprite_frames = SubResource("SpriteFrames_dviaq")
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera2D" unique_id=1131726671]
 current = true
 
-[node name="Map04" parent="." unique_id=2072849281 instance=ExtResource("18_tqrpg")]
+[node name="Map" parent="." unique_id=2072849281 instance=ExtResource("18_tqrpg")]

@@ -23,6 +23,7 @@ var SceneAngleMoveExpandNowPos:Vector2
 
 func _ready() -> void:
 	UiOverAnimation.reset_anim_frame()
+	Game.PlayersReady.connect(StartSequence)
 	#LoadMap()
 	LoadMinimap()
 	lbl321.self_modulate=Color.TRANSPARENT
@@ -35,19 +36,33 @@ func _ready() -> void:
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
 		player.ResetPlayer(i)
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
-		if player.current_control==player.control_type.HUMAN:
+		if player.current_control==player.control_type.HUMAN and player.PlayerID==NetworkManager.PlayerID:
 			carinstance.setup(map,player.PlayerID,true,player)
-			carinstance.add_child(HumanCarController.new(player))
-			print('tryingout now')
+			var controller:CarController=HumanCarController.new(player)
+			carinstance.add_child(controller)
+			carinstance.controller=controller
 			focusCar(player,carinstance)
 			carinstance.CharID=GameData.currentCharacter
 			player.charid=GameData.currentCharacter
 			available_ids.erase(GameData.currentCharacter)
 			available_ids.shuffle()
 			player.racefinished.connect(Racestop)
+			carinstance.set_multiplayer_authority(player.NetworkID)
+		elif player.current_control==player.control_type.HUMAN:
+			carinstance.setup(map,player.PlayerID,false,player)
+			var controller:CarController=CarController.new(player)
+			carinstance.add_child(controller)
+			carinstance.controller=controller
+			carinstance.CharID=GameData.currentCharacter
+			player.charid=GameData.currentCharacter
+			available_ids.erase(GameData.currentCharacter)
+			available_ids.shuffle()
+			carinstance.set_multiplayer_authority(player.NetworkID)
 		else:
 			carinstance.setup(map,player.PlayerID,false,player)
-			carinstance.add_child(AICarController.new(player))
+			var controller:CarController=AICarController.new(player)
+			carinstance.add_child(controller)
+			carinstance.controller=controller
 			var newid:int
 			if player.charid==0:
 				newid=available_ids.pop_front()
@@ -56,13 +71,21 @@ func _ready() -> void:
 				newid=player.charid
 				available_ids.erase(newid)
 			carinstance.CharID=newid
+			
 		add_child(carinstance)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
 		player.SetCar(carinstance)
-	CoolEffects()
 	fcsCar.player.SetHud(hud,fcsCar)
+	if GameData.IsMultiplayer and not NetworkManager.is_host:
+		Game.server_receive_ready.rpc_id(1,fcsCar.playerID)
+	else:
+		Game.server_receive_ready(fcsCar.playerID)
 
+func StartSequence(target_tick:int)->void:
+	while NetworkTime.tick < target_tick:
+		await NetworkTime.after_tick
+	CoolEffects()
 	
 func LoadMinimap()->void:
 	map=$Map
@@ -112,7 +135,6 @@ func register(player:Player)->void:
 	players.append(player)
 
 func focusCar(player:Player,car:Car)->void:
-	print('yea focusing')
 	GameData.FocusCar=car
 	fcsCar=car
 	GameData.FocusPlayer=player

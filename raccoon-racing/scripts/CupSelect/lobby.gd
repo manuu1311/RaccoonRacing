@@ -117,26 +117,31 @@ func LobbyJoined()->void:
 func RegisterPlayer(newcharid:int)->void:
 	if not NetworkManager.is_host: 
 		return
+	var sender_network_id: int = multiplayer.get_remote_sender_id()
 	var newid:int=GameData.PlayersArr.size()
 	var newplayer:Player=Player.new(newid,Player.control_type.HUMAN)
 	newplayer.charid=newcharid
 	newplayer.OnlineName=names[newcharid]
+	newplayer.network_id = sender_network_id
 	GameData.PlayersArr.append(newplayer)
 	lobby_script.UpdateIconsNames()
 	var charids:Array[int]=[]
 	var playernames:Array[String]=[]
+	var network_ids: Array[int] = []
 	for player:Player in GameData.PlayersArr:
 		charids.append(player.charid)
 		playernames.append(player.OnlineName)
-	PlayerRegistered.rpc(charids,playernames,newid)
+		network_ids.append(player.network_id)
+	PlayerRegistered.rpc(charids,playernames,network_ids,newid)
 	
 @rpc("authority","call_remote","reliable")
-func PlayerRegistered(charids:Array[int],playernames:Array[String],playerID:int)->void:
+func PlayerRegistered(charids:Array[int],playernames:Array[String],networkids:Array[int],playerID:int)->void:
 	GameData.PlayersArr.clear()
 	for i in range(charids.size()):
 		var newplayer:Player=Player.new(i,Player.control_type.HUMAN)
 		newplayer.charid=charids[i]
 		newplayer.OnlineName=playernames[i]
+		newplayer.network_id = networkids[i]
 		GameData.PlayersArr.append(newplayer)
 	if not IsLocked and not NetworkManager.is_host:
 		NetworkManager.PlayerID=playerID
@@ -204,6 +209,7 @@ func Start()->void:
 	UiOverAnimation.playanim()
 	await UiOverAnimation.animated_sprite_2d.animation_finished
 	MusicPlayer.FadeOutAndStop(2.5)
+	GameData.SetPlayersCount()
 	CreateAIPlayers()
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
 

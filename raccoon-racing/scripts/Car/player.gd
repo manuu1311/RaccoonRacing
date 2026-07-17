@@ -22,6 +22,7 @@ var AiReflect:int
 var ScorePoints:int=0
 ##multiplayer name
 var OnlineName:String=''
+var NetworkID:int=1
 signal racefinished
 '''
 1:become invincible

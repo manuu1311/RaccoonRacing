@@ -65,6 +65,7 @@ var CupTimes:Array[Array]=[
 	[0,0,0],[0,0,0],
 	[0,0,0],[0,0,0],
 ]
+var OnlinePlayersCount:int=1
 
 const SAVE_PATH = "user://savegame.tres"
 var save_data: SaveData
@@ -239,6 +240,9 @@ func ClearPlayers()->void:
 	PlayersArr=[]
 	Ranking=[]
 	OrderInfo=[]
+
+func SetPlayersCount()->void:
+	OnlinePlayersCount=PlayersArr.size()
 
 func format_time(msec_total: int) -> String:
 	var total_seconds: int = int(msec_total / 1000)
