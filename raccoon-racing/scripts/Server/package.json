@@ -7,6 +7,6 @@
     "start": "node signaling_server.js"
   },
   "dependencies": {
-    "ws": "^8.18.0"
+    "ws": "^7.0.0"
   }
 }
