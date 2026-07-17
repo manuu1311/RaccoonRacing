@@ -27,12 +27,22 @@ func _ready() -> void:
 	join_screen.show()
 	lobby_scene.hide()
 	infolbl.hide()
+	cup_screen.CupSelected.connect(_on_cup_selected)
 	NetworkManager.signal_lobby_created.connect(HostLobby)
 	NetworkManager.signal_lobby_joined.connect(LobbyJoined)
 	NetworkManager.signal_host_left.connect(_on_button_pressed)
 	NetworkManager.signal_client_disconnected.connect(_on_peer_disconnected)
 	NetworkManager.signal_peer_left.connect(_on_peer_disconnected)
 	
+
+func _on_cup_selected()->void:
+	SyncCup.rpc(GameData.currentCup)
+	lobby_script.UpdateCupInfo()
+
+@rpc('authority','call_remote','reliable')
+func SyncCup(cup:int)->void:
+	GameData.currentCup=cup
+	lobby_script.UpdateCupInfo()
 
 func _on_lobby_mouse_entered() -> void:
 	#print('lobby enter')
@@ -172,3 +182,11 @@ func _on_lobbycode_pressed() -> void:
 
 func _on_peer_disconnected()->void:
 	_on_button_pressed()
+
+
+func _on_startbutton_pressed() -> void:
+	pass # Replace with function body.
+
+@rpc('authority','call_local','reliable')
+func Start()->void:
+	pass

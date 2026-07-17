@@ -62,7 +62,7 @@ func _on_diff_mouse_exited(diff: int) -> void:
 			txts[i].scale=Vector2(1,1)
 			txts[i].position-=txts[i].size*0.1
 
-func greyout(rect: TextureRect):
+func greyout(rect: TextureRect)->void:
 	rect.modulate = Color(r_g_b, r_g_b, r_g_b, 1)
-func greyin(rect: TextureRect):
+func greyin(rect: TextureRect)->void:
 	rect.modulate = Color(1,1,1, 1)

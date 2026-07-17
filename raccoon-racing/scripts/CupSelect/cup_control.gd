@@ -5,6 +5,7 @@ class_name UICupSelection
 @onready var cups: Control = $Cups
 @onready var buttons: DifficultyButtons = $Buttons
 var choosing_diff:bool=false
+signal CupSelected
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -71,6 +72,9 @@ func _on_cup_pressed(id: int) -> void:
 	else:
 		ButtonSounds.PlaySound('click')
 		GameData.currentCup=id
-		choosing_diff=true
-		buttons.updateLocks(GameData.currentCup)
-		show_diff_screen()
+		if GameData.IsMultiplayer and NetworkManager.is_host:
+			CupSelected.emit()
+		else:
+			choosing_diff=true
+			buttons.updateLocks(GameData.currentCup)
+			show_diff_screen()

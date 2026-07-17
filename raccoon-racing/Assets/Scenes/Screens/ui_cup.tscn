@@ -246,7 +246,6 @@ offset_bottom = 500.0
 texture = ExtResource("2_lo0sp")
 
 [node name="CupScreen" type="Control" parent="." unique_id=1820990992]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1607,6 +1606,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 
 [node name="LobbyScreen" type="Control" parent="Lobby" unique_id=333585633]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1988,6 +1988,148 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 
+[node name="CupInfo" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=1420956524]
+anchors_preset = 0
+offset_left = -39.77
+offset_top = 59.7
+offset_right = -39.77
+offset_bottom = 59.7
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=2135120703]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 18
+text = "CUP SELECTED:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=2023728171]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 18
+text = "CUP SELECTED:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=741845901]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 18
+text = "CUP SELECTED:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cup" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=70962671]
+layout_mode = 0
+offset_left = 232.77
+offset_top = 11.300003
+offset_right = 363.77002
+offset_bottom = 43.300003
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 21
+text = "CUP 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="StartGame" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=1312708556]
+anchors_preset = 0
+offset_left = -56.875
+offset_top = 405.54
+offset_right = -56.875
+offset_bottom = 405.54
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1148406048]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 33
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1742042146]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 33
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1301247248]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 33
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1790822476]
+layout_mode = 0
+offset_left = 104.875
+offset_top = 8.61499
+offset_right = 236.875
+offset_bottom = 51.61499
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
+
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup1/Button" to="CupScreen/Cups/Cup1" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup1/Button" to="CupScreen/Cups/Cup1" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup2/Button" to="CupScreen/Cups/Cup2" method="_on_button_mouse_entered"]
@@ -2030,3 +2172,6 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 [connection signal="mouse_entered" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_exited"]
 [connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_button_pressed"]
+[connection signal="mouse_entered" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby/LobbyScreen/LobbyScreen" method="_on_startbutton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby/LobbyScreen/LobbyScreen" method="_on_startbutton_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby" method="_on_startbutton_pressed"]
