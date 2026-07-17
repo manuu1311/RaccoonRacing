@@ -23,7 +23,8 @@ var SceneAngleMoveExpandNowPos:Vector2
 
 func _ready() -> void:
 	UiOverAnimation.reset_anim_frame()
-	LoadMap()
+	#LoadMap()
+	LoadMinimap()
 	lbl321.self_modulate=Color.TRANSPARENT
 	stagesize=map.GetMapSize()
 	SceneAngleMoveExpandPos = Vector2(150,0)
@@ -37,6 +38,7 @@ func _ready() -> void:
 		if player.current_control==player.control_type.HUMAN:
 			carinstance.setup(map,player.PlayerID,true,player)
 			carinstance.add_child(HumanCarController.new(player))
+			print('tryingout now')
 			focusCar(player,carinstance)
 			carinstance.CharID=GameData.currentCharacter
 			player.charid=GameData.currentCharacter
@@ -62,37 +64,42 @@ func _ready() -> void:
 	fcsCar.player.SetHud(hud,fcsCar)
 
 	
+func LoadMinimap()->void:
+	map=$Map
+	var is_car: bool = (GameData.current_vehicle == GameData.VehicleType.CAR)
+	var suffix: String = "1" if is_car else "2"
+	var map_num: int = GameData.currentMap
+	# 3. Format the minimap path
+	# Map 1 uses 01/02, Map 2 uses 11/12, Map 3 uses 21/22, etc.
+	var minimap_index: int = map_num - 1
+	var minimap_path: String = "res://Assets/Scenes/Screens/maps/Minimap%d%s.tscn" % [minimap_index, suffix]
+
+	# 4. Instantiate and attach the minimap
+	var minimap_instance:CanvasLayer = load(minimap_path).instantiate() as CanvasLayer
+	minimap_instance.name = "Minimap"
+	map.add_child(minimap_instance)
 	
-func LoadMap()->void:
-	var minimap_instance:CanvasLayer
-	if GameData.currentMap==1:
-		map=load("res://Assets/Scenes/Screens/maps/Map01.tscn").instantiate() as Map
-		add_child(map)
-		if GameData.current_vehicle==GameData.VehicleType.CAR:
-			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap01.tscn").instantiate()
-		else:
-			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap02.tscn").instantiate()
-	elif GameData.currentMap==2:
-		map=load("res://Assets/Scenes/Screens/maps/Map02.tscn").instantiate() as Map
-		add_child(map)
-		if GameData.current_vehicle==GameData.VehicleType.CAR:
-			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap11.tscn").instantiate()
-		else:
-			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap12.tscn").instantiate()
-	elif GameData.currentMap==3:
-		map=load("res://Assets/Scenes/Screens/maps/Map03.tscn").instantiate() as Map
-		add_child(map)
-		if GameData.current_vehicle==GameData.VehicleType.CAR:
-			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap21.tscn").instantiate()
-		else:
-			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap22.tscn").instantiate()
-	elif GameData.currentMap==4:
-		map=load("res://Assets/Scenes/Screens/maps/Map04.tscn").instantiate() as Map
-		add_child(map)
-		if GameData.current_vehicle==GameData.VehicleType.CAR:
-			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap31.tscn").instantiate()
-		else:
-			minimap_instance = load("res://Assets/Scenes/Screens/maps/Minimap32.tscn").instantiate()
+func LoadMap() -> void:
+	var map_num: int = GameData.currentMap
+
+	# 1. Format the map path (e.g., "Map01.tscn", "Map02.tscn")
+	# %02d pads single digits with a leading zero (1 becomes 01)
+	var map_path: String = "res://Assets/Scenes/Screens/maps/Map%02d.tscn" % map_num
+
+	map = load(map_path).instantiate() as Map
+	add_child(map)
+
+	# 2. Determine the minimap suffix based on the vehicle type
+	var is_car: bool = (GameData.current_vehicle == GameData.VehicleType.CAR)
+	var suffix: String = "1" if is_car else "2"
+
+	# 3. Format the minimap path
+	# Map 1 uses 01/02, Map 2 uses 11/12, Map 3 uses 21/22, etc.
+	var minimap_index: int = map_num - 1
+	var minimap_path: String = "res://Assets/Scenes/Screens/maps/Minimap%d%s.tscn" % [minimap_index, suffix]
+
+	# 4. Instantiate and attach the minimap
+	var minimap_instance:CanvasLayer = load(minimap_path).instantiate() as CanvasLayer
 	minimap_instance.name = "Minimap"
 	map.add_child(minimap_instance)
 
@@ -105,6 +112,7 @@ func register(player:Player)->void:
 	players.append(player)
 
 func focusCar(player:Player,car:Car)->void:
+	print('yea focusing')
 	GameData.FocusCar=car
 	fcsCar=car
 	GameData.FocusPlayer=player
@@ -155,7 +163,7 @@ func SetCenterPos(nowPos:Vector2)->void:
 	if(scenecenterpos.y > map.MapBy):
 		scenecenterpos.y = map.MapBy;
 
-func adjust_camera_zoom(target_zoom: Vector2, delta: float) -> void:
+func adjust_camera_zoom(target_zoom: Vector2, _delta: float) -> void:
 	# Smoothly interpolates the camera zoom
 	camera.zoom = camera.zoom.lerp(target_zoom, 0.1)
 

@@ -11,6 +11,7 @@ var totaltime:float=0.0
 var expectedtime:float=5
 
 func _ready() -> void:
+	target_scene='res://Assets/Scenes/Screens/experiments/Experiment'+str(GameData.currentMap)+'.tscn'
 	UiOverAnimation.animated_sprite_2d.frame=0
 	hint.stop()
 	_cycle_hint()

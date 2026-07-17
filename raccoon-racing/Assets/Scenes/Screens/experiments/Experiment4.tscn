@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://c0ofpbx08n080"]
+
+[ext_resource type="PackedScene" uid="uid://cehj3k48xb3su" path="res://Assets/Scenes/Screens/HUD/HUD.tscn" id="1_ixdto"]
+[ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager.gd" id="1_tvyvo"]
+[ext_resource type="Script" uid="uid://memhlecsyk42" path="res://scripts/Game/sound_manager.gd" id="2_tvyvo"]
+[ext_resource type="Texture2D" uid="uid://dn7nt3mtihhn" path="res://Assets/Images/game/finish/1.png" id="3_bves5"]
+[ext_resource type="Texture2D" uid="uid://c5k0abksngnfh" path="res://Assets/Images/game/finish/2.png" id="4_bhkoc"]
+[ext_resource type="Texture2D" uid="uid://uxwty2nltrnj" path="res://Assets/Images/game/finish/3.png" id="5_0kcrt"]
+[ext_resource type="Texture2D" uid="uid://dlvhfnc8n2fdj" path="res://Assets/Images/game/finish/4.png" id="6_j4v2f"]
+[ext_resource type="Texture2D" uid="uid://cx5jgk2igxxnx" path="res://Assets/Images/game/finish/5.png" id="7_ppjtc"]
+[ext_resource type="Texture2D" uid="uid://b8cgvo5xo7w2s" path="res://Assets/Images/game/finish/6.png" id="8_yjsht"]
+[ext_resource type="Texture2D" uid="uid://d14vor5b0sb1u" path="res://Assets/Images/game/finish/7.png" id="9_1ywkx"]
+[ext_resource type="Texture2D" uid="uid://cy1kge340sjiu" path="res://Assets/Images/game/finish/8.png" id="10_ams03"]
+[ext_resource type="Texture2D" uid="uid://dhm3vwa3jue5l" path="res://Assets/Images/game/finish/9.png" id="11_bjip1"]
+[ext_resource type="Texture2D" uid="uid://c5wmxkb4lu25a" path="res://Assets/Images/game/finish/10.png" id="12_4vdsy"]
+[ext_resource type="Texture2D" uid="uid://mau1b7sjj52n" path="res://Assets/Images/game/finish/11.png" id="13_s2h1f"]
+[ext_resource type="Texture2D" uid="uid://b267h6gqu1f0l" path="res://Assets/Images/game/finish/12.png" id="14_2ka2b"]
+[ext_resource type="Texture2D" uid="uid://dclsslp8k0hyy" path="res://Assets/Images/game/finish/13.png" id="15_8q1j1"]
+[ext_resource type="Texture2D" uid="uid://cq4xfe1yvy5gc" path="res://Assets/Images/game/finish/14.png" id="16_puo7n"]
+[ext_resource type="Texture2D" uid="uid://e7u6tavnglm8" path="res://Assets/Images/game/finish/15.png" id="17_k28o0"]
+[ext_resource type="PackedScene" uid="uid://ccn84qrud5yaw" path="res://Assets/Scenes/Screens/maps/Map04.tscn" id="18_tqrpg"]
+
+[sub_resource type="Environment" id="Environment_lapx5"]
+glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_rrtsn"]
+resource_name = "321"
+length = 0.6285743
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("321:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.17142858, 0.2, 0.22857143, 0.25714287, 0.45714286, 0.4857143, 0.5142857, 0.54285717, 0.5714286, 0.62857145),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(150, 150), Vector2(150, 150), Vector2(155, 145), Vector2(150, 150), Vector2(152, 148), Vector2(150, 150), Vector2(150, 150), Vector2(150, 160), Vector2(150, 150), Vector2(150, 130), Vector2(150, 100), Vector2(150, 50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("321:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.54285717, 0.62857145),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("321:theme_override_font_sizes/font_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14285715),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [150, 50]
+}
+
+[sub_resource type="Animation" id="Animation_piq2e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("321:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("321:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [52]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("321:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(150, 150)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6y0pu"]
+_data = {
+&"321": SubResource("Animation_rrtsn"),
+&"RESET": SubResource("Animation_piq2e")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dviaq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bves5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bhkoc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0kcrt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j4v2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ppjtc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yjsht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1ywkx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ams03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bjip1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4vdsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_s2h1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_2ka2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_8q1j1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_puo7n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_k28o0")
+}],
+"loop": false,
+"name": &"default",
+"speed": 35.0
+}]
+
+[node name="Experiment4" type="Node2D" unique_id=255379933]
+script = ExtResource("1_tvyvo")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2062170670]
+environment = SubResource("Environment_lapx5")
+
+[node name="Hud" parent="." unique_id=929271289 instance=ExtResource("1_ixdto")]
+
+[node name="SoundManager" type="AudioStreamPlayer" parent="." unique_id=1463811845]
+script = ExtResource("2_tvyvo")
+
+[node name="321" type="CanvasLayer" parent="." unique_id=1354835482]
+offset = Vector2(150, 125)
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 150, 125)
+
+[node name="321" type="Label" parent="321" unique_id=288480580]
+custom_minimum_size = Vector2(200, 200)
+offset_left = 150.0
+offset_top = 150.0
+offset_right = 350.00006
+offset_bottom = 355.0
+scale = Vector2(2.6, 2.6)
+pivot_offset = Vector2(100, 100)
+theme_override_colors/font_color = Color(0.8603393, 0.9375, 0.05566405, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 12
+theme_override_font_sizes/font_size = 52
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="321Player" type="AnimationPlayer" parent="321" unique_id=1495085889]
+libraries/ = SubResource("AnimationLibrary_6y0pu")
+
+[node name="Finish" type="AnimatedSprite2D" parent="321" unique_id=1119794115]
+position = Vector2(200, 200)
+sprite_frames = SubResource("SpriteFrames_dviaq")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=76570798]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D" unique_id=1131726671]
+current = true
+
+[node name="Map04" parent="." unique_id=2072849281 instance=ExtResource("18_tqrpg")]
