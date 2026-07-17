@@ -20,6 +20,8 @@ var distance:int
 var hud:HUDManager
 var AiReflect:int
 var ScorePoints:int=0
+##multiplayer name
+var OnlineName:String
 signal racefinished
 '''
 1:become invincible

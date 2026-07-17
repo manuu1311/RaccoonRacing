@@ -27,7 +27,10 @@ var ICE_SERVERS:Dictionary = {
 		{"urls": ["stun:stun.l.google.com:19302"]}
 	]
 }
-@onready var line_edit: LineEdit = $JoinButton/LineEdit
+
+#id assigned
+var PlayerID:int
+var NetworkID:int
 
 # ── Lifecycle ──────────────────────────────────────────────────────────────────
 

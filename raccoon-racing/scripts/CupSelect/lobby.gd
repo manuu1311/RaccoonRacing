@@ -14,6 +14,11 @@ var IsLocked:bool=false
 @onready var jointxt: Label = $LobbyScreen/JoinScreen/JoinButton/MainText
 @onready var code: Button = $LobbyScreen/LobbyScreen/Code
 @onready var lobbycodeinput: LineEdit = $LobbyScreen/JoinScreen/TextEdit
+@export var lobby_script: LobbyScene
+var names:Array[String]=[
+	"",
+	"Rocko","Vixen","Mambo","Pingo","Hudson","Banzai"
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,7 +28,10 @@ func _ready() -> void:
 	lobby_scene.hide()
 	infolbl.hide()
 	NetworkManager.signal_lobby_created.connect(HostLobby)
-	NetworkManager.signal_lobby_joined.connect(LobbyTransition)
+	NetworkManager.signal_lobby_joined.connect(LobbyJoined)
+	NetworkManager.signal_host_left.connect(_on_button_pressed)
+	NetworkManager.signal_client_disconnected.connect(_on_peer_disconnected)
+	NetworkManager.signal_peer_left.connect(_on_peer_disconnected)
 	
 
 func _on_lobby_mouse_entered() -> void:
@@ -72,13 +80,53 @@ func _on_hostbutton_pressed() -> void:
 	NetworkManager.lobby_host()
 
 
-func _on_joinbutton_pressed() -> void:
+func _on_joinbutton_pressed(_code:String='') -> void:
 	ButtonSounds.PlaySound("click")
 	infolbl.show()
 	NetworkManager.lobby_join(lobbycodeinput.text)
 
 func HostLobby()->void:
+	var hostid:int=multiplayer.get_unique_id()
+	NetworkManager.NetworkID=hostid
+	var host_player: Player = Player.new(0, Player.control_type.HUMAN)
+	host_player.charid = GameData.currentCharacter
+	set_multiplayer_authority(hostid)
 	LobbyTransition()
+
+func LobbyJoined()->void:
+	RegisterPlayer.rpc_id(1,GameData.currentCharacter)
+
+@rpc("any_peer","call_remote","reliable")
+func RegisterPlayer(newcharid:int)->void:
+	if not NetworkManager.is_host: 
+		return
+	var newid:int=GameData.PlayersArr.size()
+	var newplayer:Player=Player.new(newid,Player.control_type.HUMAN)
+	newplayer.charid=newcharid
+	newplayer.name=names[newcharid]
+	GameData.PlayersArr.append(newplayer)
+	lobby_script.UpdateIconsNames()
+	var charids:Array[int]
+	var playernames:Array[String]
+	for player:Player in GameData.PlayersArr:
+		charids.append(player.PlayerID)
+		playernames.append(player.name)
+	PlayerRegistered.rpc(GameData.PlayersArr,newid)
+	
+@rpc("authority","call_remote","reliable")
+func PlayerRegistered(charids:Array[int],playernames:Array[String],playerID:int)->void:
+	GameData.PlayersArr.clear()
+	for i in range(charids.size()):
+		var newplayer:Player=Player.new(i,Player.control_type.HUMAN)
+		newplayer.charid=charids[i]
+		newplayer.name=playernames[i]
+		GameData.PlayersArr.append(newplayer)
+	lobby_script.UpdateIconsNames()
+	if not IsLocked and not NetworkManager.is_host:
+		NetworkManager.PlayerID=playerID
+		LobbyTransition()
+		IsLocked=true
+	
 
 func LobbyTransition()->void:
 	join_screen.hide()
@@ -95,6 +143,8 @@ func _on_leavelobbybutton_mouse_exited() -> void:
 
 ##delete all multiplayer related variables
 func _on_button_pressed() -> void:
+	GameData.IsMultiplayer=false
+	GameData.PlayersArr=[]
 	ButtonSounds.PlaySound("click")
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_cup.tscn")
 
@@ -119,3 +169,6 @@ func _on_hostbutton_mouse_exited() -> void:
 
 func _on_lobbycode_pressed() -> void:
 	DisplayServer.clipboard_set(code.text)
+
+func _on_peer_disconnected()->void:
+	_on_button_pressed()

@@ -176,7 +176,6 @@ func CheckCupLocks()->int:
 	return 0
 
 func PopulatePlayers()->void:
-
 	var newplayer:Player
 	newplayer=Player.new(0,Player.control_type.HUMAN)
 	PlayersArr.append(newplayer)
@@ -198,6 +197,10 @@ func PopulatePlayers()->void:
 	OrderInfo.append(3)
 	Ranking.append(3)
 	
+func PopulateOrderArrays()->void:
+	Ranking=[0,1,2,3]
+	OrderInfo=[0,1,2,3]
+
 #testing function
 func SetMidGameData()->void:
 	#won cup 1 in normal, cup 2 in easy, cup 3 in easy

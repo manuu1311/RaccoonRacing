@@ -30,6 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://uwccjy1nbxdw" path="res://Assets/Animations/UISelect/cups/cup8.png" id="24_5pglv"]
 [ext_resource type="Script" uid="uid://msdh6uoathri" path="res://scripts/CupSelect/lobby.gd" id="29_2rjpb"]
 [ext_resource type="Texture2D" uid="uid://b44cubu66xpxg" path="res://Assets/Animations/CharSelection/characters/rockopic.png" id="30_qkely"]
+[ext_resource type="Script" uid="uid://bje81nurnb71o" path="res://scripts/CupSelect/lobby_scene.gd" id="30_u1jg4"]
+[ext_resource type="Texture2D" uid="uid://nd8yow4x6jxs" path="res://Assets/utils/RaccoonRacing.icon.png" id="31_lsqhh"]
 
 [sub_resource type="Animation" id="Animation_q3nyi"]
 length = 0.001
@@ -1530,12 +1532,13 @@ offset_bottom = 484.46
 scale = Vector2(0.9, 0.9)
 texture_normal = ExtResource("16_tdwvn")
 
-[node name="Lobby" type="Control" parent="." unique_id=1409316861]
+[node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("29_2rjpb")
+lobby_script = NodePath("LobbyScreen/LobbyScreen")
 
 [node name="LobbyText" type="Control" parent="Lobby" unique_id=1426446236]
 anchors_preset = 0
@@ -1609,6 +1612,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="JoinScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=2082871443]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1782,11 +1786,14 @@ text = "Connecting to server
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251]
-visible = false
+[node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251 node_paths=PackedStringArray("rects", "labels")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("30_u1jg4")
+names = Array[String](["Frank", "Bot Aldo", "Bot Waldo", "Bot Rinco"])
+rects = [NodePath("HBoxContainer/Char1/Char"), NodePath("HBoxContainer/Char2/Char"), NodePath("HBoxContainer/Char3/Char"), NodePath("HBoxContainer/Char4/Char")]
+labels = [NodePath("HBoxContainer/Char1/Label"), NodePath("HBoxContainer/Char2/Label"), NodePath("HBoxContainer/Char3/Label"), NodePath("HBoxContainer/Char4/Label")]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=66908092]
 layout_mode = 1
@@ -1809,9 +1816,8 @@ expand_mode = 1
 
 [node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char1" unique_id=1281781118]
 layout_mode = 0
-offset_left = 15.0
 offset_top = 108.0
-offset_right = 91.0
+offset_right = 100.0
 offset_bottom = 140.0
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
@@ -1832,9 +1838,8 @@ expand_mode = 1
 
 [node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char2" unique_id=209030174]
 layout_mode = 0
-offset_left = 15.0
 offset_top = 108.0
-offset_right = 91.0
+offset_right = 100.0
 offset_bottom = 140.0
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
@@ -1855,14 +1860,13 @@ expand_mode = 1
 
 [node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char3" unique_id=1649749730]
 layout_mode = 0
-offset_left = 15.0
 offset_top = 108.0
-offset_right = 91.0
+offset_right = 100.0
 offset_bottom = 140.0
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
-text = "Rocko"
+text = "Bot Aldo"
 alignment = 1
 
 [node name="Char4" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=874258086]
@@ -1873,19 +1877,18 @@ size_flags_horizontal = 7
 layout_mode = 0
 offset_right = 100.0
 offset_bottom = 100.0
-texture = ExtResource("30_qkely")
+texture = ExtResource("31_lsqhh")
 expand_mode = 1
 
 [node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char4" unique_id=1329705382]
 layout_mode = 0
-offset_left = 15.0
 offset_top = 108.0
-offset_right = 91.0
+offset_right = 100.0
 offset_bottom = 140.0
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
-text = "Rocko"
+text = "Bot Waldo"
 alignment = 1
 
 [node name="Text" type="Label" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=410879286]
@@ -2022,6 +2025,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 [connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_exited"]
 [connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_pressed"]
+[connection signal="text_submitted" from="Lobby/LobbyScreen/JoinScreen/TextEdit" to="Lobby" method="_on_joinbutton_pressed"]
 [connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/Code" to="Lobby" method="_on_lobbycode_pressed"]
 [connection signal="mouse_entered" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_exited"]
