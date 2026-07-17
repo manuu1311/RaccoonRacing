@@ -13,6 +13,7 @@ class_name Car
 @onready var bottom_effect: Node2D = $Visual/BottomEffect
 @onready var top_effect: Node2D = $Visual/TopEffect
 @onready var input_handler: InputHandler = $InputHandler
+@onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
 #character id,to set sprites
 var player:Player
 var CharID:int=0
@@ -120,6 +121,7 @@ func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 func _ready() -> void:
     horse=carhorse
     input_handler.setup(player,controller)
+    RollbackSyncSetup()
     if isHovercraft():
         car.hide()
         hovercraft.show()
@@ -132,7 +134,15 @@ func _ready() -> void:
     PopulateCollisions()
     DeferredSetup.call_deferred()
 
-    
+
+func RollbackSyncSetup()->void:
+    rollback_synchronizer.add_input(controller, "forward")
+    rollback_synchronizer.add_input(controller, "brake")
+    rollback_synchronizer.add_input(controller, "left")
+    rollback_synchronizer.add_input(controller, "right")
+    rollback_synchronizer.add_input(controller, "special")
+    rollback_synchronizer.process_settings()
+
 func DeferredSetup()->void:
     #add car view to minimap
     if isFcsCar:

@@ -10,6 +10,8 @@ func setup(playerinst:Player,controllerinst:CarController)->void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _rollback_tick(_delta: float, _tick: int, _is_fresh: bool) -> void:
+	if player.car.isSleep:
+		return
 	##steering
 	if controller.right:
 		player.car.TurnLRight()

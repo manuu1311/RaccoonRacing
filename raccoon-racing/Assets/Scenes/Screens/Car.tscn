@@ -1230,4 +1230,5 @@ script = ExtResource("227_xe8o2")
 [node name="RollbackSynchronizer" type="Node" parent="." unique_id=762178569 node_paths=PackedStringArray("root")]
 script = ExtResource("227_xh78s")
 root = NodePath("..")
+state_properties = Array[String]([":global_position", ":rotation", ":speed"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"
