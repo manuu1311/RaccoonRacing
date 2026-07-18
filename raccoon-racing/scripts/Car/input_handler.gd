@@ -9,24 +9,23 @@ func setup(playerinst:Player,controllerinst:CarController)->void:
 	controller=controllerinst
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _rollback_tick(_delta: float, _tick: int, _is_fresh: bool) -> void:
-	if player.car.isSleep:
-		return
-	##steering
-	if controller.right:
-		player.car.TurnLRight()
-	elif controller.left:
-		player.car.TurnLeft()
-	else:
-		player.car.CancelTurn()
-	##accelerating
-	if controller.forward:
-		player.car.Forward()
-	elif controller.brake:
-		player.car.Backward()
-	else:
-		player.car.Clearward()
-	##special
-	if controller.special:
-		player.UseProp()
-	player.Update()
+func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
+	if not player.car.isSleep:
+		##steering
+		if controller.right:
+			player.car.TurnLRight()
+		elif controller.left:
+			player.car.TurnLeft()
+		else:
+			player.car.CancelTurn()
+		##accelerating
+		if controller.forward:
+			player.car.Forward()
+		elif controller.brake:
+			player.car.Backward()
+		else:
+			player.car.Clearward()
+		##special
+		if controller.special and is_fresh:
+			player.UseProp()
+	player.Update(tick, is_fresh)

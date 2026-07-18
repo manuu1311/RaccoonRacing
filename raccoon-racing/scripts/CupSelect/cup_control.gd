@@ -51,6 +51,7 @@ func _on_diff_pressed(diff: int) -> void:
 		await UiOverAnimation.animated_sprite_2d.animation_finished
 		MusicPlayer.FadeOutAndStop(2.5)
 		GameData.PopulatePlayers()
+		print('Network tick rate: ',NetworkTime.tickrate)
 		NetworkTime.start()
 		get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
 		

@@ -136,11 +136,27 @@ func _ready() -> void:
 
 
 func RollbackSyncSetup()->void:
+    rollback_synchronizer.add_input(self, "jumpCurrheight")
+    rollback_synchronizer.add_input(self, "jumpPrevheight")
+    rollback_synchronizer.add_input(self, "bsex")
+    rollback_synchronizer.add_input(self, "isBack")
+    rollback_synchronizer.add_input(self, "isAtIce")
+    rollback_synchronizer.add_input(self, "isInvincible")
+    rollback_synchronizer.add_input(self, "isSmallState")
+    rollback_synchronizer.add_input(self, "isUseShield")
+    rollback_synchronizer.add_input(self, "isLock")
+    rollback_synchronizer.add_input(self, "horse ")
+    rollback_synchronizer.add_input(self, "shrinkscale")
+    rollback_synchronizer.add_input(self, "maxRotationWheel")
+    rollback_synchronizer.add_input(self, "carRotationWheel ")
     rollback_synchronizer.add_input(controller, "forward")
     rollback_synchronizer.add_input(controller, "brake")
     rollback_synchronizer.add_input(controller, "left")
     rollback_synchronizer.add_input(controller, "right")
     rollback_synchronizer.add_input(controller, "special")
+    rollback_synchronizer.add_input(player, "NowPointId")
+    rollback_synchronizer.add_input(player.prop, "NowPorpId")
+    rollback_synchronizer.add_input(player.prop, "IsUseShield")
     rollback_synchronizer.process_settings()
 
 func DeferredSetup()->void:

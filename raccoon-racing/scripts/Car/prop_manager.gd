@@ -11,9 +11,9 @@ func _init(playerinst:Player)->void:
 	propArr = []
 	IsUseShield = false;
 
-func run()->void:
+func run(tick:int, is_fresh:bool)->void:
 	for propinst:Prop in propArr:
-		propinst.run()
+		propinst.run_tick(tick, is_fresh)
 
 '''
 1:become invincible

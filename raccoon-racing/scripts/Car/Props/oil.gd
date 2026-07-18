@@ -15,7 +15,6 @@ func _init(playerinst:Player)->void:
 	bs_in_map.IsActivated = false;
 	player.car.sounds.playoilSound();
 	usebomb()
-	delme()
 	
 func usebomb()->void:
 	await player.car.get_tree().create_timer(0.3).timeout
