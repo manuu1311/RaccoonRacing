@@ -23,7 +23,7 @@ func run_tick(tick: int, is_fresh: bool) -> void:
 		ended = true
 		if is_fresh:
 			_expire()
-#TODO: set the scale in event inmap object
+
 func run()->void:
 	player.car.prop_effector.bone.scale*=1.0007
 

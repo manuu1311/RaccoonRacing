@@ -3,6 +3,7 @@ class_name InvincibleProp
 
 var UseTime:int = 6;
 var AddHorse:float = 1.5;
+var tickactivate:int
 
 func _init(playerinst:Player)->void:
 	super(playerinst);
@@ -13,6 +14,7 @@ func _init(playerinst:Player)->void:
 	player.car.isInvincible = true
 	player.car.prop_effector.AddInvincible(1.5)
 	player.IsUsingProp=true
+	tickactivate=NetworkTime.tickrate+UseTime*NetworkTime.tickrate
 	delme()
 
 
@@ -20,7 +22,8 @@ func run()->void:
 	pass
 	
 func delme()->void:
-	await player.car.get_tree().create_timer(UseTime).timeout
+	if NetworkTime.tick!=tickactivate:
+		return
 	if is_instance_valid(player.car):
 		player.IsUsingProp=false
 		if(player.PlayerID==0):

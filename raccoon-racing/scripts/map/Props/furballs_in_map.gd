@@ -94,8 +94,6 @@ func OnHitStatus()->void:
     bomb_effect.play()
     sprite_2d.hide()
     petroadd=false
-    await map.get_tree().create_timer(0.5).timeout
-    queue_free()
     
     
 func AddPetro()->void:

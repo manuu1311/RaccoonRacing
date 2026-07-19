@@ -934,6 +934,7 @@ position = Vector2(0, -17.99)
 
 [node name="Bone" type="Sprite2D" parent="Visual/BottomEffect/Circler" unique_id=238309451]
 position = Vector2(0, -48.02)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_e63hh")
 
 [node name="Rotator" type="AnimationPlayer" parent="Visual/BottomEffect/Circler/Bone" unique_id=1242688632]

@@ -3,6 +3,7 @@ class_name MineProp
 
 
 var bomb_in_map:EventInMap;
+var tickactivate:int=int(0.3*NetworkTime.tickrate)
 
 func _init(playerinst:Player)->void:
 	super(playerinst);
@@ -14,10 +15,12 @@ func _init(playerinst:Player)->void:
 	bomb_in_map.setup(player.car.map,pos.x,pos.y,25,25,0)
 	bomb_in_map.IsActivated = false;
 	player.car.sounds.playmineSound();
+	tickactivate+=NetworkTime.tick
 	usebomb()
 	
 func usebomb()->void:
-	await player.car.get_tree().create_timer(0.3).timeout
+	if NetworkTime.tick!=tickactivate:
+		return
 	if is_instance_valid(bomb_in_map):
 		bomb_in_map.IsActivated = true;
 	delme();
