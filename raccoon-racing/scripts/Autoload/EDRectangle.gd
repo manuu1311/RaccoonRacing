@@ -14,5 +14,6 @@ func _init(x: float, y: float, width: float, height: float, Ang: float = 0.0) ->
     
     var loc4 := Vector2(x + loc3.x, y + loc3.y)
     
+    @warning_ignore("narrowing_conversion")
     LineWidth = height
     super(loc4.x, loc4.y, loc5.x, loc5.y)

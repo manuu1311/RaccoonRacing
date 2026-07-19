@@ -42,9 +42,9 @@ func delme() -> void:
 	if ended:
 		return
 	ended = true
+	player.IsUsingProp = false
+	player.ResetUse()
 	if is_instance_valid(player.car):
-		player.IsUsingProp = false
-		player.ResetUse()
 		player.car.prop_effector.StopPetro()
 	player.prop.Delprop(self)
 		

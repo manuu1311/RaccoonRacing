@@ -57,8 +57,8 @@ func _process(_delta: float) -> void:
 			pass
 
 		WebSocketPeer.STATE_CLOSED:
-			var code   = ws_peer.get_close_code()
-			var reason = ws_peer.get_close_reason()
+			var code:int   = ws_peer.get_close_code()
+			var reason:String = ws_peer.get_close_reason()
 			print("WS closed. Code: ", code, " Reason: '", reason, "'")
 			if code <= 0:
 				print("WARNING: Possible TLS or network failure – never reached server")
@@ -145,13 +145,13 @@ func _ws_close_connection(code: int = 1000, reason: String = "Disconnecting") ->
 # ── Packet parsing ───────────────────────────────────────────────────────────
 
 func _ws_parse_packet() -> void:
-	var raw = ws_peer.get_packet().get_string_from_utf8()
+	var raw:String = ws_peer.get_packet().get_string_from_utf8()
 	print("Received from signaling: ", raw)
 
 	if raw.is_empty():
 		return
 
-	var first_newline = raw.find("\n")
+	var first_newline:int = raw.find("\n")
 	var header: String
 	var body: String
 
@@ -164,8 +164,8 @@ func _ws_parse_packet() -> void:
 	if header.length() < 3:
 		return
 
-	var cmd     = header.substr(0, 1)
-	var payload = header.substr(3).strip_edges()
+	var cmd:String     = header.substr(0, 1)
+	var payload:String = header.substr(3).strip_edges()
 
 	match cmd:
 		"I":  # Server assigned us an ID
@@ -182,12 +182,12 @@ func _ws_parse_packet() -> void:
 				signal_lobby_joined.emit()
 
 		"N":  # New peer arrived
-			var peer_id = int(payload)
+			var peer_id:int = int(payload)
 			print("[Net] New peer: ", peer_id)
 			_network_create_new_peer_connection(peer_id)
 
 		"D":  # Peer left
-			var left_id = int(payload)
+			var left_id:int = int(payload)
 			print("[Net] Peer disconnected: ", left_id)
 			if left_id == 1 and not is_host:
 				# The host left — the whole lobby is no longer viable.
@@ -212,18 +212,18 @@ func _ws_parse_packet() -> void:
 			_ws_close_connection(1000, "Match starting")
 
 		"O":  # Incoming offer
-			var from_id = int(payload)
+			var from_id:int = int(payload)
 			if web_rtc_peer and web_rtc_peer.has_peer(from_id):
 				web_rtc_peer.get_peer(from_id).connection.set_remote_description("offer", body.strip_edges())
 
 		"A":  # Incoming answer
-			var from_id = int(payload)
+			var from_id:int = int(payload)
 			if web_rtc_peer and web_rtc_peer.has_peer(from_id):
 				web_rtc_peer.get_peer(from_id).connection.set_remote_description("answer", body.strip_edges())
 
 		"C":  # Incoming ICE candidate – body is JSON
-			var from_id   = int(payload)
-			var candidate = JSON.parse_string(body.strip_edges())
+			var from_id:int   = int(payload)
+			var candidate:Variant = JSON.parse_string(body.strip_edges())
 			if candidate == null:
 				print("[Net] Error parsing ICE candidate JSON!")
 				return
@@ -269,7 +269,7 @@ func _on_offer_created(type: String, sdp: String, peer_id: int) -> void:
 	if not web_rtc_peer.has_peer(peer_id):
 		return
 	web_rtc_peer.get_peer(peer_id).connection.set_local_description(type, sdp)
-	var cmd = "O" if type == "offer" else "A"
+	var cmd:String = "O" if type == "offer" else "A"
 	_ws_send_text("%s: %d\n%s" % [cmd, peer_id, sdp])
 
 func _on_ice_candidate_created(mid: String, index: int, sdp: String, peer_id: int) -> void:

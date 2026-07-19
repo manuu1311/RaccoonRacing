@@ -93,7 +93,7 @@ func save_game() -> void:
 	cupLocks=save_data.cupLocks
 	
 	# 2. Save the resource to the device
-	var result = ResourceSaver.save(save_data, SAVE_PATH)
+	var result:Error = ResourceSaver.save(save_data, SAVE_PATH)
 	if result == OK:
 		print("Game Saved Successfully!")
 
@@ -245,11 +245,14 @@ func SetPlayersCount()->void:
 	OnlinePlayersCount=PlayersArr.size()
 
 func format_time(msec_total: int) -> String:
+	@warning_ignore("integer_division")
 	var total_seconds: int = int(msec_total / 1000)
 	
+	@warning_ignore("integer_division")
 	var minutes: int = total_seconds / 60
 	var seconds: int = total_seconds % 60
 	# Divide by 10 to turn 0-999ms into 0-99cs (2 digits)
+	@warning_ignore("integer_division")
 	var milliseconds: int = int(msec_total) % 1000 / 10 
 	
 	return "%02d:%02d:%02d" % [minutes, seconds, milliseconds]

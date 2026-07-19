@@ -16,7 +16,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	scale=Vector2(0.7,0.7)
 	global_position=Vector2(x,y)
 
-func GetHitEventStatus(PlayerId:int,isfresh:bool)->void:
+func GetHitEventStatus(PlayerId:int,_isfresh:bool)->void:
 	if not box_visible:
 		return
 	var player:Player=GameData.PlayersArr[PlayerId]

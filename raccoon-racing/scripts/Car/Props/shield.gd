@@ -14,7 +14,7 @@ func _init(playerinst:Player)->void:
 	player.car.IsUseShield = true;
 	player.car.prop_effector.AddShield()
 	start_tick = NetworkTime.tick
-	end_tick = start_tick + int(NetworkTime.tick_rate * UseTime)
+	end_tick = start_tick + int(NetworkTime.tickrate * UseTime)
 
 func run_tick(tick: int, is_fresh: bool) -> void:
 	if ended:

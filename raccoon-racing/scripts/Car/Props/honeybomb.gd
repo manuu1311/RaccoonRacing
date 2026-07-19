@@ -36,7 +36,7 @@ func _init(playerinst: Player) -> void:
 
 
 	player.car.sounds.playBearSSound()
-	arm_tick = NetworkTime.tick + int(NetworkTime.tick_rate * 0.1)
+	arm_tick = NetworkTime.tick + int(NetworkTime.tickrate * 0.1)
 	
 func run_tick(tick: int, is_fresh: bool) -> void:
 	if done:

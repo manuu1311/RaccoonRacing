@@ -101,7 +101,7 @@ func AddPetro()->void:
     bottom_effect.add_child(boost)
     #boost.top_level = true
 
-func AutoPlay(map: Map, Aimplayer: Player)->void:
+func AutoPlay(Aimplayer: Player)->void:
     DoAction(0);
     var targetangle:float;
     if(NowPointId == Aimplayer.car.NowPointId || LockAim):
@@ -119,7 +119,7 @@ func AutoPlay(map: Map, Aimplayer: Player)->void:
         DoAction(2);
 
     
-func UpdatePoint(map: Map)->void:
+func UpdatePoint()->void:
     if LockAim:
         return
     var _loc4_:Vector2;

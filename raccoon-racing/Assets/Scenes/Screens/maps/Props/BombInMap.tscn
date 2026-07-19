@@ -90,5 +90,5 @@ frame_progress = 1.0
 [node name="RollbackSynchronizer" type="Node" parent="." unique_id=1017897832 node_paths=PackedStringArray("root")]
 script = ExtResource("19_m7rgx")
 root = NodePath("..")
-state_properties = Array[String]([":exploded", ":explode_tickis", ":IsActivated", ":global_position"])
+state_properties = Array[String]([":exploded", ":explode_tick", ":IsActivated", ":global_position"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"

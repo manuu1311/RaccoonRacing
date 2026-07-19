@@ -8,7 +8,7 @@ var proptype:int
 func _init(playerinst:Player)->void:
 	player = playerinst;
 
-func run_tick(tick: int, is_fresh: bool) -> void:
+func run_tick(_tick: int, _is_fresh: bool) -> void:
 	pass
 
 func run()->void:

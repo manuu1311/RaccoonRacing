@@ -36,11 +36,11 @@ func SetDmc()->void:
 func SetAimPlayer()->Player:
 	return GameData.PlayersArr[GameData.OrderInfo[player.OrderId-1]]
 
-func run_tick(tick: int, is_fresh: bool) -> void:
+func run_tick(_tick: int, _is_fresh: bool) -> void:
 	if not is_instance_valid(HomingMissile):
 		return
-	HomingMissile.AutoPlay(player.car.map, Aimplayer)
-	HomingMissile.UpdatePoint(player.car.map)
+	HomingMissile.AutoPlay(Aimplayer)
+	HomingMissile.UpdatePoint()
 	HomingMissile.AddPetro()
 	UpdateView()
 

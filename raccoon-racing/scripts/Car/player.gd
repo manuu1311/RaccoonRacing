@@ -97,6 +97,7 @@ func UpdatePoint() -> void:
 	# _loc5_ in flash: total distance between current waypoint and next waypoint
 	var between: float = car.map.Points[car.NowPointId].distance_to(_loc4_)
 	
+	@warning_ignore("narrowing_conversion")
 	distance = car.map.Points[car.NowPointId].distance_to(car.global_position)
 
 	if car.NowPointId == 0 and !LapsLock:
@@ -185,10 +186,10 @@ func ClearPropBox(id:int)->void:
 
 func GetPropPer()->int:
 	# Clamp OrderId to ensure it doesn't break if index goes out of bounds
-	var position: int = clampi(OrderId, 0, 3)
+	var orderposition: int = clampi(OrderId, 0, 3)
 	
 	# Fetch the weights for the current position
-	var weights: Array = POSITION_PROBABILITIES[position]
+	var weights: Array = POSITION_PROBABILITIES[orderposition]
 	
 	# Roll a number between 0 and 99 (Total weight = 100)
 	var roll: int = randi_range(0, 99)
@@ -418,6 +419,8 @@ func ResetUse()->void:
 	CanUseProp=true
 
 func UseProp()->void:
+	if PlayerID==0:
+		prints(IsPlayering(), not car.isSleep, CanUseProp, !IsUsingProp)
 	if(IsPlayering() && not car.isSleep and CanUseProp and !IsUsingProp):
 		prop.UseProp()
 		CanUseProp=false

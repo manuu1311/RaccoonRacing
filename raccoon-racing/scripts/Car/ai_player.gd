@@ -49,6 +49,7 @@ func AutoInput()->Array[bool]:
         angle_diff=wrapf(angle_diff, -180.0, 180.0)
         if angle_diff > 5 and angle_diff < 180:
             AiNowPushButton = 3
+            @warning_ignore("narrowing_conversion")
             AiNowPushButtonTime = angle_diff / AiReflect
         elif angle_diff < -5 and angle_diff > -180:
             AiNowPushButton = 2
@@ -73,6 +74,7 @@ func AutoPlay()->void:
         angle_diff=wrapf(angle_diff, -180.0, 180.0)
         if angle_diff > 5 and angle_diff < 180:
             AiNowPushButton = 3
+            @warning_ignore("narrowing_conversion")
             AiNowPushButtonTime = angle_diff / AiReflect
         elif angle_diff < -5 and angle_diff > -180:
             AiNowPushButton = 2
@@ -130,7 +132,7 @@ func AutoUseProp()->bool:
                 if other.PlayerID != self.PlayerID and not (IsOnlyAttPlayer and other.PlayerID != 0):
                     if not other.car.isInvincible:
                         if car.global_position.distance_to(other.car.global_position) < 300:
-                            var point_delta = car.NowPointId - other.car.NowPointId
+                            var point_delta:int = car.NowPointId - other.car.NowPointId
                             if point_delta > 0 or point_delta < -10 or (point_delta == 0 and distance < other.distance):
                                 return true
             if car.map.IsWanPoint(car.NowPointId):
@@ -165,7 +167,7 @@ func _handle_prop_type_nine() -> bool:
             for other in GameData.PlayersArr:
                 if not (IsOnlyAttPlayer and other.PlayerID != 0) and not other.car.isInvincible and other.PlayerID != self.PlayerID:
                     if car.global_position.distance_to(other.car.global_position) < 300:
-                        var point_delta:int = car.NowPointId - other.NowPointId
+                        var point_delta:int = car.NowPointId - other.car.NowPointId
                         if point_delta > 0 or point_delta < -10 or (point_delta == 0 and distance < other.distance):
                             return true
             if car.map.IsWanPoint(car.NowPointId):

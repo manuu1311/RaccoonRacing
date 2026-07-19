@@ -106,7 +106,9 @@ func AddPetro()->void:
     
 func UpdateCarPos()->void:
     GetHitCar();
+    @warning_ignore("integer_division")
     stepx = int(speed.x * 10) / 10;
+    @warning_ignore("integer_division")
     stepy = int(speed.y * 10) / 10;
     tempx = position.x + stepx;
     tempy = position.y + stepy;

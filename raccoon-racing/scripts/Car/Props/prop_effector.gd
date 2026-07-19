@@ -81,7 +81,7 @@ func StopSleep()->void:
 	if (GameData.FocusPlayer.hud!=null):
 		GameData.FocusPlayer.hud.StopSleep()
 	
-func SleepShotArt(id:int)->void:
+func SleepShotArt(_id:int)->void:
 	give_sleep.play()
 	car.sounds.playuseSleepSound();
 

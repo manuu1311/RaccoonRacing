@@ -49,6 +49,7 @@ func RunPropBox()->void:
 	if not showprop:
 		return
 	PropBoxRunTime-=50
+	@warning_ignore("integer_division")
 	var _loc3_: = int(PropBoxRunTime / 50);
 	var _loc2_:int
 	if(_loc3_ != 1 && _loc3_ != 2 && _loc3_ != 3 && _loc3_ != 4 && _loc3_ != 6 && _loc3_ != 7 && _loc3_ != 8 && _loc3_ != 10 && _loc3_ != 11 && _loc3_ != 13):

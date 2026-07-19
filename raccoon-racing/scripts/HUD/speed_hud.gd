@@ -51,20 +51,25 @@ func _process(_delta: float) -> void:
 	else:
 		speed=int(car.speed.length()*10)
 	label.text = str(speed)
+	@warning_ignore("integer_division")
 	animated_sprite_2d.frame = int(speed / 30)
 	
 	if raceOver:
 		return
+	@warning_ignore("narrowing_conversion")
 	current_lap_time = Time.get_ticks_msec() - timestart
+	@warning_ignore("narrowing_conversion")
 	totaltime=Time.get_ticks_msec()-totaltimestart
 	time.text = format_time(totaltime)
 
 func format_time(msec_total: float) -> String:
 	var total_seconds: int = int(msec_total / 1000)
 	
+	@warning_ignore("integer_division")
 	var minutes: int = total_seconds / 60
 	var seconds: int = total_seconds % 60
 	# Divide by 10 to turn 0-999ms into 0-99cs (2 digits)
+	@warning_ignore("integer_division")
 	var milliseconds: int = int(msec_total) % 1000 / 10 
 	
 	return "%02d:%02d:%02d" % [minutes, seconds, milliseconds]

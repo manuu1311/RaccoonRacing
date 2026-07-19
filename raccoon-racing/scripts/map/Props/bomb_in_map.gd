@@ -42,7 +42,7 @@ func GetHitEventStatus(PlayerId: int,_is_fresh:bool) -> void:
 			car.player.prop.del_prop_by_type(3)
 
 
-func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
+func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 	if not exploded:
 		return
 	if tick == explode_tick and is_fresh:
