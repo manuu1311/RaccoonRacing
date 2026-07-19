@@ -17,7 +17,7 @@ func _init(playerinst:Player) -> void:
 	delme()
 	player.IsUsingProp=true
 	start_tick = NetworkTime.tick
-	max_ticks = int(NetworkTime.tick_rate * UseTime)
+	max_ticks = int(NetworkTime.tickrate * UseTime)
 	
 func run_tick(tick: int, is_fresh: bool) -> void:
 	if ended:

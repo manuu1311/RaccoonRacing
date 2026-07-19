@@ -20,7 +20,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	self.angle = angleinst;
 	self.edface = map.edevent.AddRectangle(x,y,width,height,angle);
 	
-func GetHitEventStatus(_PlayerId:int)->void:
+func GetHitEventStatus(_PlayerId:int,_is_fresh:bool)->void:
 	pass
 
 func del()->void:

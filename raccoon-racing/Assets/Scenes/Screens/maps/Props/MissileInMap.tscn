@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dfwnw7t1h46nj" path="res://scripts/map/Props/missile_in_map.gd" id="1_hr52w"]
 [ext_resource type="Texture2D" uid="uid://ceja5xfgtt1y0" path="res://Assets/Images/Vehicles/PropEffects/Missile/missile.png" id="2_0asrg"]
+[ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_hf5jq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hf5jq"]
 size = Vector2(12, 67)
@@ -30,3 +31,9 @@ rotation = 1.5707964
 
 [node name="CollisionPoint0" type="Marker2D" parent="Collisions" unique_id=296217415]
 position = Vector2(0, -27)
+
+[node name="RollbackSynchronizer" type="Node" parent="." unique_id=1798741526 node_paths=PackedStringArray("root")]
+script = ExtResource("3_hf5jq")
+root = NodePath("..")
+state_properties = Array[String]([":LockAim", ":NowPointId ", ":position", ":rotation", ":speed", ":bsEx", ":hit", ":hit_tick"])
+metadata/_custom_type_script = "uid://d350u8evihs1u"

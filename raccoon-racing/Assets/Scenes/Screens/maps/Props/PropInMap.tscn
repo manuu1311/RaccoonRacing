@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://gxgoijjbjxka" path="res://Assets/Images/maps/Props/cube.png" id="1_arpfm"]
 [ext_resource type="Script" uid="uid://8qv2prqdogux" path="res://scripts/map/Props/prop_in_map.gd" id="1_vt37a"]
+[ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_8avk0"]
 
 [sub_resource type="Animation" id="Animation_vt37a"]
 length = 0.001
@@ -80,3 +81,9 @@ autoplay = &"cube"
 [node name="Timer" type="Timer" parent="." unique_id=1364119973]
 wait_time = 3.0
 one_shot = true
+
+[node name="RollbackSynchronizer" type="Node" parent="." unique_id=2084563048 node_paths=PackedStringArray("root")]
+script = ExtResource("3_8avk0")
+root = NodePath("..")
+state_properties = Array[String]([":box_visible", ":hide_tick"])
+metadata/_custom_type_script = "uid://d350u8evihs1u"

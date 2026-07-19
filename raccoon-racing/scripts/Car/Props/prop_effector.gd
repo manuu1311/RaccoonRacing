@@ -109,7 +109,7 @@ func OnAreaEntered(body:Area2D)->void:
 					bonehit.emit()
 					if caropp.isInvincible:
 						return
-					if caropp.player.prop.IsUseShield:
+					if caropp.player.car.IsUseShield:
 						caropp.player.prop.del_prop_by_type(3)
 						return
 					var dist:Vector2 =caropp.global_position-(car.global_position)

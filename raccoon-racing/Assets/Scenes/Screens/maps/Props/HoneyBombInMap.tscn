@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://b56wosmysa3h6" path="res://Assets/Images/maps/Props/bombeffect/14.png" id="16_uvddm"]
 [ext_resource type="Texture2D" uid="uid://dymibfgaevit7" path="res://Assets/Images/maps/Props/bombeffect/15.png" id="17_kvfde"]
 [ext_resource type="Texture2D" uid="uid://cu3bqky47op1g" path="res://Assets/Images/maps/Props/bombeffect/16.png" id="18_lan60"]
+[ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="23_8sof1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1fv3o"]
 animations = [{
@@ -119,3 +120,9 @@ sprite_frames = SubResource("SpriteFrames_jvtuy")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1464373087]
 position = Vector2(64.86, -1)
+
+[node name="RollbackSynchronizer" type="Node" parent="." unique_id=971336091 node_paths=PackedStringArray("root")]
+script = ExtResource("23_8sof1")
+root = NodePath("..")
+state_properties = Array[String]([":IsActivated", ":exploded", ":explode_tick", ":global_position", ":rotation"])
+metadata/_custom_type_script = "uid://d350u8evihs1u"

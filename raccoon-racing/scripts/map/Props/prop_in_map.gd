@@ -1,6 +1,12 @@
 extends EventInMap
 
 @onready var timer: Timer = $Timer
+@onready var synchronizer: RollbackSynchronizer = $RollbackSynchronizer
+
+@export var respawn_ticks: int = NetworkTime.tickrate*3
+
+var box_visible: bool = true
+var hide_tick: int = -1
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
 	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
@@ -10,15 +16,18 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	scale=Vector2(0.7,0.7)
 	global_position=Vector2(x,y)
 
-func GetHitEventStatus(PlayerId:int)->void:
-	if(visible):
-		var player:Player=GameData.PlayersArr[PlayerId]
-		player.RunPropBox(global_position.x,global_position.y)
-		hide()
-		timer.start()
-		await timer.timeout
-		ReShowProp()
+func GetHitEventStatus(PlayerId:int,isfresh:bool)->void:
+	if not box_visible:
+		return
+	var player:Player=GameData.PlayersArr[PlayerId]
+	player.RunPropBox(global_position.x,global_position.y)
+	box_visible=false
+	hide_tick = NetworkTime.tick
 		
+func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
+	visible = box_visible
+	if not box_visible and tick - hide_tick >= respawn_ticks:
+		box_visible = true
 
 func ReShowProp()->void:
 	show();

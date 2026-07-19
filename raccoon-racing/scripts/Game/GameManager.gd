@@ -34,7 +34,6 @@ func _ready() -> void:
 	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
 	for i:int in GameData.Ranking.size(): 
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
-		player.ResetPlayer(i)
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
 		if player.current_control==player.control_type.HUMAN and player.PlayerID==NetworkManager.PlayerID:
 			carinstance.setup(map,player.PlayerID,true,player)
@@ -71,11 +70,11 @@ func _ready() -> void:
 				newid=player.charid
 				available_ids.erase(newid)
 			carinstance.CharID=newid
-			
 		add_child(carinstance)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
 		player.SetCar(carinstance)
+		player.ResetPlayer(i)
 	fcsCar.player.SetHud(hud,fcsCar)
 	if GameData.IsMultiplayer and not NetworkManager.is_host:
 		Game.server_receive_ready.rpc_id(1,fcsCar.playerID)

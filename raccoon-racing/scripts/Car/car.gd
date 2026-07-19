@@ -106,11 +106,12 @@ var collisionPoints:Array[Node2D]
 var isInvincible:bool=false
 var isSmallState:bool=false
 var isResetting:bool=false
-var isUseShield:bool=false
+var IsUseShield:bool=false
 var isFcsCar:bool
 var controller:CarController
-
-
+var isfresh:bool
+var NowPointId:int
+var NowPorpId:int
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
     map=gamemap
@@ -143,20 +144,19 @@ func RollbackSyncSetup()->void:
     rollback_synchronizer.add_input(self, "isAtIce")
     rollback_synchronizer.add_input(self, "isInvincible")
     rollback_synchronizer.add_input(self, "isSmallState")
-    rollback_synchronizer.add_input(self, "isUseShield")
+    rollback_synchronizer.add_input(self, "IsUseShield")
     rollback_synchronizer.add_input(self, "isLock")
-    rollback_synchronizer.add_input(self, "horse ")
+    rollback_synchronizer.add_input(self, "horse")
     rollback_synchronizer.add_input(self, "shrinkscale")
     rollback_synchronizer.add_input(self, "maxRotationWheel")
-    rollback_synchronizer.add_input(self, "carRotationWheel ")
+    rollback_synchronizer.add_input(self, "carRotationWheel")
     rollback_synchronizer.add_input(controller, "forward")
     rollback_synchronizer.add_input(controller, "brake")
     rollback_synchronizer.add_input(controller, "left")
     rollback_synchronizer.add_input(controller, "right")
     rollback_synchronizer.add_input(controller, "special")
-    rollback_synchronizer.add_input(player, "NowPointId")
-    rollback_synchronizer.add_input(player.prop, "NowPorpId")
-    rollback_synchronizer.add_input(player.prop, "IsUseShield")
+    rollback_synchronizer.add_input(self, "NowPointId")
+    rollback_synchronizer.add_input(self, "NowPorpId")
     rollback_synchronizer.process_settings()
 
 func DeferredSetup()->void:
@@ -313,7 +313,8 @@ func CancelTurn()->void:
     steer_normal()
 
 
-func Update()->void:
+func Update(is_fresh:bool)->void:
+    isfresh=is_fresh
     if isHovercraft():
         Water()
     if(not isLock):
@@ -472,7 +473,7 @@ func GetHitCar()->void:
             var caropp:Car=area.get_parent().get_parent() as Car
             #not sure
             if playerID < caropp.playerID:
-                BeAttacked(caropp)
+                BeAttacked(caropp,isfresh)
 
    
  
@@ -518,7 +519,7 @@ func GetHitEvent(tx:float, ty:float)->void:
         pointpos=point.position+Vector2(tx,ty)
         collided=map.edevent.getHitFace(pointpos)
         if(collided!=null):
-            map.GetHitEventStatus(collided.getId(),playerID)
+            map.GetHitEventStatus(collided.getId(),playerID,isfresh)
             return
         pointid+=1
     
@@ -586,7 +587,7 @@ func GetHitStatus(tx:float, ty:float)->void:
     tempy = position.y + stepy
 
 
-func BeAttacked(who: Car)->void:
+func BeAttacked(who: Car,_is_fresh:bool=true)->void:
     if(who.jumpCurrheight > heightOverWall or jumpCurrheight > heightOverWall):
         return 
     if(isResetting or who.isResetting):
@@ -635,7 +636,7 @@ func Reset(newpos:Vector2,newangle:float)->void:
     visual.scale=Vector2(1,1)
     jumpCurrheight=0
     jumpPrevheight=0
-    Update();
+    Update(isfresh);
 
 func SetOnIce()->void:
     if isInvincible:

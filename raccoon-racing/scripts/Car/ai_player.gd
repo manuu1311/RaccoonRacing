@@ -23,13 +23,13 @@ func RunPropBox(_x:float,_y:float)->void:
 
 
 
-func Update()->void:
+func Update(tick:int, is_fresh:bool)->void:
     if(AiPlayering && car.playering):
         AutoUseProp();
         AutoReSetCar();
     UpdatePoint()
-    car.Update()
-    prop.run()
+    car.Update(is_fresh)
+    prop.run(tick, is_fresh)
     
 ##return forward,brake,left,right
 func AutoInput()->Array[bool]:
@@ -42,8 +42,8 @@ func AutoInput()->Array[bool]:
     else:
         AiNowPushButtonTimeNow = 0;
         var angle_rad: float = atan2(
-            car.map.Points[NowPointId].y - car.global_position.y,
-            car.map.Points[NowPointId].x - car.global_position.x
+            car.map.Points[car.NowPointId].y - car.global_position.y,
+            car.map.Points[car.NowPointId].x - car.global_position.x
         )
         var angle_diff: float = rad_to_deg(angle_rad-car.rotation+PI/2)
         angle_diff=wrapf(angle_diff, -180.0, 180.0)
@@ -66,8 +66,8 @@ func AutoPlay()->void:
     else:
         AiNowPushButtonTimeNow = 0;
         var angle_rad: float = atan2(
-            car.map.Points[NowPointId].y - car.global_position.y,
-            car.map.Points[NowPointId].x - car.global_position.x
+            car.map.Points[car.NowPointId].y - car.global_position.y,
+            car.map.Points[car.NowPointId].x - car.global_position.x
         )
         var angle_diff: float = rad_to_deg(angle_rad-car.rotation+PI/2)
         angle_diff=wrapf(angle_diff, -180.0, 180.0)
@@ -96,12 +96,12 @@ func AutoUseProp()->bool:
     AiUsePropTime = 0
     HasProp=false
     
-    if car.map.IsPropPoint(NowPointId) and prop.NowPorpId != 5:
+    if car.map.IsPropPoint(car.NowPointId) and car.NowPorpId != 5:
         if IsOnlyAttPlayer:
             return false
         return true
 
-    match prop.NowPorpId:
+    match car.NowPorpId:
         0:
             return false
         1: # Proximity Bomb/Obstacle items
@@ -130,10 +130,10 @@ func AutoUseProp()->bool:
                 if other.PlayerID != self.PlayerID and not (IsOnlyAttPlayer and other.PlayerID != 0):
                     if not other.car.isInvincible:
                         if car.global_position.distance_to(other.car.global_position) < 300:
-                            var point_delta = NowPointId - other.NowPointId
+                            var point_delta = car.NowPointId - other.car.NowPointId
                             if point_delta > 0 or point_delta < -10 or (point_delta == 0 and distance < other.distance):
                                 return true
-            if car.map.IsWanPoint(NowPointId):
+            if car.map.IsWanPoint(car.NowPointId):
                 if IsOnlyAttPlayer:
                     if OrderId >= GameData.PlayersArr.size() - 1:
                         if GameData.OrderInfo[0]!= 0: return false
@@ -150,7 +150,7 @@ func AutoUseProp()->bool:
                 return false
             return true
         8: # Speed Pad / Nitro Line
-            if car.map.IsLinePoint(NowPointId):
+            if car.map.IsLinePoint(car.NowPointId):
                 return true
         9: # Complex behavior depending on AI profile Type
             return _handle_prop_type_nine()
@@ -165,10 +165,10 @@ func _handle_prop_type_nine() -> bool:
             for other in GameData.PlayersArr:
                 if not (IsOnlyAttPlayer and other.PlayerID != 0) and not other.car.isInvincible and other.PlayerID != self.PlayerID:
                     if car.global_position.distance_to(other.car.global_position) < 300:
-                        var point_delta:int = NowPointId - other.NowPointId
+                        var point_delta:int = car.NowPointId - other.NowPointId
                         if point_delta > 0 or point_delta < -10 or (point_delta == 0 and distance < other.distance):
                             return true
-            if car.map.IsWanPoint(NowPointId):
+            if car.map.IsWanPoint(car.NowPointId):
                 if IsOnlyAttPlayer:
                     if OrderId >= GameData.PlayersArr.size() - 1:
                         if GameData.OrderInfo[0] != 0: 
@@ -177,12 +177,12 @@ func _handle_prop_type_nine() -> bool:
                         return false
                 return true
         1:
-            if car.map.IsLinePoint(NowPointId):
+            if car.map.IsLinePoint(car.NowPointId):
                 return true
         2:
             for other in GameData.PlayersArr:
                 if other.PlayerID != self.PlayerID and not (IsOnlyAttPlayer and other.PlayerID != 0):
-                    if not other.car.isInvincible and not other.prop.IsUseShield:
+                    if not other.car.isInvincible and not other.car.IsUseShield:
                         if car.global_position.distance_to(other.car.global_position) < 300:
                             return true
         5:
@@ -203,9 +203,9 @@ func _handle_prop_type_nine() -> bool:
 
 
 func AutoReSetCar()->void:
-    if(AiLastCheckPoint != NowPointId):
+    if(AiLastCheckPoint != car.NowPointId):
          ResetTimer.start()
-         AiLastCheckPoint = NowPointId;
+         AiLastCheckPoint = car.NowPointId;
 
 func ActionCar(action:int)->void:
     if(car.playering && not car.isSleep):
@@ -236,13 +236,13 @@ func Stoprace()->void:
     for propinst:Prop in prop.propArr:
         prop.Delprop(propinst)
     prop.propArr=[]
-    NowPointId=0
+    car.NowPointId=0
 
 func Reset()->void:
     car.playering = false;
     car.isResetting = true;
-    var newpos:Vector2 = car.map.Points[NowPointId - 1];
-    var anglediff:float=(car.map.Points[NowPointId]-newpos).angle()
+    var newpos:Vector2 = car.map.Points[car.NowPointId - 1];
+    var anglediff:float=(car.map.Points[car.NowPointId]-newpos).angle()
     car.Reset(newpos,anglediff)
     car.speed=Vector2(0,0)
     await car.get_tree().create_timer(1).timeout
@@ -266,5 +266,5 @@ func StartRace()->void:
     ResetTimer.timeout.connect(Reset)
     if randi() % 5 == 0:
         CanUseProp=true
-        prop.NowPorpId = 8
+        car.NowPorpId = 8
         UseProp()

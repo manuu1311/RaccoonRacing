@@ -1,6 +1,7 @@
 extends MoveObject
 class_name MissileInMap
 
+@onready var synchronizer: RollbackSynchronizer = $RollbackSynchronizer
 var onhitstatfun:Callable
 var onhitcarfun:Callable
 var petrolength:int=0
@@ -13,7 +14,12 @@ const effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tsc
 @onready var bottom_effect: Node2D = $BottomEffect
 var aimed:int
 signal MissileHit
-
+var LockAim: bool = false
+var NowPointId: int = 0
+#network
+var hit: bool = false
+var hit_tick: int = -1
+const HIT_LINGER_TICKS := 6
 
 func _ready() -> void:
     horse=Vector2(SpeedHorse,0)
@@ -21,30 +27,39 @@ func _ready() -> void:
 func OnHitStatus()->void:
     return
 
-func OnHitCar(car:Car)->void:
+func OnHitCar(car:Car,is_fresh: bool=true)->void:
     if car.playerID!=aimed:
         return
     var dist:Vector2
-    if(!car.isInvincible && !car.player.prop.IsUseShield):
+    if(!car.isInvincible && !car.player.car.IsUseShield):
         dist=car.global_position-global_position
         car.bsex = 50;
         car.sounds.playBsSound();
         car.speed+=dist*0.1
 
-    if(car.player.prop.IsUseShield):
+    if(car.player.car.IsUseShield):
         car.player.prop.del_prop_by_type(3);
 
-    car.prop_effector.PlayBomb(global_position)
-    car.sounds.playBedumpSound();
-    MissileHit.emit()
+    if is_fresh:
+        car.prop_effector.PlayBomb(global_position)
+        car.sounds.playBedumpSound()
+        MissileHit.emit()
 
 func reset(x:float,y:float,r:float)->void:
       global_position=Vector2(x,y)
       rotation=r
       Update();
 
-func _process(_delta: float) -> void:
-    return
+func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
+    if hit:
+        if tick - hit_tick >= HIT_LINGER_TICKS:
+            synchronizer.despawn()
+        return
+    UpdateCarPos()
+    UpdateSpeed()
+    if bsEx > 0:
+        rotation_degrees += min(bsEx, 30)
+        bsEx -= 1
 
 func Update()->void:
     UpdateCarPos();
@@ -86,6 +101,39 @@ func AddPetro()->void:
     bottom_effect.add_child(boost)
     #boost.top_level = true
 
+func AutoPlay(map: Map, Aimplayer: Player)->void:
+    DoAction(0);
+    var targetangle:float;
+    if(NowPointId == Aimplayer.car.NowPointId || LockAim):
+        var dist:Vector2=Aimplayer.car.global_position-global_position
+        targetangle = rad_to_deg(atan2(dist.y, dist.x))
+        LockAim = true;
+    else:
+        var dist:Vector2=Aimplayer.car.map.Points[NowPointId]-global_position
+        targetangle = rad_to_deg(atan2(dist.y, dist.x))
+    var anglediff:float=targetangle-rotation_degrees
+    anglediff = wrapf(anglediff, -180.0, 180.0)
+    if(anglediff > 5 && anglediff < 180):
+        DoAction(3);
+    elif(anglediff < -5 && anglediff > -180):
+        DoAction(2);
+
+    
+func UpdatePoint(map: Map)->void:
+    if LockAim:
+        return
+    var _loc4_:Vector2;
+    if(NowPointId + 1 < map.Points.size()):
+        _loc4_ = map.Points[NowPointId + 1];
+    else:
+        _loc4_ = map.Points[0];
+    var tonext:float=(_loc4_).distance_to(global_position)
+    var tocurr:float=map.Points[NowPointId].distance_to(global_position)
+    var between:float=map.Points[NowPointId].distance_to(_loc4_)
+    if(tonext + 200 < between || tocurr < 200):
+        NowPointId += 1;
+        if(NowPointId >= map.Points.size()):
+            NowPointId = 0;
 
 func GetHitStatus(tx:float,ty:float)->void:
     var wallAngledeg:float =GetHitStatusAng(tx,ty)

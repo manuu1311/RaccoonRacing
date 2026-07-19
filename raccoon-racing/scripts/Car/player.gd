@@ -12,7 +12,6 @@ var alldistance:int=0
 var prop:PropManager
 var CanUseProp:bool=false
 var IsUsingProp:bool=false
-var NowPointId:int
 var OrderId:int
 var LapsLock:bool=true
 var Laps:int=1
@@ -69,7 +68,7 @@ func IsPlayering()->bool:
 
 func Update(tick:int, is_fresh:bool)->void:
 	UpdatePoint()
-	car.Update()
+	car.Update(is_fresh)
 	prop.run(tick, is_fresh)
 	
 	
@@ -80,7 +79,7 @@ func StartRace()->void:
 		car.speed=Vector2.ZERO;
 	elif(car.speed.length() > 0.5):
 		CanUseProp=true
-		prop.NowPorpId = 8;
+		car.NowPorpId = 8;
 		UseProp();
 	
 func UpdatePoint() -> void:
@@ -88,36 +87,36 @@ func UpdatePoint() -> void:
 		return
 		
 	var _loc4_: Vector2
-	if NowPointId + 1 < car.map.Points.size():
-		_loc4_ = car.map.Points[NowPointId + 1]
+	if car.NowPointId + 1 < car.map.Points.size():
+		_loc4_ = car.map.Points[car.NowPointId + 1]
 	else:
 		_loc4_ = car.map.Points[0]
 
 	# _loc6_ in flash: distance from car to NEXT waypoint
 	var tonext: float = _loc4_.distance_to(car.global_position)
 	# _loc5_ in flash: total distance between current waypoint and next waypoint
-	var between: float = car.map.Points[NowPointId].distance_to(_loc4_)
+	var between: float = car.map.Points[car.NowPointId].distance_to(_loc4_)
 	
-	distance = car.map.Points[NowPointId].distance_to(car.global_position)
+	distance = car.map.Points[car.NowPointId].distance_to(car.global_position)
 
-	if NowPointId == 0 and !LapsLock:
-		alldistance = (Laps + 1) * 10000000 + NowPointId * 10000 + (10000 - distance)
+	if car.NowPointId == 0 and !LapsLock:
+		alldistance = (Laps + 1) * 10000000 + car.NowPointId * 10000 + (10000 - distance)
 	else:
-		alldistance = Laps * 10000000 + NowPointId * 10000 + (10000 - distance)
+		alldistance = Laps * 10000000 + car.NowPointId * 10000 + (10000 - distance)
 
 	WinJudge() 
 
 	# Waypoint progression logic
 	if tonext + 200 < between or distance < 200:
-		NowPointId += 1
-		if NowPointId >= car.map.Points.size():
-			NowPointId = 0
+		car.NowPointId += 1
+		if car.NowPointId >= car.map.Points.size():
+			car.NowPointId = 0
 
 func WinJudge() -> void:
-	if NowPointId == 1:
+	if car.NowPointId == 1:
 		LapsLock = false
 		
-	if NowPointId == 0 and !LapsLock:
+	if car.NowPointId == 0 and !LapsLock:
 		var win_pos: Vector2 = car.map.WinPosition # Assuming map has this method
 		var win_to_point_0: float = win_pos.distance_to(car.map.Points[0])
 		
@@ -147,8 +146,8 @@ func ResetPlayer(order:int)->void:
 	IsUsingProp=false
 	LapsLock=true
 	Laps=1
-	prop.NowPorpId=0
-	NowPointId=0
+	car.NowPorpId=0
+	car.NowPointId=0
 	OrderId=order
 	alldistance=-OrderId
 	
@@ -169,16 +168,16 @@ func RunPropBox(x:float,y:float)->void:
 	car.sounds.GetProp()
 	if not hud.PropItemReady():
 		hud.propmove(x,y)
-	if prop.NowPorpId!=0:
+	if car.NowPorpId!=0:
 		return
 	GetProp(GetPropPer())
-	hud.StartPropBox(1.5,prop.NowPorpId)
+	hud.StartPropBox(1.5,car.NowPorpId)
 
 
 			
 
 func GetProp(propid:int)->void:
-	prop.NowPorpId=propid
+	car.NowPorpId=propid
 
 func ClearPropBox(id:int)->void:
 	if hud!=null:

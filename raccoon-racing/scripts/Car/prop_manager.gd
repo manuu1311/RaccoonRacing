@@ -1,15 +1,12 @@
 extends Node
 class_name PropManager
 
-var IsUseShield:bool;
 var player:Player;
-var propArr:Array[Prop];
-var NowPorpId:int = 0;
+var propArr:Array[Prop]
 
 func _init(playerinst:Player)->void:
 	player = playerinst;
 	propArr = []
-	IsUseShield = false;
 
 func run(tick:int, is_fresh:bool)->void:
 	for propinst:Prop in propArr:
@@ -34,7 +31,7 @@ func run(tick:int, is_fresh:bool)->void:
 '''
 func UseProp()->void:
 	var _loc2_:int;
-	match(NowPorpId):
+	match(player.car.NowPorpId):
 		0:
 			return;
 		#invincible
@@ -82,7 +79,7 @@ func UseProp()->void:
 			match(player.charid):
 				1:
 					propArr.append(PetroProp.new(player))
-					NowPorpId = 8;
+					player.car.NowPorpId = 8;
 					player.ClearPropBox(8);
 				2:
 					propArr.append(FurballsProp.new(player))
@@ -128,8 +125,8 @@ func UseProp()->void:
 	return;
 
 func ClearPropBox()->void:
-	NowPorpId = 0;
-	player.ClearPropBox(NowPorpId);
+	player.car.NowPorpId = 0;
+	player.ClearPropBox(player.car.NowPorpId);
 
 
 func Delprop(prop:Prop)->void:
