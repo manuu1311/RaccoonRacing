@@ -17,6 +17,7 @@ var hit: bool = false
 var hit_tick: int = -1
 const HIT_LINGER_TICKS := 25
 var _is_fresh: bool = false
+var alive:bool=true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass # Replace with function body.
@@ -27,10 +28,14 @@ func setup(mapinst:Map,_ishitcar:bool,_ishitwall:bool)->void:
         collisions.append(get_node("Collisions/CollisionPoint"+str(i)))
 
 func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
+    if hit and tick - hit_tick >= HIT_LINGER_TICKS+50:
+        queue_free()
+    if not alive:
+        return
     _is_fresh = is_fresh
     if hit:
         if tick - hit_tick >= HIT_LINGER_TICKS:
-            synchronizer.despawn()
+            alive=false
         return
 
     if not petroadd:

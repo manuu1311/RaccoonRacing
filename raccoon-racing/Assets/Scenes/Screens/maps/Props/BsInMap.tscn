@@ -13,5 +13,5 @@ texture = ExtResource("1_2xihf")
 [node name="RollbackSynchronizer" type="Node" parent="." unique_id=186689947 node_paths=PackedStringArray("root")]
 script = ExtResource("3_ish0c")
 root = NodePath("..")
-state_properties = Array[String]([":IsActivated", ":spawn_tick", ":global_position", ":rotation"])
+state_properties = Array[String]([":IsActivated", ":spawn_tick", ":global_position", ":rotation", ":alive"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"

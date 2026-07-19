@@ -36,5 +36,5 @@ rotation = 1.5707964
 [node name="RollbackSynchronizer" type="Node" parent="." unique_id=2123408247 node_paths=PackedStringArray("root")]
 script = ExtResource("4_tb6q5")
 root = NodePath("..")
-state_properties = Array[String]([":position", ":rotation", ":speed", ":horse", ":petroadd", ":bsEx", ":hit", ":hit_tick"])
+state_properties = Array[String]([":position", ":rotation", ":speed", ":horse", ":petroadd", ":bsEx", ":hit", ":hit_tick", ":alive"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"

@@ -20,6 +20,7 @@ var NowPointId: int = 0
 var hit: bool = false
 var hit_tick: int = -1
 const HIT_LINGER_TICKS := 6
+var alive:bool=true
 
 func _ready() -> void:
     horse=Vector2(SpeedHorse,0)
@@ -28,8 +29,9 @@ func OnHitStatus()->void:
     return
 
 func OnHitCar(car:Car,is_fresh: bool=true)->void:
-    if car.playerID!=aimed:
+    if hit or car.playerID!=aimed:
         return
+    hit=true
     var dist:Vector2
     if(!car.isInvincible && !car.player.car.IsUseShield):
         dist=car.global_position-global_position
@@ -46,14 +48,20 @@ func OnHitCar(car:Car,is_fresh: bool=true)->void:
         MissileHit.emit()
 
 func reset(x:float,y:float,r:float)->void:
-      global_position=Vector2(x,y)
-      rotation=r
-      Update();
+    global_position=Vector2(x,y)
+    rotation=r
+    Update();
 
 func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
+    if hit and tick - hit_tick >= HIT_LINGER_TICKS + 50:
+        queue_free()
+    if not alive:
+        return
     if hit:
         if tick - hit_tick >= HIT_LINGER_TICKS:
-            synchronizer.despawn()
+            alive = false
+            visible = false
+            hide()
         return
     UpdateCarPos()
     UpdateSpeed()

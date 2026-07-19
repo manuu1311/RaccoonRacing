@@ -175,10 +175,10 @@ func RunPropBox(x:float,y:float)->void:
 	hud.StartPropBox(1.5,car.NowPorpId)
 
 
-			
 
 func GetProp(propid:int)->void:
-	car.NowPorpId=propid
+	if is_instance_valid(car):
+		car.NowPorpId=propid
 
 func ClearPropBox(id:int)->void:
 	if hud!=null:

@@ -14,7 +14,6 @@ func _init(playerinst:Player) -> void:
 	proptype = 8;
 	player.prop.del_prop_by_type(proptype);
 	player.car.sounds.playPetroSound();
-	delme()
 	player.IsUsingProp=true
 	start_tick = NetworkTime.tick
 	max_ticks = int(NetworkTime.tickrate * UseTime)

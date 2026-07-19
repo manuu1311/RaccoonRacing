@@ -124,5 +124,5 @@ position = Vector2(64.86, -1)
 [node name="RollbackSynchronizer" type="Node" parent="." unique_id=971336091 node_paths=PackedStringArray("root")]
 script = ExtResource("23_8sof1")
 root = NodePath("..")
-state_properties = Array[String]([":IsActivated", ":exploded", ":explode_tick", ":global_position", ":rotation"])
+state_properties = Array[String]([":IsActivated", ":exploded", ":explode_tick", ":global_position", ":rotation", ":alive"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"

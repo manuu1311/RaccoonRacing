@@ -4,6 +4,7 @@ class_name BsInMap
 @onready var synchronizer: RollbackSynchronizer = $RollbackSynchronizer
 var LIFETIME_TICKS :int= NetworkTime.tickrate*30*99999999
 var spawn_tick: int = -1
+var alive:bool=true
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
 	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
@@ -25,9 +26,11 @@ func GetHitEventStatus(PlayerId:int,is_fresh:bool)->void:
 
 
 func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
+	if not alive and tick - spawn_tick >= LIFETIME_TICKS+50:
+			queue_free()
 	if IsActivated and tick - spawn_tick >= LIFETIME_TICKS:
 		IsActivated = false
-		synchronizer.despawn()
+		alive=false
 
 func _rollback_spawn() -> void:
 	show()

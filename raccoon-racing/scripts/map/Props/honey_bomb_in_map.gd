@@ -11,6 +11,7 @@ const EXPLODE_TICKS := 20
 var exploded: bool = false
 var explode_tick: int = -1
 var _is_fresh: bool = false
+var alive:bool=true
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
 	mapinst.add_child(self)
@@ -37,6 +38,10 @@ func GetHitEventStatus(PlayerId:int,is_fresh: bool)->void:
 		car.sounds.playerBombSound()
 
 func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
+	if exploded and tick - explode_tick >= EXPLODE_TICKS+50:
+		queue_free()
+	if not alive:
+		return
 	_is_fresh = is_fresh
 	if not exploded:
 		return
@@ -45,7 +50,7 @@ func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 		animated_sprite_2d.show()
 		animated_sprite_2d.play()
 	if tick - explode_tick >= EXPLODE_TICKS:
-		synchronizer.despawn()
+		alive=false
 
 func _rollback_spawn() -> void:
 	show()

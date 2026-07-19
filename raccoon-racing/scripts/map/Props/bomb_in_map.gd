@@ -8,7 +8,7 @@ var bombview:AnimatedSprite2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var synchronizer: RollbackSynchronizer = $RollbackSynchronizer
 const EXPLODE_TICKS := 35
-
+var alive:bool=true
 var exploded: bool = false
 var explode_tick: int = -1
 
@@ -45,6 +45,10 @@ func GetHitEventStatus(PlayerId: int,_is_fresh:bool) -> void:
 func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 	if not exploded:
 		return
+	if tick - explode_tick >= EXPLODE_TICKS+50:
+			queue_free()
+	if not alive:
+		return
 	if tick == explode_tick and is_fresh:
 		# one-shot cosmetics, only on the first time we ever see this tick
 		sprite_2d.hide()
@@ -52,7 +56,7 @@ func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 		animated_sprite_2d.show()
 		animated_sprite_2d.play()
 	if tick - explode_tick >= EXPLODE_TICKS:
-		synchronizer.despawn()
+		alive=false
 
 func _rollback_spawn() -> void:
 	show()
