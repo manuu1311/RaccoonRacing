@@ -99,7 +99,6 @@ func UseProp()->void:
 						var newplayer:Player=GameData.PlayersArr[j]
 						if(newplayer.PlayerID!=player.PlayerID): 
 							if(not newplayer.car.isResetting and not newplayer.car.isInvincible):
-								#TODO: greater than, not smaller than
 								if(newplayer.alldistance <= player.alldistance):
 									var dist:Vector2=newplayer.car.global_position-player.car.global_position
 									var distsq:float=dist.length_squared()
@@ -114,13 +113,11 @@ func UseProp()->void:
 				#default
 				_:
 					pass
-					#TODO:message..
 					#as.MessageBox.ShowMessage("Error  UseProp Playertype");
 			return;
 		#default
 		_:
 			pass
-			#TODO:message=
 			#as.MessageBox.ShowMessage("Error UseProp Id");
 	return;
 

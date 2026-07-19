@@ -46,7 +46,7 @@ func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 	if not exploded:
 		return
 	if tick - explode_tick >= EXPLODE_TICKS+50:
-			queue_free()
+			_rollback_destroy()
 	if not alive:
 		return
 	if tick == explode_tick and is_fresh:
@@ -66,7 +66,8 @@ func _rollback_despawn() -> void:
 	animated_sprite_2d.stop()
 
 func _rollback_destroy() -> void:
-	bombview.queue_free()
+	if is_instance_valid(bombview):
+		bombview.queue_free()
 	queue_free()
 
 func del()->void:

@@ -33,7 +33,7 @@ func SetDmc()->void:
 	HomingMissile.petrowidth=1
 	player.car.sounds.playMissileSound()
 
-#TODO: is that mess really needed?
+
 func SetAimPlayer()->Player:
 	return GameData.PlayersArr[GameData.OrderInfo[player.OrderId-1]]
 

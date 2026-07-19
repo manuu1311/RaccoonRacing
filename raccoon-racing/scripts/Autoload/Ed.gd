@@ -1,7 +1,7 @@
 extends Node
 class_name Ed
 
-#TODO: static array typing
+
 var AddSurfaceArr:Array[EdLine]
 var LengthX:float
 var LengthY:float
@@ -55,7 +55,6 @@ func ReTidyFace()->void:
 	while(_loc2_ <= int(sqrt(len(AddSurfaceArr)))):
 		SurfaceArr.append([])
 		_loc3_ = 0;
-		#TODO: is it a flash error, < instead of <=? flash is more forgiving on arrays
 		while(_loc3_ <= int(sqrt(len(AddSurfaceArr)))):
 			SurfaceArr[_loc2_].append([])
 			_loc3_ = _loc3_ + 1;
@@ -104,7 +103,6 @@ func getHitFace(point:Vector2)->EdLine:
 		i+=1
 	return null;
 
-#TODO: is it really needed, or is it just flash memory cleaning?
 func del_ed(ed_id: int) -> void:
 	# 1. Clean out the 2D grid cells safely
 	for col in SurfaceArr:

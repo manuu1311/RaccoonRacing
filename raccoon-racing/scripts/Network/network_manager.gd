@@ -119,7 +119,6 @@ func start_match() -> void:
 	# so the server's 10s auto-close timer (which only starts once "S:" is
 	# received) never fired and the socket stayed open indefinitely.
 	_ws_send_text("S: \n")
-	# TODO: this is the function to call to actually start the game
 	start_game.rpc()
 
 
@@ -290,7 +289,6 @@ func _on_rtc_peer_disconnected(id: int) -> void:
 @rpc("any_peer", "call_local", "reliable")
 func start_game() -> void:
 	print("start_game RPC received")
-	# TODO: this is where your actual game-start logic goes
 	# GameState.isMultiplayer = true
 	# get_tree().change_scene_to_file("res://Assets/Scene/Level/mainGame.tscn")
 	pass

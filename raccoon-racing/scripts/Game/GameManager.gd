@@ -1,11 +1,9 @@
 extends Node2D
 class_name GameManager
 
-#TODO:save reference ofplayer or car?
 var players: Array[Player]
 var cars:Array[Car]
 var fcsCar:Car
-#TODO: should be created
 @onready var map: Map
 @onready var hud: HUDManager = $Hud
 @onready var sound_manager: GameSoundManager = $SoundManager

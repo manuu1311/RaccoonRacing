@@ -3,7 +3,6 @@ class_name  Player
 
 var car: Car
 var PlayerID:int
-#TODO: should be set by game manager
 ##character id 1-6
 var charid:int=0
 enum control_type{HUMAN,AI,MULTIPLAYER,RLTRAINING,RL}
@@ -48,7 +47,6 @@ const POSITION_PROBABILITIES: Dictionary = {
 }
 func _init(id:int,control:control_type) -> void:
 	PlayerID=id
-	#TODO: manage ordering
 	OrderId=id
 	current_control=control
 	prop=PropManager.new(self)
@@ -212,7 +210,6 @@ func GetPropPer_LEGACY()->int:
 		_loc5_ = randi_range(0,79);
 	var _loc2_:Array[int] = [0,0,0,0,0,0,0,0,0,0,0];
 	var _loc6_:Vector2;
-	#TODO: is selectlevelid the difficulty?
 	if(PlayerID == 0 || GameData.currentDifficulty < 2):
 		if(OrderId == 0):
 			_loc2_[1] = 0;
