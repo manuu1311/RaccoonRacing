@@ -13,6 +13,7 @@ func _init(playerinst: Player) -> void:
 	HomingMissileView = preload("res://Assets/Scenes/Screens/maps/PropknView.tscn").instantiate() as Sprite2D
 	HomingMissile.aimed = Aimplayer.PlayerID
 	HomingMissile.MissileHit.connect(delme)
+	HomingMissile.map=player.map
 	SetDmc()
 
 func SetDmc() -> void:

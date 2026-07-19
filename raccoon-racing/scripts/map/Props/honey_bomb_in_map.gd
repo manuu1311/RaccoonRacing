@@ -36,7 +36,7 @@ func GetHitEventStatus(PlayerId:int,is_fresh: bool)->void:
 	if is_fresh:
 		car.sounds.playerBombSound()
 
-func _rollback_tick(delta: float, tick: int, is_fresh: bool) -> void:
+func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 	_is_fresh = is_fresh
 	if not exploded:
 		return

@@ -18,6 +18,7 @@ func _init(playerinst:Player)->void:
 	).instantiate() as Sprite2D
 	HomingMissile.aimed=Aimplayer.PlayerID
 	HomingMissile.MissileHit.connect(delme)
+	HomingMissile.map=player.map
 	SetDmc();
 	
 

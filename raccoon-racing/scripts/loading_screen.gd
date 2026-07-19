@@ -22,7 +22,7 @@ func _ready() -> void:
 func _wait_for_loading() -> void:
 	while true:
 		# Pass progress_array so Godot can write the percentage into it
-		var status = ResourceLoader.load_threaded_get_status(target_scene, progress_array)
+		var status: = ResourceLoader.load_threaded_get_status(target_scene, progress_array)
 		
 		# Update Percentage Text
 		if progress_array.size() > 0:
@@ -39,7 +39,7 @@ func _wait_for_loading() -> void:
 		if status == ResourceLoader.THREAD_LOAD_LOADED:
 			percentage.text="100%"
 			await get_tree().create_timer(0.3).timeout
-			var packed_scene = ResourceLoader.load_threaded_get(target_scene)
+			var packed_scene:Resource = ResourceLoader.load_threaded_get(target_scene)
 			get_tree().change_scene_to_packed(packed_scene)
 			break
 		elif status == ResourceLoader.THREAD_LOAD_FAILED or status == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
@@ -50,7 +50,7 @@ func _wait_for_loading() -> void:
 
 func _cycle_hint() -> void:
 	# Get total frames in current animation
-	var total_frames = hint.sprite_frames.get_frame_count(hint.animation)
+	var total_frames:int = hint.sprite_frames.get_frame_count(hint.animation)
 	var newframe:int=hint.frame
 	while newframe==hint.frame:
 		newframe=randi_range(0,total_frames-1)

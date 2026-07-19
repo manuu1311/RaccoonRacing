@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func updateLocks(id: int)->void:
 	#was the race won before?
-	var racewon=GameData.cupWon[id]
+	var racewon:int=GameData.cupWon[id]
 	for i in range(3):
 		if racewon>=i:
 			locks[i]=0
