@@ -111,6 +111,13 @@ var controller:CarController
 var isfresh:bool
 var NowPointId:int
 var NowPorpId:int
+var StartTick:int=9999999
+##ai variables 
+var AiNowPushButtonTimeNow:int
+var AiNowPushButtonTime:int
+var AiNowPushButton:int
+var HasProp:bool=false
+var AiUsePropTime:int=0
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
     map=gamemap
@@ -136,6 +143,16 @@ func _ready() -> void:
 
 
 func RollbackSyncSetup()->void:
+    rollback_synchronizer.add_input(controller, "forward")
+    rollback_synchronizer.add_input(controller, "brake")
+    rollback_synchronizer.add_input(controller, "left")
+    rollback_synchronizer.add_input(controller, "right")
+    rollback_synchronizer.add_input(controller, "special")
+    rollback_synchronizer.add_state(self, "AiUsePropTime")
+    rollback_synchronizer.add_state(self, "AiNowPushButtonTime")
+    rollback_synchronizer.add_state(self, "AiNowPushButton")
+    rollback_synchronizer.add_state(self, "HasProp")
+    rollback_synchronizer.add_state(self, "AiNowPushButtonTimeNow")
     rollback_synchronizer.add_state(self, "jumpCurrheight")
     rollback_synchronizer.add_state(self, "jumpPrevheight")
     rollback_synchronizer.add_state(self, "bsex")
@@ -149,11 +166,6 @@ func RollbackSyncSetup()->void:
     rollback_synchronizer.add_state(self, "shrinkscale")
     rollback_synchronizer.add_state(self, "maxRotationWheel")
     rollback_synchronizer.add_state(self, "carRotationWheel")
-    rollback_synchronizer.add_state(controller, "forward")
-    rollback_synchronizer.add_state(controller, "brake")
-    rollback_synchronizer.add_state(controller, "left")
-    rollback_synchronizer.add_state(controller, "right")
-    rollback_synchronizer.add_state(controller, "special")
     rollback_synchronizer.add_state(self, "NowPointId")
     rollback_synchronizer.add_state(self, "NowPorpId")
     rollback_synchronizer.process_settings()
@@ -274,7 +286,8 @@ func Backward()->void:
 
 func Clearward()->void:
       if isHovercraft():
-        sounds.stopHCRunSound()
+        if isfresh:
+            sounds.stopHCRunSound()
 
 
 
@@ -334,9 +347,11 @@ func Update(is_fresh:bool)->void:
     if(friction > 40 and speed.length() > 2):
         if(speed.length() > bsSpeed):
             if(friction > 60):
-                sounds.playTurnBsSound(0)
+                if isfresh:
+                    sounds.playTurnBsSound(0)
             else:
-                sounds.playTurnBsSound(1)
+                if isfresh:
+                    sounds.playTurnBsSound(1)
         spawn_smoke("smoke1",moveAngCar < 0)
         if(friction > 70):
             spawn_smoke("smoke1",moveAngCar > 0)
@@ -458,7 +473,8 @@ func Jumping()->void:
         z_index=1
     if(jumpCurrheight < jumpFloorHeight):
         if(jumpFloorHeight - jumpCurrheight > 0.5):
-            sounds.playHCEndJumpSound()
+            if isfresh:
+                sounds.playHCEndJumpSound()
             
         jumpCurrheight = (- jumpCurrheight) * jumpSpring
         jumpPrevheight = (- temp_height) * jumpSpring
@@ -549,7 +565,8 @@ func GetHitStatus(tx:float, ty:float)->void:
     #no wall detected
     if(is_nan(wallAngledeg)):
         return 
-    sounds.playbumpsound()
+    if isfresh:
+        sounds.playbumpsound()
     var speedangle:float=speed.angle()
     var wallAngle :float= deg_to_rad(wallAngledeg)
     var speedwallangle:float=wrapf(
@@ -597,7 +614,8 @@ func BeAttacked(who: Car,_is_fresh:bool=true)->void:
         return 
     if(isResetting or who.isResetting):
         return 
-    sounds.playbumpsound()
+    if isfresh:
+        sounds.playbumpsound()
     var isInvincibletemp:bool = isInvincible
     var enemyInvincible:bool = who.isInvincible;
     if(isSmallState):
@@ -623,12 +641,14 @@ func BeAttacked(who: Car,_is_fresh:bool=true)->void:
     if(not isInvincibletemp and enemyInvincible):
         speed = enemySpeed+pushvector*40
         bs = true
-        sounds.playBsSound()
+        if isfresh:
+            sounds.playBsSound()
     #if im invincible and enemy is not: give massive knockback
     elif(isInvincibletemp and not enemyInvincible):
         who.speed = mySpeed-pushvector*40
         who.bs = true
-        sounds.playBsSound()
+        if isfresh:
+            sounds.playBsSound()
     #no one is invincible
     else:
         speed = enemySpeed+pushvector

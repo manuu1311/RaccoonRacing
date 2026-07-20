@@ -125,7 +125,7 @@ func LoadMap() -> void:
 
 func RaceStart()->void:
 	for player:Player in GameData.PlayersArr:
-		player.StartRace()
+		player.StartRace(NetworkTime.tick)
 	
 	
 func register(player:Player)->void:

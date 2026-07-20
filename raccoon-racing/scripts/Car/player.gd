@@ -70,9 +70,10 @@ func Update(tick:int, is_fresh:bool)->void:
 	prop.run(tick, is_fresh)
 	
 	
-func StartRace()->void:
+func StartRace(starttick:int)->void:
 	car.playering = true;
 	car.isLock = false;
+	car.StartTick=starttick
 	if(car.speed.length() > 2):
 		car.speed=Vector2.ZERO;
 	elif(car.speed.length() > 0.5):
@@ -416,8 +417,6 @@ func ResetUse()->void:
 	CanUseProp=true
 
 func UseProp()->void:
-	if PlayerID==0:
-		prints(IsPlayering(), not car.isSleep, CanUseProp, !IsUsingProp)
 	if(IsPlayering() && not car.isSleep and CanUseProp and !IsUsingProp):
 		prop.UseProp()
 		CanUseProp=false

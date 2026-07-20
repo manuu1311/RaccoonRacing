@@ -3,19 +3,14 @@ class_name AIPlayer
 
 var AiPlayering:bool=false
 var AiUsePropReflect:int=150
-var AiUsePropTime:int=0
 var ResetTimer:Timer
 var AiResetTime:int=10
 var AiLastCheckPoint:int
-var AiNowPushButtonTimeNow:int
-var AiNowPushButtonTime:int
-var AiNowPushButton:int
-var HasProp:bool=false
 var IsOnlyAttPlayer:bool=false
 
 func RunPropBox(_x:float,_y:float)->void:
-    if not HasProp:
-        HasProp=true
+    if not car.HasProp:
+        car.HasProp=true
         CanUseProp=true
         var id:int=GetPropPer()
         await car.get_tree().create_timer(1.5).timeout
@@ -25,6 +20,7 @@ func RunPropBox(_x:float,_y:float)->void:
 
 func Update(tick:int, is_fresh:bool)->void:
     if(AiPlayering && car.playering):
+        AutoPlay()
         AutoUseProp();
         AutoReSetCar();
     UpdatePoint()
@@ -35,12 +31,12 @@ func Update(tick:int, is_fresh:bool)->void:
 func AutoInput()->Array[bool]:
     var inputArr:Array[bool]=[0,0,0,0]
     inputArr[0]=true
-    if(AiNowPushButtonTimeNow < AiNowPushButtonTime):
-        if AiNowPushButton!=4:
-            inputArr[AiNowPushButton]=true
-        AiNowPushButtonTimeNow = AiNowPushButtonTimeNow + 1;
+    if(car.AiNowPushButtonTimeNow < car.AiNowPushButtonTime):
+        if car.AiNowPushButton!=4:
+            inputArr[car.AiNowPushButton]=true
+        car.AiNowPushButtonTimeNow = car.AiNowPushButtonTimeNow + 1;
     else:
-        AiNowPushButtonTimeNow = 0;
+        car.AiNowPushButtonTimeNow = 0;
         var angle_rad: float = atan2(
             car.map.Points[car.NowPointId].y - car.global_position.y,
             car.map.Points[car.NowPointId].x - car.global_position.x
@@ -48,24 +44,24 @@ func AutoInput()->Array[bool]:
         var angle_diff: float = rad_to_deg(angle_rad-car.rotation+PI/2)
         angle_diff=wrapf(angle_diff, -180.0, 180.0)
         if angle_diff > 5 and angle_diff < 180:
-            AiNowPushButton = 3
+            car.AiNowPushButton = 3
             @warning_ignore("narrowing_conversion")
-            AiNowPushButtonTime = angle_diff / AiReflect
+            car.AiNowPushButtonTime = angle_diff / AiReflect
         elif angle_diff < -5 and angle_diff > -180:
-            AiNowPushButton = 2
-            AiNowPushButtonTime = abs(angle_diff) / 45 + AiReflect
+            car.AiNowPushButton = 2
+            car.AiNowPushButtonTime = abs(angle_diff) / 45 + AiReflect
         else:
-            AiNowPushButtonTime = AiReflect
-            AiNowPushButton = 4
+            car.AiNowPushButtonTime = AiReflect
+            car.AiNowPushButton = 4
     return inputArr
 
 func AutoPlay()->void:
     ActionCar(0);
-    if(AiNowPushButtonTimeNow < AiNowPushButtonTime):
-        ActionCar(AiNowPushButton);
-        AiNowPushButtonTimeNow = AiNowPushButtonTimeNow + 1;
+    if(car.AiNowPushButtonTimeNow < car.AiNowPushButtonTime):
+        ActionCar(car.AiNowPushButton);
+        car.AiNowPushButtonTimeNow = car.AiNowPushButtonTimeNow + 1;
     else:
-        AiNowPushButtonTimeNow = 0;
+        car.AiNowPushButtonTimeNow = 0;
         var angle_rad: float = atan2(
             car.map.Points[car.NowPointId].y - car.global_position.y,
             car.map.Points[car.NowPointId].x - car.global_position.x
@@ -73,30 +69,30 @@ func AutoPlay()->void:
         var angle_diff: float = rad_to_deg(angle_rad-car.rotation+PI/2)
         angle_diff=wrapf(angle_diff, -180.0, 180.0)
         if angle_diff > 5 and angle_diff < 180:
-            AiNowPushButton = 3
+            car.AiNowPushButton = 3
             @warning_ignore("narrowing_conversion")
-            AiNowPushButtonTime = angle_diff / AiReflect
+            car.AiNowPushButtonTime = angle_diff / AiReflect
         elif angle_diff < -5 and angle_diff > -180:
-            AiNowPushButton = 2
-            AiNowPushButtonTime = abs(angle_diff) / 45 + AiReflect
+            car.AiNowPushButton = 2
+            car.AiNowPushButtonTime = abs(angle_diff) / 45 + AiReflect
         else:
-            AiNowPushButtonTime = AiReflect
-            AiNowPushButton = 4
+            car.AiNowPushButtonTime = AiReflect
+            car.AiNowPushButton = 4
 
 
 func ResetPlayer(order:int)->void:
     AiPlayering=false
-    HasProp=false
-    AiUsePropTime=0
+    car.HasProp=false
+    car.AiUsePropTime=0
     super(order)
   
 func AutoUseProp()->bool:
-    AiUsePropTime += 1
-    if AiUsePropTime <= AiUsePropReflect:
+    car.AiUsePropTime += 1
+    if car.AiUsePropTime <= AiUsePropReflect:
         return false
         
-    AiUsePropTime = 0
-    HasProp=false
+    car.AiUsePropTime = 0
+    car.HasProp=false
     
     if car.map.IsPropPoint(car.NowPointId) and car.NowPorpId != 5:
         if IsOnlyAttPlayer:
@@ -158,7 +154,7 @@ func AutoUseProp()->bool:
             return _handle_prop_type_nine()
         _:
             push_error("Error UseProp Id")
-    HasProp=false
+    car.HasProp=false
     return false
 
 func _handle_prop_type_nine() -> bool:
@@ -256,10 +252,11 @@ func RestartRace()->void:
     car.playering = true;
     ResetTimer.start()
     
-func StartRace()->void:
+func StartRace(starttick:int)->void:
     AiPlayering=true
     car.playering = true;
     car.isLock = false;
+    car.StartTick=starttick
     ResetTimer=Timer.new()
     car.add_child(ResetTimer)
     ResetTimer.one_shot=true
