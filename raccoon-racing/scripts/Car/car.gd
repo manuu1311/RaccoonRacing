@@ -194,6 +194,8 @@ func PopulateCollisions()->void:
             collisionPoints.append(child)
 
 func steer_left()->void:
+    if not isfresh:
+        return
     character.position=Vector2(4.5,-5)
     character.rotation=deg_to_rad(-23.5)
     if isHovercraft():
@@ -208,6 +210,8 @@ func steer_left()->void:
         fl.rotation=deg_to_rad(-23.5)
     
 func steer_right()->void:
+    if not isfresh:
+        return
     character.position=Vector2(-4.5,-5)
     character.rotation=deg_to_rad(23.5)
     if isHovercraft():
@@ -223,6 +227,8 @@ func steer_right()->void:
         
     
 func steer_normal()->void:
+    if not isfresh:
+        return
     character.position=Vector2(0,-4)
     character.rotation=0
     if isHovercraft():
@@ -239,12 +245,16 @@ func steer_normal()->void:
 
 #start wheel spinning
 func all_wheel()->void:
+    if not isfresh:
+        return
     fl.play()
     fr.play()
     rl.play()
     rr.play()
     
 func stop_wheel()->void:
+    if not isfresh:
+        return
     fl.stop()
     fr.stop()
     rl.stop()

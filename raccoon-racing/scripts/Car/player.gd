@@ -39,9 +39,15 @@ signal racefinished
 	5:rotating bones
 	6:laser shrink ray
 '''
+'const POSITION_PROBABILITIES: Dictionary = {
+    0: [0,  0, 30, 30,  0,  0, 30,  0, 10], # 1st Place
+    1: [5,  0, 15, 20, 5, 15, 15, 15, 10], # 2nd Place
+    2: [10, 10, 5,  5, 15, 20, 5, 20, 10], # 3rd Place
+    3: [15, 20, 0,  0, 20, 15,  0, 20, 10]  # 4th Place
+}'
 const POSITION_PROBABILITIES: Dictionary = {
-	0: [0,  0, 30, 30,  0,  0, 30,  0, 10], # 1st Place
-	1: [5,  0, 15, 20, 5, 15, 15, 15, 10], # 2nd Place
+	0: [0,  0, 0, 0,  0,  0, 0,  0, 100], # 1st Place
+	1: [5,  0, 15, 20, 5, 15, 0, 0, 100], # 2nd Place
 	2: [10, 10, 5,  5, 15, 20, 5, 20, 10], # 3rd Place
 	3: [15, 20, 0,  0, 20, 15,  0, 20, 10]  # 4th Place
 }
@@ -104,7 +110,7 @@ func UpdatePoint() -> void:
 	else:
 		alldistance = Laps * 10000000 + car.NowPointId * 10000 + (10000 - distance)
 
-	WinJudge() 
+	WinJudge()
 
 	# Waypoint progression logic
 	if tonext + 200 < between or distance < 200:
@@ -128,7 +134,7 @@ func WinJudge() -> void:
 				
 			Laps += 1
 			# If this is the main player (ID 0)
-			if hud!=null: 
+			if hud!=null:
 				hud.updatelap()
 				if Laps == GameData.currentLaps:
 					# Replace with your actual UI/Notification system call

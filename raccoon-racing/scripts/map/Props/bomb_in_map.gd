@@ -45,7 +45,7 @@ func GetHitEventStatus(PlayerId: int,_is_fresh:bool) -> void:
 func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 	if not exploded:
 		return
-	if tick - explode_tick >= EXPLODE_TICKS+50:
+	if tick - explode_tick >= EXPLODE_TICKS+70:
 			_rollback_destroy()
 	if not alive:
 		return

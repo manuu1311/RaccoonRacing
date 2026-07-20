@@ -1,42 +1,51 @@
 extends Prop
 class_name IceTrailProp
 
-@export var stamp_interval: float = 0.15   # how often to drop a patch
-@export var grow_time: float = 2.0          # matches original CarUse window
+@export var use_time: float = 2.0
+@export var ice_width: float = 30.0
+var IcePatchScene: PackedScene
+var trail: IceTrailInMap
+var time_active: float = 0.0
+var active: bool = true
+var delta: float = 0.0
+var end_timer: SceneTreeTimer
 
-var growing := true
-var stamp :int= 0
-
-var IcePatchScene :Resource
-
-
-func _init(playerinst:Player)->void:
-	super(playerinst);
-	proptype = 9;
-	IcePatchScene=preload("res://Assets/Scenes/Screens/maps/Props/IceTrail.tscn")
+func _init(playerinst: Player) -> void:
+	super(playerinst)
+	proptype = 9
+	IcePatchScene = preload("res://Assets/Scenes/Screens/maps/Props/IceTrail.tscn")
 	player.car.sounds.playIceSound()
-	delme()
+	_spawn_trail()
+	end_timer = player.car.get_tree().create_timer(use_time)
+	end_timer.timeout.connect(_on_use_time_elapsed)
 
-func advance() -> void:
-	stamp += 1
-	if stamp >= 3:
-		stamp = 0
-		_drop_ice_stamp()
+func _spawn_trail() -> void:
+	trail = IcePatchScene.instantiate()
+	player.car.map.add_child(trail)
+	# Start the trail at the car's rear (70 units behind)
+	trail.global_position = player.car.global_position + player.car.transform.y * 70
+	trail.add_point(Vector2.ZERO)  # First point at origin
 
-func run()->void:
-	advance()
+func _physics_process(deltat: float) -> void:
+	delta = deltat
 
+func run_tick(_tick: int, is_fresh: bool) -> void:
+	if not active or not is_instance_valid(trail) or not is_fresh:
+		return
+	time_active += delta
+	trail.add_point(player.car.global_position + player.car.transform.y * 70)
 
-func delme()->void:
-	await player.car.map.get_tree().create_timer(grow_time).timeout
-	if is_instance_valid(player.car):
-		player.prop.Delprop(self)
-	
-func del()->void:
+func _on_use_time_elapsed() -> void:
+	active = false
+	if is_instance_valid(trail):
+		trail.stop_growing()
+	player.prop.Delprop(self)
+
+func del() -> void:
+	if is_instance_valid(trail):
+		trail.queue_free()
 	queue_free()
 
-
-func _drop_ice_stamp()->void:
-	var patch:Node2D = IcePatchScene.instantiate()
-	player.car.map.add_child(patch)
-	patch.global_position = player.car.global_position + player.car.transform.y * 70
+func _exit_tree() -> void:
+	if end_timer and end_timer.is_connected("timeout", _on_use_time_elapsed):
+		end_timer.disconnect("timeout", _on_use_time_elapsed)

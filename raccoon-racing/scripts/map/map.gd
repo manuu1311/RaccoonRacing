@@ -84,7 +84,7 @@ func InitMap()->void:
         queue_redraw()
         
 func deferredInit()->void:
-    minimap=get_node("Minimap/View/MapSprite") 
+    minimap=get_node("Minimap/View/MapSprite")
     if IsHovercraft:
         offset=offsethc
     else:
@@ -188,18 +188,18 @@ func InitJumpWall()->void:
                     _loc3_ = _loc3_ + 1;
                 if(_loc4_ != _loc3_):
                     AddJumpEdLine(
-                            _loc2_.global_position.x,
-                            _loc2_.global_position.y,
-                            _loc6_.global_position.x,
-                            _loc6_.global_position.y
-                            )
+                        _loc2_.global_position.x,
+                        _loc2_.global_position.y,
+                        _loc6_.global_position.x,
+                        _loc6_.global_position.y
+                        )
                     break;
         _loc7_ = _loc7_ + 1;
 
 func AddJumpEdLine(x1:float,y1:float,x2:float,y2:float)->void:
     var _loc2_:EdLine = ed.AddLine(x1,y1,x2,y2)
     _loc2_.ReSetLineWidth(10)
-    canBeJumpWall.append(_loc2_.getId()) 
+    canBeJumpWall.append(_loc2_.getId())
    
 func InitGrass() -> void:
     #added safety check, godot is stricter than flash
@@ -367,8 +367,8 @@ func InitEventInMap()->void:
 
     
 func AddEventInMap(event: EventInMap)->void:
-      Events.append(event);
-      edevent.ReTidyFace();
+    Events.append(event);
+    edevent.ReTidyFace();
     
 func DelEventInMap(id:int)->void:
     var _loc2_:int = 0;
@@ -381,7 +381,7 @@ func DelEventInMap(id:int)->void:
 @warning_ignore("narrowing_conversion")
 func StartCupMap(num:int=NAN,w:int=NAN,h:int=NAN)->void:
     if(is_nan(num)):
-         num = 4
+        num = 4
     var mapsize:Vector2=GetMapSize()
     if(is_nan(w)):
         w = int(mapsize.x / num)
@@ -424,5 +424,5 @@ func GetHitEventStatus(eventid:int,playerid:int,isfresh:bool)->void:
     while(_loc2_ < Events.size()):
         if(Events[_loc2_].edface.getId() == eventid):
             Events[_loc2_].GetHitEventStatus(playerid,isfresh);
-            return 
+            return
         _loc2_ = _loc2_ + 1;
