@@ -33,9 +33,7 @@ func _ready() -> void:
 	for i:int in GameData.Ranking.size(): 
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
-		prints(player.current_control,player.PlayerID,NetworkManager.PlayerID)
 		if player.current_control==player.control_type.HUMAN and player.PlayerID==NetworkManager.PlayerID:
-			print('this is you')
 			carinstance.setup(map,player.PlayerID,true,player)
 			var controller:CarController=HumanCarController.new(player)
 			carinstance.add_child(controller)
@@ -71,6 +69,7 @@ func _ready() -> void:
 				available_ids.erase(newid)
 			carinstance.CharID=newid
 		add_child(carinstance)
+		carinstance.name="Car"+str(player.PlayerID)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
 		player.SetCar(carinstance)
