@@ -4,109 +4,142 @@ class_name IceTrailInMap
 @onready var area_2d: Area2D = $Area2D
 @onready var collision_polygon_2d: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 @onready var polygon_2d: Polygon2D = $Area2D/Polygon2D
+@onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
 
-@export var trail_width: float = 90.0
-@export var edge_jitter: float = 6.0          # organic wobble, like the random() offsets in the Flash version
-@export var min_point_distance: float = 12.0  # only add a new point once car has moved this far
-@export var max_points: int = 80              # cap so it doesn't grow forever
-@export var fade_lifetime: float = 4.0        # how long the trail lingers once growth stops
-
-var centers: Array[Vector2] = []
-var edge_jitters: Array[float] = []           # stored per-point so edges don't re-wobble every rebuild
-var bodies_on_patch: Array[Area2D] = []
-var growing: bool = true
-var _origin_set: bool = false
+var car:Car
+var poly:PackedVector2Array=PackedVector2Array()
+var rng := RandomNumberGenerator.new()
+var left_by_slot: Dictionary = {} # slot:int -> Vector2
+var right_by_slot: Dictionary = {}
+var max_slot: int = -1
+var usetime:int=NetworkTime.seconds_to_ticks(2.0)
+var lifetime:int=NetworkTime.seconds_to_ticks(6.0)
+var left:Vector2=Vector2(-45,50)
+var right:Vector2=Vector2(45,50)
+var jitterstrength:float=25
+var tickinterval:int=2
+var currtick:int=0
+var growtick:int
+var carsintrail:Array[Car]
+var spawntick:int
+var disabletick:int
+var despawntick:int
+var alive:bool=true
+var enabled:bool=true
+var last_point_pos: Vector2 = Vector2.ZERO
+var has_last_point: bool = false
+var min_forward_progress: float = 4.0 
 
 func _ready() -> void:
-	if polygon_2d.color.a == 0:
-		polygon_2d.color = Color(0.6, 0.9, 1.0, 0.6)
 	area_2d.area_entered.connect(_on_enter)
 	area_2d.area_exited.connect(_on_exit)
+	spawntick=NetworkTime.tick
+	growtick=spawntick+usetime
+	disabletick=spawntick+lifetime
+	despawntick=disabletick+70
+	global_position =car.global_position + car.transform.y * 70
+	poly.append(Vector2.ZERO)
+	rollback_setup()
+	
 
-# Call every frame while the car is drifting/using ice, passing the car's world position.
-func add_point(global_pos: Vector2) -> void:
-	if not growing:
+
+func rollback_setup()->void:
+	rollback_synchronizer.add_state(self, "max_slot")
+	rollback_synchronizer.add_state(self, "left_by_slot")
+	rollback_synchronizer.add_state(self, "right_by_slot")
+	rollback_synchronizer.add_state(self, "last_point_pos")
+	rollback_synchronizer.add_state(self, "has_last_point")
+	rollback_synchronizer.add_state(self, "alive")
+	rollback_synchronizer.add_state(self, "currtick")
+
+func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
+	if not alive:
+		if tick>despawntick:
+			queue_free()
+		return
+	
+	if tick>disabletick:
+		alive=false
+		return
+		
+	if not is_fresh:
+		return
+		
+	currtick+=1
+	if currtick<tickinterval:
+		return
+	currtick=0
+	if tick<growtick:
+		add_point()
+
+func add_point() -> void:
+	if not car:
 		return
 
-	if not _origin_set:
-		global_position = global_pos
-		_origin_set = true
-		centers.append(Vector2.ZERO)
-		edge_jitters.append(randf_range(-edge_jitter, edge_jitter))
-		return
+	var slot: int = (NetworkTime.tick - spawntick) / tickinterval
 
-	var local_pos: Vector2 = to_local(global_pos)
-	if centers.is_empty() or local_pos.distance_to(centers.back()) >= min_point_distance:
-		centers.append(local_pos)
-		edge_jitters.append(randf_range(-edge_jitter, edge_jitter))
-		if centers.size() > max_points:
-			centers.pop_front()
-			edge_jitters.pop_front()
-		_rebuild_shape()
+	# forward-progress check, keyed off the previous *slot*, not a mutable running var
+	if left_by_slot.has(slot - 1):
+		var prev_pos: Vector2 = to_global(left_by_slot[slot - 1]).lerp(to_global(right_by_slot[slot - 1]), 0.5)
+		var progress: float = (car.global_position - prev_pos).dot(car.transform.y)
+		if progress < min_forward_progress:
+			return
 
-# Call when the car stops drifting; trail seals up and starts fading out.
-func stop_growing() -> void:
-	if not growing:
-		return
-	growing = false
-	get_tree().create_timer(fade_lifetime).timeout.connect(_on_fade_timeout)
+	var lrsign: int = 1 if slot % 2 == 0 else -1
 
-func _on_fade_timeout() -> void:
-	for body: Area2D in bodies_on_patch:
-		if is_instance_valid(body):
-			var car := _get_car_from_body(body)
-			if car:
-				car.OutOfIce()
-	queue_free()
+	rng.seed = spawntick * 100000 + slot
 
-func _rebuild_shape() -> void:
-	if centers.size() < 2:
-		return
+	var left_jitter := rng.randf_range(0.0, jitterstrength) * lrsign
+	var right_jitter := rng.randf_range(0.0, jitterstrength) * lrsign
 
-	var left := PackedVector2Array()
-	var right := PackedVector2Array()
+	var left_offset: Vector2 = left + Vector2(left_jitter, 0.0)
+	var right_offset: Vector2 = right + Vector2(right_jitter, 0.0)
 
-	for i in range(centers.size()):
-		var dir_in: Vector2 = Vector2.DOWN
-		var dir_out: Vector2 = Vector2.DOWN
-		if i > 0:
-			dir_in = (centers[i] - centers[i - 1]).normalized()
-		if i < centers.size() - 1:
-			dir_out = (centers[i + 1] - centers[i]).normalized()
-		var dir: Vector2 = dir_in + dir_out
-		if dir == Vector2.ZERO:
-			dir = dir_out
-		dir = dir.normalized()
+	left_by_slot[slot] = to_local(car.global_position + left_offset.rotated(car.rotation))
+	right_by_slot[slot] = to_local(car.global_position + right_offset.rotated(car.rotation))
+	max_slot = max(max_slot, slot)
 
-		var normal := Vector2(-dir.y, dir.x)
-		var j: float = edge_jitters[i]
-		left.append(centers[i] + normal * (trail_width * 0.5 + j))
-		right.append(centers[i] - normal * (trail_width * 0.5 + j))
+	_update_polygon()
 
-	right.reverse()
-	var poly := PackedVector2Array()
-	poly.append_array(left)
-	poly.append_array(right)
+func _update_polygon() -> void:
+	poly = PackedVector2Array()
+	poly.append(Vector2.ZERO)
+	for s in range(0, max_slot + 1):
+		if left_by_slot.has(s):
+			poly.append(left_by_slot[s])
+	for s in range(max_slot, -1, -1):
+		if right_by_slot.has(s):
+			poly.append(right_by_slot[s])
 
-	collision_polygon_2d.polygon = poly
 	polygon_2d.polygon = poly
+	if poly.size() >= 3:
+		collision_polygon_2d.polygon = poly
+
 
 func _on_enter(body: Area2D) -> void:
 	if body.is_in_group("Body"):
-		bodies_on_patch.append(body)
-		var car := _get_car_from_body(body)
+		var carinst :Car= _get_car_from_body(body)
 		if car:
-			car.SetOnIce()
+			carsintrail.append(carinst)
+			carinst.SetOnIce()
 
 func _on_exit(body: Area2D) -> void:
-	if body in bodies_on_patch:
-		bodies_on_patch.erase(body)
-		var car := _get_car_from_body(body)
-		if car:
-			car.OutOfIce()
+	var carinst :Car= _get_car_from_body(body)
+	if carinst in carsintrail:
+		carsintrail.erase(carinst)
+		carinst.OutOfIce()
 
 func _get_car_from_body(body: Area2D) -> Car:
 	if body and body.get_parent() and body.get_parent().get_parent():
 		return body.get_parent().get_parent() as Car
 	return null
 	
+	
+func _rollback_spawn() -> void:
+	collision_polygon_2d.disabled=false
+
+func _rollback_despawn() -> void:
+	collision_polygon_2d.disabled=true
+	for c in carsintrail:
+		c.OutOfIce()
+	carsintrail.clear()
