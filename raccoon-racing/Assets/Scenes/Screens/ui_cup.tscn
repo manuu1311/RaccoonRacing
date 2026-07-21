@@ -1533,7 +1533,6 @@ scale = Vector2(0.9, 0.9)
 texture_normal = ExtResource("16_tdwvn")
 
 [node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

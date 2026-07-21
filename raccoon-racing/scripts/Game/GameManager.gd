@@ -33,7 +33,9 @@ func _ready() -> void:
 	for i:int in GameData.Ranking.size(): 
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
+		prints(player.current_control,player.PlayerID,NetworkManager.PlayerID)
 		if player.current_control==player.control_type.HUMAN and player.PlayerID==NetworkManager.PlayerID:
+			print('this is you')
 			carinstance.setup(map,player.PlayerID,true,player)
 			var controller:CarController=HumanCarController.new(player)
 			carinstance.add_child(controller)
@@ -132,6 +134,7 @@ func register(player:Player)->void:
 	players.append(player)
 
 func focusCar(player:Player,car:Car)->void:
+	print('focusing')
 	GameData.FocusCar=car
 	fcsCar=car
 	GameData.FocusPlayer=player
