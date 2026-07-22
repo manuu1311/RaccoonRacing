@@ -10,7 +10,7 @@ func _init(playerinst:Player)->void:
 	player.prop.del_prop_by_type(proptype);
 	player.car.isSleep = true;
 	player.car.prop_effector.PlaySleep()
-	tickactivate=NetworkTime.tickrate+UseTime*NetworkTime.tickrate
+	tickactivate=NetworkTime.tick+NetworkTime.seconds_to_ticks(UseTime)
 	delme()
 
 func run()->void:
