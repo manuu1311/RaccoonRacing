@@ -6,9 +6,9 @@ var LIFETIME_TICKS :int= NetworkTime.tickrate*30*99999999
 var spawn_tick: int = -1
 var alive:bool=true
 
-func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
+func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
 	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
-	map.add_child(self)
+	map.SpawnProp("Bs",id,self)
 	global_position=Vector2(x,y)
 	rotation=angle
 	IsActivated=true

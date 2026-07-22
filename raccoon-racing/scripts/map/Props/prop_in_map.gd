@@ -8,8 +8,8 @@ extends EventInMap
 var box_visible: bool = true
 var hide_tick: int = -1
 
-func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
-	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
+func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
+	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst,id)
 	var scaled_size:Vector2 = $Sprite2D.texture.get_size() * $Sprite2D.global_scale
 	width=scaled_size.x
 	height=scaled_size.y

@@ -45,13 +45,13 @@ func _ready() -> void:
 			available_ids.shuffle()
 			player.racefinished.connect(Racestop)
 			carinstance.set_multiplayer_authority(player.NetworkID)
-		elif player.current_control==player.control_type.HUMAN:
+		elif player.current_control==player.control_type.HUMAN and GameData.IsMultiplayer:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=CarController.new(player)
 			carinstance.add_child(controller)
 			carinstance.controller=controller
-			carinstance.CharID=GameData.currentCharacter
-			player.charid=GameData.currentCharacter
+			carinstance.CharID=player.charid
+			#player.charid=GameData.currentCharacter
 			available_ids.erase(GameData.currentCharacter)
 			available_ids.shuffle()
 			carinstance.set_multiplayer_authority(player.NetworkID)
@@ -133,7 +133,6 @@ func register(player:Player)->void:
 	players.append(player)
 
 func focusCar(player:Player,car:Car)->void:
-	print('focusing')
 	GameData.FocusCar=car
 	fcsCar=car
 	GameData.FocusPlayer=player

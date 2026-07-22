@@ -7,7 +7,6 @@ signal PlayersReady(tick:int)
 
 @rpc("any_peer", "reliable")
 func server_receive_ready(peer_id: int)->void:
-	prints('debuggy: ishost:',NetworkManager.is_host,'ormp:',multiplayer.is_server())
 	if GameData.IsMultiplayer and not NetworkManager.is_host: 
 		print('returning :()')
 		return
@@ -22,6 +21,7 @@ func server_receive_ready(peer_id: int)->void:
 func start_race_countdown()->void:
 	# Pick a safe tick in the future
 	var target_tick:int = NetworkTime.tick 
+	prints('target:',str(target_tick),'curr:',NetworkTime.tick)
 	if GameData.OnlinePlayersCount>1:
 		target_tick+= NetworkTime.tickrate*5
 	rpc("broadcast_start_tick", target_tick)

@@ -15,7 +15,7 @@ func _init(playerinst: Player) -> void:
 func _spawn_trail() -> void:
 	trail = IcePatchScene.instantiate()
 	trail.car=player.car
-	player.car.map.add_child(trail)
+	player.car.map.SpawnProp("IceTrail",player.PlayerID,trail)
 	# Start the trail at the car's rear (70 units behind)
 	trail.global_position = player.car.global_position + player.car.transform.y * 70
 

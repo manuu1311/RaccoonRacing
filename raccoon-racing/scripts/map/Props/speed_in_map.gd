@@ -4,8 +4,8 @@ extends EventInMap
 var Horse:Vector2
 var TimePropReShow:int = 3000
 
-func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
-	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
+func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
+	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst,id)
 	Horse=Vector2(1,0)
 	global_position=Vector2(x,y)
 	rotation_degrees=angle

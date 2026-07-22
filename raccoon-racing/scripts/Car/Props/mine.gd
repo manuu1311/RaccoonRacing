@@ -13,21 +13,22 @@ func _init(playerinst:Player)->void:
 	).instantiate() as EventInMap
 	var pos:Vector2=Vector2(0,20).rotated(player.car.rotation)+player.car.global_position
 	player.car.map.AddEventInMap(bomb_in_map)
-	bomb_in_map.setup(player.car.map,pos.x,pos.y,25,25,0)
+	bomb_in_map.setup(player.car.map,pos.x,pos.y,25,25,0,player.PlayerID)
 	bomb_in_map.IsActivated = false;
 	player.car.sounds.playmineSound();
 	tickactivate+=NetworkTime.tick
 	
-func usebomb()->void:
+func usebomb(isfresh:bool)->void:
 	if NetworkTime.tick!=tickactivate:
 		return
 	if is_instance_valid(bomb_in_map):
 		bomb_in_map.IsActivated = true;
 	despawntick=NetworkTime.tick+50
-	delme();
+	if isfresh:
+		delme();
 	
-func run_tick(_tick: int, _is_fresh: bool) -> void:
-	usebomb()
+func run_tick(_tick: int, is_fresh: bool) -> void:
+	usebomb(is_fresh)
 
 func run()->void:
 	pass

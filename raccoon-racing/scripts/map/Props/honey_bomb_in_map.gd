@@ -13,11 +13,11 @@ var explode_tick: int = -1
 var _is_fresh: bool = false
 var alive:bool=true
 
-func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
-	mapinst.add_child(self)
+func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
+	mapinst.SpawnProp("HoneyBomb",id,self)
 	global_position=Vector2(xinst,yinst)
 	rotation=angleinst
-	super(mapinst,marker_2d.global_position.x,marker_2d.global_position.y,widthinst,heightinst,angleinst);
+	super(mapinst,marker_2d.global_position.x,marker_2d.global_position.y,widthinst,heightinst,angleinst,id);
 	animated_sprite_2d.hide()
 
 func GetHitEventStatus(PlayerId:int,is_fresh: bool)->void:

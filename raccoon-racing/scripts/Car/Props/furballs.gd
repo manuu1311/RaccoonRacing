@@ -19,6 +19,7 @@ func _init(playerinst:Player)->void:
 	end_tick = NetworkTime.tick + int(NetworkTime.tickrate * 30.0)
 	for i in range(6):
 		var furballinst: FurballsInMap = Furballs1.instantiate() as FurballsInMap
+		player.car.map.SpawnProp("Furballs",player.PlayerID,furballinst)
 		player.car.map.add_child(furballinst)
 		furballinst.setup(player.car.map, false, false)
 		furballinst.speed = player.car.speed

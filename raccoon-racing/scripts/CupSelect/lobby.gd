@@ -199,6 +199,8 @@ func _on_peer_disconnected()->void:
 
 func _on_startbutton_pressed() -> void:
 	print('Start button pressed, starting game')
+	GameData.SetPlayersCount()
+	CreateAIPlayers()
 	Start.rpc()
 
 @rpc('authority','call_local','reliable')
@@ -209,14 +211,27 @@ func Start()->void:
 	UiOverAnimation.playanim()
 	await UiOverAnimation.animated_sprite_2d.animation_finished
 	MusicPlayer.FadeOutAndStop(2.5)
-	GameData.SetPlayersCount()
-	CreateAIPlayers()
 	GameData.PopulateOrderArrays()
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
 
 
 func CreateAIPlayers()->void:
+	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
+	for player:Player in GameData.PlayersArr:
+		available_ids.erase(player.PlayerID)
 	for i in range(GameData.PlayersArr.size(),4,1):
+		var new_id:int
+		available_ids.shuffle()
+		new_id=available_ids.pop_front()
 		var aiplayer:Player=AIPlayer.new(i,Player.control_type.AI)
 		GameData.PlayersArr.append(aiplayer)
 		aiplayer.AiReflect=lobby_script.difficulty
+		aiplayer.charid=new_id
+		CreateNewAIPlayer.rpc(i,new_id)
+
+@rpc('authority','call_remote','reliable')
+func CreateNewAIPlayer(playerid:int,charid:int)->void:
+	var aiplayer:Player=AIPlayer.new(playerid,Player.control_type.AI)
+	GameData.PlayersArr.append(aiplayer)
+	aiplayer.AiReflect=lobby_script.difficulty
+	aiplayer.charid=charid

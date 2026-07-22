@@ -13,11 +13,11 @@ var exploded: bool = false
 var explode_tick: int = -1
 
 # Called when the node enters the scene tree for the first time.
-func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
-	super(mapinst,xinst,yinst,widthinst,heightinst,angleinst);
+func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
+	super(mapinst,xinst,yinst,widthinst,heightinst,angleinst,id);
 	bombview=preload("res://Assets/Scenes/Screens/maps/Props/BombView.tscn").instantiate() as AnimatedSprite2D
 	global_position=Vector2(x,y)
-	map.add_child(self)
+	map.SpawnProp("Mine",id,self)
 	map.minimap.add_child(bombview)
 	bombview.position=map.offset+global_position*map.ScaledTimes
 	animated_sprite_2d.hide()

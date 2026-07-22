@@ -10,8 +10,9 @@ var x:float;
 var y:float;
 var edface:EdRectangle
 var IsActivated:bool
+var PlayerID:int
 
-func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float)->void:
+func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
 	self.x = xinst;
 	self.y = yinst;
 	self.width = widthinst;
@@ -19,6 +20,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	self.map = mapinst;
 	self.angle = angleinst;
 	self.edface = map.edevent.AddRectangle(x,y,width,height,angle);
+	PlayerID=id
 	
 func GetHitEventStatus(_PlayerId:int,_is_fresh:bool)->void:
 	pass
