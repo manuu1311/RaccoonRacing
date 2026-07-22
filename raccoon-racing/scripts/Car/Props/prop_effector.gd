@@ -23,7 +23,7 @@ func _ready() -> void:
 	bone.hide()
 	rotator.stop()
 	mover.stop()
-	
+
 ##boost
 func AddPetro()->void:
 	var boost: Node2D = effect.instantiate() as Node2D

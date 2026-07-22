@@ -57,7 +57,7 @@ var offset:Vector2
 var PointsPath:String
 var minimap:Sprite2D
 #spawn counter, to syncrhonise spawned prop names
-var SpawnCounter:int=0
+var SpawnCounter:Array[int]=[0,0,0,0]
 
 func _ready() -> void:
 	if GameData.current_vehicle==GameData.VehicleType.CAR:
@@ -436,5 +436,5 @@ func GetHitEventStatus(eventid:int,playerid:int,isfresh:bool)->void:
 
 func SpawnProp(basename:String, id:int, prop:Node2D)->void:
 	add_child(prop)
-	prop.name=basename+str(id)+str(SpawnCounter)
-	SpawnCounter+=1
+	prop.name=basename+str(id)+str(SpawnCounter[id])
+	SpawnCounter[id]+=1

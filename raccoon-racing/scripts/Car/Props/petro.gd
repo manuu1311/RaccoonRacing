@@ -23,9 +23,9 @@ func run_tick(tick: int, is_fresh: bool) -> void:
 		return
 	if player.car.jumpCurrheight < 1:
 		player.car.speed += Vector2(AddHorsebyAuto, 0).rotated(player.car.rotation - PI / 2)
-	player.car.prop_effector.AddPetro()
 
 	if is_fresh:
+		player.car.prop_effector.AddPetro()
 		if tick == start_tick:
 			player.car.sounds.playPetroSound()
 		if tick - start_tick >= max_ticks:
