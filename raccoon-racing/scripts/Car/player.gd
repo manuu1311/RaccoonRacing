@@ -171,13 +171,15 @@ func Stoprace()->void:
 func RunPropBox(x:float,y:float)->void:
 	if not car.playering:
 		return
-	car.sounds.GetProp()
-	if not hud.PropItemReady():
-		hud.propmove(x,y)
+	if hud!=null and car.isfresh:
+		car.sounds.GetProp()
+		if not hud.PropItemReady():
+			hud.propmove(x,y)
 	if car.NowPorpId!=0:
 		return
 	GetProp(GetPropPer())
-	hud.StartPropBox(1.5,car.NowPorpId)
+	if hud!=null:
+		hud.StartPropBox(1.5,car.NowPorpId)
 
 
 

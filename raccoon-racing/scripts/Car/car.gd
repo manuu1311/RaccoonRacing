@@ -433,8 +433,9 @@ func UpdateCarPos()->void:
 
 
 func UpdateViewMap()->void:
-    carViewInstance.position=map.offset+global_position*map.ScaledTimes
-    carViewInstance.rotation=rotation-PI/2
+    if isfresh:
+        carViewInstance.position=map.offset+global_position*map.ScaledTimes
+        carViewInstance.rotation=rotation-PI/2
 
 func UpdateSpeed()->void:
     var dir:int
