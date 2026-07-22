@@ -25,7 +25,9 @@ func SetDmc() -> void:
 	HomingMissile.NowPointId = player.car.NowPointId
 	var view_sprite: Sprite2D = player.car.map.minimap
 	view_sprite.add_child(HomingMissileView)
-	if player.PlayerID == 0:
+	HomingMissile.missileview=HomingMissileView
+	HomingMissile.AimPlayer=Aimplayer
+	if player.PlayerID == GameData.FocusPlayer.PlayerID:
 		player.car.sounds.playMissileSound()
 
 func SetAimPlayer() -> Player:

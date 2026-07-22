@@ -28,10 +28,13 @@ func SetDmc()->void:
 	HomingMissile.rotation=player.car.rotation-PI/2
 	var view_sprite:Sprite2D = player.car.map.minimap
 	view_sprite.add_child(HomingMissileView)
+	HomingMissile.missileview=HomingMissileView
+	HomingMissile.AimPlayer=Aimplayer
 	HomingMissile.speed=player.car.speed
 	HomingMissile.petrolength=10
 	HomingMissile.petrowidth=1
-	player.car.sounds.playMissileSound()
+	if player.PlayerID == GameData.FocusPlayer.PlayerID:
+		player.car.sounds.playMissileSound()
 
 
 func SetAimPlayer()->Player:
@@ -40,10 +43,10 @@ func SetAimPlayer()->Player:
 func run_tick(_tick: int, _is_fresh: bool) -> void:
 	if not is_instance_valid(HomingMissile):
 		return
-	HomingMissile.AutoPlay(Aimplayer)
-	HomingMissile.UpdatePoint()
-	HomingMissile.AddPetro()
-	UpdateView()
+	#HomingMissile.AutoPlay(Aimplayer)
+	#HomingMissile.UpdatePoint()
+	#HomingMissile.AddPetro()
+	#UpdateView()
 
 func run()->void:
 	pass
@@ -56,12 +59,6 @@ func run()->void:
 
 func OnHitStatus()->void:
 	pass
-
-func UpdateView()->void:
-	if not is_instance_valid(HomingMissile):
-		return
-	HomingMissileView.position=player.car.map.offset+HomingMissile.global_position*player.car.map.ScaledTimes
-	HomingMissileView.rotation=HomingMissile.rotation
 
 func delme()->void:
 	player.prop.Delprop(self)

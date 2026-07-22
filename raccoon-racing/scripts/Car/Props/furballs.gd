@@ -20,7 +20,6 @@ func _init(playerinst:Player)->void:
 	for i in range(6):
 		var furballinst: FurballsInMap = Furballs1.instantiate() as FurballsInMap
 		player.car.map.SpawnProp("Furballs",player.PlayerID,furballinst)
-		player.car.map.add_child(furballinst)
 		furballinst.setup(player.car.map, false, false)
 		furballinst.speed = player.car.speed
 		furballinst.petrolength = 10

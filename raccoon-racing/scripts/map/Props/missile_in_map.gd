@@ -14,6 +14,7 @@ const effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tsc
 @onready var bottom_effect: Node2D = $BottomEffect
 var aimed:int
 signal MissileHit
+var AimPlayer:Player
 var LockAim: bool = false
 var NowPointId: int = 0
 #network
@@ -21,6 +22,7 @@ var hit: bool = false
 var hit_tick: int = -1
 const HIT_LINGER_TICKS := 6
 var alive:bool=true
+var missileview:Sprite2D
 
 func _ready() -> void:
     horse=Vector2(SpeedHorse,0)
@@ -63,6 +65,10 @@ func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
             visible = false
             hide()
         return
+    AutoPlay(AimPlayer)
+    UpdatePoint()
+    AddPetro()
+    UpdateView()
     UpdateCarPos()
     UpdateSpeed()
     if bsEx > 0:
@@ -206,3 +212,7 @@ func UpdateSpeed()->void:
         dir = 1;
     #calculate magnitude and direction of force
     speed+= (speed*0.0008*int(90-friction)).rotated(deg_to_rad(90*dir))
+
+func UpdateView()->void:
+    missileview.position=map.offset+global_position*map.ScaledTimes
+    missileview.rotation=rotation

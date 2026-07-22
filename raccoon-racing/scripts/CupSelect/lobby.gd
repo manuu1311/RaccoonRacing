@@ -218,7 +218,7 @@ func Start()->void:
 func CreateAIPlayers()->void:
 	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
 	for player:Player in GameData.PlayersArr:
-		available_ids.erase(player.PlayerID)
+		available_ids.erase(player.charid)
 	for i in range(GameData.PlayersArr.size(),4,1):
 		var new_id:int
 		available_ids.shuffle()

@@ -90,7 +90,7 @@ Debug={
 
 time/tickrate=35
 autoconnect/enabled=true
-autoconnect/simulated_latency_ms=103
+autoconnect/simulated_latency_ms=64
 autoconnect/simulated_packet_loss_chance=0.088
 
 [physics]
