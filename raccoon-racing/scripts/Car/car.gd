@@ -498,14 +498,18 @@ func Jumping()->void:
 
 
 func GetHitCar()->void:
-    var overlapping_areas:Array[Area2D] = body.get_overlapping_areas()
-    for area:Area2D in overlapping_areas:
-        if area.is_in_group("Body"):
-            #calculate collisions
-            var caropp:Car=area.get_parent().get_parent() as Car
-            #not sure
-            if playerID < caropp.playerID:
-                BeAttacked(caropp,isfresh)
+    for playerinst:Player in GameData.PlayersArr:
+        if global_position.distance_squared_to(playerinst.car.global_position)<1800:
+            if playerID < playerinst.PlayerID:
+                BeAttacked(playerinst.car,isfresh)
+    #var overlapping_areas:Array[Area2D] = body.get_overlapping_areas()
+    #for area:Area2D in overlapping_areas:
+        #if area.is_in_group("Body"):
+            ##calculate collisions
+            #var caropp:Car=area.get_parent().get_parent() as Car
+            ##not sure
+            #if playerID < caropp.playerID:
+                #BeAttacked(caropp,isfresh)
 
    
  

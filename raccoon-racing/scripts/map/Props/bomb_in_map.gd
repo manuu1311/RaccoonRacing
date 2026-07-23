@@ -59,16 +59,13 @@ func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 		alive=false
 
 func _rollback_spawn() -> void:
-	show()
+	IsActivated=true
 
 func _rollback_despawn() -> void:
-	hide()
-	animated_sprite_2d.stop()
+	IsActivated=false
 
 func _rollback_destroy() -> void:
-	if is_instance_valid(bombview):
-		bombview.queue_free()
-	queue_free()
+	map.DelEventInMap(edface.getId())
 
 func del()->void:
 	if is_instance_valid(bombview):

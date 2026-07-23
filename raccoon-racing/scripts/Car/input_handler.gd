@@ -3,6 +3,7 @@ class_name InputHandler
 
 var player:Player
 var controller:CarController
+var specialtick:int=0
 
 func setup(playerinst:Player,controllerinst:CarController)->void:
 	player=playerinst
@@ -27,7 +28,8 @@ func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 		else:
 			player.car.Clearward()
 		##special
-		if controller.special and is_fresh:
+		if controller.special and tick>specialtick:
 			print('--using special!--z')
 			player.UseProp()
+			specialtick=tick
 	player.Update(tick, is_fresh)

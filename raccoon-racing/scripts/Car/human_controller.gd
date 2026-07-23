@@ -8,7 +8,7 @@ func handle_input()->void:
 	forward=false
 	brake=false
 	special=false
-	if not player.car.isSleep and not player.car.jumpCurrheight>=1 and player.car.playering:
+	if not player.car.isSleep and not (player.car.jumpCurrheight>=1) and player.car.playering:
 		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		# Handle Steering (X-axis)
 		if input_dir.x > 0:
@@ -25,6 +25,6 @@ func handle_input()->void:
 			brake=true
 		#else:
 			#player.car.Clearward()
-		if Input.is_action_just_released("Special"):
-			special=true
+		if Input.is_action_just_pressed("Special"):
+			special_buffered=true
 			#player.UseProp()
