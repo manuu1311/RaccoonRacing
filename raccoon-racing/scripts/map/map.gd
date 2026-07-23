@@ -424,7 +424,7 @@ func IsWanPoint(NowPoint:int)->bool:
 	return WanPointArr.has(NowPoint)
 func IsLinePoint(NowPoint:int)->bool:
 	return LinePointArr.has(NowPoint)
-	
+
 func GetHitEventStatus(eventid:int,playerid:int,isfresh:bool)->void:
 	var _loc2_:int = 0;
 	while(_loc2_ < Events.size()):
