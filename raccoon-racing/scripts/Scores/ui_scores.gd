@@ -77,17 +77,17 @@ func _ready() -> void:
 
         # 4. THE COUNTING (Starts instantly alongside the flight!)
         # By using .parallel(), these start counting the EXACT millisecond the label begins moving
-        tween.parallel().tween_method(func(val): lblpointsadd.text = "+" + str(val), scorepoints[player.OrderId], 0, 0.3)
+        tween.parallel().tween_method(func(val:int)->void: lblpointsadd.text = "+" + str(val), scorepoints[player.OrderId], 0, 0.3)
 
-        var new_total = player.ScorePoints + scorepoints[player.OrderId]
-        tween.parallel().tween_method(func(val): lblpoints.text = str(val), player.ScorePoints, new_total, 0.3).set_delay(0.2)
+        var new_total:int = player.ScorePoints + scorepoints[player.OrderId]
+        tween.parallel().tween_method(func(val:int)->void: lblpoints.text = str(val), player.ScorePoints, new_total, 0.3).set_delay(0.2)
 
         # 5. --- IMPACT POP & CLEAN UP ---
         tween.tween_property(lblpoints, "scale", Vector2(1.3, 1.3), 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
         tween.tween_property(lblpoints, "scale", Vector2.ONE, 0.1)
 
         # Reset the added score label behind the scenes
-        tween.tween_callback(func():
+        tween.tween_callback(func()->void:
             lblpointsadd.hide()
         )
         
@@ -104,7 +104,7 @@ func _ready() -> void:
         var newrank:int=GetNewRank(player.PlayerID)
         secondtween.tween_interval(2.0)
         secondtween.tween_property(positions[i],"position",nodepositions[newrank],0.5)
-        secondtween.tween_callback(func():
+        secondtween.tween_callback(func()->void:
             var lblrank:Label=positions[i].get_node("rank")
             lblrank.text=str(newrank+1)
             var diff:Sprite2D=positions[i].get_node("diff")

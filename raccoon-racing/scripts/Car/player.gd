@@ -177,9 +177,10 @@ func RunPropBox(x:float,y:float)->void:
 			hud.propmove(x,y)
 	if car.NowPorpId!=0:
 		return
-	GetProp(GetPropPer())
-	if hud!=null:
-		hud.StartPropBox(1.5,car.NowPorpId)
+	if car.isfresh:
+		GetProp(GetPropPer())
+		if hud!=null:
+			hud.StartPropBox(1.5,car.NowPorpId)
 
 
 

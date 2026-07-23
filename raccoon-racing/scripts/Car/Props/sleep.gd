@@ -11,19 +11,20 @@ func _init(playerinst:Player)->void:
 	player.car.isSleep = true;
 	player.car.prop_effector.PlaySleep()
 	tickactivate=NetworkTime.tick+NetworkTime.seconds_to_ticks(UseTime)
-	delme()
 
-func run()->void:
-	pass
+func run_tick(tick: int, is_fresh: bool) -> void:
+	if tick==tickactivate:
+		player.car.isSleep = false;
+		if is_fresh:
+			player.car.prop_effector.StopSleep()
+			player.car.sounds.StopBeSleepSound();
+	if tick>tickactivate+70:
+		delme()
+	
 func delme()->void:
-	if NetworkTime.tick!=tickactivate:
-		return
 	if is_instance_valid(player.car):
 		player.prop.Delprop(self);
 	
 	
 func del()->void:
-	player.car.prop_effector.StopSleep()
-	player.car.sounds.StopBeSleepSound();
-	player.car.isSleep = false;
 	queue_free()

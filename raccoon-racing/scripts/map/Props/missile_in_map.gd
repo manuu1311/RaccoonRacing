@@ -214,5 +214,7 @@ func UpdateSpeed()->void:
     speed+= (speed*0.0008*int(90-friction)).rotated(deg_to_rad(90*dir))
 
 func UpdateView()->void:
+    if not is_instance_valid(missileview):
+        return
     missileview.position=map.offset+global_position*map.ScaledTimes
     missileview.rotation=rotation

@@ -23,7 +23,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	animated_sprite_2d.hide()
 
 
-func GetHitEventStatus(PlayerId: int,_is_fresh:bool) -> void:
+func GetHitEventStatus(PlayerId: int,is_fresh:bool) -> void:
 	if not IsActivated or exploded:
 		return
 	var car: Car = GameData.PlayersArr[PlayerId].car
@@ -39,7 +39,14 @@ func GetHitEventStatus(PlayerId: int,_is_fresh:bool) -> void:
 			car.speed *= 0.3
 			car.speed += (car.global_position - global_position) * 0.03
 		else:
-			car.player.prop.del_prop_by_type(3)
+			if is_fresh:
+				car.player.prop.del_prop_by_type(3)
+		if is_fresh:
+			car.sounds.playerBombSound()
+			animated_sprite_2d.show()
+			animated_sprite_2d.play()
+			sprite_2d.hide()
+			bombview.hide()
 
 
 func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
@@ -51,10 +58,7 @@ func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 		return
 	if tick == explode_tick and is_fresh:
 		# one-shot cosmetics, only on the first time we ever see this tick
-		sprite_2d.hide()
-		bombview.hide()
-		animated_sprite_2d.show()
-		animated_sprite_2d.play()
+		pass
 	if tick - explode_tick >= EXPLODE_TICKS:
 		alive=false
 

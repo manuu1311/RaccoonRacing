@@ -14,6 +14,7 @@ var IsHovercraft:bool
 @onready var rotator: AnimationPlayer = $"../Visual/BottomEffect/Circler/Bone/Rotator"
 @onready var mover: AnimationPlayer = $"../Visual/BottomEffect/Circler/Bone/Mover"
 @onready var area_2d: Area2D = $"../Visual/BottomEffect/Circler/Area2D"
+var detectbone:bool=false
 signal bonehit
 
 func _ready() -> void:
@@ -90,16 +91,44 @@ func PlayBone()->void:
 	bone.show()
 	rotator.play("Bone")
 	mover.play("BoneMove")
-	area_2d.area_entered.connect(OnAreaEntered)
 	car.sounds.playdogSSound()
+	detectbone=true
 
 func StopBone()->void:
 	bone.hide()
 	rotator.stop()
 	mover.stop()
-	if area_2d.area_entered.has_connections():
-		area_2d.area_entered.disconnect(OnAreaEntered)
+	detectbone=false
+
+func _rollback_tick(_delta: float, _tick: int, is_fresh: bool) -> void:
+	if detectbone:
+		CheckBoneCollisions(is_fresh)
 	
+func CheckBoneCollisions(isfresh:bool)->void:
+	for player:Player in GameData.PlayersArr:
+		if player.PlayerID!=car.playerID:
+			var caropp:Car=player.car
+			if bone.global_position.distance_squared_to(caropp.global_position)<650:
+				if caropp.jumpCurrheight<caropp.heightOverWall:
+					if !caropp.isResetting:
+						bonehit.emit()
+						if caropp.isInvincible:
+							return
+						if caropp.player.car.IsUseShield:
+							caropp.player.prop.del_prop_by_type(3)
+							return
+						var dist:Vector2 =caropp.global_position-(car.global_position)
+						var loc7:float=0.005
+						var distsq:float=dist.length_squared()
+						if distsq<2000:
+							loc7 = 0.005 + 0.05 * (2000 - distsq) / 2000;
+						var knockback:Vector2=dist*loc7
+						caropp.speed-=knockback*40
+						caropp.bs=true
+						if isfresh:
+							caropp.prop_effector.PlayBomb(bone.global_position)
+							caropp.sounds.playBedumpSound()
+
 func OnAreaEntered(body:Area2D)->void:
 	if body.is_in_group("Body"):
 		var caropp:Car=body.get_parent().get_parent() as Car

@@ -17,7 +17,6 @@ func _init(playerinst: Player) -> void:
 	SetDmc()
 
 func SetDmc() -> void:
-	player.car.map.add_child(HomingMissile)
 	player.car.map.SpawnProp("HomingMissile",player.PlayerID,HomingMissile)
 	HomingMissile.global_position = player.car.global_position + Vector2(-25, 0).rotated(player.car.rotation)
 	HomingMissile.rotation = player.car.rotation - PI / 2

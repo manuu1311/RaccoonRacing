@@ -29,7 +29,6 @@ func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 			player.car.Clearward()
 		##special
 		if controller.special and tick>specialtick:
-			print('--using special!--z')
 			player.UseProp()
 			specialtick=tick
 	player.Update(tick, is_fresh)
