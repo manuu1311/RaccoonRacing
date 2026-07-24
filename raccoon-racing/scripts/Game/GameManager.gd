@@ -127,6 +127,9 @@ func LoadMap() -> void:
 func RaceStart()->void:
 	for player:Player in GameData.PlayersArr:
 		player.StartRace(NetworkTime.tick)
+	Game.PlayersReady.disconnect(StartSequence)
+	Game.PlayersReady.connect(ShowFinishEffect)
+	
 	
 	
 func register(player:Player)->void:
@@ -237,18 +240,22 @@ func UpdateOrderResult() -> void:
 				hud.play_overtake(i, old_index)
 
 
-func Racestop()->void:
-	hud.StopRecord()
-	MusicPlayer.FadeOutAndStop(3)
-	if(fcsCar.player.OrderId == 0):
-		sound_manager.PlaySound("finish",0.0)
+func Racestop(id:int)->void:
+	if fcsCar.playerID==id:
+		hud.StopRecord()
+		MusicPlayer.FadeOutAndStop(3)
+		if(fcsCar.player.OrderId == 0):
+			sound_manager.PlaySound("finish",0.0)
+		else:
+			sound_manager.PlaySound("failed",0.0)
+	if GameData.IsMultiplayer and not NetworkManager.is_host:
+		Game.server_receive_ready.rpc_id(1,fcsCar.playerID)
 	else:
-		sound_manager.PlaySound("failed",0.0)
-	ShowFinishEffect();
+		Game.server_receive_ready(fcsCar.playerID)
 
 
 
-func ShowFinishEffect()->void:
+func ShowFinishEffect(_tick:int)->void:
 	finish.play()
 	await get_tree().create_timer(3).timeout
 	UiOverAnimation.playanim()
@@ -261,5 +268,6 @@ func ShowFinishEffect()->void:
 
 func BackToMain()->void:
 	GameData.FocusCar.player.racefinished.disconnect(Racestop)
+	Game.PlayersReady.disconnect(ShowFinishEffect)
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_scores.tscn")
 	queue_free()

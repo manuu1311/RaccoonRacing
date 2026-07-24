@@ -19,7 +19,7 @@ func OnHitCar(car:Car,is_fresh:bool=true)->void:
 			car.sounds.playerBombSound()
 
 	if(car.player.car.IsUseShield):
-		car.player.prop.del_prop_by_type(3);
+		car.player.RemoveShield(is_fresh);
 
 	if is_fresh:
 		car.prop_effector.PlayBomb(global_position)

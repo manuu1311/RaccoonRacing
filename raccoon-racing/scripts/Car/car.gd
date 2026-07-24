@@ -111,6 +111,7 @@ var controller:CarController
 var isfresh:bool
 var NowPointId:int
 var NowPorpId:int
+var CanUseProp:bool=false
 var StartTick:int=9999999
 ##ai variables 
 var AiNowPushButtonTimeNow:int
@@ -168,6 +169,7 @@ func RollbackSyncSetup()->void:
     rollback_synchronizer.add_state(self, "carRotationWheel")
     rollback_synchronizer.add_state(self, "NowPointId")
     rollback_synchronizer.add_state(self, "NowPorpId")
+    rollback_synchronizer.add_state(self, "CanUseProp")
     rollback_synchronizer.process_settings()
 
 func DeferredSetup()->void:

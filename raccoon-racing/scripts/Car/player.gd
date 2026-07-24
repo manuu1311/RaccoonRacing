@@ -9,7 +9,6 @@ enum control_type{HUMAN,AI,MULTIPLAYER,RLTRAINING,RL}
 var current_control:control_type
 var alldistance:int=0
 var prop:PropManager
-var CanUseProp:bool=false
 var IsUsingProp:bool=false
 var OrderId:int
 var LapsLock:bool=true
@@ -83,7 +82,7 @@ func StartRace(starttick:int)->void:
 	if(car.speed.length() > 2):
 		car.speed=Vector2.ZERO;
 	elif(car.speed.length() > 0.5):
-		CanUseProp=true
+		car.CanUseProp=true
 		car.NowPorpId = 8;
 		UseProp();
 	
@@ -148,7 +147,7 @@ func WinJudge() -> void:
 
 
 func ResetPlayer(order:int)->void:
-	CanUseProp=false
+	car.CanUseProp=false
 	IsUsingProp=false
 	LapsLock=true
 	Laps=1
@@ -166,7 +165,7 @@ func Stoprace()->void:
 	for propinst:Prop in prop.propArr:
 		propinst.del()
 	prop.propArr.clear()
-	racefinished.emit()
+	racefinished.emit(PlayerID)
 
 func RunPropBox(x:float,y:float)->void:
 	if not car.playering:
@@ -211,6 +210,13 @@ func GetPropPer()->int:
 			return i + 1 # Item IDs start at 1, arrays start at 0
 			
 	return 7
+
+func RemoveShield(_isfresh:bool)->void:
+	car.IsUseShield=false
+	car.prop_effector.RemoveShield()
+func AddShield(_isfresh:bool)->void:
+	car.IsUseShield=true
+	car.prop_effector.AddShield()
 
 func GetPropPer_LEGACY()->int:
 	var _loc5_:int = randi_range(0,99);
@@ -423,9 +429,9 @@ func GetPropPer_LEGACY()->int:
 	#return randi_range(0,8)
 
 func ResetUse()->void:
-	CanUseProp=true
+	car.CanUseProp=true
 
 func UseProp()->void:
-	if(IsPlayering() && not car.isSleep and CanUseProp and !IsUsingProp):
+	if(IsPlayering() && not car.isSleep and car.CanUseProp and !IsUsingProp):
 		prop.UseProp()
-		CanUseProp=false
+		car.CanUseProp=false

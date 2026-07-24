@@ -40,7 +40,7 @@ func GetHitEventStatus(PlayerId: int,is_fresh:bool) -> void:
 			car.speed += (car.global_position - global_position) * 0.03
 		else:
 			if is_fresh:
-				car.player.prop.del_prop_by_type(3)
+				car.player.RemoveShield(is_fresh);
 		if is_fresh:
 			car.sounds.playerBombSound()
 			animated_sprite_2d.show()

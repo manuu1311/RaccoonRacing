@@ -120,7 +120,7 @@ func UpdateCarPos()->void:
     
     
 
-func OnHitCar(who: Car,_isfresh:bool=true) -> void:
+func OnHitCar(who: Car,isfresh:bool=true) -> void:
     if hit or who.playerID == player.PlayerID:
         return
     if not who.isInvincible and not who.player.car.IsUseShield:
@@ -128,7 +128,7 @@ func OnHitCar(who: Car,_isfresh:bool=true) -> void:
         if _is_fresh:
             who.sounds.playBsSound()
     if who.player.car.IsUseShield:
-        who.player.prop.del_prop_by_type(3)
+        who.player.RemoveShield(isfresh);
     _pop(who)
 
 func _rollback_spawn() -> void:

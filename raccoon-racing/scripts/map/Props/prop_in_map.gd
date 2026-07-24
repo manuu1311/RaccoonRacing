@@ -31,7 +31,7 @@ func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
 		box_visible = true
 
 func ReShowProp()->void:
-	show();
+	visible=true;
 	
 func del()->void:
 	queue_free()

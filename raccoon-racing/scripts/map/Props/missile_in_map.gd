@@ -34,6 +34,7 @@ func OnHitCar(car:Car,is_fresh: bool=true)->void:
     if hit or car.playerID!=aimed:
         return
     hit=true
+    hit_tick=NetworkTime.tick
     var dist:Vector2
     if(!car.isInvincible && !car.player.car.IsUseShield):
         dist=car.global_position-global_position
@@ -42,7 +43,7 @@ func OnHitCar(car:Car,is_fresh: bool=true)->void:
         car.speed+=dist*0.1
 
     if(car.player.car.IsUseShield):
-        car.player.prop.del_prop_by_type(3);
+        car.player.RemoveShield(is_fresh);
 
     if is_fresh:
         car.prop_effector.PlayBomb(global_position)

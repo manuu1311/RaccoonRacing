@@ -7,7 +7,6 @@ var AddHorse:float = 1.8;
 var AddHorsebyAuto:float = 0.2;
 var start_tick: int = 0
 var max_ticks: int = 0
-var ended: bool = false
 
 func _init(playerinst:Player) -> void:
 	super(playerinst);
@@ -19,16 +18,17 @@ func _init(playerinst:Player) -> void:
 	max_ticks = int(NetworkTime.tickrate * UseTime)
 	
 func run_tick(tick: int, is_fresh: bool) -> void:
-	if ended:
-		return
-	if player.car.jumpCurrheight < 1:
+	if player.car.jumpCurrheight < 1 and tick-start_tick<max_ticks:
 		player.car.speed += Vector2(AddHorsebyAuto, 0).rotated(player.car.rotation - PI / 2)
-
-	if is_fresh:
-		player.car.prop_effector.AddPetro()
-		if tick == start_tick:
-			player.car.sounds.playPetroSound()
-		if tick - start_tick >= max_ticks:
+		if is_fresh:
+			player.car.prop_effector.AddPetro()
+	if tick - start_tick == max_ticks:
+		player.ResetUse()
+		player.IsUsingProp = false
+		if is_instance_valid(player.car):
+			player.car.prop_effector.StopPetro()
+	if is_fresh:			
+		if tick - start_tick >= max_ticks+70:
 			delme()
 
 func run()->void:
@@ -38,14 +38,8 @@ func run()->void:
 	
 
 func delme() -> void:
-	if ended:
-		return
-	ended = true
-	player.IsUsingProp = false
-	player.ResetUse()
-	if is_instance_valid(player.car):
-		player.car.prop_effector.StopPetro()
 	player.prop.Delprop(self)
-		
+	
+	
 func del()->void:
 	pass

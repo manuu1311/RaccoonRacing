@@ -15,11 +15,16 @@ func _init(playerinst:Player)->void:
 	player.car.prop_effector.AddInvincible(1.5)
 	player.IsUsingProp=true
 	tickactivate=NetworkTime.tick+NetworkTime.seconds_to_ticks(UseTime)
-	delme()
 
 
-func run()->void:
-	pass
+func run_tick(tick: int, is_fresh: bool) -> void:
+	if is_instance_valid(player.car) and tick==tickactivate:
+		player.IsUsingProp=false
+		if(player.PlayerID==GameData.FocusPlayer.PlayerID) and is_fresh:
+			MusicPlayer.PlayMusic("map"+str(GameData.currentMap))
+			player.car.prop_effector.StopInvincible()
+	if tick>tickactivate+70:
+		player.prop.Delprop(self);
 	
 func delme()->void:
 	if NetworkTime.tick!=tickactivate:
@@ -30,5 +35,10 @@ func delme()->void:
 			MusicPlayer.PlayMusic("map"+str(GameData.currentMap))
 		player.prop.Delprop(self);
 	
-func del()->void:
-	player.car.prop_effector.StopInvincible()
+func _rollback_spawn() -> void:
+	player.car.isInvincible = true
+	player.IsUsingProp=true
+
+func _rollback_despawn() -> void:
+	player.car.isInvincible = false
+	player.IsUsingProp=false

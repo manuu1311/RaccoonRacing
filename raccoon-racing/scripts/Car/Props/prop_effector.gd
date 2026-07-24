@@ -56,11 +56,13 @@ func StopInvincible()->void:
 	
  
 func AddShield()->void:
-	shield.play("default")
-	car.sounds.playShieldSound()
+	if not shield.is_playing():
+		shield.play("default")
+		car.sounds.playShieldSound()
 	
 func RemoveShield()->void:
-	shield.play("fade")   
+	if not shield.is_playing():
+		shield.play("fade")   
 
 func PlayBomb(pos:Vector2)->void:
 	bomb.show()
@@ -115,7 +117,7 @@ func CheckBoneCollisions(isfresh:bool)->void:
 						if caropp.isInvincible:
 							return
 						if caropp.player.car.IsUseShield:
-							caropp.player.prop.del_prop_by_type(3)
+							caropp.player.RemoveShield(isfresh)
 							return
 						var dist:Vector2 =caropp.global_position-(car.global_position)
 						var loc7:float=0.005

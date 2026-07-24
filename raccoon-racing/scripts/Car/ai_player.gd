@@ -11,7 +11,7 @@ var IsOnlyAttPlayer:bool=false
 func RunPropBox(_x:float,_y:float)->void:
     if not car.HasProp:
         car.HasProp=true
-        CanUseProp=true
+        car.CanUseProp=true
         var id:int=GetPropPer()
         await car.get_tree().create_timer(1.5).timeout
         GetProp(id)
@@ -264,6 +264,6 @@ func StartRace(starttick:int)->void:
     ResetTimer.start()
     ResetTimer.timeout.connect(Reset)
     if randi() % 5 == 0:
-        CanUseProp=true
+        car.CanUseProp=true
         car.NowPorpId = 8
         UseProp()
