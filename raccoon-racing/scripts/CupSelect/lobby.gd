@@ -33,7 +33,6 @@ func _ready() -> void:
 	NetworkManager.signal_host_left.connect(_on_button_pressed)
 	NetworkManager.signal_client_disconnected.connect(_on_peer_disconnected)
 	NetworkManager.signal_peer_left.connect(_on_peer_disconnected)
-	
 
 func _on_cup_selected()->void:
 	SyncCup.rpc(GameData.currentCup)

@@ -5,6 +5,8 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if GameData.IsMultiplayer and not NetworkManager.is_host:
+		continue_button.hide()
 	for i in range(8):
 		UpdateTime(i)
 
@@ -32,4 +34,11 @@ func _on_button_mouse_exited() -> void:
 
 func _on_button_pressed() -> void:
 	MusicPlayer.stop()
-	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_main_menu.tscn")
+	if GameData.IsMultiplayer:
+		LobbyScene.rpc()
+	else:
+		get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_main_menu.tscn")
+
+@rpc('authority','call_local','reliable')
+func LobbyScene()->void:
+	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_cup.tscn")

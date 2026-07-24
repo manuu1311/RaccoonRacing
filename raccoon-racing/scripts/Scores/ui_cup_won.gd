@@ -42,6 +42,9 @@ var textures:Array[Texture]=[
 	]
 	
 func _ready() -> void:
+	if GameData.IsMultiplayer and not NetworkManager.is_host:
+		continuebuttonloss.hide()
+		continue_buttonwin.hide()
 	cuptext.hide()
 	chartext.hide()
 	charicon.hide()
@@ -92,7 +95,14 @@ func LossSetup()->void:
 
 
 func OnContinueButtonPressed()->void:
-	GameData.ClearPlayers()
+	if GameData.IsMultiplayer and NetworkManager.is_host:
+		GameData.ClearPlayers()
+	else:
+		GameData.ClearAIPlayers()
+		ChangeScene.rpc()
+
+@rpc('authority','call_local','reliable')
+func ChangeScene()->void:
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_top_scores.tscn")
 
 func OnButtonHoverWin()->void:

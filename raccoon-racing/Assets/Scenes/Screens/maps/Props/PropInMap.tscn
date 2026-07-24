@@ -85,5 +85,4 @@ one_shot = true
 [node name="RollbackSynchronizer" type="Node" parent="." unique_id=2084563048 node_paths=PackedStringArray("root")]
 script = ExtResource("3_8avk0")
 root = NodePath("..")
-state_properties = Array[String]([":box_visible", ":hide_tick"])
 metadata/_custom_type_script = "uid://d350u8evihs1u"

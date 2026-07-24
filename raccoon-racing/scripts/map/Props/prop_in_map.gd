@@ -4,6 +4,7 @@ extends EventInMap
 @onready var synchronizer: RollbackSynchronizer = $RollbackSynchronizer
 
 @export var respawn_ticks: int = NetworkTime.tickrate*3
+@onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
 
 var box_visible: bool = true
 var hide_tick: int = -1
@@ -15,6 +16,8 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	height=scaled_size.y
 	scale=Vector2(0.7,0.7)
 	global_position=Vector2(x,y)
+	rollback_synchronizer.add_state(self, "box_visible")
+	rollback_synchronizer.add_state(self, "hide_tick")
 
 func GetHitEventStatus(PlayerId:int,isfresh:bool)->void:
 	if not box_visible:

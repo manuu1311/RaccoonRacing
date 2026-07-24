@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var lap_label: Label = $Text/LapInfo/LapLabel
 @onready var racetime: Label = $Text/TimeInfo/Racetime
 @onready var cuptime: Label = $Text/TimeInfo/Cuptime
+@onready var continuebutton: Button = $Text/ContinueButton/Button
 var difftextures:Array[Texture]=[
     preload("res://Assets/Animations/Scores/down.png"),
     preload("res://Assets/Animations/Scores/up.png"),
@@ -29,6 +30,8 @@ var names:Array[String]=[
 var scorepoints:Array[int]=[10,8,6,4]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    if GameData.IsMultiplayer and not NetworkManager.is_host:
+        continuebutton.hide()
     CoolTexts()
     UiOverAnimation.animated_sprite_2d.frame=0
     MusicPlayer.PlayMusic("stats")
@@ -143,8 +146,8 @@ func _on_continue_mouse_entered() -> void:
 func _on_continue_mouse_exited() -> void:
     continuetext.add_theme_color_override("font_color",Color.WHITE)
 
-
-func _on_continue_pressed() -> void:
+@rpc('authority','call_local','reliable')
+func NextScene()->void:
     GameData.currentStep+=1
     if GameData.currentStep<GameData.cupInfo[GameData.currentCup].size():
         MusicPlayer.stop()
@@ -156,3 +159,9 @@ func _on_continue_pressed() -> void:
         get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
     else:
         get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_cup_won.tscn")
+
+
+func _on_continue_pressed() -> void:
+    NextScene.rpc()
+    
+    

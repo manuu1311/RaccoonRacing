@@ -924,6 +924,7 @@ animations = [{
 
 [node name="Car" type="Node2D" unique_id=694736785]
 script = ExtResource("1_kulw5")
+playering = null
 
 [node name="Visual" type="Node2D" parent="." unique_id=2200433]
 
