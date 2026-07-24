@@ -170,6 +170,11 @@ func RollbackSyncSetup()->void:
     rollback_synchronizer.add_state(self, "NowPointId")
     rollback_synchronizer.add_state(self, "NowPorpId")
     rollback_synchronizer.add_state(self, "CanUseProp")
+    rollback_synchronizer.add_state(self, "global_position")
+    rollback_synchronizer.add_state(self, "rotation")
+    rollback_synchronizer.add_state(self, "speed")
+    rollback_synchronizer.add_state(self, "isSleep")
+    rollback_synchronizer.add_state(self, "bs")
     rollback_synchronizer.process_settings()
 
 func DeferredSetup()->void:

@@ -2,6 +2,8 @@ extends Node
 
 var players: Array[Player]
 var fcsCar:Car
+##to lock props when player still cannot see them
+var propLock:bool=false
 var ready_players: Dictionary = {}
 signal PlayersReady(tick:int)
 

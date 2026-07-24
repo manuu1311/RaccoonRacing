@@ -178,6 +178,7 @@ func RunPropBox(x:float,y:float)->void:
 		return
 	if car.isfresh:
 		GetProp(GetPropPer())
+		car.CanUseProp=true
 		if hud!=null:
 			hud.StartPropBox(1.5,car.NowPorpId)
 

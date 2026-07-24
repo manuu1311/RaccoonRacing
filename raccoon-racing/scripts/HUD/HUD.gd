@@ -26,8 +26,11 @@ func setup() -> void:
 func SetCar(car:Car)->void:
 	FocusCar=car
 	prop_hud.DeferredInit(car.player.charid)
-	prop_hud.prop_visible.connect(car.player.ResetUse)
+	prop_hud.prop_visible.connect(ResetPropLock)
 	speed_hud.SetCar(FocusCar)
+
+func ResetPropLock()->void:
+	Game.propLock=false
 
 func PropItemReady()->bool:
 	return prop_hud.itemready
@@ -38,6 +41,7 @@ func PropUsed(id:int)->void:
 func propmove(x:float,y:float)->void:
 	prop_hud.propmove(x,y)
 func StartPropBox(runtime:float,id:int)->void:
+	Game.propLock=true
 	prop_hud.show()
 	prop_hud.StartPropBox(runtime,id)
 
