@@ -20,23 +20,18 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	rollback_synchronizer.add_state(self, "box_visible")
 	rollback_synchronizer.add_state(self, "hide_tick")
 
-func GetHitEventStatus(PlayerId:int,isfresh:bool,currtick:int)->void:
+func GetHitEventStatus(PlayerId:int,_isfresh:bool,currtick:int)->void:
 	if not box_visible:
 		return
 	var player:Player=GameData.PlayersArr[PlayerId]
 	box_visible=false
 	hide_tick = currtick
-	if isfresh:
-		player.RunPropBox(global_position.x,global_position.y)
+	player.RunPropBox(global_position.x,global_position.y)
 		
 func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
-
 	visible = box_visible
 	if not box_visible and tick - hide_tick >= respawn_ticks:
 		box_visible = true
-
-func ReShowProp()->void:
-	visible=true;
 	
 func del()->void:
 	queue_free()

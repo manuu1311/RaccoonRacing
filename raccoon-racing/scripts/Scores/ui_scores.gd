@@ -8,7 +8,7 @@ extends CanvasLayer
 @onready var lap_label: Label = $Text/LapInfo/LapLabel
 @onready var racetime: Label = $Text/TimeInfo/Racetime
 @onready var cuptime: Label = $Text/TimeInfo/Cuptime
-@onready var continuebutton: Button = $Text/ContinueButton/Button
+@onready var continuebutton: Node2D = $Text/ContinueButton
 var difftextures:Array[Texture]=[
     preload("res://Assets/Animations/Scores/down.png"),
     preload("res://Assets/Animations/Scores/up.png"),
@@ -53,7 +53,10 @@ func _ready() -> void:
         var icon:Sprite2D=positions[i].get_node("Icon")
         icon.texture=textures[player.charid] 
         var lblname:Label=positions[i].get_node("name")
-        lblname.text=names[player.charid] 
+        if player.name.length()<2:
+            lblname.text=names[player.charid] 
+        else:
+            lblname.text=player.name
         var lblrank:Label=positions[i].get_node("rank")
         lblrank.text=str(i+1)
         var lblpoints:Label=positions[i].get_node("points")

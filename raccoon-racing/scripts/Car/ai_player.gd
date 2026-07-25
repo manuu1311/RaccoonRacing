@@ -24,7 +24,7 @@ func Update(tick:int, is_fresh:bool)->void:
         AutoUseProp();
         AutoReSetCar();
     UpdatePoint()
-    car.Update(is_fresh)
+    car.Update()
     prop.run(tick, is_fresh)
     
 ##return forward,brake,left,right

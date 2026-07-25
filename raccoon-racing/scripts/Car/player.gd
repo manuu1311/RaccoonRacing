@@ -20,6 +20,7 @@ var ScorePoints:int=0
 var OnlineName:String=''
 var NetworkID:int=1
 signal racefinished
+var rng :RandomNumberGenerator= RandomNumberGenerator.new()
 '''
 1:become invincible
 2:sleep other players
@@ -196,8 +197,8 @@ func GetPropPer()->int:
 	var weights: Array = POSITION_PROBABILITIES[orderposition]
 	
 	# Roll a number between 0 and 99 (Total weight = 100)
-	seed(NetworkTime.tick+PlayerID)
-	var roll: int = randi_range(0, 99)
+	rng.seed = NetworkTime.tick + PlayerID
+	var roll: int = rng.randi_range(0, 99)
 	
 	var running_total: int = 0
 	

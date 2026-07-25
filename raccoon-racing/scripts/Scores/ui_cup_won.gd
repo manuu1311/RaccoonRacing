@@ -99,7 +99,7 @@ func OnContinueButtonPressed()->void:
 		GameData.ClearPlayers()
 	else:
 		GameData.ClearAIPlayers()
-		ChangeScene.rpc()
+	ChangeScene.rpc()
 
 @rpc('authority','call_local','reliable')
 func ChangeScene()->void:
