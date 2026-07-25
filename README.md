@@ -1,7 +1,11 @@
 # RaccoonRacing
+<div align="center">
+<img src="https://raw.githubusercontent.com/manuu1311/RaccoonRacing/main/raccoon-racing/Assets/logo.png" alt="Logo" width="300" />
+
 Recreation of the flash game "Raccoon Racing" in Godot.  
-All original trademarks, characters, and copyrighted material related to the original Raccoon Racing belong to their respective owners.  
-![Logo](https://raw.githubusercontent.com/manuu1311/RaccoonRacing/main/raccoon-racing/Assets/logo.png)
+All original trademarks, characters, and copyrighted material related to the original Raccoon Racing belong to their respective owners.
+
+</div>
 ## Roadmap
 
 | Status | Task |
