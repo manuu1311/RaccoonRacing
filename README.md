@@ -1,7 +1,7 @@
 # RaccoonRacing
 Recreation of the flash game "Raccoon Racing" in Godot.  
 All original trademarks, characters, and copyrighted material related to the original Raccoon Racing belong to their respective owners.  
-
+![Logo](https://raw.githubusercontent.com/manuu1311/RaccoonRacing/main/raccoon-racing/Assets/logo.png)
 ## Roadmap
 
 | Status | Task |
