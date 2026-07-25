@@ -1,7 +1,7 @@
 <div align="center">
-  
-# RaccoonRacing
-  
+
+<font size="+3"># RaccoonRacing</font>
+
   <img src="https://raw.githubusercontent.com/manuu1311/RaccoonRacing/main/raccoon-racing/Assets/logo.png" alt="Logo" width="300" />
 
 Recreation of the flash game "Raccoon Racing" in Godot.  
