@@ -27,8 +27,7 @@ func _process(_delta: float) -> void:
 		else:
 			player.car.Clearward()
 		if controller.special:
-			prints('view from player:',GameData.FocusPlayer.PlayerID,'player:',player.charid,'using prop:',player.car.NowPorpId,'but can he use it:',player.car.CanUseProp)
-			player.UseProp()
+			player.RequestUseProp()
 			controller.special_buffered=false
 	player.Update()
 
@@ -59,8 +58,7 @@ func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
 			player.car.Clearward()
 		##special
 		if controller.special and tick>specialtick:
-			prints('view from player:',GameData.FocusPlayer.PlayerID,'player:',player.charid,'using prop:',player.car.NowPorpId,'but can he use it:',player.car.CanUseProp)
-			player.UseProp()
+			player.RequestUseProp()
 			controller.special_buffered=false
 			specialtick=tick
 	player.Update(tick, is_fresh)

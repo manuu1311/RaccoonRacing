@@ -68,6 +68,7 @@ func _ready() -> void:
 				newid=player.charid
 				available_ids.erase(newid)
 			carinstance.CharID=newid
+			carinstance.set_multiplayer_authority(1)
 		add_child(carinstance)
 		carinstance.name="Car"+str(player.PlayerID)
 		carinstance.global_position=map.StartPosArr[i].global_position

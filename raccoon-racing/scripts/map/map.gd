@@ -312,6 +312,7 @@ func InitEventInMap()->void:
 		var scaled_size:Vector2 = newprop.get_node("Sprite2D").texture.get_size() *0.7
 		newprop.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
 		_loc2_.rotation = 0.0;
+		newprop.set_multiplayer_authority(1)
 		add_child(newprop)
 		newprop.name="PropInMap"+str(_loc3_)
 		Events.append(newprop)
@@ -373,6 +374,7 @@ func InitEventInMap()->void:
 
 	
 func AddEventInMap(event: EventInMap)->void:
+	event.set_multiplayer_authority(1)
 	Events.append(event);
 	edevent.ReTidyFace();
 	
@@ -426,15 +428,62 @@ func IsLinePoint(NowPoint:int)->bool:
 	return LinePointArr.has(NowPoint)
 
 func GetHitEventStatus(eventid:int,playerid:int)->void:
+	if GameData.IsMultiplayer and not NetworkManager.is_host:
+		_request_event_hit.rpc_id(1, eventid, playerid, NetworkTime.tick)
+		return
+	_resolve_event_hit(eventid, playerid, NetworkTime.tick)
+
+@rpc("any_peer", "reliable")
+func _request_event_hit(eventid:int, playerid:int, tick:int)->void:
+	if not NetworkManager.is_host:
+		return
+	_resolve_event_hit(eventid, playerid, tick)
+
+@rpc("authority", "call_remote", "reliable")
+func _remote_event_hit(eventid:int, playerid:int, tick:int)->void:
+	_apply_event_hit(eventid, playerid, tick)
+
+func _resolve_event_hit(eventid:int, playerid:int, tick:int)->void:
+	_apply_event_hit(eventid, playerid, tick)
+	if GameData.IsMultiplayer:
+		_remote_event_hit.rpc(eventid, playerid, tick)
+
+func _apply_event_hit(eventid:int, playerid:int, tick:int)->void:
 	var _loc2_:int = 0;
 	while(_loc2_ < Events.size()):
 		if(Events[_loc2_].edface.getId() == eventid):
-			Events[_loc2_].GetHitEventStatus(playerid);
+			Events[_loc2_].GetHitEventStatus(playerid, true, tick);
 			return
 		_loc2_ = _loc2_ + 1;
 
+func RequestUseProp(playerid:int)->void:
+	if GameData.IsMultiplayer and not NetworkManager.is_host:
+		_request_use_prop.rpc_id(1, playerid)
+		return
+	_resolve_use_prop(playerid)
+
+@rpc("any_peer", "reliable")
+func _request_use_prop(playerid:int)->void:
+	if not NetworkManager.is_host:
+		return
+	_resolve_use_prop(playerid)
+
+@rpc("authority", "call_remote", "reliable")
+func _remote_use_prop(playerid:int)->void:
+	_apply_use_prop(playerid)
+
+func _resolve_use_prop(playerid:int)->void:
+	_apply_use_prop(playerid)
+	if GameData.IsMultiplayer:
+		_remote_use_prop.rpc(playerid)
+
+func _apply_use_prop(playerid:int)->void:
+	if playerid >= 0 and playerid < GameData.PlayersArr.size():
+		GameData.PlayersArr[playerid].UseProp()
+
 
 func SpawnProp(basename:String, id:int, prop:Node2D)->void:
+	prop.set_multiplayer_authority(1)
 	add_child(prop)
 	prop.name=basename+str(id)+str(SpawnCounter[id])
 	SpawnCounter[id]+=1

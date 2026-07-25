@@ -165,7 +165,7 @@ func Stoprace()->void:
 	prop.propArr.clear()
 	racefinished.emit(PlayerID)
 
-func RunPropBox(x:float,y:float)->void:
+func RunPropBox(x:float,y:float,seedtick:int=-1)->void:
 	if not car.playering:
 		return
 	if hud!=null and car.isfresh:
@@ -174,7 +174,7 @@ func RunPropBox(x:float,y:float)->void:
 			hud.propmove(x,y)
 	if car.NowPorpId!=0:
 		return
-	GetProp(GetPropPer())
+	GetProp(GetPropPer(seedtick))
 	car.CanUseProp=true
 	if hud!=null and car.isfresh:
 		hud.StartPropBox(1.5,car.NowPorpId)
@@ -189,7 +189,7 @@ func ClearPropBox(id:int)->void:
 	if hud!=null:
 		hud.PropUsed(id)
 
-func GetPropPer()->int:
+func GetPropPer(seedtick:int=-1)->int:
 	# Clamp OrderId to ensure it doesn't break if index goes out of bounds
 	var orderposition: int = clampi(OrderId, 0, 3)
 	
@@ -197,7 +197,7 @@ func GetPropPer()->int:
 	var weights: Array = POSITION_PROBABILITIES[orderposition]
 	
 	# Roll a number between 0 and 99 (Total weight = 100)
-	rng.seed = NetworkTime.tick + PlayerID
+	rng.seed = (seedtick if seedtick >= 0 else NetworkTime.tick) + PlayerID
 	var roll: int = rng.randi_range(0, 99)
 	
 	var running_total: int = 0
@@ -429,6 +429,10 @@ func GetPropPer_LEGACY()->int:
 
 func ResetUse()->void:
 	car.CanUseProp=true
+
+func RequestUseProp()->void:
+	if(IsPlayering() && not car.isSleep and car.CanUseProp and !car.IsUsingProp):
+		car.map.RequestUseProp(PlayerID)
 
 func UseProp()->void:
 	if(IsPlayering() && not car.isSleep and car.CanUseProp and !car.IsUsingProp):

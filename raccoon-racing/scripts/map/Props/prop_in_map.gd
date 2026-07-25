@@ -26,12 +26,14 @@ func GetHitEventStatus(PlayerId:int,_isfresh:bool,currtick:int)->void:
 	var player:Player=GameData.PlayersArr[PlayerId]
 	box_visible=false
 	hide_tick = currtick
-	player.RunPropBox(global_position.x,global_position.y)
+	player.RunPropBox(global_position.x,global_position.y,currtick)
 		
 func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
-	visible = box_visible
 	if not box_visible and tick - hide_tick >= respawn_ticks:
 		box_visible = true
+
+func _process(_delta: float) -> void:
+	visible = box_visible
 	
 func del()->void:
 	queue_free()

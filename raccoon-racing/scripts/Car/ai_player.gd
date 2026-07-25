@@ -8,18 +8,18 @@ var AiResetTime:int=10
 var AiLastCheckPoint:int
 var IsOnlyAttPlayer:bool=false
 
-func RunPropBox(_x:float,_y:float)->void:
+func RunPropBox(_x:float,_y:float,seedtick:int=-1)->void:
     if not car.HasProp:
         car.HasProp=true
         car.CanUseProp=true
-        var id:int=GetPropPer()
+        var id:int=GetPropPer(seedtick)
         await car.get_tree().create_timer(1.5).timeout
         GetProp(id)
 
 
 
 func Update(tick:int, is_fresh:bool)->void:
-    if(AiPlayering && car.playering):
+    if(AiPlayering && car.playering && car.is_multiplayer_authority()):
         AutoPlay()
         AutoUseProp();
         AutoReSetCar();
