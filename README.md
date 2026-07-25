@@ -6,6 +6,7 @@ Recreation of the flash game "Raccoon Racing" in Godot.
 All original trademarks, characters, and copyrighted material related to the original Raccoon Racing belong to their respective owners.
 
 </div>
+
 ## Roadmap
 
 | Status | Task |
