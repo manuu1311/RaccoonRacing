@@ -11,6 +11,7 @@ var y:float;
 var edface:EdRectangle
 var IsActivated:bool
 var PlayerID:int
+var lifetime:int
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
 	self.x = xinst;

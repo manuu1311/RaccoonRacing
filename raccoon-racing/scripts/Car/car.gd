@@ -581,8 +581,7 @@ func GetHitStatus(tx:float, ty:float)->void:
     #no wall detected
     if(is_nan(wallAngledeg)):
         return 
-    if isfresh:
-        sounds.playbumpsound()
+    sounds.playbumpsound()
     var speedangle:float=speed.angle()
     var wallAngle :float= deg_to_rad(wallAngledeg)
     var speedwallangle:float=wrapf(
@@ -630,8 +629,7 @@ func BeAttacked(who: Car,_is_fresh:bool=true,_tick:int=0)->void:
         return 
     if(isResetting or who.isResetting):
         return 
-    if isfresh:
-        sounds.playbumpsound()
+    sounds.playbumpsound()
     var isInvincibletemp:bool = isInvincible
     var enemyInvincible:bool = who.isInvincible;
     if(isSmallState):

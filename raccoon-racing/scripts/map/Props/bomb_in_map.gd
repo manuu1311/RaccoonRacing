@@ -6,11 +6,7 @@ var bsValume:int = 60;
 var bombview:AnimatedSprite2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var synchronizer: RollbackSynchronizer = $RollbackSynchronizer
-const EXPLODE_TICKS := 35
-var alive:bool=true
-var exploded: bool = false
-var explode_tick: int = -1
+@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
 
 # Called when the node enters the scene tree for the first time.
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
@@ -23,14 +19,18 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	animated_sprite_2d.hide()
 
 
-func GetHitEventStatus(PlayerId: int,is_fresh:bool,currtick:int) -> void:
-	if not IsActivated or exploded:
+func GetHitEventStatus(PlayerId: int) -> void:
+	if not is_multiplayer_authority():
+		return
+	if not IsActivated:
 		return
 	var car: Car = GameData.PlayersArr[PlayerId].car
 	if car.isInvincible:
 		return
-	exploded = true
-	explode_tick = currtick
+	MineExplode.rpc(car)
+
+@rpc('call_local','reliable')
+func MineExplode(car:Car)->void:
 	IsActivated = false
 	if car.jumpCurrheight < jumphigh - 1:
 		if not car.IsUseShield:
@@ -39,36 +39,14 @@ func GetHitEventStatus(PlayerId: int,is_fresh:bool,currtick:int) -> void:
 			car.speed *= 0.3
 			car.speed += (car.global_position - global_position) * 0.03
 		else:
-			if is_fresh:
-				car.player.RemoveShield(is_fresh);
-		if is_fresh:
-			car.sounds.playerBombSound()
-			animated_sprite_2d.show()
-			animated_sprite_2d.play()
-			sprite_2d.hide()
-			bombview.hide()
+			car.player.RemoveShield();
+		car.sounds.playerBombSound()
+		animated_sprite_2d.show()
+		animated_sprite_2d.play()
+		sprite_2d.hide()
+		bombview.hide()
 
-
-func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
-	if not exploded:
-		return
-	if tick - explode_tick >= EXPLODE_TICKS+70:
-			_rollback_destroy()
-	if not alive:
-		return
-	if tick == explode_tick and is_fresh:
-		# one-shot cosmetics, only on the first time we ever see this tick
-		pass
-	if tick - explode_tick >= EXPLODE_TICKS:
-		alive=false
-
-func _rollback_spawn() -> void:
-	IsActivated=true
-
-func _rollback_despawn() -> void:
-	IsActivated=false
-
-func _rollback_destroy() -> void:
+func destroy() -> void:
 	map.DelEventInMap(edface.getId())
 
 func del()->void:
