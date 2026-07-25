@@ -15,7 +15,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	spawn_tick = NetworkTime.tick
 	
 	
-func GetHitEventStatus(PlayerId:int,is_fresh:bool)->void:
+func GetHitEventStatus(PlayerId:int,is_fresh:bool,_currtick:int)->void:
 	if(IsActivated):
 		var car:Car=GameData.PlayersArr[PlayerId].car
 		if(not car.isInvincible):

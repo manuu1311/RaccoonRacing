@@ -425,11 +425,11 @@ func IsWanPoint(NowPoint:int)->bool:
 func IsLinePoint(NowPoint:int)->bool:
 	return LinePointArr.has(NowPoint)
 
-func GetHitEventStatus(eventid:int,playerid:int,isfresh:bool)->void:
+func GetHitEventStatus(eventid:int,playerid:int,isfresh:bool,currtick:int)->void:
 	var _loc2_:int = 0;
 	while(_loc2_ < Events.size()):
 		if(Events[_loc2_].edface.getId() == eventid):
-			Events[_loc2_].GetHitEventStatus(playerid,isfresh);
+			Events[_loc2_].GetHitEventStatus(playerid,isfresh,currtick);
 			return
 		_loc2_ = _loc2_ + 1;
 

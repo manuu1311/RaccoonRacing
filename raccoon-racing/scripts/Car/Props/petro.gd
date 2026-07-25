@@ -13,21 +13,22 @@ func _init(playerinst:Player) -> void:
 	proptype = 8;
 	player.prop.del_prop_by_type(proptype);
 	player.car.sounds.playPetroSound();
-	player.IsUsingProp=true
+	player.car.IsUsingProp=true
 	start_tick = NetworkTime.tick
 	max_ticks = int(NetworkTime.tickrate * UseTime)
 	
 func run_tick(tick: int, is_fresh: bool) -> void:
 	if player.car.jumpCurrheight < 1 and tick-start_tick<max_ticks:
 		player.car.speed += Vector2(AddHorsebyAuto, 0).rotated(player.car.rotation - PI / 2)
+		player.car.IsUsingProp=true
 		if is_fresh:
 			player.car.prop_effector.AddPetro()
 	if tick - start_tick == max_ticks:
 		player.ResetUse()
-		player.IsUsingProp = false
+		player.car.IsUsingProp = false
 		if is_instance_valid(player.car):
 			player.car.prop_effector.StopPetro()
-	if is_fresh:			
+	if is_fresh:
 		if tick - start_tick >= max_ticks+70:
 			delme()
 

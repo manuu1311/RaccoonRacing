@@ -109,16 +109,20 @@ var IsUseShield:bool=false
 var isFcsCar:bool
 var controller:CarController
 var isfresh:bool
+var currtick:int
 var NowPointId:int
 var NowPorpId:int
 var CanUseProp:bool=false
+var IsUsingProp:bool=false
 var StartTick:int=9999999
+var StartBoost:bool=false
 ##ai variables 
 var AiNowPushButtonTimeNow:int
 var AiNowPushButtonTime:int
 var AiNowPushButton:int
 var HasProp:bool=false
 var AiUsePropTime:int=0
+
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
     map=gamemap
@@ -165,11 +169,13 @@ func RollbackSyncSetup()->void:
     rollback_synchronizer.add_state(self, "isLock")
     rollback_synchronizer.add_state(self, "horse")
     rollback_synchronizer.add_state(self, "shrinkscale")
+    #rollback_synchronizer.add_state(self, "StartBoost")
     rollback_synchronizer.add_state(self, "maxRotationWheel")
     rollback_synchronizer.add_state(self, "carRotationWheel")
     rollback_synchronizer.add_state(self, "NowPointId")
     rollback_synchronizer.add_state(self, "NowPorpId")
     rollback_synchronizer.add_state(self, "CanUseProp")
+    rollback_synchronizer.add_state(self, "IsUsingProp")
     rollback_synchronizer.add_state(self, "global_position")
     rollback_synchronizer.add_state(self, "rotation")
     rollback_synchronizer.add_state(self, "speed")
@@ -343,10 +349,15 @@ func TurnLRight()->void:
 func CancelTurn()->void:
     steer_normal()
 
+func _rollback_tick(_delta: float, _tick: int, _is_fresh: bool) -> void:
+    if StartBoost:
+        CanUseProp=true
+        NowPorpId = 8;
+        player.UseProp();
+        StartBoost=false
 
-func Update(is_fresh:bool)->void:
-    isfresh=is_fresh
-    if isHovercraft():
+func Update()->void:
+    if isHovercraft() and isfresh:
         Water()
     if(not isLock):
         UpdateCarPos()
@@ -562,7 +573,7 @@ func GetHitEvent(tx:float, ty:float)->void:
         pointpos=point.position+Vector2(tx,ty)
         collided=map.edevent.getHitFace(pointpos)
         if(collided!=null):
-            map.GetHitEventStatus(collided.getId(),playerID,isfresh)
+            map.GetHitEventStatus(collided.getId(),playerID,isfresh,currtick)
             return
         pointid+=1
     
@@ -631,7 +642,7 @@ func GetHitStatus(tx:float, ty:float)->void:
     tempy = position.y + stepy
 
 
-func BeAttacked(who: Car,_is_fresh:bool=true)->void:
+func BeAttacked(who: Car,_is_fresh:bool=true,_tick:int=0)->void:
     if(who.jumpCurrheight > heightOverWall or jumpCurrheight > heightOverWall):
         return 
     if(isResetting or who.isResetting):
@@ -683,7 +694,7 @@ func Reset(newpos:Vector2,newangle:float)->void:
     visual.scale=Vector2(1,1)
     jumpCurrheight=0
     jumpPrevheight=0
-    Update(isfresh);
+    Update();
 
 func SetOnIce()->void:
     if isInvincible:

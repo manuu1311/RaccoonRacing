@@ -68,10 +68,10 @@ func GetHitCar()->void:
 			var caropp:Car=area.get_parent().get_parent() as Car
 			BeAttacked(caropp)
 			
-func BeAttacked(Who:Car,is_fresh:bool=true)->void:
+func BeAttacked(Who:Car,is_fresh:bool=true,tick:int=0)->void:
 	if(Who.isResetting):
 		return 
-	OnHitCar(Who,is_fresh)
+	OnHitCar(Who,is_fresh,tick)
 	var enemyspeed:Vector2
 	if(IsHitCar):
 		if(Who.jumpCurrheight > Who.heightOverWall):
@@ -87,7 +87,7 @@ func BeAttacked(Who:Car,is_fresh:bool=true)->void:
 		speed = enemyspeed+pushvector*15
 		bsEx = 120;
 
-func OnHitCar(_Who:Car,_is_fresh:bool=true)->void:
+func OnHitCar(_Who:Car,_is_fresh:bool=true,_tick:int=0)->void:
 	return
 
 func GetHitStatus(tx:float,ty:float)->void:

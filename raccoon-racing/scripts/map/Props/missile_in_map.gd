@@ -30,11 +30,11 @@ func _ready() -> void:
 func OnHitStatus()->void:
     return
 
-func OnHitCar(car:Car,is_fresh: bool=true)->void:
+func OnHitCar(car:Car,is_fresh: bool=true,tick:int=0)->void:
     if hit or car.playerID!=aimed:
         return
     hit=true
-    hit_tick=NetworkTime.tick
+    hit_tick=tick
     var dist:Vector2
     if(!car.isInvincible && !car.player.car.IsUseShield):
         dist=car.global_position-global_position
@@ -55,8 +55,8 @@ func reset(x:float,y:float,r:float)->void:
     rotation=r
     Update();
 
-func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
-    if hit and tick - hit_tick >= HIT_LINGER_TICKS + 50:
+func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
+    if hit and tick - hit_tick >= HIT_LINGER_TICKS + 70:
         queue_free()
     if not alive:
         return
@@ -64,11 +64,11 @@ func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
         if tick - hit_tick >= HIT_LINGER_TICKS:
             alive = false
             visible = false
-            hide()
         return
     AutoPlay(AimPlayer)
     UpdatePoint()
-    AddPetro()
+    if is_fresh:
+        AddPetro()
     UpdateView()
     UpdateCarPos()
     UpdateSpeed()

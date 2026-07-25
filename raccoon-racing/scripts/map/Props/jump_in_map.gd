@@ -6,5 +6,5 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	rotation_degrees=angle
 	
 	
-func GetHitEventStatus(PlayerId:int,_isfresh:bool)->void:
+func GetHitEventStatus(PlayerId:int,_isfresh:bool,_currtick:int)->void:
 	GameData.PlayersArr[PlayerId].car.JumpBySpeed(0.5)

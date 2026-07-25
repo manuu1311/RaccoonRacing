@@ -18,6 +18,7 @@ var hit_tick: int = -1
 const HIT_LINGER_TICKS := 25
 var _is_fresh: bool = false
 var alive:bool=true
+var currtick:int=0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass # Replace with function body.
@@ -28,6 +29,7 @@ func setup(mapinst:Map,_ishitcar:bool,_ishitwall:bool)->void:
         collisions.append(get_node("Collisions/CollisionPoint"+str(i)))
 
 func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
+    currtick=tick
     if hit and tick - hit_tick >= HIT_LINGER_TICKS+50:
         queue_free()
     if not alive:
@@ -78,7 +80,7 @@ func _pop(who: Car) -> void:
     if hit:
         return
     hit = true
-    hit_tick = int(NetworkTime.tick)
+    hit_tick = currtick
     speed = Vector2.ZERO
     horse = Vector2.ZERO
     petroadd = false
@@ -120,7 +122,7 @@ func UpdateCarPos()->void:
     
     
 
-func OnHitCar(who: Car,isfresh:bool=true) -> void:
+func OnHitCar(who: Car,isfresh:bool=true,_tick:int=0) -> void:
     if hit or who.playerID == player.PlayerID:
         return
     if not who.isInvincible and not who.player.car.IsUseShield:

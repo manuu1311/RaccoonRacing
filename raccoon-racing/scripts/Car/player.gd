@@ -9,7 +9,6 @@ enum control_type{HUMAN,AI,MULTIPLAYER,RLTRAINING,RL}
 var current_control:control_type
 var alldistance:int=0
 var prop:PropManager
-var IsUsingProp:bool=false
 var OrderId:int
 var LapsLock:bool=true
 var Laps:int=1
@@ -71,7 +70,7 @@ func IsPlayering()->bool:
 
 func Update(tick:int, is_fresh:bool)->void:
 	UpdatePoint()
-	car.Update(is_fresh)
+	car.Update()
 	prop.run(tick, is_fresh)
 	
 	
@@ -82,9 +81,7 @@ func StartRace(starttick:int)->void:
 	if(car.speed.length() > 2):
 		car.speed=Vector2.ZERO;
 	elif(car.speed.length() > 0.5):
-		car.CanUseProp=true
-		car.NowPorpId = 8;
-		UseProp();
+		car.StartBoost=true
 	
 func UpdatePoint() -> void:
 	if !IsPlayering():
@@ -148,7 +145,7 @@ func WinJudge() -> void:
 
 func ResetPlayer(order:int)->void:
 	car.CanUseProp=false
-	IsUsingProp=false
+	car.IsUsingProp=false
 	LapsLock=true
 	Laps=1
 	car.NowPorpId=0
@@ -176,11 +173,10 @@ func RunPropBox(x:float,y:float)->void:
 			hud.propmove(x,y)
 	if car.NowPorpId!=0:
 		return
-	if car.isfresh:
-		GetProp(GetPropPer())
-		car.CanUseProp=true
-		if hud!=null:
-			hud.StartPropBox(1.5,car.NowPorpId)
+	GetProp(GetPropPer())
+	car.CanUseProp=true
+	if hud!=null and car.isfresh:
+		hud.StartPropBox(1.5,car.NowPorpId)
 
 
 
@@ -200,6 +196,7 @@ func GetPropPer()->int:
 	var weights: Array = POSITION_PROBABILITIES[orderposition]
 	
 	# Roll a number between 0 and 99 (Total weight = 100)
+	seed(NetworkTime.tick+PlayerID)
 	var roll: int = randi_range(0, 99)
 	
 	var running_total: int = 0
@@ -433,6 +430,6 @@ func ResetUse()->void:
 	car.CanUseProp=true
 
 func UseProp()->void:
-	if(IsPlayering() && not car.isSleep and car.CanUseProp and !IsUsingProp):
+	if(IsPlayering() && not car.isSleep and car.CanUseProp and !car.IsUsingProp):
 		prop.UseProp()
 		car.CanUseProp=false

@@ -3,11 +3,11 @@ class_name Propkn1InMap
 
 var JumpHigh:int=4
 
-func OnHitCar(car:Car,is_fresh:bool=true)->void:
+func OnHitCar(car:Car,is_fresh:bool=true,tick:int=0)->void:
 	if hit or car.playerID!=aimed:
 		return
 	hit = true
-	hit_tick = int(NetworkTime.tick)
+	hit_tick = tick
 	var dist:Vector2
 	if(!car.isInvincible && !car.player.car.IsUseShield):
 		dist=car.global_position-global_position

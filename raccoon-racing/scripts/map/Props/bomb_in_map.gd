@@ -23,14 +23,14 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	animated_sprite_2d.hide()
 
 
-func GetHitEventStatus(PlayerId: int,is_fresh:bool) -> void:
+func GetHitEventStatus(PlayerId: int,is_fresh:bool,currtick:int) -> void:
 	if not IsActivated or exploded:
 		return
 	var car: Car = GameData.PlayersArr[PlayerId].car
 	if car.isInvincible:
 		return
 	exploded = true
-	explode_tick = NetworkTime.tick
+	explode_tick = currtick
 	IsActivated = false
 	if car.jumpCurrheight < jumphigh - 1:
 		if not car.IsUseShield:
