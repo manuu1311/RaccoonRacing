@@ -69,10 +69,10 @@ func SetHud(hudinst:HUDManager,carinst:Car)->void:
 func IsPlayering()->bool:
 	return car.playering
 
-func Update(tick:int, is_fresh:bool)->void:
+func Update()->void:
 	UpdatePoint()
 	car.Update()
-	prop.run(tick, is_fresh)
+	prop.run()
 	
 	
 func StartRace(starttick:int)->void:

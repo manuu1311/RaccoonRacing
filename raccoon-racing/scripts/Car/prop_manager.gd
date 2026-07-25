@@ -8,9 +8,9 @@ func _init(playerinst:Player)->void:
 	player = playerinst;
 	propArr = []
 
-func run(tick:int, is_fresh:bool)->void:
+func run()->void:
 	for propinst:Prop in propArr:
-		propinst.run_tick(tick, is_fresh)
+		propinst.run_tick()
 
 '''
 1:become invincible

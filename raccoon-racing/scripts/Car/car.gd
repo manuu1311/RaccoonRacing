@@ -13,7 +13,7 @@ class_name Car
 @onready var bottom_effect: Node2D = $Visual/BottomEffect
 @onready var top_effect: Node2D = $Visual/TopEffect
 @onready var input_handler: InputHandler = $InputHandler
-@onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
+@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
 #character id,to set sprites
 var player:Player
 var CharID:int=0
@@ -108,8 +108,6 @@ var isResetting:bool=false
 var IsUseShield:bool=false
 var isFcsCar:bool
 var controller:CarController
-var isfresh:bool
-var currtick:int
 var NowPointId:int
 var NowPorpId:int
 var CanUseProp:bool=false
@@ -133,7 +131,7 @@ func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 func _ready() -> void:
     horse=carhorse
     input_handler.setup(player,controller)
-    RollbackSyncSetup()
+    StateSyncSetup()
     if isHovercraft():
         car.hide()
         hovercraft.show()
@@ -146,42 +144,49 @@ func _ready() -> void:
     PopulateCollisions()
     DeferredSetup.call_deferred()
 
+func StateSyncSetup()->void:
+    state_synchronizer.add_state(self, "position")
+    state_synchronizer.add_state(self, "rotation")
+    state_synchronizer.add_state(controller, "forward")
+    state_synchronizer.add_state(controller, "brake")
+    state_synchronizer.add_state(controller, "left")
+    state_synchronizer.add_state(controller, "right")
 
-func RollbackSyncSetup()->void:
-    rollback_synchronizer.add_input(controller, "forward")
-    rollback_synchronizer.add_input(controller, "brake")
-    rollback_synchronizer.add_input(controller, "left")
-    rollback_synchronizer.add_input(controller, "right")
-    rollback_synchronizer.add_input(controller, "special")
-    rollback_synchronizer.add_state(self, "AiUsePropTime")
-    rollback_synchronizer.add_state(self, "AiNowPushButtonTime")
-    rollback_synchronizer.add_state(self, "AiNowPushButton")
-    rollback_synchronizer.add_state(self, "HasProp")
-    rollback_synchronizer.add_state(self, "AiNowPushButtonTimeNow")
-    rollback_synchronizer.add_state(self, "jumpCurrheight")
-    rollback_synchronizer.add_state(self, "jumpPrevheight")
-    rollback_synchronizer.add_state(self, "bsex")
-    rollback_synchronizer.add_state(self, "isBack")
-    rollback_synchronizer.add_state(self, "isAtIce")
-    rollback_synchronizer.add_state(self, "isInvincible")
-    rollback_synchronizer.add_state(self, "isSmallState")
-    rollback_synchronizer.add_state(self, "IsUseShield")
-    rollback_synchronizer.add_state(self, "isLock")
-    rollback_synchronizer.add_state(self, "horse")
-    rollback_synchronizer.add_state(self, "shrinkscale")
-    #rollback_synchronizer.add_state(self, "StartBoost")
-    rollback_synchronizer.add_state(self, "maxRotationWheel")
-    rollback_synchronizer.add_state(self, "carRotationWheel")
-    rollback_synchronizer.add_state(self, "NowPointId")
-    rollback_synchronizer.add_state(self, "NowPorpId")
-    rollback_synchronizer.add_state(self, "CanUseProp")
-    rollback_synchronizer.add_state(self, "IsUsingProp")
-    rollback_synchronizer.add_state(self, "global_position")
-    rollback_synchronizer.add_state(self, "rotation")
-    rollback_synchronizer.add_state(self, "speed")
-    rollback_synchronizer.add_state(self, "isSleep")
-    rollback_synchronizer.add_state(self, "bs")
-    rollback_synchronizer.process_settings()
+#func RollbackSyncSetup()->void:
+    #rollback_synchronizer.add_input(controller, "forward")
+    #rollback_synchronizer.add_input(controller, "brake")
+    #rollback_synchronizer.add_input(controller, "left")
+    #rollback_synchronizer.add_input(controller, "right")
+    #rollback_synchronizer.add_input(controller, "special")
+    #rollback_synchronizer.add_state(self, "AiUsePropTime")
+    #rollback_synchronizer.add_state(self, "AiNowPushButtonTime")
+    #rollback_synchronizer.add_state(self, "AiNowPushButton")
+    #rollback_synchronizer.add_state(self, "HasProp")
+    #rollback_synchronizer.add_state(self, "AiNowPushButtonTimeNow")
+    #rollback_synchronizer.add_state(self, "jumpCurrheight")
+    #rollback_synchronizer.add_state(self, "jumpPrevheight")
+    #rollback_synchronizer.add_state(self, "bsex")
+    #rollback_synchronizer.add_state(self, "isBack")
+    #rollback_synchronizer.add_state(self, "isAtIce")
+    #rollback_synchronizer.add_state(self, "isInvincible")
+    #rollback_synchronizer.add_state(self, "isSmallState")
+    #rollback_synchronizer.add_state(self, "IsUseShield")
+    #rollback_synchronizer.add_state(self, "isLock")
+    #rollback_synchronizer.add_state(self, "horse")
+    #rollback_synchronizer.add_state(self, "shrinkscale")
+    ##rollback_synchronizer.add_state(self, "StartBoost")
+    #rollback_synchronizer.add_state(self, "maxRotationWheel")
+    #rollback_synchronizer.add_state(self, "carRotationWheel")
+    #rollback_synchronizer.add_state(self, "NowPointId")
+    #rollback_synchronizer.add_state(self, "NowPorpId")
+    #rollback_synchronizer.add_state(self, "CanUseProp")
+    #rollback_synchronizer.add_state(self, "IsUsingProp")
+    #rollback_synchronizer.add_state(self, "global_position")
+    #rollback_synchronizer.add_state(self, "rotation")
+    #rollback_synchronizer.add_state(self, "speed")
+    #rollback_synchronizer.add_state(self, "isSleep")
+    #rollback_synchronizer.add_state(self, "bs")
+    #rollback_synchronizer.process_settings()
 
 func DeferredSetup()->void:
     #add car view to minimap
@@ -207,8 +212,6 @@ func PopulateCollisions()->void:
             collisionPoints.append(child)
 
 func steer_left()->void:
-    if not isfresh:
-        return
     character.position=Vector2(4.5,-5)
     character.rotation=deg_to_rad(-23.5)
     if isHovercraft():
@@ -223,8 +226,6 @@ func steer_left()->void:
         fl.rotation=deg_to_rad(-23.5)
     
 func steer_right()->void:
-    if not isfresh:
-        return
     character.position=Vector2(-4.5,-5)
     character.rotation=deg_to_rad(23.5)
     if isHovercraft():
@@ -240,8 +241,6 @@ func steer_right()->void:
         
     
 func steer_normal()->void:
-    if not isfresh:
-        return
     character.position=Vector2(0,-4)
     character.rotation=0
     if isHovercraft():
@@ -258,16 +257,12 @@ func steer_normal()->void:
 
 #start wheel spinning
 func all_wheel()->void:
-    if not isfresh:
-        return
     fl.play()
     fr.play()
     rl.play()
     rr.play()
     
 func stop_wheel()->void:
-    if not isfresh:
-        return
     fl.stop()
     fr.stop()
     rl.stop()
@@ -277,12 +272,10 @@ func stop_wheel()->void:
 func Forward()->void:
     all_wheel()
     if isHovercraft():
-        if isfresh:
-            sounds.playHCRunSound()
+        sounds.playHCRunSound()
     if(not bs and friction > bsWheelLength and speed.length() > bsSpeed):
         bs = true;
-        if isfresh:
-            sounds.playBsSound()
+        sounds.playBsSound()
         bsf = moveAngCar > 0;
 
     if(speed.length() < bsClearSpeed):
@@ -309,8 +302,7 @@ func Backward()->void:
 
 func Clearward()->void:
       if isHovercraft():
-        if isfresh:
-            sounds.stopHCRunSound()
+        sounds.stopHCRunSound()
 
 
 
@@ -357,13 +349,12 @@ func _rollback_tick(_delta: float, _tick: int, _is_fresh: bool) -> void:
         StartBoost=false
 
 func Update()->void:
-    if isHovercraft() and isfresh:
+    if isHovercraft():
         Water()
     if(not isLock):
         UpdateCarPos()
-        
-    UpdateViewMap()
     UpdateSpeed()
+    UpdateViewMap()
     Jumping()
     #sounds.Loopsounds()
     var dir_modifier: float = 1.0 if bsf else -1.0
@@ -375,11 +366,9 @@ func Update()->void:
     if(friction > 40 and speed.length() > 2):
         if(speed.length() > bsSpeed):
             if(friction > 60):
-                if isfresh:
-                    sounds.playTurnBsSound(0)
+                sounds.playTurnBsSound(0)
             else:
-                if isfresh:
-                    sounds.playTurnBsSound(1)
+                sounds.playTurnBsSound(1)
         spawn_smoke("smoke1",moveAngCar < 0)
         if(friction > 70):
             spawn_smoke("smoke1",moveAngCar > 0)
@@ -394,8 +383,6 @@ func get_angle_diff()->float:
 
 #spawn smoke particle
 func spawn_smoke(type:String, lr:bool)->void:
-    if not isfresh:
-        return
     if(not isHovercraft() and jumpCurrheight < 1):
         var smokeinst:Node2D
         if type=='smoke1':
@@ -451,9 +438,8 @@ func UpdateCarPos()->void:
 
 
 func UpdateViewMap()->void:
-    if isfresh:
-        carViewInstance.position=map.offset+global_position*map.ScaledTimes
-        carViewInstance.rotation=rotation-PI/2
+    carViewInstance.position=map.offset+global_position*map.ScaledTimes
+    carViewInstance.rotation=rotation-PI/2
 
 func UpdateSpeed()->void:
     var dir:int
@@ -480,16 +466,14 @@ func UpdateSpeed()->void:
 func JumpBySpeed(height:float)->void:
     if(jumpCurrheight < heightOverWall):
         jumpCurrheight += height * speed.length() * jumpspeed;
-        if isfresh:
-            sounds.playFastSound()
-            sounds.playHCJumpSound()
-            sounds.playJumpSound()
+        sounds.playFastSound()
+        sounds.playHCJumpSound()
+        sounds.playJumpSound()
         
 func Jump(height:float)->void:
     jumpPrevheight = jumpCurrheight
     jumpCurrheight += height
-    if isfresh:
-        sounds.playHCJumpSound()
+    sounds.playHCJumpSound()
     
     
     
@@ -502,8 +486,7 @@ func Jumping()->void:
         z_index=1
     if(jumpCurrheight < jumpFloorHeight):
         if(jumpFloorHeight - jumpCurrheight > 0.5):
-            if isfresh:
-                sounds.playHCEndJumpSound()
+            sounds.playHCEndJumpSound()
             
         jumpCurrheight = (- jumpCurrheight) * jumpSpring
         jumpPrevheight = (- temp_height) * jumpSpring
@@ -519,7 +502,7 @@ func GetHitCar()->void:
     for playerinst:Player in GameData.PlayersArr:
         if global_position.distance_squared_to(playerinst.car.global_position)<1800:
             if playerID < playerinst.PlayerID:
-                BeAttacked(playerinst.car,isfresh)
+                BeAttacked(playerinst.car)
     #var overlapping_areas:Array[Area2D] = body.get_overlapping_areas()
     #for area:Area2D in overlapping_areas:
         #if area.is_in_group("Body"):
@@ -573,7 +556,7 @@ func GetHitEvent(tx:float, ty:float)->void:
         pointpos=point.position+Vector2(tx,ty)
         collided=map.edevent.getHitFace(pointpos)
         if(collided!=null):
-            map.GetHitEventStatus(collided.getId(),playerID,isfresh,currtick)
+            map.GetHitEventStatus(collided.getId(),playerID)
             return
         pointid+=1
     
