@@ -17,7 +17,7 @@ func _init(playerinst:Player)->void:
 	tickactivate=NetworkTime.tick+NetworkTime.seconds_to_ticks(UseTime)
 
 
-func run_tick(tick: int, is_fresh: bool) -> void:
+func run_tick() -> void:
 	if is_instance_valid(player.car) and tick==tickactivate:
 		player.car.IsUsingProp=false
 		if(player.PlayerID==GameData.FocusPlayer.PlayerID) and is_fresh:

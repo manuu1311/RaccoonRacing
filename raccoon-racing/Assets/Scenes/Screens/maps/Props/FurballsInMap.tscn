@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b0k22b3srl51j" path="res://scripts/map/Props/furballs_in_map.gd" id="1_xif3h"]
 [ext_resource type="Texture2D" uid="uid://c8q3r7ec3gr17" path="res://Assets/Images/Vehicles/PropEffects/Furball/furball.png" id="2_q41wo"]
 [ext_resource type="PackedScene" uid="uid://cp1qhvg4vv6ts" path="res://Assets/Scenes/Screens/PropEffects/bomb.tscn" id="2_sir00"]
-[ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="4_tb6q5"]
+[ext_resource type="Script" uid="uid://3lbngqcexe0l" path="res://addons/netfox/state-synchronizer.gd" id="4_tb6q5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sir00"]
 size = Vector2(12, 12)
@@ -33,8 +33,7 @@ rotation = 1.5707964
 
 [node name="CollisionPoint0" type="Marker2D" parent="Collisions" unique_id=1726968693]
 
-[node name="RollbackSynchronizer" type="Node" parent="." unique_id=2123408247 node_paths=PackedStringArray("root")]
+[node name="StateSynchronizer" type="Node" parent="." unique_id=75254808 node_paths=PackedStringArray("root")]
 script = ExtResource("4_tb6q5")
 root = NodePath("..")
-state_properties = Array[String]([":position", ":rotation", ":speed", ":petroadd", ":hit", ":hit_tick", ":alive"])
-metadata/_custom_type_script = "uid://d350u8evihs1u"
+metadata/_custom_type_script = "uid://3lbngqcexe0l"

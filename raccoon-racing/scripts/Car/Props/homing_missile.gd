@@ -17,10 +17,9 @@ func _init(playerinst:Player)->void:
         "res://Assets/Scenes/Screens/maps/MissileView.tscn"
 	).instantiate() as Sprite2D
 	HomingMissile.aimed=Aimplayer.PlayerID
-	HomingMissile.MissileHit.connect(delme)
 	HomingMissile.map=player.car.map
 	SetDmc();
-	
+	delme()
 
 func SetDmc()->void:
 	player.car.map.SpawnProp("HomingMissile",player.PlayerID,HomingMissile)
@@ -40,30 +39,8 @@ func SetDmc()->void:
 func SetAimPlayer()->Player:
 	return GameData.PlayersArr[GameData.OrderInfo[player.OrderId-1]]
 
-func run_tick(_tick: int, _is_fresh: bool) -> void:
-	if not is_instance_valid(HomingMissile):
-		return
-	#HomingMissile.AutoPlay(Aimplayer)
-	#HomingMissile.UpdatePoint()
-	#HomingMissile.AddPetro()
-	#UpdateView()
-
-func run()->void:
-	pass
-	#HomingMissile.AutoPlay();
-	#HomingMissile.UpdatePoint();
-	#HomingMissile.Update();
-	#HomingMissile.AddPetro();
-	#UpdateView()
-
-
-func OnHitStatus()->void:
-	pass
-
 func delme()->void:
 	player.prop.Delprop(self)
 
 func del()->void:
-	if is_instance_valid(HomingMissileView):
-		HomingMissileView.queue_free()
-	queue_free()
+	pass

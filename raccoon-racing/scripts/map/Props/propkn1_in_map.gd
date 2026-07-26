@@ -3,25 +3,32 @@ class_name Propkn1InMap
 
 var JumpHigh:int=4
 
-func OnHitCar(car:Car,is_fresh:bool=true,tick:int=0)->void:
-	if hit or car.playerID!=aimed:
+func OnHitCar(car:Car)->void:
+	if car.playerID!=aimed:
 		return
-	hit = true
-	hit_tick = tick
-	var dist:Vector2
-	if(!car.isInvincible && !car.player.car.IsUseShield):
-		dist=car.global_position-global_position
-		car.bsex = 90;
-		car.Jump(JumpHigh)
-		car.speed*=0.1
-		car.speed+=dist*0.03
-		if is_fresh:
-			car.sounds.playerBombSound()
+	car.prop_effector.PlayBomb(global_position)
+	car.sounds.playBedumpSound()
+	if not is_multiplayer_authority():
+		return
+	if(!car.isInvincible && !car.player.prop.IsUseShield):
+		ApplyExplosion.rpc(car)
 
-	if(car.player.car.IsUseShield):
-		car.player.RemoveShield(is_fresh);
+	if(car.player.prop.IsUseShield):
+		RemoveShield.rpc(car)
+	ClearMissile.rpc()
 
-	if is_fresh:
-		car.prop_effector.PlayBomb(global_position)
-		car.sounds.playBedumpSound()
-		MissileHit.emit()
+
+
+@rpc('call_local','reliable')
+func ApplyExplosion(car:Car)->void:
+	var dist:Vector2=car.global_position-global_position
+	car.bsex = 90;
+	car.sounds.playerBombSound();
+	car.speed*=0.1
+	car.speed+=dist*0.03
+@rpc('call_local','reliable')
+func RemoveShield(car:Car)->void:
+	car.player.RemoveShield()
+@rpc('call_local','reliable')
+func ClearMissile()->void:
+	queue_free()

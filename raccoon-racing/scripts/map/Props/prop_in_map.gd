@@ -1,13 +1,11 @@
 extends EventInMap
 
 @onready var timer: Timer = $Timer
-@onready var synchronizer: RollbackSynchronizer = $RollbackSynchronizer
-
+@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
 @export var respawn_ticks: int = NetworkTime.tickrate*3
-@onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
-
-var box_visible: bool = true
-var hide_tick: int = -1
+var hide_tick:int=0
+##predict prop hidden after local collision
+var predictingtick:int=0
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
 	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst,id)
@@ -17,21 +15,36 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	scale=Vector2(0.7,0.7)
 	global_position=Vector2(x,y)
 	await ready
-	rollback_synchronizer.add_state(self, "box_visible")
-	rollback_synchronizer.add_state(self, "hide_tick")
+	state_synchronizer.add_state(self, "hide_tick")
+	IsActivated=true
 
-func GetHitEventStatus(PlayerId:int,_isfresh:bool,currtick:int)->void:
-	if not box_visible:
+func GetHitEventStatus(PlayerId:int)->void:
+	if not IsActivated:
 		return
-	var player:Player=GameData.PlayersArr[PlayerId]
-	box_visible=false
-	hide_tick = currtick
-	player.RunPropBox(global_position.x,global_position.y)
-		
-func _rollback_tick(_delta: float, tick: int, _is_fresh: bool) -> void:
-	visible = box_visible
-	if not box_visible and tick - hide_tick >= respawn_ticks:
-		box_visible = true
-	
+	if is_multiplayer_authority():
+		hide_tick=NetworkTime.tick+respawn_ticks
+		NotifyPlayer.rpc(PlayerId,hide_tick)
+	else:
+		#hide it temporarily
+		predictingtick=NetworkTime.tick+NetworkTime.seconds_to_ticks(1)
+		GameData.PlayersArr[PlayerId].RunPropBox(global_position.x,global_position.y)
+
+@rpc('call_local','reliable')
+func NotifyPlayer(playerid:int,hidetick:int)->void:
+	hide_tick=hidetick
+	var player:Player=GameData.PlayersArr[playerid]
+	player.ValidatePropBox(global_position.x,global_position.y)
+	#delete client prediction
+	predictingtick=0
+
+func _process(_delta: float) -> void:
+	var curtick:int=NetworkTime.tick
+	if curtick<predictingtick:
+		visible=false
+		IsActivated=false
+	else:
+		visible=curtick>hide_tick
+		IsActivated=curtick>hide_tick
+
 func del()->void:
 	queue_free()

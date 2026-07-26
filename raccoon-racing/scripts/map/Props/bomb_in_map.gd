@@ -6,7 +6,6 @@ var bsValume:int = 60;
 var bombview:AnimatedSprite2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
 
 # Called when the node enters the scene tree for the first time.
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:

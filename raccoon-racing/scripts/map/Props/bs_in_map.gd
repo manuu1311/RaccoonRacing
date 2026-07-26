@@ -1,8 +1,7 @@
 extends EventInMap
 class_name BsInMap
 
-@onready var synchronizer: RollbackSynchronizer = $RollbackSynchronizer
-var lifetimeticks:int
+var lifetimeticks:int=0
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
 	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)

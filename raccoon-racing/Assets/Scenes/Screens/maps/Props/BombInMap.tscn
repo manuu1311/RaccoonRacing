@@ -18,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://b56wosmysa3h6" path="res://Assets/Images/maps/Props/bombeffect/14.png" id="15_rcvlu"]
 [ext_resource type="Texture2D" uid="uid://dymibfgaevit7" path="res://Assets/Images/maps/Props/bombeffect/15.png" id="16_s1vpk"]
 [ext_resource type="Texture2D" uid="uid://cu3bqky47op1g" path="res://Assets/Images/maps/Props/bombeffect/16.png" id="17_qotcb"]
-[ext_resource type="Script" uid="uid://3lbngqcexe0l" path="res://addons/netfox/state-synchronizer.gd" id="19_m7rgx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4qmce"]
 animations = [{
@@ -86,8 +85,3 @@ texture = ExtResource("1_ddg8r")
 sprite_frames = SubResource("SpriteFrames_4qmce")
 frame = 15
 frame_progress = 1.0
-
-[node name="StateSynchronizer" type="Node" parent="." unique_id=65025239 node_paths=PackedStringArray("root")]
-script = ExtResource("19_m7rgx")
-root = NodePath("..")
-metadata/_custom_type_script = "uid://3lbngqcexe0l"

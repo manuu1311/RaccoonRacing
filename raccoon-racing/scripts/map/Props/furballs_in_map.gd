@@ -11,57 +11,38 @@ const petroeffect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petr
 @onready var bomb_effect: AnimatedSprite2D = $BombEffect
 @onready var bottom_effect: Node2D = $BottomEffect
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var synchronizer: RollbackSynchronizer = $RollbackSynchronizer
+@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
 var petroadd:bool=true
-var hit: bool = false
-var hit_tick: int = -1
-const HIT_LINGER_TICKS := 25
-var _is_fresh: bool = false
-var alive:bool=true
-var currtick:int=0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	StateSyncSetup()
+
+func StateSyncSetup()->void:
+	state_synchronizer.add_state(self, "position")
 
 func setup(mapinst:Map,_ishitcar:bool,_ishitwall:bool)->void:
 	map=mapinst
 	for i in range(1):
 		collisions.append(get_node("Collisions/CollisionPoint"+str(i)))
 
-func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
-	currtick=tick
-	if hit and tick - hit_tick >= HIT_LINGER_TICKS+50:
-		queue_free()
-	if not alive:
-		return
-	_is_fresh = is_fresh
-	if hit:
-		if tick - hit_tick >= HIT_LINGER_TICKS:
-			alive=false
-		return
-
-	if not petroadd:
-		return
-
+func _process(_delta: float) -> void:
 	Forward()
-	UpdateCarPos()
-	UpdateSpeed()
-	if bsEx > 0:
-		rotation_degrees += min(bsEx, 30)
-		bsEx -= 1
-	if _is_fresh:
-		AddPetro() 
+	Update()
+	AddPetro() 
 
 func Forward()->void:
 	speed+=horse.rotated(rotation)
 
 
 func reset(x:float,y:float,r:float)->void:
-	  global_position=Vector2(x,y)
-	  rotation=r
+	global_position=Vector2(x,y)
+	rotation=r
+	Update()
 
 func Update()->void:
-	if not petroadd:return
+	if not petroadd:
+		return
 	UpdateCarPos();
 	UpdateSpeed();
 	if(bsEx > 0):
@@ -74,21 +55,8 @@ func GetHitStatus(tx:float,ty:float)->void:
 	#no wall detected
 	if(is_nan(wallAngledeg)):
 		return 
-	_pop(null)
+	OnHitStatus()
 
-func _pop(who: Car) -> void:
-	if hit:
-		return
-	hit = true
-	hit_tick = currtick
-	speed = Vector2.ZERO
-	horse = Vector2.ZERO
-	petroadd = false
-	if _is_fresh:
-		bomb_effect.play()
-		sprite_2d.hide()
-		if who:
-			who.sounds.playBedumpSound()
 
 func OnHitStatus()->void:
 	speed=Vector2(0,0)
@@ -96,11 +64,16 @@ func OnHitStatus()->void:
 	bomb_effect.play()
 	sprite_2d.hide()
 	petroadd=false
+	await bomb_effect.animation_finished
+	del()
+	
+
+func del()->void:
+	queue_free()
 	
 	
 func AddPetro()->void:
 	var boost: Node2D = petroeffect.instantiate() as Node2D
-	
 	boost.rotation=rotation
 	boost.global_position=global_position
 	boost.global_position += Vector2(0,randf_range(-5.0, 5.0)).rotated(boost.rotation)
@@ -122,22 +95,29 @@ func UpdateCarPos()->void:
 	
 	
 
-func OnHitCar(who: Car) -> void:
-	if hit or who.playerID == player.PlayerID:
+func OnHitCar(Who:Car)->void:
+	if Who.playerID==player.PlayerID:
 		return
-	if not who.isInvincible and not who.player.car.IsUseShield:
-		who.bsex = 50
-		if _is_fresh:
-			who.sounds.playBsSound()
-	if who.player.car.IsUseShield:
-		who.player.RemoveShield();
-	_pop(who)
+	speed=Vector2(0,0)
+	horse=Vector2(0,0)
+	bomb_effect.play()
+	sprite_2d.hide()
+	petroadd=false
+	Who.sounds.playBedumpSound();
+	if is_multiplayer_authority():
+		if(!Who.isInvincible && !Who.player.prop.IsUseShield):
+			ApplyCarEffect(Who)
+			#car.Speed.plus(new as.Vector(_loc6_,_loc5_).scaleNew(0.1));
+		if(Who.player.prop.IsUseShield):
+			RemoveShield.rpc(Who)
+	await bomb_effect.animation_finished
+	del()
 
-func _rollback_spawn() -> void:
-	show()
-
-func _rollback_despawn() -> void:
-	hide()
-
-func _rollback_destroy() -> void:
-	queue_free()
+@rpc('call_local','reliable')
+func ApplyCarEffect(Who:Car)->void:
+	Who.bsex = 50;
+	Who.sounds.playBsSound()
+	
+@rpc('call_local','reliable')
+func RemoveShield(Who:Car)->void:
+	Who.player.RemoveShield();

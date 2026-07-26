@@ -11,9 +11,8 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	rotation_degrees=angle
 	
 	
-func GetHitEventStatus(PlayerId:int,isfresh:bool,_currtick:int)->void:
+func GetHitEventStatus(PlayerId:int)->void:
 	var car:Car=GameData.PlayersArr[PlayerId].car
 	car.speed+=Horse.rotated(deg_to_rad(angle-90))
-	if isfresh:
-		car.sounds.playFastSound()
-		car.sounds.playAddSpeedSound()
+	car.sounds.playFastSound()
+	car.sounds.playAddSpeedSound()

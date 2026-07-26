@@ -11,6 +11,7 @@ func _init(playerinst: Player) -> void:
 	proptype = 9
 	player.car.sounds.playIceSound()
 	_spawn_trail()
+	delme()
 
 func _spawn_trail() -> void:
 	trail = IcePatchScene.instantiate()

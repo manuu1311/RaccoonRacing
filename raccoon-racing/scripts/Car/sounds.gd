@@ -4,7 +4,7 @@ class_name CarSounds
 #Variables
 var soundsVolume: float = 1.0
 # Panning: -1.0 is full left, 1.0 is full right
-var sounds_pen: float = 0.0 
+var sounds_pen: float = 0.0
 var prevSpeed: Vector2=Vector2.ZERO
 @onready var car: Car = $".."
 
@@ -139,7 +139,7 @@ func _on_hc_add_speed_finished()->void:
         hc_run.play()
 
 func GetProp()->void:
-    get_prop.play()   
+    get_prop.play()
     
 func stopHCRunSound()->void:
     if(hc_add_speed.playing or hc_run.playing):
@@ -149,7 +149,7 @@ func stopHCRunSound()->void:
 
 
 func playFastSound()->void:
-      if not car.isHovercraft():
+    if not car.isHovercraft():
         car_add_speed.stop()
         car_lost_speed.stop()
         car_run_speed.stop()
@@ -167,7 +167,7 @@ func playTurnBsSound(type:int)->void:
                 car_small_bs.play()
 
 func playBsSound()->void:
-      if not car.isHovercraft():
+    if not car.isHovercraft():
         if not car_stop.playing:
             car_stop.play()
 
@@ -183,16 +183,16 @@ func playJumpSound()->void:
 
 
 func playHCJumpSound()->void:
-      if(car.isHovercraft()):
+    if(car.isHovercraft()):
         if not hc_jump.playing:
             hc_jump.play()
 
 
 func playbumpsound()->void:
-      if(car.isHovercraft()):
+    if(car.isHovercraft()):
         if not hc_bump.playing:
             hc_bump.play()
-      else:
+    else:
         if not car_bump.playing:
             car_bump.play()
 
@@ -200,15 +200,15 @@ func playMissileSound()->void:
     missile.play()
     
 func playHCEndJumpSound()->void:
-      if(car.isHovercraft()):
+    if(car.isHovercraft()):
         if hc_end_jump.playing:
             hc_end_jump.play()
-      else:
+    else:
         if car_jump_end.playing:
             car_jump_end.play()
             
 func playerBombSound()->void:
-   bomb.play()
+    bomb.play()
 
 func playShieldSound()->void:
     shield.play()
@@ -230,7 +230,7 @@ func playdogSSound()->void:
     dog_s.play()
     
 func StopdogSSound()->void:
-   dog_s.stop()
+    dog_s.stop()
 
 func playPandaSSound()->void:
     panda_s.stop()

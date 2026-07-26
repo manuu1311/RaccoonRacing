@@ -4,9 +4,7 @@ class_name HoneyProp
 
 var bomb_in_map1:EventInMap;
 var bomb_in_map2:EventInMap;
-var arm_tick: int
-var armed: bool = false
-var done: bool = false
+var tickactivate:int=int(0.1*NetworkTime.tickrate)
 
 func _init(playerinst: Player) -> void:
 	super(playerinst)
@@ -36,24 +34,21 @@ func _init(playerinst: Player) -> void:
 
 
 	player.car.sounds.playBearSSound()
-	arm_tick = NetworkTime.tick + int(NetworkTime.tickrate * 0.1)
+	tickactivate+=NetworkTime.tick
 	
-func run_tick(tick: int, is_fresh: bool) -> void:
-	if done:
+func run_tick() -> void:
+	UseBomb()
+	
+func UseBomb()->void:
+	if NetworkTime.tick!=tickactivate:
 		return
-	if not armed and tick >= arm_tick:
-		armed = true
-		if is_instance_valid(bomb_in_map1) and is_instance_valid(bomb_in_map2):
-			bomb_in_map1.IsActivated = true
-			bomb_in_map2.IsActivated = true
-		done = true
-		if is_fresh:
-			player.prop.Delprop(self)
+	if is_instance_valid(bomb_in_map1):
+		bomb_in_map1.IsActivated = true;
+	if is_instance_valid(bomb_in_map2):
+		bomb_in_map2.IsActivated = true;
+	delme();
 
 func del() -> void:
-	pass
-	
-func run()->void:
 	pass
 	
 func delme()->void:

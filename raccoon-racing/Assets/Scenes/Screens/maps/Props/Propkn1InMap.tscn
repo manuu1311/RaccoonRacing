@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://dworixgdubkxb" path="res://Assets/Images/Vehicles/PropEffects/Kn1/kn1.png" id="1_e25e7"]
 [ext_resource type="Script" uid="uid://cc5d5y5qou0vh" path="res://scripts/map/Props/propkn1_in_map.gd" id="1_nyfy2"]
-[ext_resource type="Script" uid="uid://d350u8evihs1u" path="res://addons/netfox/rollback/rollback-synchronizer.gd" id="3_d7rpq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyfy2"]
 size = Vector2(12, 67)
@@ -31,9 +30,3 @@ rotation = 1.5707964
 
 [node name="CollisionPoint0" type="Marker2D" parent="Collisions" unique_id=2034520081]
 position = Vector2(0, -27)
-
-[node name="RollbackSynchronizer" type="Node" parent="." unique_id=934981715 node_paths=PackedStringArray("root")]
-script = ExtResource("3_d7rpq")
-root = NodePath("..")
-state_properties = Array[String]([":LockAim", ":NowPointId", ":position", ":rotation", ":speed", ":bsEx", ":hit", ":hit_tick", ":alive"])
-metadata/_custom_type_script = "uid://d350u8evihs1u"

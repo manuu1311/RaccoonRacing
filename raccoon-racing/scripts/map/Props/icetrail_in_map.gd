@@ -4,7 +4,7 @@ class_name IceTrailInMap
 @onready var area_2d: Area2D = $Area2D
 @onready var collision_polygon_2d: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 @onready var polygon_2d: Polygon2D = $Area2D/Polygon2D
-@onready var rollback_synchronizer: RollbackSynchronizer = $RollbackSynchronizer
+@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
 
 var car:Car
 var poly:PackedVector2Array=PackedVector2Array()
@@ -18,14 +18,10 @@ var left:Vector2=Vector2(-45,50)
 var right:Vector2=Vector2(45,50)
 var jitterstrength:float=25
 var tickinterval:int=2
-var currtick:int=0
 var growtick:int
-var carsintrail:Array[Car]
+var fadetick:int
 var spawntick:int
-var disabletick:int
-var despawntick:int
-var alive:bool=true
-var enabled:bool=true
+var carsintrail:Array[Car]
 var last_point_pos: Vector2 = Vector2.ZERO
 var has_last_point: bool = false
 var min_forward_progress: float = 4.0 
@@ -35,47 +31,33 @@ func _ready() -> void:
 	area_2d.area_exited.connect(_on_exit)
 	spawntick=NetworkTime.tick
 	growtick=spawntick+usetime
-	disabletick=spawntick+lifetime
-	despawntick=disabletick+70
+	fadetick=spawntick+lifetime
 	global_position =car.global_position + car.transform.y * 70
 	poly.append(Vector2.ZERO)
-	rollback_setup()
+	StateSyncSetup()
 	
 
 
-func rollback_setup()->void:
-	rollback_synchronizer.add_state(self, "max_slot")
-	rollback_synchronizer.add_state(self, "left_by_slot")
-	rollback_synchronizer.add_state(self, "right_by_slot")
-	rollback_synchronizer.add_state(self, "last_point_pos")
-	rollback_synchronizer.add_state(self, "has_last_point")
-	rollback_synchronizer.add_state(self, "alive")
-	rollback_synchronizer.add_state(self, "currtick")
+func StateSyncSetup()->void:
+	state_synchronizer.add_state(self, "poly")
 
-func _rollback_tick(_delta: float, tick: int, is_fresh: bool) -> void:
-	if not alive:
-		if tick>despawntick:
-			queue_free()
+
+func _process(_delta: float) -> void:
+	var curtick:int=NetworkTime.tick
+	if curtick>fadetick:
+		queue_free()
+	if curtick>growtick:
 		return
-	
-	if tick>disabletick:
-		alive=false
+	if curtick%tickinterval!=0:
 		return
-		
-	if not is_fresh:
-		return
-		
-	currtick+=1
-	if currtick<tickinterval:
-		return
-	currtick=0
-	if tick<growtick:
+	if curtick<growtick:
 		add_point()
 
 func add_point() -> void:
 	if not car:
 		return
 
+	@warning_ignore("integer_division")
 	var slot: int = (NetworkTime.tick - spawntick) / tickinterval
 
 	# forward-progress check, keyed off the previous *slot*, not a mutable running var
