@@ -126,7 +126,7 @@ func LoadMap() -> void:
 
 func RaceStart()->void:
 	for player:Player in GameData.PlayersArr:
-		player.StartRace(NetworkTime.tick)
+		player.StartRace()
 	Game.PlayersReady.disconnect(StartSequence)
 	Game.PlayersReady.connect(ShowFinishEffect)
 	

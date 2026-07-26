@@ -438,3 +438,23 @@ func SpawnProp(basename:String, id:int, prop:Node2D)->void:
 	add_child(prop)
 	prop.name=basename+str(id)+str(SpawnCounter[id])
 	SpawnCounter[id]+=1
+
+
+@rpc('call_local','any_peer','reliable')
+func ApplyProp(networkid:int, playerid:int,car_position:Vector2,car_rotation:float,propnum:int)->void:
+	if networkid==GameData.FocusPlayer.NetworkID:
+		return
+	var player:Player=GameData.PlayersArr[playerid]
+	#save previous position and rotation
+	var prevpos:Vector2=player.car.position
+	var prevrot:float=player.car.rotation
+	#apply authoritative position and rotation
+	player.car.position=car_position
+	player.car.rotation=car_rotation
+	#authoritative prop
+	player.car.NowPorpId=propnum
+	#use prop
+	player.prop.UseProp()
+	#revert transform changes
+	player.car.position=prevpos
+	player.car.rotation=prevrot

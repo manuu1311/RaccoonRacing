@@ -4,6 +4,7 @@ class_name OilProp
 
 var bs_in_map:EventInMap
 var lifetime:int=30
+var tickactivate:int=int(0.3*NetworkTime.tickrate)
 
 func _init(playerinst:Player)->void:
 	super(playerinst);
@@ -15,9 +16,18 @@ func _init(playerinst:Player)->void:
 	player.car.map.AddEventInMap(bs_in_map)
 	bs_in_map.setup(player.car.map,pos.x,pos.y,50,50,player.car.rotation_degrees)
 	player.car.sounds.playoilSound();
+	tickactivate+=NetworkTime.tick
 	
+
+func ActivateOil()->void:
+	if NetworkTime.tick!=tickactivate:
+		return
+	if is_instance_valid(bs_in_map):
+		bs_in_map.IsActivated = true;
+	delme();
+
 func run_tick() -> void:
-	pass
+	ActivateOil()
 
 	
 func delme()->void:

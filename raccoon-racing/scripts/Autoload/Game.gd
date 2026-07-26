@@ -23,9 +23,9 @@ func server_receive_ready(peer_id: int)->void:
 func start_race_countdown()->void:
 	# Pick a safe tick in the future
 	var target_tick:int = NetworkTime.tick 
-	prints('target:',str(target_tick),'curr:',NetworkTime.tick)
 	if GameData.OnlinePlayersCount>1:
 		target_tick+= NetworkTime.tickrate*5
+	prints('Current tick:',NetworkTime.tick,'Target start tick:',str(target_tick))
 	rpc("broadcast_start_tick", target_tick)
 
 @rpc("authority", "call_local", "reliable")

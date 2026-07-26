@@ -63,7 +63,7 @@ func RunPropBox()->void:
 		PropBoxRunTime=0
 		icon.frame=PropId
 		timer.stop()
-		itemready=true	
+		itemready=true
 		prop_visible.emit()
 		return
 		

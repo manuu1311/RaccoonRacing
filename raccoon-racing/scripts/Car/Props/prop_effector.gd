@@ -95,18 +95,15 @@ func PlayBone()->void:
 	mover.play("BoneMove")
 	car.sounds.playdogSSound()
 	detectbone=true
+	
 
 func StopBone()->void:
 	bone.hide()
 	rotator.stop()
 	mover.stop()
 	detectbone=false
-
-func _rollback_tick(_delta: float, _tick: int, is_fresh: bool) -> void:
-	if detectbone:
-		CheckBoneCollisions(is_fresh)
 	
-func CheckBoneCollisions(isfresh:bool)->void:
+func CheckBoneCollisions()->void:
 	for player:Player in GameData.PlayersArr:
 		if player.PlayerID!=car.playerID:
 			var caropp:Car=player.car
@@ -117,7 +114,7 @@ func CheckBoneCollisions(isfresh:bool)->void:
 						if caropp.isInvincible:
 							return
 						if caropp.player.car.IsUseShield:
-							caropp.player.RemoveShield(isfresh)
+							caropp.player.RemoveShield()
 							return
 						var dist:Vector2 =caropp.global_position-(car.global_position)
 						var loc7:float=0.005
@@ -127,9 +124,8 @@ func CheckBoneCollisions(isfresh:bool)->void:
 						var knockback:Vector2=dist*loc7
 						caropp.speed-=knockback*40
 						caropp.bs=true
-						if isfresh:
-							caropp.prop_effector.PlayBomb(bone.global_position)
-							caropp.sounds.playBedumpSound()
+						caropp.prop_effector.PlayBomb(bone.global_position)
+						caropp.sounds.playBedumpSound()
 
 func OnAreaEntered(body:Area2D)->void:
 	if body.is_in_group("Body"):
@@ -137,20 +133,5 @@ func OnAreaEntered(body:Area2D)->void:
 		if caropp.playerID!=car.playerID:
 			if caropp.jumpCurrheight<caropp.heightOverWall:
 				if !caropp.isResetting:
-					bonehit.emit()
-					if caropp.isInvincible:
-						return
-					if caropp.player.car.IsUseShield:
-						caropp.player.prop.del_prop_by_type(3)
-						return
-					var dist:Vector2 =caropp.global_position-(car.global_position)
-					var loc7:float=0.005
-					var distsq:float=dist.length_squared()
-					if distsq<2000:
-						loc7 = 0.005 + 0.05 * (2000 - distsq) / 2000;
-					var knockback:Vector2=dist*loc7
-					caropp.speed-=knockback*40
-					caropp.bs=true
-					caropp.prop_effector.PlayBomb(bone.global_position)
-					caropp.sounds.playBedumpSound()
+					bonehit.emit(caropp)
 					

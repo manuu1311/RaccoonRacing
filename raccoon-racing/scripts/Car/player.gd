@@ -39,18 +39,13 @@ var PropValidated:bool=false
 	5:rotating bones
 	6:laser shrink ray
 '''
-'const POSITION_PROBABILITIES: Dictionary = {
-    0: [0,  0, 30, 30,  0,  0, 30,  0, 10], # 1st Place
-    1: [5,  0, 15, 20, 5, 15, 15, 15, 10], # 2nd Place
-    2: [10, 10, 5,  5, 15, 20, 5, 20, 10], # 3rd Place
-    3: [15, 20, 0,  0, 20, 15,  0, 20, 10]  # 4th Place
-}'
 const POSITION_PROBABILITIES: Dictionary = {
-	0: [0,  0, 0, 0,  0,  0, 0,  0, 100], # 1st Place
-	1: [5,  0, 15, 20, 5, 15, 0, 0, 100], # 2nd Place
+	0: [0,  0, 30, 30,  0,  0, 30,  0, 10], # 1st Place
+	1: [5,  0, 15, 20, 5, 15, 15, 15, 10], # 2nd Place
 	2: [10, 10, 5,  5, 15, 20, 5, 20, 10], # 3rd Place
 	3: [15, 20, 0,  0, 20, 15,  0, 20, 10]  # 4th Place
 }
+
 func _init(id:int,control:control_type) -> void:
 	PlayerID=id
 	OrderId=id
@@ -76,14 +71,15 @@ func Update()->void:
 	prop.run()
 	
 	
-func StartRace(starttick:int)->void:
+func StartRace()->void:
+	print('locking to false')
 	car.playering = true;
 	car.isLock = false;
-	car.StartTick=starttick
 	if(car.speed.length() > 2):
 		car.speed=Vector2.ZERO;
 	elif(car.speed.length() > 0.5):
-		car.StartBoost=true
+		PropValidated=true
+		car.StartBoost()
 	
 func UpdatePoint() -> void:
 	if !IsPlayering():
@@ -175,7 +171,7 @@ func ValidatePropBox(x:float,y:float)->void:
 func RunPropBox(x:float,y:float)->void:
 	if not car.playering:
 		return
-	if hud!=null and car.isfresh:
+	if hud!=null:
 		car.sounds.GetProp()
 		if not hud.PropItemReady():
 			hud.propmove(x,y)
@@ -442,3 +438,7 @@ func UseProp()->void:
 		prop.UseProp()
 		car.CanUseProp=false
 		PropValidated=false
+		if not GameData.IsMultiplayer or NetworkManager.is_host:
+			car.RequestProp(NetworkID,PlayerID,car.position,car.rotation,car.NowPorpId)
+		else:
+			car.RequestProp.rpc_id(1,NetworkID,PlayerID,car.position,car.rotation,car.NowPorpId)

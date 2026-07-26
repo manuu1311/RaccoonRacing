@@ -92,7 +92,6 @@ _data = {
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a30fl"]
 
 [node name="UiScores" type="CanvasLayer" unique_id=1836238246]
-visible = false
 script = ExtResource("1_m44wg")
 
 [node name="Background" type="Node2D" parent="." unique_id=2018799200]

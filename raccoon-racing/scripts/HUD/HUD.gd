@@ -30,7 +30,10 @@ func SetCar(car:Car)->void:
 	speed_hud.SetCar(FocusCar)
 
 func ResetPropLock()->void:
-	Game.propLock=false
+	if FocusCar.player.PropValidated:
+		Game.propLock=false
+	else:
+		PropUsed(0)
 
 func PropItemReady()->bool:
 	return prop_hud.itemready
@@ -44,8 +47,9 @@ func StartPropBox(runtime:float,id:int)->void:
 	Game.propLock=true
 	prop_hud.show()
 	prop_hud.StartPropBox(runtime,id)
+	
 func IsPropHudVisible()->bool:
-	return prop_hud.visible
+	return prop_hud.icon.visible
 
 func updatelap()->void:
 	speed_hud.on_lap_completed()
