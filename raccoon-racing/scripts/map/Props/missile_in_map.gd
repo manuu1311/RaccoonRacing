@@ -12,7 +12,10 @@ var SpeedHorse:int=1
 const effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
 @onready var bottom_effect: Node2D = $BottomEffect
 var aimed:int
-
+var missileview:Sprite2D
+var AimPlayer:Player
+var LockAim:bool=false
+var NowPointId:int
 
 func _ready() -> void:
 	horse=Vector2(SpeedHorse,0)
@@ -27,10 +30,10 @@ func OnHitCar(car:Car)->void:
 	car.sounds.playBedumpSound()
 	if not is_multiplayer_authority():
 		return
-	if(!car.isInvincible && !car.player.prop.IsUseShield):
+	if(!car.isInvincible && !car.IsUseShield):
 		ApplyExplosion.rpc(car)
 
-	if(car.player.prop.IsUseShield):
+	if(car.IsUseShield):
 		RemoveShield.rpc(car)
 	ClearMissile.rpc()
 
@@ -55,11 +58,14 @@ func reset(x:float,y:float,r:float)->void:
 	Update();
 
 func _process(_delta: float) -> void:
-	return
+	Update()
 
 func Update()->void:
+	AutoPlay()
+	UpdatePoint()
 	UpdateCarPos();
 	UpdateSpeed();
+	UpdateView()
 	if(bsEx > 0):
 		rotation_degrees += min(bsEx,30);
 		bsEx = bsEx - 1;
@@ -145,6 +151,44 @@ func GetHitStatus(tx:float,ty:float)->void:
 		tempx = position.x + stepx
 		tempy = position.y + stepy
 
+
+func UpdateView()->void:
+	missileview.position=map.offset+global_position*map.ScaledTimes
+	missileview.rotation=rotation
+
+
+func UpdatePoint()->void:
+	if LockAim:
+		return
+	var _loc4_:Vector2;
+	if(NowPointId + 1 <map.Points.size()):
+		_loc4_ = map.Points[NowPointId + 1];
+	else:
+		_loc4_ = map.Points[0];
+	var tonext:float=(_loc4_).distance_to(global_position)
+	var tocurr:float=map.Points[NowPointId].distance_to(global_position)
+	var between:float=map.Points[NowPointId].distance_to(_loc4_)
+	if(tonext + 200 < between || tocurr < 200):
+		NowPointId += 1;
+		if(NowPointId >= map.Points.size()):
+			NowPointId = 0;
+
+func AutoPlay()->void:
+	DoAction(0);
+	var targetangle:float;
+	if(NowPointId == AimPlayer.car.NowPointId || LockAim):
+		var dist:Vector2=AimPlayer.car.global_position-global_position
+		targetangle = rad_to_deg(atan2(dist.y, dist.x))
+		LockAim = true;
+	else:
+		var dist:Vector2=map.Points[NowPointId]-global_position
+		targetangle = rad_to_deg(atan2(dist.y, dist.x))
+	var anglediff:float=targetangle-rotation_degrees
+	anglediff = wrapf(anglediff, -180.0, 180.0)
+	if(anglediff > 5 && anglediff < 180):
+		DoAction(3);
+	elif(anglediff < -5 && anglediff > -180):
+		DoAction(2);
 
 func UpdateSpeed()->void:
 	var dir:int

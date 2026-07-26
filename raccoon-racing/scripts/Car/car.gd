@@ -13,7 +13,8 @@ class_name Car
 @onready var bottom_effect: Node2D = $Visual/BottomEffect
 @onready var top_effect: Node2D = $Visual/TopEffect
 @onready var input_handler: InputHandler = $InputHandler
-#@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
+@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
+@onready var tick_interpolator: TickInterpolator = $TickInterpolator
 #character id,to set sprites
 var player:Player
 var CharID:int=0
@@ -129,7 +130,7 @@ func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 func _ready() -> void:
 	horse=carhorse
 	input_handler.setup(player,controller)
-	#StateSyncSetup()
+	StateSyncSetup()
 	if isHovercraft():
 		car.hide()
 		hovercraft.show()
@@ -143,49 +144,33 @@ func _ready() -> void:
 	DeferredSetup.call_deferred()
 
 func StateSyncSetup()->void:
-	pass
-	#state_synchronizer.add_state(self, "position")
-	#state_synchronizer.add_state(self, "rotation")
+	state_synchronizer.add_state(self, "position")
+	state_synchronizer.add_state(self, "rotation")
+	state_synchronizer.add_state(self, "jumpCurrheight")
+	state_synchronizer.add_state(self, "scale")
+	
 	#state_synchronizer.add_state(controller, "forward")
 	#state_synchronizer.add_state(controller, "brake")
 	#state_synchronizer.add_state(controller, "left")
 	#state_synchronizer.add_state(controller, "right")
+	if not is_multiplayer_authority():
+		tick_interpolator.add_property(self, "position")
+		tick_interpolator.add_property(self, "rotation")
+		tick_interpolator.add_property(self, "scale")
+		tick_interpolator.add_property(self, "jumpCurrheight")
+	state_synchronizer.process_settings()
+	tick_interpolator.process_settings()
 
-#func RollbackSyncSetup()->void:
-	#rollback_synchronizer.add_input(controller, "forward")
-	#rollback_synchronizer.add_input(controller, "brake")
-	#rollback_synchronizer.add_input(controller, "left")
-	#rollback_synchronizer.add_input(controller, "right")
-	#rollback_synchronizer.add_input(controller, "special")
-	#rollback_synchronizer.add_state(self, "AiUsePropTime")
-	#rollback_synchronizer.add_state(self, "AiNowPushButtonTime")
-	#rollback_synchronizer.add_state(self, "AiNowPushButton")
-	#rollback_synchronizer.add_state(self, "HasProp")
-	#rollback_synchronizer.add_state(self, "AiNowPushButtonTimeNow")
-	#rollback_synchronizer.add_state(self, "jumpCurrheight")
-	#rollback_synchronizer.add_state(self, "jumpPrevheight")
-	#rollback_synchronizer.add_state(self, "bsex")
-	#rollback_synchronizer.add_state(self, "isBack")
-	#rollback_synchronizer.add_state(self, "isAtIce")
-	#rollback_synchronizer.add_state(self, "isInvincible")
-	#rollback_synchronizer.add_state(self, "isSmallState")
-	#rollback_synchronizer.add_state(self, "IsUseShield")
-	#rollback_synchronizer.add_state(self, "isLock")
-	#rollback_synchronizer.add_state(self, "horse")
-	#rollback_synchronizer.add_state(self, "shrinkscale")
-	##rollback_synchronizer.add_state(self, "StartBoost")
-	#rollback_synchronizer.add_state(self, "maxRotationWheel")
-	#rollback_synchronizer.add_state(self, "carRotationWheel")
-	#rollback_synchronizer.add_state(self, "NowPointId")
-	#rollback_synchronizer.add_state(self, "NowPorpId")
-	#rollback_synchronizer.add_state(self, "CanUseProp")
-	#rollback_synchronizer.add_state(self, "IsUsingProp")
-	#rollback_synchronizer.add_state(self, "global_position")
-	#rollback_synchronizer.add_state(self, "rotation")
-	#rollback_synchronizer.add_state(self, "speed")
-	#rollback_synchronizer.add_state(self, "isSleep")
-	#rollback_synchronizer.add_state(self, "bs")
-	#rollback_synchronizer.process_settings()
+
+func _process(_delta: float) -> void:
+	if not is_multiplayer_authority():
+		if controller.right:
+			steer_right()
+		elif controller.left:
+			steer_left()
+		else:
+			steer_normal()
+
 
 func DeferredSetup()->void:
 	#add car view to minimap
@@ -622,11 +607,12 @@ func GetHitStatus(tx:float, ty:float)->void:
 
 
 func BeAttacked(who: Car)->void:
+	if (GameData.IsMultiplayer and not NetworkManager.is_host):
+		return
 	if(who.jumpCurrheight > heightOverWall or jumpCurrheight > heightOverWall):
 		return 
 	if(isResetting or who.isResetting):
-		return 
-	sounds.playbumpsound()
+		return
 	var isInvincibletemp:bool = isInvincible
 	var enemyInvincible:bool = who.isInvincible;
 	if(isSmallState):
@@ -650,18 +636,22 @@ func BeAttacked(who: Car)->void:
 	var pushvector:Vector2 = dist*spring
 	#if enemy is invincible and im not: massive knockback
 	if(not isInvincibletemp and enemyInvincible):
-		speed = enemySpeed+pushvector*40
-		bs = true
-		sounds.playBsSound()
+		ResolveAttackedCollisions.rpc(playerID,enemySpeed+pushvector*40,true)
 	#if im invincible and enemy is not: give massive knockback
 	elif(isInvincibletemp and not enemyInvincible):
-		who.speed = mySpeed-pushvector*40
-		who.bs = true
-		sounds.playBsSound()
+		who.ResolveAttackedCollisions.rpc(who.playerID,enemySpeed+pushvector*40,true)
 	#no one is invincible
 	else:
-		speed = enemySpeed+pushvector
-		who.speed = mySpeed-pushvector
+		ResolveAttackedCollisions.rpc(playerID,enemySpeed+pushvector,false)
+		who.ResolveAttackedCollisions.rpc(who.playerID,mySpeed-pushvector,false)
+
+@rpc('any_peer','call_local','reliable')
+func ResolveAttackedCollisions(_id:int, newspeed:Vector2,newbs:bool)->void:
+	sounds.playbumpsound()
+	speed=newspeed
+	bs=newbs
+	if bs:
+		sounds.playBsSound()
 
 func Reset(newpos:Vector2,newangle:float)->void:
 	global_position=newpos

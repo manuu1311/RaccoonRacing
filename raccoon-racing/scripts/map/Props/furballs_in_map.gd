@@ -105,10 +105,10 @@ func OnHitCar(Who:Car)->void:
 	petroadd=false
 	Who.sounds.playBedumpSound();
 	if is_multiplayer_authority():
-		if(!Who.isInvincible && !Who.player.prop.IsUseShield):
+		if(!Who.isInvincible && !Who.IsUseShield):
 			ApplyCarEffect(Who)
 			#car.Speed.plus(new as.Vector(_loc6_,_loc5_).scaleNew(0.1));
-		if(Who.player.prop.IsUseShield):
+		if(Who.IsUseShield):
 			RemoveShield.rpc(Who)
 	await bomb_effect.animation_finished
 	del()

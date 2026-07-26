@@ -227,6 +227,8 @@
 [ext_resource type="Texture2D" uid="uid://5locry7to46g" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GiveSleep/42.png" id="205_iv1uf"]
 [ext_resource type="Texture2D" uid="uid://barirfjr3s38j" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GiveSleep/43.png" id="206_uc0lh"]
 [ext_resource type="Script" uid="uid://ckepxlv4m520p" path="res://scripts/Car/input_handler.gd" id="227_xe8o2"]
+[ext_resource type="Script" uid="uid://3lbngqcexe0l" path="res://addons/netfox/state-synchronizer.gd" id="229_1tcci"]
+[ext_resource type="Script" uid="uid://dour8fehaaugp" path="res://addons/netfox/tick-interpolator.gd" id="229_ug78t"]
 
 [sub_resource type="Animation" id="Animation_xh78s"]
 resource_name = "Bone"
@@ -1226,3 +1228,14 @@ car = NodePath("..")
 
 [node name="InputHandler" type="Node" parent="." unique_id=1840505980]
 script = ExtResource("227_xe8o2")
+
+[node name="StateSynchronizer" type="Node" parent="." unique_id=1732001525 node_paths=PackedStringArray("root")]
+script = ExtResource("229_1tcci")
+root = NodePath("..")
+metadata/_custom_type_script = "uid://3lbngqcexe0l"
+
+[node name="TickInterpolator" type="Node" parent="." unique_id=2072324406 node_paths=PackedStringArray("root")]
+script = ExtResource("229_ug78t")
+root = NodePath("../StateSynchronizer")
+record_first_state = false
+metadata/_custom_type_script = "uid://dour8fehaaugp"

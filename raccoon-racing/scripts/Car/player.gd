@@ -72,9 +72,9 @@ func Update()->void:
 	
 	
 func StartRace()->void:
-	print('locking to false')
 	car.playering = true;
-	car.isLock = false;
+	car.isLock = false
+	#car.StateSyncSetup()
 	if(car.speed.length() > 2):
 		car.speed=Vector2.ZERO;
 	elif(car.speed.length() > 0.5):

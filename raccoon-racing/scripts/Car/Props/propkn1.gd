@@ -24,6 +24,7 @@ func SetDmc()->void:
 	view_sprite.add_child(HomingMissileView)
 	HomingMissile.missileview=HomingMissileView
 	HomingMissile.AimPlayer=Aimplayer
+	HomingMissile.NowPointId=player.car.NowPointId
 	HomingMissile.speed=player.car.speed
 	HomingMissile.petrolength=10
 	HomingMissile.petrowidth=1
