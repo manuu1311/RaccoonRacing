@@ -44,6 +44,7 @@ func MineExplode(car:Car)->void:
 		animated_sprite_2d.play()
 		sprite_2d.hide()
 		bombview.hide()
+	destroy()
 
 func destroy() -> void:
 	map.DelEventInMap(edface.getId())
