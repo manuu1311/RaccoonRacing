@@ -12,7 +12,10 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	delme()
 	
 	
-func GetHitEventStatus(PlayerId:int)->void:
+func GetHitEventStatus(PlayerId:int,unsynced:bool)->void:
+	#prevent multiple executions
+	if unsynced:
+		return
 	if(IsActivated):
 		var car:Car=GameData.PlayersArr[PlayerId].car
 		if(not car.isInvincible):

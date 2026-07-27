@@ -59,6 +59,8 @@ func _process(_delta: float) -> void:
 	if curtick > fadetick:
 		queue_free()
 		return
+	if not is_multiplayer_authority():
+		return
 		
 	if curtick > growtick:
 		return

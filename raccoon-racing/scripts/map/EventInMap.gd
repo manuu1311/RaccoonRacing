@@ -23,7 +23,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	self.edface = map.edevent.AddRectangle(x,y,width,height,angle);
 	PlayerID=id
 	
-func GetHitEventStatus(_PlayerId:int)->void:
+func GetHitEventStatus(_PlayerId:int,_unsynced:bool)->void:
 	pass
 
 func del()->void:

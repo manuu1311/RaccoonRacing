@@ -9,9 +9,11 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	Horse=Vector2(1,0)
 	global_position=Vector2(x,y)
 	rotation_degrees=angle
-	
-	
-func GetHitEventStatus(PlayerId:int)->void:
+
+
+func GetHitEventStatus(PlayerId:int,unsynced:bool)->void:
+	if unsynced:
+		return
 	var car:Car=GameData.PlayersArr[PlayerId].car
 	car.speed+=Horse.rotated(deg_to_rad(angle-90))
 	car.sounds.playFastSound()

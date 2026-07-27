@@ -24,7 +24,6 @@ func Update()->void:
 		AutoUseProp();
 		AutoReSetCar();
 	UpdatePoint()
-	car.Update()
 	
 ##return forward,brake,left,right
 func AutoInput()->Array[bool]:
@@ -63,7 +62,7 @@ func AutoPlay()->void:
 			car.CurrentState=Car.turnstate.LEFT
 		elif car.AiNowPushButton==3:
 			car.CurrentState=Car.turnstate.RIGHT
-		elif car.AiNowPushButton==3:
+		elif car.AiNowPushButton==4:
 			car.CurrentState=Car.turnstate.FORWARD
 		car.AiNowPushButtonTimeNow = car.AiNowPushButtonTimeNow + 1;
 	else:

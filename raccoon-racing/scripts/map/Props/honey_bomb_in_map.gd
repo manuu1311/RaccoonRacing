@@ -14,7 +14,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	super(mapinst,marker_2d.global_position.x,marker_2d.global_position.y,widthinst,heightinst,angleinst,id);
 	animated_sprite_2d.hide()
 
-func GetHitEventStatus(PlayerId:int)->void:
+func GetHitEventStatus(PlayerId:int,_unsynced:bool)->void:
 	if not IsActivated:
 		return
 	var car: Car = GameData.PlayersArr[PlayerId].car

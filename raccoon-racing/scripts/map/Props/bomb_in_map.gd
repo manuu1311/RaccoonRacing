@@ -18,7 +18,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	animated_sprite_2d.hide()
 
 
-func GetHitEventStatus(PlayerId: int) -> void:
+func GetHitEventStatus(PlayerId: int,_unsynced:bool) -> void:
 	if not is_multiplayer_authority():
 		return
 	if not IsActivated:

@@ -228,7 +228,7 @@ func SolveRemoteCollisions()->void:
 	stepy=snapped(speed[1],0.1)
 	tempx = position.x + stepx
 	tempy = position.y + stepy
-	GetHitEvent(tempx,tempy)
+	GetHitEvent(tempx,tempy,true)
 
 func DeferredSetup()->void:
 	#add car view to minimap
@@ -582,7 +582,7 @@ func GetGrassStatus(tx:float, ty:float)->void:
 	tempy = position.y + stepy;
 	
 	
-func GetHitEvent(tx:float, ty:float)->void:
+func GetHitEvent(tx:float, ty:float,unsynced:bool=false)->void:
 	if(jumpCurrheight> heightOverWall or isResetting):
 		return 
 		
@@ -595,7 +595,7 @@ func GetHitEvent(tx:float, ty:float)->void:
 		pointpos=point.position+Vector2(tx,ty)
 		collided=map.edevent.getHitFace(pointpos)
 		if(collided!=null):
-			map.GetHitEventStatus(collided.getId(),playerID)
+			map.GetHitEventStatus(collided.getId(),playerID,unsynced)
 			return
 		pointid+=1
 	

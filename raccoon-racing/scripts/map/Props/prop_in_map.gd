@@ -18,7 +18,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	state_synchronizer.add_state(self, "hide_tick")
 	IsActivated=true
 
-func GetHitEventStatus(PlayerId:int)->void:
+func GetHitEventStatus(PlayerId:int,_unsynced:bool)->void:
 	if not IsActivated:
 		return
 	if is_multiplayer_authority():
