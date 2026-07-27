@@ -57,8 +57,15 @@ func AutoInput()->Array[bool]:
 
 func AutoPlay()->void:
 	ActionCar(0);
+	car.IsAccelerating=true
 	if(car.AiNowPushButtonTimeNow < car.AiNowPushButtonTime):
 		ActionCar(car.AiNowPushButton);
+		if car.AiNowPushButton==2:
+			car.CurrentState=Car.turnstate.LEFT
+		elif car.AiNowPushButton==3:
+			car.CurrentState=Car.turnstate.RIGHT
+		elif car.AiNowPushButton==3:
+			car.CurrentState=Car.turnstate.FORWARD
 		car.AiNowPushButtonTimeNow = car.AiNowPushButtonTimeNow + 1;
 	else:
 		car.AiNowPushButtonTimeNow = 0;

@@ -1239,3 +1239,8 @@ script = ExtResource("229_ug78t")
 root = NodePath("../StateSynchronizer")
 record_first_state = false
 metadata/_custom_type_script = "uid://dour8fehaaugp"
+
+[node name="FXSynchronizer" type="Node" parent="." unique_id=1030079540 node_paths=PackedStringArray("root")]
+script = ExtResource("229_1tcci")
+root = NodePath("../StateSynchronizer")
+metadata/_custom_type_script = "uid://3lbngqcexe0l"

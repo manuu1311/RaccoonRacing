@@ -441,16 +441,20 @@ func SpawnProp(basename:String, id:int, prop:Node2D)->void:
 
 
 @rpc('call_local','any_peer','reliable')
-func ApplyProp(networkid:int, playerid:int,car_position:Vector2,car_rotation:float,propnum:int)->void:
+func ApplyProp(networkid:int, playerid:int,car_position:Vector2,car_rotation:float,propnum:int,nowpointid:int,order:Array[int])->void:
 	if networkid==GameData.FocusPlayer.NetworkID:
 		return
 	var player:Player=GameData.PlayersArr[playerid]
-	#save previous position and rotation
+	#save previous info
 	var prevpos:Vector2=player.car.position
 	var prevrot:float=player.car.rotation
+	var prevpoint:int=player.car.NowPointId
+	var prevorder:Array[int]=GameData.OrderInfo
 	#apply authoritative position and rotation
 	player.car.position=car_position
 	player.car.rotation=car_rotation
+	player.car.NowPointId=nowpointid
+	GameData.OrderInfo=order
 	#authoritative prop
 	player.car.NowPorpId=propnum
 	#use prop
@@ -458,3 +462,5 @@ func ApplyProp(networkid:int, playerid:int,car_position:Vector2,car_rotation:flo
 	#revert transform changes
 	player.car.position=prevpos
 	player.car.rotation=prevrot
+	player.car.NowPointId=prevpoint
+	GameData.OrderInfo=prevorder

@@ -32,6 +32,7 @@ var carView:Resource
 var carViewInstance:Sprite2D
 @onready var current_vehicle: GameData.VehicleType=GameData.current_vehicle
 @onready var prop_effector: PropEffector = $PropEffector
+@onready var fx_synchronizer: StateSynchronizer = $FXSynchronizer
 var friction:float=0
 var shrinkscale:float=1
 #state: drifting
@@ -119,6 +120,9 @@ var AiNowPushButtonTime:int
 var AiNowPushButton:int
 var HasProp:bool=false
 var AiUsePropTime:int=0
+enum turnstate{IDLE,RIGHT,LEFT,FORWARD}
+var CurrentState:turnstate
+var IsAccelerating:bool
 
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
@@ -144,33 +148,86 @@ func _ready() -> void:
 	DeferredSetup.call_deferred()
 
 func StateSyncSetup()->void:
+	##essential
 	state_synchronizer.add_state(self, "position")
 	state_synchronizer.add_state(self, "rotation")
 	state_synchronizer.add_state(self, "jumpCurrheight")
 	state_synchronizer.add_state(self, "scale")
+	state_synchronizer.add_state(self, "CurrentState")
+	state_synchronizer.add_state(self, "speed")
+	##cosmetics
+	fx_synchronizer.add_state(self, "friction")
+	fx_synchronizer.add_state(self, "moveAngCar")
+	fx_synchronizer.add_state(self, "IsAccelerating")
+
 	
-	#state_synchronizer.add_state(controller, "forward")
-	#state_synchronizer.add_state(controller, "brake")
-	#state_synchronizer.add_state(controller, "left")
-	#state_synchronizer.add_state(controller, "right")
 	if not is_multiplayer_authority():
 		tick_interpolator.add_property(self, "position")
 		tick_interpolator.add_property(self, "rotation")
 		tick_interpolator.add_property(self, "scale")
-		tick_interpolator.add_property(self, "jumpCurrheight")
 	state_synchronizer.process_settings()
 	tick_interpolator.process_settings()
 
 
 func _process(_delta: float) -> void:
+	UpdateViewMap()
 	if not is_multiplayer_authority():
-		if controller.right:
-			steer_right()
-		elif controller.left:
-			steer_left()
-		else:
-			steer_normal()
+		if NetworkManager.is_host:
+			SolveRemoteCollisions()
+		match CurrentState:
+			turnstate.IDLE:
+				steer_normal()
+			turnstate.RIGHT:
+				steer_right()
+			turnstate.LEFT:
+				steer_left()
+			turnstate.FORWARD:
+				steer_normal()
+		if IsAccelerating:
+			UnsyncedForward()
+		ApplyUnsyncedFX()
+	
 
+func UnsyncedForward()->void:
+	all_wheel()
+	if isHovercraft():
+		sounds.playHCRunSound()
+	if(not bs and friction > bsWheelLength and speed.length() > bsSpeed):
+		bs = true
+		sounds.playBsSound()
+		bsf = moveAngCar > 0;
+
+	if(speed.length() < bsClearSpeed):
+		bs = false
+	# if difference is too large: spawn smoke
+	if abs(get_angle_diff())> 140 or isLock:
+		spawn_smoke('smoke1',true)  
+		spawn_smoke('smoke1',false) 
+
+func ApplyUnsyncedFX()->void:
+	if isHovercraft():
+		Water()
+	if(friction > 40 and speed.length() > 2):
+		if(speed.length() > bsSpeed):
+			if(friction > 60):
+				sounds.playTurnBsSound(0)
+			else:
+				sounds.playTurnBsSound(1)
+		spawn_smoke("smoke1",moveAngCar < 0)
+		if(friction > 70):
+			spawn_smoke("smoke1",moveAngCar > 0)
+	elif(speed.length() < 0.5):
+		stop_wheel()
+	else:
+		all_wheel()
+
+func SolveRemoteCollisions()->void:
+	GetHitCar()
+	stepx=snapped(speed[0],0.1)
+	stepy=snapped(speed[1],0.1)
+	tempx = position.x + stepx
+	tempy = position.y + stepy
+	GetHitEvent(tempx,tempy)
 
 func DeferredSetup()->void:
 	#add car view to minimap
@@ -336,7 +393,6 @@ func Update()->void:
 	if(not isLock):
 		UpdateCarPos()
 	UpdateSpeed()
-	UpdateViewMap()
 	Jumping()
 	#sounds.Loopsounds()
 	var dir_modifier: float = 1.0 if bsf else -1.0
@@ -714,4 +770,4 @@ func isHovercraft()->bool:
 
 @rpc('call_remote','any_peer','reliable')
 func RequestProp(networkid:int, playerid:int,car_position:Vector2,car_rotation:float,propnum:int)->void:
-	map.ApplyProp.rpc(networkid,playerid,car_position,car_rotation,propnum)
+	map.ApplyProp.rpc(networkid,playerid,car_position,car_rotation,propnum,NowPointId,GameData.OrderInfo)

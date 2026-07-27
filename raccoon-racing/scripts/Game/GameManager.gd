@@ -257,6 +257,9 @@ func Racestop(id:int)->void:
 
 func ShowFinishEffect(_tick:int)->void:
 	finish.play()
+	#sync everyone's orderinfo
+	if NetworkManager.is_host:
+		UpdateOrderInfo.rpc(GameData.OrderInfo)
 	await get_tree().create_timer(3).timeout
 	UiOverAnimation.playanim()
 	await UiOverAnimation.animated_sprite_2d.animation_finished
@@ -265,6 +268,9 @@ func ShowFinishEffect(_tick:int)->void:
 			player.Stoprace()
 	BackToMain()
 
+@rpc("authority",'reliable','call_remote')
+func UpdateOrderInfo(neworder:Array[int])->void:
+	GameData.OrderInfo=neworder
 
 func BackToMain()->void:
 	GameData.FocusCar.player.racefinished.disconnect(Racestop)

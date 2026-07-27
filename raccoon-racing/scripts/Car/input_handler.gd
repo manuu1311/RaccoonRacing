@@ -14,15 +14,20 @@ func _process(_delta: float) -> void:
 		##steering
 		if controller.right:
 			player.car.TurnLRight()
+			player.car.CurrentState=Car.turnstate.RIGHT
 		elif controller.left:
 			player.car.TurnLeft()
+			player.car.CurrentState=Car.turnstate.LEFT
 		else:
 			player.car.CancelTurn()
+			player.car.CurrentState=Car.turnstate.FORWARD
 		##accelerating
 		if controller.forward:
 			player.car.Forward()
+			player.car.IsAccelerating=true
 		elif controller.brake:
 			player.car.Backward()
+			player.car.IsAccelerating=false
 		else:
 			player.car.Clearward()
 		if controller.special:
