@@ -432,24 +432,21 @@ func _on_frame_changed()->void:
 		volume.show()
 
 func _on_start_button_pressed()->void:
-	buttons.hide()
-	logo.hide()
+	Hideadditions()
 	play()
 	await animation_finished
 	get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_char_selection.tscn')
 
 
 func _on_how_to_play_button_pressed() -> void:
-	buttons.hide()
-	logo.hide()
+	Hideadditions()
 	play()
 	await animation_finished
 	get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_how_to_play.tscn')
 
 
 func _on_high_scores_button_pressed() -> void:
-	buttons.hide()
-	logo.hide()
+	Hideadditions()
 	play()
 	await animation_finished
 	get_tree().change_scene_to_file(\"res://Assets/Scenes/Screens/ui_top_scores.tscn\")
@@ -457,6 +454,11 @@ func _on_high_scores_button_pressed() -> void:
 
 func _on_volume_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(MainBus, linear_to_db(value))
+
+func Hideadditions()->void:
+	buttons.hide()
+	logo.hide()
+	volume.hide()
 "
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0l03o"]

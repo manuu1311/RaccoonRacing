@@ -37,6 +37,7 @@ NetworkPerformance="*uid://cqgf7aqmjfoa3"
 WindowTiler="*uid://cmqjajhjgffm1"
 NetworkSimulator="*uid://1y2ey1e6qjwr"
 NetworkManager="*uid://dba1jm8b3m437"
+DebugPanel="*uid://b2pa455vs7kan"
 
 [debug]
 
@@ -46,6 +47,7 @@ gdscript/warnings/untyped_declaration=1
 
 window/size/viewport_width=500
 window/size/viewport_height=500
+window/size/always_on_top=true
 window/size/window_width_override=750
 window/size/window_height_override=750
 window/stretch/mode="canvas_items"

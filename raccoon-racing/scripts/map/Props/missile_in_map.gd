@@ -51,6 +51,7 @@ func RemoveShield(car:Car)->void:
 @rpc('call_local','reliable')
 func ClearMissile()->void:
 	queue_free()
+	missileview.queue_free()
 
 func reset(x:float,y:float,r:float)->void:
 	global_position=Vector2(x,y)

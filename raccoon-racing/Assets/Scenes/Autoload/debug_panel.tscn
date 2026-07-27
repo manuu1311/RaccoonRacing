@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b2pa455vs7kan"]
+
+[ext_resource type="Script" uid="uid://l8m23oiknqrj" path="res://scripts/Autoload/debug_panel.gd" id="1_m8rwj"]
+
+[node name="debug_panel" type="CanvasLayer" unique_id=522984652]
+layer = 100
+script = ExtResource("1_m8rwj")
+
+[node name="HideButton" type="Button" parent="." unique_id=1591067748]
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 13.0
+offset_bottom = 15.0
+
+[node name="MainPanel" type="Control" parent="." unique_id=2106475999]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="ColorRect" parent="MainPanel" unique_id=1436812503]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = 120.0
+offset_bottom = 18.0
+color = Color(0.23529412, 0.23529412, 0.23529412, 0.2784314)
+
+[node name="fps" type="Label" parent="MainPanel" unique_id=1386914640]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 4.0
+offset_right = 52.0
+offset_bottom = 17.0
+theme_override_font_sizes/font_size = 9
+text = "fps:60.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="latency" type="Label" parent="MainPanel" unique_id=197917643]
+layout_mode = 0
+offset_left = 57.795
+offset_top = 4.0
+offset_right = 117.795006
+offset_bottom = 17.0
+theme_override_font_sizes/font_size = 9
+text = "latency: 11ms"
+horizontal_alignment = 1
+vertical_alignment = 1
