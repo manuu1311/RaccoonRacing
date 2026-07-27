@@ -25,7 +25,6 @@ func Update()->void:
 		AutoReSetCar();
 	UpdatePoint()
 	car.Update()
-	prop.run()
 	
 ##return forward,brake,left,right
 func AutoInput()->Array[bool]:

@@ -53,7 +53,8 @@ func _on_diff_pressed(diff: int) -> void:
 		GameData.PopulatePlayers()
 		print('Network tick rate: ',NetworkTime.tickrate)
 		NetworkTime.start()
-		get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
+		UiLoadingScreen.ChangeScene()
+		#get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
 		
 
 

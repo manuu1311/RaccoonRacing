@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name LoadingScreen
 
 @onready var hint: AnimatedSprite2D = $Hint
 @onready var percentage: Label = $Text/Percentage
@@ -10,7 +11,15 @@ var hint_interval: float = 3.5
 var totaltime:float=0.0
 var expectedtime:float=5
 
+
 func _ready() -> void:
+	visible=false
+
+func ChangeScene() -> void:
+	visible=true
+	if get_tree().current_scene:
+		get_tree().current_scene.queue_free()
+		get_tree().current_scene = null
 	target_scene='res://Assets/Scenes/Screens/experiments/Experiment'+str(GameData.currentMap)+'.tscn'
 	UiOverAnimation.animated_sprite_2d.frame=0
 	hint.stop()
@@ -55,3 +64,6 @@ func _cycle_hint() -> void:
 	while newframe==hint.frame:
 		newframe=randi_range(0,total_frames-1)
 	hint.frame=newframe
+
+func HideLoading()->void:
+	visible=false

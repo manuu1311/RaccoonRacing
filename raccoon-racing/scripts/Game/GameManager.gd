@@ -17,7 +17,17 @@ var stagesize:Vector2
 var scenecenterpos:Vector2
 var SceneAngleMoveExpandPos:Vector2
 var SceneAngleMoveExpandNowPos:Vector2
-
+#preload props
+const PROP_SCENES = {
+	"prop1": preload("res://Assets/Scenes/Screens/maps/Props/BombInMap.tscn"),
+	"prop2": preload("res://Assets/Scenes/Screens/maps/Props/BsInMap.tscn"),
+	"prop3": preload("res://scripts/map/Props/furballs_in_map.gd"),
+	"prop4": preload("res://Assets/Scenes/Screens/maps/Props/HoneyBombInMap.tscn"),
+	"prop5": preload("res://Assets/Scenes/Screens/maps/Props/IceTrail.tscn"),
+	"prop6": preload("res://Assets/Scenes/Screens/maps/Props/MissileInMap.tscn"),
+	"prop7": preload("res://Assets/Scenes/Screens/maps/Props/Propkn1InMap.tscn"),
+	"prop8": preload("res://Assets/Scenes/Screens/maps/Props/ShrinkInMap.tscn"),
+}
 
 func _ready() -> void:
 	UiOverAnimation.reset_anim_frame()
@@ -75,10 +85,15 @@ func _ready() -> void:
 		player.SetCar(carinstance)
 		player.ResetPlayer(i)
 	fcsCar.player.SetHud(hud,fcsCar)
+	
 	if GameData.IsMultiplayer and not NetworkManager.is_host:
 		Game.server_receive_ready.rpc_id(1,fcsCar.playerID)
 	else:
 		Game.server_receive_ready(fcsCar.playerID)
+	UiLoadingScreen.HideLoading()
+	sound_manager.PlaySound('levelstart')
+
+		
 
 func StartSequence(target_tick:int)->void:
 	while NetworkTime.tick < target_tick:
@@ -152,8 +167,10 @@ func _process(_delta: float) -> void:
 		GameData.FocusPlayer.car.playering=false
 		
 func CoolEffects()->void:
-	sound_manager.PlaySound('levelstart')
-	await get_tree().create_timer(3).timeout
+	#if not multipayer, there is no wait time -> wait for 
+	#initial music to finish
+	if not GameData.IsMultiplayer:
+		await get_tree().create_timer(3).timeout
 	sound_manager.PlaySound("ready3")
 	lbl321.text='3'
 	lbl321_player.play("321")

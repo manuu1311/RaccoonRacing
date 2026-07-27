@@ -159,7 +159,8 @@ func NextScene()->void:
 		for i in GameData.Ranking.size():
 			var orderid:int=GameData.Ranking[i]
 			GameData.PlayersArr[orderid].OrderId=orderid
-		get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
+		UiLoadingScreen.ChangeScene()
+		#get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
 	else:
 		get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_cup_won.tscn")
 

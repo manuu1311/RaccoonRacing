@@ -6,17 +6,11 @@
 layer = 100
 script = ExtResource("1_m8rwj")
 
-[node name="HideButton" type="Button" parent="." unique_id=1591067748]
-offset_left = 5.0
-offset_top = 7.0
-offset_right = 13.0
-offset_bottom = 15.0
-
 [node name="MainPanel" type="Control" parent="." unique_id=2106475999]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 9.0
+offset_bottom = 5.0
 
 [node name="Panel" type="ColorRect" parent="MainPanel" unique_id=1436812503]
 layout_mode = 0
@@ -47,3 +41,9 @@ theme_override_font_sizes/font_size = 9
 text = "latency: 11ms"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HideButton" type="Button" parent="." unique_id=1591067748]
+offset_left = 4.0
+offset_top = 6.5
+offset_right = 13.0
+offset_bottom = 15.5

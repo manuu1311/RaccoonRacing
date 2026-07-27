@@ -211,7 +211,8 @@ func Start()->void:
 	await UiOverAnimation.animated_sprite_2d.animation_finished
 	MusicPlayer.FadeOutAndStop(2.5)
 	GameData.PopulateOrderArrays()
-	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
+	UiLoadingScreen.ChangeScene()
+	#get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_loading_screen.tscn")
 
 
 func CreateAIPlayers()->void:
@@ -234,3 +235,6 @@ func CreateNewAIPlayer(playerid:int,charid:int)->void:
 	GameData.PlayersArr.append(aiplayer)
 	aiplayer.AiReflect=lobby_script.difficulty
 	aiplayer.charid=charid
+	
+func hide_loading() -> void:
+	visible=false

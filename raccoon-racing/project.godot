@@ -36,7 +36,10 @@ NetworkEvents="*uid://bdmobxxptryj0"
 NetworkPerformance="*uid://cqgf7aqmjfoa3"
 WindowTiler="*uid://cmqjajhjgffm1"
 NetworkSimulator="*uid://1y2ey1e6qjwr"
+Noray="*uid://gu4bv4tgms3x"
+PacketHandshake="*uid://tt3j25a05n7c"
 NetworkManager="*uid://dba1jm8b3m437"
+UiLoadingScreen="*uid://cukvs5a5kq71l"
 DebugPanel="*uid://b2pa455vs7kan"
 
 [debug]
