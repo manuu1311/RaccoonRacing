@@ -66,10 +66,11 @@ func IsPlayering()->bool:
 	return car.playering
 
 func Update()->void:
-	UpdatePoint()
-	car.Update()
 	prop.run()
-	
+	UpdatePoint()
+
+func AuthorityUpdate()->void:
+	car.Update()
 	
 func StartRace()->void:
 	car.playering = true;

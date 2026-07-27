@@ -34,5 +34,6 @@ func _process(_delta: float) -> void:
 			player.UseProp()
 			controller.special_buffered=false
 	if is_multiplayer_authority():
-		player.Update()
+		player.AuthorityUpdate()
+	player.Update()
 	
