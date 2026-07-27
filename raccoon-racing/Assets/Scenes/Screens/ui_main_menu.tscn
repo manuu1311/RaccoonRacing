@@ -405,6 +405,9 @@ class_name MainScreenAnimator
 signal main_anim_complete
 @onready var logo: Logo = $\"../../Logo\"
 @onready var buttons: UIbuttons = $\"../../Buttons\"
+@onready var volume: Control = $\"../../Volume\"
+var MainBus:int=AudioServer.get_bus_index(\"Master\")
+@onready var volumeslider: HSlider = $\"../../Volume/HSlider\"
 
 func _ready()->void:
 	if not MusicPlayer.playing :
@@ -412,8 +415,10 @@ func _ready()->void:
 	play(\"intro\")
 	buttons.hide()
 	logo.hide()
+	volume.hide()
 	frame=0
 	frame_changed.connect(_on_frame_changed)
+	volumeslider.value=0.5
 
 func _on_frame_changed()->void:
 	if frame == 40:
@@ -424,6 +429,7 @@ func _on_frame_changed()->void:
 		logo.show()
 		#await get_tree().create_timer(2).timeout
 		logo.play_anim()
+		volume.show()
 
 func _on_start_button_pressed()->void:
 	buttons.hide()
@@ -447,6 +453,10 @@ func _on_high_scores_button_pressed() -> void:
 	play()
 	await animation_finished
 	get_tree().change_scene_to_file(\"res://Assets/Scenes/Screens/ui_top_scores.tscn\")
+
+
+func _on_volume_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(MainBus, linear_to_db(value))
 "
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0l03o"]
@@ -661,7 +671,7 @@ corner_radius_bottom_left = 50
 position = Vector2(250, 250)
 sprite_frames = SubResource("SpriteFrames_jua0g")
 animation = &"intro"
-frame = 41
+frame = 40
 script = SubResource("GDScript_14row")
 metadata/_edit_group_ = true
 
@@ -839,6 +849,21 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -2.6005406
 
+[node name="Volume" type="Control" parent="." unique_id=1012747165]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HSlider" type="HSlider" parent="Volume" unique_id=1665948954]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 479.0
+offset_right = 308.0
+offset_bottom = 495.0
+max_value = 1.0
+step = 0.05
+
 [connection signal="mouse_entered" from="Buttons/StartGameButton" to="Buttons" method="_on_mouse_entered"]
 [connection signal="pressed" from="Buttons/StartGameButton" to="Dummy/Background" method="_on_start_button_pressed"]
 [connection signal="pressed" from="Buttons/StartGameButton" to="Buttons" method="_on_mouse_click"]
@@ -852,3 +877,4 @@ rotation = -2.6005406
 [connection signal="pressed" from="Buttons/MoreGamesButton" to="Buttons" method="_on_wrong_mouse_click"]
 [connection signal="mouse_entered" from="Buttons/FreeGamesButton" to="Buttons" method="_on_mouse_entered"]
 [connection signal="pressed" from="Buttons/FreeGamesButton" to="Buttons" method="_on_wrong_mouse_click"]
+[connection signal="value_changed" from="Volume/HSlider" to="Dummy/Background" method="_on_volume_changed"]
