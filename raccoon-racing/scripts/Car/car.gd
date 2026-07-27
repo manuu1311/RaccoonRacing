@@ -134,7 +134,8 @@ func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 func _ready() -> void:
 	horse=carhorse
 	input_handler.setup(player,controller)
-	StateSyncSetup()
+	if GameData.IsMultiplayer:
+		StateSyncSetup()
 	if isHovercraft():
 		car.hide()
 		hovercraft.show()
@@ -652,7 +653,7 @@ func GetHitStatus(tx:float, ty:float)->void:
 		if(abs(speedwallangle) < 60):
 			speedwallangle *=0.5
 		speed=speed.rotated(deg_to_rad(speedwallangle))
-	var wall_hit_factor:float = 1.0 - wallSpring * (speedwallangle90 * abs(abs(poswallangle) - 90) / 90.0)
+	var wall_hit_factor:float = 1.0 - map.Wallspring * (speedwallangle90 * abs(abs(poswallangle) - 90) / 90.0)
 	wall_hit_factor = clamp(wall_hit_factor, -5.0, 5.0)
 	speed *= wall_hit_factor
 	speed+=(Vector2(0.1,0).rotated(deg_to_rad(wallAngledeg+90)))
