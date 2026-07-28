@@ -162,7 +162,8 @@ func _process(_delta: float) -> void:
 		SceneCenterMoveToPos()
 		if !fcsCar.isLock:
 			UpdateOrderResult()
-	if Input.is_action_just_released("Debug"):
+	#TODO: not needed anymore?
+	if Input.is_action_just_released("Debug") and false:
 		GameData.FocusPlayer.Stoprace()
 		GameData.FocusPlayer.car.playering=false
 		

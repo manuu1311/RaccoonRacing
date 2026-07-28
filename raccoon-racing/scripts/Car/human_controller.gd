@@ -9,19 +9,18 @@ func handle_input()->void:
 	brake=false
 	special=false
 	if not player.car.isSleep and not (player.car.jumpCurrheight>=1) and player.car.playering:
-		var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		# Handle Steering (X-axis)
-		if input_dir.x > 0:
+		if Input.is_action_pressed('Steer right'):
 			right=true
-		elif input_dir.x < 0:
+		elif Input.is_action_pressed('Steer left'):
 			left=true
 		#else:
 			#player.car.CancelTurn()
 
 		# Handle Throttle/Brake (Y-axis)
-		if input_dir.y < 0:
+		if Input.is_action_pressed('Accelerate'):
 			forward=true
-		elif input_dir.y > 0:
+		elif Input.is_action_pressed('Brake'):
 			brake=true
 		#else:
 			#player.car.Clearward()
