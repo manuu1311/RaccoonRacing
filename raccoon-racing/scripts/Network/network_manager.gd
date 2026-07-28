@@ -152,7 +152,6 @@ func lan_host() -> void:
 	discovery_broadcaster = PacketPeerUDP.new()
 	discovery_broadcaster.set_broadcast_enabled(true)
 	discovery_broadcaster.set_dest_address("255.255.255.255", DISCOVERY_PORT)
-	
 	enet_peer = ENetMultiplayerPeer.new()
 	var err:Error = enet_peer.create_server(LAN_PORT, MAX_PLAYERS)
 	if err == OK:
@@ -160,6 +159,7 @@ func lan_host() -> void:
 		my_id = 1 # Host is always 1 in star topology
 		print("[LAN] Hosting on port ", LAN_PORT, " with ID: ", my_id)
 		signal_lobby_created.emit(GetLocalIP())
+		set_process(true)
 	else:
 		print("[LAN] Failed to create server: ", err)
 		connection_type = ConnectionType.NONE
@@ -173,6 +173,7 @@ func lan_join(ip: String) -> void:
 	if err == OK:
 		multiplayer.multiplayer_peer = enet_peer
 		print("[LAN] Connecting to ", ip, ":", LAN_PORT)
+		current_lobby=ip
 		# We wait for the "connected_to_server" signal to emit signal_lobby_joined
 	else:
 		print("[LAN] Failed to create client: ", err)
@@ -181,10 +182,12 @@ func lan_join(ip: String) -> void:
 
 func discover_lan_host() -> void:
 	if discovery_listener == null:
+		connection_type = ConnectionType.LAN
 		discovery_listener = PacketPeerUDP.new()
 		var err:Error = discovery_listener.bind(DISCOVERY_PORT)
 		if err == OK:
 			print("[LAN] Listening for hosts...")
+			set_process(true)
 		else:
 			print("[LAN] Failed to bind discovery port: ", err)
 			discovery_listener = null
@@ -407,6 +410,8 @@ func _on_connection_failed() -> void:
 		signal_client_disconnected.emit()
 
 func CleanDiscovery()->void:
+	set_process(false)
+	print('[LAN] Quit listening')
 	if discovery_broadcaster:
 		discovery_broadcaster.close()
 		discovery_broadcaster = null
@@ -462,4 +467,10 @@ func IsDiscovering()->bool:
 
 func IsLan()->bool:
 	return connection_type==ConnectionType.LAN
+
+func SetLanType()->void:
+	connection_type = ConnectionType.LAN
+
+func ResetType()->void:
+	connection_type = ConnectionType.LAN
 #endregion

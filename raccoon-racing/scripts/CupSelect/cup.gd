@@ -1,4 +1,5 @@
 extends Control
+class_name CupIcon
 
 @export var locked: bool
 var completed: int
@@ -41,6 +42,8 @@ func _ready() -> void:
 
 
 func _on_button_mouse_entered() -> void:
+	if GameData.IsMultiplayer:
+		return
 	ButtonSounds.PlaySound('hover')
 	if locked:
 		$Infotext.show()
@@ -49,6 +52,8 @@ func _on_button_mouse_entered() -> void:
 
 
 func _on_button_mouse_exited() -> void:
+	if GameData.IsMultiplayer:
+		return
 	if locked:
 		$Infotext.hide()
 	else:

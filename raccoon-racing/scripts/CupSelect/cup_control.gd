@@ -66,7 +66,16 @@ func show_diff_screen()->void:
 	bg_filter.show()
 	buttons.show()
 	
-	
+##handle selected cup shiny (for multiplayer)
+func HandleShiny(id:int)->void:
+	if not GameData.IsMultiplayer:
+		return
+	var shinypath:String = "Cups/Cup" + str(GameData.currentCup+1)+'/Img/Shiny'
+	var shiny:TextureRect=get_node_or_null(shinypath)
+	shiny.hide()
+	var newshinypath:String = "Cups/Cup" + str(id+1)+'/Img/Shiny'
+	var newshiny:TextureRect=get_node_or_null(newshinypath)
+	newshiny.show()
 	
 
 func _on_cup_pressed(id: int) -> void:
@@ -74,6 +83,7 @@ func _on_cup_pressed(id: int) -> void:
 		ButtonSounds.PlaySound('warning')
 	else:
 		ButtonSounds.PlaySound('click')
+		HandleShiny(id)
 		GameData.currentCup=id
 		if GameData.IsMultiplayer and NetworkManager.is_host:
 			CupSelected.emit()

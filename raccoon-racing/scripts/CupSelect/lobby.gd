@@ -28,6 +28,7 @@ var names:Array[String]=[
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	show()
 	lobby_screen.hide()
 	cup_screen.show()
 	join_screen.show()
@@ -84,6 +85,7 @@ func _on_lobby_pressed() -> void:
 			lbltext.add_theme_color_override("font_color",Color.WHITE)
 			lobby_screen.hide()
 			cup_screen.show()
+			cup_screen.HandleShiny(GameData.currentCup)
 		else:
 			InLobbyScreen=true
 			lbltext.add_theme_color_override("font_color",Color.YELLOW)
@@ -263,7 +265,7 @@ func hide_loading() -> void:
 
 func _on_detect_mouse_entered() -> void:
 	ButtonSounds.PlaySound('hover')
-	discoverbase.self_modulate=Color(255,200,255,255)
+	discoverbase.self_modulate=Color(1,0.5,1,1)
 
 
 func _on_detect_mouse_exited() -> void:
@@ -274,7 +276,29 @@ func _on_detect_pressed() -> void:
 	ButtonSounds.PlaySound('click')
 	if NetworkManager.IsDiscovering():
 		NetworkManager.CleanDiscovery()
-		discoveranims.play('Idle')
+		NetworkManager.ResetType()
+		discoveranims.play('RESET')
 	else:
 		NetworkManager.discover_lan_host()
+		NetworkManager.SetLanType()
 		discoveranims.play('Wifi')
+
+
+func _on_lantext_mouse_entered() -> void:
+	if LanToggled:
+		lantext.add_theme_color_override("font_color",Color.WHITE)
+	else:
+		lantext.add_theme_color_override("font_color",Color.YELLOW)
+	
+
+
+func _on_lantext_mouse_exited() -> void:
+	if LanToggled:
+		lantext.add_theme_color_override("font_color",Color.YELLOW)
+	else:
+		lantext.add_theme_color_override("font_color",Color.WHITE)
+	
+
+
+func _on_lantextbutton_pressed() -> void:
+	togglelan_button.button_pressed=not togglelan_button.button_pressed

@@ -333,7 +333,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(0.9312496, 0, 1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -345,7 +345,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(0.8937502, 0, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_7scm4"]
@@ -1827,7 +1827,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="JoinScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=2082871443]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1887,6 +1886,16 @@ theme_override_font_sizes/font_size = 37
 text = "Lan"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=808217682]
+layout_mode = 0
+offset_left = 132.155
+offset_top = 12.805
+offset_right = 215.155
+offset_bottom = 49.805
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 
 [node name="ToggleButton" type="CheckButton" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=2120807744]
 layout_mode = 0
@@ -2104,6 +2113,7 @@ offset_top = 5.000659
 offset_right = 1089.4928
 offset_bottom = 193.4704
 rotation = 0.25307274
+color = Color(0.9312496, 0, 1, 1)
 
 [node name="line5" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=904953338]
 layout_mode = 1
@@ -2115,6 +2125,7 @@ offset_top = 5.000667
 offset_right = 1514.4927
 offset_bottom = 193.47041
 rotation = 1.2304571
+color = Color(0.8937502, 0, 1, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base" unique_id=1343525636]
 libraries/ = SubResource("AnimationLibrary_kmnuw")
@@ -2160,6 +2171,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251 node_paths=PackedStringArray("rects", "labels")]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2285,15 +2297,16 @@ text_overrun_behavior = 1
 
 [node name="Code" type="Button" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=326425690]
 layout_mode = 0
-offset_left = 333.0
+offset_left = 344.0
 offset_top = 11.0
-offset_right = 490.0
+offset_right = 494.0
 offset_bottom = 42.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5pglv")
 text = "rnjs1lkvnrel35lo"
+alignment = 0
 
 [node name="LeaveLobby" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=855267174]
 anchors_preset = 0
@@ -2534,6 +2547,9 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 [connection signal="mouse_entered" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_exited"]
 [connection signal="pressed" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_pressed"]
+[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantext_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantext_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantextbutton_pressed"]
 [connection signal="toggled" from="Lobby/LobbyScreen/JoinScreen/LanButton/ToggleButton" to="Lobby" method="_on_toggled_lan"]
 [connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_hostbutton_mouse_exited"]
