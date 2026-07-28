@@ -115,8 +115,8 @@ var NowPorpId:int
 var CanUseProp:bool=false
 var IsUsingProp:bool=false
 ##ai variables 
-var AiNowPushButtonTimeNow:int
-var AiNowPushButtonTime:int
+var AiNowPushButtonTimeNow:float
+var AiNowPushButtonTime:float
 var AiNowPushButton:int
 var HasProp:bool=false
 var AiUsePropTime:int=0

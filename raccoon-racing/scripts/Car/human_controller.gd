@@ -14,8 +14,8 @@ func handle_input()->void:
 			right=true
 		elif Input.is_action_pressed('Steer left'):
 			left=true
-		#else:
-			#player.car.CancelTurn()
+		else:
+			cancelturn=true
 
 		# Handle Throttle/Brake (Y-axis)
 		if Input.is_action_pressed('Accelerate'):
@@ -25,5 +25,5 @@ func handle_input()->void:
 		#else:
 			#player.car.Clearward()
 		if Input.is_action_just_pressed("Special") and not Game.propLock:
-			special_buffered=true
+			special=true
 			#player.UseProp()

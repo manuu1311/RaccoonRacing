@@ -167,9 +167,12 @@ func ValidatePropBox(x:float,y:float)->void:
 	if hud!=null:
 		if not hud.IsPropHudVisible():
 			RunPropBox(x,y)
+	else:
+		RunPropBox(x,y)
 	PropValidated=true
 
 func RunPropBox(x:float,y:float)->void:
+	print('running propbox')
 	if not car.playering:
 		return
 	if hud!=null:
@@ -221,221 +224,12 @@ func AddShield()->void:
 	car.IsUseShield=true
 	car.prop_effector.AddShield()
 
-func GetPropPer_LEGACY()->int:
-	var _loc5_:int = randi_range(0,99);
-	if(charid == 1 && OrderId == 0 && PlayerID == 0):
-		_loc5_ = randi_range(0,89);
-	if(charid == 1 && OrderId == 1 && PlayerID == 0):
-		_loc5_ = randi_range(0,79);
-	var _loc2_:Array[int] = [0,0,0,0,0,0,0,0,0,0,0];
-	var _loc6_:Vector2;
-	if(PlayerID == 0 || GameData.currentDifficulty < 2):
-		if(OrderId == 0):
-			_loc2_[1] = 0;
-			_loc2_[2] = 0;
-			_loc2_[3] = 30;
-			_loc2_[4] = 30;
-			_loc2_[5] = 0;
-			_loc2_[6] = 0;
-			_loc2_[7] = 30;
-			_loc2_[8] = 0;
-			_loc2_[9] = 10;
-		elif(OrderId == 1):
-			_loc2_[1] = 5;
-			_loc2_[2] = 0;
-			_loc2_[3] = 20;
-			_loc2_[4] = 10;
-			_loc2_[5] = 5;
-			_loc2_[6] = 20;
-			_loc2_[7] = 10;
-			_loc2_[8] = 10;
-			_loc2_[9] = 20;
-		elif(OrderId == 2):
-			_loc2_[1] = 10;
-			_loc2_[2] = 5;
-			_loc2_[3] = 0;
-			_loc2_[4] = 0;
-			_loc2_[5] = 10;
-			_loc2_[6] = 25;
-			_loc2_[7] = 0;
-			_loc2_[8] = 30;
-			_loc2_[9] = 20;
-		else:
-			_loc2_[1] = 10;
-			_loc2_[2] = 5;
-			_loc2_[3] = 0;
-			_loc2_[4] = 0;
-			_loc2_[5] = 10;
-			_loc2_[6] = 25;
-			_loc2_[7] = 0;
-			_loc2_[8] = 30;
-			_loc2_[9] = 20;
-	elif(OrderId == 0):
-		_loc6_=GameData.PlayersArr[0].car.global_position-car.global_position
-		if(_loc6_.length() < 300):
-			_loc2_[1] = 30;
-			_loc2_[2] = 0;
-			_loc2_[3] = 10;
-			_loc2_[4] = 20;
-			_loc2_[5] = 0;
-			_loc2_[6] = 0;
-			_loc2_[7] = 20;
-			_loc2_[8] = 10;
-			_loc2_[9] = 10;
-		else:
-			_loc2_[1] = 0;
-			_loc2_[2] = 0;
-			_loc2_[3] = 30;
-			_loc2_[4] = 30;
-			_loc2_[5] = 0;
-			_loc2_[6] = 0;
-			_loc2_[7] = 30;
-			_loc2_[8] = 0;
-			_loc2_[9] = 10;
-	elif(OrderId == 1):
-		_loc6_=GameData.PlayersArr[0].car.global_position-car.global_position
-		if(_loc6_.length() < 300):
-			if(GameData.PlayersArr[0].OrderId == 0):
-				_loc2_[1] = 40;
-				_loc2_[2] = 0;
-				_loc2_[3] = 0;
-				_loc2_[4] = 0;
-				_loc2_[5] = 5;
-				_loc2_[6] = 5;
-				_loc2_[7] = 0;
-				_loc2_[8] = 30;
-				_loc2_[9] = 20;
-			else:
-				_loc2_[1] = 30;
-				_loc2_[2] = 0;
-				_loc2_[3] = 10;
-				_loc2_[4] = 15;
-				_loc2_[5] = 0;
-				_loc2_[6] = 0;
-				_loc2_[7] = 15;
-				_loc2_[8] = 10;
-				_loc2_[9] = 20;
-		elif(GameData.PlayersArr[0].OrderId == 0):
-			_loc2_[1] = 0;
-			_loc2_[2] = 0;
-			_loc2_[3] = 0;
-			_loc2_[4] = 0;
-			_loc2_[5] = 10;
-			_loc2_[6] = 30;
-			_loc2_[7] = 0;
-			_loc2_[8] = 40;
-			_loc2_[9] = 20;
-		else:
-			_loc2_[1] = 0;
-			_loc2_[2] = 0;
-			_loc2_[3] = 20;
-			_loc2_[4] = 25;
-			_loc2_[5] = 0;
-			_loc2_[6] = 0;
-			_loc2_[7] = 25;
-			_loc2_[8] = 10;
-			_loc2_[9] = 20;
-	elif(OrderId == 2):
-		_loc6_=GameData.PlayersArr[0].car.global_position-car.global_position
-		if(_loc6_.length() < 300):
-			if(GameData.PlayersArr[0].OrderId < 2):
-				_loc2_[1] = 40;
-				_loc2_[2] = 0;
-				_loc2_[3] = 0;
-				_loc2_[4] = 0;
-				_loc2_[5] = 5;
-				_loc2_[6] = 15;
-				_loc2_[7] = 0;
-				_loc2_[8] = 20;
-				_loc2_[9] = 20;
-			else:
-				_loc2_[1] = 0;
-				_loc2_[2] = 0;
-				_loc2_[3] = 10;
-				_loc2_[4] = 30;
-				_loc2_[5] = 0;
-				_loc2_[6] = 0;
-				_loc2_[7] = 30;
-				_loc2_[8] = 10;
-				_loc2_[9] = 20;
-
-		elif(GameData.PlayersArr[0].OrderId == 0):
-			_loc2_[1] = 0;
-			_loc2_[2] = 5;
-			_loc2_[3] = 0;
-			_loc2_[4] = 0;
-			_loc2_[5] = 20;
-			_loc2_[6] = 15;
-			_loc2_[7] = 0;
-			_loc2_[8] = 30;
-			_loc2_[9] = 30;
-		elif(GameData.PlayersArr[0].OrderId == 1):
-			_loc2_[1] = 0;
-			_loc2_[2] = 5;
-			_loc2_[3] = 0;
-			_loc2_[4] = 0;
-			_loc2_[5] = 10;
-			_loc2_[6] = 15;
-			_loc2_[7] = 0;
-			_loc2_[8] = 40;
-			_loc2_[9] = 30;
-		else:
-			_loc2_[1] = 0;
-			_loc2_[2] = 0;
-			_loc2_[3] = 10;
-			_loc2_[4] = 30;
-			_loc2_[5] = 0;
-			_loc2_[6] = 0;
-			_loc2_[7] = 30;
-			_loc2_[8] = 10;
-			_loc2_[9] = 20;
-	else:
-		_loc6_=GameData.PlayersArr[0].car.global_position-car.global_position
-		if(_loc6_.length() < 300):
-			_loc2_[1] = 30;
-			_loc2_[2] = 0;
-			_loc2_[3] = 0;
-			_loc2_[4] = 0;
-			_loc2_[5] = 5;
-			_loc2_[6] = 15;
-			_loc2_[7] = 0;
-			_loc2_[8] = 30;
-			_loc2_[9] = 20;
-		elif(GameData.PlayersArr[0].OrderId == 0):
-			_loc2_[1] = 0;
-			_loc2_[2] = 5;
-			_loc2_[3] = 0;
-			_loc2_[4] = 0;
-			_loc2_[5] = 30;
-			_loc2_[6] = 5;
-			_loc2_[7] = 0;
-			_loc2_[8] = 30;
-			_loc2_[9] = 30;
-		else:
-			_loc2_[1] = 0;
-			_loc2_[2] = 10;
-			_loc2_[3] = 0;
-			_loc2_[4] = 0;
-			_loc2_[5] = 10;
-			_loc2_[6] = 10;
-			_loc2_[7] = 0;
-			_loc2_[8] = 40;
-			_loc2_[9] = 30;
-	var _loc3_:int = 1;
-	var _loc4_:int = 0;
-	while(_loc3_ < _loc2_.size()):
-		_loc4_ += _loc2_[_loc3_];
-		if(_loc5_ < _loc4_):
-			return _loc3_;
-		_loc3_ = _loc3_ + 1;
-	return 7
-	#return randi_range(0,8)
-
 func ResetUse()->void:
 	car.CanUseProp=true
 
 func UseProp()->void:
 	if(IsPlayering() && not car.isSleep and car.CanUseProp and !car.IsUsingProp):
+		prints('player',PlayerID,'trying to use special!')
 		if not GameData.IsMultiplayer or NetworkManager.is_host:
 			car.RequestProp(NetworkID,PlayerID,car.position,car.rotation,car.NowPorpId)
 		else:

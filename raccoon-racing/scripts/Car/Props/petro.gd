@@ -16,9 +16,11 @@ func _init(playerinst:Player) -> void:
 	endtick = NetworkTime.tick+NetworkTime.seconds_to_ticks(UseTime)
 	
 func run_tick() -> void:
-	if player.car.jumpCurrheight < 1 and NetworkTime.tick<endtick:
-		player.car.speed += Vector2(AddHorsebyAuto, 0).rotated(player.car.rotation - PI / 2)
+	if NetworkTime.tick<endtick:
 		player.car.prop_effector.AddPetro()
+		if player.car.jumpCurrheight < 1:
+			player.car.speed += Vector2(AddHorsebyAuto, 0).rotated(player.car.rotation - PI / 2)
+		
 	elif NetworkTime.tick>endtick:
 		delme()
 

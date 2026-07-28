@@ -11,6 +11,7 @@ func setup(playerinst:Player,controllerinst:CarController)->void:
 
 func _process(_delta: float) -> void:
 	if not player.car.isSleep:
+		controller.GetInput()
 		##steering
 		if controller.right:
 			player.car.TurnLRight()
@@ -18,7 +19,7 @@ func _process(_delta: float) -> void:
 		elif controller.left:
 			player.car.TurnLeft()
 			player.car.CurrentState=Car.turnstate.LEFT
-		else:
+		elif controller.cancelturn:
 			player.car.CancelTurn()
 			player.car.CurrentState=Car.turnstate.FORWARD
 		##accelerating
@@ -32,7 +33,6 @@ func _process(_delta: float) -> void:
 			player.car.Clearward()
 		if controller.special:
 			player.UseProp()
-			controller.special_buffered=false
 	if is_multiplayer_authority():
 		player.AuthorityUpdate()
 	player.Update()

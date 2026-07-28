@@ -7,15 +7,14 @@ var brake:bool
 var left:bool
 var right:bool
 var special:bool
-var special_buffered:bool
+var cancelturn:bool
 
 func _init(playerinst:Player) -> void:
 	player=playerinst
 	
-func _process(_delta: float) -> void:
+func GetInput() -> void:
 	if is_multiplayer_authority():
 		handle_input()
-		special=special_buffered
 
 func handle_input()->void:
 	pass

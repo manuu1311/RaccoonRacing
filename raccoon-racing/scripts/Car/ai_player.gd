@@ -20,18 +20,18 @@ func RunPropBox(_x:float,_y:float)->void:
 
 func Update()->void:
 	if(AiPlayering && car.playering):
-		AutoPlay()
-		AutoUseProp();
+		#AutoPlay()
+		#AutoUseProp();
 		AutoReSetCar();
 	UpdatePoint()
+	prop.run()
 	
 ##return forward,brake,left,right
 func AutoInput()->Array[bool]:
-	var inputArr:Array[bool]=[0,0,0,0]
+	var inputArr:Array[bool]=[0,0,0,0,0]
 	inputArr[0]=true
 	if(car.AiNowPushButtonTimeNow < car.AiNowPushButtonTime):
-		if car.AiNowPushButton!=4:
-			inputArr[car.AiNowPushButton]=true
+		inputArr[car.AiNowPushButton]=true
 		car.AiNowPushButtonTimeNow = car.AiNowPushButtonTimeNow + 1;
 	else:
 		car.AiNowPushButtonTimeNow = 0;
@@ -43,7 +43,6 @@ func AutoInput()->Array[bool]:
 		angle_diff=wrapf(angle_diff, -180.0, 180.0)
 		if angle_diff > 5 and angle_diff < 180:
 			car.AiNowPushButton = 3
-			@warning_ignore("narrowing_conversion")
 			car.AiNowPushButtonTime = angle_diff / AiReflect
 		elif angle_diff < -5 and angle_diff > -180:
 			car.AiNowPushButton = 2
@@ -58,12 +57,6 @@ func AutoPlay()->void:
 	car.IsAccelerating=true
 	if(car.AiNowPushButtonTimeNow < car.AiNowPushButtonTime):
 		ActionCar(car.AiNowPushButton);
-		if car.AiNowPushButton==2:
-			car.CurrentState=Car.turnstate.LEFT
-		elif car.AiNowPushButton==3:
-			car.CurrentState=Car.turnstate.RIGHT
-		elif car.AiNowPushButton==4:
-			car.CurrentState=Car.turnstate.FORWARD
 		car.AiNowPushButtonTimeNow = car.AiNowPushButtonTimeNow + 1;
 	else:
 		car.AiNowPushButtonTimeNow = 0;
@@ -74,13 +67,15 @@ func AutoPlay()->void:
 		var angle_diff: float = rad_to_deg(angle_rad-car.rotation+PI/2)
 		angle_diff=wrapf(angle_diff, -180.0, 180.0)
 		if angle_diff > 5 and angle_diff < 180:
+			car.CurrentState=Car.turnstate.RIGHT
 			car.AiNowPushButton = 3
-			@warning_ignore("narrowing_conversion")
 			car.AiNowPushButtonTime = angle_diff / AiReflect
 		elif angle_diff < -5 and angle_diff > -180:
+			car.CurrentState=Car.turnstate.LEFT
 			car.AiNowPushButton = 2
 			car.AiNowPushButtonTime = abs(angle_diff) / 45 + AiReflect
 		else:
+			car.CurrentState=Car.turnstate.FORWARD
 			car.AiNowPushButtonTime = AiReflect
 			car.AiNowPushButton = 4
 
@@ -261,6 +256,7 @@ func StartRace()->void:
 	AiPlayering=true
 	car.playering = true;
 	car.isLock = false;
+	car.speed=Vector2.ZERO
 	ResetTimer=Timer.new()
 	car.add_child(ResetTimer)
 	ResetTimer.one_shot=true
