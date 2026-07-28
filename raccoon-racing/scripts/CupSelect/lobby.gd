@@ -14,7 +14,13 @@ var IsLocked:bool=false
 @onready var jointxt: Label = $LobbyScreen/JoinScreen/JoinButton/MainText
 @onready var code: Button = $LobbyScreen/LobbyScreen/Code
 @onready var lobbycodeinput: LineEdit = $LobbyScreen/JoinScreen/TextEdit
+@onready var lantext: Label = $LobbyScreen/JoinScreen/LanButton/MainText
 @export var lobby_script: LobbyScene
+@onready var discoverbase: Panel = $LobbyScreen/JoinScreen/JoinButton/Discover/base
+@onready var discoveranims: AnimationPlayer = $LobbyScreen/JoinScreen/JoinButton/Discover/base/AnimationPlayer
+@onready var discovericon: Control = $LobbyScreen/JoinScreen/JoinButton/Discover
+@onready var togglelan_button: CheckButton = $LobbyScreen/JoinScreen/LanButton/ToggleButton
+var LanToggled:bool=false
 var names:Array[String]=[
 	"prova",
 	"Rocko","Vixen","Mambo","Pingo","Hudson","Banzai"
@@ -27,6 +33,8 @@ func _ready() -> void:
 	join_screen.show()
 	lobby_scene.hide()
 	infolbl.hide()
+	_on_toggled_lan(LanToggled)
+	togglelan_button.button_pressed=LanToggled
 	cup_screen.CupSelected.connect(_on_cup_selected)
 	NetworkManager.signal_lobby_created.connect(HostLobby)
 	NetworkManager.signal_lobby_joined.connect(LobbyJoined)
@@ -87,13 +95,13 @@ func _on_lobby_pressed() -> void:
 func _on_hostbutton_pressed() -> void:
 	ButtonSounds.PlaySound("click")
 	infolbl.show()
-	NetworkManager.lobby_host()
+	NetworkManager.lobby_host(LanToggled)
 
 
 func _on_joinbutton_pressed(_code:String='') -> void:
 	ButtonSounds.PlaySound("click")
 	infolbl.show()
-	NetworkManager.lobby_join(lobbycodeinput.text)
+	NetworkManager.lobby_join(lobbycodeinput.text,LanToggled)
 
 func HostLobby(_code:String)->void:
 	var hostid:int=multiplayer.get_unique_id()
@@ -195,6 +203,19 @@ func _on_lobbycode_pressed() -> void:
 func _on_peer_disconnected()->void:
 	_on_button_pressed()
 
+func _on_toggled_lan(toggled:bool)->void:
+	ButtonSounds.PlaySound('click')
+	if toggled:
+		lobbycodeinput.placeholder_text='Enter ip or press discover'
+		lantext.add_theme_color_override("font_color",Color.YELLOW)
+		LanToggled=true
+		discovericon.show()
+	else:
+		lobbycodeinput.placeholder_text='Enter lobby id'
+		lantext.add_theme_color_override("font_color",Color.WHITE)
+		LanToggled=false
+		discovericon.hide()
+
 
 func _on_startbutton_pressed() -> void:
 	print('Start button pressed, starting game')
@@ -238,3 +259,22 @@ func CreateNewAIPlayer(playerid:int,charid:int)->void:
 	
 func hide_loading() -> void:
 	visible=false
+
+
+func _on_detect_mouse_entered() -> void:
+	ButtonSounds.PlaySound('hover')
+	discoverbase.self_modulate=Color(255,200,255,255)
+
+
+func _on_detect_mouse_exited() -> void:
+	discoverbase.self_modulate=Color.WHITE
+
+
+func _on_detect_pressed() -> void:
+	ButtonSounds.PlaySound('click')
+	if NetworkManager.IsDiscovering():
+		NetworkManager.CleanDiscovery()
+		discoveranims.play('Idle')
+	else:
+		NetworkManager.discover_lan_host()
+		discoveranims.play('Wifi')

@@ -14,8 +14,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	fps.text='fps: '+str(Engine.get_frames_per_second())
-	latency.text='latency: '+str(NetworkTime.remote_rtt/2)
+	fps.text = "fps: %.0f" % Engine.get_frames_per_second()
+	latency.text = "latency: %.0f ms" % (NetworkTime.remote_rtt / 2.0)
 	
 func _on_hide_pressed()->void:
 	main_panel.visible=not main_panel.visible

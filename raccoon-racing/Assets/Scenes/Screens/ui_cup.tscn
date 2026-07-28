@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://uwccjy1nbxdw" path="res://Assets/Animations/UISelect/cups/cup8.png" id="24_5pglv"]
 [ext_resource type="Script" uid="uid://msdh6uoathri" path="res://scripts/CupSelect/lobby.gd" id="29_2rjpb"]
 [ext_resource type="Texture2D" uid="uid://b44cubu66xpxg" path="res://Assets/Animations/CharSelection/characters/rockopic.png" id="30_qkely"]
+[ext_resource type="Texture2D" uid="uid://2xsqa131cc3b" path="res://Assets/Images/WiFi/icon.png" id="30_tke11"]
 [ext_resource type="Script" uid="uid://bje81nurnb71o" path="res://scripts/CupSelect/lobby_scene.gd" id="30_u1jg4"]
 [ext_resource type="Texture2D" uid="uid://nd8yow4x6jxs" path="res://Assets/utils/RaccoonRacing.icon.png" id="31_lsqhh"]
 
@@ -211,6 +212,220 @@ _data = {
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u1jg4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tke11"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5pglv"]
+bg_color = Color(0, 0.55429685, 0.80625, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="Animation" id="Animation_tke11"]
+resource_name = "Idle"
+length = 0.028574286
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("icon/line1:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.7254902, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("icon/line2:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("icon/line3:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("icon/line4:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("icon/line5:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2ji5b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("icon/line1:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("icon/line2:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("icon/line3:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0124999285, 1, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("icon/line4:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("icon/line5:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7scm4"]
+resource_name = "Wifi"
+length = 0.57143146
+loop_mode = 2
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("icon/line1:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.54285717),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 0.48235294, 0, 1), Color(1, 0.48235294, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("icon/line2:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.54285717),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 0, 1), Color(1, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("icon/line3:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.54285717),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("icon/line4:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.54285717),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 0, 1), Color(1, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("icon/line5:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.54285717),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 0, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmnuw"]
+_data = {
+&"Idle": SubResource("Animation_tke11"),
+&"RESET": SubResource("Animation_2ji5b"),
+&"Wifi": SubResource("Animation_7scm4")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ji5b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7scm4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kmnuw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pglv"]
 
@@ -1617,6 +1832,71 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="LanButton" type="Control" parent="Lobby/LobbyScreen/JoinScreen" unique_id=1483382074]
+anchors_preset = 0
+offset_left = 76.845
+offset_top = 60.195
+offset_right = 76.845
+offset_bottom = 60.195
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=1849875198]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 37
+text = "Lan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=543173141]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 37
+text = "Lan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=1410226248]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 37
+text = "Lan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToggleButton" type="CheckButton" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=2120807744]
+layout_mode = 0
+offset_left = 149.155
+offset_top = 49.805
+offset_right = 193.155
+offset_bottom = 73.805
+button_pressed = true
+icon_alignment = 1
+
 [node name="HostButton" type="Control" parent="Lobby/LobbyScreen/JoinScreen" unique_id=921356509]
 anchors_preset = 0
 offset_left = 76.845
@@ -1756,6 +2036,99 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 
+[node name="Discover" type="Control" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=1584484851]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="base" type="Panel" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover" unique_id=136488334]
+layout_mode = 0
+offset_left = 253.20001
+offset_top = 8.955002
+offset_right = 313.2
+offset_bottom = 68.955
+scale = Vector2(0.8, 0.8)
+theme_override_styles/panel = SubResource("StyleBoxFlat_5pglv")
+
+[node name="icon" type="TextureRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base" unique_id=876095021]
+clip_children = 1
+layout_mode = 0
+offset_left = 9.999999
+offset_top = 5.9999995
+offset_right = 850.0
+offset_bottom = 865.0
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("30_tke11")
+
+[node name="line1" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=210404503]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_top = 655.0005
+offset_right = 134.68
+offset_bottom = 789.6275
+color = Color(1, 0, 0, 1)
+
+[node name="line2" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=311410509]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_left = 168.66826
+offset_top = 385.60236
+offset_right = 618.4049
+offset_bottom = 533.1322
+rotation = 0.84648466
+color = Color(1, 1, 0, 1)
+
+[node name="line3" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=477780298]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_left = 300.00027
+offset_top = 180.00064
+offset_right = 925.7847
+offset_bottom = 368.4704
+rotation = 0.89011794
+color = Color(0.0124999285, 1, 0, 1)
+
+[node name="line4" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=1116462668]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_left = 250.00024
+offset_top = 5.000659
+offset_right = 1089.4928
+offset_bottom = 193.4704
+rotation = 0.25307274
+
+[node name="line5" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=904953338]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_left = 675.0001
+offset_top = 5.000667
+offset_right = 1514.4927
+offset_bottom = 193.47041
+rotation = 1.2304571
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base" unique_id=1343525636]
+libraries/ = SubResource("AnimationLibrary_kmnuw")
+
+[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover" unique_id=2100640391]
+layout_mode = 0
+offset_left = 261.2
+offset_top = 14.955002
+offset_right = 295.2
+offset_bottom = 47.955
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2ji5b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7scm4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kmnuw")
+
 [node name="TextEdit" type="LineEdit" parent="Lobby/LobbyScreen/JoinScreen" unique_id=627887546]
 layout_mode = 0
 offset_left = 121.0
@@ -1765,7 +2138,7 @@ offset_bottom = 367.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 8
-placeholder_text = "Enter lobby id"
+placeholder_text = "Enter ip or press discover"
 alignment = 1
 
 [node name="Infolbl" type="Label" parent="Lobby/LobbyScreen/JoinScreen" unique_id=2022208306]
@@ -1912,15 +2285,15 @@ text_overrun_behavior = 1
 
 [node name="Code" type="Button" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=326425690]
 layout_mode = 0
-offset_left = 343.0
+offset_left = 333.0
 offset_top = 11.0
-offset_right = 461.0
+offset_right = 490.0
 offset_bottom = 42.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5pglv")
-text = "rnjs1lkvnrel35"
+text = "rnjs1lkvnrel35lo"
 
 [node name="LeaveLobby" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=855267174]
 anchors_preset = 0
@@ -2161,12 +2534,16 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 [connection signal="mouse_entered" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_exited"]
 [connection signal="pressed" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_pressed"]
+[connection signal="toggled" from="Lobby/LobbyScreen/JoinScreen/LanButton/ToggleButton" to="Lobby" method="_on_toggled_lan"]
 [connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_hostbutton_mouse_exited"]
 [connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_hostbutton_pressed"]
 [connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_exited"]
 [connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_pressed"]
+[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_pressed"]
 [connection signal="text_submitted" from="Lobby/LobbyScreen/JoinScreen/TextEdit" to="Lobby" method="_on_joinbutton_pressed"]
 [connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/Code" to="Lobby" method="_on_lobbycode_pressed"]
 [connection signal="mouse_entered" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_entered"]

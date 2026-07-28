@@ -92,7 +92,6 @@ Debug={
 [netfox]
 
 time/tickrate=35
-autoconnect/enabled=true
 autoconnect/simulated_latency_ms=64
 autoconnect/simulated_packet_loss_chance=0.088
 

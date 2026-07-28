@@ -20,12 +20,21 @@ var textures:Array[Texture]=[
 @onready var startctrl: Control = $StartGame
 @onready var starttxt: Label = $StartGame/MainText
 @onready var cuptxt: Label = $CupInfo/Cup
+@onready var lobbycodetext: Label = $Text
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:		
+func _ready() -> void:
 	UpdateIconsNames()
 
 
+func UpdateCode()->void:
+	if NetworkManager.IsLobbySealed:
+		lobbycodetext.text='Lobby sealed'
+	elif NetworkManager.IsLan():
+		lobbycodetext.text='Lobby IP'
+	else:
+		lobbycodetext.text='Lobby code'
+		
 func UpdateIconsNames()->void:
 	if NetworkManager.is_host:
 		startctrl.show()
