@@ -15,27 +15,29 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	animated_sprite_2d.hide()
 
 func GetHitEventStatus(PlayerId:int,_unsynced:bool)->void:
+	if not is_multiplayer_authority():
+		return
 	if not IsActivated:
 		return
 	var car: Car = GameData.PlayersArr[PlayerId].car
 	if car.isInvincible:
 		return
 	if car.jumpCurrheight < jumphigh - 1:
-		if is_multiplayer_authority():
-			BombExplode.rpc(car)
-		IsActivated = false
-		animated_sprite_2d.show()
-		animated_sprite_2d.play()
-		await animated_sprite_2d.animation_finished
-		map.DelEventInMap(edface.getId())
+		BombExplode.rpc(car.playerID)
 
 @rpc('call_local','reliable')
-func BombExplode(car:Car)->void:
+func BombExplode(carid:int)->void:
+	var car:Car=GameData.PlayersArr[carid].car
 	car.sounds.playerBombSound()
 	car.bsex=bsValume
 	car.Jump(jumphigh)
 	car.speed*=0.3
 	car.speed+=(car.global_position-global_position)*0.03
+	IsActivated = false
+	animated_sprite_2d.show()
+	animated_sprite_2d.play()
+	await animated_sprite_2d.animation_finished
+	map.DelEventInMap(edface.getId())
 
 func del() -> void:
 	queue_free()

@@ -26,10 +26,11 @@ func GetHitEventStatus(PlayerId: int,_unsynced:bool) -> void:
 	var car: Car = GameData.PlayersArr[PlayerId].car
 	if car.isInvincible:
 		return
-	MineExplode.rpc(car)
+	MineExplode.rpc(car.playerID)
 
 @rpc('call_local','reliable')
-func MineExplode(car:Car)->void:
+func MineExplode(carid:int)->void:
+	var car:Car=GameData.PlayersArr[carid].car
 	IsActivated = false
 	if car.jumpCurrheight < jumphigh - 1:
 		if not car.IsUseShield:

@@ -164,15 +164,14 @@ func Stoprace()->void:
 	racefinished.emit(PlayerID)
 
 func ValidatePropBox(x:float,y:float)->void:
-	if hud!=null:
+	if not GameData.IsMultiplayer or NetworkManager.is_host:
+		RunPropBox(x,y)
+	elif hud!=null:
 		if not hud.IsPropHudVisible():
 			RunPropBox(x,y)
-	else:
-		RunPropBox(x,y)
 	PropValidated=true
 
 func RunPropBox(x:float,y:float)->void:
-	print('running propbox')
 	if not car.playering:
 		return
 	if hud!=null:
@@ -229,7 +228,6 @@ func ResetUse()->void:
 
 func UseProp()->void:
 	if(IsPlayering() && not car.isSleep and car.CanUseProp and !car.IsUsingProp):
-		prints('player',PlayerID,'trying to use special!')
 		if not GameData.IsMultiplayer or NetworkManager.is_host:
 			car.RequestProp(NetworkID,PlayerID,car.position,car.rotation,car.NowPorpId)
 		else:

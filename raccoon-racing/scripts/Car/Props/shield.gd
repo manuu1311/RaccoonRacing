@@ -11,7 +11,7 @@ func _init(playerinst:Player)->void:
 	proptype = 3
 	player.prop.del_prop_by_type(proptype);
 	end_tick = NetworkTime.tick + NetworkTime.seconds_to_ticks(UseTime)
-	player.car.prop_effector.AddShield()
+	player.AddShield()
 	
 func run_tick() -> void:
 	if NetworkTime.tick>end_tick:
@@ -22,4 +22,4 @@ func delme() -> void:
 		player.prop.Delprop(self)
 
 func del()->void:
-	player.car.prop_effector.RemoveShield()
+	player.RemoveShield()

@@ -153,7 +153,7 @@ func StateSyncSetup()->void:
 	state_synchronizer.add_state(self, "position")
 	state_synchronizer.add_state(self, "rotation")
 	state_synchronizer.add_state(self, "jumpCurrheight")
-	state_synchronizer.add_state(self, "scale")
+	state_synchronizer.add_state(visual, "scale")
 	state_synchronizer.add_state(self, "CurrentState")
 	state_synchronizer.add_state(self, "speed")
 	##cosmetics
@@ -165,7 +165,7 @@ func StateSyncSetup()->void:
 	if not is_multiplayer_authority():
 		tick_interpolator.add_property(self, "position")
 		tick_interpolator.add_property(self, "rotation")
-		tick_interpolator.add_property(self, "scale")
+		tick_interpolator.add_property(visual, "scale")
 	state_synchronizer.process_settings()
 	tick_interpolator.process_settings()
 

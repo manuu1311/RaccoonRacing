@@ -1,4 +1,5 @@
 extends Control
+class_name MainLobby
 
 @onready var lbltext: Label = $LobbyText/MainText
 @onready var lobby_screen: Control = $LobbyScreen
@@ -6,7 +7,7 @@ extends Control
 var InLobbyScreen:bool=false
 var IsLocked:bool=false
 @onready var join_screen: Control = $LobbyScreen/JoinScreen
-@onready var lobby_scene: Control = $LobbyScreen/LobbyScreen
+@onready var lobby_scene: LobbyScene = $LobbyScreen/LobbyScreen
 @onready var infolbl: Label = $LobbyScreen/JoinScreen/Infolbl
 @onready var leavelobbybtn: Button = $LobbyScreen/LobbyScreen/LeaveLobby/Button
 @onready var leavelobbytxt: Label = $LobbyScreen/LobbyScreen/LeaveLobby/MainText
@@ -142,6 +143,7 @@ func RegisterPlayer(newcharid:int)->void:
 		playernames.append(player.OnlineName)
 		network_ids.append(player.NetworkID)
 	PlayerRegistered.rpc(charids,playernames,network_ids,newid)
+	lobby_scene.GiveLobbyInfo()
 	
 @rpc("authority","call_remote","reliable")
 func PlayerRegistered(charids:Array[int],playernames:Array[String],networkids:Array[int],playerID:int)->void:

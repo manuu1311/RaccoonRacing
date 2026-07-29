@@ -30,7 +30,6 @@ func run()->void:
 	6:laser shrink ray
 '''
 func UseProp()->void:
-	print('yea its using me')
 	var _loc2_:int;
 	match(player.car.NowPorpId):
 		0:

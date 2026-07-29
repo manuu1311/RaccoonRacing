@@ -11,16 +11,17 @@ func OnHitCar(car:Car)->void:
 	if not is_multiplayer_authority():
 		return
 	if(!car.isInvincible && !car.IsUseShield):
-		ApplyExplosion.rpc(car)
+		ApplyExplosion.rpc(car.playerID)
 
 	if(car.IsUseShield):
-		RemoveShield.rpc(car)
+		RemoveShield.rpc(car.playerID)
 	ClearMissile.rpc()
 
 
 
 @rpc('call_local','reliable')
-func ApplyExplosion(car:Car)->void:
+func ApplyExplosion(carid:int)->void:
+	var car:Car=GameData.PlayersArr[carid].car
 	var dist:Vector2=car.global_position-global_position
 	car.bsex = 90;
 	car.sounds.playerBombSound();
@@ -28,7 +29,8 @@ func ApplyExplosion(car:Car)->void:
 	car.speed+=dist*0.03
 	car.Jump(JumpHigh)
 @rpc('call_local','reliable')
-func RemoveShield(car:Car)->void:
+func RemoveShield(carid:int)->void:
+	var car:Car=GameData.PlayersArr[carid].car
 	car.player.RemoveShield()
 @rpc('call_local','reliable')
 func ClearMissile()->void:

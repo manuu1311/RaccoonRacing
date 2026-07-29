@@ -3,7 +3,6 @@ class_name IceTrailInMap
 
 @onready var area_2d: Area2D = $Area2D
 @onready var polygon_2d: Polygon2D = $Area2D/Polygon2D
-@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
 
 const MAX_TRAIL_SLOTS = 100
 var base_slot: int = 0 
@@ -47,19 +46,11 @@ func _ready() -> void:
 		left_by_slot[-1]  = start_left
 		right_by_slot[-1] = start_right
 		max_slot = -1
-	if GameData.IsMultiplayer:
-		StateSyncSetup()
-
-func StateSyncSetup() -> void:
-	if state_synchronizer:
-		state_synchronizer.add_state(self, "poly")
 
 func _process(_delta: float) -> void:
 	var curtick: int = NetworkTime.tick
 	if curtick > fadetick:
 		queue_free()
-		return
-	if not is_multiplayer_authority():
 		return
 		
 	if curtick > growtick:

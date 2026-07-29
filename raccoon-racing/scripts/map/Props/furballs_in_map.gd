@@ -13,13 +13,11 @@ const petroeffect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petr
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
 var petroadd:bool=true
+var exploded:bool=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	StateSyncSetup()
-
-func StateSyncSetup()->void:
-	state_synchronizer.add_state(self, "position")
+	pass
 
 func setup(mapinst:Map,_ishitcar:bool,_ishitwall:bool)->void:
 	map=mapinst
@@ -69,6 +67,7 @@ func OnHitStatus()->void:
 	
 
 func del()->void:
+	await bomb_effect.animation_finished
 	queue_free()
 	
 	
@@ -98,26 +97,37 @@ func UpdateCarPos()->void:
 func OnHitCar(Who:Car)->void:
 	if Who.playerID==player.PlayerID:
 		return
+	PlayEffect(Who)
+	if is_multiplayer_authority():
+		if(!Who.isInvincible && !Who.IsUseShield):
+			ApplyCarEffect.rpc(Who.playerID)
+			#car.Speed.plus(new as.Vector(_loc6_,_loc5_).scaleNew(0.1));
+		if(Who.IsUseShield):
+			RemoveShield.rpc(Who.playerID)
+	del()
+
+@rpc('call_local','reliable')
+func ApplyCarEffect(Whoid:int)->void:
+	var Who:Car=GameData.PlayersArr[Whoid].car
+	Who.bsex = 50;
+	Who.sounds.playBsSound()
+	if not exploded:
+		PlayEffect(Who)
+	del()
+	
+@rpc('call_local','reliable')
+func RemoveShield(Whoid:Car)->void:
+	var Who:Car=GameData.PlayersArr[Whoid].car
+	Who.player.RemoveShield();
+	if not exploded:
+		PlayEffect(Who)
+	del()
+
+func PlayEffect(Who:Car)->void:
+	exploded=true
 	speed=Vector2(0,0)
 	horse=Vector2(0,0)
 	bomb_effect.play()
 	sprite_2d.hide()
 	petroadd=false
 	Who.sounds.playBedumpSound();
-	if is_multiplayer_authority():
-		if(!Who.isInvincible && !Who.IsUseShield):
-			ApplyCarEffect(Who)
-			#car.Speed.plus(new as.Vector(_loc6_,_loc5_).scaleNew(0.1));
-		if(Who.IsUseShield):
-			RemoveShield.rpc(Who)
-	await bomb_effect.animation_finished
-	del()
-
-@rpc('call_local','reliable')
-func ApplyCarEffect(Who:Car)->void:
-	Who.bsex = 50;
-	Who.sounds.playBsSound()
-	
-@rpc('call_local','reliable')
-func RemoveShield(Who:Car)->void:
-	Who.player.RemoveShield();
