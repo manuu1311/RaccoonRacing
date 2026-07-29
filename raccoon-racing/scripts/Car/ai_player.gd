@@ -86,75 +86,72 @@ func ResetPlayer(order:int)->void:
 	car.AiUsePropTime=0
 	super(order)
   
-func AutoUseProp()->bool:
+func AutoUseProp() -> bool:
 	car.AiUsePropTime += 1
 	if car.AiUsePropTime <= AiUsePropReflect:
 		return false
-		
+
 	car.AiUsePropTime = 0
-	car.HasProp=false
-	
+	car.HasProp = false
+
 	if car.map.IsPropPoint(car.NowPointId) and car.NowPorpId != 5:
-		if IsOnlyAttPlayer:
-			return false
-		return true
+		return true  # dump current prop to free the slot for a new pickup
 
 	match car.NowPorpId:
 		0:
 			return false
-		1: # Proximity Bomb/Obstacle items
-			for other:Player in GameData.PlayersArr:
+
+		1: # Proximity Bomb/Obstacle
+			for other in GameData.PlayersArr:
 				if other.PlayerID != self.PlayerID:
-					if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.car.CharID == 2):
+					if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) \
+					or (other.prop.IsHavePropType(9) and other.car.CharData.CountersHazardProps):
 						return true
-					var dist_to_player: float = car.global_position.distance_to(other.car.global_position)
-					if dist_to_player < 300:
-						if not (IsOnlyAttPlayer and other.PlayerID != 0):
-							return true
-			# Check map hazards
-			for event_item:EventInMap in car.map.Events:
-				if event_item.is_class("BombInMap") or event_item.is_class("BsInMap") or event_item.is_class('HoneyBombInMap'):
+					if car.global_position.distance_to(other.car.global_position) < 300:
+						return true
+			for event_item in car.map.Events:
+				if event_item.is_class("BombInMap") or event_item.is_class("BsInMap") or event_item.is_class("HoneyBombInMap"):
 					if car.global_position.distance_to(event_item.global_position) < 300:
 						return true
+
 		2:
 			return true
-		3: # Global team item / shield check
-			for other:Player in GameData.PlayersArr:
+
+		3: # Shield vs incoming hazards
+			for other in GameData.PlayersArr:
 				if other.PlayerID != self.PlayerID:
-					if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.car.CharID == 2):
+					if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) \
+					or (other.prop.IsHavePropType(9) and other.car.CharID==2):
 						return true
-		4, 7: # Offensive targeting missiles/items
-			for other:Player in GameData.PlayersArr:
-				if other.PlayerID != self.PlayerID and not (IsOnlyAttPlayer and other.PlayerID != 0):
-					if not other.car.isInvincible:
-						if car.global_position.distance_to(other.car.global_position) < 300:
-							var point_delta:int = car.NowPointId - other.car.NowPointId
-							if point_delta > 0 or point_delta < -10 or (point_delta == 0 and distance < other.distance):
-								return true
+
+		4, 7: # Offensive targeting
+			for other in GameData.PlayersArr:
+				if other.PlayerID != self.PlayerID and not other.car.isInvincible:
+					if car.global_position.distance_to(other.car.global_position) < 300:
+						var point_delta: int = car.NowPointId - other.car.NowPointId
+						if point_delta > 0 or point_delta < -10 or (point_delta == 0 and distance < other.distance):
+							return true
 			if car.map.IsWanPoint(car.NowPointId):
-				if IsOnlyAttPlayer:
-					if OrderId >= GameData.PlayersArr.size() - 1:
-						if GameData.OrderInfo[0]!= 0: return false
-					elif GameData.OrderInfo[OrderId + 1] != 0: 
-						return false
 				return true
+
 		5: # Shield / Boost
 			if OrderId != 0:
-				if IsOnlyAttPlayer and GameData.OrderInfo[0] != 0:
-					return false
 				return true
+
 		6: # Homing Missile
-			if IsOnlyAttPlayer and GameData.OrderInfo[OrderId-1] != 0:
-				return false
 			return true
+
 		8: # Speed Pad / Nitro Line
 			if car.map.IsLinePoint(car.NowPointId):
 				return true
-		9: # Complex behavior depending on AI profile Type
+
+		9:
 			return _handle_prop_type_nine()
+
 		_:
 			push_error("Error UseProp Id")
-	car.HasProp=false
+
+	car.HasProp = false
 	return false
 
 func _handle_prop_type_nine() -> bool:

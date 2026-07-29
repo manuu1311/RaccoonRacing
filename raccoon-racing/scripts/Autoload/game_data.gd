@@ -5,8 +5,6 @@ after changing character, special character prop icon should be updated
 add vibration
 adjust autouseprop to not take into account players or chars
 add pause menu
-fix acceleration sounds
-add remote bumping and bs sounds
 '''
 #for which character, is he unlocked?
 #0:rocko 1:vixen 2:mambo
