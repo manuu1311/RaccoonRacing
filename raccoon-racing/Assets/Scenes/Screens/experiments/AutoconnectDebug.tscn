@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://f33pu4njs3u2"]
+
+[ext_resource type="Script" uid="uid://bo6vdthotfhie" path="res://scripts/Game/autoconnect_debug_manager.gd" id="1_hbi2c"]
+[ext_resource type="PackedScene" uid="uid://cehj3k48xb3su" path="res://Assets/Scenes/Screens/HUD/HUD.tscn" id="1_r32qe"]
+[ext_resource type="PackedScene" uid="uid://c47mpkqmnemuy" path="res://Assets/Scenes/Screens/maps/Map01.tscn" id="18_j6yh8"]
+
+[sub_resource type="Environment" id="Environment_y5543"]
+glow_enabled = true
+
+[node name="AutoconnectDebug" type="Node2D" unique_id=43745372]
+script = ExtResource("1_hbi2c")
+MapNum = 0
+mainchar = 5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=559091128]
+environment = SubResource("Environment_y5543")
+
+[node name="Hud" parent="." unique_id=929271289 instance=ExtResource("1_r32qe")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2009521800]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D" unique_id=1383581528]
+current = true
+
+[node name="Map" parent="." unique_id=620435250 instance=ExtResource("18_j6yh8")]
