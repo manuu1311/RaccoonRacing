@@ -21,8 +21,8 @@ var textures:Array[Texture]=[
 @onready var starttxt: Label = $StartGame/MainText
 @onready var cuptxt: Label = $CupInfo/Cup
 @onready var lobbycodetext: Label = $Text
-@onready var aiprop_check_button: CheckButton = $AIPropUse/CheckButton
 @onready var mainlobby: MainLobby = $"../.."
+@onready var aipropbtn: CheckBox = $AIPropUse/btn
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -124,15 +124,16 @@ func _on_startbutton_mouse_exited() -> void:
 
 
 func _on_aiprop_check_button_toggled(toggled_on: bool) -> void:
-	AIPropCheck.rpc(toggled_on)
+	if NetworkManager.is_host:
+		AIPropCheck.rpc(toggled_on)
 
 @rpc('authority','call_local','reliable')
 func AIPropCheck(value:bool)->void:
 	GameData.AICanUseProp=value
-	aiprop_check_button.set_pressed_no_signal(value)
+	aipropbtn.set_pressed_no_signal(value)
 
 ##send remote client info about the lobby
 func GiveLobbyInfo()->void:
 	if is_multiplayer_authority():
-		_on_aiprop_check_button_toggled(aiprop_check_button.button_pressed)
+		_on_aiprop_check_button_toggled(aipropbtn.button_pressed)
 		mainlobby.SyncCup(GameData.currentCup)

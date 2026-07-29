@@ -76,7 +76,7 @@ func UseProp()->void:
 			ClearPropBox();
 			return;
 		9:
-			match(player.charid):
+			match(player.car.CharID):
 				1:
 					propArr.append(PetroProp.new(player))
 					player.car.NowPorpId = 8;

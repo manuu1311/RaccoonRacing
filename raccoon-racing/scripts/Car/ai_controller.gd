@@ -9,7 +9,7 @@ func _init(playerinst:Player) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func handle_input()->void:
-	if not player.car.isSleep and not player.car.isLock and not (player.car.jumpCurrheight>=1) and player.car.playering:
+	if not player.car.isSleep and not player.car.isLock and not (player.car.jumpCurrheight>=1) and player.IsPlayering():
 		var inputArr:Array[bool]=aiplayer.AutoInput()
 		forward=inputArr[0]
 		brake=inputArr[1]

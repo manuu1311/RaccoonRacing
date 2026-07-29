@@ -2377,9 +2377,9 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
 [node name="CupInfo" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=1420956524]
 anchors_preset = 0
 offset_left = -39.77
-offset_top = 59.7
+offset_top = 63.0
 offset_right = -39.77
-offset_bottom = 59.7
+offset_bottom = 63.0
 
 [node name="Outline2" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=2135120703]
 layout_mode = 0
@@ -2521,33 +2521,24 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="txt" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/AIPropUse" unique_id=1080901709]
+[node name="btn" type="CheckBox" parent="Lobby/LobbyScreen/LobbyScreen/AIPropUse" unique_id=458336009]
 layout_mode = 0
-offset_left = 340.0
-offset_top = 52.0
-offset_right = 471.0
-offset_bottom = 84.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+offset_left = 338.0
+offset_top = 71.0
+offset_right = 476.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
+theme_override_colors/icon_pressed_color = Color(0.5625, 0.25839844, 0.25839844, 1)
 theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 7
-theme_override_font_sizes/font_size = 14
-text = "AI can use prop"
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 1
-
-[node name="CheckButton" type="CheckButton" parent="Lobby/LobbyScreen/LobbyScreen/AIPropUse" unique_id=1137001165]
-layout_mode = 0
-offset_left = 379.0
-offset_top = 77.0
-offset_right = 423.0
-offset_bottom = 101.0
+theme_override_font_sizes/font_size = 21
+theme_override_colors/checkbox_checked_color = Color(1, 1, 0, 1)
+theme_override_colors/checkbox_unchecked_color = Color(1, 1, 1, 1)
 button_pressed = true
+text = "AI props"
+text_overrun_behavior = 1
+clip_text = true
 
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup1/Button" to="CupScreen/Cups/Cup1" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup1/Button" to="CupScreen/Cups/Cup1" method="_on_button_mouse_exited"]
@@ -2601,4 +2592,4 @@ button_pressed = true
 [connection signal="mouse_entered" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby/LobbyScreen/LobbyScreen" method="_on_startbutton_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby/LobbyScreen/LobbyScreen" method="_on_startbutton_mouse_exited"]
 [connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby" method="_on_startbutton_pressed"]
-[connection signal="toggled" from="Lobby/LobbyScreen/LobbyScreen/AIPropUse/CheckButton" to="Lobby/LobbyScreen/LobbyScreen" method="_on_aiprop_check_button_toggled"]
+[connection signal="toggled" from="Lobby/LobbyScreen/LobbyScreen/AIPropUse/btn" to="Lobby/LobbyScreen/LobbyScreen" method="_on_aiprop_check_button_toggled"]

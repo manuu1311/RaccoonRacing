@@ -105,7 +105,7 @@ func AutoUseProp()->bool:
 		1: # Proximity Bomb/Obstacle items
 			for other:Player in GameData.PlayersArr:
 				if other.PlayerID != self.PlayerID:
-					if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.charid == 2):
+					if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.car.CharID == 2):
 						return true
 					var dist_to_player: float = car.global_position.distance_to(other.car.global_position)
 					if dist_to_player < 300:
@@ -121,7 +121,7 @@ func AutoUseProp()->bool:
 		3: # Global team item / shield check
 			for other:Player in GameData.PlayersArr:
 				if other.PlayerID != self.PlayerID:
-					if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.charid == 2):
+					if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) or (other.prop.IsHavePropType(9) and other.car.CharID == 2):
 						return true
 		4, 7: # Offensive targeting missiles/items
 			for other:Player in GameData.PlayersArr:
@@ -158,7 +158,7 @@ func AutoUseProp()->bool:
 	return false
 
 func _handle_prop_type_nine() -> bool:
-	match charid:
+	match car.CharID:
 		3,4:
 			for other in GameData.PlayersArr:
 				if not (IsOnlyAttPlayer and other.PlayerID != 0) and not other.car.isInvincible and other.PlayerID != self.PlayerID:

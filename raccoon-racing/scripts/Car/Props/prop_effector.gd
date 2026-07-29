@@ -112,5 +112,39 @@ func OnAreaEntered(body:Area2D)->void:
 		if caropp.playerID!=car.playerID:
 			if caropp.jumpCurrheight<caropp.heightOverWall:
 				if !caropp.isResetting:
-					bonehit.emit(caropp)
-					
+					_on_bone_hit(caropp)
+	
+#bone hit logic
+func _on_bone_hit(caropp:Car) -> void:
+	if NetworkManager.is_host:
+		if caropp.isInvincible:
+			BoneInvincible.rpc(caropp.playerID)
+		else:
+			if caropp.player.car.IsUseShield:
+				BoneShield.rpc(caropp.playerID)
+			else:
+				BoneEffect.rpc(caropp.playerID)
+
+@rpc('call_local','reliable')
+func BoneEffect(caroppid:int)->void:
+	var caropp:Car=GameData.PlayersArr[caroppid].car
+	var dist:Vector2 =caropp.global_position-(car.global_position)
+	var loc7:float=0.005
+	var distsq:float=dist.length_squared()
+	if distsq<2000:
+		loc7 = 0.005 + 0.05 * (2000 - distsq) / 2000;
+	var knockback:Vector2=dist*loc7
+	caropp.speed+=knockback*40
+	caropp.bs=true
+	bonehit.emit(caropp)
+
+@rpc('call_local','reliable')
+func BoneShield(caroppid:int)->void:
+	var caropp:Car=GameData.PlayersArr[caroppid].car
+	caropp.player.RemoveShield()
+	bonehit.emit(caropp)
+
+@rpc('call_local','reliable')
+func BoneInvincible(caroppid:int)->void:
+	var caropp:Car=GameData.PlayersArr[caroppid].car
+	bonehit.emit(caropp)
