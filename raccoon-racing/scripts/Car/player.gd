@@ -66,6 +66,7 @@ func IsPlayering()->bool:
 	return car.playering
 
 func Update()->void:
+	car.sounds.Loopsounds()
 	prop.run()
 	UpdatePoint()
 

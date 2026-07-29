@@ -86,12 +86,12 @@ func Loopsounds()->void:
 				speedOffset = 0.05
 			#is accelerating?
 			if(car.speed.length() > prevSpeed.length() - speedOffset):
+				car_run_speed.stop()
+				car_lost_speed.stop()
 				speedScalar = car_add_speed.stream.get_length()*speedScalar 
 				if(not car_add_speed.playing or  abs(speedScalar - car_add_speed.get_playback_position()) > car_add_speed.stream.get_length() / 5):
 					#in seconds
 					car_add_speed.play(speedScalar)
-					car_run_speed.stop()
-					car_lost_speed.stop()
 			#decelerating
 			else:
 				speedScalar=car_lost_speed.stream.get_length()*speedScalar

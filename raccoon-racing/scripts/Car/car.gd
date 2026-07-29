@@ -395,7 +395,6 @@ func Update()->void:
 		UpdateCarPos()
 	UpdateSpeed()
 	Jumping()
-	sounds.Loopsounds()
 	var dir_modifier: float = 1.0 if bsf else -1.0
 	if(bs):
 		rotation_degrees += 1 * speed.length()*dir_modifier
