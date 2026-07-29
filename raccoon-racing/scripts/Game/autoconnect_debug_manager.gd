@@ -12,6 +12,7 @@ var SceneAngleMoveExpandPos:Vector2
 var SceneAngleMoveExpandNowPos:Vector2
 @export var MapNum:int=1
 @export var mainchar:int=1
+@export var IsMultiplayer:bool=true
 var personalid:int
 signal ClientRegistrationComplete
 
@@ -31,14 +32,15 @@ func _ready() -> void:
 	GameData.OrderInfo=[]
 	GameData.Ranking=[]
 	if multiplayer.is_server():
-		print('hi')
 		CreatePlayer(GameData.PlayersArr.size(),Player.control_type.HUMAN,GameData.currentCharacter,1)
 		CreatePlayer(GameData.PlayersArr.size(),Player.control_type.AI,1,1)
 		personalid=0
-		ClientRegistrationComplete.connect(RemoteStartRace)
+		if IsMultiplayer:
+			ClientRegistrationComplete.connect(RemoteStartRace)
+		else:
+			RemoteStartRace()
 	else:
 		RequestRegister()
-		print('helloo')
 
 
 func _process(_delta: float) -> void:

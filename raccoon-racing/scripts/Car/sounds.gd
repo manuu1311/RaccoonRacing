@@ -68,64 +68,38 @@ func PopulateSounds()->void:
 				sounds.append(child)
 				
 
-#func Loopsounds()->void:
-	##distance between car and focus car (player)
-	#var dx: float = global_position.x - GameData.FocusCar.global_position.x
-	#var dy: float = global_position.y - GameData.FocusCar.global_position.y
-	#var dist_sqr: float = (dx * dx) + (dy * dy)
-	#soundsVolume = (160000.0 - dist_sqr) / 1600.0
-	#if(dist_sqr > 1000):
-		#soundsVolume -= 20
-	#if(soundsVolume < 0):
-		#soundsVolume = 0;
-		#return 
-	##prevent sounds from being too loud if there are many cars around
-	#var totalVolume:float = 0;
-	#for id in len(GameData.PlayersArr):
-		#totalVolume += GameData.PlayersArr[id].car.sounds.soundsVolume;
-	#
-	#if(totalVolume > 150):
-		#soundsVolume *= 150 / totalVolume;
-	##Calculate Panning 
-	#var as2_pen: float = ((dx - 400.0) / 4.0) + 100.0
-	#as2_pen = clamp(as2_pen, -100.0, 100.0)
-	##normalise between -1 and 1
-	#sounds_pen = as2_pen / 100.0
-	##apply new settings
-	#apply_global_sound_settings()
-	##this.sounds.changeAllSoundVolumeAndPan(this.soundsVolume,this.soundsPen);
-	##pitch and state calculation
-	#var speedScalar:float = car.speed.length() / 16;
-	#var speedOffset:float=0;
-	#if(not car.isHovercraft()):
-		#if(car_fast_speed.playing and car_fast_speed.get_playback_position() < 0.4):
-			#return 
-		#if(speedScalar > 0.8):
-			#car_add_speed.stop()
-			#car_lost_speed.stop()
-			#if not car_run_speed.is_playing():
-				#car_run_speed.play()
-		#else:
-			#if car.speed.length() <= 3.0:
-				#speedOffset = 0.0
-			#else:
-				#speedOffset = 0.05
-			##is accelerating?
-			#if(car.speed.length() > prevSpeed.length() - speedOffset):
-				#speedScalar = car_add_speed.stream.get_length()*speedScalar 
-				#if(not car_add_speed.playing or  abs(speedScalar - car_add_speed.get_playback_position()) > car_add_speed.stream.get_length() / 5):
-					##in seconds
-					#car_add_speed.play(speedScalar)
-					#car_run_speed.stop()
-					#car_lost_speed.stop()
-			##decelerating
-			#else:
-				#speedScalar=car_lost_speed.stream.get_length()*speedScalar
-				#if (not car_lost_speed.playing or abs(speedScalar-(car_add_speed.stream.get_length()-car_lost_speed.get_playback_position()))>car_add_speed.stream.get_length()/5):
-					#car_lost_speed.play((car_add_speed.stream.get_length()-speedScalar))
-					#car_run_speed.stop()
-					#car_add_speed.stop()
-		#prevSpeed = car.speed
+func Loopsounds()->void:
+	var speedScalar:float = car.speed.length() / 16;
+	var speedOffset:float=0;
+	if(not car.isHovercraft()):
+		if(car_fast_speed.playing and car_fast_speed.get_playback_position() < 0.4):
+			return 
+		if(speedScalar > 0.8):
+			car_add_speed.stop()
+			car_lost_speed.stop()
+			if not car_run_speed.is_playing():
+				car_run_speed.play()
+		else:
+			if car.speed.length() <= 3.0:
+				speedOffset = 0.0
+			else:
+				speedOffset = 0.05
+			#is accelerating?
+			if(car.speed.length() > prevSpeed.length() - speedOffset):
+				speedScalar = car_add_speed.stream.get_length()*speedScalar 
+				if(not car_add_speed.playing or  abs(speedScalar - car_add_speed.get_playback_position()) > car_add_speed.stream.get_length() / 5):
+					#in seconds
+					car_add_speed.play(speedScalar)
+					car_run_speed.stop()
+					car_lost_speed.stop()
+			#decelerating
+			else:
+				speedScalar=car_lost_speed.stream.get_length()*speedScalar
+				if (not car_lost_speed.playing or abs(speedScalar-(car_add_speed.stream.get_length()-car_lost_speed.get_playback_position()))>car_add_speed.stream.get_length()/5):
+					car_lost_speed.play((car_add_speed.stream.get_length()-speedScalar))
+					car_run_speed.stop()
+					car_add_speed.stop()
+		prevSpeed = car.speed
 
 
 func playHCRunSound()->void:
