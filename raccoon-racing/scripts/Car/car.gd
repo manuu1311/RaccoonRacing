@@ -186,24 +186,20 @@ func _process(_delta: float) -> void:
 				steer_normal()
 		if IsAccelerating:
 			UnsyncedForward()
-		ApplyUnsyncedFX()
+		ProcessFX()
+		UnsyncedForward()
 	
 
 func UnsyncedForward()->void:
-	all_wheel()
-	if isHovercraft():
-		sounds.playHCRunSound()
-	if(not bs and friction > bsWheelLength and speed.length() > bsSpeed):
-		bs = true
-		sounds.playBsSound()
-		bsf = moveAngCar > 0;
-
-	if(speed.length() < bsClearSpeed):
-		bs = false
-	# if difference is too large: spawn smoke
-	if abs(get_angle_diff())> 140 or isLock:
-		spawn_smoke('smoke1',true)  
-		spawn_smoke('smoke1',false) 
+	stepx=snapped(speed[0],0.1)
+	stepy=snapped(speed[1],0.1)
+	tempx = position.x + stepx
+	tempy = position.y + stepy
+	var wallAngledeg:float =GetHitStatusAng(tempx,tempy)
+	#no wall detected
+	if(is_nan(wallAngledeg)):
+		return 
+	sounds.playbumpsound()
 
 func ApplyUnsyncedFX()->void:
 	if isHovercraft():
@@ -389,12 +385,16 @@ func StartBoost() -> void:
 	player.UseProp();
 
 func Update()->void:
-	if isHovercraft():
-		Water()
 	if(not isLock):
 		UpdateCarPos()
 	UpdateSpeed()
 	Jumping()
+	ProcessFX()
+
+
+func ProcessFX()->void:
+	if isHovercraft():
+		Water()
 	var dir_modifier: float = 1.0 if bsf else -1.0
 	if(bs):
 		rotation_degrees += 1 * speed.length()*dir_modifier
@@ -410,10 +410,10 @@ func Update()->void:
 		spawn_smoke("smoke1",moveAngCar < 0)
 		if(friction > 70):
 			spawn_smoke("smoke1",moveAngCar > 0)
-	elif(speed.length() < 0.5):
-		stop_wheel()
-	else:
-		all_wheel()
+		elif(speed.length() < 0.5):
+			stop_wheel()
+		else:
+			all_wheel()
 
 #get difference beteween speed angle and sprite angle
 func get_angle_diff()->float:

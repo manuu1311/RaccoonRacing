@@ -21,12 +21,12 @@ func _init(player_inst: Player, attacker_car: Car) -> void:
 	# Fire immediately — no need to wait for run() to pick it up
 	effect_started = true
 	_apply_shrink_effect()
+	
 
-func run() -> void:
+func run_tick() -> void:
 	# Ray still spawns here since we need the scene tree
 	if active_ray == null and is_instance_valid(attacker):
 		active_ray = RAY_SCENE.instantiate() as ShrinkInMap
-		player.car.map.add_child(active_ray)
 		player.car.map.SpawnProp("ShrinkRay",player.PlayerID,active_ray)
 		active_ray.setup(attacker, player.car, use_time)
 		active_ray.z_index=2
