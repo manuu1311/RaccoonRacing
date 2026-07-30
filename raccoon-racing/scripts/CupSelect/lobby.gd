@@ -82,14 +82,17 @@ func _on_lobby_pressed() -> void:
 		return
 	else:
 		ButtonSounds.PlaySound("click")
+		##get out of lobby
 		if InLobbyScreen:
+			InLobbyScreen=false
 			lobbytext_button.focus_neighbor_left='../../../CupScreen/BackButton'
 			lobbytext_button.focus_neighbor_top='../../../CupScreen/Cups/Cup8/Button'
-			InLobbyScreen=false
 			lbltext.add_theme_color_override("font_color",Color.WHITE)
 			lobby_screen.hide()
 			cup_screen.show()
 			cup_screen.HandleShiny(GameData.currentCup)
+			cup_screen.EnableCupFocus()
+		##enter lobby
 		else:
 			InLobbyScreen=true
 			lobbytext_button.focus_neighbor_left=NodePath("")
@@ -98,6 +101,7 @@ func _on_lobby_pressed() -> void:
 			cup_screen.hide()
 			lobby_screen.show()
 			cup_screen.hide_diff_screen()
+			cup_screen.DisableCupFocus()
 
 
 func _on_hostbutton_pressed() -> void:

@@ -6,6 +6,7 @@ class_name UICupSelection
 @onready var buttons: DifficultyButtons = $Buttons
 var choosing_diff:bool=false
 signal CupSelected
+@onready var tofocus_btn: Button = $Buttons/EasyBTN/Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,7 +20,17 @@ func _ready() -> void:
 
 
 
+func EnableCupFocus()->void:
+	for i in range(8):
+		var button_path:String = "Cups/Cup" + str(i+1) +"/Button"
+		var cup_button:Button = get_node(button_path) as Button
+		cup_button.add_theme_stylebox_override("Focus",StyleBoxEmpty.new())
 
+func DisableCupFocus()->void:
+	for i in range(8):
+		var button_path:String = "Cups/Cup" + str(i+1) +"/Button"
+		var cup_button:Button = get_node(button_path) as Button
+		cup_button.remove_theme_stylebox_override("Focus")
 
 func _on_back_button_pressed() -> void:
 	ButtonSounds.PlaySound('click')
@@ -61,10 +72,17 @@ func _on_diff_pressed(diff: int) -> void:
 func hide_diff_screen()->void:
 	bg_filter.hide()
 	buttons.hide()
+	var backbtn:Control=$BackButton
+	backbtn.focus_neighbor_top='../Cups/Cup7/Button'
+	backbtn.focus_neighbor_right='../../Lobby/LobbyText/Button'
+	backbtn.focus_neighbor_bottom='../Cups/Cup1/Button'
 	
 func show_diff_screen()->void:
 	bg_filter.show()
 	buttons.show()
+	var backbtn:Control=$BackButton
+	backbtn.focus_neighbor_bottom='../Buttons/EasyBTN/Button'
+	backbtn.focus_neighbor_top='../Buttons/HardBTN/Button'
 	
 ##handle selected cup shiny (for multiplayer)
 func HandleShiny(id:int)->void:
@@ -91,3 +109,5 @@ func _on_cup_pressed(id: int) -> void:
 			choosing_diff=true
 			buttons.updateLocks(GameData.currentCup)
 			show_diff_screen()
+			tofocus_btn.grab_focus()
+			
