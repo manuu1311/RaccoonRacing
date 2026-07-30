@@ -3,7 +3,6 @@ extends Node
 '''
 after changing character, special character prop icon should be updated
 add vibration
-adjust autouseprop to not take into account players or chars
 add pause menu
 '''
 #for which character, is he unlocked?
