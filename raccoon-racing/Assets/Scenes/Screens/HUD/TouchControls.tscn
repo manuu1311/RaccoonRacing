@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://crv5h3ehm0sfi"]
+
+[ext_resource type="Texture2D" uid="uid://clxi2m4cnep2d" path="res://Assets/Images/hud/Touch/arrow.png" id="1_8wwg5"]
+[ext_resource type="Texture2D" uid="uid://gxgoijjbjxka" path="res://Assets/Images/maps/Props/cube.png" id="2_strh0"]
+
+[node name="TouchControls" type="CanvasLayer" unique_id=1592030081]
+
+[node name="Control" type="Control" parent="." unique_id=1456461512]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Up" type="TouchScreenButton" parent="Control" unique_id=1032458717]
+position = Vector2(530, 255)
+rotation = -1.5707964
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("1_8wwg5")
+texture_pressed = ExtResource("1_8wwg5")
+passby_press = true
+action = "Accelerate"
+
+[node name="Down" type="TouchScreenButton" parent="Control" unique_id=1838092971]
+position = Vector2(657, 239)
+rotation = 1.5707964
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("1_8wwg5")
+texture_pressed = ExtResource("1_8wwg5")
+passby_press = true
+action = "Brake"
+
+[node name="Right" type="TouchScreenButton" parent="Control" unique_id=136401625]
+position = Vector2(-130, 278)
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("1_8wwg5")
+texture_pressed = ExtResource("1_8wwg5")
+passby_press = true
+action = "Steer right"
+
+[node name="Left" type="TouchScreenButton" parent="Control" unique_id=278237086]
+position = Vector2(-115, 406)
+rotation = 3.1415927
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("1_8wwg5")
+texture_pressed = ExtResource("1_8wwg5")
+passby_press = true
+action = "Steer left"
+
+[node name="Special" type="TouchScreenButton" parent="Control" unique_id=718622458]
+position = Vector2(-161, 145)
+texture_normal = ExtResource("2_strh0")
+texture_pressed = ExtResource("2_strh0")
+passby_press = true
+action = "Special"
