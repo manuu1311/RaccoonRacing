@@ -158,6 +158,8 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yoyxl"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ty0o1"]
+
 [sub_resource type="FontVariation" id="FontVariation_nnnlj"]
 spacing_glyph = 1
 
@@ -823,11 +825,14 @@ animations = [{
 "speed": 35.0
 }]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43mdl"]
+
 [node name="UiCupWon" type="CanvasLayer" unique_id=1663479219]
 script = ExtResource("1_jwxe0")
 metadata/_edit_vertical_guides_ = [-111.0]
 
 [node name="Won" type="Node2D" parent="." unique_id=43115198]
+visible = false
 
 [node name="Background" type="Node2D" parent="Won" unique_id=665448909]
 position = Vector2(250, 250)
@@ -912,6 +917,7 @@ offset_bottom = 444.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nnnlj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_f5bee")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_yoyxl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ty0o1")
 
 [node name="Text" type="Node2D" parent="Won" unique_id=46922943]
 
@@ -1324,7 +1330,6 @@ scale_amount_min = 0.099999994
 scale_amount_max = 0.29999998
 
 [node name="Lost" type="Node2D" parent="." unique_id=1185404279]
-visible = false
 position = Vector2(269, 150)
 
 [node name="Background" type="Node2D" parent="Lost" unique_id=451558442]
@@ -1423,10 +1428,15 @@ offset_bottom = 444.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nnnlj")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_f5bee")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_yoyxl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_43mdl")
 
+[connection signal="focus_entered" from="Won/ContinueButton/Button" to="." method="OnButtonHoverWin"]
+[connection signal="focus_exited" from="Won/ContinueButton/Button" to="." method="OnButtonHoverExitWin"]
 [connection signal="mouse_entered" from="Won/ContinueButton/Button" to="." method="OnButtonHoverWin"]
 [connection signal="mouse_exited" from="Won/ContinueButton/Button" to="." method="OnButtonHoverExitWin"]
 [connection signal="pressed" from="Won/ContinueButton/Button" to="." method="OnContinueButtonPressed"]
+[connection signal="focus_entered" from="Lost/Continue/ContinueButton/Button" to="." method="OnButtonHoverLoss"]
+[connection signal="focus_exited" from="Lost/Continue/ContinueButton/Button" to="." method="OnButtonHoverExitLoss"]
 [connection signal="mouse_entered" from="Lost/Continue/ContinueButton/Button" to="." method="OnButtonHoverLoss"]
 [connection signal="mouse_exited" from="Lost/Continue/ContinueButton/Button" to="." method="OnButtonHoverExitLoss"]
 [connection signal="pressed" from="Lost/Continue/ContinueButton/Button" to="." method="OnContinueButtonPressed"]

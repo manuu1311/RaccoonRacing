@@ -469,10 +469,16 @@ texture = ExtResource("3_vd7x1")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xjbaf"]
 texture = ExtResource("4_14row")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_evr18"]
+texture = ExtResource("4_14row")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8whp2"]
 texture = ExtResource("5_5iyik")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m23ag"]
+texture = ExtResource("6_vd7x1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qgbk7"]
 texture = ExtResource("6_vd7x1")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rjmma"]
@@ -481,16 +487,25 @@ texture = ExtResource("7_14row")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qinps"]
 texture = ExtResource("8_v7cgl")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n4igx"]
+texture = ExtResource("8_v7cgl")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fukie"]
 texture = ExtResource("9_4iwyt")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6h45"]
 texture = ExtResource("10_gx5lc")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4iwyt"]
+texture = ExtResource("10_gx5lc")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nwu3n"]
 texture = ExtResource("11_evr18")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n0kuj"]
+texture = ExtResource("12_gtplp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gx5lc"]
 texture = ExtResource("12_gtplp")
 
 [sub_resource type="Animation" id="Animation_0l03o"]
@@ -684,7 +699,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_5iyik")
 
-[node name="StartGameButton" type="Button" parent="Buttons" unique_id=1517811359]
+[node name="StartGameButton" type="Button" parent="Buttons" unique_id=1517811359 groups=["default_focus"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.823
@@ -697,9 +712,11 @@ offset_right = 477.19998
 offset_bottom = 226.44
 grow_horizontal = 2
 grow_vertical = 2
+focus_neighbor_top = NodePath("../../Volume/HSlider")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0l03o")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_xjbaf")
+theme_override_styles/focus = SubResource("StyleBoxTexture_evr18")
 
 [node name="HowToPlayButton" type="Button" parent="Buttons" unique_id=217371142]
 layout_mode = 1
@@ -717,6 +734,7 @@ grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_8whp2")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_m23ag")
+theme_override_styles/focus = SubResource("StyleBoxTexture_qgbk7")
 
 [node name="HighScoresButton" type="Button" parent="Buttons" unique_id=1495544859]
 layout_mode = 1
@@ -734,6 +752,7 @@ grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_rjmma")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_qinps")
+theme_override_styles/focus = SubResource("StyleBoxTexture_n4igx")
 
 [node name="MoreGamesButton" type="Button" parent="Buttons" unique_id=315608316]
 layout_mode = 1
@@ -751,6 +770,7 @@ grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_fukie")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_x6h45")
+theme_override_styles/focus = SubResource("StyleBoxTexture_4iwyt")
 
 [node name="FreeGamesButton" type="Button" parent="Buttons" unique_id=1125033170]
 layout_mode = 1
@@ -765,9 +785,11 @@ offset_right = 478.51498
 offset_bottom = 442.03
 grow_horizontal = 2
 grow_vertical = 2
+focus_neighbor_bottom = NodePath("../../Volume/HSlider")
 theme_override_styles/normal = SubResource("StyleBoxTexture_nwu3n")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_n0kuj")
+theme_override_styles/focus = SubResource("StyleBoxTexture_gx5lc")
 
 [node name="Logo" type="CanvasLayer" parent="." unique_id=1841181194]
 script = ExtResource("9_m23ag")
@@ -863,6 +885,8 @@ offset_left = 203.0
 offset_top = 479.0
 offset_right = 308.0
 offset_bottom = 495.0
+focus_neighbor_top = NodePath("../../Buttons/FreeGamesButton")
+focus_neighbor_bottom = NodePath("../../Buttons/StartGameButton")
 max_value = 1.0
 step = 0.05
 

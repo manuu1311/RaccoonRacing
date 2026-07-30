@@ -118,6 +118,8 @@ corner_detail = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i838u"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0g4sg"]
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=816403930]
 script = ExtResource("1_b5g7p")
 
@@ -946,7 +948,7 @@ text = "Back"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Buttons/ContinueButton" unique_id=2093049224]
+[node name="Button" type="Button" parent="Buttons/ContinueButton" unique_id=2093049224 groups=["default_focus"]]
 layout_mode = 0
 offset_left = 222.0
 offset_top = 415.0
@@ -955,6 +957,7 @@ offset_bottom = 444.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_plmhe")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8fs17")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_i838u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0g4sg")
 
 [node name="Highscores" type="Control" parent="Buttons" unique_id=74047937]
 anchors_preset = 0
@@ -994,6 +997,8 @@ text = "High Scores"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="focus_entered" from="Buttons/ContinueButton/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="Buttons/ContinueButton/Button" to="." method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="Buttons/ContinueButton/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Buttons/ContinueButton/Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Buttons/ContinueButton/Button" to="." method="_on_button_pressed"]
