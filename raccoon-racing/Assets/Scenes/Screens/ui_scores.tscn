@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c2s35hd03hcxu" path="res://Assets/Animations/Scores/gradientbg2.png" id="5_xsj34"]
 [ext_resource type="Texture2D" uid="uid://hjp24s2c8g5b" path="res://Assets/Animations/CharSelection/greenbush.png" id="6_i2oi5"]
 [ext_resource type="Texture2D" uid="uid://dqywrdq8ycm5i" path="res://Assets/Animations/CharSelection/emptybush.png" id="7_kpbv8"]
+[ext_resource type="Shortcut" uid="uid://c20xrlgkwtkri" path="res://Assets/Shortcuts/new_shortcut.tres" id="8_bg8mh"]
 [ext_resource type="FontFile" uid="uid://dhqkn2g7x12vn" path="res://Assets/Fonts/1010__sans.ttf" id="8_kpbv8"]
 [ext_resource type="Texture2D" uid="uid://b44cubu66xpxg" path="res://Assets/Animations/CharSelection/characters/rockopic.png" id="9_a30fl"]
 
@@ -208,6 +209,7 @@ offset_bottom = 444.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i2oi5")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_kpbv8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_a30fl")
+shortcut = ExtResource("8_bg8mh")
 
 [node name="Label" type="Node2D" parent="Text" unique_id=1738051923]
 position = Vector2(0, -35)

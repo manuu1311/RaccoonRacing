@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cectleostw2vn" path="res://Assets/Animations/UISelect/cups/cup6.png" id="21_u1jg4"]
 [ext_resource type="Texture2D" uid="uid://hpvclwh65680" path="res://Assets/Animations/UISelect/cups/cup7.png" id="22_tke11"]
 [ext_resource type="Texture2D" uid="uid://uwccjy1nbxdw" path="res://Assets/Animations/UISelect/cups/cup8.png" id="24_5pglv"]
+[ext_resource type="Shortcut" uid="uid://c20xrlgkwtkri" path="res://Assets/Shortcuts/new_shortcut.tres" id="28_5pglv"]
 [ext_resource type="Script" uid="uid://msdh6uoathri" path="res://scripts/CupSelect/lobby.gd" id="29_2rjpb"]
 [ext_resource type="Texture2D" uid="uid://b44cubu66xpxg" path="res://Assets/Animations/CharSelection/characters/rockopic.png" id="30_qkely"]
 [ext_resource type="Texture2D" uid="uid://2xsqa131cc3b" path="res://Assets/Images/Icons/icon.png" id="30_tke11"]
@@ -1795,6 +1796,7 @@ scale = Vector2(0.9, 0.9)
 focus_neighbor_top = NodePath("../Cups/Cup7/Button")
 focus_neighbor_right = NodePath("../../Lobby/LobbyText/Button")
 focus_neighbor_bottom = NodePath("../Cups/Cup1/Button")
+shortcut = ExtResource("28_5pglv")
 texture_normal = ExtResource("16_tdwvn")
 
 [node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]

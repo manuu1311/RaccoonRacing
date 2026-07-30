@@ -69,3 +69,8 @@ func _switch_to_empty()->void:
 
 func _on_scene_changed()->void:
 	_switch_to_empty()
+
+##re apply focus to global default (e.g. after a scene change)
+func ReApplyFocus()->void:
+	if mode==Mode.CONTROLLER:
+		_focus_nearest_fallback(get_viewport())

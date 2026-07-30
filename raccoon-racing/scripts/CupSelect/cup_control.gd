@@ -12,6 +12,7 @@ signal CupSelected
 func _ready() -> void:
 	hide_diff_screen()
 	UiOverAnimation.reset_anim_frame()
+	InputModeManager.ReApplyFocus()
 	#connect each cup
 	for i in range(8):
 		var button_path:String = "Cups/Cup" + str(i+1) +"/Button"

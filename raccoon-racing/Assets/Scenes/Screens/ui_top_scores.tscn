@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dk051de2fv8dp" path="res://Assets/Images/maps/map2/shapes/246.png" id="4_plmhe"]
 [ext_resource type="Texture2D" uid="uid://dc3q711f52um2" path="res://Assets/Images/maps/map2/shapes/244.png" id="5_8fs17"]
 [ext_resource type="FontFile" uid="uid://dhqkn2g7x12vn" path="res://Assets/Fonts/1010__sans.ttf" id="6_i838u"]
+[ext_resource type="Shortcut" uid="uid://c20xrlgkwtkri" path="res://Assets/Shortcuts/new_shortcut.tres" id="7_8fs17"]
 
 [sub_resource type="Animation" id="Animation_q3nyi"]
 length = 0.001
@@ -958,6 +959,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_plmhe")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8fs17")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_i838u")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0g4sg")
+shortcut = ExtResource("7_8fs17")
 
 [node name="Highscores" type="Control" parent="Buttons" unique_id=74047937]
 anchors_preset = 0

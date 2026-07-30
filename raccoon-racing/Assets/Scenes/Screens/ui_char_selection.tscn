@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dpdjbwrhlhhct" path="res://Assets/Animations/CharSelection/grass2.png" id="7_qnxsf"]
 [ext_resource type="Texture2D" uid="uid://cson3qsyf7pk4" path="res://Assets/Animations/CharSelection/road2.png" id="8_mk0pc"]
 [ext_resource type="Texture2D" uid="uid://dyj0x211s7w7c" path="res://Assets/Animations/CharSelection/lines2.png" id="9_tqy4p"]
+[ext_resource type="Shortcut" uid="uid://c20xrlgkwtkri" path="res://Assets/Shortcuts/new_shortcut.tres" id="14_a2dju"]
 [ext_resource type="Texture2D" uid="uid://dioaqtx5mmk0n" path="res://Assets/Images/main_menu/back.png" id="14_gtwtp"]
 [ext_resource type="Texture2D" uid="uid://dp4yjmnoqrwc6" path="res://Assets/Animations/CharSelection/characters/mambopic.png" id="15_obove"]
 [ext_resource type="Texture2D" uid="uid://dmqxmmga4q3k7" path="res://Assets/Animations/CharSelection/characters/shiny2.png" id="16_02813"]
@@ -1068,6 +1069,7 @@ offset_bottom = 228.46
 scale = Vector2(0.9, 0.9)
 focus_neighbor_top = NodePath("../Characters/Hudson/Char/Button")
 focus_neighbor_bottom = NodePath("../Characters/Rocko/Char/Button")
+shortcut = ExtResource("14_a2dju")
 texture_normal = ExtResource("14_gtwtp")
 
 [node name="Characters" type="Control" parent="Control" unique_id=83292420]

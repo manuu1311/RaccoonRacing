@@ -3,6 +3,10 @@ class_name UICharSelection
 
 @onready var back_button: TextureButton = $BackButton
 
+func _ready() -> void:
+	InputModeManager.ReApplyFocus()
+		
+
 func _on_back_button_pressed() -> void:
 	ButtonSounds.PlaySound('click')
 	get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_main_menu.tscn')
