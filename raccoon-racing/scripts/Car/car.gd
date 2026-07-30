@@ -123,7 +123,8 @@ var AiUsePropTime:int=0
 enum turnstate{IDLE,RIGHT,LEFT,FORWARD}
 var CurrentState:turnstate
 var IsAccelerating:bool
-
+signal WallBump
+signal KartBump
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 	map=gamemap
@@ -619,7 +620,7 @@ func GetHitStatus(tx:float, ty:float)->void:
 	#no wall detected
 	if(is_nan(wallAngledeg)):
 		return 
-	sounds.playbumpsound()
+	var speed_before: Vector2 = speed
 	var speedangle:float=speed.angle()
 	var wallAngle :float= deg_to_rad(wallAngledeg)
 	var speedwallangle:float=wrapf(
@@ -653,8 +654,10 @@ func GetHitStatus(tx:float, ty:float)->void:
 			speedwallangle *=0.5
 		speed=speed.rotated(deg_to_rad(speedwallangle))
 	var wall_hit_factor:float = 1.0 - map.Wallspring * (speedwallangle90 * abs(abs(poswallangle) - 90) / 90.0)
-	wall_hit_factor = clamp(wall_hit_factor, -5.0, 5.0)
+	var speed_lost: float = (speed_before - speed).length()
 	speed *= wall_hit_factor
+	sounds.playbumpsound()
+	WallBump.emit(speed_lost)
 	speed+=(Vector2(0.1,0).rotated(deg_to_rad(wallAngledeg+90)))
 	stepx = int(speed.x * 10.0) / 10.0
 	stepy = int(speed.y * 10.0) / 10.0
@@ -704,6 +707,7 @@ func BeAttacked(who: Car)->void:
 @rpc('any_peer','call_local','reliable')
 func ResolveAttackedCollisions(_id:int, newspeed:Vector2,newbs:bool)->void:
 	sounds.playbumpsound()
+	KartBump.emit((newspeed-speed).length())
 	speed=newspeed
 	bs=newbs
 	if bs:

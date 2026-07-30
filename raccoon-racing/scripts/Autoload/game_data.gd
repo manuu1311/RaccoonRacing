@@ -67,6 +67,8 @@ var CupTimes:Array[Array]=[
 var OnlinePlayersCount:int=1
 var AICanUseProp:bool=true
 
+var VibrationMultiplier:float=1
+
 const SAVE_PATH = "user://savegame.tres"
 var save_data: SaveData
 var debug_save_file: SaveData=null

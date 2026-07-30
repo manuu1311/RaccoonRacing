@@ -227,6 +227,7 @@
 [ext_resource type="Texture2D" uid="uid://5locry7to46g" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GiveSleep/42.png" id="205_iv1uf"]
 [ext_resource type="Texture2D" uid="uid://barirfjr3s38j" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GiveSleep/43.png" id="206_uc0lh"]
 [ext_resource type="Script" uid="uid://ckepxlv4m520p" path="res://scripts/Car/input_handler.gd" id="227_xe8o2"]
+[ext_resource type="Script" uid="uid://vxlcf6cr06ig" path="res://scripts/Car/vibration_handler.gd" id="228_1tcci"]
 [ext_resource type="Script" uid="uid://3lbngqcexe0l" path="res://addons/netfox/state-synchronizer.gd" id="229_1tcci"]
 [ext_resource type="Script" uid="uid://dour8fehaaugp" path="res://addons/netfox/tick-interpolator.gd" id="229_ug78t"]
 
@@ -1228,6 +1229,13 @@ car = NodePath("..")
 
 [node name="InputHandler" type="Node" parent="." unique_id=1840505980]
 script = ExtResource("227_xe8o2")
+
+[node name="VibrationHandler" type="Node" parent="." unique_id=1183192662]
+script = ExtResource("228_1tcci")
+friction_min = 35.0
+friction_weak_max = 0.4
+wall_bump_max_lost_speed = 30
+kart_bump_max_lost_speed = 20
 
 [node name="StateSynchronizer" type="Node" parent="." unique_id=1732001525 node_paths=PackedStringArray("root")]
 script = ExtResource("229_1tcci")

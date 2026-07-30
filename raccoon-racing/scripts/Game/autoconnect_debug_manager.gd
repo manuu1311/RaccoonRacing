@@ -19,15 +19,16 @@ signal ClientRegistrationComplete
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	DisableHud()
-	await NetworkTime.after_sync
+	if IsMultiplayer:
+		await NetworkTime.after_sync
 	NetworkSetup()
 	LoadMinimap()
+	map.deferredInit()
 	GameData.currentMap=MapNum
 	GameData.currentCharacter=mainchar
 	stagesize=map.GetMapSize()
 	SceneAngleMoveExpandPos = Vector2(150,0)
 	SceneAngleMoveExpandNowPos = Vector2.ZERO
-	map.deferredInit()
 	GameData.PlayersArr=[]
 	GameData.OrderInfo=[]
 	GameData.Ranking=[]
@@ -78,6 +79,8 @@ func RemoteStartRace()->void:
 func CreateCars()->void:
 	for player:Player in GameData.PlayersArr:
 		RegisterPlayer(player)
+	var vibhandler:VibrationHandler=GameData.PlayersArr[0].car.get_node('VibrationHandler') as VibrationHandler
+	vibhandler.RegisterCar(GameData.PlayersArr[0].car)
 
 func RegisterPlayer(player:Player)->void:
 	var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
