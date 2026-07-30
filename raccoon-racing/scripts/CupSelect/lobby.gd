@@ -2,6 +2,7 @@ extends Control
 class_name MainLobby
 
 @onready var lbltext: Label = $LobbyText/MainText
+@onready var lobbytext_button: Button = $LobbyText/Button
 @onready var lobby_screen: Control = $LobbyScreen
 @onready var cup_screen: UICupSelection = $"../CupScreen"
 var InLobbyScreen:bool=false
@@ -82,6 +83,8 @@ func _on_lobby_pressed() -> void:
 	else:
 		ButtonSounds.PlaySound("click")
 		if InLobbyScreen:
+			lobbytext_button.focus_neighbor_left='../../../CupScreen/BackButton'
+			lobbytext_button.focus_neighbor_top='../../../CupScreen/Cups/Cup8/Button'
 			InLobbyScreen=false
 			lbltext.add_theme_color_override("font_color",Color.WHITE)
 			lobby_screen.hide()
@@ -89,6 +92,8 @@ func _on_lobby_pressed() -> void:
 			cup_screen.HandleShiny(GameData.currentCup)
 		else:
 			InLobbyScreen=true
+			lobbytext_button.focus_neighbor_left=NodePath("")
+			lobbytext_button.focus_neighbor_top=NodePath("")
 			lbltext.add_theme_color_override("font_color",Color.YELLOW)
 			cup_screen.hide()
 			lobby_screen.show()

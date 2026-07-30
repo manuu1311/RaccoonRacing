@@ -72,141 +72,6 @@ _data = {
 &"sliding": SubResource("Animation_lo0sp")
 }
 
-[sub_resource type="Animation" id="Animation_ia3vx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cup1/Img/Shiny:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_n5pa4")]
-}
-
-[sub_resource type="Animation" id="Animation_4q2sj"]
-resource_name = "shinyAnim"
-length = 0.14286
-loop_mode = 1
-step = 0.028571429
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cup1/Img/Shiny:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Cup2/Img/Shiny:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Cup3/Img/Shiny:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Cup4/Img/Shiny:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Cup5/Img/Shiny:texture")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Cup6/Img/Shiny:texture")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Cup7/Img/Shiny:texture")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Cup8/Img/Shiny:texture")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4j5vo"]
-_data = {
-&"RESET": SubResource("Animation_ia3vx"),
-&"shinyAnim": SubResource("Animation_4q2sj")
-}
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rwrk"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2rjpb"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qkely"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aqrqf"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6uye0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ycji"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lsqhh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u1jg4"]
@@ -429,6 +294,157 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pglv"]
 
+[sub_resource type="Animation" id="Animation_ia3vx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cup1/Img/Shiny:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_n5pa4")]
+}
+
+[sub_resource type="Animation" id="Animation_4q2sj"]
+resource_name = "shinyAnim"
+length = 0.14286
+loop_mode = 1
+step = 0.028571429
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cup1/Img/Shiny:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cup2/Img/Shiny:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cup3/Img/Shiny:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cup4/Img/Shiny:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Cup5/Img/Shiny:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cup6/Img/Shiny:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cup7/Img/Shiny:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Cup8/Img/Shiny:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.057142857, 0.114285715),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_n5pa4"), ExtResource("5_w6uiw"), ExtResource("6_mpbsm")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4j5vo"]
+_data = {
+&"RESET": SubResource("Animation_ia3vx"),
+&"shinyAnim": SubResource("Animation_4q2sj")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rwrk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2rjpb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qkely"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b82vi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4nowa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67xml"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qme77"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivuh7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oe1ws"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jbyn2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mk067"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aqrqf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6uye0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ycji"]
+
 [node name="UiCup" type="CanvasLayer" unique_id=1885147626]
 
 [node name="Background" type="Control" parent="." unique_id=1712459191]
@@ -459,6 +475,810 @@ layout_mode = 0
 offset_right = 500.0
 offset_bottom = 500.0
 texture = ExtResource("2_lo0sp")
+
+[node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("29_2rjpb")
+lobby_script = NodePath("LobbyScreen/LobbyScreen")
+
+[node name="LobbyText" type="Control" parent="Lobby" unique_id=1426446236]
+anchors_preset = 0
+offset_left = 246.195
+offset_top = 428.385
+offset_right = 246.195
+offset_bottom = 428.385
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyText" unique_id=964052060]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 26
+text = "Lobby"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyText" unique_id=251772356]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 26
+text = "Lobby"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyText" unique_id=798313544]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 26
+text = "Lobby"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Lobby/LobbyText" unique_id=1993907484]
+layout_mode = 0
+offset_left = 121.80499
+offset_top = 8.61499
+offset_right = 222.805
+offset_bottom = 51.61499
+focus_neighbor_left = NodePath("../../../CupScreen/BackButton")
+focus_neighbor_top = NodePath("../../../CupScreen/Cups/Cup8/Button")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
+
+[node name="LobbyScreen" type="Control" parent="Lobby" unique_id=333585633]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="JoinScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=2082871443]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LanButton" type="Control" parent="Lobby/LobbyScreen/JoinScreen" unique_id=1483382074]
+anchors_preset = 0
+offset_left = 76.845
+offset_top = 60.195
+offset_right = 76.845
+offset_bottom = 60.195
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=1849875198]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 37
+text = "Lan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=543173141]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 37
+text = "Lan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=1410226248]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 37
+text = "Lan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=808217682]
+layout_mode = 0
+offset_left = 124.155
+offset_top = 5.8050003
+offset_right = 221.155
+offset_bottom = 52.805
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
+
+[node name="ToggleButton" type="CheckButton" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=2120807744]
+layout_mode = 0
+offset_left = 149.155
+offset_top = 49.805
+offset_right = 193.155
+offset_bottom = 73.805
+focus_mode = 0
+button_pressed = true
+icon_alignment = 1
+
+[node name="HostButton" type="Control" parent="Lobby/LobbyScreen/JoinScreen" unique_id=921356509]
+anchors_preset = 0
+offset_left = 76.845
+offset_top = 147.285
+offset_right = 76.845
+offset_bottom = 147.285
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/JoinScreen/HostButton" unique_id=2016332513]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 53
+text = "Host"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyScreen/JoinScreen/HostButton" unique_id=1194832893]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 53
+text = "Host"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyScreen/JoinScreen/HostButton" unique_id=683248519]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 53
+text = "Host"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/HostButton" unique_id=1647547091 groups=["default_focus"]]
+layout_mode = 0
+offset_left = 94.155
+offset_top = 4.7149963
+offset_right = 249.155
+offset_bottom = 65.715
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
+
+[node name="JoinButton" type="Control" parent="Lobby/LobbyScreen/JoinScreen" unique_id=1114631265]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 51.800003
+offset_top = 228.045
+offset_right = 51.800003
+offset_bottom = 228.045
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=477559761]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 53
+text = "Join"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=1256551184]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 53
+text = "Join"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=147509161]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 53
+text = "Join"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=689550352]
+layout_mode = 0
+offset_left = 99.2
+offset_top = 4.955017
+offset_right = 245.2
+offset_bottom = 64.95502
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
+
+[node name="Discover" type="Control" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=1584484851]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="base" type="Panel" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover" unique_id=136488334]
+layout_mode = 0
+offset_left = 253.20001
+offset_top = 8.955002
+offset_right = 313.2
+offset_bottom = 68.955
+scale = Vector2(0.8, 0.8)
+theme_override_styles/panel = SubResource("StyleBoxFlat_5pglv")
+
+[node name="icon" type="TextureRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base" unique_id=876095021]
+clip_children = 1
+layout_mode = 0
+offset_left = 9.999999
+offset_top = 5.9999995
+offset_right = 850.0
+offset_bottom = 865.0
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("30_tke11")
+
+[node name="line1" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=210404503]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_top = 655.0005
+offset_right = 134.68
+offset_bottom = 789.6275
+color = Color(1, 0, 0, 1)
+
+[node name="line2" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=311410509]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_left = 168.66826
+offset_top = 385.60236
+offset_right = 618.4049
+offset_bottom = 533.1322
+rotation = 0.84648466
+color = Color(1, 1, 0, 1)
+
+[node name="line3" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=477780298]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_left = 300.00027
+offset_top = 180.00064
+offset_right = 925.7847
+offset_bottom = 368.4704
+rotation = 0.89011794
+color = Color(0.0124999285, 1, 0, 1)
+
+[node name="line4" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=1116462668]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_left = 250.00024
+offset_top = 5.000659
+offset_right = 1089.4928
+offset_bottom = 193.4704
+rotation = 0.25307274
+color = Color(0.9312496, 0, 1, 1)
+
+[node name="line5" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=904953338]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.048
+anchor_bottom = 0.047000002
+offset_left = 675.0001
+offset_top = 5.000667
+offset_right = 1514.4927
+offset_bottom = 193.47041
+rotation = 1.2304571
+color = Color(0.8937502, 0, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base" unique_id=1343525636]
+libraries/ = SubResource("AnimationLibrary_kmnuw")
+
+[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover" unique_id=2100640391]
+layout_mode = 0
+offset_left = 257.2
+offset_top = 11.955002
+offset_right = 297.2
+offset_bottom = 54.955
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2ji5b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7scm4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kmnuw")
+
+[node name="TextEdit" type="LineEdit" parent="Lobby/LobbyScreen/JoinScreen" unique_id=627887546]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 318.0
+offset_right = 388.0
+offset_bottom = 367.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 8
+placeholder_text = "Enter ip or press discover"
+alignment = 1
+
+[node name="Infolbl" type="Label" parent="Lobby/LobbyScreen/JoinScreen" unique_id=2022208306]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 362.0
+offset_right = 426.0
+offset_bottom = 437.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 10
+text = "Connecting to server
+(might take a while after inactivity)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251 node_paths=PackedStringArray("rects", "labels")]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("30_u1jg4")
+names = Array[String](["Frank", "Bot Aldo", "Bot Waldo", "Bot Rinco"])
+rects = [NodePath("HBoxContainer/Char1/Char"), NodePath("HBoxContainer/Char2/Char"), NodePath("HBoxContainer/Char3/Char"), NodePath("HBoxContainer/Char4/Char")]
+labels = [NodePath("HBoxContainer/Char1/Label"), NodePath("HBoxContainer/Char2/Label"), NodePath("HBoxContainer/Char3/Label"), NodePath("HBoxContainer/Char4/Label")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=66908092]
+layout_mode = 1
+offset_left = 38.0
+offset_top = 150.0
+offset_right = 370.0
+offset_bottom = 250.0
+theme_override_constants/separation = 100
+
+[node name="Char1" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=793430571]
+layout_mode = 2
+size_flags_horizontal = 7
+
+[node name="Char" type="TextureRect" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char1" unique_id=966973970]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+texture = ExtResource("30_qkely")
+expand_mode = 1
+
+[node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char1" unique_id=1281781118]
+layout_mode = 0
+offset_top = 108.0
+offset_right = 100.0
+offset_bottom = 140.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Rocko"
+alignment = 1
+
+[node name="Char2" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=460114918]
+layout_mode = 2
+size_flags_horizontal = 7
+
+[node name="Char" type="TextureRect" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char2" unique_id=1074099149]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+texture = ExtResource("30_qkely")
+expand_mode = 1
+
+[node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char2" unique_id=209030174]
+layout_mode = 0
+offset_top = 108.0
+offset_right = 100.0
+offset_bottom = 140.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Rocko"
+alignment = 1
+
+[node name="Char3" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=227305550]
+layout_mode = 2
+size_flags_horizontal = 7
+
+[node name="Char" type="TextureRect" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char3" unique_id=1483447698]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+texture = ExtResource("30_qkely")
+expand_mode = 1
+
+[node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char3" unique_id=1649749730]
+layout_mode = 0
+offset_top = 108.0
+offset_right = 100.0
+offset_bottom = 140.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Bot Aldo"
+alignment = 1
+
+[node name="Char4" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=874258086]
+layout_mode = 2
+size_flags_horizontal = 7
+
+[node name="Char" type="TextureRect" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char4" unique_id=1536925367]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+texture = ExtResource("31_lsqhh")
+expand_mode = 1
+
+[node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char4" unique_id=1329705382]
+layout_mode = 0
+offset_top = 108.0
+offset_right = 100.0
+offset_bottom = 140.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Bot Waldo"
+alignment = 1
+
+[node name="Text" type="Label" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=410879286]
+layout_mode = 0
+offset_left = 217.0
+offset_top = 11.0
+offset_right = 348.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 7
+text = "Lobby code:"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="Code" type="Button" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=326425690]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 11.0
+offset_right = 494.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5pglv")
+text = "rnjs1lkvnrel35lo"
+alignment = 0
+
+[node name="LeaveLobby" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=855267174]
+anchors_preset = 0
+offset_left = 99.59
+offset_top = 327.185
+offset_right = 99.59
+offset_bottom = 327.185
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/LeaveLobby" unique_id=1479748235]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 33
+text = "Leave lobby"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/LeaveLobby" unique_id=103554212]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 33
+text = "Leave lobby"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/LeaveLobby" unique_id=1099587893]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 33
+text = "Leave lobby"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Lobby/LobbyScreen/LobbyScreen/LeaveLobby" unique_id=899658060 groups=["default_focus"]]
+layout_mode = 0
+offset_left = 54.410004
+offset_top = 5.8150024
+offset_right = 292.41
+offset_bottom = 57.815002
+focus_neighbor_right = NodePath("../../../../LobbyText/Button")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
+
+[node name="CupInfo" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=1420956524]
+anchors_preset = 0
+offset_left = -39.77
+offset_top = 63.0
+offset_right = -39.77
+offset_bottom = 63.0
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=2135120703]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 18
+text = "CUP SELECTED:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=2023728171]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 18
+text = "CUP SELECTED:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=741845901]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 18
+text = "CUP SELECTED:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cup" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=70962671]
+layout_mode = 0
+offset_left = 232.77
+offset_top = 11.300003
+offset_right = 363.77002
+offset_bottom = 43.300003
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 21
+text = "CUP 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="StartGame" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=1312708556]
+anchors_preset = 0
+offset_left = -56.875
+offset_top = 405.54
+offset_right = -56.875
+offset_bottom = 405.54
+
+[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1148406048]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 33
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1742042146]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 33
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1301247248]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("2_q3nyi")
+theme_override_font_sizes/font_size = 33
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1790822476]
+layout_mode = 0
+offset_left = 101.875
+offset_top = 6.4599915
+offset_right = 242.875
+offset_bottom = 52.45999
+focus_neighbor_right = NodePath("../../../../LobbyText/Button")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
+
+[node name="AIPropUse" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=53470234]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="btn" type="CheckBox" parent="Lobby/LobbyScreen/LobbyScreen/AIPropUse" unique_id=458336009]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 71.0
+offset_right = 476.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0.5625, 0.25839844, 0.25839844, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 21
+theme_override_colors/checkbox_checked_color = Color(1, 1, 0, 1)
+theme_override_colors/checkbox_unchecked_color = Color(1, 1, 1, 1)
+button_pressed = true
+text = "AI props"
+text_overrun_behavior = 1
+clip_text = true
 
 [node name="CupScreen" type="Control" parent="." unique_id=1820990992]
 visible = false
@@ -637,15 +1457,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="CupScreen/Cups/Cup1" unique_id=1101783617]
+[node name="Button" type="Button" parent="CupScreen/Cups/Cup1" unique_id=1101783617 groups=["default_focus"]]
 layout_mode = 0
 offset_left = 1.6600018
 offset_top = 2.5
 offset_right = 206.66
 offset_bottom = 70.5
+focus_neighbor_top = NodePath("../../../../Lobby/LobbyText/Button")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b82vi")
 
 [node name="Cup2" type="Control" parent="CupScreen/Cups" unique_id=191826416]
 anchors_preset = 0
@@ -763,6 +1585,7 @@ offset_bottom = 70.5
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nowa")
 
 [node name="Cup3" type="Control" parent="CupScreen/Cups" unique_id=908395654]
 anchors_preset = 0
@@ -880,6 +1703,7 @@ offset_bottom = 70.5
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_67xml")
 
 [node name="Cup4" type="Control" parent="CupScreen/Cups" unique_id=1153626590]
 anchors_preset = 0
@@ -997,6 +1821,7 @@ offset_bottom = 70.5
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qme77")
 
 [node name="Cup5" type="Control" parent="CupScreen/Cups" unique_id=1837400641]
 anchors_preset = 0
@@ -1114,6 +1939,7 @@ offset_bottom = 70.5
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ivuh7")
 
 [node name="Cup6" type="Control" parent="CupScreen/Cups" unique_id=773169809]
 anchors_preset = 0
@@ -1231,6 +2057,7 @@ offset_bottom = 70.5
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oe1ws")
 
 [node name="Cup7" type="Control" parent="CupScreen/Cups" unique_id=946534370]
 anchors_preset = 0
@@ -1345,9 +2172,12 @@ offset_left = 1.6600018
 offset_top = 2.5
 offset_right = 206.66
 offset_bottom = 70.5
+focus_neighbor_right = NodePath("../../Cup8/Button")
+focus_neighbor_bottom = NodePath("../../../BackButton")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jbyn2")
 
 [node name="Cup8" type="Control" parent="CupScreen/Cups" unique_id=1506406338]
 anchors_preset = 0
@@ -1462,9 +2292,12 @@ offset_left = 1.6600018
 offset_top = 2.5
 offset_right = 206.66
 offset_bottom = 70.5
+focus_neighbor_left = NodePath("../../Cup7/Button")
+focus_neighbor_bottom = NodePath("../../../BackButton")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mk067")
 
 [node name="BGFilter" type="TextureRect" parent="CupScreen" unique_id=790340210]
 visible = false
@@ -1745,815 +2578,78 @@ offset_top = 442.46
 offset_right = 301.00006
 offset_bottom = 484.46
 scale = Vector2(0.9, 0.9)
+focus_neighbor_top = NodePath("../Cups/Cup7/Button")
+focus_neighbor_right = NodePath("../../Lobby/LobbyText/Button")
+focus_neighbor_bottom = NodePath("../Cups/Cup1/Button")
 texture_normal = ExtResource("16_tdwvn")
 
-[node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("29_2rjpb")
-lobby_script = NodePath("LobbyScreen/LobbyScreen")
-
-[node name="LobbyText" type="Control" parent="Lobby" unique_id=1426446236]
-anchors_preset = 0
-offset_left = 246.195
-offset_top = 428.385
-offset_right = 246.195
-offset_bottom = 428.385
-
-[node name="Outline2" type="Label" parent="Lobby/LobbyText" unique_id=964052060]
-layout_mode = 0
-offset_left = 2.985
-offset_top = 2.87
-offset_right = 338.98755
-offset_bottom = 53.87
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 31
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 26
-text = "Lobby"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Outline" type="Label" parent="Lobby/LobbyText" unique_id=251772356]
-layout_mode = 0
-offset_left = 5.76
-offset_top = 6.675
-offset_right = 341.76257
-offset_bottom = 57.675
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = -2
-theme_override_constants/shadow_offset_y = -2
-theme_override_constants/shadow_outline_size = 24
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 26
-text = "Lobby"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MainText" type="Label" parent="Lobby/LobbyText" unique_id=798313544]
-layout_mode = 0
-offset_right = 336.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 14
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 26
-text = "Lobby"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="Lobby/LobbyText" unique_id=1993907484]
-layout_mode = 0
-offset_left = 121.80499
-offset_top = 8.61499
-offset_right = 222.805
-offset_bottom = 51.61499
-theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
-
-[node name="LobbyScreen" type="Control" parent="Lobby" unique_id=333585633]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="JoinScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=2082871443]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="LanButton" type="Control" parent="Lobby/LobbyScreen/JoinScreen" unique_id=1483382074]
-anchors_preset = 0
-offset_left = 76.845
-offset_top = 60.195
-offset_right = 76.845
-offset_bottom = 60.195
-
-[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=1849875198]
-layout_mode = 0
-offset_left = 2.985
-offset_top = 2.87
-offset_right = 338.98755
-offset_bottom = 53.87
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 31
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 37
-text = "Lan"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Outline" type="Label" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=543173141]
-layout_mode = 0
-offset_left = 5.76
-offset_top = 6.675
-offset_right = 341.76257
-offset_bottom = 57.675
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = -2
-theme_override_constants/shadow_offset_y = -2
-theme_override_constants/shadow_outline_size = 24
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 37
-text = "Lan"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MainText" type="Label" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=1410226248]
-layout_mode = 0
-offset_right = 336.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 14
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 37
-text = "Lan"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=808217682]
-layout_mode = 0
-offset_left = 132.155
-offset_top = 12.805
-offset_right = 215.155
-offset_bottom = 49.805
-theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
-
-[node name="ToggleButton" type="CheckButton" parent="Lobby/LobbyScreen/JoinScreen/LanButton" unique_id=2120807744]
-layout_mode = 0
-offset_left = 149.155
-offset_top = 49.805
-offset_right = 193.155
-offset_bottom = 73.805
-button_pressed = true
-icon_alignment = 1
-
-[node name="HostButton" type="Control" parent="Lobby/LobbyScreen/JoinScreen" unique_id=921356509]
-anchors_preset = 0
-offset_left = 76.845
-offset_top = 147.285
-offset_right = 76.845
-offset_bottom = 147.285
-
-[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/JoinScreen/HostButton" unique_id=2016332513]
-layout_mode = 0
-offset_left = 2.985
-offset_top = 2.87
-offset_right = 338.98755
-offset_bottom = 53.87
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 31
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 53
-text = "Host"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Outline" type="Label" parent="Lobby/LobbyScreen/JoinScreen/HostButton" unique_id=1194832893]
-layout_mode = 0
-offset_left = 5.76
-offset_top = 6.675
-offset_right = 341.76257
-offset_bottom = 57.675
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = -2
-theme_override_constants/shadow_offset_y = -2
-theme_override_constants/shadow_outline_size = 24
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 53
-text = "Host"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MainText" type="Label" parent="Lobby/LobbyScreen/JoinScreen/HostButton" unique_id=683248519]
-layout_mode = 0
-offset_right = 336.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 14
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 53
-text = "Host"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/HostButton" unique_id=1647547091]
-layout_mode = 0
-offset_left = 96.155
-offset_top = 8.61499
-offset_right = 249.155
-offset_bottom = 62.714996
-theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
-
-[node name="JoinButton" type="Control" parent="Lobby/LobbyScreen/JoinScreen" unique_id=1114631265]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 51.800003
-offset_top = 228.045
-offset_right = 51.800003
-offset_bottom = 228.045
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=477559761]
-layout_mode = 0
-offset_left = 2.985
-offset_top = 2.87
-offset_right = 338.98755
-offset_bottom = 53.87
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 31
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 53
-text = "Join"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Outline" type="Label" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=1256551184]
-layout_mode = 0
-offset_left = 5.76
-offset_top = 6.675
-offset_right = 341.76257
-offset_bottom = 57.675
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = -2
-theme_override_constants/shadow_offset_y = -2
-theme_override_constants/shadow_outline_size = 24
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 53
-text = "Join"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MainText" type="Label" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=147509161]
-layout_mode = 0
-offset_right = 336.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 14
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 53
-text = "Join"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=689550352]
-layout_mode = 0
-offset_left = 104.2
-offset_top = 8.61499
-offset_right = 236.2
-offset_bottom = 64.95502
-theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
-
-[node name="Discover" type="Control" parent="Lobby/LobbyScreen/JoinScreen/JoinButton" unique_id=1584484851]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="base" type="Panel" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover" unique_id=136488334]
-layout_mode = 0
-offset_left = 253.20001
-offset_top = 8.955002
-offset_right = 313.2
-offset_bottom = 68.955
-scale = Vector2(0.8, 0.8)
-theme_override_styles/panel = SubResource("StyleBoxFlat_5pglv")
-
-[node name="icon" type="TextureRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base" unique_id=876095021]
-clip_children = 1
-layout_mode = 0
-offset_left = 9.999999
-offset_top = 5.9999995
-offset_right = 850.0
-offset_bottom = 865.0
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("30_tke11")
-
-[node name="line1" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=210404503]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.048
-anchor_bottom = 0.047000002
-offset_top = 655.0005
-offset_right = 134.68
-offset_bottom = 789.6275
-color = Color(1, 0, 0, 1)
-
-[node name="line2" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=311410509]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.048
-anchor_bottom = 0.047000002
-offset_left = 168.66826
-offset_top = 385.60236
-offset_right = 618.4049
-offset_bottom = 533.1322
-rotation = 0.84648466
-color = Color(1, 1, 0, 1)
-
-[node name="line3" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=477780298]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.048
-anchor_bottom = 0.047000002
-offset_left = 300.00027
-offset_top = 180.00064
-offset_right = 925.7847
-offset_bottom = 368.4704
-rotation = 0.89011794
-color = Color(0.0124999285, 1, 0, 1)
-
-[node name="line4" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=1116462668]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.048
-anchor_bottom = 0.047000002
-offset_left = 250.00024
-offset_top = 5.000659
-offset_right = 1089.4928
-offset_bottom = 193.4704
-rotation = 0.25307274
-color = Color(0.9312496, 0, 1, 1)
-
-[node name="line5" type="ColorRect" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base/icon" unique_id=904953338]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.048
-anchor_bottom = 0.047000002
-offset_left = 675.0001
-offset_top = 5.000667
-offset_right = 1514.4927
-offset_bottom = 193.47041
-rotation = 1.2304571
-color = Color(0.8937502, 0, 1, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/base" unique_id=1343525636]
-libraries/ = SubResource("AnimationLibrary_kmnuw")
-
-[node name="Button" type="Button" parent="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover" unique_id=2100640391]
-layout_mode = 0
-offset_left = 261.2
-offset_top = 14.955002
-offset_right = 295.2
-offset_bottom = 47.955
-theme_override_styles/normal = SubResource("StyleBoxEmpty_2ji5b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_7scm4")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_kmnuw")
-
-[node name="TextEdit" type="LineEdit" parent="Lobby/LobbyScreen/JoinScreen" unique_id=627887546]
-layout_mode = 0
-offset_left = 121.0
-offset_top = 318.0
-offset_right = 388.0
-offset_bottom = 367.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/outline_size = 8
-placeholder_text = "Enter ip or press discover"
-alignment = 1
-
-[node name="Infolbl" type="Label" parent="Lobby/LobbyScreen/JoinScreen" unique_id=2022208306]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 362.0
-offset_right = 426.0
-offset_bottom = 437.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_constants/outline_size = 7
-theme_override_constants/shadow_outline_size = 10
-text = "Connecting to server
-(might take a while after inactivity)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251 node_paths=PackedStringArray("rects", "labels")]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("30_u1jg4")
-names = Array[String](["Frank", "Bot Aldo", "Bot Waldo", "Bot Rinco"])
-rects = [NodePath("HBoxContainer/Char1/Char"), NodePath("HBoxContainer/Char2/Char"), NodePath("HBoxContainer/Char3/Char"), NodePath("HBoxContainer/Char4/Char")]
-labels = [NodePath("HBoxContainer/Char1/Label"), NodePath("HBoxContainer/Char2/Label"), NodePath("HBoxContainer/Char3/Label"), NodePath("HBoxContainer/Char4/Label")]
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=66908092]
-layout_mode = 1
-offset_left = 38.0
-offset_top = 150.0
-offset_right = 370.0
-offset_bottom = 250.0
-theme_override_constants/separation = 100
-
-[node name="Char1" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=793430571]
-layout_mode = 2
-size_flags_horizontal = 7
-
-[node name="Char" type="TextureRect" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char1" unique_id=966973970]
-layout_mode = 0
-offset_right = 100.0
-offset_bottom = 100.0
-texture = ExtResource("30_qkely")
-expand_mode = 1
-
-[node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char1" unique_id=1281781118]
-layout_mode = 0
-offset_top = 108.0
-offset_right = 100.0
-offset_bottom = 140.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/outline_size = 6
-text = "Rocko"
-alignment = 1
-
-[node name="Char2" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=460114918]
-layout_mode = 2
-size_flags_horizontal = 7
-
-[node name="Char" type="TextureRect" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char2" unique_id=1074099149]
-layout_mode = 0
-offset_right = 100.0
-offset_bottom = 100.0
-texture = ExtResource("30_qkely")
-expand_mode = 1
-
-[node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char2" unique_id=209030174]
-layout_mode = 0
-offset_top = 108.0
-offset_right = 100.0
-offset_bottom = 140.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/outline_size = 6
-text = "Rocko"
-alignment = 1
-
-[node name="Char3" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=227305550]
-layout_mode = 2
-size_flags_horizontal = 7
-
-[node name="Char" type="TextureRect" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char3" unique_id=1483447698]
-layout_mode = 0
-offset_right = 100.0
-offset_bottom = 100.0
-texture = ExtResource("30_qkely")
-expand_mode = 1
-
-[node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char3" unique_id=1649749730]
-layout_mode = 0
-offset_top = 108.0
-offset_right = 100.0
-offset_bottom = 140.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/outline_size = 6
-text = "Bot Aldo"
-alignment = 1
-
-[node name="Char4" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=874258086]
-layout_mode = 2
-size_flags_horizontal = 7
-
-[node name="Char" type="TextureRect" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char4" unique_id=1536925367]
-layout_mode = 0
-offset_right = 100.0
-offset_bottom = 100.0
-texture = ExtResource("31_lsqhh")
-expand_mode = 1
-
-[node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char4" unique_id=1329705382]
-layout_mode = 0
-offset_top = 108.0
-offset_right = 100.0
-offset_bottom = 140.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/outline_size = 6
-text = "Bot Waldo"
-alignment = 1
-
-[node name="Text" type="Label" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=410879286]
-layout_mode = 0
-offset_left = 217.0
-offset_top = 11.0
-offset_right = 348.0
-offset_bottom = 43.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 7
-text = "Lobby code:"
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 1
-
-[node name="Code" type="Button" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=326425690]
-layout_mode = 0
-offset_left = 344.0
-offset_top = 11.0
-offset_right = 494.0
-offset_bottom = 42.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_styles/normal = SubResource("StyleBoxEmpty_5pglv")
-text = "rnjs1lkvnrel35lo"
-alignment = 0
-
-[node name="LeaveLobby" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=855267174]
-anchors_preset = 0
-offset_left = 99.59
-offset_top = 327.185
-offset_right = 99.59
-offset_bottom = 327.185
-
-[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/LeaveLobby" unique_id=1479748235]
-layout_mode = 0
-offset_left = 2.985
-offset_top = 2.87
-offset_right = 338.98755
-offset_bottom = 53.87
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 31
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 33
-text = "Leave lobby"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Outline" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/LeaveLobby" unique_id=103554212]
-layout_mode = 0
-offset_left = 5.76
-offset_top = 6.675
-offset_right = 341.76257
-offset_bottom = 57.675
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = -2
-theme_override_constants/shadow_offset_y = -2
-theme_override_constants/shadow_outline_size = 24
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 33
-text = "Leave lobby"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MainText" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/LeaveLobby" unique_id=1099587893]
-layout_mode = 0
-offset_right = 336.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 14
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 33
-text = "Leave lobby"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="Lobby/LobbyScreen/LobbyScreen/LeaveLobby" unique_id=899658060]
-layout_mode = 0
-offset_left = 58.410004
-offset_top = 8.61499
-offset_right = 288.41
-offset_bottom = 51.61499
-theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
-
-[node name="CupInfo" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=1420956524]
-anchors_preset = 0
-offset_left = -39.77
-offset_top = 63.0
-offset_right = -39.77
-offset_bottom = 63.0
-
-[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=2135120703]
-layout_mode = 0
-offset_left = 2.985
-offset_top = 2.87
-offset_right = 338.98755
-offset_bottom = 53.87
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 31
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 18
-text = "CUP SELECTED:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Outline" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=2023728171]
-layout_mode = 0
-offset_left = 5.76
-offset_top = 6.675
-offset_right = 341.76257
-offset_bottom = 57.675
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = -2
-theme_override_constants/shadow_offset_y = -2
-theme_override_constants/shadow_outline_size = 24
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 18
-text = "CUP SELECTED:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MainText" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=741845901]
-layout_mode = 0
-offset_right = 336.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 14
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 18
-text = "CUP SELECTED:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Cup" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/CupInfo" unique_id=70962671]
-layout_mode = 0
-offset_left = 232.77
-offset_top = 11.300003
-offset_right = 363.77002
-offset_bottom = 43.300003
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 0
-theme_override_constants/outline_size = 13
-theme_override_constants/shadow_outline_size = 20
-theme_override_font_sizes/font_size = 21
-text = "CUP 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 1
-
-[node name="StartGame" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=1312708556]
-anchors_preset = 0
-offset_left = -56.875
-offset_top = 405.54
-offset_right = -56.875
-offset_bottom = 405.54
-
-[node name="Outline2" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1148406048]
-layout_mode = 0
-offset_left = 2.985
-offset_top = 2.87
-offset_right = 338.98755
-offset_bottom = 53.87
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 31
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 33
-text = "START"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Outline" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1742042146]
-layout_mode = 0
-offset_left = 5.76
-offset_top = 6.675
-offset_right = 341.76257
-offset_bottom = 57.675
-theme_override_colors/font_color = Color(1, 1, 1, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = -2
-theme_override_constants/shadow_offset_y = -2
-theme_override_constants/shadow_outline_size = 24
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 33
-text = "START"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MainText" type="Label" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1301247248]
-layout_mode = 0
-offset_right = 336.0
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 14
-theme_override_fonts/font = ExtResource("2_q3nyi")
-theme_override_font_sizes/font_size = 33
-text = "START"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="Lobby/LobbyScreen/LobbyScreen/StartGame" unique_id=1790822476]
-layout_mode = 0
-offset_left = 104.875
-offset_top = 8.61499
-offset_right = 236.875
-offset_bottom = 51.61499
-theme_override_styles/normal = SubResource("StyleBoxEmpty_lsqhh")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1jg4")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_tke11")
-
-[node name="AIPropUse" type="Control" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=53470234]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="btn" type="CheckBox" parent="Lobby/LobbyScreen/LobbyScreen/AIPropUse" unique_id=458336009]
-layout_mode = 0
-offset_left = 338.0
-offset_top = 71.0
-offset_right = 476.0
-offset_bottom = 109.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0.5625, 0.25839844, 0.25839844, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 21
-theme_override_colors/checkbox_checked_color = Color(1, 1, 0, 1)
-theme_override_colors/checkbox_unchecked_color = Color(1, 1, 1, 1)
-button_pressed = true
-text = "AI props"
-text_overrun_behavior = 1
-clip_text = true
-
+[connection signal="focus_entered" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_entered"]
+[connection signal="focus_exited" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_exited"]
+[connection signal="mouse_entered" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_pressed"]
+[connection signal="focus_entered" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantext_mouse_entered"]
+[connection signal="focus_exited" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantext_mouse_exited"]
+[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantext_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantext_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantextbutton_pressed"]
+[connection signal="toggled" from="Lobby/LobbyScreen/JoinScreen/LanButton/ToggleButton" to="Lobby" method="_on_toggled_lan"]
+[connection signal="focus_entered" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_hostbutton_mouse_exited"]
+[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_hostbutton_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_hostbutton_pressed"]
+[connection signal="focus_entered" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_entered"]
+[connection signal="focus_exited" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_exited"]
+[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_pressed"]
+[connection signal="focus_entered" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_mouse_entered"]
+[connection signal="focus_exited" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_mouse_exited"]
+[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_pressed"]
+[connection signal="text_submitted" from="Lobby/LobbyScreen/JoinScreen/TextEdit" to="Lobby" method="_on_joinbutton_pressed"]
+[connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/Code" to="Lobby" method="_on_lobbycode_pressed"]
+[connection signal="focus_entered" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_entered"]
+[connection signal="focus_exited" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_exited"]
+[connection signal="mouse_entered" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_button_pressed"]
+[connection signal="mouse_entered" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby/LobbyScreen/LobbyScreen" method="_on_startbutton_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby/LobbyScreen/LobbyScreen" method="_on_startbutton_mouse_exited"]
+[connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby" method="_on_startbutton_pressed"]
+[connection signal="toggled" from="Lobby/LobbyScreen/LobbyScreen/AIPropUse/btn" to="Lobby/LobbyScreen/LobbyScreen" method="_on_aiprop_check_button_toggled"]
+[connection signal="focus_entered" from="CupScreen/Cups/Cup1/Button" to="CupScreen/Cups/Cup1" method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="CupScreen/Cups/Cup1/Button" to="CupScreen/Cups/Cup1" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup1/Button" to="CupScreen/Cups/Cup1" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup1/Button" to="CupScreen/Cups/Cup1" method="_on_button_mouse_exited"]
+[connection signal="focus_entered" from="CupScreen/Cups/Cup2/Button" to="CupScreen/Cups/Cup2" method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="CupScreen/Cups/Cup2/Button" to="CupScreen/Cups/Cup2" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup2/Button" to="CupScreen/Cups/Cup2" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup2/Button" to="CupScreen/Cups/Cup2" method="_on_button_mouse_exited"]
+[connection signal="focus_entered" from="CupScreen/Cups/Cup3/Button" to="CupScreen/Cups/Cup3" method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="CupScreen/Cups/Cup3/Button" to="CupScreen/Cups/Cup3" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup3/Button" to="CupScreen/Cups/Cup3" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup3/Button" to="CupScreen/Cups/Cup3" method="_on_button_mouse_exited"]
+[connection signal="focus_entered" from="CupScreen/Cups/Cup4/Button" to="CupScreen/Cups/Cup4" method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="CupScreen/Cups/Cup4/Button" to="CupScreen/Cups/Cup4" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup4/Button" to="CupScreen/Cups/Cup4" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup4/Button" to="CupScreen/Cups/Cup4" method="_on_button_mouse_exited"]
+[connection signal="focus_entered" from="CupScreen/Cups/Cup5/Button" to="CupScreen/Cups/Cup5" method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="CupScreen/Cups/Cup5/Button" to="CupScreen/Cups/Cup5" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup5/Button" to="CupScreen/Cups/Cup5" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup5/Button" to="CupScreen/Cups/Cup5" method="_on_button_mouse_exited"]
+[connection signal="focus_entered" from="CupScreen/Cups/Cup6/Button" to="CupScreen/Cups/Cup6" method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="CupScreen/Cups/Cup6/Button" to="CupScreen/Cups/Cup6" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup6/Button" to="CupScreen/Cups/Cup6" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup6/Button" to="CupScreen/Cups/Cup6" method="_on_button_mouse_exited"]
+[connection signal="focus_entered" from="CupScreen/Cups/Cup7/Button" to="CupScreen/Cups/Cup7" method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="CupScreen/Cups/Cup7/Button" to="CupScreen/Cups/Cup7" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup7/Button" to="CupScreen/Cups/Cup7" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup7/Button" to="CupScreen/Cups/Cup7" method="_on_button_mouse_exited"]
+[connection signal="focus_entered" from="CupScreen/Cups/Cup8/Button" to="CupScreen/Cups/Cup8" method="_on_button_mouse_entered"]
+[connection signal="focus_exited" from="CupScreen/Cups/Cup8/Button" to="CupScreen/Cups/Cup8" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Cups/Cup8/Button" to="CupScreen/Cups/Cup8" method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/Cups/Cup8/Button" to="CupScreen/Cups/Cup8" method="_on_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/Buttons/HardBTN/Button" to="CupScreen/Buttons" method="_on_diff_mouse_entered" binds= [3]]
@@ -2565,31 +2661,8 @@ clip_text = true
 [connection signal="mouse_entered" from="CupScreen/Buttons/EasyBTN/Button" to="CupScreen/Buttons" method="_on_diff_mouse_entered" binds= [1]]
 [connection signal="mouse_exited" from="CupScreen/Buttons/EasyBTN/Button" to="CupScreen/Buttons" method="_on_diff_mouse_exited" binds= [1]]
 [connection signal="pressed" from="CupScreen/Buttons/EasyBTN/Button" to="CupScreen" method="_on_diff_pressed" binds= [1]]
+[connection signal="focus_entered" from="CupScreen/BackButton" to="CupScreen" method="_on_back_button_mouse_entered"]
+[connection signal="focus_exited" from="CupScreen/BackButton" to="CupScreen" method="_on_back_button_mouse_exited"]
 [connection signal="mouse_entered" from="CupScreen/BackButton" to="CupScreen" method="_on_back_button_mouse_entered"]
 [connection signal="mouse_exited" from="CupScreen/BackButton" to="CupScreen" method="_on_back_button_mouse_exited"]
 [connection signal="pressed" from="CupScreen/BackButton" to="CupScreen" method="_on_back_button_pressed"]
-[connection signal="mouse_entered" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_mouse_exited"]
-[connection signal="pressed" from="Lobby/LobbyText/Button" to="Lobby" method="_on_lobby_pressed"]
-[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantext_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantext_mouse_exited"]
-[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/LanButton/Button" to="Lobby" method="_on_lantextbutton_pressed"]
-[connection signal="toggled" from="Lobby/LobbyScreen/JoinScreen/LanButton/ToggleButton" to="Lobby" method="_on_toggled_lan"]
-[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_hostbutton_mouse_exited"]
-[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/HostButton/Button" to="Lobby" method="_on_hostbutton_pressed"]
-[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_mouse_exited"]
-[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Button" to="Lobby" method="_on_joinbutton_pressed"]
-[connection signal="mouse_entered" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_mouse_exited"]
-[connection signal="pressed" from="Lobby/LobbyScreen/JoinScreen/JoinButton/Discover/Button" to="Lobby" method="_on_detect_pressed"]
-[connection signal="text_submitted" from="Lobby/LobbyScreen/JoinScreen/TextEdit" to="Lobby" method="_on_joinbutton_pressed"]
-[connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/Code" to="Lobby" method="_on_lobbycode_pressed"]
-[connection signal="mouse_entered" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_leavelobbybutton_mouse_exited"]
-[connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/LeaveLobby/Button" to="Lobby" method="_on_button_pressed"]
-[connection signal="mouse_entered" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby/LobbyScreen/LobbyScreen" method="_on_startbutton_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby/LobbyScreen/LobbyScreen" method="_on_startbutton_mouse_exited"]
-[connection signal="pressed" from="Lobby/LobbyScreen/LobbyScreen/StartGame/Button" to="Lobby" method="_on_startbutton_pressed"]
-[connection signal="toggled" from="Lobby/LobbyScreen/LobbyScreen/AIPropUse/btn" to="Lobby/LobbyScreen/LobbyScreen" method="_on_aiprop_check_button_toggled"]

@@ -201,9 +201,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="Text/ContinueButton" unique_id=1767248069 groups=["default_focus"]]
-offset_left = 108.0
+offset_left = 195.0
 offset_top = 415.0
-offset_right = 402.0
+offset_right = 317.0
 offset_bottom = 444.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i2oi5")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_kpbv8")

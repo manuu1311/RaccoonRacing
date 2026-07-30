@@ -11,7 +11,6 @@ const petroeffect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petr
 @onready var bomb_effect: AnimatedSprite2D = $BombEffect
 @onready var bottom_effect: Node2D = $BottomEffect
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
 var petroadd:bool=true
 var exploded:bool=false
 

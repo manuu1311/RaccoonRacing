@@ -6,6 +6,7 @@ enum Mode { MOUSE, CONTROLLER, EMPTY }
 signal mode_changed(mode: Mode)
 
 var mode: Mode = Mode.MOUSE
+var previous_mode:Mode
 
 const JOY_AXIS_DEADZONE := 0.35
 
@@ -14,6 +15,7 @@ func _ready()->void:
 	get_tree().scene_changed.connect(_on_scene_changed)
 
 func _input(event: InputEvent) -> void:
+	previous_mode=mode
 	if event is InputEventJoypadButton:
 		_switch_to_controller()
 	elif event is InputEventJoypadMotion:
@@ -34,7 +36,9 @@ func _switch_to_controller() -> void:
 
 	var vp :Viewport= get_viewport()
 	var target :Control= vp.gui_get_hovered_control()
-	if target and target.focus_mode != Control.FOCUS_NONE:
+	if target:
+		target.notification(Control.NOTIFICATION_MOUSE_EXIT)
+	if target and target.focus_mode != Control.FOCUS_NONE and previous_mode==Mode.MOUSE:
 		target.grab_focus()
 	else:
 		_focus_nearest_fallback(vp)
