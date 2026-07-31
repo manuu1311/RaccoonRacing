@@ -175,6 +175,7 @@ func LobbyTransition()->void:
 	join_screen.hide()
 	lobby_scene.show()
 	code.text=NetworkManager.current_lobby
+	InputModeManager.ReApplyFocus()
 	
 func _on_leavelobbybutton_mouse_entered() -> void:
 	ButtonSounds.PlaySound('hover')

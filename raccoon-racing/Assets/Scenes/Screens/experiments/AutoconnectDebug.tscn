@@ -9,7 +9,6 @@ glow_enabled = true
 
 [node name="AutoconnectDebug" type="Node2D" unique_id=43745372]
 script = ExtResource("1_hbi2c")
-IsMultiplayer = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=559091128]
 environment = SubResource("Environment_y5543")

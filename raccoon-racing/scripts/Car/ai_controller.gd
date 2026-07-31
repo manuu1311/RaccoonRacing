@@ -20,3 +20,9 @@ func handle_input()->void:
 			special=aiplayer.AutoUseProp()
 		else:
 			special=false
+	else:
+		forward=false
+		brake=false
+		left=false
+		right=false
+		cancelturn=false

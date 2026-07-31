@@ -46,6 +46,7 @@ func RegisterCar(fcscar: Car) -> void:
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	car.WallBump.connect(OnWallBump)
 	car.KartBump.connect(OnKartBump)
+	await ready
 	set_process(true)
 
 func _process(delta: float) -> void:

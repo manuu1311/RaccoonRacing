@@ -511,6 +511,10 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_02813"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a2dju"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oq6vp"]
+
 [sub_resource type="Animation" id="Animation_p3osk"]
 resource_name = "FadeIn"
 length = 2.34286
@@ -1128,6 +1132,7 @@ focus_neighbor_bottom = NodePath("../../../Pingo/Char/Button")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a2dju")
 
 [node name="Lock" type="TextureRect" parent="Control/Characters/Rocko" unique_id=921747378]
 layout_mode = 0
@@ -1202,6 +1207,7 @@ focus_neighbor_bottom = NodePath("../../../Hudson/Char/Button")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oq6vp")
 
 [node name="Lock" type="TextureRect" parent="Control/Characters/Vixen" unique_id=1371307557]
 layout_mode = 0
@@ -1276,6 +1282,7 @@ focus_neighbor_bottom = NodePath("../../../Banzai/Char/Button")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oq6vp")
 
 [node name="Lock" type="TextureRect" parent="Control/Characters/Mambo" unique_id=111246684]
 layout_mode = 0
@@ -1351,6 +1358,7 @@ focus_neighbor_bottom = NodePath("../../../../BackButton")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oq6vp")
 
 [node name="Lock" type="TextureRect" parent="Control/Characters/Pingo" unique_id=903902098]
 layout_mode = 0
@@ -1428,6 +1436,7 @@ focus_neighbor_bottom = NodePath("../../../../BackButton")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oq6vp")
 
 [node name="Lock" type="TextureRect" parent="Control/Characters/Hudson" unique_id=2114148212]
 layout_mode = 0
@@ -1504,6 +1513,7 @@ focus_neighbor_bottom = NodePath("../../../../BackButton")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_obove")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fi2k8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_02813")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oq6vp")
 
 [node name="Lock" type="TextureRect" parent="Control/Characters/Banzai" unique_id=1759660974]
 layout_mode = 0
