@@ -144,6 +144,7 @@ func _ready() -> void:
 		car.show()
 		hovercraft.hide()
 	steer_normal()
+	stop_wheel()
 	current_vehicle=GameData.current_vehicle
 	#get collision points from the car scene
 	PopulateCollisions()
@@ -411,10 +412,10 @@ func ProcessFX()->void:
 		spawn_smoke("smoke1",moveAngCar < 0)
 		if(friction > 70):
 			spawn_smoke("smoke1",moveAngCar > 0)
-		elif(speed.length() < 0.5):
-			stop_wheel()
-		else:
-			all_wheel()
+	elif(speed.length() < 0.5):
+		stop_wheel()
+	else:
+		all_wheel()
 
 #get difference beteween speed angle and sprite angle
 func get_angle_diff()->float:
@@ -698,7 +699,7 @@ func BeAttacked(who: Car)->void:
 		ResolveAttackedCollisions.rpc(playerID,enemySpeed+pushvector*40,true)
 	#if im invincible and enemy is not: give massive knockback
 	elif(isInvincibletemp and not enemyInvincible):
-		who.ResolveAttackedCollisions.rpc(who.playerID,enemySpeed+pushvector*40,true)
+		who.ResolveAttackedCollisions.rpc(who.playerID,enemySpeed-pushvector*40,true)
 	#no one is invincible
 	else:
 		ResolveAttackedCollisions.rpc(playerID,enemySpeed+pushvector,false)

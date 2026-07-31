@@ -46,6 +46,7 @@ func UseProp()->void:
 				if(newplayer.PlayerID != player.PlayerID):
 					if(not newplayer.car.isResetting and not newplayer.car.isInvincible):
 						newplayer.prop.propArr.append(SleepProp.new(newplayer))
+						player.car.prop_effector.PlaySleepHudAnimation(newplayer.PlayerID)
 				else:
 					player.car.prop_effector.SleepShotArt(player.PlayerID)
 				_loc2_ = _loc2_ + 1;

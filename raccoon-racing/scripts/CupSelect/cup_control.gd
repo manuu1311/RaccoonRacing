@@ -110,5 +110,6 @@ func _on_cup_pressed(id: int) -> void:
 			choosing_diff=true
 			buttons.updateLocks(GameData.currentCup)
 			show_diff_screen()
-			tofocus_btn.grab_focus()
+			if InputModeManager.mode==InputModeManager.Mode.CONTROLLER:
+				tofocus_btn.grab_focus()
 			

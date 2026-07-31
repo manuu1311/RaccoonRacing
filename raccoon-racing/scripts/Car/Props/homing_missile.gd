@@ -33,7 +33,7 @@ func SetDmc()->void:
 	HomingMissile.speed=player.car.speed
 	HomingMissile.petrolength=10
 	HomingMissile.petrowidth=1
-	if player.PlayerID == GameData.FocusPlayer.PlayerID:
+	if player.current_control==Player.control_type.HUMAN:
 		player.car.sounds.playMissileSound()
 
 

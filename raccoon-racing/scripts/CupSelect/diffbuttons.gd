@@ -34,16 +34,21 @@ func _on_diff_mouse_entered(diff: int) -> void:
 	ButtonSounds.PlaySound('hover')
 	for i in range(3):
 		if diff-1==i:
+			if btns[i].scale==Vector2(1.2,1.2):
+				return
 			btns[i].scale=Vector2(1.2,1.2)
 			btns[i].position-=btns[i].size*0.1
 			txts[i].scale=Vector2(1.2,1.2)
 			txts[i].position-=txts[i].size*0.1
 			
 		else:
-			btns[i].scale=Vector2(0.8,0.8)
-			btns[i].position+=btns[i].size*0.1
-			txts[i].scale=Vector2(0.8,0.8)
-			txts[i].position+=txts[i].size*0.1
+			pass
+			#if btns[i].scale==Vector2(0.8,0.8):
+				#return
+			#btns[i].scale=Vector2(0.8,0.8)
+			#btns[i].position+=btns[i].size*0.1
+			#txts[i].scale=Vector2(0.8,0.8)
+			#txts[i].position+=txts[i].size*0.1
 
 
 
@@ -52,15 +57,18 @@ func _on_diff_mouse_exited(diff: int) -> void:
 		return
 	for i in range(3):
 		if diff-1==i:
+			if btns[i].scale==Vector2(1,1):
+				return
 			btns[i].scale=Vector2(1,1)
 			btns[i].position+=btns[i].size*0.1
 			txts[i].scale=Vector2(1,1)
 			txts[i].position+=txts[i].size*0.1
 		else:
-			btns[i].scale=Vector2(1,1)
-			btns[i].position-=btns[i].size*0.1
-			txts[i].scale=Vector2(1,1)
-			txts[i].position-=txts[i].size*0.1
+			pass
+			#btns[i].scale=Vector2(1,1)
+			#btns[i].position-=btns[i].size*0.1
+			#txts[i].scale=Vector2(1,1)
+			#txts[i].position-=txts[i].size*0.1
 
 func greyout(rect: TextureRect)->void:
 	rect.modulate = Color(r_g_b, r_g_b, r_g_b, 1)

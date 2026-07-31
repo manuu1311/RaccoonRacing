@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cq4xfe1yvy5gc" path="res://Assets/Images/game/finish/14.png" id="16_fn7bp"]
 [ext_resource type="Texture2D" uid="uid://e7u6tavnglm8" path="res://Assets/Images/game/finish/15.png" id="17_ne0eb"]
 [ext_resource type="PackedScene" uid="uid://m7noqod4rkcs" path="res://Assets/Scenes/Screens/maps/Map03.tscn" id="18_ag0ay"]
+[ext_resource type="Script" uid="uid://djeahpd2vve1p" path="res://scripts/Game/viewport_manager.gd" id="20_07on0"]
 
 [sub_resource type="Environment" id="Environment_7sc16"]
 glow_enabled = true
@@ -212,3 +213,9 @@ sprite_frames = SubResource("SpriteFrames_3gfgy")
 current = true
 
 [node name="Map" parent="." unique_id=2122224565 instance=ExtResource("18_ag0ay")]
+
+[node name="ViewportManager" type="Node" parent="." unique_id=1403781753 node_paths=PackedStringArray("hud", "camera", "game_manager")]
+script = ExtResource("20_07on0")
+hud = NodePath("../Hud")
+camera = NodePath("../Camera2D")
+game_manager = NodePath("..")

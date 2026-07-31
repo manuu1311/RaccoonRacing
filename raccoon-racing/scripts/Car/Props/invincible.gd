@@ -8,7 +8,7 @@ var tickend:int
 func _init(playerinst:Player)->void:
 	super(playerinst);
 	proptype = 1;
-	if(player.PlayerID == GameData.FocusPlayer.PlayerID && !player.car.isInvincible):
+	if(player.current_control==Player.control_type.HUMAN && !player.car.isInvincible):
 		MusicPlayer.PlayMusic("invincible")
 	player.prop.del_prop_by_type(proptype);
 	player.car.isInvincible = true
@@ -24,7 +24,7 @@ func run_tick() -> void:
 func delme()->void:
 	if is_instance_valid(player.car):
 		player.car.IsUsingProp=false
-		if(player.PlayerID==GameData.FocusPlayer.PlayerID):
+		if(player.current_control==Player.control_type.HUMAN):
 			MusicPlayer.PlayMusic("map"+str(GameData.currentMap))
 		player.prop.Delprop(self);
 	

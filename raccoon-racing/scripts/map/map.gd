@@ -442,7 +442,7 @@ func SpawnProp(basename:String, id:int, prop:Node2D)->void:
 
 @rpc('call_local','any_peer','reliable')
 func ApplyProp(networkid:int, playerid:int,car_position:Vector2,car_rotation:float,propnum:int,nowpointid:int,order:Array[int])->void:
-	if networkid==GameData.FocusPlayer.NetworkID:
+	if networkid==multiplayer.get_unique_id():
 		return
 	var player:Player=GameData.PlayersArr[playerid]
 	#save previous info

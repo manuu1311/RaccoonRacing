@@ -73,15 +73,19 @@ func PlaySleep()->void:
 	get_sleep.play()
 	car_sleep.play()
 	car.sounds.playBeSleepSound()
-	if GameData.FocusPlayer.hud!=null:
-		GameData.FocusPlayer.hud.SleepEffect(car.player.PlayerID)
+
+func PlaySleepHudAnimation(id:int)->void:
+	if car.player.hud!=null:
+		car.player.hud.SleepEffect(id)
 
 func StopSleep()->void:
 	get_sleep.stop()
 	car_sleep.stop()
 	car.sounds.StopBeSleepSound()
-	if (GameData.FocusPlayer.hud!=null):
-		GameData.FocusPlayer.hud.StopSleep()
+
+func StopSleepHudAnimation()->void:
+	if (car.player.hud!=null):
+		car.player.hud.StopSleep()
 	
 func SleepShotArt(_id:int)->void:
 	give_sleep.play()

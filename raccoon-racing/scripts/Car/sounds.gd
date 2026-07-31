@@ -49,24 +49,6 @@ func _ready() -> void:
 	hc_add_speed.finished.connect(_on_hc_add_speed_finished)
 
 
-func PopulateSounds()->void:
-	for child in get_children():
-		if child is AudioStreamPlayer2D:
-			sounds.append(child)
-			if car == GameData.FocusCar:
-				# Replace with a non-spatial player
-				var flat := AudioStreamPlayer.new()
-				flat.stream = child.stream
-				flat.volume_db = child.volume_db
-				flat.bus = child.bus
-				flat.autoplay = child.autoplay
-				flat.name = child.name + "_flat"
-				add_child(flat)
-				child.queue_free()
-				sounds.append(flat)
-			else:
-				sounds.append(child)
-				
 
 func Loopsounds()->void:
 	var speedScalar:float = car.speed.length() / 16;

@@ -23,7 +23,7 @@ func setup() -> void:
 	chars=[char_1,char_2,char_3,char_4]
 	for i in range(GameData.PlayersArr.size()):
 		var rect:IconController=vbox.get_child(i) as IconController
-		rect.texture=textures[GameData.PlayersArr[GameData.OrderInfo[i]].car.CharID]
+		rect.texture=textures[GameData.PlayersArr[GameData.OrderInfo[i]].charid]
 		rect.setup(GameData.PlayersArr[GameData.OrderInfo[i]].PlayerID)
 		
 func SleepEffect(playerid:int)->void:

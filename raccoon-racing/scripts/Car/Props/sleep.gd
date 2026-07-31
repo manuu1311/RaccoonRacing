@@ -22,6 +22,8 @@ func delme()->void:
 	
 	
 func del()->void:
+	for playerinst:Player in GameData.PlayersArr:
+		playerinst.car.prop_effector.StopSleepHudAnimation()
 	player.car.prop_effector.StopSleep()
 	player.car.sounds.StopBeSleepSound();
 	player.car.isSleep = false;

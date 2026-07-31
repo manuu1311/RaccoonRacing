@@ -10,13 +10,12 @@ var fcsCar:Car
 @onready var lbl321: Label = $"321/321"
 @onready var lbl321_player: AnimationPlayer = $"321/321Player"
 @onready var finish: AnimatedSprite2D = $"321/Finish"
-var MoveSceneCenterSpeed:int = 2;
-var MoveSceneAngleSpeed:float = 0.2;
 @onready var camera: Camera2D = $Camera2D
-var stagesize:Vector2
-var scenecenterpos:Vector2
-var SceneAngleMoveExpandPos:Vector2
-var SceneAngleMoveExpandNowPos:Vector2
+@onready var viewport_manager: ViewportManager = $ViewportManager
+var IsRaceStarted:bool=false
+signal overtake_signal
+signal players_created_signal
+
 #preload props
 const PROP_SCENES = {
 	"prop1": preload("res://Assets/Scenes/Screens/maps/Props/BombInMap.tscn"),
@@ -30,15 +29,19 @@ const PROP_SCENES = {
 }
 
 func _ready() -> void:
+	lbl321.self_modulate=Color.TRANSPARENT
 	UiOverAnimation.reset_anim_frame()
 	Game.PlayersReady.connect(StartSequence)
 	#LoadMap()
 	LoadMinimap()
-	lbl321.self_modulate=Color.TRANSPARENT
-	stagesize=map.GetMapSize()
-	SceneAngleMoveExpandPos = Vector2(150,0)
-	SceneAngleMoveExpandNowPos = Vector2.ZERO
 	map.deferredInit()
+	CreatePlayers()
+	players_created_signal.emit()
+	UiLoadingScreen.HideLoading()
+	sound_manager.PlaySound('levelstart')
+
+	
+func CreatePlayers()->void:
 	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
 	for i:int in GameData.Ranking.size(): 
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
@@ -48,13 +51,12 @@ func _ready() -> void:
 			var controller:CarController=HumanCarController.new(player)
 			carinstance.add_child(controller)
 			carinstance.controller=controller
-			focusCar(player,carinstance)
 			carinstance.CharID=GameData.currentCharacter
 			player.charid=GameData.currentCharacter
 			available_ids.erase(GameData.currentCharacter)
 			available_ids.shuffle()
-			player.racefinished.connect(Racestop)
 			carinstance.set_multiplayer_authority(player.NetworkID)
+			focusCar(player,carinstance)
 		elif player.current_control==player.control_type.HUMAN and GameData.IsMultiplayer:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=CarController.new(player)
@@ -84,16 +86,6 @@ func _ready() -> void:
 		carinstance.rotation=map.StartPosArr[i].rotation
 		player.SetCar(carinstance)
 		player.ResetPlayer(i)
-	fcsCar.player.SetHud(hud,fcsCar)
-	
-	if GameData.IsMultiplayer and not NetworkManager.is_host:
-		Game.server_receive_ready.rpc_id(1,fcsCar.playerID)
-	else:
-		Game.server_receive_ready(fcsCar.playerID)
-	UiLoadingScreen.HideLoading()
-	sound_manager.PlaySound('levelstart')
-
-		
 
 func StartSequence(target_tick:int)->void:
 	while NetworkTime.tick < target_tick:
@@ -114,58 +106,24 @@ func LoadMinimap()->void:
 	var minimap_instance:CanvasLayer = load(minimap_path).instantiate() as CanvasLayer
 	minimap_instance.name = "Minimap"
 	map.add_child(minimap_instance)
-	
-func LoadMap() -> void:
-	var map_num: int = GameData.currentMap
-
-	# 1. Format the map path (e.g., "Map01.tscn", "Map02.tscn")
-	# %02d pads single digits with a leading zero (1 becomes 01)
-	var map_path: String = "res://Assets/Scenes/Screens/maps/Map%02d.tscn" % map_num
-
-	map = load(map_path).instantiate() as Map
-	add_child(map)
-
-	# 2. Determine the minimap suffix based on the vehicle type
-	var is_car: bool = (GameData.current_vehicle == GameData.VehicleType.CAR)
-	var suffix: String = "1" if is_car else "2"
-
-	# 3. Format the minimap path
-	# Map 1 uses 01/02, Map 2 uses 11/12, Map 3 uses 21/22, etc.
-	var minimap_index: int = map_num - 1
-	var minimap_path: String = "res://Assets/Scenes/Screens/maps/Minimap%d%s.tscn" % [minimap_index, suffix]
-
-	# 4. Instantiate and attach the minimap
-	var minimap_instance:CanvasLayer = load(minimap_path).instantiate() as CanvasLayer
-	minimap_instance.name = "Minimap"
-	map.add_child(minimap_instance)
 
 func RaceStart()->void:
 	for player:Player in GameData.PlayersArr:
 		player.StartRace()
 	Game.PlayersReady.disconnect(StartSequence)
 	Game.PlayersReady.connect(ShowFinishEffect)
+	IsRaceStarted=true
 	
-	
-	
-func register(player:Player)->void:
-	players.append(player)
 
 func focusCar(player:Player,car:Car)->void:
 	GameData.FocusCar=car
 	fcsCar=car
 	GameData.FocusPlayer=player
+	viewport_manager.FocusPlayer(player,car)
 	
 func _process(_delta: float) -> void:
-	if fcsCar!=null:
-		camera.zoom=Vector2.ONE*(1 - fcsCar.jumpCurrheight * 0.005)
-		SetSceneAngleExpand(fcsCar.global_position,fcsCar.rotation-PI/2)
-		SceneCenterMoveToPos()
-		if !fcsCar.isLock:
-			UpdateOrderResult()
-	#TODO: not needed anymore?
-	if Input.is_action_just_released("Debug") and false:
-		GameData.FocusPlayer.Stoprace()
-		GameData.FocusPlayer.car.playering=false
+	if !fcsCar.isLock:
+		UpdateOrderResult()
 		
 func CoolEffects()->void:
 	#if not multipayer, there is no wait time -> wait for 
@@ -191,36 +149,6 @@ func CoolEffects()->void:
 	#lbl321.hide()
 	RaceStart()
 	MusicPlayer.PlayMusic("map"+str(GameData.currentMap)) 
-	
-
-func SetCenterPos(nowPos:Vector2)->void:
-	scenecenterpos = nowPos;
-	if(scenecenterpos.x < map.MapLx):
-		scenecenterpos.x = map.MapLx;
-	if(scenecenterpos.x > map.MapRx):
-		scenecenterpos.x = map.MapRx;
-	if(scenecenterpos.y < map.MapTy):
-		scenecenterpos.y = map.MapTy;
-	if(scenecenterpos.y > map.MapBy):
-		scenecenterpos.y = map.MapBy;
-
-func adjust_camera_zoom(target_zoom: Vector2, _delta: float) -> void:
-	# Smoothly interpolates the camera zoom
-	camera.zoom = camera.zoom.lerp(target_zoom, 0.1)
-
-func SceneCenterMoveToPos()->void:
-	var distanceToTarget:Vector2 = scenecenterpos - camera.global_position
-	camera.global_position += distanceToTarget / 8 * MoveSceneCenterSpeed   
-	
-	
-func SetSceneAngleExpand(nowPos:Vector2, nowCarAngle:float)->void:
-	SceneAngleMoveExpandPos.x = 200;
-	SceneAngleMoveExpandPos.y = 0;
-	SceneAngleMoveExpandPos=SceneAngleMoveExpandPos.rotated(nowCarAngle);
-	SceneAngleMoveExpandNowPos.x += (SceneAngleMoveExpandPos.x - SceneAngleMoveExpandNowPos.x) / 8 * MoveSceneAngleSpeed;
-	SceneAngleMoveExpandNowPos.y += (SceneAngleMoveExpandPos.y - SceneAngleMoveExpandNowPos.y) / 8 * MoveSceneAngleSpeed;
-	nowPos+=SceneAngleMoveExpandNowPos
-	SetCenterPos(nowPos);
 	
 	
 	
@@ -253,23 +181,8 @@ func UpdateOrderResult() -> void:
 		# --- OVERTAKE DETECTION ---
 		# If they were in the race before, and their new index is smaller (closer to 0/1st place)
 		if old_index != -1 and i < old_index:
-			# Trigger HUD animation
-			if hud and hud.has_method("play_overtake"):
-				hud.play_overtake(i, old_index)
+			overtake_signal.emit(i,old_index)
 
-
-func Racestop(id:int)->void:
-	if fcsCar.playerID==id:
-		hud.StopRecord()
-		MusicPlayer.FadeOutAndStop(3)
-		if(fcsCar.player.OrderId == 0):
-			sound_manager.PlaySound("finish",0.0)
-		else:
-			sound_manager.PlaySound("failed",0.0)
-	if GameData.IsMultiplayer and not NetworkManager.is_host:
-		Game.server_receive_ready.rpc_id(1,fcsCar.playerID)
-	else:
-		Game.server_receive_ready(fcsCar.playerID)
 
 
 
@@ -282,7 +195,7 @@ func ShowFinishEffect(_tick:int)->void:
 	UiOverAnimation.playanim()
 	await UiOverAnimation.animated_sprite_2d.animation_finished
 	for player:Player in GameData.PlayersArr:
-		if player!=GameData.FocusPlayer:
+		if player.current_control==Player.control_type.HUMAN:
 			player.Stoprace()
 	BackToMain()
 
@@ -291,7 +204,6 @@ func UpdateOrderInfo(neworder:Array[int])->void:
 	GameData.OrderInfo=neworder
 
 func BackToMain()->void:
-	GameData.FocusCar.player.racefinished.disconnect(Racestop)
 	Game.PlayersReady.disconnect(ShowFinishEffect)
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_scores.tscn")
 	queue_free()

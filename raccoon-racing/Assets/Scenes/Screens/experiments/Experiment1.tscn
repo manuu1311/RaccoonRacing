@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager.gd" id="1_ixktl"]
 [ext_resource type="PackedScene" uid="uid://c47mpkqmnemuy" path="res://Assets/Scenes/Screens/maps/Map01.tscn" id="2_6unhv"]
 [ext_resource type="PackedScene" uid="uid://cehj3k48xb3su" path="res://Assets/Scenes/Screens/HUD/HUD.tscn" id="2_7b10p"]
+[ext_resource type="Script" uid="uid://djeahpd2vve1p" path="res://scripts/Game/viewport_manager.gd" id="2_dht3l"]
 [ext_resource type="Script" uid="uid://memhlecsyk42" path="res://scripts/Game/sound_manager.gd" id="3_6unhv"]
 [ext_resource type="Texture2D" uid="uid://dn7nt3mtihhn" path="res://Assets/Images/game/finish/1.png" id="4_dht3l"]
 [ext_resource type="Texture2D" uid="uid://c5k0abksngnfh" path="res://Assets/Images/game/finish/2.png" id="5_6ctss"]
@@ -167,6 +168,12 @@ script = ExtResource("1_ixktl")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=946382265]
 environment = SubResource("Environment_1wkmo")
+
+[node name="ViewportManager" type="Node" parent="." unique_id=1080431434 node_paths=PackedStringArray("hud", "camera", "game_manager")]
+script = ExtResource("2_dht3l")
+hud = NodePath("../Hud")
+camera = NodePath("../Camera2D")
+game_manager = NodePath("..")
 
 [node name="Hud" parent="." unique_id=929271289 instance=ExtResource("2_7b10p")]
 

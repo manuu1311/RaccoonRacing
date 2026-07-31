@@ -25,7 +25,7 @@ func setup() -> void:
 
 func SetCar(car:Car)->void:
 	FocusCar=car
-	prop_hud.DeferredInit(car.player.charid)
+	prop_hud.DeferredInit(car.CharID)
 	prop_hud.prop_visible.connect(ResetPropLock)
 	speed_hud.SetCar(FocusCar)
 

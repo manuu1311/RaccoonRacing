@@ -45,7 +45,6 @@ func _ready() -> void:
 		var orderid:int=GameData.Ranking[i]
 		var player:Player=GameData.PlayersArr[orderid]
 		var gradient:Sprite2D=positions[i].get_node("gradient")
-		#if player.car==GameData.FocusCar:
 		if player.PlayerID==0:
 			gradient.self_modulate=Color(0,0.45,0,0.36)
 		else:
