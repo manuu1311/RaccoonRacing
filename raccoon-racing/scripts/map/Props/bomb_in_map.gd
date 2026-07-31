@@ -24,7 +24,7 @@ func GetHitEventStatus(PlayerId: int,_unsynced:bool) -> void:
 	if not IsActivated:
 		return
 	var car: Car = GameData.PlayersArr[PlayerId].car
-	if car.isInvincible:
+	if car.isInvincible or car.jumpCurrheight > jumphigh - 1:
 		return
 	MineExplode.rpc(car.playerID)
 
@@ -32,19 +32,18 @@ func GetHitEventStatus(PlayerId: int,_unsynced:bool) -> void:
 func MineExplode(carid:int)->void:
 	var car:Car=GameData.PlayersArr[carid].car
 	IsActivated = false
-	if car.jumpCurrheight < jumphigh - 1:
-		if not car.IsUseShield:
-			car.sounds.playerBombSound()
-			car.bsex = bsValume
-			car.Jump(jumphigh)
-			car.speed *= 0.3
-			car.speed += (car.global_position - global_position) * 0.03
-		else:
-			car.player.RemoveShield();
-		animated_sprite_2d.show()
-		animated_sprite_2d.play()
-		sprite_2d.hide()
-		bombview.hide()
+	if not car.IsUseShield:
+		car.sounds.playerBombSound()
+		car.bsex = bsValume
+		car.Jump(jumphigh)
+		car.speed *= 0.3
+		car.speed += (car.global_position - global_position) * 0.03
+	else:
+		car.player.RemoveShield();
+	animated_sprite_2d.show()
+	animated_sprite_2d.play()
+	sprite_2d.hide()
+	bombview.hide()
 	destroy()
 
 func destroy() -> void:

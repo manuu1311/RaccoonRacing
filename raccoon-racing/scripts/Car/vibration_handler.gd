@@ -38,6 +38,8 @@ func _ready() -> void:
 	set_process(false)
 
 func RegisterCar(fcscar: Car) -> void:
+	if GameData.VibrationMultiplier<0.5:
+		return
 	var joys := Input.get_connected_joypads()
 	if joys.is_empty():
 		return

@@ -40,7 +40,7 @@ func run_tick() -> void:
 	UseBomb()
 	
 func UseBomb()->void:
-	if NetworkTime.tick!=tickactivate:
+	if NetworkTime.tick<tickactivate:
 		return
 	if is_instance_valid(bomb_in_map1):
 		bomb_in_map1.IsActivated = true;

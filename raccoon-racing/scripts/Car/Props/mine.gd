@@ -18,7 +18,7 @@ func _init(playerinst:Player)->void:
 	tickactivate+=NetworkTime.tick
 	
 func usebomb()->void:
-	if NetworkTime.tick!=tickactivate:
+	if NetworkTime.tick<tickactivate:
 		return
 	if is_instance_valid(bomb_in_map):
 		bomb_in_map.IsActivated = true;

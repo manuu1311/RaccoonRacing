@@ -114,7 +114,9 @@ var NowPointId:int
 var NowPorpId:int
 var CanUseProp:bool=false
 var IsUsingProp:bool=false
-##ai variables 
+##ai variables
+var extrapolation_frames:int=3
+var syncedposition:Vector2
 var AiNowPushButtonTimeNow:float
 var AiNowPushButtonTime:float
 var AiNowPushButton:int
@@ -152,7 +154,7 @@ func _ready() -> void:
 
 func StateSyncSetup()->void:
 	##essential
-	state_synchronizer.add_state(self, "position")
+	state_synchronizer.add_state(self, "syncedposition")
 	state_synchronizer.add_state(self, "rotation")
 	state_synchronizer.add_state(self, "jumpCurrheight")
 	state_synchronizer.add_state(visual, "scale")
@@ -164,17 +166,18 @@ func StateSyncSetup()->void:
 	fx_synchronizer.add_state(self, "IsAccelerating")
 
 	
-	if not is_multiplayer_authority():
-		tick_interpolator.add_property(self, "position")
-		tick_interpolator.add_property(self, "rotation")
-		tick_interpolator.add_property(visual, "scale")
+	#if not is_multiplayer_authority():
+		#tick_interpolator.add_property(self, "position")
+		#tick_interpolator.add_property(self, "rotation")
+		#tick_interpolator.add_property(visual, "scale")
 	state_synchronizer.process_settings()
 	tick_interpolator.process_settings()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	UpdateViewMap()
 	if not is_multiplayer_authority():
+		ExtrapolatePosition(delta)
 		if NetworkManager.is_host:
 			SolveRemoteCollisions()
 		match CurrentState:
@@ -186,11 +189,18 @@ func _process(_delta: float) -> void:
 				steer_left()
 			turnstate.FORWARD:
 				steer_normal()
-		if IsAccelerating:
-			UnsyncedForward()
 		ProcessFX()
 		UnsyncedForward()
+	else:
+		syncedposition=position
 	
+
+func ExtrapolatePosition(delta: float) -> void:
+	# Look roughly 2 frames into the future
+	var target_position:Vector2 = syncedposition + (speed * extrapolation_frames) 
+
+	# Smoothly move towards the target position. 
+	position = position.lerp(target_position, min(delta * 15.0, 1.0))
 
 func UnsyncedForward()->void:
 	stepx=snapped(speed[0],0.1)
@@ -705,7 +715,7 @@ func BeAttacked(who: Car)->void:
 		ResolveAttackedCollisions.rpc(playerID,enemySpeed+pushvector,false)
 		who.ResolveAttackedCollisions.rpc(who.playerID,mySpeed-pushvector,false)
 
-@rpc('any_peer','call_local','reliable')
+@rpc('any_peer','call_local','unreliable')
 func ResolveAttackedCollisions(_id:int, newspeed:Vector2,newbs:bool)->void:
 	sounds.playbumpsound()
 	KartBump.emit((newspeed-speed).length())

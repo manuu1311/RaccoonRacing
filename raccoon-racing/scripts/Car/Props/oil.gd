@@ -20,7 +20,7 @@ func _init(playerinst:Player)->void:
 	
 
 func ActivateOil()->void:
-	if NetworkTime.tick!=tickactivate:
+	if NetworkTime.tick<tickactivate:
 		return
 	if is_instance_valid(bs_in_map):
 		bs_in_map.IsActivated = true;

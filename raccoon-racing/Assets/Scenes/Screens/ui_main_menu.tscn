@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://bjk35vmhhygnw" path="res://Assets/Images/main_menu/sprites/freegames.png" id="11_evr18"]
 [ext_resource type="Texture2D" uid="uid://bowu1n1cuu0m5" path="res://Assets/Images/main_menu/sprites/freegameshover.png" id="12_gtplp"]
 [ext_resource type="Texture2D" uid="uid://cwc6tfc478rhx" path="res://Assets/Images/main_menu/wheel.png" id="12_vd7x1"]
+[ext_resource type="Texture2D" uid="uid://tnnjwmi15rkr" path="res://Assets/Images/Icons/controller.png" id="16_evr18"]
+[ext_resource type="Texture2D" uid="uid://cdnhjdvrjc15l" path="res://Assets/Images/Icons/vibration.png" id="17_gtplp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xjbaf"]
 atlas = ExtResource("1_w4jy3")
@@ -408,6 +410,9 @@ signal main_anim_complete
 @onready var volume: Control = $\"../../Volume\"
 var MainBus:int=AudioServer.get_bus_index(\"Master\")
 @onready var volumeslider: HSlider = $\"../../Volume/HSlider\"
+@onready var vibration: CanvasLayer = $\"../../Vibration\"
+@onready var vibrationeffect: Control = $\"../../Vibration/Effect\"
+@onready var vibrationcontroller: TextureButton = $\"../../Vibration/controller\"
 
 func _ready()->void:
 	if not MusicPlayer.playing :
@@ -416,6 +421,9 @@ func _ready()->void:
 	buttons.hide()
 	logo.hide()
 	volume.hide()
+	#default vibration on
+	vibrationeffect.show()
+	vibration.hide()
 	frame=0
 	frame_changed.connect(_on_frame_changed)
 	volumeslider.value=0.5
@@ -430,6 +438,7 @@ func _on_frame_changed()->void:
 		#await get_tree().create_timer(2).timeout
 		logo.play_anim()
 		volume.show()
+		vibration.show()
 
 func _on_start_button_pressed()->void:
 	Hideadditions()
@@ -455,10 +464,26 @@ func _on_high_scores_button_pressed() -> void:
 func _on_volume_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(MainBus, linear_to_db(value))
 
+func _on_vibration_changed()->void:
+	if GameData.VibrationMultiplier>0.5:
+		GameData.VibrationMultiplier=0.0
+		vibrationeffect.visible=false
+	else:
+		GameData.VibrationMultiplier=1.0
+		vibrationeffect.visible=true
+
 func Hideadditions()->void:
 	buttons.hide()
 	logo.hide()
 	volume.hide()
+
+
+func _on_controller_focus_entered() -> void:
+	vibrationcontroller.modulate=Color.RED
+
+
+func _on_controller_focus_exited() -> void:
+	vibrationcontroller.modulate=Color.BLACK
 "
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0l03o"]
@@ -785,6 +810,7 @@ offset_right = 478.51498
 offset_bottom = 442.03
 grow_horizontal = 2
 grow_vertical = 2
+focus_neighbor_left = NodePath("../../Vibration/controller")
 focus_neighbor_bottom = NodePath("../../Volume/HSlider")
 theme_override_styles/normal = SubResource("StyleBoxTexture_nwu3n")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_xjbaf")
@@ -885,10 +911,60 @@ offset_left = 203.0
 offset_top = 479.0
 offset_right = 308.0
 offset_bottom = 495.0
+focus_neighbor_left = NodePath("../../Vibration/controller")
 focus_neighbor_top = NodePath("../../Buttons/FreeGamesButton")
 focus_neighbor_bottom = NodePath("../../Buttons/StartGameButton")
 max_value = 1.0
 step = 0.05
+
+[node name="Vibration" type="CanvasLayer" parent="." unique_id=214716893]
+
+[node name="controller" type="TextureButton" parent="Vibration" unique_id=1854315332]
+modulate = Color(0, 0, 0, 1)
+clip_children = 1
+offset_left = 11.0
+offset_top = 437.0
+offset_right = 161.0
+offset_bottom = 587.0
+scale = Vector2(0.2, 0.2)
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../../Buttons/FreeGamesButton")
+focus_neighbor_bottom = NodePath("../../Volume/HSlider")
+texture_normal = ExtResource("16_evr18")
+texture_pressed = ExtResource("16_evr18")
+texture_hover = ExtResource("16_evr18")
+texture_focused = ExtResource("16_evr18")
+
+[node name="ColorRect" type="ColorRect" parent="Vibration/controller" unique_id=1298835578]
+layout_mode = 0
+offset_right = 169.99998
+offset_bottom = 140.0
+
+[node name="Effect" type="Control" parent="Vibration" unique_id=400894078]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="vibration" type="TextureRect" parent="Vibration/Effect" unique_id=1296183311]
+layout_mode = 0
+offset_left = 7.999999
+offset_top = 441.99997
+offset_right = 158.0
+offset_bottom = 756.0
+rotation = 0.17453292
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("17_gtplp")
+
+[node name="vibration2" type="TextureRect" parent="Vibration/Effect" unique_id=1015640411]
+layout_mode = 0
+offset_left = 47.000004
+offset_top = 454.00003
+offset_right = 197.0
+offset_bottom = 768.00006
+rotation = 2.88852
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("17_gtplp")
 
 [connection signal="mouse_entered" from="Buttons/StartGameButton" to="Buttons" method="_on_mouse_entered"]
 [connection signal="pressed" from="Buttons/StartGameButton" to="Dummy/Background" method="_on_start_button_pressed"]
@@ -904,3 +980,6 @@ step = 0.05
 [connection signal="mouse_entered" from="Buttons/FreeGamesButton" to="Buttons" method="_on_mouse_entered"]
 [connection signal="pressed" from="Buttons/FreeGamesButton" to="Buttons" method="_on_wrong_mouse_click"]
 [connection signal="value_changed" from="Volume/HSlider" to="Dummy/Background" method="_on_volume_changed"]
+[connection signal="focus_entered" from="Vibration/controller" to="Dummy/Background" method="_on_controller_focus_entered"]
+[connection signal="focus_exited" from="Vibration/controller" to="Dummy/Background" method="_on_controller_focus_exited"]
+[connection signal="pressed" from="Vibration/controller" to="Dummy/Background" method="_on_vibration_changed"]
