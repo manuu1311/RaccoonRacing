@@ -142,9 +142,6 @@ Brake={
 [netfox]
 
 rollback/enabled=false
-autoconnect/enabled=true
-autoconnect/simulated_latency_ms=70
-autoconnect/simulated_packet_loss_chance=0.2
 time/enabled=false
 time/tickrate=105
 

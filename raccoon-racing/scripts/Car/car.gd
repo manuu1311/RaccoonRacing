@@ -115,8 +115,6 @@ var NowPorpId:int
 var CanUseProp:bool=false
 var IsUsingProp:bool=false
 ##ai variables
-var extrapolation_frames:int=3
-var syncedposition:Vector2
 var AiNowPushButtonTimeNow:float
 var AiNowPushButtonTime:float
 var AiNowPushButton:int
@@ -127,6 +125,10 @@ var CurrentState:turnstate
 var IsAccelerating:bool
 signal WallBump
 signal KartBump
+##network
+var extrapolation_frames:int=3
+var syncedposition:Vector2
+var syncedspeed:Vector2
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 	map=gamemap
@@ -159,7 +161,7 @@ func StateSyncSetup()->void:
 	state_synchronizer.add_state(self, "jumpCurrheight")
 	state_synchronizer.add_state(visual, "scale")
 	state_synchronizer.add_state(self, "CurrentState")
-	state_synchronizer.add_state(self, "speed")
+	state_synchronizer.add_state(self, "syncedspeed")
 	##cosmetics
 	fx_synchronizer.add_state(self, "friction")
 	fx_synchronizer.add_state(self, "moveAngCar")
@@ -170,14 +172,15 @@ func StateSyncSetup()->void:
 		#tick_interpolator.add_property(self, "position")
 		#tick_interpolator.add_property(self, "rotation")
 		#tick_interpolator.add_property(visual, "scale")
+	#tick_interpolator.process_settings()
 	state_synchronizer.process_settings()
-	tick_interpolator.process_settings()
 
 
 func _process(delta: float) -> void:
 	UpdateViewMap()
 	if not is_multiplayer_authority():
-		ExtrapolatePosition(delta)
+		speed=syncedspeed
+		position=ExtrapolatePosition(delta,position, syncedposition,speed,extrapolation_frames)
 		if NetworkManager.is_host:
 			SolveRemoteCollisions()
 		match CurrentState:
@@ -192,15 +195,16 @@ func _process(delta: float) -> void:
 		ProcessFX()
 		UnsyncedForward()
 	else:
+		syncedspeed=speed
 		syncedposition=position
 	
 
-func ExtrapolatePosition(delta: float) -> void:
+func ExtrapolatePosition(delta: float,actualpos:Vector2,syncpos:Vector2,syncvel:Vector2,frames:int) -> Vector2:
 	# Look roughly 2 frames into the future
-	var target_position:Vector2 = syncedposition + (speed * extrapolation_frames) 
+	var target_position:Vector2 = syncpos + (syncvel * frames) 
 
 	# Smoothly move towards the target position. 
-	position = position.lerp(target_position, min(delta * 15.0, 1.0))
+	return actualpos.lerp(target_position, min(delta * 15.0, 1.0))
 
 func UnsyncedForward()->void:
 	stepx=snapped(speed[0],0.1)
@@ -719,7 +723,10 @@ func BeAttacked(who: Car)->void:
 func ResolveAttackedCollisions(_id:int, newspeed:Vector2,newbs:bool)->void:
 	sounds.playbumpsound()
 	KartBump.emit((newspeed-speed).length())
-	speed=newspeed
+	if is_multiplayer_authority():
+		speed=newspeed
+	else:
+		syncedspeed=newspeed
 	bs=newbs
 	if bs:
 		sounds.playBsSound()
