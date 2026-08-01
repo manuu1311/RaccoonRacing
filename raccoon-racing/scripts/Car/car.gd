@@ -138,6 +138,9 @@ var last_local_collision:int
 ##tick threshold to simulate local collisions
 var local_collision_tick_threshold:int
 var is_predicting:bool=false
+var reconciliation_offset: Vector2 = Vector2.ZERO
+var reconciliation_decay: float = 12.0 
+var was_predicting: bool = false
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 	map=gamemap
@@ -190,13 +193,22 @@ func StateSyncSetup()->void:
 
 func _process(delta: float) -> void:
 	UpdateViewMap()
-	UpdatePredictFlag()
 	if not is_multiplayer_authority():
 		if is_predicting:
-			position=ExtrapolatePosition(delta,position,position, speed,1)
+			position = ExtrapolatePosition(delta, position, position, speed, 1)
+			was_predicting = true
 		else:
-			speed=syncedspeed
-			position=ExtrapolatePosition(delta,position, syncedposition,speed,extrapolation_frames)
+			var corrected_pos: Vector2 = ExtrapolatePosition(delta, position, syncedposition, speed, extrapolation_frames)
+			if was_predicting:
+				# just switched off prediction this frame: capture the gap instead of snapping
+				reconciliation_offset = position - corrected_pos
+				was_predicting = false
+			position = corrected_pos + reconciliation_offset
+			if reconciliation_offset.length_squared() > 0.01:
+				reconciliation_offset = reconciliation_offset.lerp(Vector2.ZERO, min(delta * reconciliation_decay, 1.0))
+			else:
+				reconciliation_offset = Vector2.ZERO
+
 		if NetworkManager.is_host:
 			SolveRemoteCollisions()
 		match CurrentState:
@@ -211,10 +223,10 @@ func _process(delta: float) -> void:
 		ProcessFX()
 		UnsyncedForward()
 	else:
-		syncedspeed=speed
-		syncedposition=position
-		#if prediction turned on and enough ticks passed from last authoritative collision: simulate
+		syncedspeed = speed
+		syncedposition = position
 		if GameData.IsMultiplayer and not NetworkManager.is_host:
+			UpdatePredictFlag()
 			if should_predict and NetworkTime.tick > last_authoritative_collision + local_collision_tick_threshold:
 				SimulateLocalCollisions()
 	
