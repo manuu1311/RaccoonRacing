@@ -129,7 +129,15 @@ signal KartBump
 var extrapolation_frames:int=3
 var syncedposition:Vector2
 var syncedspeed:Vector2
-var should_predict:bool=true
+var should_predict:bool=false
+var should_predict_star:bool=false
+##network tick of the last authoritative collision
+var last_authoritative_collision:int
+##network tick of the last simulated collision
+var last_local_collision:int
+##tick threshold to simulate local collisions
+var local_collision_tick_threshold:int
+var is_predicting:bool=false
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 	map=gamemap
@@ -142,6 +150,7 @@ func _ready() -> void:
 	input_handler.setup(player,controller)
 	extrapolation_frames=DebugConsole.extrapolation_frames
 	should_predict=DebugConsole.should_predict
+	local_collision_tick_threshold=NetworkTime.seconds_to_ticks(0.1)
 	if GameData.IsMultiplayer:
 		StateSyncSetup()
 	if isHovercraft():
@@ -181,9 +190,13 @@ func StateSyncSetup()->void:
 
 func _process(delta: float) -> void:
 	UpdateViewMap()
+	UpdatePredictFlag()
 	if not is_multiplayer_authority():
-		speed=syncedspeed
-		position=ExtrapolatePosition(delta,position, syncedposition,speed,extrapolation_frames)
+		if is_predicting:
+			position=ExtrapolatePosition(delta,position,position, speed,1)
+		else:
+			speed=syncedspeed
+			position=ExtrapolatePosition(delta,position, syncedposition,speed,extrapolation_frames)
 		if NetworkManager.is_host:
 			SolveRemoteCollisions()
 		match CurrentState:
@@ -200,7 +213,70 @@ func _process(delta: float) -> void:
 	else:
 		syncedspeed=speed
 		syncedposition=position
+		#if prediction turned on and enough ticks passed from last authoritative collision: simulate
+		if GameData.IsMultiplayer and not NetworkManager.is_host:
+			if should_predict and NetworkTime.tick > last_authoritative_collision + local_collision_tick_threshold:
+				SimulateLocalCollisions()
 	
+
+func UpdatePredictFlag() -> void:
+	if is_predicting and NetworkTime.tick > last_local_collision + local_collision_tick_threshold:
+		is_predicting = false
+
+
+func SimulateLocalCollisions()->void:
+	for playerinst:Player in GameData.PlayersArr:
+		if global_position.distance_squared_to(playerinst.car.global_position)<1800:
+			if playerID != playerinst.PlayerID:
+				LocalAttack(playerinst.car)
+
+
+func LocalAttack(who:Car)->void:
+	if(who.jumpCurrheight > heightOverWall or jumpCurrheight > heightOverWall):
+		return 
+	if(isResetting or who.isResetting):
+		return
+	var isInvincibletemp:bool = isInvincible
+	var enemyInvincible:bool = who.isInvincible;
+	if(isSmallState):
+		enemyInvincible = true
+	if(who.isSmallState):
+		isInvincibletemp = true
+   
+	var enemySpeed:Vector2
+	if(not (isInvincibletemp and not enemyInvincible)):
+		enemySpeed = who.speed
+	var mySpeed:Vector2
+	if(not(not isInvincibletemp and enemyInvincible)):
+		mySpeed = speed
+	#distance between cars
+	var dist:Vector2=global_position-who.global_position
+	var distsq:float = dist.length_squared()
+	var spring:float = 0.005
+	if(distsq < 2000):
+		spring = 0.005 + 0.05 * (2000 - distsq) / 2000
+	#push vector
+	var pushvector:Vector2 = dist*spring
+	#if enemy is invincible and im not: massive knockback
+	if(not isInvincibletemp and enemyInvincible) and should_predict_star:
+		ResolveLocalCollision(enemySpeed+pushvector*40,true)
+	#if im invincible and enemy is not: give massive knockback
+	elif(isInvincibletemp and not enemyInvincible and should_predict_star):
+		who.ResolveLocalCollision(enemySpeed-pushvector*40,true)
+	#no one is invincible
+	else:
+		ResolveLocalCollision(enemySpeed+pushvector,false)
+		who.ResolveLocalCollision(mySpeed-pushvector,false)
+
+func ResolveLocalCollision(newspeed:Vector2,newbs:bool)->void:
+	last_local_collision=NetworkTime.tick
+	is_predicting=true
+	sounds.playbumpsound()
+	KartBump.emit((newspeed-speed).length())
+	speed=newspeed
+	bs=newbs
+	if bs:
+		sounds.playBsSound()
 
 func ExtrapolatePosition(delta: float,actualpos:Vector2,syncpos:Vector2,syncvel:Vector2,frames:int) -> Vector2:
 	# Look roughly 2 frames into the future
@@ -724,15 +800,18 @@ func BeAttacked(who: Car)->void:
 
 @rpc('any_peer','call_local','unreliable')
 func ResolveAttackedCollisions(_id:int, newspeed:Vector2,newbs:bool)->void:
-	sounds.playbumpsound()
-	KartBump.emit((newspeed-speed).length())
-	if is_multiplayer_authority():
-		speed=newspeed
-	else:
-		syncedspeed=newspeed
-	bs=newbs
-	if bs:
-		sounds.playBsSound()
+	if newbs or not is_predicting:
+		sounds.playbumpsound()
+		KartBump.emit((newspeed-speed).length())
+		if is_multiplayer_authority():
+			speed=newspeed
+		else:
+			syncedspeed=newspeed
+		bs=newbs
+		if bs:
+			sounds.playBsSound()
+	is_predicting=false
+	last_authoritative_collision=NetworkTime.tick
 
 func Reset(newpos:Vector2,newangle:float)->void:
 	global_position=newpos
