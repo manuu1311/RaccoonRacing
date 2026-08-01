@@ -129,6 +129,7 @@ signal KartBump
 var extrapolation_frames:int=3
 var syncedposition:Vector2
 var syncedspeed:Vector2
+var should_predict:bool=true
 
 func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 	map=gamemap
@@ -139,6 +140,8 @@ func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 func _ready() -> void:
 	horse=carhorse
 	input_handler.setup(player,controller)
+	extrapolation_frames=DebugConsole.extrapolation_frames
+	should_predict=DebugConsole.should_predict
 	if GameData.IsMultiplayer:
 		StateSyncSetup()
 	if isHovercraft():

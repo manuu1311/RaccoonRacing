@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cmqp2uph5pmob"]
+
+[ext_resource type="Script" uid="uid://c4cm0w3e8baos" path="res://scripts/Autoload/debug_conosle.gd" id="1_kwe5j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vv2li"]
+bg_color = Color(0.27450982, 0.27450982, 0.27450982, 0.38039216)
+
+[node name="DebugConsole" type="CanvasLayer" unique_id=686790063]
+script = ExtResource("1_kwe5j")
+
+[node name="Panel" type="Panel" parent="." unique_id=420418819]
+offset_top = 280.0
+offset_right = 500.0
+offset_bottom = 500.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vv2li")
+
+[node name="Vbox" type="VBoxContainer" parent="Panel" unique_id=1593981120]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 235.0
+
+[node name="Output" type="RichTextLabel" parent="Panel/Vbox" unique_id=170376600]
+custom_minimum_size = Vector2(0, 195)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 11
+
+[node name="Input" type="LineEdit" parent="Panel/Vbox" unique_id=886611046]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+placeholder_text = "Enter command"
