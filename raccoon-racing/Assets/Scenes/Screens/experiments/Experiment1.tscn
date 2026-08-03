@@ -14,15 +14,6 @@ minimap_canvas = NodePath("MinimapCanvas")
 [node name="SoundManager" type="AudioStreamPlayer" parent="." unique_id=339817642]
 script = ExtResource("3_6unhv")
 
-[node name="world" type="Node2D" parent="." unique_id=1038090199]
-
-[node name="SubViewport" parent="." unique_id=416504036 instance=ExtResource("3_agnfx")]
-position = Vector2i(0, 0)
-
-[node name="MinimapCanvas" type="CanvasLayer" parent="." unique_id=1355070842]
-
-[node name="Minimap" parent="MinimapCanvas" unique_id=2034007929 instance=ExtResource("4_4shc6")]
-
 [node name="Background" type="Control" parent="." unique_id=1021613311]
 layout_mode = 3
 anchors_preset = 0
@@ -56,3 +47,12 @@ offset_bottom = 508.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 0, 1)
+
+[node name="world" type="Node2D" parent="." unique_id=1038090199]
+
+[node name="SubViewport" parent="." unique_id=416504036 instance=ExtResource("3_agnfx")]
+position = Vector2i(0, 0)
+
+[node name="MinimapCanvas" type="CanvasLayer" parent="." unique_id=1355070842]
+
+[node name="Minimap" parent="MinimapCanvas" unique_id=2034007929 instance=ExtResource("4_4shc6")]
