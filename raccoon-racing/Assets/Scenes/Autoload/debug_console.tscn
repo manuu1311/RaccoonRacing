@@ -6,9 +6,11 @@
 bg_color = Color(0.27450982, 0.27450982, 0.27450982, 0.38039216)
 
 [node name="DebugConsole" type="CanvasLayer" unique_id=686790063]
+layer = 2
 script = ExtResource("1_kwe5j")
 
 [node name="Panel" type="Panel" parent="." unique_id=420418819]
+z_index = 500
 offset_top = 280.0
 offset_right = 500.0
 offset_bottom = 500.0

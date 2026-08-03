@@ -55,13 +55,11 @@ func StopInvincible()->void:
 	
  
 func AddShield()->void:
-	if not shield.is_playing():
-		shield.play("default")
-		car.sounds.playShieldSound()
+	shield.play("default")
+	car.sounds.playShieldSound()
 	
 func RemoveShield()->void:
-	if not shield.is_playing():
-		shield.play("fade")   
+	shield.play("fade")   
 
 func PlayBomb(pos:Vector2)->void:
 	bomb.show()
