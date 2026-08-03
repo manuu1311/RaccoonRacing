@@ -59,6 +59,7 @@ window/size/window_width_override=750
 window/size/window_height_override=750
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://4l3jsqcdtk02"
+window/quality/msaa_2d=0
 
 [editor_plugins]
 

@@ -44,6 +44,7 @@ func Setup(mapinst:Map,soundmanager:GameSoundManager,gamemanager:GameManager)->v
 	sound_manager=soundmanager
 	game_manager=gamemanager
 	game_manager.overtake_signal.connect(hud.play_overtake)
+	hud.minimap.texture=gamemanager.minimap.get_texture()
 
 func FocusPlayer(player:Player,carinstance:Car)->void:
 	FcsPlayer=player
@@ -52,10 +53,6 @@ func FocusPlayer(player:Player,carinstance:Car)->void:
 	var vibhandler:VibrationHandler=fcsCar.get_node('VibrationHandler') as VibrationHandler
 	vibhandler.RegisterCar(fcsCar)
 	SetHud()
-	if GameData.IsMultiplayer and not NetworkManager.is_host:
-		Game.server_receive_ready.rpc_id(1,FcsPlayer.PlayerID)
-	else:
-		Game.server_receive_ready(FcsPlayer.PlayerID)
 
 func SetHud()->void:
 	FcsPlayer.SetHud(hud,fcsCar)

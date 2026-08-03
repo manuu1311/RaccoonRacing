@@ -24,6 +24,6 @@ func handle_input()->void:
 			brake=true
 		#else:
 			#player.car.Clearward()
-		if Input.is_action_just_pressed("Special") and not Game.propLock:
+		if Input.is_action_just_pressed("Special"):
 			special=true
 			#player.UseProp()

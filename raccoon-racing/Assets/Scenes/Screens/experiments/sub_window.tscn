@@ -158,12 +158,12 @@ animations = [{
 }]
 
 [node name="SubViewport" type="Window" unique_id=1244682952]
+audio_listener_enable_2d = true
 oversampling_override = 1.0
 position = Vector2i(0, 23)
 size = Vector2i(500, 500)
 unresizable = true
 borderless = true
-always_on_top = true
 content_scale_size = Vector2i(500, 500)
 content_scale_mode = 1
 content_scale_aspect = 1
@@ -172,6 +172,7 @@ script = ExtResource("1_impuy")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=878114350]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera2D" unique_id=810702209]
+current = true
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=985093546]
 

@@ -3,13 +3,15 @@ class_name GameManager
 
 var players: Array[Player]
 var cars:Array[Car]
-var fcsCar:Car
+var fcsPlayer:Player
 var map: Map
+var minimap:SubViewport
 @onready var sound_manager: GameSoundManager = $SoundManager
 @export var viewport_manager_arr: Array[ViewportManager]
 @export var world: Node2D
 var IsRaceStarted:bool=false
 signal overtake_signal
+@export var minimap_canvas: CanvasLayer
 var window_instance:PackedScene=preload("res://Assets/Scenes/Screens/experiments/sub_window.tscn")
 
 #preload props
@@ -33,6 +35,10 @@ func _ready() -> void:
 	UiLoadingScreen.HideLoading()
 	PopulateViewports()
 	sound_manager.PlaySound('levelstart')
+	if GameData.IsMultiplayer and not NetworkManager.is_host:
+		Game.server_receive_ready.rpc_id(1,fcsPlayer.PlayerID)
+	else:
+		Game.server_receive_ready(fcsPlayer.PlayerID)
 
 
 func PopulateViewports()->void:
@@ -41,6 +47,7 @@ func PopulateViewports()->void:
 		var viewport:ViewportManager=viewport_manager_arr[i]
 		viewport.world_2d=get_viewport().world_2d
 		viewport.Setup(map,sound_manager,self)
+		viewport.name='Window'+str(i)
 		var player:Player=GameData.PlayersArr[i]
 		focusCar(player,player.car,i)
 	
@@ -53,22 +60,22 @@ func AddWindow()->void:
 	var main_window :Window= get_window()
 	main_window.mode = Window.MODE_FULLSCREEN
 	if Game.LocalPlayers==2:
-		main_window.content_scale_size=Vector2(1000,500)
+		main_window.content_scale_size=Vector2(1010,500)
 	else:
-		main_window.content_scale_size=Vector2(1000,1000)
+		main_window.content_scale_size=Vector2(1010,1010)
 	
 	viewport_manager_arr[0].position = Vector2i(0,0)
 	var split_window :ViewportManager=window_instance.instantiate() as ViewportManager
-	split_window.position = Vector2i(500, 0)
+	split_window.position = Vector2i(510, 0)
 	add_child(split_window)
 	viewport_manager_arr.append(split_window)
 	if Game.LocalPlayers>2:
 		split_window=window_instance.instantiate() as ViewportManager
-		split_window.position = Vector2i(0, 500)
+		split_window.position = Vector2i(0, 510)
 		add_child(split_window)
 		viewport_manager_arr.append(split_window)
 		split_window=window_instance.instantiate() as ViewportManager
-		split_window.position = Vector2i(500, 500)
+		split_window.position = Vector2i(510, 510)
 		add_child(split_window)
 		viewport_manager_arr.append(split_window)
 
@@ -80,6 +87,7 @@ func CreatePlayers()->void:
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
 		if player.current_control==player.control_type.HUMAN and player.PlayerID==NetworkManager.PlayerID:
+			fcsPlayer=player
 			carinstance.setup(map,player.PlayerID,true,player)
 			var controller:CarController=HumanCarController.new(player)
 			carinstance.add_child(controller)
@@ -146,9 +154,10 @@ func LoadMap() -> void:
 
 	# 4. Instantiate and attach the minimap
 	@warning_ignore("unsafe_method_access")
-	var minimap_instance:CanvasLayer = load(minimap_path).instantiate() as CanvasLayer
-	minimap_instance.name = "Minimap"
-	map.add_child(minimap_instance)
+	minimap = load(minimap_path).instantiate() as SubViewport
+	minimap.name = "Minimap"
+	minimap_canvas.add_child(minimap)
+	map.minimap=minimap.get_node('View/MapSprite')
 
 
 func RaceStart()->void:
@@ -163,7 +172,7 @@ func focusCar(player:Player,car:Car,id:int)->void:
 	viewport_manager_arr[id].FocusPlayer(player,car)
 	
 func _process(_delta: float) -> void:
-	if !GameData.PlayersArr[0].car.isLock:
+	if IsRaceStarted:
 		UpdateOrderResult()
 		
 func CoolEffects()->void:

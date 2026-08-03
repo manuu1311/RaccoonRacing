@@ -8,13 +8,27 @@ var AiResetTime:int=10
 var AiLastCheckPoint:int
 var IsOnlyAttPlayer:bool=false
 
-func RunPropBox(_x:float,_y:float)->void:
-	if not car.HasProp:
+func RunPropBox(x:float,y:float)->void:
+	if hud==null:
 		car.HasProp=true
 		car.CanUseProp=true
 		var id:int=GetPropPer()
 		await car.get_tree().create_timer(1.5).timeout
 		GetProp(id)
+		return
+	if not car.playering:
+		return
+	if hud!=null:
+		car.sounds.GetProp()
+		if not hud.PropItemReady():
+			hud.propmove(x,y)
+	if car.NowPorpId!=0:
+		return
+	GetProp(GetPropPer())
+	car.CanUseProp=true
+	if hud!=null and car:
+		hud.StartPropBox(1.5,car.NowPorpId)
+		
 
 
 

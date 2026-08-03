@@ -86,7 +86,6 @@ func InitMap()->void:
 		queue_redraw()
 		
 func deferredInit()->void:
-	minimap=get_node("Minimap/View/MapSprite")
 	if IsHovercraft:
 		offset=offsethc
 	else:

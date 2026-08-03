@@ -6,6 +6,7 @@ class_name HUDManager
 @onready var char_hud: CharHud = $CharHud
 @onready var lbl321: Label = $"321/321"
 @onready var lbl321_player: AnimationPlayer = $"321/321Player"
+@onready var minimap: TextureRect = $Minimap
 var FocusCar:Car
 # Called when the node enters the scene tree for the first time.
 
@@ -33,7 +34,7 @@ func SetCar(car:Car)->void:
 
 func ResetPropLock()->void:
 	if FocusCar.player.PropValidated:
-		Game.propLock=false
+		FocusCar.CanUseProp=true
 	else:
 		PropUsed(0)
 
@@ -46,7 +47,7 @@ func PropUsed(id:int)->void:
 func propmove(x:float,y:float)->void:
 	prop_hud.propmove(x,y)
 func StartPropBox(runtime:float,id:int)->void:
-	Game.propLock=true
+	FocusCar.CanUseProp=false
 	prop_hud.show()
 	prop_hud.StartPropBox(runtime,id)
 	

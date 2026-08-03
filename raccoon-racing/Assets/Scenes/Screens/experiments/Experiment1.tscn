@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager.gd" id="1_ixktl"]
 [ext_resource type="Script" uid="uid://memhlecsyk42" path="res://scripts/Game/sound_manager.gd" id="3_6unhv"]
 [ext_resource type="PackedScene" uid="uid://qokanxpo7gxp" path="res://Assets/Scenes/Screens/experiments/sub_window.tscn" id="3_agnfx"]
+[ext_resource type="PackedScene" uid="uid://cai5a5wyyssi8" path="res://Assets/Scenes/Screens/maps/Minimap01.tscn" id="4_4shc6"]
 
-[node name="Experiment1" type="Node2D" unique_id=1060618127 node_paths=PackedStringArray("viewport_manager_arr", "world")]
+[node name="Experiment1" type="Node2D" unique_id=1060618127 node_paths=PackedStringArray("viewport_manager_arr", "world", "minimap_canvas")]
 script = ExtResource("1_ixktl")
 viewport_manager_arr = [NodePath("SubViewport")]
 world = NodePath("world")
+minimap_canvas = NodePath("MinimapCanvas")
 
 [node name="SoundManager" type="AudioStreamPlayer" parent="." unique_id=339817642]
 script = ExtResource("3_6unhv")
@@ -16,3 +18,41 @@ script = ExtResource("3_6unhv")
 
 [node name="SubViewport" parent="." unique_id=416504036 instance=ExtResource("3_agnfx")]
 position = Vector2i(0, 0)
+
+[node name="MinimapCanvas" type="CanvasLayer" parent="." unique_id=1355070842]
+
+[node name="Minimap" parent="MinimapCanvas" unique_id=2034007929 instance=ExtResource("4_4shc6")]
+
+[node name="Background" type="Control" parent="." unique_id=1021613311]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Rectangle" type="ColorRect" parent="Background" unique_id=1982584132]
+layout_mode = 0
+offset_right = 1000.0
+offset_bottom = 1000.0
+color = Color(1, 0, 0, 1)
+
+[node name="Line" type="ColorRect" parent="Background" unique_id=1977934882]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 502.0
+offset_right = 508.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0, 1)
+
+[node name="Line2" type="ColorRect" parent="Background" unique_id=1538936759]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 502.0
+offset_right = 1000.0
+offset_bottom = 508.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0, 1)
