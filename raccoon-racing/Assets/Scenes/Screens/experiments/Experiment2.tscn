@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://x5mtmmx66o0n"]
 
 [ext_resource type="PackedScene" uid="uid://cehj3k48xb3su" path="res://Assets/Scenes/Screens/HUD/HUD.tscn" id="1_ff4fs"]
-[ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager.gd" id="1_hidcn"]
+[ext_resource type="Script" uid="uid://cl1wxsiljemrf" path="res://scripts/Game/GameManager.gd" id="1_hidcn"]
 [ext_resource type="Script" uid="uid://memhlecsyk42" path="res://scripts/Game/sound_manager.gd" id="2_hidcn"]
 [ext_resource type="Texture2D" uid="uid://dn7nt3mtihhn" path="res://Assets/Images/game/finish/1.png" id="3_052ws"]
 [ext_resource type="Texture2D" uid="uid://c5k0abksngnfh" path="res://Assets/Images/game/finish/2.png" id="4_efamk"]
@@ -18,11 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dclsslp8k0hyy" path="res://Assets/Images/game/finish/13.png" id="15_pmtvq"]
 [ext_resource type="Texture2D" uid="uid://cq4xfe1yvy5gc" path="res://Assets/Images/game/finish/14.png" id="16_tdwnx"]
 [ext_resource type="Texture2D" uid="uid://e7u6tavnglm8" path="res://Assets/Images/game/finish/15.png" id="17_nwwk3"]
-[ext_resource type="PackedScene" uid="uid://dsit2dtpfwrw6" path="res://Assets/Scenes/Screens/maps/Map02.tscn" id="18_b68g0"]
-[ext_resource type="Script" uid="uid://djeahpd2vve1p" path="res://scripts/Game/viewport_manager.gd" id="20_052ws"]
-
-[sub_resource type="Environment" id="Environment_31jco"]
-glow_enabled = true
+[ext_resource type="Script" uid="uid://cligm6st5mkwg" path="res://scripts/Game/viewport_manager.gd" id="20_052ws"]
 
 [sub_resource type="Animation" id="Animation_rrtsn"]
 resource_name = "321"
@@ -166,13 +162,12 @@ animations = [{
 [node name="Experiment2" type="Node2D" unique_id=74206321]
 script = ExtResource("1_hidcn")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=278472289]
-environment = SubResource("Environment_31jco")
-
-[node name="Hud" parent="." unique_id=929271289 instance=ExtResource("1_ff4fs")]
-
 [node name="SoundManager" type="AudioStreamPlayer" parent="." unique_id=489187388]
 script = ExtResource("2_hidcn")
+
+[node name="world" type="Node2D" parent="." unique_id=1227553961]
+
+[node name="Hud" parent="." unique_id=929271289 instance=ExtResource("1_ff4fs")]
 
 [node name="321" type="CanvasLayer" parent="." unique_id=657344968]
 offset = Vector2(150, 125)
@@ -212,10 +207,10 @@ sprite_frames = SubResource("SpriteFrames_n2buk")
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera2D" unique_id=1289474750]
 current = true
 
-[node name="Map" parent="." unique_id=422089434 instance=ExtResource("18_b68g0")]
-
 [node name="ViewportManager" type="Node" parent="." unique_id=1119142234 node_paths=PackedStringArray("hud", "camera", "game_manager")]
 script = ExtResource("20_052ws")
 hud = NodePath("../Hud")
 camera = NodePath("../Camera2D")
 game_manager = NodePath("..")
+
+[node name="MinimapCanvas" type="CanvasLayer" parent="." unique_id=351115963]

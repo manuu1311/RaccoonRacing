@@ -1,23 +1,18 @@
 extends Node2D
-class_name GameManager
+class_name GameManager_split
 
 var players: Array[Player]
 var cars:Array[Car]
-var fcsCar:Car
-@onready var map: Map
-@onready var hud: HUDManager = $Hud
+var fcsPlayer:Player
+var map: Map
+var minimap:SubViewport
 @onready var sound_manager: GameSoundManager = $SoundManager
-@onready var lbl321: Label = $"321/321"
-@onready var lbl321_player: AnimationPlayer = $"321/321Player"
-@onready var finish: AnimatedSprite2D = $"321/Finish"
-@onready var camera: Camera2D = $Camera2D
-@onready var viewport_manager: ViewportManagerDummy = $ViewportManager
+@export var viewport_manager_arr: Array[ViewportManager]
+@export var world: Node2D
 var IsRaceStarted:bool=false
 signal overtake_signal
-signal players_created_signal
-@onready var world: Node2D = $world
-var minimap:SubViewport
-@onready var minimap_canvas: CanvasLayer = $MinimapCanvas
+@export var minimap_canvas: CanvasLayer
+var window_instance:PackedScene=preload("res://Assets/Scenes/Screens/experiments/sub_window.tscn")
 
 #preload props
 const PROP_SCENES = {
@@ -32,24 +27,67 @@ const PROP_SCENES = {
 }
 
 func _ready() -> void:
-	lbl321.self_modulate=Color.TRANSPARENT
 	UiOverAnimation.reset_anim_frame()
 	Game.PlayersReady.connect(StartSequence)
-	#LoadMap()
 	LoadMap()
 	map.deferredInit()
 	CreatePlayers()
-	players_created_signal.emit()
 	UiLoadingScreen.HideLoading()
+	PopulateViewports()
 	sound_manager.PlaySound('levelstart')
+	if GameData.IsMultiplayer and not NetworkManager.is_host:
+		Game.server_receive_ready.rpc_id(1,fcsPlayer.PlayerID)
+	else:
+		Game.server_receive_ready(fcsPlayer.PlayerID)
 
+
+func PopulateViewports()->void:
+	AddWindow()
+	for i in range(len(viewport_manager_arr)):
+		var viewport:ViewportManager=viewport_manager_arr[i]
+		viewport.world_2d=get_viewport().world_2d
+		viewport.Setup(map,sound_manager,self)
+		viewport.name='Window'+str(i)
+		var player:Player=GameData.PlayersArr[i]
+		focusCar(player,player.car,i)
 	
+
+
+func AddWindow()->void:
+	if not Game.IsSplitScreen:
+		return
+
+	var main_window :Window= get_window()
+	main_window.mode = Window.MODE_FULLSCREEN
+	if Game.LocalPlayers==2:
+		main_window.content_scale_size=Vector2(1010,500)
+	else:
+		main_window.content_scale_size=Vector2(1010,1010)
+	
+	viewport_manager_arr[0].position = Vector2i(0,0)
+	var split_window :ViewportManager=window_instance.instantiate() as ViewportManager
+	split_window.position = Vector2i(510, 0)
+	add_child(split_window)
+	viewport_manager_arr.append(split_window)
+	if Game.LocalPlayers>2:
+		split_window=window_instance.instantiate() as ViewportManager
+		split_window.position = Vector2i(0, 510)
+		add_child(split_window)
+		viewport_manager_arr.append(split_window)
+		split_window=window_instance.instantiate() as ViewportManager
+		split_window.position = Vector2i(510, 510)
+		add_child(split_window)
+		viewport_manager_arr.append(split_window)
+
+
+
 func CreatePlayers()->void:
 	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
 	for i:int in GameData.Ranking.size(): 
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
 		if player.current_control==player.control_type.HUMAN and player.PlayerID==NetworkManager.PlayerID:
+			fcsPlayer=player
 			carinstance.setup(map,player.PlayerID,true,player)
 			var controller:CarController=HumanCarController.new(player)
 			carinstance.add_child(controller)
@@ -59,7 +97,6 @@ func CreatePlayers()->void:
 			available_ids.erase(GameData.currentCharacter)
 			available_ids.shuffle()
 			carinstance.set_multiplayer_authority(player.NetworkID)
-			focusCar(player,carinstance)
 		elif player.current_control==player.control_type.HUMAN and GameData.IsMultiplayer:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=CarController.new(player)
@@ -83,7 +120,7 @@ func CreatePlayers()->void:
 				newid=player.charid
 				available_ids.erase(newid)
 			carinstance.CharID=newid
-		add_child(carinstance)
+		world.add_child(carinstance)
 		carinstance.name="Car"+str(player.PlayerID)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
@@ -122,6 +159,7 @@ func LoadMap() -> void:
 	minimap_canvas.add_child(minimap)
 	map.minimap=minimap.get_node('View/MapSprite')
 
+
 func RaceStart()->void:
 	for player:Player in GameData.PlayersArr:
 		player.StartRace()
@@ -130,13 +168,11 @@ func RaceStart()->void:
 	IsRaceStarted=true
 	
 
-func focusCar(player:Player,car:Car)->void:
-	fcsCar=car
-	viewport_manager.Setup(map,self)
-	viewport_manager.FocusPlayer(player,car)
+func focusCar(player:Player,car:Car,id:int)->void:
+	viewport_manager_arr[id].FocusPlayer(player,car)
 	
 func _process(_delta: float) -> void:
-	if !fcsCar.isLock:
+	if IsRaceStarted:
 		UpdateOrderResult()
 		
 func CoolEffects()->void:
@@ -145,26 +181,25 @@ func CoolEffects()->void:
 	if not GameData.IsMultiplayer:
 		await get_tree().create_timer(3).timeout
 	sound_manager.PlaySound("ready3")
-	lbl321.text='3'
-	lbl321_player.play("321")
+	Play321Anim('3')
 	await get_tree().create_timer(1).timeout
 	sound_manager.PlaySound("ready2")
-	lbl321.text='2'
-	lbl321_player.play("321")
+	Play321Anim('2')
 	await get_tree().create_timer(1).timeout
 	sound_manager.PlaySound("ready1")
-	lbl321.text='1'
-	lbl321_player.play("321")
+	Play321Anim('1')
 	await get_tree().create_timer(1).timeout
 	sound_manager.PlaySound("go")
-	lbl321.text='GO'
-	lbl321_player.play("321")
+	Play321Anim('GO')
 	await get_tree().create_timer(0.3).timeout
 	#lbl321.hide()
 	RaceStart()
 	MusicPlayer.PlayMusic("map"+str(GameData.currentMap)) 
 	
-	
+func Play321Anim(msg:String)->void:
+	for viewport:ViewportManager in viewport_manager_arr:
+		viewport.lbl321.text=msg
+		viewport.lbl321player.play('321')
 	
 func UpdateOrderResult() -> void:
 	# 1. Sort the players by distance descending
@@ -201,7 +236,6 @@ func UpdateOrderResult() -> void:
 
 
 func ShowFinishEffect(_tick:int)->void:
-	finish.play()
 	#sync everyone's orderinfo
 	if NetworkManager.is_host:
 		UpdateOrderInfo.rpc(GameData.OrderInfo)

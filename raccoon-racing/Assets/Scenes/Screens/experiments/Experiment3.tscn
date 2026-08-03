@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dwppsxx4mnenn"]
 
 [ext_resource type="PackedScene" uid="uid://cehj3k48xb3su" path="res://Assets/Scenes/Screens/HUD/HUD.tscn" id="1_lkqsu"]
-[ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager.gd" id="1_p2hrk"]
+[ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager_split.gd" id="1_p2hrk"]
 [ext_resource type="Script" uid="uid://memhlecsyk42" path="res://scripts/Game/sound_manager.gd" id="2_p2hrk"]
 [ext_resource type="Texture2D" uid="uid://dn7nt3mtihhn" path="res://Assets/Images/game/finish/1.png" id="3_07on0"]
 [ext_resource type="Texture2D" uid="uid://c5k0abksngnfh" path="res://Assets/Images/game/finish/2.png" id="4_jgyte"]
@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cq4xfe1yvy5gc" path="res://Assets/Images/game/finish/14.png" id="16_fn7bp"]
 [ext_resource type="Texture2D" uid="uid://e7u6tavnglm8" path="res://Assets/Images/game/finish/15.png" id="17_ne0eb"]
 [ext_resource type="PackedScene" uid="uid://m7noqod4rkcs" path="res://Assets/Scenes/Screens/maps/Map03.tscn" id="18_ag0ay"]
-[ext_resource type="Script" uid="uid://djeahpd2vve1p" path="res://scripts/Game/viewport_manager.gd" id="20_07on0"]
+[ext_resource type="Script" uid="uid://djeahpd2vve1p" path="res://scripts/Game/viewport_manager_split.gd" id="20_07on0"]
 
 [sub_resource type="Environment" id="Environment_7sc16"]
 glow_enabled = true

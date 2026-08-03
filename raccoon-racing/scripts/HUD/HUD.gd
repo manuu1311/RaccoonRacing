@@ -6,7 +6,7 @@ class_name HUDManager
 @onready var char_hud: CharHud = $CharHud
 @onready var lbl321: Label = $"321/321"
 @onready var lbl321_player: AnimationPlayer = $"321/321Player"
-@onready var minimap: TextureRect = $Minimap
+@onready var minimap: TextureRect = $MinimapHud/Minimap
 var FocusCar:Car
 # Called when the node enters the scene tree for the first time.
 

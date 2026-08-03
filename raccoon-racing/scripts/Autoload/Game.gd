@@ -4,8 +4,8 @@ var players: Array[Player]
 var ready_players: Dictionary = {}
 signal PlayersReady(tick:int)
 ##split screen mode
-var IsSplitScreen:bool=false
-var LocalPlayers:int=2
+var IsSplitScreen:bool=true
+var LocalPlayers:int=3
 
 
 @rpc("any_peer", "reliable")

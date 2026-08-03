@@ -169,7 +169,9 @@ metadata/_edit_use_anchors_ = true
 [node name="321Player" type="AnimationPlayer" parent="321" unique_id=1415020121]
 libraries/ = SubResource("AnimationLibrary_12x6x")
 
-[node name="Minimap" type="TextureRect" parent="." unique_id=126918580]
+[node name="MinimapHud" type="CanvasLayer" parent="." unique_id=159701634]
+
+[node name="Minimap" type="TextureRect" parent="MinimapHud" unique_id=126918580]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

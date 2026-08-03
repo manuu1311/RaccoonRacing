@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://cputl6pwqgagy"]
 
-[ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager.gd" id="1_ixktl"]
+[ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager_split.gd" id="1_ixktl"]
 [ext_resource type="Script" uid="uid://memhlecsyk42" path="res://scripts/Game/sound_manager.gd" id="3_6unhv"]
 [ext_resource type="PackedScene" uid="uid://qokanxpo7gxp" path="res://Assets/Scenes/Screens/experiments/sub_window.tscn" id="3_agnfx"]
-[ext_resource type="PackedScene" uid="uid://cai5a5wyyssi8" path="res://Assets/Scenes/Screens/maps/Minimap01.tscn" id="4_4shc6"]
 
 [node name="Experiment1" type="Node2D" unique_id=1060618127 node_paths=PackedStringArray("viewport_manager_arr", "world", "minimap_canvas")]
 script = ExtResource("1_ixktl")
@@ -54,5 +53,3 @@ color = Color(1, 1, 0, 1)
 position = Vector2i(0, 0)
 
 [node name="MinimapCanvas" type="CanvasLayer" parent="." unique_id=1355070842]
-
-[node name="Minimap" parent="MinimapCanvas" unique_id=2034007929 instance=ExtResource("4_4shc6")]
