@@ -43,8 +43,6 @@ var current_vehicle: VehicleType = VehicleType.CAR
 var PlayersArr:Array[Player]=[]
 var OrderInfo:Array[int]=[]
 var Ranking:Array[int]=[]
-var FocusCar:Car
-var FocusPlayer:Player
 ##array to store info about best lap times in the 4 circuits
 var BestTimes:Array[Array]=[
 	[0,0],

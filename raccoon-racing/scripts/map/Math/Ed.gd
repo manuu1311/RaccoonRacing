@@ -74,6 +74,7 @@ func ReTidyFace()->void:
 		while(_loc3_ <= _loc7_):
 			_loc4_ = _loc6_;
 			while(_loc4_ <= _loc5_):
+				@warning_ignore("unsafe_method_access")
 				SurfaceArr[_loc3_][_loc4_].append(AddSurfaceArr[_loc2_]);
 				_loc4_ = _loc4_ + 1;
 			_loc3_ = _loc3_ + 1;
@@ -93,6 +94,7 @@ func getHitFace(point:Vector2)->EdLine:
 	if cellx<0 or cellx>=len(SurfaceArr):return null
 	if celly<0 or celly>=len(SurfaceArr[cellx]):return null
 	while(i < len(SurfaceArr[cellx][celly])):
+		@warning_ignore("unsafe_method_access")
 		if(SurfaceArr[cellx][celly][i].HitTest(point.x,point.y)):
 			return SurfaceArr[cellx][celly][i];
 		i+=1

@@ -1,11 +1,14 @@
 extends Node
 
 var players: Array[Player]
-var fcsCar:Car
 ##to lock props when player still cannot see them
 var propLock:bool=false
 var ready_players: Dictionary = {}
 signal PlayersReady(tick:int)
+##split screen mode
+var IsSplitScreen:bool=true
+var LocalPlayers:int=3
+
 
 @rpc("any_peer", "reliable")
 func server_receive_ready(peer_id: int)->void:
@@ -34,6 +37,3 @@ func broadcast_start_tick(target_tick: int)->void:
 
 func register(player:Player)->void:
 	players.append(player)
-
-func focusCar(car:Car)->void:
-	fcsCar=car

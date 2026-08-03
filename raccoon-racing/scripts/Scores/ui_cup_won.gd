@@ -49,7 +49,7 @@ func _ready() -> void:
 	chartext.hide()
 	charicon.hide()
 	##player won:
-	if GameData.PlayersArr[GameData.Ranking[0]]==GameData.FocusPlayer:
+	if GameData.Ranking[0]==0:
 		lost.hide()
 		won.show()
 		WonSetup()

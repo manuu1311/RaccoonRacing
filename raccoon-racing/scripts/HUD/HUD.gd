@@ -21,6 +21,7 @@ func setup() -> void:
 	char_hud.setup() 
 	speed_hud.Setup()
 	lbl321.self_modulate=Color.TRANSPARENT
+	speed_hud.set_process(false)
 
 
 func SetCar(car:Car)->void:
@@ -28,6 +29,7 @@ func SetCar(car:Car)->void:
 	prop_hud.DeferredInit(car.CharID)
 	prop_hud.prop_visible.connect(ResetPropLock)
 	speed_hud.SetCar(FocusCar)
+	speed_hud.set_process(true)
 
 func ResetPropLock()->void:
 	if FocusCar.player.PropValidated:

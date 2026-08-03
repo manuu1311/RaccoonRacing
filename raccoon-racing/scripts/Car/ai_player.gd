@@ -105,7 +105,7 @@ func AutoUseProp() -> bool:
 			for other in GameData.PlayersArr:
 				if other.PlayerID != self.PlayerID:
 					if other.prop.IsHavePropType(5) or other.prop.IsHavePropType(6) \
-					or (other.prop.IsHavePropType(9) and other.car.CharData.CountersHazardProps):
+					or (other.prop.IsHavePropType(9)):
 						return true
 					if car.global_position.distance_to(other.car.global_position) < 300:
 						return true

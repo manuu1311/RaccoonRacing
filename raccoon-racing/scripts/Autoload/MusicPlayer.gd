@@ -20,6 +20,7 @@ func PlayMusic(music: String)->void:
 	if new_stream:
 		volume_db=0
 		stream = new_stream
+		@warning_ignore("unsafe_property_access")
 		stream.loop = true
 		play()
 	else:

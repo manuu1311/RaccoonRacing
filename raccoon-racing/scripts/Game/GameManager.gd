@@ -4,17 +4,13 @@ class_name GameManager
 var players: Array[Player]
 var cars:Array[Car]
 var fcsCar:Car
-@onready var map: Map
-@onready var hud: HUDManager = $Hud
+var map: Map
 @onready var sound_manager: GameSoundManager = $SoundManager
-@onready var lbl321: Label = $"321/321"
-@onready var lbl321_player: AnimationPlayer = $"321/321Player"
-@onready var finish: AnimatedSprite2D = $"321/Finish"
-@onready var camera: Camera2D = $Camera2D
-@onready var viewport_manager: ViewportManager = $ViewportManager
+@export var viewport_manager_arr: Array[ViewportManager]
+@export var world: Node2D
 var IsRaceStarted:bool=false
 signal overtake_signal
-signal players_created_signal
+var window_instance:PackedScene=preload("res://Assets/Scenes/Screens/experiments/sub_window.tscn")
 
 #preload props
 const PROP_SCENES = {
@@ -29,18 +25,55 @@ const PROP_SCENES = {
 }
 
 func _ready() -> void:
-	lbl321.self_modulate=Color.TRANSPARENT
 	UiOverAnimation.reset_anim_frame()
 	Game.PlayersReady.connect(StartSequence)
-	#LoadMap()
-	LoadMinimap()
+	LoadMap()
 	map.deferredInit()
 	CreatePlayers()
-	players_created_signal.emit()
 	UiLoadingScreen.HideLoading()
+	PopulateViewports()
 	sound_manager.PlaySound('levelstart')
 
+
+func PopulateViewports()->void:
+	AddWindow()
+	for i in range(len(viewport_manager_arr)):
+		var viewport:ViewportManager=viewport_manager_arr[i]
+		viewport.world_2d=get_viewport().world_2d
+		viewport.Setup(map,sound_manager,self)
+		var player:Player=GameData.PlayersArr[i]
+		focusCar(player,player.car,i)
 	
+
+
+func AddWindow()->void:
+	if not Game.IsSplitScreen:
+		return
+
+	var main_window :Window= get_window()
+	main_window.mode = Window.MODE_FULLSCREEN
+	if Game.LocalPlayers==2:
+		main_window.content_scale_size=Vector2(1000,500)
+	else:
+		main_window.content_scale_size=Vector2(1000,1000)
+	
+	viewport_manager_arr[0].position = Vector2i(0,0)
+	var split_window :ViewportManager=window_instance.instantiate() as ViewportManager
+	split_window.position = Vector2i(500, 0)
+	add_child(split_window)
+	viewport_manager_arr.append(split_window)
+	if Game.LocalPlayers>2:
+		split_window=window_instance.instantiate() as ViewportManager
+		split_window.position = Vector2i(0, 500)
+		add_child(split_window)
+		viewport_manager_arr.append(split_window)
+		split_window=window_instance.instantiate() as ViewportManager
+		split_window.position = Vector2i(500, 500)
+		add_child(split_window)
+		viewport_manager_arr.append(split_window)
+
+
+
 func CreatePlayers()->void:
 	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
 	for i:int in GameData.Ranking.size(): 
@@ -56,7 +89,6 @@ func CreatePlayers()->void:
 			available_ids.erase(GameData.currentCharacter)
 			available_ids.shuffle()
 			carinstance.set_multiplayer_authority(player.NetworkID)
-			focusCar(player,carinstance)
 		elif player.current_control==player.control_type.HUMAN and GameData.IsMultiplayer:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=CarController.new(player)
@@ -80,7 +112,7 @@ func CreatePlayers()->void:
 				newid=player.charid
 				available_ids.erase(newid)
 			carinstance.CharID=newid
-		add_child(carinstance)
+		world.add_child(carinstance)
 		carinstance.name="Car"+str(player.PlayerID)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
@@ -92,20 +124,32 @@ func StartSequence(target_tick:int)->void:
 		await NetworkTime.after_tick
 	CoolEffects()
 	
-func LoadMinimap()->void:
-	map=$Map
+func LoadMap() -> void:
+	var map_num: int = GameData.currentMap
+
+	# 1. Format the map path (e.g., "Map01.tscn", "Map02.tscn")
+	# %02d pads single digits with a leading zero (1 becomes 01)
+	var map_path: String = "res://Assets/Scenes/Screens/maps/Map%02d.tscn" % map_num
+
+	@warning_ignore("unsafe_method_access")
+	map = load(map_path).instantiate() as Map
+	world.add_child(map)
+
+	# 2. Determine the minimap suffix based on the vehicle type
 	var is_car: bool = (GameData.current_vehicle == GameData.VehicleType.CAR)
 	var suffix: String = "1" if is_car else "2"
-	var map_num: int = GameData.currentMap
+
 	# 3. Format the minimap path
 	# Map 1 uses 01/02, Map 2 uses 11/12, Map 3 uses 21/22, etc.
 	var minimap_index: int = map_num - 1
 	var minimap_path: String = "res://Assets/Scenes/Screens/maps/Minimap%d%s.tscn" % [minimap_index, suffix]
 
 	# 4. Instantiate and attach the minimap
+	@warning_ignore("unsafe_method_access")
 	var minimap_instance:CanvasLayer = load(minimap_path).instantiate() as CanvasLayer
 	minimap_instance.name = "Minimap"
 	map.add_child(minimap_instance)
+
 
 func RaceStart()->void:
 	for player:Player in GameData.PlayersArr:
@@ -115,14 +159,11 @@ func RaceStart()->void:
 	IsRaceStarted=true
 	
 
-func focusCar(player:Player,car:Car)->void:
-	GameData.FocusCar=car
-	fcsCar=car
-	GameData.FocusPlayer=player
-	viewport_manager.FocusPlayer(player,car)
+func focusCar(player:Player,car:Car,id:int)->void:
+	viewport_manager_arr[id].FocusPlayer(player,car)
 	
 func _process(_delta: float) -> void:
-	if !fcsCar.isLock:
+	if !GameData.PlayersArr[0].car.isLock:
 		UpdateOrderResult()
 		
 func CoolEffects()->void:
@@ -131,26 +172,25 @@ func CoolEffects()->void:
 	if not GameData.IsMultiplayer:
 		await get_tree().create_timer(3).timeout
 	sound_manager.PlaySound("ready3")
-	lbl321.text='3'
-	lbl321_player.play("321")
+	Play321Anim('3')
 	await get_tree().create_timer(1).timeout
 	sound_manager.PlaySound("ready2")
-	lbl321.text='2'
-	lbl321_player.play("321")
+	Play321Anim('2')
 	await get_tree().create_timer(1).timeout
 	sound_manager.PlaySound("ready1")
-	lbl321.text='1'
-	lbl321_player.play("321")
+	Play321Anim('1')
 	await get_tree().create_timer(1).timeout
 	sound_manager.PlaySound("go")
-	lbl321.text='GO'
-	lbl321_player.play("321")
+	Play321Anim('GO')
 	await get_tree().create_timer(0.3).timeout
 	#lbl321.hide()
 	RaceStart()
 	MusicPlayer.PlayMusic("map"+str(GameData.currentMap)) 
 	
-	
+func Play321Anim(msg:String)->void:
+	for viewport:ViewportManager in viewport_manager_arr:
+		viewport.lbl321.text=msg
+		viewport.lbl321player.play('321')
 	
 func UpdateOrderResult() -> void:
 	# 1. Sort the players by distance descending
@@ -187,7 +227,6 @@ func UpdateOrderResult() -> void:
 
 
 func ShowFinishEffect(_tick:int)->void:
-	finish.play()
 	#sync everyone's orderinfo
 	if NetworkManager.is_host:
 		UpdateOrderInfo.rpc(GameData.OrderInfo)

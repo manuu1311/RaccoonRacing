@@ -1,9 +1,15 @@
-extends Node
+extends Window
 class_name ViewportManager
 
-@export var hud: HUDManager
-@export var camera:Camera2D
-@export var game_manager:GameManager
+@onready var camera: Camera2D = $Camera2D
+
+@onready var hud: HUDManager = $HUD/Hud
+@onready var lbl321: Label = $"HUD/321/321"
+@onready var lbl321player: AnimationPlayer = $"HUD/321/321Player"
+@onready var finish: AnimatedSprite2D = $HUD/FinishEffect/Finish
+var sound_manager: GameSoundManager
+var game_manager: GameManager
+
 var stagesize:Vector2
 var SceneAngleMoveExpandPos : Vector2
 var SceneAngleMoveExpandNowPos : Vector2
@@ -12,17 +18,16 @@ var MoveSceneCenterSpeed:int = 2;
 var MoveSceneAngleSpeed:float = 0.2;
 var FcsPlayer:Player
 var fcsCar:Car
-@onready var map: Node2D = $"../Map"
-@onready var sound_manager: GameSoundManager = $"../SoundManager"
+var map: Map
+var container:SubViewportContainer
+
 
 
 func _ready() -> void:
-	stagesize=map.GetMapSize()
+	lbl321.self_modulate=Color.TRANSPARENT
+	finish.frame=0
 	SceneAngleMoveExpandPos = Vector2(150,0)
 	SceneAngleMoveExpandNowPos = Vector2.ZERO
-	game_manager.overtake_signal.connect(hud.play_overtake)
-	game_manager.players_created_signal.connect(SetHud)
-	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,12 +38,20 @@ func _process(_delta: float) -> void:
 		SceneCenterMoveToPos()
 
 
+func Setup(mapinst:Map,soundmanager:GameSoundManager,gamemanager:GameManager)->void:
+	map=mapinst
+	stagesize=map.GetMapSize()
+	sound_manager=soundmanager
+	game_manager=gamemanager
+	game_manager.overtake_signal.connect(hud.play_overtake)
+
 func FocusPlayer(player:Player,carinstance:Car)->void:
 	FcsPlayer=player
 	fcsCar=carinstance
 	player.racefinished.connect(Racestop)
 	var vibhandler:VibrationHandler=fcsCar.get_node('VibrationHandler') as VibrationHandler
 	vibhandler.RegisterCar(fcsCar)
+	SetHud()
 	if GameData.IsMultiplayer and not NetworkManager.is_host:
 		Game.server_receive_ready.rpc_id(1,FcsPlayer.PlayerID)
 	else:
@@ -56,6 +69,7 @@ func Racestop(id:int)->void:
 			sound_manager.PlaySound("finish",0.0)
 		else:
 			sound_manager.PlaySound("failed",0.0)
+		finish.play()
 	if GameData.IsMultiplayer and not NetworkManager.is_host:
 		Game.server_receive_ready.rpc_id(1,fcsCar.playerID)
 	else:
