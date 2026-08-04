@@ -177,27 +177,44 @@ func CheckCupLocks()->int:
 	return 0
 
 func PopulatePlayers()->void:
+	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
 	var newplayer:Player
 	newplayer=Player.new(0,Player.control_type.HUMAN)
 	PlayersArr.append(newplayer)
 	OrderInfo.append(0)
 	Ranking.append(0)
+	var chosenid:int=GameData.currentCharacter[0]
+	newplayer.charid=chosenid
+	available_ids.erase(chosenid)
 	newplayer=AIPlayer.new(1,Player.control_type.AI)
 	PlayersArr.append(newplayer)
 	newplayer.AiReflect=AiLevel[currentDifficulty-1][0][0]
 	OrderInfo.append(1)
 	Ranking.append(1)
+	var new_id:int
+	available_ids.shuffle()
+	new_id=available_ids.pop_front()
+	newplayer.charid=new_id
+	available_ids.erase(new_id)
 	newplayer=AIPlayer.new(2,Player.control_type.AI)
 	PlayersArr.append(newplayer)
 	newplayer.AiReflect=AiLevel[currentDifficulty-1][1][0]
 	OrderInfo.append(2)
 	Ranking.append(2)
+	available_ids.shuffle()
+	new_id=available_ids.pop_front()
+	newplayer.charid=new_id
+	available_ids.erase(new_id)
 	newplayer=AIPlayer.new(3,Player.control_type.AI)
 	PlayersArr.append(newplayer)
 	newplayer.AiReflect=AiLevel[currentDifficulty-1][2][0]
 	OrderInfo.append(3)
 	Ranking.append(3)
-	
+	available_ids.shuffle()
+	new_id=available_ids.pop_front()
+	newplayer.charid=new_id
+	available_ids.erase(new_id)
+
 func PopulateOrderArrays()->void:
 	Ranking=[0,1,2,3]
 	OrderInfo=[0,1,2,3]

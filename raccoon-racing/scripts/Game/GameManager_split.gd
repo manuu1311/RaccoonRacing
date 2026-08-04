@@ -43,13 +43,14 @@ func _ready() -> void:
 
 func PopulateViewports()->void:
 	AddWindow()
-	for i in range(len(viewport_manager_arr)):
-		var viewport:ViewportManager=viewport_manager_arr[i]
-		viewport.world_2d=get_viewport().world_2d
-		viewport.Setup(map,sound_manager,self)
-		viewport.name='Window'+str(i)
-		var player:Player=GameData.PlayersArr[i]
-		focusCar(player,player.car,i)
+	var viewportid:int
+	for player:Player in GameData.PlayersArr:
+		if player.current_control==Player.control_type.HUMAN:
+			var viewport:ViewportManager=viewport_manager_arr[viewportid]
+			viewport.world_2d=get_viewport().world_2d
+			viewport.Setup(map,sound_manager,self)
+			viewport.name='Window'+str(viewportid)
+			focusCar(player,player.car,viewportid)
 	
 
 
@@ -82,7 +83,6 @@ func AddWindow()->void:
 
 
 func CreatePlayers()->void:
-	var available_ids:Array[int] = [1, 2, 3, 4, 5, 6]
 	for i:int in GameData.Ranking.size(): 
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
@@ -92,39 +92,29 @@ func CreatePlayers()->void:
 			var controller:CarController=HumanCarController.new(player)
 			carinstance.add_child(controller)
 			carinstance.controller=controller
-			carinstance.CharID=GameData.currentCharacter[player.PlayerID]
-			available_ids.erase(GameData.currentCharacter[player.PlayerID])
-			available_ids.shuffle()
-			#carinstance.set_multiplayer_authority(player.NetworkID)
+			carinstance.CharID=player.charid
+			carinstance.set_multiplayer_authority(player.NetworkID)
 		elif player.current_control==player.control_type.MULTIPLAYER:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=CarController.new(player)
 			carinstance.add_child(controller)
 			carinstance.controller=controller
 			carinstance.CharID=player.charid
-			#player.charid=GameData.currentCharacter
-			available_ids.erase(GameData.currentCharacter[player.PlayerID])
-			available_ids.shuffle()
-			player.SetCar(carinstance)
-			#carinstance.set_multiplayer_authority(player.NetworkID)
+			carinstance.set_multiplayer_authority(player.NetworkID)
 		else:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=AICarController.new(player)
 			carinstance.add_child(controller)
 			carinstance.controller=controller
-			var newid:int
-			if player.charid==0:
-				newid=available_ids.pop_front()
-				player.charid=newid
-			else:
-				newid=player.charid
-				available_ids.erase(newid)
-			carinstance.CharID=newid
-			player.SetCar(carinstance)
+			carinstance.CharID=player.charid
 		world.add_child(carinstance)
 		carinstance.name="Car"+str(player.PlayerID)
+		print('is host:',NetworkManager.is_host)
+		print('setting the position!:',carinstance.global_position)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
+		print('set the position!:',carinstance.global_position)
+		player.SetCar(carinstance)
 		player.ResetPlayer(i)
 
 func StartSequence(target_tick:int)->void:

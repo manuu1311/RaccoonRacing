@@ -94,10 +94,10 @@ func _on_start_button_mouse_exited() -> void:
 
 func _on_start_button_pressed() -> void:
 	if CharactersChosen.size()==PlayersNum:
+		Game.LocalPlayers=PlayersNum
 		ButtonSounds.PlaySound('click')
 		UiOverAnimation.playanim()
 		await  UiOverAnimation.animated_sprite_2d.animation_finished
 		get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_cup.tscn')
 	else:
 		ButtonSounds.PlaySound('warning')
-		GameData

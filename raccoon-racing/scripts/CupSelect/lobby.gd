@@ -138,7 +138,7 @@ func RegisterPlayer(newcharid:int)->void:
 		return
 	var sender_network_id: int = multiplayer.get_remote_sender_id()
 	var newid:int=GameData.PlayersArr.size()
-	var newplayer:Player=Player.new(newid,Player.control_type.HUMAN)
+	var newplayer:Player=Player.new(newid,Player.control_type.MULTIPLAYER)
 	newplayer.charid=newcharid
 	newplayer.OnlineName=names[newcharid]
 	newplayer.NetworkID = sender_network_id
@@ -158,13 +158,15 @@ func RegisterPlayer(newcharid:int)->void:
 func PlayerRegistered(charids:Array[int],playernames:Array[String],networkids:Array[int],playerID:int)->void:
 	GameData.PlayersArr.clear()
 	for i in range(charids.size()):
-		var newplayer:Player=Player.new(i,Player.control_type.HUMAN)
+		var newplayer:Player=Player.new(i,Player.control_type.MULTIPLAYER)
 		newplayer.charid=charids[i]
 		newplayer.OnlineName=playernames[i]
 		newplayer.NetworkID = networkids[i]
 		GameData.PlayersArr.append(newplayer)
 	if not IsLocked and not NetworkManager.is_host:
 		NetworkManager.PlayerID=playerID
+		#change player control to human
+		GameData.PlayersArr[playerID].current_control=Player.control_type.HUMAN
 		LobbyTransition()
 		IsLocked=true
 		GameData.IsMultiplayer=true

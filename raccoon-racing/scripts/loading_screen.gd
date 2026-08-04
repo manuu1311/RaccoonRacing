@@ -23,7 +23,7 @@ func ChangeScene() -> void:
 	if Game.IsSplitScreen:
 		target_scene='res://Assets/Scenes/Screens/experiments/Experiment1.tscn'
 	else:
-		target_scene='res://Assets/Scenes/Screens/experiments/Experiment2.tscn'
+		target_scene='res://Assets/Scenes/Screens/experiments/Experiment1.tscn'
 	UiOverAnimation.animated_sprite_2d.frame=0
 	hint.stop()
 	_cycle_hint()

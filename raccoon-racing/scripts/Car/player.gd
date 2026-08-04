@@ -54,7 +54,6 @@ func _init(id:int,control:control_type) -> void:
 	
 
 func SetCar(carinst:Car)->void:
-	print('set my car')
 	car=carinst
 	
 func SetHud(hudinst:HUDManager,carinst:Car)->void:

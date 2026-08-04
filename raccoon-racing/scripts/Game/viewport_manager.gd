@@ -40,14 +40,9 @@ func Setup(mapinst:Map,gamemanager:GameManager)->void:
 func FocusPlayer(player:Player,carinstance:Car)->void:
 	FcsPlayer=player
 	fcsCar=carinstance
-	player.SetCar(carinstance)
 	player.racefinished.connect(Racestop)
 	var vibhandler:VibrationHandler=fcsCar.get_node('VibrationHandler') as VibrationHandler
 	vibhandler.RegisterCar(fcsCar)
-	if GameData.IsMultiplayer and not NetworkManager.is_host:
-		Game.server_receive_ready.rpc_id(1,FcsPlayer.PlayerID)
-	else:
-		Game.server_receive_ready(FcsPlayer.PlayerID)
 
 func SetHud()->void:
 	FcsPlayer.SetHud(hud,fcsCar)

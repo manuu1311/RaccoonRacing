@@ -49,6 +49,8 @@ func CreatePlayers()->void:
 	for i:int in GameData.Ranking.size(): 
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
+		print('setting up')
+		player.SetCar(carinstance)
 		if player.current_control==player.control_type.HUMAN:
 			carinstance.setup(map,player.PlayerID,true,player)
 			var controller:CarController=HumanCarController.new(player)
@@ -69,7 +71,6 @@ func CreatePlayers()->void:
 			#player.charid=GameData.currentCharacter
 			available_ids.erase(GameData.currentCharacter[player.PlayerID])
 			available_ids.shuffle()
-			player.SetCar(carinstance)
 			#carinstance.set_multiplayer_authority(player.NetworkID)
 		else:
 			carinstance.setup(map,player.PlayerID,false,player)
@@ -84,12 +85,15 @@ func CreatePlayers()->void:
 				newid=player.charid
 				available_ids.erase(newid)
 			carinstance.CharID=newid
-			player.SetCar(carinstance)
 		add_child(carinstance)
 		carinstance.name="Car"+str(player.PlayerID)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
 		player.ResetPlayer(i)
+		if GameData.IsMultiplayer and not NetworkManager.is_host:
+			Game.server_receive_ready.rpc_id(1,NetworkManager.PlayerID)
+		else:
+			Game.server_receive_ready(GameData.PlayersArr[0].PlayerID)
 
 func StartSequence(target_tick:int)->void:
 	while NetworkTime.tick < target_tick:
