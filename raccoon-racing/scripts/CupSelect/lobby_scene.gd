@@ -47,7 +47,7 @@ func UpdateIconsNames()->void:
 		var player:Player=GameData.PlayersArr[i]
 		rects[i].texture=textures[player.charid]
 		labels[i].text=player.OnlineName
-		if player.PlayerID!=NetworkManager.PlayerID:
+		if player.current_control!=Player.control_type.HUMAN:
 			labels[i].editable=false
 			# Disconnect previous signals if they exist so they don't stack up
 			if labels[i].text_submitted.is_connected(_on_name_submitted):
@@ -57,10 +57,10 @@ func UpdateIconsNames()->void:
 		else:
 			labels[i].editable=true
 			if not labels[i].text_submitted.is_connected(_on_name_submitted):
-				labels[i].text_submitted.connect(_on_name_submitted)
+				labels[i].text_submitted.connect(_on_name_submitted.bind(i))
 			if not labels[i].focus_exited.is_connected(_on_name_focus_exited):
 				# We bind the LineEdit instance so we can read its text when focus leaves
-				labels[i].focus_exited.connect(_on_name_focus_exited.bind(labels[i]))
+				labels[i].focus_exited.connect(_on_name_focus_exited.bind(labels[i],i))
 	#bots
 	for i in range(GameData.PlayersArr.size(),4,1):
 		rects[i].texture=textures[0]
@@ -71,11 +71,11 @@ func UpdateIconsNames()->void:
 func UpdateCupInfo()->void:
 	cuptxt.text='CUP '+str(GameData.currentCup+1)
 
-func SendNameUpdate(new_name: String) -> void:
+func SendNameUpdate(new_name: String,playerid:int) -> void:
 	if NetworkManager.is_host:
-		ChangeNameRequest(new_name,NetworkManager.PlayerID)
+		ChangeNameRequest(new_name,playerid)
 	else:
-		ChangeNameRequest.rpc_id(1, new_name,NetworkManager.PlayerID)
+		ChangeNameRequest.rpc_id(1, new_name,playerid)
 
 @rpc("any_peer", "call_remote", "reliable")
 func ChangeNameRequest(new_name: String,id:int) -> void:
@@ -102,17 +102,17 @@ func BroadcastNameUpdate(player_id: int, new_name: String) -> void:
 	UpdateIconsNames()
 
 
-func _on_name_submitted(new_text: String) -> void:
+func _on_name_submitted(new_text: String,playerid:int) -> void:
 	# Player hit Enter. Remove focus from the LineEdit to look clean
 	var current_focus:Control = get_viewport().gui_get_focus_owner()
 	if current_focus:
 		current_focus.release_focus() 
 	# Send the name up to your network controller (adjust node path if needed)
-	SendNameUpdate(new_text)
+	SendNameUpdate(new_text,playerid)
 
-func _on_name_focus_exited(line_edit: LineEdit) -> void:
+func _on_name_focus_exited(line_edit: LineEdit,playerid:int) -> void:
 	# Player clicked away or unfocused. Submit whatever text is currently inside
-	SendNameUpdate(line_edit.text)
+	SendNameUpdate(line_edit.text,playerid)
 
 
 func _on_startbutton_mouse_entered() -> void:
