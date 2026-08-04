@@ -96,7 +96,7 @@ func CreatePlayers()->void:
 			player.charid=GameData.currentCharacter
 			available_ids.erase(GameData.currentCharacter)
 			available_ids.shuffle()
-			carinstance.set_multiplayer_authority(player.NetworkID)
+			#carinstance.set_multiplayer_authority(player.NetworkID)
 		elif player.current_control==player.control_type.HUMAN and GameData.IsMultiplayer:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=CarController.new(player)
@@ -106,7 +106,7 @@ func CreatePlayers()->void:
 			#player.charid=GameData.currentCharacter
 			available_ids.erase(GameData.currentCharacter)
 			available_ids.shuffle()
-			carinstance.set_multiplayer_authority(player.NetworkID)
+			#carinstance.set_multiplayer_authority(player.NetworkID)
 		else:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=AICarController.new(player)
