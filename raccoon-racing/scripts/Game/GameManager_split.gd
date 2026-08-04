@@ -130,6 +130,8 @@ func CreatePlayers()->void:
 func StartSequence(target_tick:int)->void:
 	while NetworkTime.tick < target_tick:
 		await NetworkTime.after_tick
+	for player:Player in GameData.PlayersArr:
+		player.Setup()
 	CoolEffects()
 	
 func LoadMap() -> void:

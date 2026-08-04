@@ -137,8 +137,6 @@ func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
 func _ready() -> void:
 	horse=carhorse
 	input_handler.setup(player,controller)
-	if GameData.IsMultiplayer:
-		StateSyncSetup()
 	if isHovercraft():
 		car.hide()
 		hovercraft.show()

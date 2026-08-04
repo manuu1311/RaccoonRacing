@@ -61,6 +61,12 @@ func SetHud(hudinst:HUDManager,carinst:Car)->void:
 	hud.setup()
 	hud.SetCar(carinst)
 	
+	
+func Setup()->void:
+	if GameData.IsMultiplayer:
+		car.StateSyncSetup()
+	car.set_multiplayer_authority(NetworkID)
+
 
 func IsPlayering()->bool:
 	return car.playering
