@@ -49,6 +49,7 @@ func Setup(mapinst:Map,soundmanager:GameSoundManager,gamemanager:GameManager_spl
 func FocusPlayer(player:Player,carinstance:Car)->void:
 	FcsPlayer=player
 	fcsCar=carinstance
+	player.SetCar(carinstance)
 	player.racefinished.connect(Racestop)
 	var vibhandler:VibrationHandler=fcsCar.get_node('VibrationHandler') as VibrationHandler
 	vibhandler.RegisterCar(fcsCar)

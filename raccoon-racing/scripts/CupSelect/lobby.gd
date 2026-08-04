@@ -120,7 +120,7 @@ func HostLobby(_code:String)->void:
 	NetworkManager.NetworkID=hostid
 	var host_player: Player = Player.new(0, Player.control_type.HUMAN)
 	NetworkManager.PlayerID=0
-	host_player.charid = GameData.currentCharacter
+	host_player.charid = GameData.currentCharacter[0]
 	host_player.OnlineName=names[host_player.charid]
 	GameData.PlayersArr.append(host_player)
 	lobby_script.UpdateIconsNames()
@@ -130,7 +130,7 @@ func HostLobby(_code:String)->void:
 
 func LobbyJoined()->void:
 	await get_tree().create_timer(1.0).timeout
-	RegisterPlayer.rpc_id(1,GameData.currentCharacter)
+	RegisterPlayer.rpc_id(1,GameData.currentCharacter[0])
 
 @rpc("any_peer","call_remote","reliable")
 func RegisterPlayer(newcharid:int)->void:
@@ -176,6 +176,7 @@ func LobbyTransition()->void:
 	lobby_scene.show()
 	code.text=NetworkManager.current_lobby
 	InputModeManager.ReApplyFocus()
+	cup_screen.back_button.visible=false
 	
 func _on_leavelobbybutton_mouse_entered() -> void:
 	ButtonSounds.PlaySound('hover')

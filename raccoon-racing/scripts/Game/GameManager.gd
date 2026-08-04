@@ -49,26 +49,27 @@ func CreatePlayers()->void:
 	for i:int in GameData.Ranking.size(): 
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
-		if player.current_control==player.control_type.HUMAN and player.PlayerID==NetworkManager.PlayerID:
+		if player.current_control==player.control_type.HUMAN:
 			carinstance.setup(map,player.PlayerID,true,player)
 			var controller:CarController=HumanCarController.new(player)
 			carinstance.add_child(controller)
 			carinstance.controller=controller
-			carinstance.CharID=GameData.currentCharacter
-			player.charid=GameData.currentCharacter
-			available_ids.erase(GameData.currentCharacter)
+			carinstance.CharID=GameData.currentCharacter[player.PlayerID]
+			player.charid=GameData.currentCharacter[player.PlayerID]
+			available_ids.erase(GameData.currentCharacter[player.PlayerID])
 			available_ids.shuffle()
 			#carinstance.set_multiplayer_authority(player.NetworkID)
 			focusCar(player,carinstance)
-		elif player.current_control==player.control_type.HUMAN and GameData.IsMultiplayer:
+		elif player.current_control==player.control_type.MULTIPLAYER:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=CarController.new(player)
 			carinstance.add_child(controller)
 			carinstance.controller=controller
 			carinstance.CharID=player.charid
 			#player.charid=GameData.currentCharacter
-			available_ids.erase(GameData.currentCharacter)
+			available_ids.erase(GameData.currentCharacter[player.PlayerID])
 			available_ids.shuffle()
+			player.SetCar(carinstance)
 			#carinstance.set_multiplayer_authority(player.NetworkID)
 		else:
 			carinstance.setup(map,player.PlayerID,false,player)
@@ -83,11 +84,11 @@ func CreatePlayers()->void:
 				newid=player.charid
 				available_ids.erase(newid)
 			carinstance.CharID=newid
+			player.SetCar(carinstance)
 		add_child(carinstance)
 		carinstance.name="Car"+str(player.PlayerID)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
-		player.SetCar(carinstance)
 		player.ResetPlayer(i)
 
 func StartSequence(target_tick:int)->void:

@@ -35,14 +35,12 @@ func Setup(mapinst:Map,gamemanager:GameManager)->void:
 	game_manager=gamemanager
 	game_manager.overtake_signal.connect(hud.play_overtake)
 	game_manager.players_created_signal.connect(SetHud)
-	print('setting up')
 	hud.minimap.texture=game_manager.minimap.get_texture()
-	print(game_manager.minimap.get_texture())
-	print(hud.minimap.texture)
 
 func FocusPlayer(player:Player,carinstance:Car)->void:
 	FcsPlayer=player
 	fcsCar=carinstance
+	player.SetCar(carinstance)
 	player.racefinished.connect(Racestop)
 	var vibhandler:VibrationHandler=fcsCar.get_node('VibrationHandler') as VibrationHandler
 	vibhandler.RegisterCar(fcsCar)

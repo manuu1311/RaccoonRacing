@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://bduuioalmao1u" path="res://Assets/Animations/CharSelection/characters/hudsonpic.png" id="33_75h3l"]
 [ext_resource type="Texture2D" uid="uid://swi3iox1wcxi" path="res://Assets/Animations/CharSelection/characters/hudsonhover.png" id="34_035ol"]
 [ext_resource type="Texture2D" uid="uid://bp3cg4m5rdrb3" path="res://Assets/Animations/CharSelection/characters/hudsontext.png" id="35_hw2rr"]
+[ext_resource type="FontFile" uid="uid://bvvts4tew4fix" path="res://Assets/Fonts/44_Arial Black.ttf" id="41_oq6vp"]
 
 [sub_resource type="Animation" id="Animation_gmby4"]
 length = 0.001
@@ -711,6 +712,18 @@ tracks/15/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("../SplitScreen:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 2.3428571),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_a2dju"]
 length = 0.001
@@ -906,12 +919,36 @@ tracks/15/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("../SplitScreen:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oq6vp"]
 _data = {
 &"FadeIn": SubResource("Animation_p3osk"),
 &"RESET": SubResource("Animation_a2dju")
 }
+
+[sub_resource type="Theme" id="Theme_i40t4"]
+default_font = ExtResource("41_oq6vp")
+default_font_size = 13
+LineEdit/colors/font_outline_color = Color(1, 0, 0, 1)
+LineEdit/constants/outline_size = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i40t4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_50fdv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a0urp"]
 
 [node name="UiCharSelection" type="CanvasLayer" unique_id=2012181980]
 
@@ -1066,9 +1103,9 @@ texture = ExtResource("7_nh31l")
 
 [node name="BackButton" type="TextureButton" parent="Control" unique_id=836593869]
 layout_mode = 0
-offset_left = -26.525
+offset_left = -218.0
 offset_top = 186.46
-offset_right = 65.475044
+offset_right = -125.999954
 offset_bottom = 228.46
 scale = Vector2(0.9, 0.9)
 focus_neighbor_top = NodePath("../Characters/Hudson/Char/Button")
@@ -1560,6 +1597,143 @@ offset_bottom = 250.0
 libraries/ = SubResource("AnimationLibrary_oq6vp")
 autoplay = &"FadeIn"
 
+[node name="SplitScreen" type="Control" parent="." unique_id=1725492368]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="lbl" type="Label" parent="SplitScreen" unique_id=353612812]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -76.0
+offset_right = -18.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 2
+theme = SubResource("Theme_i40t4")
+theme_override_colors/font_color = Color(0.890625, 0.890625, 0.890625, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 16
+text = "Players: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="SplitScreen" unique_id=2121037933]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 456.0
+offset_right = 224.0
+offset_bottom = 472.0
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SplitScreen" unique_id=1787075083]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.016
+offset_left = 240.0
+offset_top = 432.0
+offset_right = 831.99994
+offset_bottom = 558.0
+scale = Vector2(0.3, 0.3)
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Char1" type="TextureRect" parent="SplitScreen/HBoxContainer" unique_id=481373513]
+layout_mode = 2
+texture = ExtResource("24_i40t4")
+
+[node name="Char2" type="TextureRect" parent="SplitScreen/HBoxContainer" unique_id=707417559]
+layout_mode = 2
+texture = ExtResource("24_i40t4")
+
+[node name="Char3" type="TextureRect" parent="SplitScreen/HBoxContainer" unique_id=591901632]
+layout_mode = 2
+texture = ExtResource("24_i40t4")
+
+[node name="Char4" type="TextureRect" parent="SplitScreen/HBoxContainer" unique_id=274774837]
+layout_mode = 2
+texture = ExtResource("24_i40t4")
+
+[node name="StartGame" type="Control" parent="SplitScreen" unique_id=1165021159]
+anchors_preset = 0
+offset_left = 282.935
+offset_top = 425.01
+offset_right = 282.935
+offset_bottom = 425.01
+
+[node name="Outline2" type="Label" parent="SplitScreen/StartGame" unique_id=269195307]
+layout_mode = 0
+offset_left = 2.985
+offset_top = 2.87
+offset_right = 338.98755
+offset_bottom = 53.87
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 31
+theme_override_fonts/font = ExtResource("41_oq6vp")
+theme_override_font_sizes/font_size = 15
+text = "GO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Outline" type="Label" parent="SplitScreen/StartGame" unique_id=1052240310]
+layout_mode = 0
+offset_left = 5.76
+offset_top = 6.675
+offset_right = 341.76257
+offset_bottom = 57.675
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = -2
+theme_override_constants/shadow_outline_size = 24
+theme_override_fonts/font = ExtResource("41_oq6vp")
+theme_override_font_sizes/font_size = 15
+text = "GO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainText" type="Label" parent="SplitScreen/StartGame" unique_id=2062621950]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("41_oq6vp")
+theme_override_font_sizes/font_size = 15
+text = "GO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="SplitScreen/StartGame" unique_id=7793946]
+layout_mode = 0
+offset_left = 113.995
+offset_top = 10.054993
+offset_right = 225.995
+offset_bottom = 50.054993
+focus_neighbor_right = NodePath("../../../../LobbyText/Button")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i40t4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_50fdv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_a0urp")
+
 [connection signal="focus_entered" from="Control/BackButton" to="Control" method="_on_back_button_mouse_entered"]
 [connection signal="focus_exited" from="Control/BackButton" to="Control" method="_on_back_button_mouse_exited"]
 [connection signal="mouse_entered" from="Control/BackButton" to="Control" method="_on_back_button_mouse_entered"]
@@ -1595,3 +1769,9 @@ autoplay = &"FadeIn"
 [connection signal="mouse_entered" from="Control/Characters/Banzai/Char/Button" to="Control/Characters/Banzai/Char" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Control/Characters/Banzai/Char/Button" to="Control/Characters/Banzai/Char" method="_on_mouse_exited"]
 [connection signal="pressed" from="Control/Characters/Banzai/Char/Button" to="Control/Characters/Banzai/Char" method="_on_pressed"]
+[connection signal="value_changed" from="SplitScreen/HSlider" to="Control" method="_on_player_slider_value_changed"]
+[connection signal="focus_entered" from="SplitScreen/StartGame/StartButton" to="Control" method="_on_start_button_mouse_entered"]
+[connection signal="focus_exited" from="SplitScreen/StartGame/StartButton" to="Control" method="_on_start_button_mouse_exited"]
+[connection signal="mouse_entered" from="SplitScreen/StartGame/StartButton" to="Control" method="_on_start_button_mouse_entered"]
+[connection signal="mouse_exited" from="SplitScreen/StartGame/StartButton" to="Control" method="_on_start_button_mouse_exited"]
+[connection signal="pressed" from="SplitScreen/StartGame/StartButton" to="Control" method="_on_start_button_pressed"]

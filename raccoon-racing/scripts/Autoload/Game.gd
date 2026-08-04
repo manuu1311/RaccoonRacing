@@ -10,8 +10,7 @@ var LocalPlayers:int=3
 
 @rpc("any_peer", "reliable")
 func server_receive_ready(peer_id: int)->void:
-	if GameData.IsMultiplayer and not NetworkManager.is_host: 
-		print('returning :()')
+	if GameData.IsMultiplayer and not NetworkManager.is_host:
 		return
 
 	ready_players[peer_id] = true

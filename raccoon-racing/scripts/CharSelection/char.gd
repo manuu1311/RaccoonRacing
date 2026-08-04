@@ -1,5 +1,5 @@
 extends TextureRect
-
+class_name CharacterIcon
 
 @onready var animator: AnimationPlayer = $"../../../Animator"
 @onready var shiny: TextureRect = $Shiny
@@ -11,6 +11,7 @@ extends TextureRect
 @export var id: int
 var locked: bool 
 @export var unlockInfo: String
+@onready var main_selection: UICharSelection = $"../../.."
 
 #greyed out icon transform
 var r_g_b: float = 102.0 / 256.0
@@ -58,13 +59,15 @@ func _on_mouse_exited() -> void:
 func _on_pressed() -> void:
 	if locked:
 		ButtonSounds.PlaySound('warning')
-	else:
+	elif not Game.IsSplitScreen:
 		ButtonSounds.PlaySound('click')
-		GameData.currentCharacter=id
+		GameData.currentCharacter=[id]
 		UiOverAnimation.playanim()
 		await  UiOverAnimation.animated_sprite_2d.animation_finished
 		get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_cup.tscn')
-
+	else:
+		main_selection.CharacterSelected(self)
+		
 func greyout()->void:
 	self.modulate = Color(r_g_b, r_g_b, r_g_b, 1)
 func greyin()->void:

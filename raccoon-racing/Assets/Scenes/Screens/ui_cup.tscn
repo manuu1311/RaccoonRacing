@@ -1882,6 +1882,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="JoinScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=2082871443]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2228,7 +2229,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251 node_paths=PackedStringArray("rects", "labels")]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2267,6 +2267,7 @@ theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "Rocko"
 alignment = 1
+select_all_on_focus = true
 
 [node name="Char2" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=460114918]
 layout_mode = 2

@@ -4,6 +4,7 @@ class_name UICupSelection
 @onready var bg_filter: TextureRect = $BGFilter
 @onready var cups: Control = $Cups
 @onready var buttons: DifficultyButtons = $Buttons
+@onready var back_button: TextureButton = $BackButton
 var choosing_diff:bool=false
 signal CupSelected
 @onready var tofocus_btn: Button = $Buttons/EasyBTN/Button

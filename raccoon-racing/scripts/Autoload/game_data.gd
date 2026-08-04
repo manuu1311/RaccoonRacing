@@ -10,7 +10,7 @@ add pause menu
 #3:pingo 4:hudson 5:banzai
 var characterLocks: Array[bool]=[0,0,1,1,1,1]
 #current character chosen
-var currentCharacter: int=1
+var currentCharacter: Array[int]=[1]
 #cup info: lock
 var cupLocks: Array[bool]=[0,0,0,0,1,1,1,1]
 ##cup info: which cups were won, in which difficulty
@@ -243,7 +243,7 @@ func ClearPlayers()->void:
 
 func ClearAIPlayers()->void:
 	for player:Player in (PlayersArr):
-		if player.current_control!=Player.control_type.HUMAN:
+		if player.current_control==Player.control_type.AI:
 			PlayersArr.erase(player)
 
 func SetPlayersCount()->void:

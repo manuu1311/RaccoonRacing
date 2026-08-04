@@ -25,7 +25,7 @@ func _ready() -> void:
 	LoadMinimap()
 	map.deferredInit()
 	GameData.currentMap=MapNum
-	GameData.currentCharacter=mainchar
+	GameData.currentCharacter=[mainchar]
 	stagesize=map.GetMapSize()
 	SceneAngleMoveExpandPos = Vector2(150,0)
 	SceneAngleMoveExpandNowPos = Vector2.ZERO
@@ -33,7 +33,7 @@ func _ready() -> void:
 	GameData.OrderInfo=[]
 	GameData.Ranking=[]
 	if multiplayer.is_server():
-		CreatePlayer(GameData.PlayersArr.size(),Player.control_type.HUMAN,GameData.currentCharacter,1)
+		CreatePlayer(GameData.PlayersArr.size(),Player.control_type.HUMAN,GameData.currentCharacter[0],1)
 		CreatePlayer(GameData.PlayersArr.size(),Player.control_type.AI,1,1)
 		personalid=0
 		if IsMultiplayer:
