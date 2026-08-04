@@ -64,29 +64,29 @@ func AddWindow()->void:
 	var main_window :Window= get_window()
 	main_window.mode = Window.MODE_FULLSCREEN
 	if Game.LocalPlayers==2:
-		main_window.content_scale_size=Vector2(1010,535)
+		main_window.content_scale_size=Vector2(1010,500)
 	else:
-		main_window.content_scale_size=Vector2(1010,1035)
+		main_window.content_scale_size=Vector2(1010,1010)
 	var split_window :ViewportManager=window_instance.instantiate() as ViewportManager
 	split_window =window_instance.instantiate() as ViewportManager
 	add_child(split_window)
 	viewport_manager_arr.append(split_window)
 	@warning_ignore("unsafe_property_access")
-	viewport_manager_arr[0].position = Vector2i(0,25)
+	viewport_manager_arr[0].position = Vector2i(0,0)
 	split_window=window_instance.instantiate() as ViewportManager
 	@warning_ignore("unsafe_property_access")
-	split_window.position = Vector2i(510, 25)
+	split_window.position = Vector2i(510, 0)
 	add_child(split_window)
 	viewport_manager_arr.append(split_window)
 	if Game.LocalPlayers>2:
 		split_window=window_instance.instantiate() as ViewportManager
 		@warning_ignore("unsafe_property_access")
-		split_window.position = Vector2i(0, 535)
+		split_window.position = Vector2i(0, 510)
 		add_child(split_window)
 		viewport_manager_arr.append(split_window)
 		split_window=window_instance.instantiate() as ViewportManager
 		@warning_ignore("unsafe_property_access")
-		split_window.position = Vector2i(510, 535)
+		split_window.position = Vector2i(510, 510)
 		add_child(split_window)
 		viewport_manager_arr.append(split_window)
 

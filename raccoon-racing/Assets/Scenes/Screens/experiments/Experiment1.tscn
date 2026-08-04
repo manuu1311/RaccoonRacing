@@ -175,7 +175,7 @@ anchors_preset = 0
 [node name="Rectangle" type="ColorRect" parent="Background" unique_id=1982584132]
 layout_mode = 0
 offset_right = 1000.0
-offset_bottom = 1025.0
+offset_bottom = 1010.0
 color = Color(1, 0, 0, 1)
 
 [node name="Line" type="ColorRect" parent="Background" unique_id=1977934882]
@@ -184,9 +184,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 502.0
-offset_top = 3.0
 offset_right = 508.0
-offset_bottom = 1024.9199
+offset_bottom = 1010.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 0, 1)
@@ -196,20 +195,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 527.0
+offset_top = 502.0
 offset_right = 1000.0
-offset_bottom = 533.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 0, 1)
-
-[node name="Line3" type="ColorRect" parent="Background" unique_id=350210262]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1000.0
-offset_bottom = 6.0
+offset_bottom = 508.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 0, 1)
