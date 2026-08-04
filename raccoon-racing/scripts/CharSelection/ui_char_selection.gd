@@ -23,6 +23,7 @@ var textures:Array[Texture]=[
 
 
 func _ready() -> void:
+	GameData.PlayersArr.clear()
 	InputModeManager.ReApplyFocus()
 	PlayersNum=1
 	Game.IsSplitScreen=false
@@ -95,6 +96,9 @@ func _on_start_button_mouse_exited() -> void:
 func _on_start_button_pressed() -> void:
 	if CharactersChosen.size()==PlayersNum:
 		Game.LocalPlayers=PlayersNum
+		GameData.currentCharacter.clear()
+		for icon:CharacterIcon in CharactersChosen:
+			GameData.currentCharacter.append(icon.id)
 		ButtonSounds.PlaySound('click')
 		UiOverAnimation.playanim()
 		await  UiOverAnimation.animated_sprite_2d.animation_finished

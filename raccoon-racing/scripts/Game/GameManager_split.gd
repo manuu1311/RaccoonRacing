@@ -47,7 +47,9 @@ func PopulateViewports()->void:
 	for player:Player in GameData.PlayersArr:
 		if player.current_control==Player.control_type.HUMAN:
 			var viewport:ViewportManager=viewport_manager_arr[viewportid]
-			viewport.world_2d=get_viewport().world_2d
+			if Game.IsSplitScreen:
+				@warning_ignore("unsafe_property_access")
+				viewport.world_2d=get_viewport().world_2d
 			viewport.Setup(map,sound_manager,self)
 			viewport.name='Window'+str(viewportid)
 			focusCar(player,player.car,viewportid)
@@ -57,26 +59,34 @@ func PopulateViewports()->void:
 func AddWindow()->void:
 	if not Game.IsSplitScreen:
 		return
-
+	viewport_manager_arr[0].free()
+	viewport_manager_arr.clear()
 	var main_window :Window= get_window()
 	main_window.mode = Window.MODE_FULLSCREEN
 	if Game.LocalPlayers==2:
-		main_window.content_scale_size=Vector2(1010,500)
+		main_window.content_scale_size=Vector2(1010,535)
 	else:
-		main_window.content_scale_size=Vector2(1010,1010)
-	
-	viewport_manager_arr[0].position = Vector2i(0,0)
+		main_window.content_scale_size=Vector2(1010,1035)
 	var split_window :ViewportManager=window_instance.instantiate() as ViewportManager
-	split_window.position = Vector2i(510, 0)
+	split_window =window_instance.instantiate() as ViewportManager
+	add_child(split_window)
+	viewport_manager_arr.append(split_window)
+	@warning_ignore("unsafe_property_access")
+	viewport_manager_arr[0].position = Vector2i(0,25)
+	split_window=window_instance.instantiate() as ViewportManager
+	@warning_ignore("unsafe_property_access")
+	split_window.position = Vector2i(510, 25)
 	add_child(split_window)
 	viewport_manager_arr.append(split_window)
 	if Game.LocalPlayers>2:
 		split_window=window_instance.instantiate() as ViewportManager
-		split_window.position = Vector2i(0, 510)
+		@warning_ignore("unsafe_property_access")
+		split_window.position = Vector2i(0, 535)
 		add_child(split_window)
 		viewport_manager_arr.append(split_window)
 		split_window=window_instance.instantiate() as ViewportManager
-		split_window.position = Vector2i(510, 510)
+		@warning_ignore("unsafe_property_access")
+		split_window.position = Vector2i(510, 535)
 		add_child(split_window)
 		viewport_manager_arr.append(split_window)
 
@@ -93,14 +103,12 @@ func CreatePlayers()->void:
 			carinstance.add_child(controller)
 			carinstance.controller=controller
 			carinstance.CharID=player.charid
-			carinstance.set_multiplayer_authority(player.NetworkID)
 		elif player.current_control==player.control_type.MULTIPLAYER:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=CarController.new(player)
 			carinstance.add_child(controller)
 			carinstance.controller=controller
 			carinstance.CharID=player.charid
-			carinstance.set_multiplayer_authority(player.NetworkID)
 		else:
 			carinstance.setup(map,player.PlayerID,false,player)
 			var controller:CarController=AICarController.new(player)
@@ -108,12 +116,14 @@ func CreatePlayers()->void:
 			carinstance.controller=controller
 			carinstance.CharID=player.charid
 		world.add_child(carinstance)
+		#temporary authority swap for car positions
+		carinstance.set_multiplayer_authority(multiplayer.get_unique_id())
 		carinstance.name="Car"+str(player.PlayerID)
-		print('is host:',NetworkManager.is_host)
-		print('setting the position!:',carinstance.global_position)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
-		print('set the position!:',carinstance.global_position)
+		if not NetworkManager.is_host:
+			print('pos:',carinstance.global_position)
+		carinstance.call_deferred('set_multiplayer_authority',player.NetworkID)
 		player.SetCar(carinstance)
 		player.ResetPlayer(i)
 

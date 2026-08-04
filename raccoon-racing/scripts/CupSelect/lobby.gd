@@ -94,14 +94,18 @@ func _on_lobby_pressed() -> void:
 			cup_screen.EnableCupFocus()
 		##enter lobby
 		else:
-			InLobbyScreen=true
-			lobbytext_button.focus_neighbor_left=NodePath("")
-			lobbytext_button.focus_neighbor_top=NodePath("")
-			lbltext.add_theme_color_override("font_color",Color.YELLOW)
-			cup_screen.hide()
-			lobby_screen.show()
-			cup_screen.hide_diff_screen()
-			cup_screen.DisableCupFocus()
+			ShowLobbyScreen()
+
+
+func ShowLobbyScreen()->void:
+	InLobbyScreen=true
+	lobbytext_button.focus_neighbor_left=NodePath("")
+	lobbytext_button.focus_neighbor_top=NodePath("")
+	lbltext.add_theme_color_override("font_color",Color.YELLOW)
+	cup_screen.hide()
+	lobby_screen.show()
+	cup_screen.hide_diff_screen()
+	cup_screen.DisableCupFocus()
 
 
 func _on_hostbutton_pressed() -> void:
@@ -118,11 +122,8 @@ func _on_joinbutton_pressed(_code:String='') -> void:
 func HostLobby(_code:String)->void:
 	var hostid:int=multiplayer.get_unique_id()
 	NetworkManager.NetworkID=hostid
-	var host_player: Player = Player.new(0, Player.control_type.HUMAN)
 	NetworkManager.PlayerID=0
-	host_player.charid = GameData.currentCharacter[0]
-	host_player.OnlineName=names[host_player.charid]
-	GameData.PlayersArr.append(host_player)
+	PopulateLocalPlayers()
 	lobby_script.UpdateIconsNames()
 	set_multiplayer_authority(hostid)
 	GameData.IsMultiplayer=true
@@ -277,6 +278,13 @@ func CreateNewAIPlayer(playerid:int,charid:int)->void:
 func hide_loading() -> void:
 	visible=false
 
+func PopulateLocalPlayers()->void:
+	for i:int in range(GameData.currentCharacter.size()):
+		var charid:int=GameData.currentCharacter[i]
+		var newplayer:Player=Player.new(i,Player.control_type.HUMAN)
+		newplayer.charid=charid
+		newplayer.OnlineName=names[newplayer.charid]
+		GameData.PlayersArr.append(newplayer)
 
 func _on_detect_mouse_entered() -> void:
 	ButtonSounds.PlaySound('hover')

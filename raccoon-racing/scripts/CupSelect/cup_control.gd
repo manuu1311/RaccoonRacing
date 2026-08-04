@@ -8,18 +8,30 @@ class_name UICupSelection
 var choosing_diff:bool=false
 signal CupSelected
 @onready var tofocus_btn: Button = $Buttons/EasyBTN/Button
+@onready var lobby: MainLobby = $"../Lobby"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	hide_diff_screen()
-	UiOverAnimation.reset_anim_frame()
-	InputModeManager.ReApplyFocus()
 	#connect each cup
 	for i in range(8):
 		var button_path:String = "Cups/Cup" + str(i+1) +"/Button"
 		var cup_button:Button = get_node(button_path) as Button
 		cup_button.pressed.connect(_on_cup_pressed.bind(i))
+	hide_diff_screen()
+	UiOverAnimation.reset_anim_frame()
+	InputModeManager.ReApplyFocus()
+	if Game.IsSplitScreen or GameData.IsMultiplayer:
+		call_deferred('TransitionToLobby')
 
+
+func TransitionToLobby()->void:
+	lobby.ShowLobbyScreen()
+	#lobby.LobbyTransition()
+	if not GameData.IsMultiplayer:
+		lobby._on_toggled_lan(true)
+		lobby._on_hostbutton_pressed()
+	elif not NetworkManager.is_host:
+		lobby.IsLocked=true
 
 
 func EnableCupFocus()->void:

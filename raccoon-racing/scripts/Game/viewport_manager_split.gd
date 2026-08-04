@@ -1,4 +1,4 @@
-extends Window
+extends Node
 class_name ViewportManager
 
 @onready var camera: Camera2D = $Camera2D
