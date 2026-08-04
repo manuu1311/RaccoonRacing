@@ -43,7 +43,7 @@ func _ready() -> void:
 
 func PopulateViewports()->void:
 	AddWindow()
-	var viewportid:int
+	var viewportid:int=0
 	for player:Player in GameData.PlayersArr:
 		if player.current_control==Player.control_type.HUMAN:
 			var viewport:ViewportManager=viewport_manager_arr[viewportid]
@@ -53,6 +53,7 @@ func PopulateViewports()->void:
 			viewport.Setup(map,sound_manager,self)
 			viewport.name='Window'+str(viewportid)
 			focusCar(player,player.car,viewportid)
+			viewportid+=1
 	
 
 
