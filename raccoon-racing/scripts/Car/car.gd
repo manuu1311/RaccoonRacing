@@ -716,9 +716,10 @@ func BeAttacked(who: Car)->void:
 @rpc('any_peer','call_local','unreliable')
 func ResolveAttackedCollisions(_id:int, newspeed:Vector2,newbs:bool)->void:
 	sounds.playbumpsound()
-	KartBump.emit((newspeed-speed).length())
-	speed=newspeed
-	bs=newbs
+	if is_multiplayer_authority() or NetworkManager.is_host:
+		KartBump.emit((newspeed-speed).length())
+		speed=newspeed
+		bs=newbs
 	if bs:
 		sounds.playBsSound()
 
