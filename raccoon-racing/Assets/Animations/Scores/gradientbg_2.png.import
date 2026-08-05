@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1oat443dywcd"
-path="res://.godot/imported/gradientbg2.png-1c39b498740a6bf8ce4ea512d2335dfe.ctex"
+uid="uid://cfvyjwrq86ihi"
+path="res://.godot/imported/gradientbg_2.png-4660cf4c081e894274af1812dc4ecf48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Animations/Scores/gradientbg2.png"
-dest_files=["res://.godot/imported/gradientbg2.png-1c39b498740a6bf8ce4ea512d2335dfe.ctex"]
+source_file="res://Assets/Animations/Scores/gradientbg_2.png"
+dest_files=["res://.godot/imported/gradientbg_2.png-4660cf4c081e894274af1812dc4ecf48.ctex"]
 
 [params]
 

@@ -4,12 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://bkbr3glflwe78" path="res://Assets/Animations/Scores/background.png" id="2_yqwi5"]
 [ext_resource type="Texture2D" uid="uid://cu8oomlcwk2sw" path="res://Assets/Animations/Scores/gradientbg.png" id="3_xsj34"]
 [ext_resource type="Texture2D" uid="uid://cy8bvk0nry17j" path="res://Assets/Animations/Scores/light.png" id="4_1ya6s"]
-[ext_resource type="Texture2D" uid="uid://c2s35hd03hcxu" path="res://Assets/Animations/Scores/gradientbg2.png" id="5_xsj34"]
+[ext_resource type="Texture2D" path="res://Assets/Animations/Scores/gradientbg2.png" id="5_xsj34"]
 [ext_resource type="Texture2D" uid="uid://hjp24s2c8g5b" path="res://Assets/Animations/CharSelection/greenbush.png" id="6_i2oi5"]
 [ext_resource type="Texture2D" uid="uid://dqywrdq8ycm5i" path="res://Assets/Animations/CharSelection/emptybush.png" id="7_kpbv8"]
 [ext_resource type="Shortcut" uid="uid://c20xrlgkwtkri" path="res://Assets/Shortcuts/new_shortcut.tres" id="8_bg8mh"]
 [ext_resource type="FontFile" uid="uid://dhqkn2g7x12vn" path="res://Assets/Fonts/1010__sans.ttf" id="8_kpbv8"]
 [ext_resource type="Texture2D" uid="uid://b44cubu66xpxg" path="res://Assets/Animations/CharSelection/characters/rockopic.png" id="9_a30fl"]
+[ext_resource type="Texture2D" uid="uid://cfvyjwrq86ihi" path="res://Assets/Animations/Scores/gradientbg_2.png" id="10_cpjsw"]
 
 [sub_resource type="Animation" id="Animation_i2oi5"]
 length = 0.001
@@ -345,10 +346,10 @@ horizontal_alignment = 1
 position = Vector2(20, -35)
 
 [node name="gradient" type="Sprite2D" parent="Icons/Char" unique_id=1480587311]
-self_modulate = Color(0, 0.4509804, 0, 0.36862746)
+self_modulate = Color(0.48235294, 0.003921569, 0.003921569, 0.8509804)
 position = Vector2(196.5, 151.6905)
 scale = Vector2(0.702, 0.437)
-texture = ExtResource("3_xsj34")
+texture = ExtResource("10_cpjsw")
 
 [node name="Icon" type="Sprite2D" parent="Icons/Char" unique_id=1115105442]
 position = Vector2(52.25, 152.6905)
@@ -431,10 +432,10 @@ scale = Vector2(0.4, 0.4)
 position = Vector2(40, 25)
 
 [node name="gradient" type="Sprite2D" parent="Icons/AIchar1" unique_id=1327898207]
-self_modulate = Color(1, 1, 1, 0.105882354)
+self_modulate = Color(0, 1, 1, 0.83137256)
 position = Vector2(196.5, 151.6905)
 scale = Vector2(0.702, 0.437)
-texture = ExtResource("3_xsj34")
+texture = ExtResource("10_cpjsw")
 
 [node name="Icon" type="Sprite2D" parent="Icons/AIchar1" unique_id=1426250654]
 position = Vector2(52.25, 152.6905)
@@ -517,10 +518,10 @@ scale = Vector2(0.4, 0.4)
 position = Vector2(60, 85)
 
 [node name="gradient" type="Sprite2D" parent="Icons/AIchar2" unique_id=131682669]
-self_modulate = Color(1, 1, 1, 0.105882354)
+self_modulate = Color(0.9882353, 1, 0, 0.8862745)
 position = Vector2(196.5, 151.6905)
 scale = Vector2(0.702, 0.437)
-texture = ExtResource("3_xsj34")
+texture = ExtResource("10_cpjsw")
 
 [node name="Icon" type="Sprite2D" parent="Icons/AIchar2" unique_id=174516112]
 position = Vector2(52.25, 152.6905)
@@ -603,10 +604,10 @@ scale = Vector2(0.4, 0.4)
 position = Vector2(80, 145)
 
 [node name="gradient" type="Sprite2D" parent="Icons/AIchar3" unique_id=1884336183]
-self_modulate = Color(1, 1, 1, 0.105882354)
+self_modulate = Color(0.23137255, 1, 0, 1)
 position = Vector2(196.5, 151.6905)
 scale = Vector2(0.702, 0.437)
-texture = ExtResource("3_xsj34")
+texture = ExtResource("10_cpjsw")
 
 [node name="Icon" type="Sprite2D" parent="Icons/AIchar3" unique_id=612044561]
 position = Vector2(52.25, 152.6905)
