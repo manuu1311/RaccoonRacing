@@ -235,6 +235,7 @@ func SolveRemoteCollisions()->void:
 	GetHitEvent(tempx,tempy,true)
 
 func DeferredSetup()->void:
+	CreateMapView()
 	#set variables
 	wallSpring=map.Wallspring
 	rollGratingNum=map.RollGratingNum
@@ -261,7 +262,7 @@ func CreateMapView()->void:
 			elif playerID==1:
 				carViewInstance.self_modulate=Color.CYAN
 			elif playerID==2:
-				carViewInstance.self_modulate=Color.CORAL
+				carViewInstance.self_modulate=Color.YELLOW
 			elif playerID==3:
 				carViewInstance.self_modulate=Color.LAWN_GREEN
 		else:
