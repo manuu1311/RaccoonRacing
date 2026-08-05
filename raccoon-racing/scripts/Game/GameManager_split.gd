@@ -47,7 +47,7 @@ func PopulateViewports()->void:
 	AddWindow()
 	var viewportid:int=0
 	for player:Player in GameData.PlayersArr:
-		if player.current_control==Player.control_type.HUMAN:
+		if player.current_control==Player.control_type.HUMAN or Game.LocalPlayers>2:
 			var viewport:ViewportManager=viewport_manager_arr[viewportid]
 			if Game.IsSplitScreen:
 				@warning_ignore("unsafe_property_access")

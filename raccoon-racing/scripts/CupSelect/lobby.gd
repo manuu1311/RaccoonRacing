@@ -236,10 +236,15 @@ func _on_toggled_lan(toggled:bool)->void:
 
 
 func _on_startbutton_pressed() -> void:
-	print('Start button pressed, starting game')
-	GameData.SetPlayersCount()
-	CreateAIPlayers()
-	Start.rpc()
+	print('[LOBBY]Start button pressed.')
+	if lobby_scene.ControlsCheck():
+		print('[LOBBY]All players have controls assigned. Starting game.')
+		GameData.SetPlayersCount()
+		CreateAIPlayers()
+		Start.rpc()
+	else:
+		print('[LOBBY]Some players dont have controls assigned. Cannot start game.')
+		ButtonSounds.PlaySound('warning')
 
 @rpc('authority','call_local','reliable')
 func Start()->void:

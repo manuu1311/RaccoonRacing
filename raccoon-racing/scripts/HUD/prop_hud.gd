@@ -31,9 +31,9 @@ func _ready() -> void:
 func DeferredInit(id: int)->void:
 	charid=id
 	var charicon:Texture2D = load("res://Assets/Images/hud/Prop/Icons/"+str(charid)+".png")
+	#prevent frames duplication
+	icon.sprite_frames = icon.sprite_frames.duplicate()
 	icon.sprite_frames.add_frame("default",charicon)
-	
-
 func StartPropBox(runtime:float,id:int)->void:
 	PlayPropRun()
 	if itemready or PropId!=-1:

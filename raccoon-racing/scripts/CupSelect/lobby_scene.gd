@@ -257,4 +257,14 @@ func _on_joy_connection_changed(device_id: int, connected: bool) -> void:
 				player.input_device_key = ""
 	_refresh_all_device_dropdowns()
 
+##check if all players have controls assigned
+func ControlsCheck()->bool:
+	if not Game.IsSplitScreen:
+		return true
+	for player:Player in GameData.PlayersArr:
+		if player.current_control==Player.control_type.HUMAN:
+			if player.input_device_key=='':
+				return false
+	return true
+
 #endregion
