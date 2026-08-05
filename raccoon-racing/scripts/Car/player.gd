@@ -22,6 +22,11 @@ var NetworkID:int=1
 signal racefinished
 var rng :RandomNumberGenerator= RandomNumberGenerator.new()
 var PropValidated:bool=false
+##device mapping
+var input_device_type: String = ""
+var input_device_id: int = -1
+var input_device_key: String = "" 
+
 '''
 1:become invincible
 2:sleep other players

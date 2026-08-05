@@ -3,7 +3,6 @@ class_name GameManager_split
 
 var players: Array[Player]
 var cars:Array[Car]
-var fcsPlayer:Player
 var map: Map
 var minimap:SubViewport
 @onready var sound_manager: GameSoundManager = $SoundManager
@@ -35,10 +34,13 @@ func _ready() -> void:
 	UiLoadingScreen.HideLoading()
 	PopulateViewports()
 	sound_manager.PlaySound('levelstart')
-	if GameData.IsMultiplayer and not NetworkManager.is_host:
-		Game.server_receive_ready.rpc_id(1,fcsPlayer.PlayerID)
-	else:
-		Game.server_receive_ready(fcsPlayer.PlayerID)
+	for player:Player in GameData.PlayersArr:
+		if player.current_control!=Player.control_type.HUMAN:
+			return
+		if GameData.IsMultiplayer and not NetworkManager.is_host:
+			Game.server_receive_ready.rpc_id(1,player.PlayerID)
+		else:
+			Game.server_receive_ready(player.PlayerID)
 
 
 func PopulateViewports()->void:
@@ -98,7 +100,6 @@ func CreatePlayers()->void:
 		var player:Player=GameData.PlayersArr[GameData.Ranking[i]]
 		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
 		if player.current_control==player.control_type.HUMAN:
-			fcsPlayer=player
 			carinstance.setup(map,player.PlayerID,true,player)
 			var controller:CarController=HumanCarController.new(player)
 			carinstance.add_child(controller)

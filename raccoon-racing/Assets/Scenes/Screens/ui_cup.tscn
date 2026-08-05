@@ -2228,13 +2228,14 @@ text = "Connecting to server
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251 node_paths=PackedStringArray("rects", "labels")]
+[node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251 node_paths=PackedStringArray("rects", "dropdowns", "labels")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("30_u1jg4")
 names = Array[String](["Frank", "Bot Aldo", "Bot Waldo", "Bot Rinco"])
 rects = [NodePath("HBoxContainer/Char1/Char"), NodePath("HBoxContainer/Char2/Char"), NodePath("HBoxContainer/Char3/Char"), NodePath("HBoxContainer/Char4/Char")]
+dropdowns = [NodePath("HBoxContainer/Char1/OptionButton"), NodePath("HBoxContainer/Char2/OptionButton"), NodePath("HBoxContainer/Char3/OptionButton"), NodePath("HBoxContainer/Char4/OptionButton")]
 labels = [NodePath("HBoxContainer/Char1/Label"), NodePath("HBoxContainer/Char2/Label"), NodePath("HBoxContainer/Char3/Label"), NodePath("HBoxContainer/Char4/Label")]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=66908092]
@@ -2269,6 +2270,20 @@ text = "Rocko"
 alignment = 1
 select_all_on_focus = true
 
+[node name="OptionButton" type="OptionButton" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char1" unique_id=1211289498]
+layout_mode = 0
+offset_top = 142.0
+offset_right = 100.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 10
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "Keyboard 1"
+popup/item_0/id = 0
+popup/item_1/text = "Keyboard 2"
+popup/item_1/id = 1
+
 [node name="Char2" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=460114918]
 layout_mode = 2
 size_flags_horizontal = 7
@@ -2291,6 +2306,19 @@ theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "Rocko"
 alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char2" unique_id=86936469]
+layout_mode = 0
+offset_top = 142.0
+offset_right = 100.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 10
+selected = 0
+item_count = 2
+popup/item_0/text = "Keyboard 1"
+popup/item_0/id = 0
+popup/item_1/text = "Keyboard 2"
+popup/item_1/id = 1
 
 [node name="Char3" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=227305550]
 layout_mode = 2
@@ -2315,6 +2343,19 @@ theme_override_constants/outline_size = 6
 text = "Bot Aldo"
 alignment = 1
 
+[node name="OptionButton" type="OptionButton" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char3" unique_id=411586268]
+layout_mode = 0
+offset_top = 142.0
+offset_right = 100.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 10
+selected = 0
+item_count = 2
+popup/item_0/text = "Keyboard 1"
+popup/item_0/id = 0
+popup/item_1/text = "Keyboard 2"
+popup/item_1/id = 1
+
 [node name="Char4" type="Control" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer" unique_id=874258086]
 layout_mode = 2
 size_flags_horizontal = 7
@@ -2337,6 +2378,19 @@ theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "Bot Waldo"
 alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char4" unique_id=510154481]
+layout_mode = 0
+offset_top = 142.0
+offset_right = 100.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 10
+selected = 0
+item_count = 2
+popup/item_0/text = "Keyboard 1"
+popup/item_0/id = 0
+popup/item_1/text = "Keyboard 2"
+popup/item_1/id = 1
 
 [node name="Text" type="Label" parent="Lobby/LobbyScreen/LobbyScreen" unique_id=410879286]
 layout_mode = 0
