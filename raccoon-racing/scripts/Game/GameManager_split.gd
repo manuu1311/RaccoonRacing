@@ -257,5 +257,7 @@ func UpdateOrderInfo(neworder:Array[int])->void:
 
 func BackToMain()->void:
 	Game.PlayersReady.disconnect(ShowFinishEffect)
+	var main_window :Window= get_window()
+	main_window.content_scale_size=Vector2(500,500)
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_scores.tscn")
 	queue_free()

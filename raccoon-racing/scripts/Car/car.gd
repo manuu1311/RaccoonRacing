@@ -26,9 +26,9 @@ var map:Map
 @export var playering:bool=true
 @onready var sounds: CarSounds = $Sounds
 #smoke effects
-var smoke_1:Resource=preload("res://Assets/Scenes/Screens/misc/smoke1.tscn")
-var smoke_2:Resource=preload("res://Assets/Scenes/Screens/misc/smoke2.tscn")
-var carView:Resource
+var smoke_1:PackedScene=preload("res://Assets/Scenes/Screens/misc/smoke1.tscn")
+var smoke_2:PackedScene=preload("res://Assets/Scenes/Screens/misc/smoke2.tscn")
+var carView:PackedScene
 var carViewInstance:Sprite2D
 @onready var current_vehicle: GameData.VehicleType=GameData.current_vehicle
 @onready var prop_effector: PropEffector = $PropEffector
@@ -108,7 +108,6 @@ var isInvincible:bool=false
 var isSmallState:bool=false
 var isResetting:bool=false
 var IsUseShield:bool=false
-var isFcsCar:bool
 var controller:CarController
 var NowPointId:int
 var NowPorpId:int
@@ -128,11 +127,10 @@ var IsAccelerating:bool
 signal WallBump
 signal KartBump
 
-func setup(gamemap:Map,id:int,control:bool,playerinst:Player) -> void:
+func setup(gamemap:Map,id:int,_control:bool,playerinst:Player) -> void:
 	map=gamemap
 	playerID=id
 	player=playerinst
-	isFcsCar=control
 
 func _ready() -> void:
 	horse=carhorse
@@ -237,21 +235,40 @@ func SolveRemoteCollisions()->void:
 	GetHitEvent(tempx,tempy,true)
 
 func DeferredSetup()->void:
-	#add car view to minimap
-	if isFcsCar:
-		carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
-	else:
-		carView=preload("res://Assets/Scenes/Screens/maps/CarViewOpp.tscn")
-	var view_sprite:Sprite2D = map.minimap
-	carViewInstance = carView.instantiate()
-	view_sprite.add_child(carViewInstance)
 	#set variables
 	wallSpring=map.Wallspring
 	rollGratingNum=map.RollGratingNum
 	glideGratingNum=map.GlideGratingNum
 	grassGratingNum=map.GrassGratingNum
 	SetSprites()
-	
+
+#create and change color of map view
+func CreateMapView()->void:
+	#add car view to minimap
+	carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
+	carViewInstance = carView.instantiate()
+	#if normal game: same as usual
+	if not Game.IsSplitScreen:
+		if player.current_control==Player.control_type.HUMAN:
+			carViewInstance.self_modulate=Color.RED
+		else:
+			carViewInstance.self_modulate=Color.BLUE
+	#else: colorful 
+	else:
+		if player.current_control==Player.control_type.HUMAN:
+			if playerID==0:
+				carViewInstance.self_modulate=Color.DARK_RED
+			elif playerID==1:
+				carViewInstance.self_modulate=Color.CYAN
+			elif playerID==2:
+				carViewInstance.self_modulate=Color.CORAL
+			elif playerID==3:
+				carViewInstance.self_modulate=Color.LAWN_GREEN
+		else:
+			carViewInstance.self_modulate=Color.BLUE
+		
+	var view_sprite:Sprite2D = map.minimap
+	view_sprite.add_child(carViewInstance)
 	
 func PopulateCollisions()->void:
 	var collisions_node:Node2D = $Visual/CollisionPoints

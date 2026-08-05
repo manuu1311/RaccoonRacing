@@ -268,6 +268,7 @@ func CreateAIPlayers()->void:
 		available_ids.shuffle()
 		new_id=available_ids.pop_front()
 		var aiplayer:Player=AIPlayer.new(i,Player.control_type.AI)
+		aiplayer.name=lobby_scene.names[i]
 		GameData.PlayersArr.append(aiplayer)
 		aiplayer.AiReflect=lobby_script.difficulty
 		aiplayer.charid=new_id
