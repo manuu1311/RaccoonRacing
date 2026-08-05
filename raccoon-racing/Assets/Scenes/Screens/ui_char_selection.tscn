@@ -1725,10 +1725,10 @@ vertical_alignment = 1
 
 [node name="StartButton" type="Button" parent="SplitScreen/StartGame" unique_id=7793946]
 layout_mode = 0
-offset_left = 113.995
-offset_top = 10.054993
-offset_right = 225.995
-offset_bottom = 50.054993
+offset_left = 153.09
+offset_top = 15.63
+offset_right = 190.17
+offset_bottom = 43.865032
 focus_neighbor_right = NodePath("../../../../LobbyText/Button")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_i40t4")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_50fdv")
