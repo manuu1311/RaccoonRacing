@@ -34,9 +34,11 @@ func _ready() -> void:
 	UiLoadingScreen.HideLoading()
 	PopulateViewports()
 	sound_manager.PlaySound('levelstart')
+	if not NetworkManager.is_host:
+		print(GameData.PlayersArr)
 	for player:Player in GameData.PlayersArr:
 		if player.current_control!=Player.control_type.HUMAN:
-			return
+			continue
 		if GameData.IsMultiplayer and not NetworkManager.is_host:
 			Game.server_receive_ready.rpc_id(1,player.PlayerID)
 		else:
@@ -123,8 +125,6 @@ func CreatePlayers()->void:
 		carinstance.name="Car"+str(player.PlayerID)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
-		if not NetworkManager.is_host:
-			print('pos:',carinstance.global_position)
 		carinstance.call_deferred('set_multiplayer_authority',player.NetworkID)
 		player.SetCar(carinstance)
 		player.ResetPlayer(i)
@@ -182,8 +182,8 @@ func _process(_delta: float) -> void:
 func CoolEffects()->void:
 	#if not multipayer, there is no wait time -> wait for 
 	#initial music to finish
-	if not GameData.IsMultiplayer:
-		await get_tree().create_timer(3).timeout
+	#if not GameData.IsMultiplayer:
+		#await get_tree().create_timer(3).timeout
 	sound_manager.PlaySound("ready3")
 	Play321Anim('3')
 	await get_tree().create_timer(1).timeout

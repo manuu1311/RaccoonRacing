@@ -23,7 +23,9 @@ signal racefinished
 var rng :RandomNumberGenerator= RandomNumberGenerator.new()
 var PropValidated:bool=false
 ##device mapping
+##'Keyboard 1','Keyboard 2','Joypad'
 var input_device_type: String = ""
+##device number (for joypad)
 var input_device_id: int = -1
 var input_device_key: String = "" 
 
