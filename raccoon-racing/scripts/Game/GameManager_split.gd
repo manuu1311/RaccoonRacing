@@ -12,6 +12,7 @@ var IsRaceStarted:bool=false
 signal overtake_signal
 @export var minimap_canvas: CanvasLayer
 var window_instance:PackedScene=preload("res://Assets/Scenes/Screens/experiments/sub_window.tscn")
+@onready var final_camera: Camera2D = $FinalCamera
 
 #preload props
 const PROP_SCENES = {
@@ -257,7 +258,16 @@ func UpdateOrderInfo(neworder:Array[int])->void:
 
 func BackToMain()->void:
 	Game.PlayersReady.disconnect(ShowFinishEffect)
+	ClearViewportsAndFocus()
 	var main_window :Window= get_window()
 	main_window.content_scale_size=Vector2(500,500)
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_scores.tscn")
 	queue_free()
+
+##clear all viewports and focus on first human player
+func ClearViewportsAndFocus()->void:
+	for i in range(len(viewport_manager_arr)):
+		viewport_manager_arr[i].free()
+		var player:Player=GameData.PlayersArr[i]
+		if player.current_control==Player.control_type.HUMAN:
+			final_camera.global_position=player.car.global_position

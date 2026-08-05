@@ -254,3 +254,5 @@ transform = Transform2D(1, 0, 0, 1, 150, 125)
 [node name="Finish" type="AnimatedSprite2D" parent="Node/HUD/FinishEffect" unique_id=1773974724]
 position = Vector2(138, 126)
 sprite_frames = SubResource("SpriteFrames_1wkmo")
+
+[node name="FinalCamera" type="Camera2D" parent="." unique_id=161664940]

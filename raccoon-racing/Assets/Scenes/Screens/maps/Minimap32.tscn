@@ -3,20 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://b430wyoy8167p" path="res://Assets/Images/maps/mapview.png" id="1_j5x3o"]
 [ext_resource type="Texture2D" uid="uid://bcp88yy2q171n" path="res://Assets/Images/maps/map4/minimap2.png" id="2_dxiy2"]
 
-[node name="Minimap32" type="CanvasLayer" unique_id=1553205259]
+[node name="Minimap32" type="SubViewport" unique_id=961359196]
+transparent_bg = true
+size = Vector2i(141, 131)
 
 [node name="View" type="TextureRect" parent="." unique_id=38029622]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -146.29999
-offset_top = -135.25
-offset_right = -5.299988
-offset_bottom = -4.25
-grow_horizontal = 0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_j5x3o")
 
 [node name="MapSprite" type="Sprite2D" parent="View" unique_id=277172274]
