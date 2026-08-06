@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func TransitionToLobby()->void:
 	lobby.ShowLobbyScreen()
-	#lobby.LobbyTransition()
+	lobby.LobbyTransition()
 	if not GameData.IsMultiplayer:
 		lobby._on_toggled_lan(true)
 		lobby._on_hostbutton_pressed()

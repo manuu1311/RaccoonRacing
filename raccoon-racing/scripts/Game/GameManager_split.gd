@@ -273,3 +273,5 @@ func ClearViewportsAndFocus()->void:
 		viewport_manager_arr[i].mode=Window.MODE_MINIMIZED
 		viewport_manager_arr[i].free()
 	($final_camera as Camera2D).global_position=GameData.PlayersArr[0].car.global_position
+	($final_camera as Camera2D).enabled=true
+	$Background.free()

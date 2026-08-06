@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://b44cubu66xpxg" path="res://Assets/Animations/CharSelection/characters/rockopic.png" id="30_qkely"]
 [ext_resource type="Texture2D" uid="uid://2xsqa131cc3b" path="res://Assets/Images/Icons/icon.png" id="30_tke11"]
 [ext_resource type="Script" uid="uid://bje81nurnb71o" path="res://scripts/CupSelect/lobby_scene.gd" id="30_u1jg4"]
-[ext_resource type="Texture2D" uid="uid://nd8yow4x6jxs" path="res://Assets/utils/RaccoonRacing.icon.png" id="31_lsqhh"]
+[ext_resource type="Texture2D" uid="uid://blpj2u6yf2lx5" path="res://icon.svg" id="33_5pglv"]
 
 [sub_resource type="Animation" id="Animation_q3nyi"]
 length = 0.001
@@ -468,6 +468,7 @@ offset_bottom = 500.0
 texture = ExtResource("2_lo0sp")
 
 [node name="CupScreen" type="Control" parent="." unique_id=1820990992]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1778,7 +1779,6 @@ shortcut = ExtResource("28_5pglv")
 texture_normal = ExtResource("16_tdwvn")
 
 [node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -2000,7 +2000,7 @@ size_flags_horizontal = 7
 layout_mode = 0
 offset_right = 100.0
 offset_bottom = 100.0
-texture = ExtResource("31_lsqhh")
+texture = ExtResource("33_5pglv")
 expand_mode = 1
 
 [node name="Label" type="LineEdit" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char4" unique_id=1329705382]
