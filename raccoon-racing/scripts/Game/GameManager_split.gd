@@ -12,7 +12,6 @@ var IsRaceStarted:bool=false
 signal overtake_signal
 @export var minimap_canvas: CanvasLayer
 var window_instance:PackedScene=preload("res://Assets/Scenes/Screens/experiments/sub_window.tscn")
-@onready var final_camera: Camera2D = $FinalCamera
 
 #preload props
 const PROP_SCENES = {
@@ -63,18 +62,18 @@ func PopulateViewports()->void:
 
 
 func AddWindow()->void:
+	var main_window :Window= get_window()
+	main_window.mode = Window.MODE_FULLSCREEN
 	if not Game.IsSplitScreen:
+		$Background.free()
 		return
 	viewport_manager_arr[0].free()
 	viewport_manager_arr.clear()
-	var main_window :Window= get_window()
-	main_window.mode = Window.MODE_FULLSCREEN
 	if Game.LocalPlayers==2:
 		main_window.content_scale_size=Vector2(1010,500)
 	else:
 		main_window.content_scale_size=Vector2(1010,1010)
 	var split_window :ViewportManager=window_instance.instantiate() as ViewportManager
-	split_window =window_instance.instantiate() as ViewportManager
 	add_child(split_window)
 	viewport_manager_arr.append(split_window)
 	@warning_ignore("unsafe_property_access")
@@ -261,13 +260,14 @@ func BackToMain()->void:
 	ClearViewportsAndFocus()
 	var main_window :Window= get_window()
 	main_window.content_scale_size=Vector2(500,500)
+	main_window.mode=Window.MODE_WINDOWED
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_scores.tscn")
 	queue_free()
 
 ##clear all viewports and focus on first human player
 func ClearViewportsAndFocus()->void:
 	for i in range(len(viewport_manager_arr)):
+		(viewport_manager_arr[i]).visible=false
+		viewport_manager_arr[i].mode=Window.MODE_MINIMIZED
 		viewport_manager_arr[i].free()
-		var player:Player=GameData.PlayersArr[i]
-		if player.current_control==Player.control_type.HUMAN:
-			final_camera.global_position=player.car.global_position
+	($final_camera as Camera2D).global_position=GameData.PlayersArr[0].car.global_position

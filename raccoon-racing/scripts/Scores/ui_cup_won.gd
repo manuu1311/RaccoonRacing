@@ -48,8 +48,8 @@ func _ready() -> void:
 	cuptext.hide()
 	chartext.hide()
 	charicon.hide()
-	##player won:
-	if GameData.Ranking[0]==0:
+	##local player won:
+	if GameData.PlayersArr[GameData.Ranking[0]].current_control==Player.control_type.HUMAN:
 		lost.hide()
 		won.show()
 		WonSetup()
@@ -57,6 +57,7 @@ func _ready() -> void:
 		won.hide()
 		lost.show()
 		LossSetup()
+	GameData.CurrentCupTime=0
 
 func WonSetup()->void:
 	trophy.texture=cups[GameData.currentDifficulty]

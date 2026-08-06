@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bty7j2h3ae8mb" path="res://scripts/Scores/ui_cup_won.gd" id="1_jwxe0"]
 [ext_resource type="Texture2D" uid="uid://cu8oomlcwk2sw" path="res://Assets/Animations/Scores/gradientbg.png" id="2_jse6j"]
 [ext_resource type="Texture2D" uid="uid://cy8bvk0nry17j" path="res://Assets/Animations/Scores/light.png" id="3_a3wrh"]
-[ext_resource type="Texture2D" uid="uid://c2s35hd03hcxu" path="res://Assets/Animations/Scores/gradientbg2.png" id="4_mwiaq"]
+[ext_resource type="Texture2D" uid="uid://1oat443dywcd" path="res://Assets/Animations/Scores/gradientbg2.png" id="4_mwiaq"]
 [ext_resource type="Texture2D" uid="uid://b6djtsvx5j5xc" path="res://Assets/Animations/CupWon/Trophy/1.png" id="5_w2abl"]
 [ext_resource type="Shortcut" uid="uid://c20xrlgkwtkri" path="res://Assets/Shortcuts/new_shortcut.tres" id="6_43mdl"]
 [ext_resource type="Texture2D" uid="uid://dc68of06emjxa" path="res://Assets/Animations/CupWon/Trophy/2.png" id="6_jfnlh"]
@@ -1422,7 +1422,7 @@ text = "Continue"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Lost/Continue/ContinueButton" unique_id=843789460]
+[node name="Button" type="Button" parent="Lost/Continue/ContinueButton" unique_id=843789460 groups=["default_focus"]]
 offset_left = 192.0
 offset_top = 415.0
 offset_right = 336.0

@@ -171,6 +171,7 @@ script = ExtResource("3_6unhv")
 [node name="world" type="Node2D" parent="." unique_id=1038090199]
 
 [node name="Background" type="Control" parent="." unique_id=1021613311]
+visibility_layer = 524288
 layout_mode = 3
 anchors_preset = 0
 
@@ -255,4 +256,4 @@ transform = Transform2D(1, 0, 0, 1, 150, 125)
 position = Vector2(138, 126)
 sprite_frames = SubResource("SpriteFrames_1wkmo")
 
-[node name="FinalCamera" type="Camera2D" parent="." unique_id=161664940]
+[node name="final_camera" type="Camera2D" parent="." unique_id=377219796]
