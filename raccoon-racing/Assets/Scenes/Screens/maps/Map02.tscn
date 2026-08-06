@@ -594,7 +594,6 @@ animations = [{
 
 [node name="Map02" type="Node2D" unique_id=422089434]
 script = ExtResource("1_vfrq5")
-drawcollision = false
 
 [node name="Visuals" type="Node2D" parent="." unique_id=690054057]
 position = Vector2(-485.5, -469)
@@ -1748,13 +1747,13 @@ position = Vector2(1102.8809, 487.77728)
 position = Vector2(993.7899, 428.8682)
 
 [node name="wall23" type="Marker2D" parent="PointsCar/Walls0" unique_id=304525643]
-position = Vector2(140.34589, -222.51979)
+position = Vector2(152.5, -234.00002)
 
 [node name="wall24" type="Marker2D" parent="PointsCar/Walls0" unique_id=1020034821]
-position = Vector2(62.75556, -322.51297)
+position = Vector2(74.50001, -327.00003)
 
 [node name="wall25" type="Marker2D" parent="PointsCar/Walls0" unique_id=922962860]
-position = Vector2(25.71054, -411.8759)
+position = Vector2(37.5, -423.00003)
 
 [node name="wall26" type="Marker2D" parent="PointsCar/Walls0" unique_id=398602953]
 position = Vector2(11.1651, -479.51224)
@@ -1823,13 +1822,13 @@ position = Vector2(-260.10718, -672.9691)
 position = Vector2(-103.5, -553)
 
 [node name="wall48" type="Marker2D" parent="PointsCar/Walls0" unique_id=583313680]
-position = Vector2(-32.49997, -439.99997)
+position = Vector2(-51.49997, -438.99997)
 
 [node name="wall49" type="Marker2D" parent="PointsCar/Walls0" unique_id=1419886381]
-position = Vector2(12.5, -296)
+position = Vector2(-18.5, -311)
 
 [node name="wall50" type="Marker2D" parent="PointsCar/Walls0" unique_id=13795340]
-position = Vector2(26.5, -116.99997)
+position = Vector2(12.5, -118.99997)
 
 [node name="wall51" type="Marker2D" parent="PointsCar/Walls0" unique_id=1365108818]
 position = Vector2(10.438293, 75.39472)
@@ -2054,9 +2053,6 @@ position = Vector2(283.5, -369)
 
 [node name="wall55" type="Marker2D" parent="PointsCar/Walls1" unique_id=1312809292]
 position = Vector2(1047.5, 209)
-
-[node name="wall56" type="Marker2D" parent="PointsCar/Walls1" unique_id=1091703110]
-position = Vector2(1211.5, 301)
 
 [node name="wall57" type="Marker2D" parent="PointsCar/Walls1" unique_id=194333954]
 position = Vector2(1220.5, 281)

@@ -266,6 +266,8 @@ func BackToMain()->void:
 
 ##clear all viewports and focus on first human player
 func ClearViewportsAndFocus()->void:
+	if not Game.IsSplitScreen:  
+		return
 	for i in range(len(viewport_manager_arr)):
 		(viewport_manager_arr[i]).visible=false
 		viewport_manager_arr[i].mode=Window.MODE_MINIMIZED
