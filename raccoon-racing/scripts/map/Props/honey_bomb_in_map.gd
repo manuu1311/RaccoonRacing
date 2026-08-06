@@ -20,19 +20,20 @@ func GetHitEventStatus(PlayerId:int,_unsynced:bool)->void:
 	if not IsActivated:
 		return
 	var car: Car = GameData.PlayersArr[PlayerId].car
-	if car.isInvincible:
-		return
 	if car.jumpCurrheight < jumphigh - 1:
 		BombExplode.rpc(car.playerID)
 
 @rpc('call_local','reliable')
 func BombExplode(carid:int)->void:
 	var car:Car=GameData.PlayersArr[carid].car
-	car.sounds.playerBombSound()
-	car.bsex=bsValume
-	car.Jump(jumphigh)
-	car.speed*=0.3
-	car.speed+=(car.global_position-global_position)*0.03
+	if car.isInvincible:
+		pass
+	else:
+		car.sounds.playerBombSound()
+		car.bsex=bsValume
+		car.Jump(jumphigh)
+		car.speed*=0.3
+		car.speed+=(car.global_position-global_position)*0.03
 	IsActivated = false
 	animated_sprite_2d.show()
 	animated_sprite_2d.play()

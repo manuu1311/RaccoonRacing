@@ -7,7 +7,7 @@ var petrowidth:float
 var pid:int
 var player:Player
 var horse:Vector2=Vector2(1,0)
-const petroeffect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
+const petroeffect:PackedScene=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
 @onready var bomb_effect: AnimatedSprite2D = $BombEffect
 @onready var bottom_effect: Node2D = $BottomEffect
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -61,12 +61,12 @@ func OnHitStatus()->void:
 	bomb_effect.play()
 	sprite_2d.hide()
 	petroadd=false
-	await bomb_effect.animation_finished
 	del()
 	
 
 func del()->void:
-	await bomb_effect.animation_finished
+	if bomb_effect.is_playing():
+		await bomb_effect.animation_finished
 	queue_free()
 	
 	
