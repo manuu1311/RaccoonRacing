@@ -34,8 +34,6 @@ func _ready() -> void:
 	UiLoadingScreen.HideLoading()
 	PopulateViewports()
 	sound_manager.PlaySound('levelstart')
-	if not NetworkManager.is_host:
-		print(GameData.PlayersArr)
 	for player:Player in GameData.PlayersArr:
 		if player.current_control!=Player.control_type.HUMAN:
 			continue

@@ -594,6 +594,7 @@ animations = [{
 
 [node name="Map02" type="Node2D" unique_id=422089434]
 script = ExtResource("1_vfrq5")
+drawcollision = false
 
 [node name="Visuals" type="Node2D" parent="." unique_id=690054057]
 position = Vector2(-485.5, -469)

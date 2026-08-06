@@ -258,10 +258,11 @@ func ClearPlayers()->void:
 	Ranking=[]
 	OrderInfo=[]
 
-func ClearAIPlayers()->void:
-	for player:Player in (PlayersArr):
-		if player.current_control==Player.control_type.AI:
-			PlayersArr.erase(player)
+func ClearAIPlayers() -> void:
+	PlayersArr = PlayersArr.filter(
+		func(player: Player) -> bool: 
+			return player.current_control != Player.control_type.AI
+	)
 
 func SetPlayersCount()->void:
 	OnlinePlayersCount=PlayersArr.size()

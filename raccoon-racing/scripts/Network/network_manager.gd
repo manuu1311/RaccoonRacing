@@ -149,9 +149,6 @@ func lan_host() -> void:
 	connection_type = ConnectionType.LAN
 	current_lobby = GetLocalIP()
 	#start broadcasting
-	discovery_broadcaster = PacketPeerUDP.new()
-	discovery_broadcaster.set_broadcast_enabled(true)
-	discovery_broadcaster.set_dest_address("255.255.255.255", DISCOVERY_PORT)
 	enet_peer = ENetMultiplayerPeer.new()
 	var err:Error = enet_peer.create_server(LAN_PORT, MAX_PLAYERS)
 	if err == OK:
@@ -191,6 +188,19 @@ func discover_lan_host() -> void:
 		else:
 			print("[LAN] Failed to bind discovery port: ", err)
 			discovery_listener = null
+
+func StartLanBroadcast() -> void:
+	if discovery_broadcaster or connection_type != ConnectionType.LAN:
+		return
+	discovery_broadcaster = PacketPeerUDP.new()
+	discovery_broadcaster.set_broadcast_enabled(true)
+	discovery_broadcaster.set_dest_address("255.255.255.255", DISCOVERY_PORT)
+	set_process(true)
+
+func StopLanBroadcast() -> void:
+	if discovery_broadcaster:
+		discovery_broadcaster.close()
+		discovery_broadcaster = null
 #endregion
 
 #region Disconnection
@@ -473,4 +483,7 @@ func SetLanType()->void:
 
 func ResetType()->void:
 	connection_type = ConnectionType.LAN
+
+func IsConnected() -> bool:
+	return connection_type != ConnectionType.NONE
 #endregion

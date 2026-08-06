@@ -27,11 +27,18 @@ func _ready() -> void:
 func TransitionToLobby()->void:
 	lobby.ShowLobbyScreen()
 	lobby.LobbyTransition()
-	if not GameData.IsMultiplayer:
-		lobby._on_toggled_lan(true)
-		lobby._on_hostbutton_pressed()
-	elif not NetworkManager.is_host:
-		lobby.IsLocked=true
+	if Game.IsSplitScreen and not GameData.IsMultiplayer:
+		if not NetworkManager.IsConnected():
+			lobby._on_toggled_lan(true)
+			lobby._on_hostbutton_pressed()
+		else:
+			lobby.ResyncLobby()
+	elif GameData.IsMultiplayer:
+		if NetworkManager.is_host:
+			lobby.ResyncLobby()
+		else:
+			pass
+			#lobby.IsLocked = true
 
 
 func EnableCupFocus()->void:
@@ -57,11 +64,11 @@ func _on_back_button_pressed() -> void:
 
 func _on_back_button_mouse_entered() -> void:
 	ButtonSounds.PlaySound('hover')
-	$BackButton.position.y-=3
+	($BackButton as TextureButton).position.y-=3
 
 
 func _on_back_button_mouse_exited() -> void:
-	$BackButton.position.y+=3
+	($BackButton as TextureButton).position.y+=3
 
 
 func _on_diff_pressed(diff: int) -> void:

@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dhldtryxihyll" path="res://scripts/Scores/ui_top_scores.gd" id="1_b5g7p"]
 [ext_resource type="Texture2D" uid="uid://uhjt4315chk4" path="res://Assets/Animations/UISelect/backgroundbase.png" id="2_u8dls"]
 [ext_resource type="Texture2D" uid="uid://hqd6w6yvnxi" path="res://Assets/Animations/UISelect/bggradient.png" id="3_k3deg"]
-[ext_resource type="Texture2D" uid="uid://dk051de2fv8dp" path="res://Assets/Images/maps/map2/shapes/246.png" id="4_plmhe"]
-[ext_resource type="Texture2D" uid="uid://dc3q711f52um2" path="res://Assets/Images/maps/map2/shapes/244.png" id="5_8fs17"]
+[ext_resource type="Texture2D" uid="uid://dk051de2fv8dp" path="res://Assets/utils/Stash/shapes/246.png" id="4_plmhe"]
+[ext_resource type="Texture2D" uid="uid://dc3q711f52um2" path="res://Assets/utils/Stash/shapes/244.png" id="5_8fs17"]
 [ext_resource type="FontFile" uid="uid://dhqkn2g7x12vn" path="res://Assets/Fonts/1010__sans.ttf" id="6_i838u"]
 [ext_resource type="Shortcut" uid="uid://c20xrlgkwtkri" path="res://Assets/Shortcuts/new_shortcut.tres" id="7_8fs17"]
 

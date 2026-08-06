@@ -302,7 +302,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xqylm"]
-size = Vector2(24, 6)
+size = Vector2(32.55, 19.03)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hrg02"]
 animations = [{
@@ -949,7 +949,7 @@ libraries/ = SubResource("AnimationLibrary_1tcci")
 position = Vector2(-8.396083e-06, -48.020004)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/BottomEffect/Circler/Area2D" unique_id=1582227620]
-position = Vector2(-8.56918e-06, -0.98999786)
+position = Vector2(-0.67, 0)
 shape = SubResource("RectangleShape2D_xqylm")
 
 [node name="CollisionPoints" type="Node2D" parent="Visual" unique_id=11894153]

@@ -16,7 +16,6 @@ extends CanvasLayer
 @onready var continue_buttonwin: Node2D = $Won/ContinueButton
 @onready var continuebuttonloss: Node2D = $Lost/Continue
 var nextdiff:Array[String]=[
-	'',
 	'Can you also beat this cup in normal mode?',
 	'Can you also beat this cup in hard mode?',
 	'Do you think you can beat your own score again?'
@@ -97,9 +96,9 @@ func LossSetup()->void:
 
 func OnContinueButtonPressed()->void:
 	if GameData.IsMultiplayer and NetworkManager.is_host:
-		GameData.ClearPlayers()
-	else:
 		GameData.ClearAIPlayers()
+	else:
+		GameData.ClearPlayers()
 	ChangeScene.rpc()
 
 @rpc('authority','call_local','reliable')

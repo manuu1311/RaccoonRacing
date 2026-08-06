@@ -95,7 +95,7 @@ func PlayBone()->void:
 	rotator.play("Bone")
 	mover.play("BoneMove")
 	car.sounds.playdogSSound()
-	if is_multiplayer_authority():
+	if not GameData.IsMultiplayer or NetworkManager.is_host:
 		area_2d.area_entered.connect(OnAreaEntered)
 	
 
