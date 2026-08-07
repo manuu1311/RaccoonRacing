@@ -44,7 +44,12 @@ func RegisterCar(fcscar: Car) -> void:
 	if joys.is_empty():
 		return
 	car = fcscar
-	device = joys[0] # TODO: real player->device mapping
+	if Game.IsSplitScreen:
+		if car.player.input_device_type=='Joypad':
+			device = joys[car.player.input_device_id]
+	#fall back to first available joypad
+	else:
+		device = joys[0]
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	car.WallBump.connect(OnWallBump)
 	car.KartBump.connect(OnKartBump)

@@ -63,7 +63,9 @@ func AddWindow()->void:
 	var main_window :Window= get_window()
 	main_window.mode = Window.MODE_FULLSCREEN
 	if OS.has_feature("android"):
-		pass
+		main_window.content_scale_size=Vector2(1000,500)
+		var touch_controls:CanvasLayer=(load("res://Assets/Scenes/Screens/HUD/TouchControls.tscn")as PackedScene).instantiate() as CanvasLayer
+		add_child(touch_controls)
 	if not Game.IsSplitScreen:
 		$Background.free()
 		return
@@ -263,10 +265,10 @@ func BackToMain()->void:
 
 ##clear all viewports and focus on first human player
 func ClearViewportsAndFocus()->void:
-	if not Game.IsSplitScreen:
-		return
 	var main_window :Window= get_window()
 	main_window.content_scale_size=Vector2(500,500)
+	if not Game.IsSplitScreen:
+		return
 	main_window.mode=Window.MODE_MAXIMIZED
 	for i in range(len(viewport_manager_arr)):
 		(viewport_manager_arr[i]).visible=false
