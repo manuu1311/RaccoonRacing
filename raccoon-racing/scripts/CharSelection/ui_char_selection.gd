@@ -20,7 +20,7 @@ var textures:Array[Texture]=[
 @onready var startbutton: Button = $"../SplitScreen/StartGame/StartButton"
 @onready var playercount_slider: HSlider = $"../SplitScreen/HSlider"
 @onready var startbutton_txt: Label = $"../SplitScreen/StartGame/MainText"
-@onready var split_screen: Control = $"../SplitScreen"
+
 
 
 func _ready() -> void:
@@ -32,10 +32,6 @@ func _ready() -> void:
 	for node:TextureRect in $"../SplitScreen/HBoxContainer".get_children():
 		selected_player_icons.append(node)
 		node.visible=false
-	#disable split screen for android
-	if OS.has_feature('android'):
-		Game
-		split_screen.visible=false
 		
 
 func _on_back_button_pressed() -> void:
@@ -65,6 +61,11 @@ func _on_back_button_mouse_exited() -> void:
 
 
 func _on_player_slider_value_changed(value: float) -> void:
+	#disable split screen for android
+	if OS.has_feature('android') or true:
+		playercount_slider.value=1.0
+		ButtonSounds.PlaySound('warning')
+		return
 	ButtonSounds.PlaySound('click')
 	var newval:int=int(value)
 	PlayersNum=newval
