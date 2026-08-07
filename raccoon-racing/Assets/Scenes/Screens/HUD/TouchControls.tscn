@@ -19,6 +19,15 @@ anchors_preset = 0
 offset_right = 250.0
 offset_bottom = 500.0
 
+[node name="ColorRect" type="ColorRect" parent="Control/LeftSide" unique_id=1813609102]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Right" type="Control" parent="Control/LeftSide" unique_id=450083871]
 layout_mode = 1
 anchors_preset = 15
@@ -85,6 +94,15 @@ anchors_preset = 0
 offset_left = 750.0
 offset_right = 1000.0
 offset_bottom = 500.0
+
+[node name="ColorRect" type="ColorRect" parent="Control/RightSide" unique_id=1886480570]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Up" type="Control" parent="Control/RightSide" unique_id=31579412]
 layout_mode = 1

@@ -66,6 +66,7 @@ func AddWindow()->void:
 		main_window.content_scale_size=Vector2(1000,500)
 		var touch_controls:CanvasLayer=(load("res://Assets/Scenes/Screens/HUD/TouchControls.tscn")as PackedScene).instantiate() as CanvasLayer
 		add_child(touch_controls)
+		viewport_manager_arr[0].hud.RecenterHudMobile()
 	if not Game.IsSplitScreen:
 		$Background.free()
 		return

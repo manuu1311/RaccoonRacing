@@ -1,8 +1,9 @@
 extends CanvasLayer
 class_name SpeedHud
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var label: Label = $Label
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $Control/AnimatedSprite2D
+@onready var label: Label = $Control/Label
 @onready var laps: Label = $Laps
 @onready var time: Label = $Time
 @onready var best_time: Label = $BestTime

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name HUDManager
 
 @onready var prop_hud: PropHud = $PropHud
@@ -7,8 +7,15 @@ class_name HUDManager
 @onready var lbl321: Label = $"321/321"
 @onready var lbl321_player: AnimationPlayer = $"321/321Player"
 @onready var minimap: TextureRect = $MinimapHud/Minimap
+@onready var layer_321: CanvasLayer = $"321"
+@onready var minimap_hud: CanvasLayer = $MinimapHud
 var FocusCar:Car
 # Called when the node enters the scene tree for the first time.
+
+
+func RecenterHudMobile()->void:
+	for layer:CanvasLayer in [prop_hud,speed_hud,char_hud,layer_321,minimap_hud]:
+		layer.offset+=Vector2(250,0)
 
 func Hide()->void:
 	prop_hud.hide()
