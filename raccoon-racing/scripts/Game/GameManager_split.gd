@@ -62,6 +62,8 @@ func PopulateViewports()->void:
 func AddWindow()->void:
 	var main_window :Window= get_window()
 	main_window.mode = Window.MODE_FULLSCREEN
+	if OS.has_feature("android"):
+		pass
 	if not Game.IsSplitScreen:
 		$Background.free()
 		return
@@ -261,7 +263,7 @@ func BackToMain()->void:
 
 ##clear all viewports and focus on first human player
 func ClearViewportsAndFocus()->void:
-	if not Game.IsSplitScreen:  
+	if not Game.IsSplitScreen:
 		return
 	var main_window :Window= get_window()
 	main_window.content_scale_size=Vector2(500,500)

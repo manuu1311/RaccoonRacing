@@ -16,7 +16,7 @@ offset_bottom = 5.0
 layout_mode = 0
 offset_left = 16.0
 offset_top = 4.0
-offset_right = 120.0
+offset_right = 194.0
 offset_bottom = 18.0
 color = Color(0.23529412, 0.23529412, 0.23529412, 0.2784314)
 
@@ -39,6 +39,17 @@ offset_right = 117.795006
 offset_bottom = 17.0
 theme_override_font_sizes/font_size = 9
 text = "latency: 11ms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="frame" type="Label" parent="MainPanel" unique_id=1546130283]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 4.0
+offset_right = 186.0
+offset_bottom = 17.0
+theme_override_font_sizes/font_size = 9
+text = "frame: 11ms"
 horizontal_alignment = 1
 vertical_alignment = 1
 
