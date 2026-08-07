@@ -22,7 +22,7 @@ var IsLocked:bool=false
 @onready var discoveranims: AnimationPlayer = $LobbyScreen/JoinScreen/JoinButton/Discover/base/AnimationPlayer
 @onready var discovericon: Control = $LobbyScreen/JoinScreen/JoinButton/Discover
 @onready var togglelan_button: CheckButton = $LobbyScreen/JoinScreen/LanButton/ToggleButton
-var LanToggled:bool=false
+var LanToggled:bool=true
 var names:Array[String]=[
 	"prova",
 	"Rocko","Vixen","Mambo","Pingo","Hudson","Banzai"

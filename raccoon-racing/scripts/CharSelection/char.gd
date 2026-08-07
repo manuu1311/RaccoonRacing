@@ -67,7 +67,7 @@ func _on_pressed() -> void:
 		get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_cup.tscn')
 	else:
 		main_selection.CharacterSelected(self)
-		
+
 func greyout()->void:
 	self.modulate = Color(r_g_b, r_g_b, r_g_b, 1)
 func greyin()->void:

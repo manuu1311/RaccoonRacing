@@ -242,6 +242,7 @@ func ShowFinishEffect(_tick:int)->void:
 	if NetworkManager.is_host:
 		UpdateOrderInfo.rpc(GameData.OrderInfo)
 	await get_tree().create_timer(3).timeout
+	ClearViewportsAndFocus()
 	UiOverAnimation.playanim()
 	await UiOverAnimation.animated_sprite_2d.animation_finished
 	for player:Player in GameData.PlayersArr:
@@ -255,10 +256,6 @@ func UpdateOrderInfo(neworder:Array[int])->void:
 
 func BackToMain()->void:
 	Game.PlayersReady.disconnect(ShowFinishEffect)
-	ClearViewportsAndFocus()
-	var main_window :Window= get_window()
-	main_window.content_scale_size=Vector2(500,500)
-	main_window.mode=Window.MODE_MAXIMIZED
 	get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_scores.tscn")
 	queue_free()
 
@@ -266,10 +263,13 @@ func BackToMain()->void:
 func ClearViewportsAndFocus()->void:
 	if not Game.IsSplitScreen:  
 		return
+	var main_window :Window= get_window()
+	main_window.content_scale_size=Vector2(500,500)
+	main_window.mode=Window.MODE_MAXIMIZED
 	for i in range(len(viewport_manager_arr)):
 		(viewport_manager_arr[i]).visible=false
 		viewport_manager_arr[i].mode=Window.MODE_MINIMIZED
-		viewport_manager_arr[i].free()
+		viewport_manager_arr[i].queue_free()
 	($final_camera as Camera2D).global_position=GameData.PlayersArr[0].car.global_position
 	($final_camera as Camera2D).enabled=true
 	$Background.free()
