@@ -4,9 +4,9 @@ class_name ViewportManager
 @onready var camera: Camera2D = $Camera2D
 
 @onready var hud: HUDManager = $HUD/Hud
-@onready var lbl321: Label = $"HUD/321/321"
-@onready var lbl321player: AnimationPlayer = $"HUD/321/321Player"
-@onready var finish: AnimatedSprite2D = $HUD/FinishEffect/Finish
+var lbl321: Label
+var lbl321player: AnimationPlayer
+@onready var finish: AnimatedSprite2D = $HUD/FinishEffect/Control/Finish
 var sound_manager: GameSoundManager
 var game_manager: GameManager_split
 
@@ -24,10 +24,12 @@ var container:SubViewportContainer
 
 
 func _ready() -> void:
-	lbl321.self_modulate=Color.TRANSPARENT
 	finish.frame=0
 	SceneAngleMoveExpandPos = Vector2(150,0)
 	SceneAngleMoveExpandNowPos = Vector2.ZERO
+	lbl321player=hud.lbl321_player
+	lbl321=hud.lbl321
+	lbl321.self_modulate=Color.TRANSPARENT
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
