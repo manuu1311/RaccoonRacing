@@ -43,6 +43,14 @@ func _ready() -> void:
 			Game.server_receive_ready(player.PlayerID)
 
 
+func ShrinkrayWarmup()->void:
+	var shrink: ShrinkInMap=PROP_SCENES.prop8.instantiate()
+	shrink.position = Vector2(-9999, -9999)
+	add_child(shrink)
+	await get_tree().process_frame
+	shrink.queue_free()
+
+
 func PopulateViewports()->void:
 	AddWindow()
 	var viewportid:int=0

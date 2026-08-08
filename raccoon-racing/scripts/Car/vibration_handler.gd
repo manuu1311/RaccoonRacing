@@ -53,15 +53,13 @@ func RegisterCar(fcscar: Car) -> void:
 	if not joys.is_empty():
 		hasjoypad=true
 		if Game.IsSplitScreen:
-			print('split screen there!')
+			
 			if car.player.input_device_type=='Joypad':
-				print('registering to joypad for joypad player')
 				device = joys[car.player.input_device_id]
 			else:
 				return
 		#fall back to first available joypad
 		else:
-			print('not if it is split screen bro!')
 			device = joys[0]
 		Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	elif not ismobile:
