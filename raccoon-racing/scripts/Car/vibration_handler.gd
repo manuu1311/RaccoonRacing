@@ -33,6 +33,12 @@ var bump_strong_val := 0.0
 var _send_accum := 0.0
 var _last_weak := -1.0
 var _last_strong := -1.0
+###mobile variables
+var ismobile:bool=false
+##give precedence to joypad
+var hasjoypad:bool=false
+var _mobile_timer :float= 0.0
+@export var mobile_haptic_hz :int= 15
 
 func _ready() -> void:
 	set_process(false)
@@ -40,17 +46,21 @@ func _ready() -> void:
 func RegisterCar(fcscar: Car) -> void:
 	if GameData.VibrationMultiplier<0.5:
 		return
-	var joys := Input.get_connected_joypads()
-	if joys.is_empty():
-		return
 	car = fcscar
-	if Game.IsSplitScreen:
-		if car.player.input_device_type=='Joypad':
-			device = joys[car.player.input_device_id]
-	#fall back to first available joypad
-	else:
-		device = joys[0]
-	Input.joy_connection_changed.connect(_on_joy_connection_changed)
+	if OS.has_feature('android'):
+		ismobile=true
+	var joys := Input.get_connected_joypads()
+	if not joys.is_empty():
+		hasjoypad=true
+		if Game.IsSplitScreen:
+			if car.player.input_device_type=='Joypad':
+				device = joys[car.player.input_device_id]
+		#fall back to first available joypad
+		else:
+			device = joys[0]
+		Input.joy_connection_changed.connect(_on_joy_connection_changed)
+	elif not ismobile:
+		return
 	car.WallBump.connect(OnWallBump)
 	car.KartBump.connect(OnKartBump)
 	await ready
@@ -100,7 +110,11 @@ func OnKartBump(knockback: float) -> void:
 func _send(delta: float) -> void:
 	var weak: float = clamp(friction_val + bump_weak_val, 0.0, 1.0)
 	var strong: float = clamp(max(bs_val, bsex_val) + bump_strong_val, 0.0, 1.0)
-
+	#if a joypad is connected: ignore phone vibration
+	if ismobile and not hasjoypad:
+		_send_mobile(delta, weak, strong)
+		return
+	
 	_send_accum += delta
 	var interval := 1.0 / send_hz
 	if _send_accum < interval:
@@ -126,3 +140,25 @@ func _on_joy_connection_changed(changed_device: int, connected: bool) -> void:
 	else:
 		set_process(false)
 		Input.stop_joy_vibration(device)
+		
+		
+func _send_mobile(delta: float, weak: float, strong: float) -> void:
+	var combined_intensity :float= max(weak, strong) * GameData.VibrationMultiplier
+	
+	if combined_intensity <= 0.05:
+		return
+
+	_mobile_timer += delta
+	var interval := 1.0 / mobile_haptic_hz
+	
+	if _mobile_timer >= interval:
+		_mobile_timer = 0.0
+		# Fires short micro-bursts to simulate continuous sliding/rumble
+		var duration_ms := int(interval * 1000.0)
+		Input.vibrate_handheld(duration_ms, combined_intensity)
+
+
+func _trigger_mobile_impulse(duration_ms: int, intensity: float) -> void:
+	var final_amplitude := intensity * GameData.VibrationMultiplier
+	if final_amplitude > 0.05:
+		Input.vibrate_handheld(duration_ms, final_amplitude)

@@ -14,7 +14,6 @@ func server_receive_ready(peer_id: int)->void:
 		return
 
 	ready_players[peer_id] = true
-	print('got one fromplayer',peer_id)
 	# Check if everyone in the lobby has loaded
 	if ready_players.size() == GameData.OnlinePlayersCount:
 		start_race_countdown()

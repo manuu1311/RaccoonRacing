@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dhldtryxihyll" path="res://scripts/Scores/ui_top_scores.gd" id="1_b5g7p"]
 [ext_resource type="Texture2D" uid="uid://uhjt4315chk4" path="res://Assets/Animations/UISelect/backgroundbase.png" id="2_u8dls"]
 [ext_resource type="Texture2D" uid="uid://hqd6w6yvnxi" path="res://Assets/Animations/UISelect/bggradient.png" id="3_k3deg"]
-[ext_resource type="Texture2D" uid="uid://dk051de2fv8dp" path="res://Assets/utils/Stash/shapes/246.png" id="4_plmhe"]
-[ext_resource type="Texture2D" uid="uid://dc3q711f52um2" path="res://Assets/utils/Stash/shapes/244.png" id="5_8fs17"]
+[ext_resource type="Texture2D" uid="uid://dk051de2fv8dp" path="res://Assets/Images/top_scores/246.png" id="4_8fs17"]
+[ext_resource type="Texture2D" uid="uid://dc3q711f52um2" path="res://Assets/Images/top_scores/244.png" id="5_i838u"]
 [ext_resource type="FontFile" uid="uid://dhqkn2g7x12vn" path="res://Assets/Fonts/1010__sans.ttf" id="6_i838u"]
 [ext_resource type="Shortcut" uid="uid://c20xrlgkwtkri" path="res://Assets/Shortcuts/new_shortcut.tres" id="7_8fs17"]
 
@@ -152,7 +152,7 @@ offset_right = 798.0
 offset_bottom = 608.0
 rotation = 0.6021386
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("4_plmhe")
+texture = ExtResource("4_8fs17")
 
 [node name="Dog" type="TextureRect" parent="." unique_id=835235379]
 offset_left = -18.000004
@@ -160,7 +160,7 @@ offset_top = 241.00002
 offset_right = 410.0
 offset_bottom = 766.0
 rotation = 0.2443461
-texture = ExtResource("5_8fs17")
+texture = ExtResource("5_i838u")
 
 [node name="Cups" type="Control" parent="." unique_id=573935311]
 layout_mode = 3

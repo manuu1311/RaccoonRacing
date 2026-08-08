@@ -939,6 +939,7 @@ texture_focused = ExtResource("16_evr18")
 layout_mode = 0
 offset_right = 169.99998
 offset_bottom = 140.0
+mouse_filter = 2
 
 [node name="Effect" type="Control" parent="Vibration" unique_id=400894078]
 layout_mode = 3
@@ -982,4 +983,6 @@ texture = ExtResource("17_gtplp")
 [connection signal="value_changed" from="Volume/HSlider" to="Dummy/Background" method="_on_volume_changed"]
 [connection signal="focus_entered" from="Vibration/controller" to="Dummy/Background" method="_on_controller_focus_entered"]
 [connection signal="focus_exited" from="Vibration/controller" to="Dummy/Background" method="_on_controller_focus_exited"]
+[connection signal="mouse_entered" from="Vibration/controller" to="Dummy/Background" method="_on_controller_focus_entered"]
+[connection signal="mouse_exited" from="Vibration/controller" to="Dummy/Background" method="_on_controller_focus_exited"]
 [connection signal="pressed" from="Vibration/controller" to="Dummy/Background" method="_on_vibration_changed"]
