@@ -68,8 +68,15 @@ var AICanUseProp:bool=true
 var VibrationMultiplier:float=1
 
 const SAVE_PATH = "user://savegame.tres"
+const USR_PREF = "user://prefs.tres"
 var save_data: SaveData
 var debug_save_file: SaveData=null
+var pref_data:Prefs
+
+var vibration_multiplier:float=1.0
+var use_gyro:bool=true
+var gyro_deadzone:float=11
+var music_volume:float=0.5
 
 ###online
 var IsMultiplayer:bool=false
@@ -77,6 +84,7 @@ var IsMultiplayer:bool=false
 func _ready() -> void:
 	print('Initialising game data')
 	load_game()
+	LoadPrefs()
 	AiLevel=[
 		[[18,100,false],[20,100,false],[22,200,false]],
 		[[15,80,true],[18,80,false],[20,80,false]],
@@ -89,8 +97,8 @@ func save_game() -> void:
 	save_data.cupWon = cupWon
 	save_data.BestTimes = BestTimes
 	save_data.CupTimes = CupTimes
-	characterLocks=save_data.characterLocks
-	cupLocks=save_data.cupLocks
+	save_data.characterLocks=characterLocks
+	save_data.cupLocks=cupLocks
 	
 	# 2. Save the resource to the device
 	var result:Error = ResourceSaver.save(save_data, SAVE_PATH)
@@ -110,13 +118,39 @@ func load_game() -> void:
 	else:
 		save_data = SaveData.new()
 		print("New Save File Created!")
-		
+	
 	# Sync values
 	cupWon = save_data.cupWon
 	BestTimes = save_data.BestTimes
 	CupTimes = save_data.CupTimes
 	characterLocks=save_data.characterLocks
 	cupLocks=save_data.cupLocks
+
+func SavePrefs()->void:
+	if not ResourceLoader.exists(USR_PREF):
+		pref_data = Prefs.new()
+		print("New Prefs File Created!")
+	if pref_data.use_gyro!=use_gyro or pref_data.gyro_deadzone!=gyro_deadzone or pref_data.vibration_multiplier!=vibration_multiplier or pref_data.music_volume!=music_volume:
+		pref_data.use_gyro=use_gyro
+		pref_data.gyro_deadzone=gyro_deadzone
+		pref_data.vibration_multiplier=vibration_multiplier
+		pref_data.music_volume=music_volume
+		var result:Error = ResourceSaver.save(pref_data, USR_PREF)
+		if result == OK:
+			print("Game Saved Successfully!")
+
+func LoadPrefs()->void:
+	print('Prefs path: ',ProjectSettings.globalize_path(USR_PREF))
+	# 3. Otherwise, fall back to normal local device saves
+	if ResourceLoader.exists(USR_PREF):
+		pref_data = ResourceLoader.load(USR_PREF)
+		print("Prefs Loaded from user storage!")
+		
+	# Sync values
+	use_gyro=pref_data.use_gyro
+	gyro_deadzone=pref_data.gyro_deadzone
+	vibration_multiplier=pref_data.vibration_multiplier
+	music_volume=pref_data.music_volume
 
 #update character locks, to unlock new characters after each cup
 func CheckCharacterLocks()->int:

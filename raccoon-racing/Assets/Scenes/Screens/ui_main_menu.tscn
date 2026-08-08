@@ -418,15 +418,15 @@ func _ready()->void:
 	if not MusicPlayer.playing :
 		MusicPlayer.PlayMusic('main')
 	play(\"intro\")
-	buttons.hide()
+	(buttons).hide()
 	logo.hide()
 	volume.hide()
-	#default vibration on
-	vibrationeffect.show()
 	vibration.hide()
 	frame=0
 	frame_changed.connect(_on_frame_changed)
+	AudioServer.set_bus_volume_db(MainBus, linear_to_db(GameData.music_volume))
 	volumeslider.value=db_to_linear(AudioServer.get_bus_volume_db(MainBus))
+	_on_vibration_changed()
 
 func _on_frame_changed()->void:
 	if frame == 40:
@@ -444,6 +444,7 @@ func _on_start_button_pressed()->void:
 	Hideadditions()
 	play()
 	await animation_finished
+	GameData.SavePrefs()
 	get_tree().change_scene_to_file('res://Assets/Scenes/Screens/ui_char_selection.tscn')
 
 
