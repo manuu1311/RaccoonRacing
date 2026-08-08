@@ -62,7 +62,7 @@ func _on_back_button_mouse_exited() -> void:
 
 func _on_player_slider_value_changed(value: float) -> void:
 	#disable split screen for android
-	if OS.has_feature('android') or true:
+	if OS.has_feature('android'):
 		playercount_slider.value=1.0
 		ButtonSounds.PlaySound('warning')
 		return

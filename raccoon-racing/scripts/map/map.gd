@@ -338,6 +338,7 @@ func InitEventInMap()->void:
 		var scaled_size:Vector2 = newbs.get_node("Sprite2D").texture.get_size()
 		newbs.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
 		newbs.name="BsInMap"+str(_loc3_)
+		newbs.IsActivated=true
 		_loc2_.rotation = 0;
 		Events.append(newbs)
 		_loc3_ = _loc3_ + 1;

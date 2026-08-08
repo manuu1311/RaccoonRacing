@@ -110,13 +110,15 @@ func ShowLobbyScreen()->void:
 
 func _on_hostbutton_pressed() -> void:
 	ButtonSounds.PlaySound("click")
-	infolbl.show()
+	if not LanToggled:
+		infolbl.show()
 	NetworkManager.lobby_host(LanToggled)
 
 
 func _on_joinbutton_pressed(_code:String='') -> void:
 	ButtonSounds.PlaySound("click")
-	infolbl.show()
+	if not LanToggled:
+		infolbl.show()
 	NetworkManager.lobby_join(lobbycodeinput.text,LanToggled)
 
 func HostLobby(_code:String)->void:

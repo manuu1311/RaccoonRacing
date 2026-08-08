@@ -16,7 +16,7 @@ var gyro_pressed_right :bool= false
 @onready var left: TextureRect = $Anchor/Left
 
 func _ready() -> void:
-	if not OS.has_feature('android') and false:
+	if not OS.has_feature('android'):
 		set_process(false)
 		visible=false
 		return
