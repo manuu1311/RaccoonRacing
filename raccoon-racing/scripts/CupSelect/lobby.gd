@@ -254,7 +254,7 @@ func _on_startbutton_pressed() -> void:
 
 @rpc('authority','call_local','reliable')
 func Start()->void:
-	GameData.currentDifficulty=GameData.cupWon[GameData.currentCup]
+	GameData.currentDifficulty=min(GameData.cupWon[GameData.currentCup]+1,3)
 	GameData.currentStep=0
 	GameData.UpdateInfo()
 	UiOverAnimation.playanim()

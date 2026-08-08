@@ -468,7 +468,6 @@ offset_bottom = 500.0
 texture = ExtResource("2_lo0sp")
 
 [node name="CupScreen" type="Control" parent="." unique_id=1820990992]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1473,7 +1472,7 @@ offset_top = 2.5
 offset_right = 206.66
 offset_bottom = 70.5
 focus_neighbor_left = NodePath("../../Cup7/Button")
-focus_neighbor_bottom = NodePath("../../../BackButton")
+focus_neighbor_bottom = NodePath("../../../../Lobby/LobbyText/Button")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6rwrk")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
@@ -1779,6 +1778,7 @@ shortcut = ExtResource("28_5pglv")
 texture_normal = ExtResource("16_tdwvn")
 
 [node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

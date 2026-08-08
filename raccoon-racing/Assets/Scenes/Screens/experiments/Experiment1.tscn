@@ -85,6 +85,7 @@ script = ExtResource("3_6unhv")
 [node name="world" type="Node2D" parent="." unique_id=1038090199]
 
 [node name="Background" type="Control" parent="." unique_id=1021613311]
+visible = false
 visibility_layer = 524288
 layout_mode = 3
 anchors_preset = 0
@@ -152,6 +153,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Finish" type="AnimatedSprite2D" parent="Node/HUD/FinishEffect/Control" unique_id=1773974724]
+position = Vector2(242, 0)
 sprite_frames = SubResource("SpriteFrames_1wkmo")
 frame = 14
 frame_progress = 1.0

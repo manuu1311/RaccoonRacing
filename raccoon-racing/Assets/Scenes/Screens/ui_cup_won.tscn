@@ -909,7 +909,7 @@ text = "Continue"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Won/ContinueButton" unique_id=1666044084]
+[node name="Button" type="Button" parent="Won/ContinueButton" unique_id=1666044084 groups=["default_focus"]]
 offset_left = 183.0
 offset_top = 415.0
 offset_right = 331.0

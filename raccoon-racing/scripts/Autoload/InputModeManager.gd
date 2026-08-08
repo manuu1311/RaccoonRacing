@@ -54,6 +54,7 @@ func _switch_to_mouse() -> void:
 	mode_changed.emit(mode)
 
 func _focus_nearest_fallback(vp: Viewport) -> void:
+	await get_tree().process_frame
 	# no control directly under the cursor (e.g. mouse over blank space) —
 	# fall back to whatever currently has focus, or a scene-defined default
 	var focused :Control= vp.gui_get_focus_owner()

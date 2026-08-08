@@ -16,6 +16,7 @@ extends CanvasLayer
 @onready var continue_buttonwin: Node2D = $Won/ContinueButton
 @onready var continuebuttonloss: Node2D = $Lost/Continue
 var nextdiff:Array[String]=[
+	'',
 	'Can you also beat this cup in normal mode?',
 	'Can you also beat this cup in hard mode?',
 	'Do you think you can beat your own score again?'
