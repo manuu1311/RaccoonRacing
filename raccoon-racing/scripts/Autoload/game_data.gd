@@ -74,7 +74,7 @@ var debug_save_file: SaveData=null
 var pref_data:Prefs
 
 var vibration_multiplier:float=1.0
-var use_gyro:bool=true
+var use_gyro:bool=false
 var gyro_deadzone:float=11
 var music_volume:float=0.5
 
@@ -137,7 +137,7 @@ func SavePrefs()->void:
 		pref_data.music_volume=music_volume
 		var result:Error = ResourceSaver.save(pref_data, USR_PREF)
 		if result == OK:
-			print("Game Saved Successfully!")
+			print("Prefs saved successfully!")
 
 func LoadPrefs()->void:
 	print('Prefs path: ',ProjectSettings.globalize_path(USR_PREF))
@@ -145,12 +145,11 @@ func LoadPrefs()->void:
 	if ResourceLoader.exists(USR_PREF):
 		pref_data = ResourceLoader.load(USR_PREF)
 		print("Prefs Loaded from user storage!")
-		
-	# Sync values
-	use_gyro=pref_data.use_gyro
-	gyro_deadzone=pref_data.gyro_deadzone
-	vibration_multiplier=pref_data.vibration_multiplier
-	music_volume=pref_data.music_volume
+		# Sync values
+		use_gyro=pref_data.use_gyro
+		gyro_deadzone=pref_data.gyro_deadzone
+		vibration_multiplier=pref_data.vibration_multiplier
+		music_volume=pref_data.music_volume
 
 #update character locks, to unlock new characters after each cup
 func CheckCharacterLocks()->int:

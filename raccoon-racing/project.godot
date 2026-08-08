@@ -44,6 +44,7 @@ UiLoadingScreen="*uid://cukvs5a5kq71l"
 DebugPanel="*uid://b2pa455vs7kan"
 InputModeManager="*uid://dwrp3vuem8t7u"
 DebugConsole="*uid://cmqp2uph5pmob"
+GyroController="*uid://ckjcb4m87sbar"
 
 [debug]
 

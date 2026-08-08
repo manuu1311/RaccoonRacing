@@ -8,9 +8,17 @@ script = ExtResource("1_m8rwj")
 
 [node name="MainPanel" type="Control" parent="." unique_id=2106475999]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 9.0
-offset_bottom = 5.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = -241.0
+offset_bottom = -245.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="ColorRect" parent="MainPanel" unique_id=1436812503]
 layout_mode = 0
@@ -54,7 +62,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HideButton" type="Button" parent="." unique_id=1591067748]
-offset_left = 4.0
-offset_top = 6.5
-offset_right = 13.0
-offset_bottom = 15.5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = -243.5
+offset_right = -237.0
+offset_bottom = -234.5
+grow_horizontal = 2
+grow_vertical = 2

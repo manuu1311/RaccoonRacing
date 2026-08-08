@@ -43,6 +43,7 @@ scale = Vector2(0.2, 0.2)
 pivot_offset = Vector2(256, 256)
 
 [node name="Up" type="TouchScreenButton" parent="Control/LeftSide/Right" unique_id=662584090]
+scale = Vector2(1, 1.25)
 texture_normal = ExtResource("1_8wwg5")
 texture_pressed = ExtResource("1_8wwg5")
 passby_press = true
@@ -64,6 +65,8 @@ scale = Vector2(0.2, 0.2)
 pivot_offset = Vector2(256, 256)
 
 [node name="Up" type="TouchScreenButton" parent="Control/LeftSide/Left" unique_id=1273918778]
+position = Vector2(0, -107.625)
+scale = Vector2(1, 1.2)
 texture_normal = ExtResource("1_8wwg5")
 texture_pressed = ExtResource("1_8wwg5")
 passby_press = true

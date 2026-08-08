@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://ckjcb4m87sbar"]
+
+[ext_resource type="Script" uid="uid://de0l04lkn3kwc" path="res://scripts/Autoload/gyro_controller.gd" id="1_2mb5l"]
+[ext_resource type="Texture2D" uid="uid://bnxrjpeei4p17" path="res://Assets/Images/Icons/gyro_base.png" id="1_e63fl"]
+[ext_resource type="Texture2D" uid="uid://dw78u1dv5fl6d" path="res://Assets/Images/Icons/gyro_arrow.png" id="2_2mb5l"]
+[ext_resource type="Texture2D" uid="uid://clxi2m4cnep2d" path="res://Assets/Images/hud/Touch/arrow.png" id="4_gwxtf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2mb5l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwxtf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5outg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bsew"]
+
+[node name="GyroController" type="CanvasLayer" unique_id=331047923]
+layer = 100
+script = ExtResource("1_2mb5l")
+
+[node name="Anchor" type="Control" parent="." unique_id=1852401494]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 27.99945
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="ColorRect" parent="Anchor" unique_id=1523000712]
+layout_mode = 0
+offset_left = 118.0
+offset_top = -219.0
+offset_right = 260.0
+offset_bottom = -185.0
+mouse_filter = 2
+color = Color(0.23529412, 0.23529412, 0.23529412, 0.2784314)
+
+[node name="GyroBase" type="Button" parent="Anchor/Panel" unique_id=1921392342]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 5.0
+offset_right = 243.69
+offset_bottom = 94.57
+scale = Vector2(0.25, 0.25)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2mb5l")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gwxtf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5outg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6bsew")
+
+[node name="TextureRect" type="TextureRect" parent="Anchor/Panel/GyroBase" unique_id=517284019]
+layout_mode = 0
+offset_top = -1.69
+offset_right = 155.0
+offset_bottom = 88.31
+mouse_filter = 2
+texture = ExtResource("1_e63fl")
+
+[node name="GyroArrow" type="TextureRect" parent="Anchor/Panel" unique_id=602377946]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 5.0
+offset_right = 217.0
+offset_bottom = 105.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_2mb5l")
+
+[node name="GyroArrow2" type="TextureRect" parent="Anchor/Panel" unique_id=424240600]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 27.0
+offset_right = 309.0
+offset_bottom = 127.0
+rotation = 3.1415927
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_2mb5l")
+
+[node name="GyroSlider" type="HSlider" parent="Anchor" unique_id=391621412]
+layout_mode = 0
+offset_left = 189.0
+offset_top = -194.0
+offset_right = 258.0
+offset_bottom = -178.0
+rotation = 3.1415927
+min_value = 5.0
+max_value = 25.0
+value = 5.0
+
+[node name="Right" type="TextureRect" parent="Anchor" unique_id=1022561468]
+layout_mode = 0
+offset_left = -28.0
+offset_top = -410.0
+offset_right = 484.0
+offset_bottom = 102.0
+scale = Vector2(0.125, 0.125)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("4_gwxtf")
+
+[node name="Left" type="TextureRect" parent="Anchor" unique_id=349343708]
+layout_mode = 0
+offset_left = -89.0
+offset_top = -410.0
+offset_right = 423.0
+offset_bottom = 102.0
+rotation = 3.1415927
+scale = Vector2(0.125, 0.125)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("4_gwxtf")
+
+[node name="HideButton" type="Button" parent="." unique_id=2106720664]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 230.0
+offset_top = -243.5
+offset_right = 239.0
+offset_bottom = -234.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Anchor/Panel/GyroBase" to="." method="_on_gyro_base_pressed"]
+[connection signal="value_changed" from="Anchor/GyroSlider" to="." method="_on_gyro_slider_value_changed"]
+[connection signal="pressed" from="HideButton" to="." method="_on_hide_button_pressed"]
