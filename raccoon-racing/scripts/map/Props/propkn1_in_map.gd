@@ -4,7 +4,7 @@ class_name Propkn1InMap
 var JumpHigh:int=4
 
 func OnHitCar(car:Car)->void:
-	if car.playerID!=aimed:
+	if car.player!=AimPlayer:
 		return
 	car.prop_effector.PlayBomb(global_position)
 	car.sounds.playBedumpSound()
@@ -18,6 +18,12 @@ func OnHitCar(car:Car)->void:
 	ClearMissile.rpc()
 
 
+func _process(delta: float) -> void:
+	UpdateAimPlayer()
+	super(delta)
+
+func UpdateAimPlayer()->void:
+	AimPlayer=GameData.PlayersArr[GameData.OrderInfo[0]]
 
 @rpc('call_local','reliable')
 func ApplyExplosion(carid:int)->void:

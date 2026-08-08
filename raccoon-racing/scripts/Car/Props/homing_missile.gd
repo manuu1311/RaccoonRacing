@@ -16,7 +16,6 @@ func _init(playerinst:Player)->void:
 	HomingMissileView=preload(
         "res://Assets/Scenes/Screens/maps/MissileView.tscn"
 	).instantiate() as Sprite2D
-	HomingMissile.aimed=Aimplayer.PlayerID
 	HomingMissile.map=player.car.map
 	SetDmc();
 	delme()

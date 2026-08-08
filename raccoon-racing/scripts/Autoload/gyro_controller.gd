@@ -70,11 +70,13 @@ func ColorfulActions()->void:
 
 
 func EnableGyro()->void:
+	ProjectSettings.set_setting("input_devices/sensors/enable_accelerometer", true)
 	set_process(true)
 	gyro_arrow.visible=true
 	gyro_arrow_2.visible=true
 
 func DisableGyro()->void:
+	ProjectSettings.set_setting("input_devices/sensors/enable_accelerometer", false)
 	set_process(false)
 	gyro_arrow.visible=false
 	gyro_arrow_2.visible=false

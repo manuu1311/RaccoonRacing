@@ -11,7 +11,6 @@ var MaxWheelLength:int=10
 var SpeedHorse:int=1
 const effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
 @onready var bottom_effect: Node2D = $BottomEffect
-var aimed:int
 var missileview:Sprite2D
 var AimPlayer:Player
 var LockAim:bool=false
@@ -24,7 +23,7 @@ func OnHitStatus()->void:
 	return
 
 func OnHitCar(car:Car)->void:
-	if car.playerID!=aimed:
+	if car.player!=AimPlayer:
 		return
 	car.prop_effector.PlayBomb(global_position)
 	car.sounds.playBedumpSound()

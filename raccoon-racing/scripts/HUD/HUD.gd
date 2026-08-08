@@ -81,3 +81,6 @@ func StopRecord()->void:
 		if FocusCar.playerID==0:
 			GameData.CurrentCupTime+=speed_hud.totaltime
 			GameData.CurrentRaceTime=speed_hud.totaltime
+	else:
+		GameData.CurrentCupTime+=speed_hud.totaltime
+		GameData.CurrentRaceTime=speed_hud.totaltime
