@@ -111,6 +111,18 @@ scale = Vector2(0.125, 0.125)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("4_gwxtf")
 
+[node name="Infolbl" type="Label" parent="Anchor" unique_id=2005585913]
+layout_mode = 0
+offset_left = 118.0
+offset_top = -249.0
+offset_right = 231.0
+offset_bottom = -226.0
+theme_override_colors/font_outline_color = Color(0.14687502, 0.13677736, 0.13677736, 1)
+theme_override_constants/outline_size = 18
+text = "(0,0,0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HideButton" type="Button" parent="." unique_id=2106720664]
 anchors_preset = 8
 anchor_left = 0.5

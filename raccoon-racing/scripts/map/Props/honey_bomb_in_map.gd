@@ -37,6 +37,7 @@ func BombExplode(carid:int)->void:
 	IsActivated = false
 	animated_sprite_2d.show()
 	animated_sprite_2d.play()
+	sprite_2d.hide()
 	await animated_sprite_2d.animation_finished
 	map.DelEventInMap(edface.getId())
 

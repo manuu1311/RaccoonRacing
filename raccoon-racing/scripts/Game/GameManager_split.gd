@@ -35,8 +35,8 @@ func _ready() -> void:
 	await get_tree().process_frame
 	CreatePlayers()
 	await get_tree().process_frame
-	UiLoadingScreen.HideLoading()
 	PopulateViewports()
+	UiLoadingScreen.HideLoading()
 	await get_tree().process_frame
 	sound_manager.PlaySound('levelstart')
 	NotifyDelayedReady.call_deferred()

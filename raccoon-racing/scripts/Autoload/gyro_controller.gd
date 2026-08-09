@@ -14,6 +14,7 @@ var gyro_pressed_right :bool= false
 @onready var anchor: Control = $Anchor
 @onready var right: TextureRect = $Anchor/Right
 @onready var left: TextureRect = $Anchor/Left
+@onready var infolbl: Label = $Anchor/Infolbl
 
 func _ready() -> void:
 	if not OS.has_feature('android'):
@@ -34,6 +35,7 @@ func _process(_delta:float)->void:
 	
 	if anchor.visible:
 		ColorfulActions()
+		ReadSensor()
 	
 	var tilt:float = Input.get_accelerometer().x - neutral_tilt
 	var threshold:float = 9.8 * sin(deg_to_rad(deadzone_degrees))
@@ -54,6 +56,9 @@ func _process(_delta:float)->void:
 	elif not want_left and gyro_pressed_left:
 		Input.action_release("steer_left")
 		gyro_pressed_left = false
+
+func ReadSensor()->void:
+	infolbl.text=str(Input.get_accelerometer())
 
 func calibrate()->void:
 	neutral_tilt = Input.get_accelerometer().x
@@ -80,6 +85,7 @@ func DisableGyro()->void:
 	set_process(false)
 	gyro_arrow.visible=false
 	gyro_arrow_2.visible=false
+	infolbl.text='null'
 
 
 func _on_gyro_base_pressed() -> void:
