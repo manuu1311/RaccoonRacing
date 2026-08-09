@@ -233,6 +233,7 @@ func GetPropPer()->int:
 func RemoveShield()->void:
 	car.IsUseShield=false
 	car.prop_effector.RemoveShield()
+	prop.del_prop_by_type(3)
 func AddShield()->void:
 	car.IsUseShield=true
 	car.prop_effector.AddShield()

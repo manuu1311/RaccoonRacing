@@ -28,12 +28,22 @@ const PROP_SCENES = {
 func _ready() -> void:
 	UiOverAnimation.reset_anim_frame()
 	Game.PlayersReady.connect(StartSequence)
+	await get_tree().process_frame
 	LoadMap()
+	await get_tree().process_frame
 	map.deferredInit()
+	await get_tree().process_frame
 	CreatePlayers()
+	await get_tree().process_frame
 	UiLoadingScreen.HideLoading()
 	PopulateViewports()
+	await get_tree().process_frame
 	sound_manager.PlaySound('levelstart')
+	NotifyDelayedReady.call_deferred()
+
+
+func NotifyDelayedReady()->void:
+	await get_tree().create_timer(2).timeout
 	for player:Player in GameData.PlayersArr:
 		if player.current_control!=Player.control_type.HUMAN:
 			continue
@@ -41,7 +51,6 @@ func _ready() -> void:
 			Game.server_receive_ready.rpc_id(1,player.PlayerID)
 		else:
 			Game.server_receive_ready(player.PlayerID)
-
 
 func ShrinkrayWarmup()->void:
 	var shrink: ShrinkInMap=PROP_SCENES.prop8.instantiate()

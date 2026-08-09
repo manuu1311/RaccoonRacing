@@ -60,7 +60,8 @@ func _apply_shrink_effect() -> void:
 
 	var restore_tween: Tween = player.car.create_tween()
 	restore_tween.tween_property(player.car, "shrinkscale", 1, 0.5)
-	player.prop.del_prop_by_type(3)
+	if player.car.IsUseShield:
+		player.RemoveShield()
 	delme()
 
 func delme()->void:
