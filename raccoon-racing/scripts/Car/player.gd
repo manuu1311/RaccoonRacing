@@ -172,10 +172,12 @@ func FinishRace()->void:
 
 func Stoprace()->void:
 	car.playering = false;
+	racefinished.emit(PlayerID)
+
+func ClearProps()->void:
 	for propinst:Prop in prop.propArr:
 		propinst.del()
 	prop.propArr.clear()
-	racefinished.emit(PlayerID)
 
 func ValidatePropBox(x:float,y:float)->void:
 	if not GameData.IsMultiplayer or NetworkManager.is_host:

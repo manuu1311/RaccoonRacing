@@ -19,7 +19,8 @@ func run_tick() -> void:
 
 func delme() -> void:
 	if is_instance_valid(player.car):
-		player.prop.Delprop(self)
+		#player.prop.Delprop(self)
+		player.RemoveShield()
 
 func del()->void:
-	player.RemoveShield()
+	pass

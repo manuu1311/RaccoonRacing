@@ -44,7 +44,7 @@ func SetCar(carinst:Car)->void:
 	car=carinst
 
 func _process(_delta: float) -> void:
-	if updating or car.isLock:
+	if car==null or updating or car.isLock:
 		return
 	var speed:int
 	if car.isLock:

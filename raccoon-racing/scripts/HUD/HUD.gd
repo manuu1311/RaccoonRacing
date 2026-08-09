@@ -82,5 +82,7 @@ func StopRecord()->void:
 			GameData.CurrentCupTime+=speed_hud.totaltime
 			GameData.CurrentRaceTime=speed_hud.totaltime
 	else:
+		print('adding the time, now it is:',GameData.CurrentCupTime)
+		print('btw, player is:',FocusCar.playerID)
 		GameData.CurrentCupTime+=speed_hud.totaltime
 		GameData.CurrentRaceTime=speed_hud.totaltime

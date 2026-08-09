@@ -29,7 +29,7 @@ func _ready() -> void:
 	UiOverAnimation.reset_anim_frame()
 	Game.PlayersReady.connect(StartSequence)
 	await get_tree().process_frame
-	LoadMap()
+	await LoadMap()
 	await get_tree().process_frame
 	map.deferredInit()
 	await get_tree().process_frame
@@ -43,7 +43,8 @@ func _ready() -> void:
 
 
 func NotifyDelayedReady()->void:
-	await get_tree().create_timer(2).timeout
+	if GameData.IsMultiplayer:
+		await get_tree().create_timer(2).timeout
 	for player:Player in GameData.PlayersArr:
 		if player.current_control!=Player.control_type.HUMAN:
 			continue
@@ -141,11 +142,10 @@ func CreatePlayers()->void:
 			carinstance.CharID=player.charid
 		world.add_child(carinstance)
 		#temporary authority swap for car positions
-		carinstance.set_multiplayer_authority(multiplayer.get_unique_id())
+		carinstance.set_multiplayer_authority(player.NetworkID)
 		carinstance.name="Car"+str(player.PlayerID)
 		carinstance.global_position=map.StartPosArr[i].global_position
 		carinstance.rotation=map.StartPosArr[i].rotation
-		carinstance.call_deferred('set_multiplayer_authority',player.NetworkID)
 		player.SetCar(carinstance)
 		player.ResetPlayer(i)
 
@@ -266,12 +266,11 @@ func ShowFinishEffect(_tick:int)->void:
 	if NetworkManager.is_host:
 		UpdateOrderInfo.rpc(GameData.OrderInfo)
 	await get_tree().create_timer(3).timeout
+	for player:Player in GameData.PlayersArr:
+		player.ClearProps()
 	ClearViewportsAndFocus()
 	UiOverAnimation.playanim()
 	await UiOverAnimation.animated_sprite_2d.animation_finished
-	for player:Player in GameData.PlayersArr:
-		if player.current_control==Player.control_type.HUMAN:
-			player.Stoprace()
 	BackToMain()
 
 @rpc("authority",'reliable','call_remote')
