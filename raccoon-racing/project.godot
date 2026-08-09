@@ -164,7 +164,7 @@ sensors/enable_accelerometer=true
 
 rollback/enabled=false
 time/enabled=false
-time/tickrate=35
+time/tickrate=105
 
 [physics]
 
