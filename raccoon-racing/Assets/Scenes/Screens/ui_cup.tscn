@@ -1862,7 +1862,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251 node_paths=PackedStringArray("rects", "dropdowns", "labels")]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2300,6 +2299,7 @@ text_overrun_behavior = 1
 clip_text = true
 
 [node name="JoinScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=2082871443]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

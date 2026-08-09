@@ -197,8 +197,8 @@ func _on_leavelobbybutton_mouse_exited() -> void:
 
 ##delete all multiplayer related variables
 func _on_button_pressed() -> void:
-	NetworkManager.leave_lobby()
 	ButtonSounds.PlaySound("click")
+	NetworkManager.leave_lobby()
 	ClearNetworkVars()
 
 func ClearNetworkVars()->void:

@@ -43,8 +43,10 @@ func UpdateCode()->void:
 func UpdateIconsNames()->void:
 	if NetworkManager.is_host:
 		startctrl.show()
+		aipropbtn.disabled=false
 	else:
 		startctrl.hide()
+		aipropbtn.disabled=true
 	#online players connected
 	for i in range(GameData.PlayersArr.size()):
 		var player:Player=GameData.PlayersArr[i]
