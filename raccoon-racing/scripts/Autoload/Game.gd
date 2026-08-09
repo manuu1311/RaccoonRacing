@@ -29,6 +29,7 @@ func start_race_countdown()->void:
 
 @rpc("authority", "call_local", "reliable")
 func broadcast_start_tick(target_tick: int)->void:
+	print("[%s] Received broadcast_start_tick=%s at my_tick=%s synced=%s time=%s" % [multiplayer.get_unique_id(), target_tick, NetworkTime.tick, NetworkTime.is_initial_sync_done(), Time.get_ticks_msec()])
 	PlayersReady.emit(target_tick)
 
 func register(player:Player)->void:

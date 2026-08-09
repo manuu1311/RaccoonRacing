@@ -149,13 +149,15 @@ func StartSequence(target_tick:int)->void:
 	
 func LoadMap() -> void:
 	var map_num: int = GameData.currentMap
-
-	# 1. Format the map path (e.g., "Map01.tscn", "Map02.tscn")
-	# %02d pads single digits with a leading zero (1 becomes 01)
 	var map_path: String = "res://Assets/Scenes/Screens/maps/Map%02d.tscn" % map_num
 
-	@warning_ignore("unsafe_method_access")
-	map = load(map_path).instantiate() as Map
+	# if the background load from the loading screen isn't done yet, wait for it —
+	# but this won't block the main thread, it just yields frames
+	while ResourceLoader.load_threaded_get_status(map_path) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		await get_tree().process_frame
+
+	var packedmap:PackedScene = ResourceLoader.load_threaded_get(map_path) as PackedScene
+	map=packedmap.instantiate()
 	world.add_child(map)
 
 	# 2. Determine the minimap suffix based on the vehicle type

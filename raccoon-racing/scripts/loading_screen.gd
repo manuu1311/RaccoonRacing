@@ -27,7 +27,7 @@ func ChangeScene() -> void:
 	UiOverAnimation.animated_sprite_2d.frame=0
 	hint.stop()
 	_cycle_hint()
-	
+	ResourceLoader.load_threaded_request('res://Assets/Scenes/Screens/maps/Map%02d.tscn' % GameData.currentMap)
 	ResourceLoader.load_threaded_request(target_scene)
 	call_deferred('_wait_for_loading')
 
