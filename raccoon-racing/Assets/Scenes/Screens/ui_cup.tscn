@@ -453,6 +453,7 @@ offset_right = 480.0
 offset_bottom = 480.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("1_xr3yx")
 expand_mode = 2
 stretch_mode = 1
@@ -465,9 +466,11 @@ autoplay = &"sliding"
 layout_mode = 0
 offset_right = 500.0
 offset_bottom = 500.0
+mouse_filter = 2
 texture = ExtResource("2_lo0sp")
 
 [node name="CupScreen" type="Control" parent="." unique_id=1820990992]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1778,7 +1781,6 @@ shortcut = ExtResource("28_5pglv")
 texture_normal = ExtResource("16_tdwvn")
 
 [node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -2618,7 +2620,6 @@ offset_left = 121.0
 offset_top = 318.0
 offset_right = 388.0
 offset_bottom = 367.0
-focus_mode = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 8

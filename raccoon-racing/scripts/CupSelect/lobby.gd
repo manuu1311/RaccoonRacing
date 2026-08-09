@@ -155,6 +155,7 @@ func RegisterPlayer(newcharid:int)->void:
 		playernames.append(player.OnlineName)
 		network_ids.append(player.NetworkID)
 	PlayerRegistered.rpc(charids,playernames,network_ids,newid)
+	SyncCup.rpc(GameData.currentCup)
 	lobby_scene.GiveLobbyInfo()
 	
 @rpc("authority","call_remote","reliable")
@@ -167,12 +168,13 @@ func PlayerRegistered(charids:Array[int],playernames:Array[String],networkids:Ar
 		newplayer.NetworkID = networkids[i]
 		GameData.PlayersArr.append(newplayer)
 	if not IsLocked and not NetworkManager.is_host:
+		if NetworkManager.NetworkID<1:
 			NetworkManager.PlayerID=playerID
 			#change player control to human
-			GameData.PlayersArr[playerID].current_control=Player.control_type.HUMAN
-			LobbyTransition()
-			IsLocked=true
-			GameData.IsMultiplayer=true
+		GameData.PlayersArr[NetworkManager.PlayerID].current_control=Player.control_type.HUMAN
+		LobbyTransition()
+		IsLocked=true
+		GameData.IsMultiplayer=true
 	lobby_script.UpdateIconsNames()
 	
 
@@ -195,13 +197,18 @@ func _on_leavelobbybutton_mouse_exited() -> void:
 
 ##delete all multiplayer related variables
 func _on_button_pressed() -> void:
+	NetworkManager.leave_lobby()
+	ButtonSounds.PlaySound("click")
+	ClearNetworkVars()
+
+func ClearNetworkVars()->void:
 	GameData.IsMultiplayer=false
 	GameData.PlayersArr=[]
-	ButtonSounds.PlaySound("click")
 	if not Game.IsSplitScreen:
 		get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_cup.tscn")
 	else:
 		get_tree().change_scene_to_file("res://Assets/Scenes/Screens/ui_char_selection.tscn")
+
 
 func _on_joinbutton_mouse_entered() -> void:
 	ButtonSounds.PlaySound('hover')
@@ -274,7 +281,7 @@ func CreateAIPlayers()->void:
 		available_ids.shuffle()
 		new_id=available_ids.pop_front()
 		var aiplayer:Player=AIPlayer.new(i,Player.control_type.AI)
-		aiplayer.name=lobby_scene.names[i]
+		aiplayer.OnlineName=lobby_scene.names[i]
 		GameData.PlayersArr.append(aiplayer)
 		aiplayer.AiReflect=lobby_script.difficulty
 		aiplayer.charid=new_id
@@ -352,4 +359,5 @@ func ResyncLobby() -> void:
 		playernames.append(player.OnlineName)
 		network_ids.append(player.NetworkID)
 	PlayerRegistered.rpc(charids, playernames, network_ids, NetworkManager.PlayerID)
+	SyncCup.rpc(GameData.currentCup)
 	lobby_scene.UpdateIconsNames()

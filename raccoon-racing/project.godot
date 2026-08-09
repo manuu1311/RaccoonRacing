@@ -60,6 +60,7 @@ window/size/mode=2
 window/size/window_width_override=750
 window/size/window_height_override=750
 window/stretch/mode="canvas_items"
+window/handheld/orientation=4
 mouse_cursor/custom_image="uid://4l3jsqcdtk02"
 window/quality/msaa_2d=0
 
@@ -163,7 +164,7 @@ sensors/enable_accelerometer=true
 
 rollback/enabled=false
 time/enabled=false
-time/tickrate=105
+time/tickrate=35
 
 [physics]
 

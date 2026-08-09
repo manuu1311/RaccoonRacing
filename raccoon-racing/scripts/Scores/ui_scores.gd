@@ -46,7 +46,7 @@ func _ready() -> void:
 		var player:Player=GameData.PlayersArr[orderid]
 		var gradient:Sprite2D=positions[i].get_node("gradient")
 		if not Game.IsSplitScreen:
-			if player.PlayerID==0:
+			if player.current_control==Player.control_type.HUMAN:
 				gradient.self_modulate=Color(0,0.8,0.5,0.45)
 			else:
 				gradient.self_modulate=Color(1,1,1,0.1)
@@ -65,7 +65,7 @@ func _ready() -> void:
 		var icon:Sprite2D=positions[i].get_node("Icon")
 		icon.texture=textures[player.charid] 
 		var lblname:Label=positions[i].get_node("name")
-		if player.name.length()<2:
+		if player.OnlineName.length()<2:
 			lblname.text=names[player.charid] 
 		else:
 			lblname.text=player.name

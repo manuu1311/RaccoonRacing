@@ -42,7 +42,7 @@ var ICE_SERVERS:Dictionary = {
 }
 
 #id assigned
-var PlayerID:int
+var PlayerID:int=0
 var NetworkID:int
 var IsLobbySealed:bool
 #endregion

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bkbr3glflwe78" path="res://Assets/Animations/Scores/background.png" id="2_yqwi5"]
 [ext_resource type="Texture2D" uid="uid://cu8oomlcwk2sw" path="res://Assets/Animations/Scores/gradientbg.png" id="3_xsj34"]
 [ext_resource type="Texture2D" uid="uid://cy8bvk0nry17j" path="res://Assets/Animations/Scores/light.png" id="4_1ya6s"]
-[ext_resource type="Texture2D" path="res://Assets/Animations/Scores/gradientbg2.png" id="5_xsj34"]
+[ext_resource type="Texture2D" uid="uid://1oat443dywcd" path="res://Assets/Animations/Scores/gradientbg2.png" id="5_xsj34"]
 [ext_resource type="Texture2D" uid="uid://hjp24s2c8g5b" path="res://Assets/Animations/CharSelection/greenbush.png" id="6_i2oi5"]
 [ext_resource type="Texture2D" uid="uid://dqywrdq8ycm5i" path="res://Assets/Animations/CharSelection/emptybush.png" id="7_kpbv8"]
 [ext_resource type="Shortcut" uid="uid://c20xrlgkwtkri" path="res://Assets/Shortcuts/new_shortcut.tres" id="8_bg8mh"]
