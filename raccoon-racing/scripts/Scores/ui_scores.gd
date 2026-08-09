@@ -68,7 +68,7 @@ func _ready() -> void:
 		if player.OnlineName.length()<2:
 			lblname.text=names[player.charid] 
 		else:
-			lblname.text=player.name
+			lblname.text=player.OnlineName
 		var lblrank:Label=positions[i].get_node("rank")
 		lblrank.text=str(i+1)
 		var lblpoints:Label=positions[i].get_node("points")
