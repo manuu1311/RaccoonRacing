@@ -65,8 +65,6 @@ var CupTimes:Array[Array]=[
 var OnlinePlayersCount:int=1
 var AICanUseProp:bool=true
 
-var VibrationMultiplier:float=1
-
 const SAVE_PATH = "user://savegame.tres"
 const USR_PREF = "user://prefs.tres"
 var save_data: SaveData
@@ -76,6 +74,7 @@ var pref_data:Prefs
 var vibration_multiplier:float=1.0
 var use_gyro:bool=false
 var gyro_deadzone:float=11
+var gyro_orientation:float=1.0
 var music_volume:float=0.5
 
 ###online
@@ -130,11 +129,14 @@ func SavePrefs()->void:
 	if not ResourceLoader.exists(USR_PREF):
 		pref_data = Prefs.new()
 		print("New Prefs File Created!")
-	if pref_data.use_gyro!=use_gyro or pref_data.gyro_deadzone!=gyro_deadzone or pref_data.vibration_multiplier!=vibration_multiplier or pref_data.music_volume!=music_volume:
+	print(music_volume,vibration_multiplier)
+	prints(pref_data.gyro_orientation!=gyro_orientation , pref_data.use_gyro!=use_gyro , pref_data.gyro_deadzone!=gyro_deadzone , pref_data.vibration_multiplier!=vibration_multiplier , pref_data.music_volume!=music_volume)
+	if pref_data.gyro_orientation!=gyro_orientation or pref_data.use_gyro!=use_gyro or pref_data.gyro_deadzone!=gyro_deadzone or pref_data.vibration_multiplier!=vibration_multiplier or pref_data.music_volume!=music_volume:
 		pref_data.use_gyro=use_gyro
 		pref_data.gyro_deadzone=gyro_deadzone
 		pref_data.vibration_multiplier=vibration_multiplier
 		pref_data.music_volume=music_volume
+		pref_data.gyro_orientation=gyro_orientation
 		var result:Error = ResourceSaver.save(pref_data, USR_PREF)
 		if result == OK:
 			print("Prefs saved successfully!")
@@ -150,6 +152,7 @@ func LoadPrefs()->void:
 		gyro_deadzone=pref_data.gyro_deadzone
 		vibration_multiplier=pref_data.vibration_multiplier
 		music_volume=pref_data.music_volume
+		gyro_orientation=pref_data.gyro_orientation
 
 #update character locks, to unlock new characters after each cup
 func CheckCharacterLocks()->int:

@@ -63,7 +63,7 @@ func cmd_set(parts: Array) -> void:
 	match var_name:
 		'should_predict':
 			var newvalue:bool=_convert_bool(raw_value)
-			SetPredict.rpc(newvalue)
+			#SetPredict.rpc(newvalue)
 			log_line("%s = %s" % [var_name, str(newvalue)])
 		'extrapolation_frames':
 			var newvalue:int=int(raw_value)
@@ -81,7 +81,8 @@ func _convert_bool(raw: String)->bool:
 func SetPredict(newval:bool)->void:
 	should_predict=newval
 	for player:Player in GameData.PlayersArr:
-		player.car.should_predict=should_predict
+		pass
+		#player.car.should_predict=should_predict
 		
 @rpc("any_peer",'call_local','reliable')
 func SetFrames(newval:int)->void:

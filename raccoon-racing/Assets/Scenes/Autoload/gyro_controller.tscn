@@ -119,7 +119,7 @@ offset_right = 231.0
 offset_bottom = -226.0
 theme_override_colors/font_outline_color = Color(0.14687502, 0.13677736, 0.13677736, 1)
 theme_override_constants/outline_size = 18
-text = "(0,0,0)"
+text = "(9.8, 9.8, 9.8)"
 horizontal_alignment = 1
 vertical_alignment = 1
 

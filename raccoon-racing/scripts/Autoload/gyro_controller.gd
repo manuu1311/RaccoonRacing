@@ -7,6 +7,7 @@ var deadzone_degrees :float= 10.0
 
 var gyro_pressed_left :bool= false
 var gyro_pressed_right :bool= false
+var orientation_sign:float=1.0
 
 @onready var gyro_arrow: TextureRect = $Anchor/Panel/GyroArrow
 @onready var gyro_arrow_2: TextureRect = $Anchor/Panel/GyroArrow2
@@ -16,14 +17,16 @@ var gyro_pressed_right :bool= false
 @onready var left: TextureRect = $Anchor/Left
 @onready var infolbl: Label = $Anchor/Infolbl
 
+
 func _ready() -> void:
 	if not OS.has_feature('android'):
 		set_process(false)
 		visible=false
 		return
 	anchor.visible=false
-	GameData.LoadPrefs()
+	#GameData.LoadPrefs()
 	enabled=GameData.use_gyro
+	orientation_sign=GameData.gyro_orientation
 	if not enabled:
 		DisableGyro()
 	deadzone_degrees=GameData.gyro_deadzone
@@ -37,31 +40,45 @@ func _process(_delta:float)->void:
 		ColorfulActions()
 		ReadSensor()
 	
-	var tilt:float = Input.get_accelerometer().x - neutral_tilt
+	var tilt:float = GetSignedX() - neutral_tilt
 	var threshold:float = 9.8 * sin(deg_to_rad(deadzone_degrees))
 
 	var want_right:bool = tilt > threshold
 	var want_left:bool = tilt < -threshold
 
 	if want_right and not gyro_pressed_right:
-		Input.action_press("steer_right")
+		Input.action_press("Steer right")
 		gyro_pressed_right = true
 	elif not want_right and gyro_pressed_right:
-		Input.action_release("steer_right")
+		Input.action_release("Steer right")
 		gyro_pressed_right = false
 
 	if want_left and not gyro_pressed_left:
-		Input.action_press("steer_left")
+		Input.action_press("Steer left")
 		gyro_pressed_left = true
 	elif not want_left and gyro_pressed_left:
-		Input.action_release("steer_left")
+		Input.action_release("Steer left")
 		gyro_pressed_left = false
 
 func ReadSensor()->void:
-	infolbl.text=str(Input.get_accelerometer())
+	var accel:Vector3 = Input.get_accelerometer()
+	infolbl.text = "%.1f, %.1f, %.1f" % [accel.x, accel.y, accel.z]
 
 func calibrate()->void:
-	neutral_tilt = Input.get_accelerometer().x
+	UpdateOrientation()
+	neutral_tilt = GetSignedX()
+
+
+func UpdateOrientation()->void:
+	var orientation := DisplayServer.screen_get_orientation()
+	if orientation == DisplayServer.ScreenOrientation.SCREEN_REVERSE_LANDSCAPE:
+		orientation_sign = -1.0
+	else:
+		orientation_sign = 1.0
+	GameData.gyro_orientation=orientation_sign
+		
+func GetSignedX()->float:
+	return Input.get_accelerometer().x * orientation_sign
 
 func ColorfulActions()->void:
 	if Input.is_action_pressed('Steer right'):
@@ -75,13 +92,11 @@ func ColorfulActions()->void:
 
 
 func EnableGyro()->void:
-	ProjectSettings.set_setting("input_devices/sensors/enable_accelerometer", true)
 	set_process(true)
 	gyro_arrow.visible=true
 	gyro_arrow_2.visible=true
 
 func DisableGyro()->void:
-	ProjectSettings.set_setting("input_devices/sensors/enable_accelerometer", false)
 	set_process(false)
 	gyro_arrow.visible=false
 	gyro_arrow_2.visible=false

@@ -58,6 +58,8 @@ func _ready() -> void:
 		lost.show()
 		LossSetup()
 	GameData.CurrentCupTime=0
+	#save settings
+	GameData.SavePrefs()
 
 func WonSetup()->void:
 	trophy.texture=cups[GameData.currentDifficulty]

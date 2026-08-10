@@ -463,14 +463,15 @@ func _on_high_scores_button_pressed() -> void:
 
 
 func _on_volume_changed(value: float) -> void:
+	GameData.music_volume=value
 	AudioServer.set_bus_volume_db(MainBus, linear_to_db(value))
 
 func _on_vibration_changed()->void:
-	if GameData.VibrationMultiplier>0.5:
-		GameData.VibrationMultiplier=0.0
+	if GameData.vibration_multiplier>0.5:
+		GameData.vibration_multiplier=0.0
 		vibrationeffect.visible=false
 	else:
-		GameData.VibrationMultiplier=1.0
+		GameData.vibration_multiplier=1.0
 		vibrationeffect.visible=true
 
 func Hideadditions()->void:

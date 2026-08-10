@@ -49,7 +49,7 @@ func _ready() -> void:
 	set_process(false)
 
 func RegisterCar(fcscar: Car) -> void:
-	if GameData.VibrationMultiplier < 0.5:
+	if GameData.vibration_multiplier < 0.5:
 		return
 	car = fcscar
 	if OS.has_feature('android'):
@@ -187,7 +187,7 @@ func _on_joy_connection_changed(changed_device: int, connected: bool) -> void:
 		Input.stop_joy_vibration(device)
 
 func _send_mobile(delta: float, weak: float, strong: float) -> void:
-	var combined_intensity: float = max(weak, strong) * GameData.VibrationMultiplier
+	var combined_intensity: float = max(weak, strong) * GameData.vibration_multiplier
 	if combined_intensity <= 0.05:
 		return
 	_mobile_timer += delta
@@ -198,6 +198,6 @@ func _send_mobile(delta: float, weak: float, strong: float) -> void:
 		Input.vibrate_handheld(duration_ms, combined_intensity)
 
 func _trigger_mobile_impulse(duration_ms: int, intensity: float) -> void:
-	var final_amplitude := intensity * GameData.VibrationMultiplier
+	var final_amplitude :float= intensity * GameData.vibration_multiplier
 	if final_amplitude > 0.05:
 		Input.vibrate_handheld(duration_ms, final_amplitude)

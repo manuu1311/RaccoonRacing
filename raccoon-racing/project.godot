@@ -168,7 +168,7 @@ time/tickrate=105
 
 [physics]
 
-3d/physics_engine="Jolt Physics"
+3d/physics_engine="Dummy"
 
 [rendering]
 
