@@ -44,7 +44,7 @@ func _ready() -> void:
 
 func NotifyDelayedReady()->void:
 	if GameData.IsMultiplayer:
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(1).timeout
 	for player:Player in GameData.PlayersArr:
 		if player.current_control!=Player.control_type.HUMAN:
 			continue
@@ -295,7 +295,7 @@ func ClearViewportsAndFocus()->void:
 	for i in range(len(viewport_manager_arr)):
 		(viewport_manager_arr[i]).visible=false
 		viewport_manager_arr[i].mode=Window.MODE_MINIMIZED
-		viewport_manager_arr[i].queue_free()
+		viewport_manager_arr[i].call_deferred('queue_free')
 	($final_camera as Camera2D).global_position=GameData.PlayersArr[0].car.global_position
 	($final_camera as Camera2D).enabled=true
 	$Background.free()

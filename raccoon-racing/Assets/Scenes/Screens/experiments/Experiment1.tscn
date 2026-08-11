@@ -85,7 +85,6 @@ script = ExtResource("3_6unhv")
 [node name="world" type="Node2D" parent="." unique_id=1038090199]
 
 [node name="Background" type="Control" parent="." unique_id=1021613311]
-visible = false
 visibility_layer = 524288
 layout_mode = 3
 anchors_preset = 0
