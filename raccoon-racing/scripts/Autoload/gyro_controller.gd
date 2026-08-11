@@ -70,12 +70,9 @@ func calibrate()->void:
 
 
 func UpdateOrientation()->void:
-	var orientation := DisplayServer.screen_get_orientation()
-	if orientation == DisplayServer.ScreenOrientation.SCREEN_REVERSE_LANDSCAPE:
-		orientation_sign = -1.0
-	else:
-		orientation_sign = 1.0
-	GameData.gyro_orientation=orientation_sign
+	var raw_y := Input.get_accelerometer().y
+	orientation_sign = 1.0 if raw_y < 0.0 else -1.0
+	GameData.gyro_orientation = orientation_sign
 		
 func GetSignedX()->float:
 	return Input.get_accelerometer().x * orientation_sign
