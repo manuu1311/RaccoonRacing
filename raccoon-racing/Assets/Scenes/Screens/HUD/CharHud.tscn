@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bduuioalmao1u" path="res://Assets/Animations/CharSelection/characters/hudsonpic.png" id="3_acq8x"]
 [ext_resource type="Script" uid="uid://dowelkpkjo71h" path="res://scripts/HUD/icon_controller.gd" id="3_soqqs"]
 [ext_resource type="Texture2D" uid="uid://c5ulw0snpg3wb" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/1.png" id="3_v7qdr"]
+[ext_resource type="Texture2D" uid="uid://bnm7gf12y7uqn" path="res://Assets/Images/hud/Char/icon3.PNG" id="4_foedu"]
 [ext_resource type="Texture2D" uid="uid://cho5f1j00wx6j" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/2.png" id="4_soqqs"]
 [ext_resource type="Texture2D" uid="uid://daso361mdy21b" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/3.png" id="5_foedu"]
 [ext_resource type="Texture2D" uid="uid://b4pp5pi0dpcj0" path="res://Assets/Images/Vehicles/PropEffects/Sleep/GetSlept/4.png" id="6_rl7oy"]
@@ -352,18 +353,25 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -240.0
-offset_top = -150.0
+offset_top = -156.0
 offset_right = -112.0
-offset_bottom = 470.0
+offset_bottom = 532.5714
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.35, 0.35)
+theme_override_constants/separation = 35
 alignment = 1
 
 [node name="Char1" type="TextureRect" parent="VBoxContainer" unique_id=1983915327]
 layout_mode = 2
 texture = ExtResource("1_srmbj")
 script = ExtResource("3_soqqs")
+
+[node name="IconHighlight" type="Sprite2D" parent="VBoxContainer/Char1" unique_id=629884261]
+self_modulate = Color(1, 0.50625, 0, 1)
+position = Vector2(65, 64)
+scale = Vector2(0.51, 0.51)
+texture = ExtResource("4_foedu")
 
 [node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char1" unique_id=1737904624]
 position = Vector2(51.24, -83.795)
@@ -382,6 +390,12 @@ layout_mode = 2
 texture = ExtResource("2_iwi6v")
 script = ExtResource("3_soqqs")
 
+[node name="IconHighlight" type="Sprite2D" parent="VBoxContainer/Char2" unique_id=1782282980]
+self_modulate = Color(0, 1, 1, 1)
+position = Vector2(65, 63.99997)
+scale = Vector2(0.51, 0.51)
+texture = ExtResource("4_foedu")
+
 [node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char2" unique_id=1722994627]
 position = Vector2(51.24, -83.795)
 sprite_frames = SubResource("SpriteFrames_8q6op")
@@ -399,6 +413,12 @@ layout_mode = 2
 texture = ExtResource("3_acq8x")
 script = ExtResource("3_soqqs")
 
+[node name="IconHighlight" type="Sprite2D" parent="VBoxContainer/Char3" unique_id=2030004094]
+self_modulate = Color(1, 1, 0, 1)
+position = Vector2(65, 63.99994)
+scale = Vector2(0.51, 0.51)
+texture = ExtResource("4_foedu")
+
 [node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char3" unique_id=1467764452]
 position = Vector2(51.24, -83.795)
 sprite_frames = SubResource("SpriteFrames_8q6op")
@@ -415,6 +435,12 @@ frame_progress = 0.51252085
 layout_mode = 2
 texture = ExtResource("1_srmbj")
 script = ExtResource("3_soqqs")
+
+[node name="IconHighlight" type="Sprite2D" parent="VBoxContainer/Char4" unique_id=1848934211]
+self_modulate = Color(0, 1, 0.2125001, 1)
+position = Vector2(65, 64)
+scale = Vector2(0.51, 0.51)
+texture = ExtResource("4_foedu")
 
 [node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char4" unique_id=519672426]
 position = Vector2(51.24, -83.795)

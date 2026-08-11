@@ -53,7 +53,7 @@ func _ready() -> void:
 		else:
 			if player.current_control==Player.control_type.HUMAN:
 				if player.PlayerID==0:
-					gradient.self_modulate=Color(0.75,0,0,0.5)
+					gradient.self_modulate=Color(1.0,0.43,0,0.85)
 				elif player.PlayerID==1:
 					gradient.self_modulate=Color(0,1,1,0.9)
 				elif player.PlayerID==2:

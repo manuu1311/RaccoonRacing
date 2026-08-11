@@ -258,7 +258,7 @@ func CreateMapView()->void:
 	else:
 		if player.current_control==Player.control_type.HUMAN:
 			if playerID==0:
-				carViewInstance.self_modulate=Color.DARK_RED
+				carViewInstance.self_modulate=Color.ORANGE_RED
 			elif playerID==1:
 				carViewInstance.self_modulate=Color.CYAN
 			elif playerID==2:
