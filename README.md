@@ -105,24 +105,28 @@ This is the actively developed part of the project right now.
 2. Clone the repo and open `project.godot` in the Godot editor.
 3. Run the project (`F5`), or export via **Project → Export** using the included export presets for Windows/Linux/Android.
 **Optional — smaller builds:** the standard editor export includes engine modules the game doesn't use, which inflates the build to ~160MB. A custom-compiled Godot build with those modules stripped brings it down to ~100–120MB depending on platform.
- 
-- Build template: [Link to Build template](github-data/Build/build_template.gdbuild)
+
+## Custom build
+- Download: [Build template](github-data/Build/build_template.gdbuild)
 - Compile with:
-*Windows*
-```bash
-  scons platform=windows target=template_debug arch=x86_64 ^
-    build_profile=Path\to\your\build_template.gdbuild ^
-    disable_3d=yes ^
-    vulkan=no ^
-    production=yes ^
-    optimize=size ^
-    module_mono_enabled=no ^
-    module_openxr_enabled=no ^
-    module_mobile_vr_enabled=no ^
-    use_mingw=yes use_llvm=yes d3d12=no
+### 💻 Windows Build
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=windows&logoColor=white)
+
+```cmd
+scons platform=windows target=template_debug arch=x86_64 ^
+  build_profile="path/to/build_template.gdbuild" ^
+  disable_3d=yes ^
+  vulkan=no ^
+  production=yes ^
+  optimize=size ^
+  module_mono_enabled=no ^
+  module_openxr_enabled=no ^
+  module_mobile_vr_enabled=no ^
+  use_mingw=yes use_llvm=yes d3d12=no
 ```
-*Android*
-```bash
+### 📱 Android Build
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+```cmd
   scons platform=android target=template_release arch=arm64 ^
     build_profile=Path\to\your\build_template.gdbuild ^
     disable_3d=yes ^
