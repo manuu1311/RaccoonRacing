@@ -91,7 +91,6 @@ Raccoon Racing is an independent, non-commercial fan remake. All rights to the o
 - **Split-screen architecture**: viewport/camera setup, HUD, and minimap all have a per-player color and input-device assignment is resolved once at lobby setup, every downstream scene (race HUD, minimap, results) reads from the same source of truth.
 - **Input abstraction**: a single input layer supports two fixed keyboard profiles plus N controllers, remapped consistently across gameplay *and* menu navigation including rumble feedback on controller and mobile.
 - **Mobile input**: gyro steering includes runtime calibration (neutral orientation + deadzone) rather than a fixed mapping, with settings persisted between sessions.
-- 
 ## AI (in progress)
  
 The current milestone: training two reinforcement-learning agents inside the finished game environment.
