@@ -41,7 +41,7 @@ The game itself is feature-complete, every system below works as intended, end t
 ## Features
  
 **Gameplay**
-- Remade animations, custom physics, and gameplay logic 
+- Remade animations, custom physics and gameplay logic 
 - All 4 original maps, 2 game modes (Car, Hovercraft)
 - 6 unlockable characters, 8 cups, 3 difficulty tiers
 - AI opponents with improved item usage and race performance over the original
@@ -51,14 +51,20 @@ The game itself is feature-complete, every system below works as intended, end t
 - LAN play with IP entry *or* one-click discovery (host broadcasts, client listens and joins)
 - Client-side prediction with server-authoritative sync
 - Lobby system with player naming and host-configurable rules (e.g. whether AI racers can use items)
+> [!NOTE]
+> 💡 **Pro-Tip for Mobile Off-Grid Play:**  
+> Want to race on the go without Wi-Fi? Have **Phone A** turn on a Mobile Hotspot and **Phone B** connect to it. Make sure **Phone B** hosts the lobby for the lowest latency and best connection! (If **Phone A** hosts the lobby, packets may not be broadcast correctly, and **Phone B** might need to manually enter the ip to join).
+
 **Split Screen**
 - Local split-screen for 2–4 players, each with a persistent accent color across every scene (HUD, minimap, results screen)
 - Per-player input selection in lobby: 2 keyboard layouts ('Keyboard 1': Arrows+Space, 'Keyboard 2': WASD+Z) plus any connected controller
 - Split screen also supports LAN multiplayer: play with friends with 2 people on a computer and one joining through mobile!
+
 **Platforms & accessibility**
 - Windows, Linux, and Android (touch controls + gyro steering)
 - Gyro settings menu with deadzone slider, neutral-position calibration, and persistent saved settings
 - Full controller support, including UI navigation and rumble on both controller and mobile
+
 **Tooling**
 - In-game debug overlay: FPS, frame time, host latency
 - Developer console for internal testing
@@ -67,8 +73,8 @@ The game itself is feature-complete, every system below works as intended, end t
 ## Controls
  
 | Action | Keyboard 1 (Arrows) | Keyboard 2 (WASD) | Controller |
-|---|---|---|---|
-| Steer | ← / → |  A / D | Left stick / D-pad |
+| :---: | :---: | :---: | :---: |
+| Steer | ← / → | A / D | Left stick / D-pad |
 | Accelerate | ↑ | W | A / R2 |
 | Brake/Reverse | ↓ | S | B / L2 |
 | Item | Space | Z | X / L1 |
