@@ -70,6 +70,7 @@ The game itself is feature-complete, every system below works as intended, end t
 |---|---|---|---|
 | Steer | ← / → |  A / D | Left stick / D-pad |
 | Accelerate | ↑ | W | A / R2 |
+| Brake/Reverse | ↓ | S | B / L2 |
 | Item | Space | Z | X / L1 |
  
 ## Disclaimer
@@ -100,10 +101,32 @@ This is the actively developed part of the project right now.
 3. Run the project (`F5`), or export via **Project → Export** using the included export presets for Windows/Linux/Android.
 **Optional — smaller builds:** the standard editor export includes engine modules the game doesn't use, which inflates the build to ~160MB. A custom-compiled Godot build with those modules stripped brings it down to ~100–120MB depending on platform.
  
-- Build template: [link to template]
+- Build template: [Link to Build template](raccoon-racing/Assets/Build/build_template.gdbuild)
 - Compile with:
+*Windows*
 ```bash
-  scons platform=<platform> target=template_release <your flags here>
+  scons platform=windows target=template_debug arch=x86_64 ^
+    build_profile=Path\to\your\build_template.gdbuild ^
+    disable_3d=yes ^
+    vulkan=no ^
+    production=yes ^
+    optimize=size ^
+    module_mono_enabled=no ^
+    module_openxr_enabled=no ^
+    module_mobile_vr_enabled=no ^
+    use_mingw=yes use_llvm=yes d3d12=no
+```
+*Android*
+```bash
+  scons platform=android target=template_release arch=arm64 ^
+    build_profile=Path\to\your\build_template.gdbuild ^
+    disable_3d=yes ^
+    vulkan=no ^
+    production=yes ^
+    optimize=size ^
+    module_mono_enabled=no ^
+    module_openxr_enabled=no ^
+    module_mobile_vr_enabled=no swappy=yes
 ```
 - See the official [Godot compiling guide](https://docs.godotengine.org/en/stable/contributing/development/compiling/index.html) for platform-specific setup.
 This step is optional, the default export from step 3 works fine, it's just larger.
