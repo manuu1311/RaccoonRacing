@@ -81,7 +81,7 @@ The game itself is feature-complete, every system below works as intended, end t
  
 ## Disclaimer
  
-Raccoon Racing is an independent, non-commercial fan remake. All rights to the original game and its concept belong to their respective owners. If you'd like to play the original, you can find it here: **[here](https://www.flashgames.it/raccoon.racing.html)**.
+Raccoon Racing is an independent, non-commercial fan remake. All rights to the original game and its concept belong to their respective owners. If you'd like to play the original, you can find it **[here](https://www.flashgames.it/raccoon.racing.html)**.
 
 ## Technical highlights
  
@@ -106,7 +106,7 @@ This is the actively developed part of the project right now.
 3. Run the project (`F5`), or export via **Project → Export** using the included export presets for Windows/Linux/Android.
 **Optional — smaller builds:** the standard editor export includes engine modules the game doesn't use, which inflates the build to ~160MB. A custom-compiled Godot build with those modules stripped brings it down to ~100–120MB depending on platform.
  
-- Build template: [Link to Build template](raccoon-racing/Assets/Build/build_template.gdbuild)
+- Build template: [Link to Build template](github-data/Build/build_template.gdbuild)
 - Compile with:
 *Windows*
 ```bash
