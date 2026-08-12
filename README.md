@@ -14,9 +14,10 @@ Play the original 👉[here](https://www.flashgames.it/raccoon.racing.html)👈
 </div>
 
 
-## Screenshots
 <h2 align="center">Screenshots</h2>
-
+<details>
+  <summary><b>Click to expand screenshots (8)</b></summary>
+  <br>
 <table align="center">
   <tr>
     <td align="center" valign="middle">
@@ -59,6 +60,7 @@ Play the original 👉[here](https://www.flashgames.it/raccoon.racing.html)👈
     </td>
   </tr>
 </table>
+</details>
 
 ## Roadmap
 
