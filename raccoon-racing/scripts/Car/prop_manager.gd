@@ -102,13 +102,12 @@ func UseProp()->void:
 						var newplayer:Player=GameData.PlayersArr[j]
 						if(newplayer.PlayerID!=player.PlayerID): 
 							if(not newplayer.car.isResetting and not newplayer.car.isInvincible):
-								if(newplayer.alldistance <= player.alldistance):
-									var dist:Vector2=newplayer.car.global_position-player.car.global_position
-									var distsq:float=dist.length_squared()
-									if(distsq < 100000):
-										newplayer.prop.propArr.append(ShrinkProp.new(newplayer,player.car))
-										ClearPropBox();
-										break
+								var dist:Vector2=newplayer.car.global_position-player.car.global_position
+								if(dist.length() < 750):
+									print('affecting him')
+									newplayer.prop.propArr.append(ShrinkProp.new(newplayer,player.car))
+									ClearPropBox();
+									break
 						j+=1;
 					if(j >= GameData.PlayersArr.size()):
 						player.prop.propArr.append(ShrinkProp.new(player,null))
