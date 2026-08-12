@@ -10,7 +10,8 @@ A full reimplementation of the nostalgic Flash racing game, rebuilt from scratch
 
 Free. Open source. Not affiliated with the original.  
 All original trademarks, characters, and copyrighted material related to the original Raccoon Racing belong to their respective owners.  
-Play the original 👉[here](https://www.flashgames.it/raccoon.racing.html)👈
+Download it 👉[**here**](https://github.com/manuu1311/RaccoonRacing/releases/tag/v2.3.0)👈  
+Play the original 👉[**here**](https://www.flashgames.it/raccoon.racing.html)👈
 </div>
 
 
@@ -62,31 +63,6 @@ Play the original 👉[here](https://www.flashgames.it/raccoon.racing.html)👈
 </table>
 </details>
 
-## Roadmap
-
-The game itself is feature-complete, every system below works as intended, end to end (physics, all maps/modes, full multiplayer, mobile, controllers). What's left is the RL milestone.
-
-| Status | Task |
-|---|---|
-| ☑️ | Game recreation |
-| ☑️ | Online multiplayer support |
-| ☑️ | LAN multiplayer support |
-| ☑️ | Mobile support |
-| ☑️ | Joypad support |
-| ⬜ | RL integration |
-| ⬜ | RL agent training |  
-
-**Current focus:** building a reinforcement learning environment on top of the finished game to train two specialized agents with different objectives:
- 
-- **Racing agent** : trained purely to win: optimal lines, item timing, race strategy.
-- **Aggressive agent** : trained to disrupt the human player specifically: mine placement and targeted interference, optimized for disruption rather than race performance.
-
-## Download
- 
-[Releases](https://github.com/manuu1311/RaccoonRacing/releases/tag/v2.3.0)
- 
-> Build size: ~120MB on desktop, ~100MB on mobile. Requires no installation on desktop, just unzip and run.
-
 ## Features
  
 **Gameplay**
@@ -100,7 +76,7 @@ The game itself is feature-complete, every system below works as intended, end t
 - LAN play with IP entry *or* one-click discovery  
 - Lobby system with player naming and host-configurable rules (e.g. whether AI racers can use items)
 > [!NOTE]
-> 💡 **Pro-Tip for Mobile Off-Grid Play:**  
+> 💡 **Pro-Tip for Mobile Play:**  
 > Want to race on the go without Wi-Fi? Have **Phone A** turn on a Mobile Hotspot and **Phone B** connect to it. Make sure **Phone B** hosts the lobby for the lowest latency and best connection! (If **Phone A** hosts the lobby, packets may not be broadcast correctly, and **Phone B** might need to manually enter the ip to join).
 
 **Split Screen**
@@ -126,6 +102,25 @@ The game itself is feature-complete, every system below works as intended, end t
 | Accelerate | ↑ | W | A / R2 |
 | Brake/Reverse | ↓ | S | B / L2 |
 | Item | Space | Z | X / L1 |
+
+## Roadmap
+
+The game itself is feature-complete, every system below works as intended. What's left is the RL milestone.
+
+| Status | Task |
+|---|---|
+| ☑️ | Game recreation |
+| ☑️ | Online multiplayer support |
+| ☑️ | LAN multiplayer support |
+| ☑️ | Mobile support |
+| ☑️ | Joypad support |
+| ⬜ | RL integration |
+| ⬜ | RL agent training |  
+
+**Current focus:** building a reinforcement learning environment on top of the finished game to train two specialized agents with different objectives:
+ 
+- **Racing agent** : trained purely to win: optimal lines, item timing, race strategy.
+- **Aggressive agent** : trained to disrupt the human player specifically: mine placement and targeted interference, optimized for disruption rather than race performance.
  
 ## Disclaimer
  
@@ -137,20 +132,14 @@ Raccoon Racing is an independent, non-commercial fan remake. All rights to the o
 - **Networking**: online play uses a signaling server purely to exchange connection info (host generates a join code, client uses it), after which the session becomes direct peer-to-peer, the signaling server never touches gameplay traffic. LAN play skips signaling entirely: the host broadcasts on the local network and clients either enter an IP manually or use one-click discovery to catch the broadcast and join automatically.
 - **Multiplayer**: each player is authoritative of his own kart, while host is authoritative for one shot events, such as collisions with props and karts. Light client-side prediction is used to keep local collisions responsive.
 - **Split-screen architecture**: viewport/camera setup, HUD, and minimap all have a per-player color and input-device assignment is resolved once at lobby setup. The game window is split into up to 4 sub-windows, which only follow a different camera, but with the same source of truth.
-- **Custom physics**: the game's physics was built from scratch, to replicate the original, bouncy, flash-like collisions. Godot's physics was only employed for basic polygon intersection.
-## AI (in progress)
- 
-The current milestone: training two reinforcement-learning agents inside the finished game environment. This is the actively developed part of the project right now.
- 
-- **Racer agent**: trained to win races using the actual physics, track layouts, and item system.
-- **Disruptor agent**: an adversarial agent trained specifically to place mines and disrupt the human player's strategy, rather than to race optimally itself.  
- 
+- **Custom physics**: the game's physics was built from scratch, to replicate the original, bouncy, flash-like collisions.
+
 ## Building from source
  
 1. Install [Godot 4.6.2 Stable](https://godotengine.org/download).
 2. Clone the repo and open `project.godot` in the Godot editor.
 3. Run the project (`F5`), or export via **Project → Export** using the included export presets for Windows/Linux/Android.
-**Optional — smaller builds:** the standard editor export includes engine modules the game doesn't use, which inflates the build to ~160MB. A custom-compiled Godot build with those modules stripped brings it down to ~100–120MB depending on platform.
+**Optional — smaller builds:** the standard editor export includes engine modules the game doesn't use, which inflates the build to ~160MB. A custom-compiled Godot build with those modules stripped brings it down to ~80–120MB depending on platform.
 
 ### Custom build
 - Download: [Build template](github-data/Build/build_template.gdbuild)
