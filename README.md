@@ -49,16 +49,6 @@ Play the original 👉[here](https://www.flashgames.it/raccoon.racing.html)👈
       <sub><b>Gameplay 2</b></sub>
     </td>
   </tr>
-  <tr>
-    <td align="center" valign="middle">
-      <img src="github-data/Screenshots/scores.png" width="350" alt="Scores screen"><br>
-      <sub><b>Scores Screen</b></sub>
-    </td>
-    <td align="center" valign="middle">
-      <img src="github-data/Screenshots/banzaiunlock.png" width="350" alt="Win scene"><br>
-      <sub><b>Win Scene</b></sub>
-    </td>
-  </tr>
 </table>
 </details>
 
