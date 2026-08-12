@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dak8yc32l8e3k"]
+
+[ext_resource type="Texture2D" uid="uid://badolyk6tmkad" path="res://Assets/Images/Icons/crown.png" id="1_r7wtm"]
+[ext_resource type="Texture2D" uid="uid://dprlthdsfocar" path="res://Assets/Animations/CupWon/Snow/1.png" id="2_a1uiy"]
+[ext_resource type="Texture2D" uid="uid://dr20unv5a3yv8" path="res://Assets/Animations/CupWon/Snow/2.png" id="3_coav4"]
+[ext_resource type="Texture2D" uid="uid://dkxd8m6p4jtg2" path="res://Assets/Animations/CupWon/Snow/3.png" id="4_755dr"]
+[ext_resource type="Texture2D" uid="uid://dgf881wxni2o1" path="res://Assets/Animations/CupWon/Snow/4.png" id="5_m188x"]
+[ext_resource type="Texture2D" uid="uid://h25co6h14e2a" path="res://Assets/Animations/CupWon/Snow/5.png" id="6_lh6j3"]
+[ext_resource type="Texture2D" uid="uid://cf6fw3wh8ft58" path="res://Assets/Animations/CupWon/Snow/6.png" id="7_2cvd1"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_alm6i"]
+frames = 6
+frame_0/texture = ExtResource("2_a1uiy")
+frame_0/duration = 0.05
+frame_1/texture = ExtResource("3_coav4")
+frame_1/duration = 0.05
+frame_2/texture = ExtResource("4_755dr")
+frame_2/duration = 0.05
+frame_3/texture = ExtResource("5_m188x")
+frame_3/duration = 0.05
+frame_4/texture = ExtResource("6_lh6j3")
+frame_4/duration = 0.05
+frame_5/texture = ExtResource("7_2cvd1")
+frame_5/duration = 0.05
+
+[sub_resource type="Gradient" id="Gradient_d8823"]
+offsets = PackedFloat32Array(0, 0.7344322, 0.99816847)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_tjuab"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="MANU" type="Node2D" unique_id=753080642]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1886174717]
+position = Vector2(86, -13.000002)
+rotation = 0.37524578
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_r7wtm")
+
+[node name="Confetti" type="CPUParticles2D" parent="." unique_id=1470987458]
+position = Vector2(53, 4)
+texture = SubResource("AnimatedTexture_alm6i")
+lifetime = 2.5
+randomness = 1.0
+fixed_fps = 35
+draw_order = 1
+emission_shape = 3
+emission_rect_extents = Vector2(75, 1)
+direction = Vector2(0, 1)
+spread = 0.0
+gravity = Vector2(0, 25)
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+scale_amount_min = 0.099999994
+scale_amount_max = 0.29999998
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("Gradient_d8823")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_tjuab")
