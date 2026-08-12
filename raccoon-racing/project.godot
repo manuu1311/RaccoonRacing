@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="RaccoonRacing"
-config/version="2.2.1"
+config/description="Remake of the flash game \"Raccoon Racing\"."
+config/version="2.3.0"
 run/main_scene="uid://c8wmuf22nxpku"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 run/max_fps=35

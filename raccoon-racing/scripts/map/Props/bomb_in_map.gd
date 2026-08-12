@@ -34,14 +34,14 @@ func MineExplode(carid:int)->void:
 	IsActivated = false
 	if car.isInvincible:
 		pass
-	elif not car.IsUseShield:
+	elif car.IsUseShield:
+		car.player.RemoveShield();
+	else:
 		car.sounds.playerBombSound()
 		car.bsex = bsValume
 		car.Jump(jumphigh)
 		car.speed *= 0.3
 		car.speed += (car.global_position - global_position) * 0.03
-	else:
-		car.player.RemoveShield();
 	animated_sprite_2d.show()
 	animated_sprite_2d.play()
 	sprite_2d.hide()

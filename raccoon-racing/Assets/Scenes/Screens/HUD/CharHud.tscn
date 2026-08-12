@@ -368,9 +368,9 @@ texture = ExtResource("1_srmbj")
 script = ExtResource("3_soqqs")
 
 [node name="IconHighlight" type="Sprite2D" parent="VBoxContainer/Char1" unique_id=629884261]
-self_modulate = Color(1, 0.50625, 0, 1)
+self_modulate = Color(1, 0.5058824, 0, 1)
 position = Vector2(65, 64)
-scale = Vector2(0.51, 0.51)
+scale = Vector2(0.48, 0.48)
 texture = ExtResource("4_foedu")
 
 [node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char1" unique_id=1737904624]
@@ -393,7 +393,7 @@ script = ExtResource("3_soqqs")
 [node name="IconHighlight" type="Sprite2D" parent="VBoxContainer/Char2" unique_id=1782282980]
 self_modulate = Color(0, 1, 1, 1)
 position = Vector2(65, 63.99997)
-scale = Vector2(0.51, 0.51)
+scale = Vector2(0.48, 0.48)
 texture = ExtResource("4_foedu")
 
 [node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char2" unique_id=1722994627]
@@ -416,7 +416,7 @@ script = ExtResource("3_soqqs")
 [node name="IconHighlight" type="Sprite2D" parent="VBoxContainer/Char3" unique_id=2030004094]
 self_modulate = Color(1, 1, 0, 1)
 position = Vector2(65, 63.99994)
-scale = Vector2(0.51, 0.51)
+scale = Vector2(0.48, 0.48)
 texture = ExtResource("4_foedu")
 
 [node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char3" unique_id=1467764452]
@@ -439,7 +439,7 @@ script = ExtResource("3_soqqs")
 [node name="IconHighlight" type="Sprite2D" parent="VBoxContainer/Char4" unique_id=1848934211]
 self_modulate = Color(0, 1, 0.2125001, 1)
 position = Vector2(65, 64)
-scale = Vector2(0.51, 0.51)
+scale = Vector2(0.48, 0.48)
 texture = ExtResource("4_foedu")
 
 [node name="GetSleep" type="AnimatedSprite2D" parent="VBoxContainer/Char4" unique_id=519672426]

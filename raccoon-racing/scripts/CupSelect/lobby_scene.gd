@@ -52,6 +52,8 @@ func UpdateIconsNames()->void:
 		var player:Player=GameData.PlayersArr[i]
 		rects[i].texture=textures[player.charid]
 		labels[i].text=player.OnlineName
+		#easter egg
+		ApplyManu(rects[i].get_parent_control(),labels[i].text)
 		if player.current_control!=Player.control_type.HUMAN:
 			labels[i].editable=false
 			dropdowns[i].hide()
@@ -79,6 +81,17 @@ func UpdateIconsNames()->void:
 		HideDropdowns()
 
 
+func ApplyManu(base:Control,nameinst:String)->void:
+	var manu:Node2D=base.get_node_or_null('manu')
+	if manu==null:
+		if nameinst=='manu':
+			manu=(load("res://Assets/Scenes/Screens/HUD/manu.tscn") as PackedScene).instantiate()
+			base.add_child(manu)
+			manu.name='manu'
+	else:
+		if nameinst!='manu':
+			manu.queue_free()
+
 func UpdateCupInfo()->void:
 	cuptxt.text='CUP '+str(GameData.currentCup+1)
 
@@ -96,11 +109,14 @@ func ChangeNameRequest(new_name: String,id:int) -> void:
 	# Find the player in our host list and update their name
 	for player in GameData.PlayersArr:
 		if player.PlayerID == id:
+			if new_name=='manu':
+				if CheckManu():
+					break
 			player.OnlineName = new_name
 			break
 			
 	# Broadcast the update to everyone else
-	BroadcastNameUpdate.rpc(id, new_name)
+	BroadcastNameUpdate.rpc(id, GameData.PlayersArr[id].OnlineName)
 	UpdateIconsNames()
 
 @rpc("authority", "call_remote", "reliable")
@@ -117,9 +133,15 @@ func _on_name_submitted(new_text: String,playerid:int) -> void:
 	# Player hit Enter. Remove focus from the LineEdit to look clean
 	var current_focus:Control = get_viewport().gui_get_focus_owner()
 	if current_focus:
-		current_focus.release_focus() 
-	# Send the name up to your network controller (adjust node path if needed)
+		current_focus.release_focus()
 	SendNameUpdate(new_text,playerid)
+
+
+func CheckManu()->bool:
+	for player:Player in GameData.PlayersArr:
+		if player.OnlineName=='manu':
+			return true
+	return false
 
 func _on_name_focus_exited(line_edit: LineEdit,playerid:int) -> void:
 	# Player clicked away or unfocused. Submit whatever text is currently inside

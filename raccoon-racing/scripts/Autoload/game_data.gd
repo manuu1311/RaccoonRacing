@@ -129,8 +129,6 @@ func SavePrefs()->void:
 	if not ResourceLoader.exists(USR_PREF):
 		pref_data = Prefs.new()
 		print("New Prefs File Created!")
-	print(music_volume,vibration_multiplier)
-	prints(pref_data.gyro_orientation!=gyro_orientation , pref_data.use_gyro!=use_gyro , pref_data.gyro_deadzone!=gyro_deadzone , pref_data.vibration_multiplier!=vibration_multiplier , pref_data.music_volume!=music_volume)
 	if pref_data.gyro_orientation!=gyro_orientation or pref_data.use_gyro!=use_gyro or pref_data.gyro_deadzone!=gyro_deadzone or pref_data.vibration_multiplier!=vibration_multiplier or pref_data.music_volume!=music_volume:
 		pref_data.use_gyro=use_gyro
 		pref_data.gyro_deadzone=gyro_deadzone
