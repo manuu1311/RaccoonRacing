@@ -274,7 +274,17 @@ func StartRace()->void:
 	ResetTimer.wait_time=AiResetTime
 	ResetTimer.start()
 	ResetTimer.timeout.connect(Reset)
-	if randi() % 5 == 0:
+	# 75% chance for fast AI (reflect_time = 10)
+	var best_chance:float = 0.75
+	# 5% chance for slow AI (reflect_time = 25)
+	var worst_chance:float = 0.05 
+
+	# Calculate dynamic success chance using remap()
+	var success_chance:float = remap(AiReflect, 10, 22, best_chance, worst_chance)
+
+	# Clamp to keep values strictly within range if ai_reflect ever goes outside 10..22
+	success_chance = clamp(success_chance, worst_chance, best_chance)
+	if randf() < success_chance:
 		car.CanUseProp=true
 		car.NowPorpId = 8
 		UseProp()

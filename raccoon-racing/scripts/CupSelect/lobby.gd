@@ -159,7 +159,7 @@ func RegisterPlayer(newcharid:int)->void:
 	lobby_scene.GiveLobbyInfo()
 	
 @rpc("authority","call_remote","reliable")
-func PlayerRegistered(charids:Array[int],playernames:Array[String],networkids:Array[int],playerID:int)->void:
+func PlayerRegistered(charids:Array[int],playernames:Array[String],networkids:Array[int],_playerID:int)->void:
 	var my_peer_id: int = multiplayer.get_unique_id()
 	GameData.PlayersArr.clear()
 	for i in range(charids.size()):

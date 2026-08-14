@@ -66,9 +66,9 @@ func WonSetup()->void:
 	maintext.text=nextdiff[GameData.currentDifficulty]
 	#is it a new record?
 	var timetext:String=GameData.format_time(GameData.CurrentCupTime)
-	if GameData.CupTimes[GameData.currentCup][GameData.currentDifficulty]==0 or GameData.CupTimes[GameData.currentCup][GameData.currentDifficulty]>GameData.CurrentCupTime:
+	if GameData.CupTimes[GameData.currentCup][GameData.currentDifficulty-1]==0 or GameData.CupTimes[GameData.currentCup][GameData.currentDifficulty-1]>GameData.CurrentCupTime:
 		#if so, store the new time and show the right effect
-		GameData.CupTimes[GameData.currentCup][GameData.currentDifficulty]=GameData.CurrentCupTime
+		GameData.CupTimes[GameData.currentCup][GameData.currentDifficulty-1]=GameData.CurrentCupTime
 		record.show()
 		no_record.hide()
 		recordtime.text=timetext
@@ -80,7 +80,11 @@ func WonSetup()->void:
 		norecordshadow.text=timetext
 		
 	#store win and check for character unlocks
+	print('saving now')
+	print(GameData.cupWon[GameData.currentCup])
+	print(GameData.currentDifficulty)
 	GameData.cupWon[GameData.currentCup]=max(GameData.cupWon[GameData.currentCup],GameData.currentDifficulty)
+	print(GameData.cupWon[GameData.currentCup])
 	var newcup:int=GameData.CheckCupLocks()
 	var newchar:int=GameData.CheckCharacterLocks()
 	if newcup!=0:

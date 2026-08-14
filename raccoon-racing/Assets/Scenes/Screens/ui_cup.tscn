@@ -470,7 +470,6 @@ mouse_filter = 2
 texture = ExtResource("2_lo0sp")
 
 [node name="CupScreen" type="Control" parent="." unique_id=1820990992]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1481,14 +1480,12 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rjpb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_qkely")
 
 [node name="BGFilter" type="TextureRect" parent="CupScreen" unique_id=790340210]
-visible = false
 layout_mode = 0
 offset_right = 500.0
 offset_bottom = 500.0
 texture = ExtResource("17_3rlsr")
 
 [node name="Buttons" type="Control" parent="CupScreen" unique_id=811551456]
-visible = false
 anchors_preset = 0
 offset_left = 250.0
 offset_right = 250.0
@@ -1781,6 +1778,7 @@ shortcut = ExtResource("28_5pglv")
 texture_normal = ExtResource("16_tdwvn")
 
 [node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
