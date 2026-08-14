@@ -6,7 +6,7 @@
 
  <p align="center"> <img src="docs/screenshots/hero.gif" alt="Raccoon Racing gameplay" width="720"> </p> <p align="center"> <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20Android-informational"> <img alt="Engine" src="https://img.shields.io/badge/engine-Godot%204.6-478cbf"> <img alt="License" src="https://img.shields.io/badge/license-MIT-green"> <img alt="Status" src="https://img.shields.io/badge/status-in%20development-yellow"> </p>
 
-A full reimplementation of the nostalgic Flash racing game, rebuilt from scratch in Godot 4, with online/LAN multiplayer, 4-player split-screen, full controller support, full mobile support, and (in progress) two competing reinforcement-learning agents.
+A full reimplementation of the nostalgic Flash racing game, rebuilt from scratch in Godot 4, with online/LAN multiplayer, 4-player split-screen, controller support and mobile support, and (in progress) two competing reinforcement-learning agents.
 
 Free. Open source. Not affiliated with the original.  
 All original trademarks, characters, and copyrighted material related to the original Raccoon Racing belong to their respective owners.  
@@ -126,6 +126,7 @@ The game itself is feature-complete, every system below works as intended. What'
  
 Raccoon Racing is an independent, non-commercial fan remake. All rights to the original game and its concept belong to their respective owners. If you'd like to play the original, you can find it **[here](https://www.flashgames.it/raccoon.racing.html)**.
 
+<!--
 ## Technical highlights
 *The section below is aimed at anyone curious about how it's built.*
  
@@ -133,6 +134,7 @@ Raccoon Racing is an independent, non-commercial fan remake. All rights to the o
 - **Multiplayer**: each player is authoritative of his own kart, while host is authoritative for one shot events, such as collisions with props and karts. Light client-side prediction is used to keep local collisions responsive.
 - **Split-screen architecture**: viewport/camera setup, HUD, and minimap all have a per-player color and input-device assignment is resolved once at lobby setup. The game window is split into up to 4 sub-windows, which only follow a different camera, but with the same source of truth.
 - **Custom physics**: the game's physics was built from scratch, to replicate the original, bouncy, flash-like collisions.
+-->
 
 ## Building from source
  
