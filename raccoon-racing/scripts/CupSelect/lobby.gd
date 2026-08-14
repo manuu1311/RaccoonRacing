@@ -160,18 +160,20 @@ func RegisterPlayer(newcharid:int)->void:
 	
 @rpc("authority","call_remote","reliable")
 func PlayerRegistered(charids:Array[int],playernames:Array[String],networkids:Array[int],playerID:int)->void:
+	var my_peer_id: int = multiplayer.get_unique_id()
 	GameData.PlayersArr.clear()
 	for i in range(charids.size()):
+		var net_id: int = networkids[i]
+		var control: Player.control_type = Player.control_type.HUMAN if net_id == my_peer_id else Player.control_type.MULTIPLAYER
 		var newplayer:Player=Player.new(i,Player.control_type.MULTIPLAYER)
 		newplayer.charid=charids[i]
 		newplayer.OnlineName=playernames[i]
-		newplayer.NetworkID = networkids[i]
+		newplayer.NetworkID = net_id
+		newplayer.current_control=control
 		GameData.PlayersArr.append(newplayer)
+		if net_id == my_peer_id:
+			NetworkManager.PlayerID = i
 	if not IsLocked and not NetworkManager.is_host:
-		if NetworkManager.NetworkID<1:
-			NetworkManager.PlayerID=playerID
-			#change player control to human
-		GameData.PlayersArr[NetworkManager.PlayerID].current_control=Player.control_type.HUMAN
 		LobbyTransition()
 		IsLocked=true
 		GameData.IsMultiplayer=true

@@ -58,6 +58,7 @@ var PointsPath:String
 var minimap:Sprite2D
 #spawn counter, to syncrhonise spawned prop names
 var SpawnCounter:Array[int]=[0,0,0,0]
+signal PlayersReady
 
 func _ready() -> void:
 	if GameData.current_vehicle==GameData.VehicleType.CAR:
@@ -71,6 +72,9 @@ func _ready() -> void:
 		top2.show()
 		top1.hide()
 		PointsPath='PointsHC'
+
+func PlayersReadySignalEmit()->void:
+	PlayersReady.emit()
 
 func InitMap()->void:
 	CupMapj=0
@@ -308,7 +312,7 @@ func InitEventInMap()->void:
 		if(_loc2_==null):
 			break;
 		var newprop:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/PropInMap.tscn").instantiate() as EventInMap
-		var scaled_size:Vector2 = newprop.get_node("Sprite2D").texture.get_size() *0.7
+		var scaled_size:Vector2 = (newprop.get_node("Sprite2D") as Sprite2D).texture.get_size() *0.7
 		newprop.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
 		_loc2_.rotation = 0.0;
 		add_child(newprop)
@@ -335,7 +339,7 @@ func InitEventInMap()->void:
 			break;
 		var newbs:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/BsInMap.tscn").instantiate() as EventInMap
 		#hardcoded because its animated sprite2d
-		var scaled_size:Vector2 = newbs.get_node("Sprite2D").texture.get_size()
+		var scaled_size:Vector2 = (newbs.get_node("Sprite2D") as Sprite2D).texture.get_size()
 		newbs.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
 		newbs.name="BsInMap"+str(_loc3_)
 		newbs.IsActivated=true
@@ -362,7 +366,7 @@ func InitEventInMap()->void:
 			break;
 		var newjump:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/JumpInMap.tscn").instantiate() as EventInMap
 		#hardcoded because its animated sprite2d
-		var scaled_size:Vector2 = newjump.get_node("Sprite2D").texture.get_size()
+		var scaled_size:Vector2 = (newjump.get_node("Sprite2D") as Sprite2D).texture.get_size()
 		newjump.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
 		_loc2_.rotation = 0;
 		add_child(newjump)

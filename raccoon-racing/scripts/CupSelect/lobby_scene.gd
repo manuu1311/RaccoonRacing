@@ -88,6 +88,7 @@ func ApplyManu(base:Control,nameinst:String)->void:
 			manu=(load("res://Assets/Scenes/Screens/HUD/manu.tscn") as PackedScene).instantiate()
 			base.add_child(manu)
 			manu.name='manu'
+			manu.z_index=100
 	else:
 		if nameinst!='manu':
 			manu.queue_free()

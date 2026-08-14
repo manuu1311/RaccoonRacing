@@ -9,14 +9,16 @@ var predictingtick:int=0
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
 	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst,id)
-	var scaled_size:Vector2 = $Sprite2D.texture.get_size() * $Sprite2D.global_scale
+	var scaled_size:Vector2 = ($Sprite2D as Sprite2D).texture.get_size() * ($Sprite2D as Sprite2D).global_scale
 	width=scaled_size.x
 	height=scaled_size.y
 	scale=Vector2(0.7,0.7)
 	global_position=Vector2(x,y)
-	await ready
-	state_synchronizer.add_state(self, "hide_tick")
 	IsActivated=true
+	map.PlayersReady.connect(SynchronizerSetup)
+
+func SynchronizerSetup()->void:
+	state_synchronizer.add_state(self, "hide_tick")
 
 func GetHitEventStatus(PlayerId:int,_unsynced:bool)->void:
 	if not IsActivated:

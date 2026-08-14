@@ -155,6 +155,7 @@ func StartSequence(target_tick:int)->void:
 		await NetworkTime.after_tick
 	for player:Player in GameData.PlayersArr:
 		player.Setup()
+	map.PlayersReadySignalEmit()
 	CoolEffects()
 	
 func LoadMap() -> void:

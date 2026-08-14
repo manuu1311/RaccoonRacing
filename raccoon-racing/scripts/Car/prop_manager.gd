@@ -99,12 +99,11 @@ func UseProp()->void:
 				6:
 					var j:int = 0;
 					while(j < GameData.PlayersArr.size()):
-						var newplayer:Player=GameData.PlayersArr[j]
+						var newplayer:Player=GameData.PlayersArr[GameData.Ranking[j]]
 						if(newplayer.PlayerID!=player.PlayerID): 
 							if(not newplayer.car.isResetting and not newplayer.car.isInvincible):
 								var dist:Vector2=newplayer.car.global_position-player.car.global_position
 								if(dist.length() < 750):
-									print('affecting him')
 									newplayer.prop.propArr.append(ShrinkProp.new(newplayer,player.car))
 									ClearPropBox();
 									break

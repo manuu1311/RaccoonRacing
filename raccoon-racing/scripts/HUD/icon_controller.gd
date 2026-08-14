@@ -22,7 +22,7 @@ func setup(id:int)->void:
 		else:
 			icon.visible=false
 	else:
-		if playerid==0:
+		if GameData.PlayersArr[playerid].current_control==Player.control_type.HUMAN:
 			icon.self_modulate=Color.RED
 		else:
 			icon.visible=false

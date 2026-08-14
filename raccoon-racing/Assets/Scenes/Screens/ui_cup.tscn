@@ -1940,6 +1940,7 @@ theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "Rocko"
 alignment = 1
+select_all_on_focus = true
 
 [node name="OptionButton" type="OptionButton" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char2" unique_id=86936469]
 layout_mode = 0
@@ -1978,6 +1979,7 @@ theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "Bot Aldo"
 alignment = 1
+select_all_on_focus = true
 
 [node name="OptionButton" type="OptionButton" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char3" unique_id=411586268]
 layout_mode = 0
@@ -2016,6 +2018,7 @@ theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "Bot Waldo"
 alignment = 1
+select_all_on_focus = true
 
 [node name="OptionButton" type="OptionButton" parent="Lobby/LobbyScreen/LobbyScreen/HBoxContainer/Char4" unique_id=510154481]
 layout_mode = 0
