@@ -987,8 +987,8 @@ theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 6
 theme_override_constants/shadow_outline_size = 11
 theme_override_fonts/font = SubResource("FontVariation_nnnlj")
-theme_override_font_sizes/font_size = 19
-text = "Can you also beat this cup in normal mode?"
+theme_override_font_sizes/font_size = 17
+text = "Do you think you can beat your own score again?"
 horizontal_alignment = 1
 vertical_alignment = 1
 

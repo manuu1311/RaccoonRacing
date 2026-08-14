@@ -290,9 +290,10 @@ func ClearViewportsAndFocus()->void:
 	main_window.content_scale_size=Vector2(500,500)
 	if OS.has_feature('android'):
 		$touch_controls.queue_free()
+	else:
+		main_window.mode=Window.MODE_MAXIMIZED
 	if not Game.IsSplitScreen:
 		return
-	main_window.mode=Window.MODE_MAXIMIZED
 	for i in range(len(viewport_manager_arr)):
 		(viewport_manager_arr[i]).visible=false
 		viewport_manager_arr[i].mode=Window.MODE_MINIMIZED
