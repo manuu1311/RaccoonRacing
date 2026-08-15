@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://diiakbk8gnnay" path="res://scripts/Game/GameManager_split.gd" id="1_ixktl"]
 [ext_resource type="Script" uid="uid://memhlecsyk42" path="res://scripts/Game/sound_manager.gd" id="3_6unhv"]
-[ext_resource type="PackedScene" uid="uid://ccn84qrud5yaw" path="res://Assets/Scenes/Screens/maps/Map04.tscn" id="3_dht3l"]
 [ext_resource type="Script" uid="uid://djeahpd2vve1p" path="res://scripts/Game/viewport_manager_split.gd" id="4_6unhv"]
 [ext_resource type="PackedScene" uid="uid://cehj3k48xb3su" path="res://Assets/Scenes/Screens/HUD/HUD.tscn" id="4_7b10p"]
 [ext_resource type="Texture2D" uid="uid://dn7nt3mtihhn" path="res://Assets/Images/game/finish/1.png" id="5_6unhv"]
@@ -84,8 +83,6 @@ minimap_canvas = NodePath("MinimapCanvas")
 script = ExtResource("3_6unhv")
 
 [node name="world" type="Node2D" parent="." unique_id=1038090199]
-
-[node name="Map04" parent="world" unique_id=2072849281 instance=ExtResource("3_dht3l")]
 
 [node name="Background" type="Control" parent="." unique_id=1021613311]
 visibility_layer = 524288
