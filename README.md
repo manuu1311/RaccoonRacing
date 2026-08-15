@@ -85,7 +85,7 @@ Play the original ðŸ‘‰[**here**](https://www.flashgames.it/raccoon.racing.html)ð
 - Split screen also supports LAN multiplayer: play with friends with 2 people on a computer and one joining with a second device!
 
 **Platforms & accessibility**
-- Windows, Linux, and Android (touch controls + gyro steering)
+- Windows, Linux, and Android (touch controls + gyro steering + virtual joystick)
 - Gyro settings menu with deadzone slider, neutral-position calibration, and persistent settings
 - Full controller support, including UI navigation and rumble on both controller and mobile
 
@@ -150,7 +150,7 @@ Raccoon Racing is an independent, non-commercial fan remake. All rights to the o
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=windows&logoColor=white)
 
 ```cmd
-scons platform=windows target=template_debug arch=x86_64 ^
+scons platform=windows target=template_release arch=x86_64 ^
   build_profile=path/to/your/build_template.gdbuild ^
   disable_3d=yes ^
   vulkan=no ^
