@@ -13,6 +13,14 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bsew"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wsgb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_brxl1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hs5j4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pj2ai"]
+
 [node name="GyroController" type="CanvasLayer" unique_id=331047923]
 layer = 100
 script = ExtResource("1_2mb5l")
@@ -117,11 +125,40 @@ offset_left = 118.0
 offset_top = -249.0
 offset_right = 231.0
 offset_bottom = -226.0
+theme_override_colors/font_shadow_color = Color(0.14687502, 0.13677736, 0.13677736, 1)
 theme_override_colors/font_outline_color = Color(0.14687502, 0.13677736, 0.13677736, 1)
 theme_override_constants/outline_size = 18
+theme_override_constants/shadow_outline_size = 9
 text = "(9.8, 9.8, 9.8)"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Modelbl" type="Label" parent="Anchor" unique_id=1328148415]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -249.0
+offset_right = 116.0
+offset_bottom = -226.0
+theme_override_colors/font_shadow_color = Color(0.14687502, 0.13677736, 0.13677736, 1)
+theme_override_colors/font_outline_color = Color(0.14687502, 0.13677736, 0.13677736, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 18
+theme_override_constants/shadow_outline_size = 10
+text = "Mode: Joystick"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Anchor/Modelbl" unique_id=1001018765]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 118.0
+offset_bottom = 25.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wsgb")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_brxl1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hs5j4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pj2ai")
 
 [node name="HideButton" type="Button" parent="." unique_id=2106720664]
 anchors_preset = 8
@@ -138,4 +175,5 @@ grow_vertical = 2
 
 [connection signal="pressed" from="Anchor/Panel/GyroBase" to="." method="_on_gyro_base_pressed"]
 [connection signal="value_changed" from="Anchor/GyroSlider" to="." method="_on_gyro_slider_value_changed"]
+[connection signal="pressed" from="Anchor/Modelbl/Button" to="." method="_on_joystic_mode_button_pressed"]
 [connection signal="pressed" from="HideButton" to="." method="_on_hide_button_pressed"]

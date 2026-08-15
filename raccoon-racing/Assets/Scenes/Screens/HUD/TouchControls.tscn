@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://crv5h3ehm0sfi"]
 
 [ext_resource type="Texture2D" uid="uid://clxi2m4cnep2d" path="res://Assets/Images/hud/Touch/arrow.png" id="1_8wwg5"]
+[ext_resource type="Script" uid="uid://buco242ywtfro" path="res://scripts/HUD/touch_controls.gd" id="1_jhre2"]
 [ext_resource type="Texture2D" uid="uid://gxgoijjbjxka" path="res://Assets/Images/maps/Props/cube.png" id="2_strh0"]
+[ext_resource type="Script" uid="uid://bciuacuteacgb" path="res://addons/virtual_joystick_DX/vjdx_core_script.gd" id="3_jhre2"]
 
 [node name="TouchControls" type="CanvasLayer" unique_id=1592030081]
+script = ExtResource("1_jhre2")
 
 [node name="Control" type="Control" parent="." unique_id=1456461512]
 layout_mode = 3
@@ -91,6 +94,35 @@ pivot_offset = Vector2(39, 45)
 texture_normal = ExtResource("2_strh0")
 texture_pressed = ExtResource("2_strh0")
 action = "Special"
+
+[node name="VirtualJoystickDX" type="Control" parent="Control/LeftSide" unique_id=2039170031]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 0
+offset_left = 49.0
+offset_top = 286.0
+offset_right = 209.0
+offset_bottom = 446.0
+pivot_offset = Vector2(20, 20)
+mouse_filter = 2
+script = ExtResource("3_jhre2")
+joystick_radius = 50.0
+deadzone = 0.4
+haptic_enabled = false
+auto_hide_on_physical_input = false
+auto_show_on_touch = false
+joystick_mode = 1
+clampzone_ratio = 3.0
+action_left = &"Steer left"
+action_right = &"Steer right"
+action_up = &""
+action_down = &""
+region_w = 285.0
+region_h = 500.0
+"Colors - D-Pad" = null
+"Textures - D-Pad" = null
+Cardinals = null
+Diagonals = null
+metadata/_custom_type_script = "uid://bciuacuteacgb"
 
 [node name="RightSide" type="Control" parent="Control" unique_id=1346199274]
 anchors_preset = 0

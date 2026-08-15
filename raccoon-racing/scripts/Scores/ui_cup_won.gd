@@ -80,9 +80,6 @@ func WonSetup()->void:
 		norecordshadow.text=timetext
 		
 	#store win and check for character unlocks
-	print('saving now')
-	print(GameData.cupWon[GameData.currentCup])
-	print(GameData.currentDifficulty)
 	GameData.cupWon[GameData.currentCup]=max(GameData.cupWon[GameData.currentCup],GameData.currentDifficulty)
 	print(GameData.cupWon[GameData.currentCup])
 	var newcup:int=GameData.CheckCupLocks()

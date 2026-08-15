@@ -16,7 +16,8 @@ var orientation_sign:float=1.0
 @onready var right: TextureRect = $Anchor/Right
 @onready var left: TextureRect = $Anchor/Left
 @onready var infolbl: Label = $Anchor/Infolbl
-
+@onready var modelbl: Label = $Anchor/Modelbl
+signal mode_updated_signal
 
 func _ready() -> void:
 	if not OS.has_feature('android'):
@@ -24,13 +25,13 @@ func _ready() -> void:
 		visible=false
 		return
 	anchor.visible=false
-	#GameData.LoadPrefs()
 	enabled=GameData.use_gyro
 	orientation_sign=GameData.gyro_orientation
 	if not enabled:
 		DisableGyro()
 	deadzone_degrees=GameData.gyro_deadzone
 	gyro_slider.value=deadzone_degrees
+	edit_mode()
 
 func _process(_delta:float)->void:
 	if not enabled:
@@ -117,3 +118,15 @@ func _on_gyro_slider_value_changed(value: float) -> void:
 
 func _on_hide_button_pressed() -> void:
 	anchor.visible=not anchor.visible
+
+
+func _on_joystic_mode_button_pressed() -> void:
+	GameData.mode_joystick=not GameData.mode_joystick
+	edit_mode()
+
+func edit_mode()->void:
+	if GameData.mode_joystick:
+		modelbl.text='Mode: Joystick'
+	else:
+		modelbl.text='Mode: Buttons'
+	mode_updated_signal.emit()
