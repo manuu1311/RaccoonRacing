@@ -150,7 +150,7 @@ Raccoon Racing is an independent, non-commercial fan remake. All rights to the o
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=windows&logoColor=white)
 
 ```cmd
-scons platform=windows target=template_debug arch=x86_64 ^
+scons platform=windows target=template_release arch=x86_64 ^
   build_profile=path/to/your/build_template.gdbuild ^
   disable_3d=yes ^
   vulkan=no ^
