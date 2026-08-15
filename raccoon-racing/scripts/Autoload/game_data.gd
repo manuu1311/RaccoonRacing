@@ -297,6 +297,8 @@ func ClearAIPlayers() -> void:
 		func(player: Player) -> bool: 
 			return player.current_control != Player.control_type.AI
 	)
+	for player:Player in PlayersArr:
+		player.ScorePoints=0
 
 func SetPlayersCount()->void:
 	OnlinePlayersCount=PlayersArr.size()
