@@ -85,7 +85,7 @@ Play the original ðŸ‘‰[**here**](https://www.flashgames.it/raccoon.racing.html)ð
 - Split screen also supports LAN multiplayer: play with friends with 2 people on a computer and one joining with a second device!
 
 **Platforms & accessibility**
-- Windows, Linux, and Android (touch controls + gyro steering)
+- Windows, Linux, and Android (touch controls + gyro steering + virtual joystick)
 - Gyro settings menu with deadzone slider, neutral-position calibration, and persistent settings
 - Full controller support, including UI navigation and rumble on both controller and mobile
 
