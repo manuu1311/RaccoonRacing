@@ -20,7 +20,7 @@ var orientation_sign:float=1.0
 signal mode_updated_signal
 
 func _ready() -> void:
-	if not OS.has_feature('android') and 0:
+	if not OS.has_feature('android'):
 		set_process(false)
 		visible=false
 		return
