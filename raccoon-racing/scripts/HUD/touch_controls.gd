@@ -3,6 +3,8 @@ extends CanvasLayer
 @onready var virtual_joystick_dx: VirtualJoystickDX = $Control/LeftSide/VirtualJoystickDX
 @onready var right: Control = $Control/LeftSide/Right
 @onready var left: Control = $Control/LeftSide/Left
+@onready var up: Control = $Control/RightSide/Up
+@onready var down: Control = $Control/RightSide/Down
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,3 +35,11 @@ func _process(_delta: float) -> void:
 		left.modulate=Color(1,1,0,1)
 	else:
 		left.modulate=Color.WHITE
+	if Input.is_action_pressed('Brake'):
+		down.modulate=Color(1,1,0,1)
+	else:
+		down.modulate=Color.WHITE
+	if Input.is_action_pressed('Accelerate'):
+		up.modulate=Color(1,1,0,1)
+	else:
+		up.modulate=Color.WHITE
