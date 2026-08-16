@@ -925,7 +925,7 @@ position = Vector2(565.3933, 1377.53)
 position = Vector2(-1856.0862, -881.96844)
 
 [node name="point1" type="Marker2D" parent="PointsHC/Points" unique_id=485930220]
-position = Vector2(-1386.2052, -1237.5962)
+position = Vector2(-1359, -1278)
 
 [node name="point2" type="Marker2D" parent="PointsHC/Points" unique_id=1161573016]
 position = Vector2(-733.77295, -1055.6128)
@@ -937,7 +937,7 @@ position = Vector2(92.89899, -1115.6287)
 position = Vector2(1084.131, -989.7881)
 
 [node name="point5" type="Marker2D" parent="PointsHC/Points" unique_id=1236374698]
-position = Vector2(1565.7363, -242.72147)
+position = Vector2(1651, -265)
 
 [node name="point6" type="Marker2D" parent="PointsHC/Points" unique_id=66886470]
 position = Vector2(1704.8843, 299.69843)
@@ -1143,6 +1143,7 @@ position = Vector2(360.63458, 599.23157)
 position = Vector2(84.31439, 457.55157)
 
 [node name="PointsCar" type="Node2D" parent="." unique_id=432608956]
+visible = false
 position = Vector2(-11.915, 69.015)
 
 [node name="Flags" type="Node2D" parent="PointsCar" unique_id=1580656068]
@@ -1529,10 +1530,10 @@ position = Vector2(-306.6411, -701.3585)
 position = Vector2(-1628.4873, -711.49414)
 
 [node name="point2" type="Marker2D" parent="PointsCar/Points" unique_id=1761872747]
-position = Vector2(-1219.496, -889.76135)
+position = Vector2(-1177.085, -937.015)
 
 [node name="point3" type="Marker2D" parent="PointsCar/Points" unique_id=987888284]
-position = Vector2(-782.085, -740.625)
+position = Vector2(-763.085, -764.015)
 
 [node name="point4" type="Marker2D" parent="PointsCar/Points" unique_id=1010714239]
 position = Vector2(-406.83414, -532.7648)
@@ -1568,10 +1569,10 @@ position = Vector2(-698.98315, 1193.2871)
 position = Vector2(-1241.6265, 1457.1873)
 
 [node name="point15" type="Marker2D" parent="PointsCar/Points" unique_id=802562642]
-position = Vector2(-1448.1698, 1435.3308)
+position = Vector2(-1585.085, 1358.985)
 
 [node name="point16" type="Marker2D" parent="PointsCar/Points" unique_id=1644968725]
-position = Vector2(-1359.8068, 595.40576)
+position = Vector2(-1377.085, 514.985)
 
 [node name="point17" type="Marker2D" parent="PointsCar/Points" unique_id=1139746230]
 position = Vector2(-1484.5424, 167.10684)

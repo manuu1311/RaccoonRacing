@@ -151,6 +151,7 @@ script = ExtResource("1_3g2hk")
 drawcollision = false
 
 [node name="Visuals" type="Node2D" parent="." unique_id=297565233]
+visible = false
 
 [node name="Ground" type="Node2D" parent="Visuals" unique_id=301955663]
 
@@ -875,10 +876,10 @@ position = Vector2(1522.0552, -35.252594)
 position = Vector2(1986.9128, 367.2461)
 
 [node name="point8" type="Marker2D" parent="PointsCar/Points" unique_id=26083000]
-position = Vector2(1614.1765, -569.55536)
+position = Vector2(1632, -660)
 
 [node name="point9" type="Marker2D" parent="PointsCar/Points" unique_id=285715987]
-position = Vector2(952.3214, -572.38983)
+position = Vector2(909, -579)
 
 [node name="point10" type="Marker2D" parent="PointsCar/Points" unique_id=628144882]
 position = Vector2(511.55707, -270.5162)
@@ -905,6 +906,7 @@ position = Vector2(-2026.7375, 545.81866)
 position = Vector2(-982.2256, 871.7859)
 
 [node name="PointsHC" type="Node2D" parent="." unique_id=1943385044]
+visible = false
 
 [node name="Flags" type="Node2D" parent="PointsHC" unique_id=934608591]
 position = Vector2(500, 50)
