@@ -37,8 +37,8 @@ func Update()->void:
 		#AutoPlay()
 		#AutoUseProp();
 		AutoReSetCar();
-	UpdatePoint()
 	prop.run()
+	UpdatePoint()
 	
 ##return forward,brake,left,right
 func AutoInput()->Array[bool]:

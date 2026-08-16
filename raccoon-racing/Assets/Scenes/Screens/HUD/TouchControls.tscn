@@ -96,6 +96,7 @@ texture_pressed = ExtResource("2_strh0")
 action = "Special"
 
 [node name="VirtualJoystickDX" type="Control" parent="Control/LeftSide" unique_id=2039170031]
+visible = false
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = 0
 offset_left = 49.0
@@ -106,7 +107,7 @@ pivot_offset = Vector2(20, 20)
 mouse_filter = 2
 script = ExtResource("3_jhre2")
 joystick_radius = 50.0
-deadzone = 0.4
+deadzone = 0.25
 haptic_enabled = false
 auto_hide_on_physical_input = false
 auto_show_on_touch = false

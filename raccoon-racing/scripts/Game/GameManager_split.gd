@@ -80,7 +80,7 @@ func PopulateViewports()->void:
 func AddWindow()->void:
 	var main_window :Window= get_window()
 	main_window.mode = Window.MODE_FULLSCREEN
-	if OS.has_feature("android"):
+	if OS.has_feature("android") or 1:
 		main_window.content_scale_size=Vector2(1000,500)
 		var touch_controls:CanvasLayer=(load("res://Assets/Scenes/Screens/HUD/TouchControls.tscn")as PackedScene).instantiate() as CanvasLayer
 		add_child(touch_controls)

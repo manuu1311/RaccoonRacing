@@ -10,7 +10,7 @@ func setup(playerinst:Player,controllerinst:CarController)->void:
 	controller=controllerinst
 
 func _process(_delta: float) -> void:
-	if not player.car.isSleep:
+	if not player.car.isSleep and not (player.car.jumpCurrheight>=1):
 		controller.GetInput()
 		##steering
 		if controller.right:
