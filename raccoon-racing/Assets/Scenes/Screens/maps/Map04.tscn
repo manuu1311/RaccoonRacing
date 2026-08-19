@@ -151,7 +151,6 @@ script = ExtResource("1_3g2hk")
 drawcollision = false
 
 [node name="Visuals" type="Node2D" parent="." unique_id=297565233]
-visible = false
 
 [node name="Ground" type="Node2D" parent="Visuals" unique_id=301955663]
 

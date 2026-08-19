@@ -7,7 +7,7 @@ func _ready() -> void:
 	ScaledTimes=0.02857142857142857
 	offsetcar=Vector2(76.5,-44.5)*ScaledTimes
 	offsethc=Vector2(395,168)*ScaledTimes
-	
+	SetBoundaries()
 	JumpWallGroupNum = 10
 	JumpWallNum = 200;
 	WallGroupNum = 10;
@@ -41,3 +41,8 @@ func _ready() -> void:
 		LinePointArr =  [3,13,19]
 		WanPointArr =  [0,1,2,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22]
 		PropPointArr = [0,2,4,9,13,18,20,21]
+
+
+
+func SetBoundaries()->void:
+	boundaries=[-2335,-1665,2345,1338]

@@ -31,11 +31,15 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await LoadMap()
 	await get_tree().process_frame
+	UiLoadingScreen.SetSetupProgress(0.65)
 	map.deferredInit()
 	await get_tree().process_frame
+	UiLoadingScreen.SetSetupProgress(0.7)
 	CreatePlayers()
 	await get_tree().process_frame
+	UiLoadingScreen.SetSetupProgress(0.85)
 	PopulateViewports()
+	ShrinkrayWarmup()
 	UiLoadingScreen.HideLoading()
 	await get_tree().process_frame
 	sound_manager.PlaySound('levelstart')
@@ -58,7 +62,8 @@ func ShrinkrayWarmup()->void:
 	shrink.position = Vector2(-9999, -9999)
 	add_child(shrink)
 	await get_tree().process_frame
-	shrink.queue_free()
+	if shrink:
+		shrink.queue_free()
 
 
 func PopulateViewports()->void:

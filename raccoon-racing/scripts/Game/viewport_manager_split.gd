@@ -43,10 +43,18 @@ func _process(_delta: float) -> void:
 func Setup(mapinst:Map,soundmanager:GameSoundManager,gamemanager:GameManager_split)->void:
 	map=mapinst
 	stagesize=map.GetMapSize()
+	SetupCameraBoundaries()
 	sound_manager=soundmanager
 	game_manager=gamemanager
 	game_manager.overtake_signal.connect(hud.play_overtake)
 	hud.minimap.texture=gamemanager.minimap.get_texture()
+
+
+func SetupCameraBoundaries()->void:
+	camera.limit_left=map.boundaries[0]
+	camera.limit_top=map.boundaries[1]
+	camera.limit_right=map.boundaries[2]
+	camera.limit_bottom=map.boundaries[3]
 
 func FocusPlayer(player:Player,carinstance:Car)->void:
 	FcsPlayer=player

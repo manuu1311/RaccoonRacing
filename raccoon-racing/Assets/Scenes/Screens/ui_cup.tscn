@@ -470,6 +470,7 @@ mouse_filter = 2
 texture = ExtResource("2_lo0sp")
 
 [node name="CupScreen" type="Control" parent="." unique_id=1820990992]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1778,7 +1779,6 @@ shortcut = ExtResource("28_5pglv")
 texture_normal = ExtResource("16_tdwvn")
 
 [node name="Lobby" type="Control" parent="." unique_id=1409316861 node_paths=PackedStringArray("lobby_script")]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -1860,6 +1860,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="LobbyScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=386025251 node_paths=PackedStringArray("rects", "dropdowns", "labels")]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2300,7 +2301,6 @@ text_overrun_behavior = 1
 clip_text = true
 
 [node name="JoinScreen" type="Control" parent="Lobby/LobbyScreen" unique_id=2082871443]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

@@ -9,7 +9,7 @@ var horse:Vector2
 var WheelLengthNum:float=0.5
 var MaxWheelLength:int=10
 var SpeedHorse:int=1
-const effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
+const effect:PackedScene=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
 @onready var bottom_effect: Node2D = $BottomEffect
 var missileview:Sprite2D
 var AimPlayer:Player

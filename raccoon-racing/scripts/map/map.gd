@@ -59,6 +59,7 @@ var minimap:Sprite2D
 #spawn counter, to syncrhonise spawned prop names
 var SpawnCounter:Array[int]=[0,0,0,0]
 signal PlayersReady
+var boundaries:Array[int]
 
 func _ready() -> void:
 	if GameData.current_vehicle==GameData.VehicleType.CAR:

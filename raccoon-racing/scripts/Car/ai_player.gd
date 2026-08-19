@@ -242,9 +242,9 @@ func Stoprace()->void:
 	AiPlayering = false;
 	car.playering = false;
 	ResetTimer.stop()
-	for propinst:Prop in prop.propArr:
-		prop.Delprop(propinst)
-	prop.propArr=[]
+	#for propinst:Prop in prop.propArr:
+		#prop.Delprop(propinst)
+	#prop.propArr=[]
 	car.NowPointId=0
 
 func Reset()->void:

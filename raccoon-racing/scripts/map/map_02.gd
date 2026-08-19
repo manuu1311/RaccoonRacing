@@ -5,6 +5,7 @@ extends Map
 func _ready() -> void:
 	super()
 	ScaledTimes=0.02857142857142857
+	SetBoundaries()
 	offsethc=Vector2(-22.8,12)*ScaledTimes
 	offsetcar=Vector2(-22.8,12)*ScaledTimes
 	JumpWallGroupNum = 10
@@ -40,3 +41,6 @@ func _ready() -> void:
 		LinePointArr =  [0,1,2,12,13,26,34,35,39,40,42]
 		WanPointArr =  [0,3,4,12,18,19,24,25,28,29,30,31,32,33,34,38,41]
 		PropPointArr = [0,6,12,18,24,29,37,40]
+
+func SetBoundaries()->void:
+	boundaries=[-2400,-2138,2400,2323]

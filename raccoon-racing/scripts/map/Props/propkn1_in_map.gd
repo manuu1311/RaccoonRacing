@@ -19,8 +19,7 @@ func OnHitCar(car:Car)->void:
 
 
 func _process(delta: float) -> void:
-	if not LockAim:
-		UpdateAimPlayer()
+	UpdateAimPlayer()
 	super(delta)
 
 func UpdateAimPlayer()->void:
