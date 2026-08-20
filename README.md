@@ -10,7 +10,7 @@ A full reimplementation of the nostalgic Flash racing game, rebuilt from scratch
 
 Free. Open source. Not affiliated with the original.  
 All original trademarks, characters, and copyrighted material related to the original Raccoon Racing belong to their respective owners.  
-Download it 👉[**here**](https://github.com/manuu1311/RaccoonRacing/releases/tag/v2.3.0)👈  
+Download it 👉[**here**](https://manuu1311.itch.io/raccoon-racing)👈  
 Play the original 👉[**here**](https://www.flashgames.it/raccoon.racing.html)👈
 </div>
 
