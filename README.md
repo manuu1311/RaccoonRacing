@@ -23,6 +23,12 @@ Play the original ðŸ‘‰[**here**](https://www.flashgames.it/raccoon.racing.html)ð
   </a>
 </p>
 
+<p align="center">
+  <a href="https://youtu.be/OytxyRGSf5E">
+  	<img src="https://img.youtube.com/vi/qLUk5RZ0ltc/maxresdefault.jpg" alt="Gameplay">
+  </a>
+</p>
+
 <details>
   <summary><b>Click to expand screenshots (8)</b></summary>
   <br>
