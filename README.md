@@ -15,7 +15,14 @@ Play the original ðŸ‘‰[**here**](https://www.flashgames.it/raccoon.racing.html)ð
 </div>
 
 
-<h2 align="center">Screenshots</h2>
+<h2 align="center">Gameplay</h2>
+
+<p align="center">
+  <a href="https://youtu.be/OytxyRGSf5E">
+  	<img src="github-data/thumbnail.png" alt="Gameplay">
+  </a>
+</p>
+
 <details>
   <summary><b>Click to expand screenshots (8)</b></summary>
   <br>
