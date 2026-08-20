@@ -6,15 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://dc3q711f52um2" path="res://Assets/Images/top_scores/244.png" id="4_r5h5u"]
 [ext_resource type="Texture2D" uid="uid://dk051de2fv8dp" path="res://Assets/Images/top_scores/246.png" id="5_66r2j"]
 [ext_resource type="FontFile" uid="uid://bvvts4tew4fix" path="res://Assets/Fonts/44_Arial Black.ttf" id="6_bpfkn"]
-[ext_resource type="Texture2D" uid="uid://mpjb1m0ufx2y" path="res://Assets/maintitle.jpg" id="7_r5h5u"]
-[ext_resource type="Texture2D" uid="uid://c2s2lrqwot45i" path="res://Assets/play.png" id="8_r5h5u"]
 
 [node name="Logo" type="Node2D" unique_id=585863891]
 script = ExtResource("1_28y03")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1420846527]
 transparent_bg = true
-size = Vector2i(1000, 500)
+size = Vector2i(500, 500)
 render_target_update_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="SubViewport" unique_id=1162395572]
@@ -104,13 +102,3 @@ text = "Enable or disable
 vibration"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=872315711]
-position = Vector2(504.4775, 248.8775)
-scale = Vector2(0.495, 0.495)
-texture = ExtResource("7_r5h5u")
-
-[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=785718398]
-position = Vector2(504.47757, 248.8775)
-scale = Vector2(0.073, 0.073)
-texture = ExtResource("8_r5h5u")

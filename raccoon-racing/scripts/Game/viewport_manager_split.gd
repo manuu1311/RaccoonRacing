@@ -43,7 +43,7 @@ func _process(_delta: float) -> void:
 func Setup(mapinst:Map,soundmanager:GameSoundManager,gamemanager:GameManager_split)->void:
 	map=mapinst
 	stagesize=map.GetMapSize()
-	SetupCameraBoundaries()
+	#SetupCameraBoundaries()
 	sound_manager=soundmanager
 	game_manager=gamemanager
 	game_manager.overtake_signal.connect(hud.play_overtake)
