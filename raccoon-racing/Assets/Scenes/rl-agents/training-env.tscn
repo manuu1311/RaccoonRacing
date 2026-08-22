@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b36q67kjg7hmq"]
+
+[ext_resource type="Script" uid="uid://dm757s5r2sa7b" path="res://scripts/rl-agents/trainingenv_controller.gd" id="1_yga5b"]
+
+[node name="TrainingEnv" type="Node2D" unique_id=1939950298]
+script = ExtResource("1_yga5b")
+map_id = 2
