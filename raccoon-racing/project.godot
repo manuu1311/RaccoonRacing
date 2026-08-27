@@ -57,6 +57,7 @@ gdscript/warnings/unsafe_method_access=1
 
 window/size/viewport_width=500
 window/size/viewport_height=500
+window/size/always_on_top=true
 window/size/window_width_override=750
 window/size/window_height_override=750
 window/stretch/mode="canvas_items"

@@ -1,4 +1,5 @@
 extends Node2D
+class_name EnvManager 
 
 #region export variables
 @export_group("General Settings")
@@ -9,15 +10,25 @@ extends Node2D
 #endregion
 
 #region class internal variables
-#endregion
 var map:Map
+signal setup_ready_signal
+#endregion
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SetVars(map_id,number_of_laps,is_hovercraft)
 	await LoadMap(GameData.currentMap)
 	SetupPlayers()
+	setup_ready_signal.emit(GameData.PlayersArr[0].car,map)
+	GameStart()
 
+
+
+func GameStart()->void:
+	for player:Player in GameData.PlayersArr:
+		player.StartRace()
+	NetworkTime.start()
+	map.PlayersReadySignalEmit()
 
 ##setup players for training env
 func SetupPlayers()->void:
