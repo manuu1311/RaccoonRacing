@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://s8jh3uc3wdf0"]
+
+[ext_resource type="Script" uid="uid://b15jbk8xtwyoh" path="res://scripts/Car/car.gd" id="1_goay5"]
+
+[node name="CarTrainingAgent" type="Node2D" unique_id=1115629746]
+script = ExtResource("1_goay5")
+metadata/_custom_type_script = "uid://b15jbk8xtwyoh"

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b4mhxh5swjgla"]
+
+[ext_resource type="PackedScene" uid="uid://dxs80hju0etfw" path="res://Assets/Scenes/Screens/Car.tscn" id="1_lynwk"]
+[ext_resource type="Script" uid="uid://bsdti71kqa6nt" path="res://scripts/rl-agents/car_agent.gd" id="1_rqfk3"]
+
+[node name="CarAgent" type="Node2D" unique_id=4230303 node_paths=PackedStringArray("car")]
+script = ExtResource("1_rqfk3")
+car = NodePath("Car")
+
+[node name="Car" parent="." unique_id=694736785 instance=ExtResource("1_lynwk")]
+
+[editable path="Car"]
