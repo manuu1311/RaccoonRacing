@@ -160,6 +160,8 @@ sensors/enable_accelerometer=true
 [layer_names]
 
 2d_physics/layer_1="Car"
+2d_physics/layer_2="Wall"
+2d_physics/layer_3="JumpWall"
 
 [netfox]
 

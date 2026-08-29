@@ -61,6 +61,21 @@ var SpawnCounter:Array[int]=[0,0,0,0]
 signal PlayersReady
 var boundaries:Array[int]
 
+#wall collision mask
+const WALL_LAYER := 1 << 1
+#jump wall collision mask
+const JUMPWALL_LAYER := 1 << 2
+
+var wall_body: StaticBody2D
+var jumpwall_body: StaticBody2D
+
+##debug vars for walls
+@export var debug_draw_walls:bool= false
+@export var wall_color :Color= Color.GREEN
+@export var jumpwall_color :Color= Color.YELLOW
+@export var wall_line_width :float= 2.0
+var wall_segments: Array[Vector2] = []
+var jumpwall_segments: Array[Vector2] = []
 func _ready() -> void:
 	if GameData.current_vehicle==GameData.VehicleType.CAR:
 		IsHovercraft=false
@@ -86,7 +101,7 @@ func InitMap()->void:
 	InitEventInMap()
 	InitStartPos()
 	#debug collisions
-	if drawcollision:
+	if drawcollision or debug_draw_walls:
 		modulate=Color(1,1,1,0.5)
 		queue_redraw()
 		
@@ -111,6 +126,12 @@ func _draw() -> void:
 	if drawcollision:
 		ed.draw_debug_geometry(self)
 		edevent.draw_debug_geometry(self)
+	if debug_draw_walls:
+		for i in range(0, wall_segments.size(), 2):
+			draw_line(wall_segments[i], wall_segments[i + 1], wall_color, wall_line_width)
+		for i in range(0, jumpwall_segments.size(), 2):
+			draw_line(jumpwall_segments[i], jumpwall_segments[i + 1], jumpwall_color, wall_line_width)
+
 
 
 func InitWalls()->void:
@@ -120,6 +141,8 @@ func InitWalls()->void:
 
 
 func InitNormalWall()->void:
+	#dynamically create collision lines
+	wall_body = _make_collider_body(WALL_LAYER,'CollisionWalls')
 	var currentwall:Marker2D
 	var firstwall:Marker2D
 	var nextwall:Marker2D
@@ -145,6 +168,8 @@ func InitNormalWall()->void:
 							nextwall.global_position.x,
 							nextwall.global_position.y
 							)
+						#add collision line
+						_add_segment(wall_body, currentwall.global_position, nextwall.global_position)
 						wallid = newwallid
 						break
 						
@@ -157,10 +182,13 @@ func InitNormalWall()->void:
 						firstwall.global_position.x,
 						firstwall.global_position.y
 						);
+					#add collision line
+					_add_segment(wall_body, currentwall.global_position, firstwall.global_position)
 					break
 
 
 func InitJumpWall()->void:
+	jumpwall_body = _make_collider_body(JUMPWALL_LAYER,'CollisionJumpWalls')
 	canBeJumpWall = []
 	var _loc7_:int = 0;
 	var _loc6_:Marker2D
@@ -189,7 +217,9 @@ func InitJumpWall()->void:
 							_loc5_.global_position.x,
 							_loc5_.global_position.y
 							)
+						_add_segment(jumpwall_body, _loc2_.global_position, _loc5_.global_position)
 						_loc4_ = _loc3_
+						
 						break
 					_loc3_ = _loc3_ + 1;
 				if(_loc4_ != _loc3_):
@@ -199,6 +229,7 @@ func InitJumpWall()->void:
 						_loc6_.global_position.x,
 						_loc6_.global_position.y
 						)
+					_add_segment(jumpwall_body, _loc2_.global_position, _loc6_.global_position)
 					break;
 		_loc7_ = _loc7_ + 1;
 
@@ -469,3 +500,30 @@ func ApplyProp(networkid:int, playerid:int,car_position:Vector2,car_rotation:flo
 	player.car.rotation=prevrot
 	player.car.NowPointId=prevpoint
 	GameData.OrderInfo=prevorder
+
+
+#region godot built in collision helper
+func _make_collider_body(layer_bit: int,nodename:String) -> StaticBody2D:
+	var body :StaticBody2D= StaticBody2D.new()
+	body.collision_layer = layer_bit
+	body.collision_mask = 0
+	add_child(body)
+	body.global_position = Vector2.ZERO
+	body.name=nodename
+	return body
+
+func _add_segment(body: StaticBody2D, p1: Vector2, p2: Vector2) -> void:
+	var col := CollisionShape2D.new()
+	var seg := SegmentShape2D.new()
+	seg.a = p1
+	seg.b = p2
+	col.shape = seg
+	body.add_child(col)
+	if debug_draw_walls:
+		if body == wall_body:
+			wall_segments.append(p1)
+			wall_segments.append(p2)
+		elif body == jumpwall_body:
+			jumpwall_segments.append(p1)
+			jumpwall_segments.append(p2)
+#endregion

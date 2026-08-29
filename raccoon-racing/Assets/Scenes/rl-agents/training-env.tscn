@@ -5,7 +5,6 @@
 
 [node name="TrainingEnv" type="Node2D" unique_id=1939950298]
 script = ExtResource("1_yga5b")
-map_id = 2
 
 [node name="Camera" type="Node2D" parent="." unique_id=1833851744 node_paths=PackedStringArray("camera", "game_manager")]
 script = ExtResource("2_74u7h")

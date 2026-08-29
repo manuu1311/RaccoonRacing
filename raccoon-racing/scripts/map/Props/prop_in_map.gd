@@ -39,6 +39,8 @@ func NotifyPlayer(playerid:int,hidetick:int)->void:
 	#delete client prediction
 	predictingtick=0
 
+
+
 func _process(_delta: float) -> void:
 	var curtick:int=NetworkTime.tick
 	if curtick<predictingtick:
