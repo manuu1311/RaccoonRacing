@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b4mhxh5swjgla"]
+
+[ext_resource type="Script" uid="uid://bsdti71kqa6nt" path="res://scripts/rl-agents/agent/car_agent.gd" id="1_yw8w0"]
+[ext_resource type="PackedScene" uid="uid://dxs80hju0etfw" path="res://Assets/Scenes/Screens/Car.tscn" id="2_xlth5"]
+[ext_resource type="PackedScene" uid="uid://cdj0edy5ut4sl" path="res://Assets/Scenes/rl-agents/agent/raycast_sensors.tscn" id="3_xlth5"]
+
+[node name="CarAgent" type="Node2D" unique_id=4230303 node_paths=PackedStringArray("car")]
+script = ExtResource("1_yw8w0")
+car = NodePath("Car")
+
+[node name="Car" parent="." unique_id=694736785 instance=ExtResource("2_xlth5")]
+
+[node name="RaycastSensors" parent="." unique_id=1214071269 instance=ExtResource("3_xlth5")]
+
+[editable path="Car"]

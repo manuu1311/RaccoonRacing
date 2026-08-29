@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cdj0edy5ut4sl"]
+
+[ext_resource type="Script" uid="uid://d14mj61f4sduf" path="res://scripts/rl-agents/agent/raycast_sensors.gd" id="1_nt7d6"]
+
+[node name="RaycastSensors" type="Node2D" unique_id=1214071269]
+script = ExtResource("1_nt7d6")
+rays_angles = [0, 15, 30, 45, 60, 75, 90, 120, 150, 180, -15, -30, -45, -60, -75, -90, -120, -150]
+ray_length = 500
