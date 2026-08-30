@@ -243,33 +243,6 @@ func DeferredSetup()->void:
 	grassGratingNum=map.GrassGratingNum
 	SetSprites()
 
-#create and change color of map view
-func CreateMapView()->void:
-	#add car view to minimap
-	carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
-	carViewInstance = carView.instantiate()
-	#if normal game: same as usual
-	if not Game.IsSplitScreen:
-		if player.current_control==Player.control_type.HUMAN:
-			carViewInstance.self_modulate=Color.RED
-		else:
-			carViewInstance.self_modulate=Color.BLUE
-	#else: colorful 
-	else:
-		if player.current_control==Player.control_type.HUMAN:
-			if playerID==0:
-				carViewInstance.self_modulate=Color.ORANGE_RED
-			elif playerID==1:
-				carViewInstance.self_modulate=Color.CYAN
-			elif playerID==2:
-				carViewInstance.self_modulate=Color.YELLOW
-			elif playerID==3:
-				carViewInstance.self_modulate=Color.LAWN_GREEN
-		else:
-			carViewInstance.self_modulate=Color.BLUE
-		
-	var view_sprite:Sprite2D = map.minimap
-	view_sprite.add_child(carViewInstance)
 	
 func PopulateCollisions()->void:
 	var collisions_node:Node2D = $Visual/CollisionPoints
@@ -277,63 +250,7 @@ func PopulateCollisions()->void:
 		if child is Node2D:
 			collisionPoints.append(child)
 
-func steer_left()->void:
-	character.position=Vector2(4.5,-5)
-	character.rotation=deg_to_rad(-23.5)
-	if isHovercraft():
-		exhaust_1.position=Vector2(-14,32)
-		exhaust_1.rotation=deg_to_rad(20)
-		exhaust_2.position=Vector2(8.75,32)
-		exhaust_2.rotation=deg_to_rad(20)
-	else:
-		fr.position=Vector2(16.25,-9.7)
-		fr.rotation=deg_to_rad(-23.5)
-		fl.position=Vector2(-15.25,-9.7)
-		fl.rotation=deg_to_rad(-23.5)
-	
-func steer_right()->void:
-	character.position=Vector2(-4.5,-5)
-	character.rotation=deg_to_rad(23.5)
-	if isHovercraft():
-		exhaust_1.position=Vector2(-8.75,32)
-		exhaust_1.rotation=deg_to_rad(-20)
-		exhaust_2.position=Vector2(14,32)
-		exhaust_2.rotation=deg_to_rad(-20)
-	else:
-		fr.position=Vector2(15.25,-9.7)
-		fr.rotation=deg_to_rad(23.5)
-		fl.position=Vector2(-16.25,-9.7)
-		fl.rotation=deg_to_rad(23.5)
-		
-	
-func steer_normal()->void:
-	character.position=Vector2(0,-4)
-	character.rotation=0
-	if isHovercraft():
-		exhaust_1.position=Vector2(-11,33)
-		exhaust_1.rotation=deg_to_rad(0)
-		exhaust_2.position=Vector2(11,33)
-		exhaust_2.rotation=deg_to_rad(0)
-	else:
-		fr.position=Vector2(16.25,-12.7)
-		fr.rotation=0
-		fl.position=Vector2(-15.25,-12.7)
-		fl.rotation=0
-		
 
-#start wheel spinning
-func all_wheel()->void:
-	fl.play()
-	fr.play()
-	rl.play()
-	rr.play()
-	
-func stop_wheel()->void:
-	fl.stop()
-	fr.stop()
-	rl.stop()
-	rr.stop()
-		
 
 func Forward()->void:
 	all_wheel()
@@ -447,47 +364,7 @@ func ProcessFX()->void:
 func get_angle_diff()->float:
 	return rad_to_deg(angle_difference(speed.angle(), rotation-PI/2))
 
-#spawn smoke particle
-func spawn_smoke(type:String, lr:bool)->void:
-	if(not isHovercraft() and jumpCurrheight < 1):
-		var smokeinst:Node2D
-		if type=='smoke1':
-			smokeinst=smoke_1.instantiate() as Node2D
-		else:
-			smokeinst=smoke_2.instantiate() as Node2D
-		get_parent().add_child(smokeinst)
-		if(lr):
-			#spawn in third point, with some offset
-			smokeinst.global_position=collisionPoints[2].global_position+Vector2(-5,-7)
-		else:
-			#spawn in fourth point, with some offset
-			smokeinst.global_position=collisionPoints[3].global_position+Vector2(-5,-7)
-		smokeinst.scale=scale
-		smokeinst.rotation = rotation
 
-
-	
-#manage water-related particles
-func Water()->void:
-	var targetpos:Vector2
-	var smokeinst:Node2D
-	var tempscale:float
-	if(jumpCurrheight < 1):
-		smokeinst=smoke_2.instantiate() as Node2D
-		get_parent().add_child(smokeinst)
-		if(randi()%2 == 1):
-			targetpos=collisionPoints[3].position+Vector2(-7.5,21.5)
-		else:
-			targetpos=collisionPoints[2].position+Vector2(-11.5,21.5)
-		
-		tempscale=(randi_range(30, 69)) / 100.0*scale.x
-		smokeinst.scale=Vector2(tempscale,tempscale)
-		targetpos=to_global(targetpos+Vector2(randi_range(-4, 4),0))
-		smokeinst.global_position.x=targetpos.x
-		smokeinst.global_position.y=targetpos.y
-		smokeinst.rotation=rotation
-		#is it true?
-		smokeinst.z_index=0
 
 #update car position
 func UpdateCarPos()->void:
@@ -770,6 +647,19 @@ func OutOfIce()->void:
 	glideGratingNum=map.GlideGratingNum
 	grassGratingNum=map.GrassGratingNum
 
+#is race type hovercraft?
+func isHovercraft()->bool:
+	return current_vehicle==GameData.VehicleType.HOVERCRAFT
+
+
+@rpc('call_remote','any_peer','reliable')
+func RequestProp(networkid:int, playerid:int,car_position:Vector2,car_rotation:float,propnum:int)->void:
+	map.ApplyProp.rpc(networkid,playerid,car_position,car_rotation,propnum,NowPointId,GameData.OrderInfo)
+
+
+
+#region Visuals
+
 func SetSprites()->void:
 	var basepath:String="res://Assets/Images/Vehicles/Cars/"
 	var charname:String
@@ -793,13 +683,130 @@ func SetSprites()->void:
 	exhaust_2.texture=load(basepath+charname+'/hcback.png')
 	character.texture=load(basepath+charname+'/char.png')
 	
+	
+#create and change color of map view
+func CreateMapView()->void:
+	#add car view to minimap
+	carView=preload("res://Assets/Scenes/Screens/maps/CarView.tscn")
+	carViewInstance = carView.instantiate()
+	#if normal game: same as usual
+	if not Game.IsSplitScreen:
+		if player.current_control==Player.control_type.HUMAN:
+			carViewInstance.self_modulate=Color.RED
+		else:
+			carViewInstance.self_modulate=Color.BLUE
+	#else: colorful 
+	else:
+		if player.current_control==Player.control_type.HUMAN:
+			if playerID==0:
+				carViewInstance.self_modulate=Color.ORANGE_RED
+			elif playerID==1:
+				carViewInstance.self_modulate=Color.CYAN
+			elif playerID==2:
+				carViewInstance.self_modulate=Color.YELLOW
+			elif playerID==3:
+				carViewInstance.self_modulate=Color.LAWN_GREEN
+		else:
+			carViewInstance.self_modulate=Color.BLUE
+		
+	var view_sprite:Sprite2D = map.minimap
+	view_sprite.add_child(carViewInstance)
 
 
-#is race type hovercraft?
-func isHovercraft()->bool:
-	return current_vehicle==GameData.VehicleType.HOVERCRAFT
+func steer_left()->void:
+	character.position=Vector2(4.5,-5)
+	character.rotation=deg_to_rad(-23.5)
+	if isHovercraft():
+		exhaust_1.position=Vector2(-14,32)
+		exhaust_1.rotation=deg_to_rad(20)
+		exhaust_2.position=Vector2(8.75,32)
+		exhaust_2.rotation=deg_to_rad(20)
+	else:
+		fr.position=Vector2(16.25,-9.7)
+		fr.rotation=deg_to_rad(-23.5)
+		fl.position=Vector2(-15.25,-9.7)
+		fl.rotation=deg_to_rad(-23.5)
+	
+func steer_right()->void:
+	character.position=Vector2(-4.5,-5)
+	character.rotation=deg_to_rad(23.5)
+	if isHovercraft():
+		exhaust_1.position=Vector2(-8.75,32)
+		exhaust_1.rotation=deg_to_rad(-20)
+		exhaust_2.position=Vector2(14,32)
+		exhaust_2.rotation=deg_to_rad(-20)
+	else:
+		fr.position=Vector2(15.25,-9.7)
+		fr.rotation=deg_to_rad(23.5)
+		fl.position=Vector2(-16.25,-9.7)
+		fl.rotation=deg_to_rad(23.5)
+		
+	
+func steer_normal()->void:
+	character.position=Vector2(0,-4)
+	character.rotation=0
+	if isHovercraft():
+		exhaust_1.position=Vector2(-11,33)
+		exhaust_1.rotation=deg_to_rad(0)
+		exhaust_2.position=Vector2(11,33)
+		exhaust_2.rotation=deg_to_rad(0)
+	else:
+		fr.position=Vector2(16.25,-12.7)
+		fr.rotation=0
+		fl.position=Vector2(-15.25,-12.7)
+		fl.rotation=0
+		
 
-
-@rpc('call_remote','any_peer','reliable')
-func RequestProp(networkid:int, playerid:int,car_position:Vector2,car_rotation:float,propnum:int)->void:
-	map.ApplyProp.rpc(networkid,playerid,car_position,car_rotation,propnum,NowPointId,GameData.OrderInfo)
+#start wheel spinning
+func all_wheel()->void:
+	fl.play()
+	fr.play()
+	rl.play()
+	rr.play()
+	
+func stop_wheel()->void:
+	fl.stop()
+	fr.stop()
+	rl.stop()
+	rr.stop()
+	
+#spawn smoke particle
+func spawn_smoke(type:String, lr:bool)->void:
+	if(not isHovercraft() and jumpCurrheight < 1):
+		var smokeinst:Node2D
+		if type=='smoke1':
+			smokeinst=smoke_1.instantiate() as Node2D
+		else:
+			smokeinst=smoke_2.instantiate() as Node2D
+		get_parent().add_child(smokeinst)
+		if(lr):
+			#spawn in third point, with some offset
+			smokeinst.global_position=collisionPoints[2].global_position+Vector2(-5,-7)
+		else:
+			#spawn in fourth point, with some offset
+			smokeinst.global_position=collisionPoints[3].global_position+Vector2(-5,-7)
+		smokeinst.scale=scale
+		smokeinst.rotation = rotation
+		
+#manage water-related particles
+func Water()->void:
+	var targetpos:Vector2
+	var smokeinst:Node2D
+	var tempscale:float
+	if(jumpCurrheight < 1):
+		smokeinst=smoke_2.instantiate() as Node2D
+		get_parent().add_child(smokeinst)
+		if(randi()%2 == 1):
+			targetpos=collisionPoints[3].position+Vector2(-7.5,21.5)
+		else:
+			targetpos=collisionPoints[2].position+Vector2(-11.5,21.5)
+		
+		tempscale=(randi_range(30, 69)) / 100.0*scale.x
+		smokeinst.scale=Vector2(tempscale,tempscale)
+		targetpos=to_global(targetpos+Vector2(randi_range(-4, 4),0))
+		smokeinst.global_position.x=targetpos.x
+		smokeinst.global_position.y=targetpos.y
+		smokeinst.rotation=rotation
+		#is it true?
+		smokeinst.z_index=0
+#endregion

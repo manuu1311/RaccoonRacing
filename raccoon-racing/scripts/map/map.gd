@@ -339,6 +339,11 @@ func InitEventInMap()->void:
 	var _loc3_:int;
 	var _loc2_:Marker2D;
 	_loc3_ = 0;
+	var empty_node:Node2D
+	# empty node to organise hierarchy
+	empty_node=Node2D.new()
+	empty_node.name='Propbox'
+	add_child(empty_node)
 	while(_loc3_ < PropboxNum):
 		_loc2_=get_node_or_null(PointsPath+'/Propbox/propbox'+str(_loc3_)) as Marker2D
 		if(_loc2_==null):
@@ -347,24 +352,32 @@ func InitEventInMap()->void:
 		var scaled_size:Vector2 = (newprop.get_node("Sprite2D") as Sprite2D).texture.get_size() *0.7
 		newprop.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
 		_loc2_.rotation = 0.0;
-		add_child(newprop)
+		empty_node.add_child(newprop)
 		newprop.name="PropInMap"+str(_loc3_)
 		Events.append(newprop)
 		_loc3_ = _loc3_ + 1;
 	_loc3_ = 0;
-	while(_loc3_ < JumpNum):
+	# empty node to organise hierarchy
+	empty_node=Node2D.new()
+	empty_node.name='SpeedPads'
+	add_child(empty_node)
+	while(_loc3_ < AddspeedNum):
 		_loc2_=get_node_or_null(PointsPath+'/Props/addspeed'+str(_loc3_)) as Marker2D
 		if(not _loc2_):
 			break;
 		var newspeed:EventInMap=preload("res://Assets/Scenes/Screens/maps/Props/SpeedInMap.tscn").instantiate() as EventInMap
 		var scaled_size:Vector2=Vector2(87,89)
-		add_child(newspeed)
+		empty_node.add_child(newspeed)
 		newspeed.name="NewSpeed"+str(_loc3_)
 		newspeed.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
 		_loc2_.rotation = 0;
 		Events.append(newspeed)
 		_loc3_ = _loc3_ + 1;
 	_loc3_ = 0;
+	# empty node to organise hierarchy
+	empty_node=Node2D.new()
+	empty_node.name='BsInmap'
+	add_child(empty_node)
 	while(_loc3_ < BsNum):
 		_loc2_=get_node_or_null(PointsPath+'/Props/bs'+str(_loc3_)) as Marker2D
 		if(not _loc2_):
@@ -392,6 +405,10 @@ func InitEventInMap()->void:
 		newmoo.global_position=_loc2_.global_position
 		_loc3_ = _loc3_ + 1;
 	_loc3_ = 0;
+	# empty node to organise hierarchy
+	empty_node=Node2D.new()
+	empty_node.name='JumpPad'
+	add_child(empty_node)
 	while(_loc3_ < JumpNum):
 		_loc2_=get_node_or_null(PointsPath+'/Props/jump'+str(_loc3_)) as Marker2D
 		if(not _loc2_):
@@ -401,7 +418,7 @@ func InitEventInMap()->void:
 		var scaled_size:Vector2 = (newjump.get_node("Sprite2D") as Sprite2D).texture.get_size()
 		newjump.setup(self,_loc2_.global_position.x,_loc2_.global_position.y,scaled_size.x,scaled_size.y,_loc2_.rotation_degrees)
 		_loc2_.rotation = 0;
-		add_child(newjump)
+		empty_node.add_child(newjump)
 		Events.append(newjump)
 		_loc3_ = _loc3_ + 1;
 	_loc3_ = 0;
