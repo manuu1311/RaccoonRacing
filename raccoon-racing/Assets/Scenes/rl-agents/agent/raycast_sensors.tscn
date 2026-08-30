@@ -4,5 +4,6 @@
 
 [node name="RaycastSensors" type="Node2D" unique_id=1214071269]
 script = ExtResource("1_nt7d6")
+collision_mask = 6
 rays_angles = [0, 15, 30, 45, 60, 75, 90, 120, 150, 180, -15, -30, -45, -60, -75, -90, -120, -150]
 ray_length = 500
