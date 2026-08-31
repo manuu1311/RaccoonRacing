@@ -96,7 +96,7 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 ## • [code][9][/code]: Is at ice flag
 ## • [code][10][/code]: Friction (how close car is to bs)
 ## [br]
-## [b]Status & Power-Ups (Indices 16–32)[/b]
+## [b]Status & Power-Ups (Indices 11–26)[/b]
 ## • [code][11..26][/code]: Currently active props, and its duration. Nominally: 
 ## [br]
 ## • [b]Sleep[/b] [code][11,12][/code], [b]Boost[/b] [code][13,14][/code], [b]Star[/b] [code][15,16][/code], 
@@ -208,7 +208,7 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 ## • [code][9][/code]: Is at ice flag
 ## • [code][10][/code]: Friction (how close car is to bs)
 ## [br]
-## [b]Status & Power-Ups (Indices 16–32)[/b]
+## [b]Status & Power-Ups (Indices 11–42)[/b]
 ## • [code][11..26][/code]: Currently active props, and its duration. Nominally: 
 ## [br]
 ## • [b]Sleep[/b] [code][11,12][/code], [b]Boost[/b] [code][13,14][/code], [b]Star[/b] [code][15,16][/code], 
@@ -218,12 +218,7 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 ## [br]
 ## • [code][27][/code]: Can use prop flag
 ## [br]
-# [code][28,29][/code] [code][11,12][/code]
-## [b]Position relative to agent (Indices 28-32[/b]
-## • [code][28,29][/code]: Car relative rotation, expressed as sin,cos
-## • [code][30,31][/code]: Car relative position
-## • [code][32][/code]: Car at range flag: is car at range? When out of range, 
-## the signal is saturated
+## [b]One hot encoding of all possible props (Indices 28-42[/b]
 ## @return PackedFloat32Array containing 33 flattened float features.
 func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
