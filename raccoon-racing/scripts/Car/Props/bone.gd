@@ -1,20 +1,18 @@
 extends Prop
 class_name BoneProp
 
-var UseTime:float=4
-var end_tick: int
 
 func _init(playerinst:Player)->void:
 	super(playerinst);
-	proptype = 9;
-	player.prop.del_prop_by_type(9)
+	use_time=4
+	proptype = 11;
+	player.prop.del_prop_by_type(11)
 	player.car.prop_effector.PlayBone()
 	player.car.prop_effector.bonehit.connect(_on_bone_hit)
-	end_tick = NetworkTime.tick + int(NetworkTime.tickrate * UseTime)
+	tick_end = NetworkTime.tick + int(NetworkTime.tickrate * use_time)
 
 func _on_bone_hit(caropp:Car) -> void:
 	ClearBone(caropp)
-
 
 
 func ClearBone(caropp:Car)->void:
@@ -24,11 +22,11 @@ func ClearBone(caropp:Car)->void:
 	
 
 func Clear()->void:
-	end_tick = NetworkTime.tick
+	tick_end = NetworkTime.tick
 
 func run_tick() -> void:
 	player.car.prop_effector.bone.scale*=1.0007
-	if NetworkTime.tick >= end_tick:
+	if NetworkTime.tick >= tick_end:
 		_expire()
 
 

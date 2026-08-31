@@ -244,7 +244,7 @@ func ResetUse()->void:
 	car.CanUseProp=true
 
 func UseProp()->void:
-	if(IsPlayering() && not car.isSleep and car.CanUseProp and !car.IsUsingProp):
+	if(IsPlayering() and can_use_prop_check()):
 		if not GameData.IsMultiplayer or NetworkManager.is_host:
 			car.RequestProp(NetworkID,PlayerID,car.position,car.rotation,car.NowPorpId)
 		else:
@@ -252,3 +252,7 @@ func UseProp()->void:
 		prop.UseProp()
 		car.CanUseProp=false
 		PropValidated=false
+
+
+func can_use_prop_check()->bool:
+	return not car.isSleep and car.CanUseProp and !car.IsUsingProp

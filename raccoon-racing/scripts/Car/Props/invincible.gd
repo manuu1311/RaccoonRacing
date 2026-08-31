@@ -1,12 +1,12 @@
 extends Prop
 class_name InvincibleProp
 
-var UseTime:int = 6;
+
 var AddHorse:float = 1.5;
-var tickend:int
 
 func _init(playerinst:Player)->void:
 	super(playerinst);
+	use_time = 6
 	proptype = 1;
 	if(player.current_control==Player.control_type.HUMAN && !player.car.isInvincible):
 		MusicPlayer.PlayMusic("invincible")
@@ -14,11 +14,11 @@ func _init(playerinst:Player)->void:
 	player.car.isInvincible = true
 	player.car.prop_effector.AddInvincible(1.5)
 	player.car.IsUsingProp=true
-	tickend=NetworkTime.tick+NetworkTime.seconds_to_ticks(UseTime)
+	tick_end=NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time)
 
 
 func run_tick() -> void:
-	if NetworkTime.tick>tickend:
+	if NetworkTime.tick>tick_end:
 		delme()
 	
 func delme()->void:

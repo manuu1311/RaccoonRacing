@@ -2,7 +2,6 @@ extends Prop
 class_name SleepProp
 
 var UseTime:int = 4
-var tickend:int
 
 func _init(playerinst:Player)->void:
 	super(playerinst);
@@ -10,10 +9,10 @@ func _init(playerinst:Player)->void:
 	player.prop.del_prop_by_type(proptype);
 	player.car.isSleep = true;
 	player.car.prop_effector.PlaySleep()
-	tickend=NetworkTime.tick+NetworkTime.seconds_to_ticks(UseTime)
+	tick_end=NetworkTime.tick+NetworkTime.seconds_to_ticks(UseTime)
 
 func run_tick() -> void:
-	if NetworkTime.tick>tickend:
+	if NetworkTime.tick>tick_end:
 		delme()
 	
 func delme()->void:

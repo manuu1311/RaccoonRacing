@@ -2,19 +2,18 @@ extends Prop
 class_name ShieldProp
 
 
-var UseTime:float = 6;
-var end_tick: int
 var ended: bool = false
 
 func _init(playerinst:Player)->void:
 	super(playerinst);
+	use_time=8
 	proptype = 3
 	player.prop.del_prop_by_type(proptype);
-	end_tick = NetworkTime.tick + NetworkTime.seconds_to_ticks(UseTime)
+	tick_end = NetworkTime.tick + NetworkTime.seconds_to_ticks(use_time)
 	player.AddShield()
 	
 func run_tick() -> void:
-	if NetworkTime.tick>end_tick:
+	if NetworkTime.tick>tick_end:
 		delme()
 
 func delme() -> void:

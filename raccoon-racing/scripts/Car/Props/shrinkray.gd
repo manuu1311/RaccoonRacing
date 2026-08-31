@@ -3,10 +3,8 @@ class_name ShrinkProp
 
 const RAY_SCENE: PackedScene = preload("res://Assets/Scenes/Screens/maps/Props/ShrinkInMap.tscn")
 
-var use_time: float = 3.0
 var add_horse: float = 0.5
 var small_scale: float = 1.0 / 3.0
-var duration:float=0.5
 
 var attacker: Car = null  # renamed: this is who fired the ray
 var active_ray: ShrinkInMap = null
@@ -14,12 +12,15 @@ var effect_started: bool = false
 
 func _init(player_inst: Player, attacker_car: Car) -> void:
 	super(player_inst)
-	proptype = 9
+	use_time=3
+	proptype = 10
 	player.prop.del_prop_by_type(9)
+	player.prop.del_prop_by_type(10)
 	self.attacker = attacker_car
 	player.car.sounds.playPandaSSound()
 	# Fire immediately — no need to wait for run() to pick it up
 	effect_started = true
+	tick_end=NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time)
 	_apply_shrink_effect()
 	
 

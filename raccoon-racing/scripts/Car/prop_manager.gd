@@ -136,12 +136,17 @@ func Delprop(prop:Prop)->void:
 			return 
 		_loc2_ = _loc2_ + 1;
 
-func IsHavePropType(typeid:int)->bool:
+func IsHavePropType(type_id:int)->bool:
 	for prop in propArr:
-		if prop.proptype == typeid:
+		if prop.proptype == type_id:
 			return true
 	return false
 
+func get_prop_by_type(type_id:int)->Prop:
+	for prop in propArr:
+		if prop.proptype == type_id:
+			return prop
+	return null
 
 func del_prop_by_type(type_id: int) -> void:
 	for i in range(propArr.size() - 1, -1, -1):
