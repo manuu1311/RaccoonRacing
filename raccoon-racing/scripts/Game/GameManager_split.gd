@@ -150,8 +150,8 @@ func CreatePlayers()->void:
 		#temporary authority swap for car positions
 		carinstance.set_multiplayer_authority(player.NetworkID)
 		carinstance.name="Car"+str(player.PlayerID)
-		carinstance.global_position=map.StartPosArr[i].global_position
-		carinstance.rotation=map.StartPosArr[i].rotation
+		carinstance.global_position=map.StartPosArr[i]
+		carinstance.rotation=map.StartPosArrRot[i]
 		player.SetCar(carinstance)
 		player.ResetPlayer(i)
 

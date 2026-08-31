@@ -20,7 +20,8 @@ var LinePointArr:Array[int]
 var PointNum:int
 var Points:Array[Vector2]
 var PropPointArr:Array[int]
-var StartPosArr:Array[Marker2D]
+var StartPosArr:Array[Vector2]
+var StartPosArrRot:Array[float]
 var PropboxNum:int
 var WinPosition:Vector2
 #changed from original one
@@ -60,6 +61,7 @@ var minimap:Sprite2D
 var SpawnCounter:Array[int]=[0,0,0,0]
 signal PlayersReady
 var boundaries:Array[int]
+var prop_spawn_node:Node
 
 #wall collision mask
 const WALL_LAYER := 1 << 1
@@ -93,6 +95,9 @@ func PlayersReadySignalEmit()->void:
 	PlayersReady.emit()
 
 func InitMap()->void:
+	prop_spawn_node=Node.new()
+	prop_spawn_node.name='Props'
+	add_child(prop_spawn_node)
 	CupMapj=0
 	StartCupMap(2)
 	InitWalls()
@@ -118,10 +123,12 @@ func InitStartPos()->void:
 	var WinPositionmarker:Marker2D=get_node_or_null(PointsPath+'/Flags/WinPos') as Marker2D
 	WinPosition=WinPositionmarker.global_position
 	while newmarker!=null:
-		StartPosArr.append(newmarker)
+		StartPosArr.append(newmarker.global_position)
+		StartPosArrRot.append(newmarker.global_rotation)
 		id+=1
 		newmarker=get_node_or_null(PointsPath+'/Flags/StartPos'+str(id))
-
+	_empty_points()
+	
 func _draw() -> void:
 	if drawcollision:
 		ed.draw_debug_geometry(self)
@@ -132,7 +139,13 @@ func _draw() -> void:
 		for i in range(0, jumpwall_segments.size(), 2):
 			draw_line(jumpwall_segments[i], jumpwall_segments[i + 1], jumpwall_color, wall_line_width)
 
-
+## delete markers in map, leaner hierarchy, less node overhead
+## particularly important for rl
+func _empty_points()->void:
+	var points_node:Node2D=get_node('PointsCar')
+	points_node.queue_free()
+	points_node=get_node('PointsHC')
+	points_node.queue_free()
 
 func InitWalls()->void:
 	InitNormalWall()
@@ -374,10 +387,6 @@ func InitEventInMap()->void:
 		Events.append(newspeed)
 		_loc3_ = _loc3_ + 1;
 	_loc3_ = 0;
-	# empty node to organise hierarchy
-	empty_node=Node2D.new()
-	empty_node.name='BsInmap'
-	add_child(empty_node)
 	while(_loc3_ < BsNum):
 		_loc2_=get_node_or_null(PointsPath+'/Props/bs'+str(_loc3_)) as Marker2D
 		if(not _loc2_):
@@ -488,7 +497,7 @@ func GetHitEventStatus(eventid:int,playerid:int,unsynced:bool)->void:
 
 
 func SpawnProp(basename:String, id:int, prop:Node2D)->void:
-	add_child(prop)
+	prop_spawn_node.add_child(prop)
 	prop.name=basename+str(id)+str(SpawnCounter[id])
 	SpawnCounter[id]+=1
 
