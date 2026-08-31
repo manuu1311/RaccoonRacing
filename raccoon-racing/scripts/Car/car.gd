@@ -22,6 +22,7 @@ var playerID:int=0
 @onready var body: Area2D = $Visual/Body
 @onready var visual: Node2D = $Visual
 @onready var character: Sprite2D = $Visual/Char
+
 var map:Map
 @export var playering:bool=true
 @onready var sounds: CarSounds = $Sounds
@@ -124,6 +125,7 @@ var AiUsePropTime:int=0
 enum turnstate{IDLE,RIGHT,LEFT,FORWARD}
 var CurrentState:turnstate
 var IsAccelerating:bool
+
 signal WallBump
 signal KartBump
 

@@ -8,10 +8,16 @@ var active: bool = true
 
 func _init(playerinst: Player) -> void:
 	super(playerinst)
-	proptype = 9
+	proptype = 12
 	player.car.sounds.playIceSound()
 	_spawn_trail()
-	delme()
+	use_time=trail.usetime
+	tick_end = NetworkTime.tick + int(NetworkTime.tickrate * use_time)
+	
+	
+func run_tick() -> void:
+	if NetworkTime.tick>tick_end:
+		delme()
 
 func _spawn_trail() -> void:
 	trail = IcePatchScene.instantiate()

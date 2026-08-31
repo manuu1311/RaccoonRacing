@@ -48,21 +48,12 @@ func _normalize_dist(dist: float, max_dist: float,offset:int,zero_range:bool, in
 	var clamped_dist:float
 	var log_0_to_1: float
 	if zero_range:
-		# keep track of sign
 		var sign_factor: float = signf(dist)
 		var abs_dist: float = absf(dist)
-		
-		# Clamp magnitude considering offset
 		clamped_dist = clampf(abs_dist - offset, 0.0, max_dist)
-		
-		# Logarithmic scaling from [0.0, 1.0]
 		log_0_to_1 = log(1.0 + clamped_dist) / log(1.0 + max_dist)
-		if inverse:
-			# reapply sign
-			return 1-log_0_to_1*sign_factor
-		else:
-			# reapply sign
-			return log_0_to_1*sign_factor
+		var magnitude: float = (1.0 - log_0_to_1) if inverse else log_0_to_1
+		return magnitude * sign_factor
 	# Remap from [0.0, 1.0] to [-1.0, 1.0]
 	else:
 		clamped_dist = clampf(dist-offset, 0.0, max_dist)
@@ -86,9 +77,45 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 		log_0_to_1 = log(1.0 + clamped_dist) / log(1.0 + max_dist)
 		return (log_0_to_1 * 2.0) - 1.0
 
+
+## Computes and returns the flattened observation array for the kart.
+## [br]
+## Returns a [PackedFloat32Array] containing 33 normalized feature elements, 
+## structured into the following observation groups:
+## [br]
+## [b]Speed & Physics (Indices 0–2)[/b]
+## • [code][0,1][/code]: Relative speed vector
+## [br]
+## [b]Airborne & Car State (Indices 3–8)[/b]
+## • [code][2,3][/code]: Current and previous jump height 
+## • [code][4][/code]: Is jumping flag 
+## • [code][5,6][/code]: Bs and its direction flags
+## • [code][7,8][/code]: Bsx flag and its magnitude
+## [br]
+## [b]Surface Properties (Indices 9–15)[/b]
+## • [code][9][/code]: Is at ice flag
+## • [code][10][/code]: Friction (how close car is to bs)
+## [br]
+## [b]Status & Power-Ups (Indices 16–32)[/b]
+## • [code][11..26][/code]: Currently active props, and its duration. Nominally: 
+## [br]
+## • [b]Sleep[/b] [code][11,12][/code], [b]Boost[/b] [code][13,14][/code], [b]Star[/b] [code][15,16][/code], 
+## [b]Shield[/b] [code][17,18][/code], [b]Small state[/b] [code][19,20][/code], 
+## [b]Ice trail[/b] [code][21,22][/code], [b]Bone[/b] [code][23,24][/code], [b]Bone position[/b],
+## relative to the car, expressed in sin,cos [/code][25,26][/code]
+## [br]
+## • [code][27][/code]: Can use prop flag
+## [br]
+# [code][28,29][/code] [code][11,12][/code]
+## [b]Position relative to agent (Indices 28-32[/b]
+## • [code][28,29][/code]: Car relative rotation, expressed as sin,cos
+## • [code][30,31][/code]: Car relative position
+## • [code][32][/code]: Car at range flag: is car at range? When out of range, 
+## the signal is saturated
+## @return PackedFloat32Array containing 33 flattened float features.
 func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(10)
+	vectorized.resize(33)
 	var speed:=_speed_to_relative(car_inst.speed)
 	# since opponent can move at maximum speed in any axis, relative to own car
 	vectorized[0]=speed.x/max_speed[1]
@@ -112,49 +139,95 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	else:
 		vectorized[7]=0.0
 		vectorized[8]=0.0
+	if car_inst.isAtIce:
+		vectorized[9]=1.0
+	else:
+		vectorized[9]=0.0
 	# car friction
-	vectorized[9]=car_inst.friction/90
+	vectorized[10]=car_inst.friction/90
 	# sleep
-	_process_prop(vectorized,10,car_inst.player.prop.get_prop_by_type(2))
+	_process_prop(vectorized,11,car_inst.player.prop.get_prop_by_type(2))
 	# boost
-	_process_prop(vectorized,12,car_inst.player.prop.get_prop_by_type(8))
+	_process_prop(vectorized,13,car_inst.player.prop.get_prop_by_type(8))
 	# invincibility star
-	_process_prop(vectorized,14,car_inst.player.prop.get_prop_by_type(1))
+	_process_prop(vectorized,15,car_inst.player.prop.get_prop_by_type(1))
 	# shield
-	_process_prop(vectorized,16,car_inst.player.prop.get_prop_by_type(3))
+	_process_prop(vectorized,17,car_inst.player.prop.get_prop_by_type(3))
 	# laser small state
-	_process_prop(vectorized,18,car_inst.player.prop.get_prop_by_type(10))
+	_process_prop(vectorized,19,car_inst.player.prop.get_prop_by_type(10))
+	# ice trail state
+	_process_prop(vectorized,21,car_inst.player.prop.get_prop_by_type(12))
 	# bone state
-	_process_prop(vectorized,20,car_inst.player.prop.get_prop_by_type(11))
-	# ideally also give position of the bone
+	if _process_prop(vectorized,23,car_inst.player.prop.get_prop_by_type(11)):
+		#give bone rotation
+		vectorized[25]=sin(car_inst.prop_effector.bone_wrapper.rotation)
+		vectorized[26]=cos(car_inst.prop_effector.bone_wrapper.rotation)
+	else:
+		vectorized[25]=0.0
+		vectorized[26]=0.0
 	
 	# can use prop flag
-	vectorized[22]=1.0 if car.player.can_use_prop_check() else 0.0
+	vectorized[27]=1.0 if car_inst.player.can_use_prop_check() else 0.0
 	
 	# rotation relative to own car 
-	vectorized[23]=sin(car_inst.global_rotation-car.global_rotation)
-	vectorized[24]=cos(car_inst.global_rotation-car.global_rotation)
+	vectorized[28]=sin(car_inst.global_rotation-car.global_rotation)
+	vectorized[29]=cos(car_inst.global_rotation-car.global_rotation)
 	# are relative coordinates better, or direction and magnitude?
 	# with magnitude, i have to calculate a square root (length calculation)
 	var relative_coords : Vector2 = _position_to_relative(car_inst.global_position)
-	vectorized[25] = _normalize_dist(
+	vectorized[30] = _normalize_dist(
 				relative_coords[0],car_detection_range,car_detection_offset,true
 	)
-	vectorized[26] = _normalize_dist(
+	vectorized[31] = _normalize_dist(
 				relative_coords[1],car_detection_range,car_detection_offset,true
 	)
 	# one axis out of range: car not present in range (saturated signal)
 	if relative_coords[0]>car_detection_range or relative_coords[1]>car_detection_range:
-		vectorized[27]=0.0
+		vectorized[32]=0.0
 	# car present in range
 	else:
-		vectorized[27]=1.0
+		vectorized[32]=1.0
 	
 	return vectorized
 
+## Computes and returns the flattened observation array for the agent kart.
+## [br]
+## Returns a [PackedFloat32Array] containing 42 normalized feature elements, 
+## structured into the following observation groups:
+## [br]
+## [b]Speed & Physics (Indices 0–2)[/b]
+## • [code][0,1][/code]: Relative speed vector
+## [br]
+## [b]Airborne & Car State (Indices 3–8)[/b]
+## • [code][2,3][/code]: Current and previous jump height 
+## • [code][4][/code]: Is jumping flag 
+## • [code][5,6][/code]: Bs and its direction flags
+## • [code][7,8][/code]: Bsx flag and its magnitude
+## [br]
+## [b]Surface Properties (Indices 9–15)[/b]
+## • [code][9][/code]: Is at ice flag
+## • [code][10][/code]: Friction (how close car is to bs)
+## [br]
+## [b]Status & Power-Ups (Indices 16–32)[/b]
+## • [code][11..26][/code]: Currently active props, and its duration. Nominally: 
+## [br]
+## • [b]Sleep[/b] [code][11,12][/code], [b]Boost[/b] [code][13,14][/code], [b]Star[/b] [code][15,16][/code], 
+## [b]Shield[/b] [code][17,18][/code], [b]Small state[/b] [code][19,20][/code], 
+## [b]Ice trail[/b] [code][21,22][/code], [b]Bone[/b] [code][23,24][/code], [b]Bone position[/b],
+## relative to the car, expressed in sin,cos [/code][25,26][/code]
+## [br]
+## • [code][27][/code]: Can use prop flag
+## [br]
+# [code][28,29][/code] [code][11,12][/code]
+## [b]Position relative to agent (Indices 28-32[/b]
+## • [code][28,29][/code]: Car relative rotation, expressed as sin,cos
+## • [code][30,31][/code]: Car relative position
+## • [code][32][/code]: Car at range flag: is car at range? When out of range, 
+## the signal is saturated
+## @return PackedFloat32Array containing 33 flattened float features.
 func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(10)
+	vectorized.resize(42)
 	var speed:=_speed_to_relative(car_inst.speed)
 	vectorized[0]=speed.x/max_speed[0]
 	# moving backwards
@@ -165,6 +238,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 		vectorized[1]=-speed.y/max_speed[0]
 	vectorized[2]=car_inst.jumpCurrheight/max_jump_height
 	vectorized[3]=car_inst.jumpPrevheight/max_jump_height
+	# STATUS FLAGS
 	# is jumping flag
 	if car_inst.jumpCurrheight>1:
 		vectorized[4]=1.0
@@ -182,32 +256,45 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	else:
 		vectorized[7]=0.0
 		vectorized[8]=0.0
+	if car_inst.isAtIce:
+		vectorized[9]=1.0
+	else:
+		vectorized[9]=0.0
 	# car friction
-	vectorized[9]=car_inst.friction/90
+	vectorized[10]=car_inst.friction/90
 	# sleep
-	_process_prop(vectorized,10,car_inst.player.prop.get_prop_by_type(2))
+	_process_prop(vectorized,11,car_inst.player.prop.get_prop_by_type(2))
 	# boost
-	_process_prop(vectorized,12,car_inst.player.prop.get_prop_by_type(8))
+	_process_prop(vectorized,13,car_inst.player.prop.get_prop_by_type(8))
 	# invincibility star
-	_process_prop(vectorized,14,car_inst.player.prop.get_prop_by_type(1))
+	_process_prop(vectorized,15,car_inst.player.prop.get_prop_by_type(1))
 	# shield
-	_process_prop(vectorized,16,car_inst.player.prop.get_prop_by_type(3))
+	_process_prop(vectorized,17,car_inst.player.prop.get_prop_by_type(3))
 	# laser small state
-	_process_prop(vectorized,18,car_inst.player.prop.get_prop_by_type(10))
+	_process_prop(vectorized,19,car_inst.player.prop.get_prop_by_type(10))
+	# ice trail state
+	_process_prop(vectorized,21,car_inst.player.prop.get_prop_by_type(12))
 	# bone state
-	_process_prop(vectorized,20,car_inst.player.prop.get_prop_by_type(11))
-	# ideally also give position of the bone
+	if _process_prop(vectorized,23,car_inst.player.prop.get_prop_by_type(11)):
+		#give bone rotation
+		vectorized[25]=sin(car_inst.prop_effector.bone_wrapper.rotation)
+		vectorized[26]=cos(car_inst.prop_effector.bone_wrapper.rotation)
+	else:
+		vectorized[25]=0.0
+		vectorized[26]=0.0
+	
 	
 	# can use prop flag
-	vectorized[22]=1.0 if car.player.can_use_prop_check() else 0.0
-	# vectorized 23 - 36: which prop am i holding?
+	vectorized[27]=1.0 if car_inst.player.can_use_prop_check() else 0.0
+	# vectorized 28 - 41: which prop am i holding?
 	# 14 available props: 8 base props + 6 special props (1 for each char)
 	# is it faster to change values individually, or create an array of 0s?
-	var id:int=car.NowPorpId
+	var id:int=car_inst.NowPorpId
 	# if special prop: add character id, to map special to the correct char
-	if id==9:
-		id+=car.CharID
-	vectorized[23+id]=1.0
+	if id!=0:
+		if id==9:
+			id+=car_inst.CharID-1
+		vectorized[27+id]=1.0
 	
 	return vectorized
 
@@ -219,17 +306,19 @@ func _speed_to_relative(speed:Vector2)->Vector2:
 func _position_to_relative(pos:Vector2)->Vector2:
 	return (pos-car.global_position).rotated(-car.rotation)
 
-func _process_prop(vectorized:PackedFloat32Array, offset:int, prop:Prop)->void:
+func _process_prop(vectorized:PackedFloat32Array, offset:int, prop:Prop)->bool:
 	if prop:
 		# flag
 		vectorized[offset]=1.0
 		# time until reset
 		vectorized[offset+1]=1-(float(prop.tick_end-NetworkTime.tick)/
 				NetworkTime.seconds_to_ticks(prop.use_time))
+		return true
 	else:
 		# reset flag
 		vectorized[offset]=0.0
 		vectorized[offset+1]=1.0
+		return false
 
 
 #endregion

@@ -11,6 +11,8 @@ var IsHovercraft:bool
 @onready var car_sleep: AnimatedSprite2D = $"../Visual/TopEffect/CarSleep"
 @onready var give_sleep: AnimatedSprite2D = $"../Visual/TopEffect/GiveSleep"
 @onready var bone: Sprite2D = $"../Visual/BottomEffect/Circler/Bone"
+## bone wrapper: useful for rl agents
+@onready var bone_wrapper: Node2D = $Visual/BottomEffect/Circler
 @onready var rotator: AnimationPlayer = $"../Visual/BottomEffect/Circler/Bone/Rotator"
 @onready var mover: AnimationPlayer = $"../Visual/BottomEffect/Circler/Bone/Mover"
 @onready var area_2d: Area2D = $"../Visual/BottomEffect/Circler/Area2D"
