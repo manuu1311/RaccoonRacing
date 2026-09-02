@@ -1,9 +1,9 @@
 extends Node2D
 class_name ShrinkInMap
 
-@onready var line_glow: Line2D = $LineGlow   # width 14, red #FF2200 alpha 128
-@onready var line_mid:  Line2D = $LineMid    # width 6,  orange #FF8800 alpha 200
-@onready var line_core: Line2D = $LineCore   # width 2,  white #FFFFFF alpha 255
+@onready var line_glow: Line2D = $LineGlow
+@onready var line_mid:  Line2D = $LineMid 
+@onready var line_core: Line2D = $LineCore
 
 @onready var start_sprite: Sprite2D  = $Start
 @onready var end_sprite:   Sprite2D  = $End
@@ -12,6 +12,10 @@ class_name ShrinkInMap
 
 var attacker: Node2D
 var victim:   Node2D
+
+var random_start: bool = false
+var random_radius: float = 150.0 
+var victim_only: Node2D = null   
 
 const STEPS := 10
 
@@ -37,16 +41,29 @@ func setup(from_node: Node2D, to_node: Node2D, duration: float) -> void:
 	victim   = to_node
 	get_tree().create_timer(duration).timeout.connect(queue_free)
 
+
+func setup_random_start(target: Node2D, duration: float) -> void:
+	victim_only = target
+	victim = target
+	random_start = true
+	get_tree().create_timer(duration).timeout.connect(queue_free)
+
 func _process(_delta: float) -> void:
-	if not is_instance_valid(attacker) or not is_instance_valid(victim):
+	if not is_instance_valid(victim):
 		queue_free()
 		return
 
-	var start_pos := attacker.global_position
+	var start_pos: Vector2
+	if random_start:
+		# Generate a new random start position around the victim each frame
+		var angle := randf_range(0, TAU)
+		var dist := randf_range(30.0, random_radius)
+		start_pos = victim.global_position + Vector2.RIGHT.rotated(angle) * dist
+	else:
+		start_pos=attacker.global_position
 	var end_pos   := victim.global_position
 	var diff      := end_pos - start_pos
 	var length    := diff.length()
-
 	# Safety: nodes on top of each other
 	if length < 1.0:
 		return

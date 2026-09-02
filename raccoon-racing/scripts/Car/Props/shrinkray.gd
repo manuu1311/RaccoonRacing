@@ -12,7 +12,7 @@ var effect_started: bool = false
 
 func _init(player_inst: Player, attacker_car: Car) -> void:
 	super(player_inst)
-	use_time=3
+	use_time=5
 	proptype = 10
 	player.prop.del_prop_by_type(9)
 	player.prop.del_prop_by_type(10)
@@ -22,31 +22,36 @@ func _init(player_inst: Player, attacker_car: Car) -> void:
 	effect_started = true
 	tick_end=NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time)
 	_apply_shrink_effect()
+	create_beam()
 	
 
-func run_tick() -> void:
+func create_beam() -> void:
 	# Ray still spawns here since we need the scene tree
-	if active_ray == null and is_instance_valid(attacker):
+	if active_ray == null:
 		active_ray = RAY_SCENE.instantiate() as ShrinkInMap
 		player.car.map.SpawnProp("ShrinkRay",player.PlayerID,active_ray)
-		active_ray.setup(attacker, player.car, use_time)
 		active_ray.z_index=2
+		if is_instance_valid(attacker):
+			active_ray.setup(attacker, player.car, use_time)
+		else:
+			active_ray.setup_random_start(player.car, use_time)
 
 	if not effect_started:
 		effect_started = true
 		_apply_shrink_effect()
 
 func _apply_shrink_effect() -> void:
-	# No attacker = fired into void, Flash just cleans up after 500ms
 	if not is_instance_valid(attacker):
-		await player.car.get_tree().create_timer(0.5).timeout
-		player.prop.Delprop(self)
+		await player.car.get_tree().create_timer(use_time).timeout
+		delme()
 		return
 
 	# Shrink player (the victim), not the attacker
 	var original_horse: float = player.car.horse
 	player.car.horse *= add_horse
 	player.car.isSmallState = true
+	if player.car.IsUseShield:
+		player.RemoveShield()
 
 	var tween: Tween = player.car.create_tween()
 	tween.tween_property(player.car, "shrinkscale", small_scale, 0.3)
@@ -61,8 +66,6 @@ func _apply_shrink_effect() -> void:
 
 	var restore_tween: Tween = player.car.create_tween()
 	restore_tween.tween_property(player.car, "shrinkscale", 1, 0.5)
-	if player.car.IsUseShield:
-		player.RemoveShield()
 	delme()
 
 func delme()->void:
