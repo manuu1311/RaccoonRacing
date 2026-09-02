@@ -81,6 +81,7 @@ folder_colors={
 
 Body="Car collision bodies"
 default_focus="Default focus for controller"
+icetrail=""
 
 [input]
 
