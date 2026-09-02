@@ -98,7 +98,7 @@ func UseProp()->void:
 					ClearPropBox();
 				6:
 					var found_player:Player=null
-					var min_dist:=750*750.0
+					var min_dist:=350*350
 					for newplayer: Player in GameData.PlayersArr:
 						if(newplayer.PlayerID!=player.PlayerID): 
 							if(not newplayer.car.isResetting and not newplayer.car.isInvincible):
