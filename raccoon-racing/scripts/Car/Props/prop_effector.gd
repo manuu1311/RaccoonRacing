@@ -2,7 +2,7 @@ extends Node
 class_name PropEffector
 
 @export var car:Car
-const effect:Resource=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
+const effect:PackedScene=preload("res://Assets/Scenes/Screens/PropEffects/Petro.tscn")
 var IsHovercraft:bool
 @onready var invincible: AnimatedSprite2D = $"../Visual/TopEffect/Invincible"
 @onready var shield: AnimatedSprite2D = $"../Visual/TopEffect/Shield"
@@ -12,7 +12,7 @@ var IsHovercraft:bool
 @onready var give_sleep: AnimatedSprite2D = $"../Visual/TopEffect/GiveSleep"
 @onready var bone: Sprite2D = $"../Visual/BottomEffect/Circler/Bone"
 ## bone wrapper: useful for rl agents
-@onready var bone_wrapper: Node2D = $Visual/BottomEffect/Circler
+@onready var bone_wrapper: Node2D = $"../Visual/BottomEffect/Circler"
 @onready var rotator: AnimationPlayer = $"../Visual/BottomEffect/Circler/Bone/Rotator"
 @onready var mover: AnimationPlayer = $"../Visual/BottomEffect/Circler/Bone/Mover"
 @onready var area_2d: Area2D = $"../Visual/BottomEffect/Circler/Area2D"
@@ -28,7 +28,7 @@ func _ready() -> void:
 
 ##boost
 func AddPetro()->void:
-	var boost: Node2D = effect.instantiate() as Node2D
+	var boost: PetroEffect = effect.instantiate() as Node2D
 	boost.is_hovercraft = IsHovercraft  
 	
 	boost.rotation=car.rotation

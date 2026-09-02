@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://c4vj6w1kpvulg" path="res://scripts/map/Props/icetrail_in_map.gd" id="1_ksg6s"]
 [ext_resource type="Texture2D" uid="uid://rh1okvclu8sn" path="res://Assets/Images/Vehicles/PropEffects/IceTrail/trail1.png" id="2_ksg6s"]
 
-[node name="IceTrail" type="Node2D" unique_id=1402138502]
+[node name="IceTrail" type="Node2D" unique_id=1402138502 groups=["icetrail"]]
 z_index = 1
 script = ExtResource("1_ksg6s")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=652234715]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=431450279]
 

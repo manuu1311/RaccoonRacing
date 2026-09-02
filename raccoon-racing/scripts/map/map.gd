@@ -61,7 +61,7 @@ var minimap:Sprite2D
 var SpawnCounter:Array[int]=[0,0,0,0]
 signal PlayersReady
 var boundaries:Array[int]
-var prop_spawn_node:Node
+var prop_spawn_node:Node2D
 
 #wall collision mask
 const WALL_LAYER := 1 << 1
@@ -95,7 +95,7 @@ func PlayersReadySignalEmit()->void:
 	PlayersReady.emit()
 
 func InitMap()->void:
-	prop_spawn_node=Node.new()
+	prop_spawn_node=Node2D.new()
 	prop_spawn_node.name='Props'
 	add_child(prop_spawn_node)
 	CupMapj=0

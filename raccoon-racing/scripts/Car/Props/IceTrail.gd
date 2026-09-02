@@ -9,6 +9,10 @@ var active: bool = true
 func _init(playerinst: Player) -> void:
 	super(playerinst)
 	proptype = 12
+	#delete previous ice trail, if there is any
+	var icetrails: = playerinst.car.get_tree().get_nodes_in_group("icetrail")
+	for icetrail:IceTrailInMap in icetrails:
+		icetrail.queue_free()
 	player.car.sounds.playIceSound()
 	_spawn_trail()
 	use_time=trail.usetime

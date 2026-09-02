@@ -81,6 +81,7 @@ folder_colors={
 
 Body="Car collision bodies"
 default_focus="Default focus for controller"
+icetrail="Ice trail group"
 
 [input]
 
@@ -162,6 +163,7 @@ sensors/enable_accelerometer=true
 2d_physics/layer_1="Car"
 2d_physics/layer_2="Wall"
 2d_physics/layer_3="JumpWall"
+2d_physics/layer_4="IceTrail"
 
 [netfox]
 

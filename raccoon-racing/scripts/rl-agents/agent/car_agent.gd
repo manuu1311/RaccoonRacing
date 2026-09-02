@@ -16,14 +16,14 @@ class_name CarAgent
 ## offset to account for car shape in car distance calculation
 @export var car_detection_offset:=42
 ## max jump height
-@export var max_jump_height:=1.0
+@export var max_jump_height:=30.0
 @export_group("Debug Settings")
 @export var debug_rays_flag:bool=true
 @export var debug_wall_color:Color=Color.RED
 @export var debug_jumpwall_color:Color=Color.YELLOW
 @export var debug_empty_color:Color=Color.GREEN
 @export var debug_ray_width:int=2
-@export var debug_stats_flag:bool=false
+@export var debug_stats_flag:bool=true
 #endregion
 
 #region agent input variables
@@ -37,7 +37,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	sensor_output=sensors.get_observation()
-	#car_state=_get_internal_state(car)
+	car_state=_get_internal_state(car)
 	if debug_rays_flag or debug_stats_flag:
 		queue_redraw()
 
@@ -232,16 +232,17 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	else:
 		vectorized[1]=-speed.y/max_speed[0]
 	vectorized[2]=car_inst.jumpCurrheight/max_jump_height
-	vectorized[3]=car_inst.jumpPrevheight/max_jump_height
+	vectorized[3]=(car_inst.jumpPrevheight/max_jump_height)
 	# STATUS FLAGS
 	# is jumping flag
 	if car_inst.jumpCurrheight>1:
 		vectorized[4]=1.0
 	else:
 		vectorized[4]=0.0
+		
 	if car_inst.bs:
 		vectorized[5]=1.0
-		vectorized[6]=1.0 if car_inst.bsf else 0.0
+		vectorized[6]=1.0 if car_inst.bsf else -1.0
 	else:
 		vectorized[5]=0.0
 		vectorized[6]=0.0
@@ -362,15 +363,13 @@ func _draw() -> void:
 	
 	if debug_stats_flag:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
-		var txt_arrays: Array[String] = [
-			'speedx:','speedy:','jumpnow:','jumpbef:','isjumping:',
-			'bs:','bs dir:','bsx:','bsxval:','friction:',
-			]
 		var text_val:String
-		for i in range(len(car_state)):
+		car_state=_get_internal_state(car)
+		var indexes:=[2,3,4]
+		for i:int in indexes:
 			text_val = "%.1f" % (car_state[i])
 			draw_string(
-					font, text_position, txt_arrays[i]+text_val, 
+					font, text_position, text_val, 
 					HORIZONTAL_ALIGNMENT_CENTER, -1, font_size,
 					Color.BLUE
 					)

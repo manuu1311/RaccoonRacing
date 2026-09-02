@@ -10,30 +10,22 @@ var car: Car
 var poly: PackedVector2Array = PackedVector2Array()
 var rng := RandomNumberGenerator.new()
 
-var left_by_slot: Dictionary = {}
-var right_by_slot: Dictionary = {}
-var segment_shapes: Dictionary = {} # Changed from Array to Dictionary
+var left_by_slot: Dictionary[int,Vector2] = {}
+var right_by_slot: Dictionary[int,Vector2] = {}
+var segment_shapes: Dictionary[int,CollisionPolygon2D] = {}
 
 var max_slot: int = -1
 var usetime: int = NetworkTime.seconds_to_ticks(2.0)
-var lifetime: int = NetworkTime.seconds_to_ticks(8.0)
+var lifetime: int = NetworkTime.seconds_to_ticks(20.0)
 var left: Vector2 = Vector2(-45, 50)
 var right: Vector2 = Vector2(45, 50)
-var jitterstrength: float = 20.0
 var tickinterval: int = 5
 var growtick: int
 var fadetick: int
 var spawntick: int
-var carsintrail: Array[Car] = []
-var last_point_pos: Vector2 = Vector2.ZERO
-var has_last_point: bool = false
-var min_forward_progress: float = 4.0 
 var center_by_slot: Dictionary = {}
-var half_width: float = 0.0
 
 func _ready() -> void:
-	area_2d.area_entered.connect(_on_enter)
-	area_2d.area_exited.connect(_on_exit)
 	
 	spawntick = NetworkTime.tick
 	growtick = spawntick + usetime
@@ -48,10 +40,13 @@ func _ready() -> void:
 		max_slot = -1
 
 func _process(_delta: float) -> void:
+	_restore_cars_variables()
 	var curtick: int = NetworkTime.tick
 	if curtick > fadetick:
 		queue_free()
 		return
+		
+	_car_collision_check()
 		
 	if curtick > growtick:
 		return
@@ -62,15 +57,10 @@ func _process(_delta: float) -> void:
 	if curtick < growtick:
 		add_point()
 
-func Despawn() -> void:
-	for shape: CollisionPolygon2D in segment_shapes.values():
-		if is_instance_valid(shape):
-			shape.disabled = true
-	for c in carsintrail:
-		if is_instance_valid(c):
-			c.OutOfIce()
-	carsintrail.clear()
 
+func _restore_cars_variables()->void:
+	for player:Player in GameData.PlayersArr:
+		_on_exit(player.car)
 
 func add_point() -> void:
 	if not car:
@@ -158,20 +148,22 @@ func _remove_oldest_slot() -> void:
 		
 	base_slot += 1
 
-func _on_enter(body: Area2D) -> void:
-	if body.is_in_group("Body"):
-		var carinst: Car = _get_car_from_body(body)
-		if carinst and not carsintrail.has(carinst):
-			carsintrail.append(carinst)
-			carinst.SetOnIce()
+func _on_enter(car_inst:Car) -> void:
+	car_inst.SetOnIce()
 
-func _on_exit(body: Area2D) -> void:
-	var carinst: Car = _get_car_from_body(body)
-	if carinst in carsintrail:
-		carsintrail.erase(carinst)
-		carinst.OutOfIce()
+func _on_exit(car_inst: Car) -> void:
+		car_inst.OutOfIce()
 
-func _get_car_from_body(body: Area2D) -> Car:
-	if body and body.get_parent() and body.get_parent().get_parent():
-		return body.get_parent().get_parent() as Car
-	return null
+func _car_collision_check()->void:
+	var car_inst:Car
+	for player:Player in GameData.PlayersArr:
+		car_inst=player.car
+		if car_inst.jumpCurrheight>car.heightOverWall or car_inst.isInvincible:
+			continue
+		for point:Node2D in car_inst.collisionPoints:
+			if Geometry2D.is_point_in_polygon(to_local(point.global_position), polygon_2d.polygon):
+				_on_enter(car_inst)
+
+
+func _exit_tree() -> void:
+	_restore_cars_variables()
