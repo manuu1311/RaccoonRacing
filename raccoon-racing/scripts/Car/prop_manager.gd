@@ -97,18 +97,22 @@ func UseProp()->void:
 					propArr.append(BoneProp.new(player))
 					ClearPropBox();
 				6:
-					var j:int = 0;
-					while(j < GameData.PlayersArr.size()):
-						var newplayer:Player=GameData.PlayersArr[GameData.Ranking[j]]
+					var found_player:Player=null
+					var min_dist:=750*750.0
+					for newplayer: Player in GameData.PlayersArr:
 						if(newplayer.PlayerID!=player.PlayerID): 
 							if(not newplayer.car.isResetting and not newplayer.car.isInvincible):
-								var dist:Vector2=newplayer.car.global_position-player.car.global_position
-								if(dist.length() < 750):
-									newplayer.prop.propArr.append(ShrinkProp.new(newplayer,player.car))
-									ClearPropBox();
-									break
-						j+=1;
-					if(j >= GameData.PlayersArr.size()):
+								var dist:=(
+										newplayer.car.global_position-player.car.global_position
+										).length_squared()
+								if(dist < min_dist):
+									if dist<min_dist:
+										found_player=newplayer
+										min_dist=dist
+					if found_player!=null:
+						found_player.prop.propArr.append(ShrinkProp.new(found_player,player.car))
+						ClearPropBox();
+					else:
 						player.prop.propArr.append(ShrinkProp.new(player,null))
 						ClearPropBox();
 				#default
