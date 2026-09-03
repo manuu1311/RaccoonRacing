@@ -7,6 +7,7 @@ var ResetTimer:Timer
 var AiResetTime:int=10
 var AiLastCheckPoint:int
 var IsOnlyAttPlayer:bool=false
+var _reset_enabled:=false
 
 func RunPropBox(x:float,y:float)->void:
 	if hud==null:
@@ -212,9 +213,10 @@ func _handle_prop_type_nine() -> bool:
 
 
 func AutoReSetCar()->void:
-	if(AiLastCheckPoint != car.NowPointId):
-		ResetTimer.start()
-		AiLastCheckPoint = car.NowPointId;
+	if _reset_enabled:
+		if(AiLastCheckPoint != car.NowPointId):
+			ResetTimer.start()
+			AiLastCheckPoint = car.NowPointId;
 
 func ActionCar(action:int)->void:
 	if(car.playering && not car.isSleep):
@@ -241,22 +243,21 @@ func DoAction(action:int)->void:
 func Stoprace()->void:
 	AiPlayering = false;
 	car.playering = false;
-	ResetTimer.stop()
-	#for propinst:Prop in prop.propArr:
-		#prop.Delprop(propinst)
-	#prop.propArr=[]
+	if _reset_enabled:
+		ResetTimer.stop()
 	car.NowPointId=0
 
 func Reset()->void:
-	car.playering = false;
-	car.isResetting = true;
-	var newpos:Vector2 = car.map.Points[car.NowPointId - 1];
-	var anglediff:float=(car.map.Points[car.NowPointId]-newpos).angle()
-	car.Reset(newpos,anglediff)
-	car.speed=Vector2(0,0)
-	await car.get_tree().create_timer(1).timeout
-	if is_instance_valid(car):
-		RestartRace()
+	if _reset_enabled:
+		car.playering = false;
+		car.isResetting = true;
+		var newpos:Vector2 = car.map.Points[car.NowPointId - 1];
+		var anglediff:float=(car.map.Points[car.NowPointId]-newpos).angle()
+		car.Reset(newpos,anglediff)
+		car.speed=Vector2(0,0)
+		await car.get_tree().create_timer(1).timeout
+		if is_instance_valid(car):
+			RestartRace()
 
 func RestartRace()->void:
 	car.isResetting = false;
@@ -268,12 +269,13 @@ func StartRace()->void:
 	car.playering = true;
 	car.isLock = false;
 	car.speed=Vector2.ZERO
-	ResetTimer=Timer.new()
-	car.add_child(ResetTimer)
-	ResetTimer.one_shot=true
-	ResetTimer.wait_time=AiResetTime
-	ResetTimer.start()
-	ResetTimer.timeout.connect(Reset)
+	if _reset_enabled:
+		ResetTimer=Timer.new()
+		car.add_child(ResetTimer)
+		ResetTimer.one_shot=true
+		ResetTimer.wait_time=AiResetTime
+		ResetTimer.start()
+		ResetTimer.timeout.connect(Reset)
 	# 75% chance for fast AI (reflect_time = 10)
 	var best_chance:float = 0.75
 	# 5% chance for slow AI (reflect_time = 25)

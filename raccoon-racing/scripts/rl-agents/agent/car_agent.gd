@@ -14,7 +14,7 @@ class_name CarAgent
 ## maximum car detection range (after which observation is saturated)
 @export var car_detection_range:=1200
 ## offset to account for car shape in car distance calculation
-@export var car_detection_offset:=42
+@export var car_detection_offset:=60
 ## max jump height
 @export var max_jump_height:=30.0
 @export_group("Debug Settings")
@@ -110,12 +110,14 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 ## [br]
 ## • [code][30,31][/code]: Relative distance
 ## [br]
-## • [code][32][/code]: Flag: is distance saturated (car out of range)
+## • [code][32][/code]: Relative scalar distance
+## [br]
+## • [code][33][/code]: Flag: is distance saturated (car out of range)
 ## [br]
 ## @return PackedFloat32Array containing flattened float features.
 func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(33)
+	vectorized.resize(34)
 	var speed:=_speed_to_relative(car_inst.speed)
 	# since opponent can move at maximum speed in any axis, relative to own car
 	vectorized[0]=speed.x/max_speed[1]
@@ -174,19 +176,25 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	vectorized[29]=cos(car_inst.global_rotation-car.global_rotation)
 	# are relative coordinates better, or direction and magnitude?
 	# with magnitude, i have to calculate a square root (length calculation)
-	var relative_coords : Vector2 = _position_to_relative(car_inst.global_position)
+	var relative_coords : Vector2 = _position_to_relative(
+				car_inst.global_position)
 	vectorized[30] = _normalize_dist(
 				relative_coords[0],car_detection_range,car_detection_offset,true
 	)
 	vectorized[31] = _normalize_dist(
 				relative_coords[1],car_detection_range,car_detection_offset,true
 	)
+	# scalar distance
+	vectorized[32]=_normalize_dist(
+				relative_coords.length(),car_detection_range,
+				car_detection_offset,true
+	)
 	# one axis out of range: car not present in range (saturated signal)
 	if relative_coords[0]>car_detection_range or relative_coords[1]>car_detection_range:
-		vectorized[32]=0.0
+		vectorized[33]=0.0
 	# car present in range
 	else:
-		vectorized[32]=1.0
+		vectorized[33]=1.0
 	
 	return vectorized
 
@@ -365,7 +373,7 @@ func _draw() -> void:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
 		car_state=_get_opponent_state(GameData.PlayersArr[1].car)
-		var indexes:=[27,28,29,30,31,32,33,34,35,36,37,38,39,40,41]
+		var indexes:=[28,29,30,31,32,33]
 		for i:int in indexes:
 			text_val = "%.1f" % (car_state[i])
 			draw_string(
