@@ -143,7 +143,7 @@ func GetHitStatusAng(tx:float, ty:float)->float:
 		var _loc5_:float = tx + _loc3_.x;
 		var _loc4_:float = ty + _loc3_.y;
 		var _loc2_:EdLine = map.ed.getHitFace(Vector2(_loc5_,_loc4_));
-		if(_loc2_ != null):
+		if _loc2_!=null:
 			return _loc2_.GetAngle();
 	return NAN
 

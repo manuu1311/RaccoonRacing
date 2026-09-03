@@ -105,6 +105,29 @@ func getHitFace(point:Vector2)->EdLine:
 		i+=1
 	return null;
 
+
+
+#find which shape is touched at point.x,point.y
+func getHitFace_array(point:Vector2)->Array[EdLine]:
+	var output_array:Array[EdLine]
+	#additional safety check, flash is more forgiving: if arrays are empty, return null
+	#if length is 0, arrays not initialized->prevent division by zero
+	if LengthX==0 or LengthY==0:
+		return output_array
+	var cellx:int = int((point.x - minX) / LengthX);
+	var celly:int = int((point.y - minY) / LengthY);
+	if cellx<0 or cellx>=len(SurfaceArr):return output_array
+	if celly<0 or celly>=len(SurfaceArr[cellx]):return output_array
+	for item:EdLine in SurfaceArr[cellx][celly]:
+		if item.HitTest(point.x, point.y) and not output_array.has(item):
+			output_array.append(item)
+			#return output_array
+	for item:EdLine in newSurfaceArr:
+		if item.HitTest(point.x, point.y) and not output_array.has(item):
+			output_array.append(item)
+			#return output_array
+	return output_array;
+
 func del_ed(ed_id: int) -> void:
 	# 1. Clean out the 2D grid cells safely
 	for col in SurfaceArr:

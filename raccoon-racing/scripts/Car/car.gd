@@ -495,13 +495,15 @@ func GetHitEvent(tx:float, ty:float,unsynced:bool=false)->void:
 	var pointid:int = 1
 	var pointpos:Vector2
 	var point: Node2D
-	var collided: EdLine
+	var collided: Array[EdLine]
 	while(pointid < 5):
 		point=collisionPoints[pointid-1]
 		pointpos=point.position+Vector2(tx,ty)
-		collided=map.edevent.getHitFace(pointpos)
-		if(collided!=null):
-			map.GetHitEventStatus(collided.getId(),playerID,unsynced)
+		collided=map.edevent.getHitFace_array(pointpos)
+			
+		if len(collided)>0:
+			for line:EdLine in collided:
+				map.GetHitEventStatus(line.getId(),playerID,unsynced)
 			return
 		pointid+=1
 	
@@ -512,7 +514,7 @@ func GetHitStatusAng(tx:float,ty:float)->float:
 		var pointpos:Vector2=point.position
 		pointpos+=Vector2(tx,ty)
 		var lineCollided:EdLine = map.ed.getHitFace(pointpos)
-		if(lineCollided!=null):
+		if lineCollided!=null:
 			for jumpCoord:int in map.canBeJumpWall:
 				if (jumpCurrheight>heightOverWall and jumpCoord==lineCollided.getId()):
 					return NAN
