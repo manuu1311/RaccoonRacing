@@ -373,7 +373,7 @@ func _draw() -> void:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
 		car_state=_get_opponent_state(GameData.PlayersArr[1].car)
-		var indexes:=[28,29,30,31,32,33]
+		var indexes:=[11,12,19,20]
 		for i:int in indexes:
 			text_val = "%.1f" % (car_state[i])
 			draw_string(
