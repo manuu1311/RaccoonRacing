@@ -13,7 +13,7 @@ var rng := RandomNumberGenerator.new()
 
 # --- timing -----------------------------------------------------------
 var usetime: int = NetworkTime.seconds_to_ticks(2.0)
-var lifetime: int = NetworkTime.seconds_to_ticks(80.0)
+var lifetime: int = NetworkTime.seconds_to_ticks(20.0)
 var growtick: int
 var fadetick: int
 var spawntick: int
@@ -27,7 +27,7 @@ var right: Vector2 = Vector2(45, 75)
 # from 5 - each patch is now a jittered, textured chunk on its own, so you
 # don't need as many of them close together to read as "icy". The adaptive
 # angle check below still kicks in on sharp turns regardless of this value.
-var tickinterval: int = 15
+var tickinterval: int = 12
 # Force an extra sample as soon as the car has turned this much since the
 # last sample, regardless of tickinterval. This is what keeps every segment
 # quad "thin" so it can never fold over itself on a sharp turn.

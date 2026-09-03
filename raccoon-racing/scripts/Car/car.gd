@@ -635,8 +635,8 @@ func SetOnIce()->void:
 	if isInvincible:
 		return
 	isAtIce=true
-	maxRotationWheel *= 2*(DefaultmaxRotationWheel);
-	carRotationWheel *= 2*(DefaultRotationWheel);
+	maxRotationWheel *= 1.1*(DefaultmaxRotationWheel);
+	carRotationWheel *= 1.1*(DefaultRotationWheel);
 	glideGratingNum = 0;
 	rollGratingNum = 0;
 	grassGratingNum = 0;
