@@ -78,9 +78,9 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 		return (log_0_to_1 * 2.0) - 1.0
 
 
-## Computes and returns the flattened observation array for the kart.
+## Computes and returns the flattened observation array for the agent kart.
 ## [br]
-## Returns a [PackedFloat32Array] containing 33 normalized feature elements, 
+## Returns a [PackedFloat32Array] containing 42 normalized feature elements, 
 ## structured into the following observation groups:
 ## [br]
 ## [b]Speed & Physics (Indices 0–2)[/b]
@@ -96,7 +96,7 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 ## • [code][9][/code]: Is at ice flag
 ## • [code][10][/code]: Friction (how close car is to bs)
 ## [br]
-## [b]Status & Power-Ups (Indices 11–26)[/b]
+## [b]Status & Power-Ups (Indices 11–42)[/b]
 ## • [code][11..26][/code]: Currently active props, and its duration. Nominally: 
 ## [br]
 ## • [b]Sleep[/b] [code][11,12][/code], [b]Boost[/b] [code][13,14][/code], [b]Star[/b] [code][15,16][/code], 
@@ -106,13 +106,13 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 ## [br]
 ## • [code][27][/code]: Can use prop flag
 ## [br]
-# [code][28,29][/code] [code][11,12][/code]
-## [b]Position relative to agent (Indices 28-32[/b]
-## • [code][28,29][/code]: Car relative rotation, expressed as sin,cos
-## • [code][30,31][/code]: Car relative position
-## • [code][32][/code]: Car at range flag: is car at range? When out of range, 
-## the signal is saturated
-## @return PackedFloat32Array containing 33 flattened float features.
+## • [code][28,29][/code]: Relative rotation (sin, cos)
+## [br]
+## • [code][30,31][/code]: Relative distance
+## [br]
+## • [code][32][/code]: Flag: is distance saturated (car out of range)
+## [br]
+## @return PackedFloat32Array containing flattened float features.
 func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
 	vectorized.resize(33)
@@ -218,7 +218,7 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 ## [br]
 ## • [code][27][/code]: Can use prop flag
 ## [br]
-## [b]One hot encoding of all possible props (Indices 28-42[/b]
+## [b]One hot encoding of all possible props (Indices 28-41[/b]
 ## @return PackedFloat32Array containing 33 flattened float features.
 func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
@@ -364,8 +364,8 @@ func _draw() -> void:
 	if debug_stats_flag:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
-		car_state=_get_internal_state(car)
-		var indexes:=[23,24,25,26]
+		car_state=_get_opponent_state(GameData.PlayersArr[1].car)
+		var indexes:=[27,28,29,30,31,32,33,34,35,36,37,38,39,40,41]
 		for i:int in indexes:
 			text_val = "%.1f" % (car_state[i])
 			draw_string(

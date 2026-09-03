@@ -776,6 +776,8 @@ func stop_wheel()->void:
 	
 #spawn smoke particle
 func spawn_smoke(type:String, lr:bool)->void:
+	if Game.is_training:
+		return
 	if(not isHovercraft() and jumpCurrheight < 1):
 		var smokeinst:Node2D
 		if type=='smoke1':

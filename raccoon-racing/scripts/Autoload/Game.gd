@@ -7,6 +7,8 @@ signal PlayersReady(tick:int)
 var IsSplitScreen:bool=false
 var LocalPlayers:int=1
 
+# if training
+var is_training:bool=true
 
 @rpc("any_peer", "reliable")
 func server_receive_ready(peer_id: int)->void:
