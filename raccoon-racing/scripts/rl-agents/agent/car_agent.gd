@@ -102,7 +102,7 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 ## • [b]Sleep[/b] [code][11,12][/code], [b]Boost[/b] [code][13,14][/code], [b]Star[/b] [code][15,16][/code], 
 ## [b]Shield[/b] [code][17,18][/code], [b]Small state[/b] [code][19,20][/code], 
 ## [b]Ice trail[/b] [code][21,22][/code], [b]Bone[/b] [code][23,24][/code], [b]Bone position[/b],
-## relative to the car, expressed in sin,cos [/code][25,26][/code]
+## relative to the car, expressed in sin,cos [code][25,26][/code]
 ## [br]
 ## • [code][27][/code]: Can use prop flag
 ## [br]
@@ -214,7 +214,7 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 ## • [b]Sleep[/b] [code][11,12][/code], [b]Boost[/b] [code][13,14][/code], [b]Star[/b] [code][15,16][/code], 
 ## [b]Shield[/b] [code][17,18][/code], [b]Small state[/b] [code][19,20][/code], 
 ## [b]Ice trail[/b] [code][21,22][/code], [b]Bone[/b] [code][23,24][/code], [b]Bone position[/b],
-## relative to the car, expressed in sin,cos [/code][25,26][/code]
+## relative to the car, expressed in sin,cos [code][25,26][/code]
 ## [br]
 ## • [code][27][/code]: Can use prop flag
 ## [br]
@@ -303,17 +303,17 @@ func _position_to_relative(pos:Vector2)->Vector2:
 	return (pos-car.global_position).rotated(-car.rotation)
 
 func _process_prop(vectorized:PackedFloat32Array, offset:int, prop:Prop)->bool:
-	if prop:
+	if prop!=null:
 		# flag
 		vectorized[offset]=1.0
 		# time until reset
-		vectorized[offset+1]=1-(float(prop.tick_end-NetworkTime.tick)/
+		vectorized[offset+1]=(float(prop.tick_end-NetworkTime.tick)/
 				NetworkTime.seconds_to_ticks(prop.use_time))
 		return true
 	else:
 		# reset flag
 		vectorized[offset]=0.0
-		vectorized[offset+1]=1.0
+		vectorized[offset+1]=0.0
 		return false
 
 
@@ -365,7 +365,7 @@ func _draw() -> void:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
 		car_state=_get_internal_state(car)
-		var indexes:=[2,3,4]
+		var indexes:=[23,24,25,26]
 		for i:int in indexes:
 			text_val = "%.1f" % (car_state[i])
 			draw_string(
