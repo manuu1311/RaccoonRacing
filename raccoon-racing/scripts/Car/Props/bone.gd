@@ -25,7 +25,7 @@ func Clear()->void:
 	tick_end = NetworkTime.tick
 
 func run_tick() -> void:
-	player.car.prop_effector.bone.scale*=1.0007
+	player.car.prop_effector.bone.scale*=1.003
 	if NetworkTime.tick >= tick_end:
 		_expire()
 

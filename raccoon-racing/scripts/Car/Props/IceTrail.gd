@@ -15,7 +15,7 @@ func _init(playerinst: Player) -> void:
 		icetrail.queue_free()
 	player.car.sounds.playIceSound()
 	_spawn_trail()
-	use_time=trail.usetime
+	use_time=2
 	tick_end = NetworkTime.tick + int(NetworkTime.tickrate * use_time)
 	
 	

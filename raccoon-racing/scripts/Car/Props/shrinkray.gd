@@ -23,7 +23,6 @@ func _init(player_inst: Player, attacker_car: Car) -> void:
 	tick_end=NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time)
 	_apply_shrink_effect()
 	create_beam()
-	
 
 func create_beam() -> void:
 	# Ray still spawns here since we need the scene tree
@@ -42,8 +41,8 @@ func create_beam() -> void:
 
 func _apply_shrink_effect() -> void:
 	if not is_instance_valid(attacker):
-		await player.car.get_tree().create_timer(use_time).timeout
-		delme()
+		tick_end=NetworkTime.tick
+		delme.call_deferred()
 		return
 
 	# Shrink player (the victim), not the attacker
