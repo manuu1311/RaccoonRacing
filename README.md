@@ -76,6 +76,29 @@ Play the original 👉[**here**](https://www.flashgames.it/raccoon.racing.html)�
 </table>
 </details>
 
+
+## Roadmap
+
+The game itself is feature-complete, every system below works as intended. What's left is the RL milestone.
+
+| Status | Task |
+|---|---|
+| ☑️ | Game recreation |
+| ☑️ | Online multiplayer support |
+| ☑️ | LAN multiplayer support |
+| ☑️ | Mobile support |
+| ☑️ | Joypad support |
+| ⬜ | RL integration |
+| ⬜ | RL agent training |  
+
+**Current focus:** building a reinforcement learning environment on top of the finished game to train two specialized agents with different objectives:
+ 
+- **Racing agent** : trained purely to win: optimal lines, item timing, race strategy.
+- **Aggressive agent** : trained to disrupt the human player specifically: mine placement and targeted interference, optimized for disruption rather than race performance.
+
+
+<img src="github-data/Screenshots/agent_sensing.png" alt="Logo" width="300" />
+
 ## Features
  
 **Gameplay**
@@ -115,25 +138,6 @@ Play the original 👉[**here**](https://www.flashgames.it/raccoon.racing.html)�
 | Accelerate | ↑ | W | A / R2 |
 | Brake/Reverse | ↓ | S | B / L2 |
 | Item | Space | Z | X / L1 |
-
-## Roadmap
-
-The game itself is feature-complete, every system below works as intended. What's left is the RL milestone.
-
-| Status | Task |
-|---|---|
-| ☑️ | Game recreation |
-| ☑️ | Online multiplayer support |
-| ☑️ | LAN multiplayer support |
-| ☑️ | Mobile support |
-| ☑️ | Joypad support |
-| ⬜ | RL integration |
-| ⬜ | RL agent training |  
-
-**Current focus:** building a reinforcement learning environment on top of the finished game to train two specialized agents with different objectives:
- 
-- **Racing agent** : trained purely to win: optimal lines, item timing, race strategy.
-- **Aggressive agent** : trained to disrupt the human player specifically: mine placement and targeted interference, optimized for disruption rather than race performance.
  
 ## Disclaimer
  
