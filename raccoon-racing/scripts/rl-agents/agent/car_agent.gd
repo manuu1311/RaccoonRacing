@@ -363,7 +363,7 @@ func _draw() -> void:
 				processed_distance=_normalize_raycast(
 							hit_distance,ray_length,raycast_sensors_offset,true,true
 							)
-				text_val = "%.1f" % (processed_distance)
+				text_val = "%.2f" % (processed_distance)
 				
 			# Draw the ray line
 			draw_line(car.position, end_point, line_color, debug_ray_width)
