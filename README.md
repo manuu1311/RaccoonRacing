@@ -97,7 +97,7 @@ The game itself is feature-complete, every system below works as intended. What'
 - **Aggressive agent** : trained to disrupt the human player specifically: mine placement and targeted interference, optimized for disruption rather than race performance.
 
 <div align="center">
-<img src="github-data/Screenshots/agent_sensing.png" alt="Logo" width="auto" />
+<img src="github-data/Screenshots/agent_sensing.png" alt="Logo" width="650" />
 <div>
 
  
