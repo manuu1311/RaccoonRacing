@@ -98,7 +98,7 @@ The game itself is feature-complete, every system below works as intended. What'
 
 <div align="center">
 <img src="github-data/Screenshots/agent_sensing.png" alt="Logo" width="650" />
-<div>
+</div>
 
  
 ## Features
