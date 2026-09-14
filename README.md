@@ -96,9 +96,11 @@ The game itself is feature-complete, every system below works as intended. What'
 - **Racing agent** : trained purely to win: optimal lines, item timing, race strategy.
 - **Aggressive agent** : trained to disrupt the human player specifically: mine placement and targeted interference, optimized for disruption rather than race performance.
 
+<div align="center">
+<img src="github-data/Screenshots/agent_sensing.png" alt="Logo" width="auto" />
+<div>
 
-<img src="github-data/Screenshots/agent_sensing.png" alt="Logo" width="300" />
-
+ 
 ## Features
  
 **Gameplay**
