@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://xsyvxxy8cstm" path="res://scripts/map/Props/jump_in_map.gd" id="1_h1bbf"]
 [ext_resource type="Texture2D" uid="uid://dajmigfa8iml3" path="res://Assets/Images/maps/Props/jumppad.png" id="2_cqe7p"]
 
-[node name="JumpInMap" type="Node2D" unique_id=1367505087]
+[node name="JumpInMap" type="Node2D" unique_id=1367505087 groups=["jump_pad"]]
 script = ExtResource("1_h1bbf")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1111118736]

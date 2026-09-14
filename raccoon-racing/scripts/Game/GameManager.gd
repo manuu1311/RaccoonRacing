@@ -87,8 +87,8 @@ func CreatePlayers()->void:
 			carinstance.CharID=newid
 		add_child(carinstance)
 		carinstance.name="Car"+str(player.PlayerID)
-		carinstance.global_position=map.StartPosArr[i].global_position
-		carinstance.rotation=map.StartPosArr[i].rotation
+		carinstance.global_position=map.StartPosArr[i]
+		carinstance.rotation=map.StartPosArrRot[i]
 		player.ResetPlayer(i)
 		if GameData.IsMultiplayer and not NetworkManager.is_host:
 			Game.server_receive_ready.rpc_id(1,NetworkManager.PlayerID)

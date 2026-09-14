@@ -23,7 +23,8 @@ class_name CarAgent
 @export var debug_jumpwall_color:Color=Color.YELLOW
 @export var debug_empty_color:Color=Color.GREEN
 @export var debug_ray_width:int=2
-@export var debug_stats_flag:bool=true
+@export var debug_stats_flag:bool=false
+@export var debug_opponent_flag:bool=true
 #endregion
 
 #region agent input variables
@@ -327,6 +328,7 @@ func _process_prop(vectorized:PackedFloat32Array, offset:int, prop:Prop)->bool:
 
 #endregion
 
+#region debug
 func _draw() -> void:
 	var font: Font = ThemeDB.fallback_font
 	var font_size: int = 12
@@ -384,6 +386,93 @@ func _draw() -> void:
 			text_position+=Vector2(0,-15)
 			
 			
+	if debug_opponent_flag:
+		# draw rectangle
+		car_state=_get_opponent_state(GameData.PlayersArr[1].car)
+		# x and y distance
+		var raw_x: float = _denormalize_dist(
+			car_state[30], car_detection_range, car_detection_offset, true
+			)
+		var raw_y: float = _denormalize_dist(
+			car_state[31], car_detection_range, car_detection_offset, true
+			)
+		var dist:=Vector2(raw_x,raw_y).rotated(car.rotation)
+		var rect_pos: Vector2 = car.position + dist - Vector2(25, 25)
+		var rect: Rect2 = Rect2(rect_pos, Vector2(50, 50))
+		draw_rect(rect, Color.GOLD, false, 2.0)
+		# draw arrow
+		# x and y velocity
+		#var vel:=Vector2(
+			#car_state[0],-car_state[1]).rotated(car.rotation
+			#)*max_speed[1]*15
+		#_draw_arrow(
+			#car.position+dist,car.position+dist+vel,Color.CRIMSON
+		#)
+		# draw string
+		var text_pos: Vector2 = Vector2(rect_pos.x, rect_pos.y - 8)
+		draw_string(
+			font, text_pos, "Opponent", HORIZONTAL_ALIGNMENT_LEFT, 
+			-1, font_size, Color.BLACK
+			)
+	var jump_pads: Array[Node2D] = []
+	jump_pads.assign(get_tree().get_nodes_in_group("jump_pad"))
+	for pad in jump_pads:
+		var pad_center: Vector2 = to_local(pad.global_position)
+
+		# move canvas origin to the pad center and apply pad's rotation
+		draw_set_transform(pad_center, pad.global_rotation, Vector2.ONE)
+
+		# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
+		var local_rect: Rect2 = Rect2(Vector2(-50, -50), Vector2(100, 100))
+		draw_rect(local_rect, Color.AQUAMARINE, false, 2.0)
+		
+		draw_set_transform(pad_center, pad.global_rotation-3.14/2, Vector2.ONE)
+		draw_string(
+			font, Vector2(-50, -58), "Jump Pad", HORIZONTAL_ALIGNMENT_LEFT, 
+			-1, font_size, Color.BLACK
+			)
+
+		# reset transform so other draw calls aren't affected
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+		
 			
 			
-			
+func _draw_arrow(start: Vector2, end: Vector2, color: Color, width: float = 2.0) -> void:
+	# Main vector line
+	draw_line(start, end, color, width)
+	
+	# Arrowhead geometry
+	var dir: Vector2 = (end - start).normalized()
+	var arrowhead_size: float = 8.0
+	var left_wing: Vector2 = end - dir.rotated(deg_to_rad(30)) * arrowhead_size
+	var right_wing: Vector2 = end - dir.rotated(deg_to_rad(-30)) * arrowhead_size
+	
+	draw_line(end, left_wing, color, width)
+	draw_line(end, right_wing, color, width)
+
+
+func _denormalize_dist(norm_val: float, max_dist: float, offset: int, zero_range: bool, inverse: bool = true) -> float:
+	if zero_range:
+		var sign_factor: float = signf(norm_val)
+		var magnitude: float = absf(norm_val)
+		
+		# reverse the inverse flag
+		var log_0_to_1: float = (1.0 - magnitude) if inverse else magnitude
+		
+		# reverse log compression using exponentiation: e^(log_0_to_1 * ln(1 + max_dist)) - 1
+		var clamped_dist: float = exp(log_0_to_1 * log(1.0 + max_dist)) - 1.0
+		
+		# reverse offset and restore sign
+		var dist: float = (clamped_dist + offset) * sign_factor
+		return dist
+	else:
+		# remap [-1.0, 1.0] back to [0.0, 1.0]
+		var log_0_to_1: float = (norm_val + 1.0) / 2.0
+		
+		# reverse log compression
+		var clamped_dist: float = exp(log_0_to_1 * log(1.0 + max_dist)) - 1.0
+		
+		# reverse offset
+		var dist: float = clamped_dist + offset
+		return dist
+#endregion
