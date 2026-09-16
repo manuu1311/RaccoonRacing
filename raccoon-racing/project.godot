@@ -83,6 +83,14 @@ Body="Car collision bodies"
 default_focus="Default focus for controller"
 icetrail=""
 jump_pad=""
+mine=""
+bs=""
+furball=""
+honey_mine=""
+missile=""
+prop=""
+missile_kn=""
+speed_pad=""
 
 [input]
 
