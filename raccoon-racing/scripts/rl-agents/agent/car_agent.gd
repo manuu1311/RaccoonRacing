@@ -23,7 +23,7 @@ class_name CarAgent
 @export var debug_jumpwall_color:Color=Color.YELLOW
 @export var debug_empty_color:Color=Color.GREEN
 @export var debug_ray_width:int=2
-@export var debug_stats_flag:bool=false
+@export var debug_stats_flag:bool=true
 @export var debug_opponent_flag:bool=true
 #endregion
 
@@ -115,10 +115,12 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 ## [br]
 ## • [code][33][/code]: Flag: is distance saturated (car out of range)
 ## [br]
+## • [code][34][/code]: Scalar velocity, with orientation towards the agent
+## [br]
 ## @return PackedFloat32Array containing flattened float features.
 func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(34)
+	vectorized.resize(36)
 	var speed:=_speed_to_relative(car_inst.speed)
 	# since opponent can move at maximum speed in any axis, relative to own car
 	vectorized[0]=speed.x/max_speed[1]
@@ -181,21 +183,33 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 				car_inst.global_position)
 	vectorized[30] = _normalize_dist(
 				relative_coords[0],car_detection_range,car_detection_offset,true
-	)
+				)
 	vectorized[31] = _normalize_dist(
 				relative_coords[1],car_detection_range,car_detection_offset,true
-	)
+				)
 	# scalar distance
 	vectorized[32]=_normalize_dist(
 				relative_coords.length(),car_detection_range,
 				car_detection_offset,true
-	)
+				)
 	# one axis out of range: car not present in range (saturated signal)
-	if relative_coords[0]>car_detection_range or relative_coords[1]>car_detection_range:
+	if abs(relative_coords.x) > car_detection_range or abs(relative_coords.y) > car_detection_range:
 		vectorized[33]=0.0
 	# car present in range
 	else:
 		vectorized[33]=1.0
+	var closing_speed := 0.0
+	var dist_len := relative_coords.length()
+	if relative_coords.length() > 0.0001:
+		var dir_to_opponent := relative_coords / dist_len
+		closing_speed = -speed.dot(dir_to_opponent)
+		vectorized[34] = clamp(closing_speed / max_speed[1], -1.0, 1.0)
+		var ego_relative_speed := _speed_to_relative(car.speed)
+		var ego_approach_speed := ego_relative_speed.dot(dir_to_opponent)
+		vectorized[35] = clamp(ego_approach_speed / max_speed[1], -1.0, 1.0)
+	else:
+		vectorized[34] = 0.0
+		vectorized[35] = 0.0
 	
 	return vectorized
 
@@ -375,7 +389,7 @@ func _draw() -> void:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
 		car_state=_get_opponent_state(GameData.PlayersArr[1].car)
-		var indexes:=[11,12,19,20]
+		var indexes:=[34,35]
 		for i:int in indexes:
 			text_val = "%.1f" % (car_state[i])
 			draw_string(
