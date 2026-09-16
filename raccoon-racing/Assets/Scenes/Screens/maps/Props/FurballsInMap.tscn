@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sir00"]
 size = Vector2(12, 12)
 
-[node name="FurballsInMap" type="Node2D" unique_id=910801965]
+[node name="FurballsInMap" type="Node2D" unique_id=910801965 groups=["furball"]]
 script = ExtResource("1_xif3h")
 
 [node name="BombEffect" parent="." unique_id=980782167 instance=ExtResource("2_sir00")]

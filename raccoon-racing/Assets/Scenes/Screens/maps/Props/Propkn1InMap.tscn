@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyfy2"]
 size = Vector2(12, 67)
 
-[node name="Propkn1InMap" type="Node2D" unique_id=882607727]
+[node name="Propkn1InMap" type="Node2D" unique_id=882607727 groups=["missile_kn"]]
 script = ExtResource("1_nyfy2")
 
 [node name="BottomEffect" type="Node2D" parent="." unique_id=253487415]

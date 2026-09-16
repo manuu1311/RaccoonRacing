@@ -15,6 +15,8 @@ class_name CarAgent
 @export var car_detection_range:=1200
 ## offset to account for car shape in car distance calculation
 @export var car_detection_offset:=60
+## buffer size for static hazards
+@export var static_hazard_buffer_length:=4
 ## max jump height
 @export var max_jump_height:=30.0
 @export_group("Debug Settings")
@@ -317,6 +319,24 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	
 	return vectorized
 
+## Computes and returns the flattened observation array for 
+## hazards in the map (bs, mines, props, missile, ..).
+## [br]
+## Returns a [PackedFloat32Array] 
+func _get_hazards_state()->PackedFloat32Array:
+	var vectorized:=PackedFloat32Array()
+	return vectorized
+
+## Computes and returns the flattened observation array for static 
+## hazards in the map (bs, mines, honey bombs).
+## [br]
+## Takes a [PackedFloat32Array] as input, to which it will write 
+## the values, starting from an offset position
+func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
+	var hazards:=_get_nearest_in_group(
+			'static_hazard',static_hazard_buffer_length
+		)
+
 ## convert global speed to relative speed
 func _speed_to_relative(speed:Vector2)->Vector2:
 	return speed.rotated(-car.rotation)
@@ -339,6 +359,31 @@ func _process_prop(vectorized:PackedFloat32Array, offset:int, prop:Prop)->bool:
 		vectorized[offset+1]=0.0
 		return false
 
+## Finds the [code]n[/code] nearest nodes in the given [code]group[/code],
+## and returns them sorted by the closest.
+func _get_nearest_in_group(group: String, n: int) -> Array[Node2D]:
+	var best_dist := PackedFloat32Array()
+	var best_node: Array[Node2D] = []
+	best_dist.resize(n)
+	best_node.resize(n)
+	for i in n:
+		best_dist[i] = INF
+		best_node[i] = null
+
+	var origin := car.global_position
+	for h in get_tree().get_nodes_in_group(group):
+		var d := origin.distance_squared_to((h as Node2D).global_position)
+		if d >= best_dist[n - 1]:
+			continue
+		var idx := n - 1
+		while idx > 0 and best_dist[idx - 1] > d:
+			best_dist[idx] = best_dist[idx - 1]
+			best_node[idx] = best_node[idx - 1]
+			idx -= 1
+		best_dist[idx] = d
+		best_node[idx] = h
+
+	return best_node
 
 #endregion
 

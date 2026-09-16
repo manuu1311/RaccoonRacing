@@ -91,6 +91,7 @@ missile=""
 prop=""
 missile_kn=""
 speed_pad=""
+static_hazard=""
 
 [input]
 

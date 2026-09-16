@@ -117,5 +117,5 @@ flip_v = true
 position = Vector2(64.375, -11)
 sprite_frames = SubResource("SpriteFrames_jvtuy")
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=1464373087]
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1464373087 groups=["honey_mine", "static_hazard"]]
 position = Vector2(64.86, -1)
