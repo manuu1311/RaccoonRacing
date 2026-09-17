@@ -2,6 +2,7 @@ extends EventInMap
 class_name BsInMap
 
 var lifetimeticks:int=0
+var currtick:=0
 
 func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:float, angleinst:float,id:int=0)->void:
 	super.setup(mapinst,xinst,yinst,widthinst,heightinst,angleinst)
@@ -25,10 +26,9 @@ func GetHitEventStatus(PlayerId:int,unsynced:bool)->void:
 
 func delme()->void:
 	if lifetime>0:
-		var i:int=0
-		while i<lifetimeticks:
+		while currtick<lifetimeticks:
 			await NetworkTime.after_tick
-			i+=1
+			currtick+=1
 		map.DelEventInMap(edface.getId())
 
 func del() -> void:

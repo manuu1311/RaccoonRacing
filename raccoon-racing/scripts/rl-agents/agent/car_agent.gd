@@ -14,9 +14,11 @@ class_name CarAgent
 ## maximum car detection range (after which observation is saturated)
 @export var car_detection_range:=1200
 ## offset to account for car shape in car distance calculation
-@export var car_detection_offset:=60
+@export var car_detection_offset:=0
+#@export var car_detection_offset:=60
 ## buffer size for static hazards
 @export var static_hazard_buffer_length:=4
+@export var static_hazard_detection_range:=1000
 ## max jump height
 @export var max_jump_height:=30.0
 @export_group("Debug Settings")
@@ -81,7 +83,7 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 		return (log_0_to_1 * 2.0) - 1.0
 
 
-## Computes and returns the flattened observation array for the agent kart.
+## Computes and returns the flattened observation array for the opponent kart.
 ## [br]
 ## Returns a [PackedFloat32Array] containing 42 normalized feature elements, 
 ## structured into the following observation groups:
@@ -117,12 +119,16 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 ## [br]
 ## • [code][33][/code]: Flag: is distance saturated (car out of range)
 ## [br]
-## • [code][34][/code]: Scalar velocity, with orientation towards the agent
+## • [code][34,35][/code]: Scalar velocity of opponent to the agent, 
+## lateral and perpendicular (is opponent approaching/dodging me?)
+## [br]
+## • [code][36,37][/code]: Scalar velocity of agent to the opponent, 
+## lateral and perpendicular (am i approaching/dodging opponent?)
 ## [br]
 ## @return PackedFloat32Array containing flattened float features.
 func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(36)
+	vectorized.resize(38)
 	var speed:=_speed_to_relative(car_inst.speed)
 	# since opponent can move at maximum speed in any axis, relative to own car
 	vectorized[0]=speed.x/max_speed[1]
@@ -201,17 +207,30 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	else:
 		vectorized[33]=1.0
 	var closing_speed := 0.0
+	var lateral_speed := 0.0
+	var ego_approach_speed := 0.0
+	var ego_lateral_speed := 0.0
+
 	var dist_len := relative_coords.length()
-	if relative_coords.length() > 0.0001:
+	if dist_len > 0.0001:
 		var dir_to_opponent := relative_coords / dist_len
+		var perp_dir := Vector2(-dir_to_opponent.y, dir_to_opponent.x)
+
 		closing_speed = -speed.dot(dir_to_opponent)
+		lateral_speed = speed.dot(perp_dir)
 		vectorized[34] = clamp(closing_speed / max_speed[1], -1.0, 1.0)
+		vectorized[36] = clamp(lateral_speed / max_speed[1], -1.0, 1.0)
+
 		var ego_relative_speed := _speed_to_relative(car.speed)
-		var ego_approach_speed := ego_relative_speed.dot(dir_to_opponent)
+		ego_approach_speed = ego_relative_speed.dot(dir_to_opponent)
+		ego_lateral_speed = ego_relative_speed.dot(perp_dir)
 		vectorized[35] = clamp(ego_approach_speed / max_speed[1], -1.0, 1.0)
+		vectorized[37] = clamp(ego_lateral_speed / max_speed[1], -1.0, 1.0) 
 	else:
 		vectorized[34] = 0.0
 		vectorized[35] = 0.0
+		vectorized[36] = 0.0
+		vectorized[37] = 0.0
 	
 	return vectorized
 
@@ -325,17 +344,130 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 ## Returns a [PackedFloat32Array] 
 func _get_hazards_state()->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
+	vectorized.resize(40)
+	var offset:=0
+	_get_static_hazards(vectorized,offset)
+	offset+=40
 	return vectorized
 
+
+func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
+	for group:String in ['missile','missilekn']:
+		var missiles:=_get_nearest_in_group(
+			group,2
+		)
+		for instance in missiles:
+			var missile:MissileInMap=instance as MissileInMap
+			# missile is present
+			vectorized[offset]=1.0
+			var relative_coords:=_position_to_relative(missile.global_position)
+			vectorized[offset+1]=_normalize_dist(
+					relative_coords[0],static_hazard_detection_range,0,false
+					)
+			vectorized[offset+2]=_normalize_dist(
+					relative_coords[1],static_hazard_detection_range,0,false
+					)
+
+			# for missile, only closing speed is relevant (impossible to dodge)
+			var target_car :Car= GameData.PlayersArr[(missile.AimPlayer.PlayerID)].car
+			var target_relative_pos := target_car.global_position - missile.global_position
+			var target_relative_vel := missile.speed - target_car.speed
+			var closing_speed_to_target :=0.0
+			vectorized[offset+3]=_normalize_dist(
+					target_relative_pos.length(),static_hazard_detection_range,
+					0,true
+					)
+
+			var target_dist := target_relative_pos.length()
+			if target_dist > 0.0001:
+				var dir_to_hazard := target_relative_pos / target_dist
+				closing_speed_to_target = target_relative_vel.dot(dir_to_hazard)
+				vectorized[offset+4] = clamp(
+						closing_speed_to_target / max_speed[1], -1.0, 1.0
+						)
+			else:
+				vectorized[offset+4] = 0.0
+			# is it targeting me
+			if missile.AimPlayer.PlayerID==car.playerID:
+				vectorized[offset+5]=1.0
+			else:
+				vectorized[offset+5]=0.0
+			# which player is it targeting
+			# always consider 4 racers
+			vectorized[offset+6]=(
+				float(missile.AimPlayer.OrderId - car.player.OrderId)/(3))
+			offset+=7
+		
+		
 ## Computes and returns the flattened observation array for static 
 ## hazards in the map (bs, mines, honey bombs).
 ## [br]
-## Takes a [PackedFloat32Array] as input, to which it will write 
+## For each hazard: [code]0[/code]: present or not ([code]1/0[/code]),
+## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]3,4,5[/code]: scalar distance and speed (lateral, perpendicular), 
+## [code]6,7,8[/code]: type (bs,mine,honey mine), 
+## [br]
+## [code]9[/code]: duration (1:full, 0:disappearing), mines are always 1 
+## [br]
+## Takes a [PackedFloat32Array] as input, 
+## to which it will write [code]10 * buffer_size[/code]
 ## the values, starting from an offset position
+# TODO: optionally give isactive as flag
 func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 	var hazards:=_get_nearest_in_group(
 			'static_hazard',static_hazard_buffer_length
 		)
+	for hazard in hazards:
+		# prop is present
+		vectorized[offset]=1.0
+		var relative_coords:=_position_to_relative(hazard.global_position)
+		vectorized[offset+1]=_normalize_dist(
+				relative_coords[0],static_hazard_detection_range,0,false
+				)
+		vectorized[offset+2]=_normalize_dist(
+				relative_coords[1],static_hazard_detection_range,0,false
+				)
+		vectorized[offset+3]=_normalize_dist(
+				relative_coords.length(),static_hazard_detection_range,
+				0,true
+				)
+		# saturated
+		if (abs(relative_coords.x) > car_detection_range or 
+				abs(relative_coords.y) > car_detection_range):
+			vectorized[offset+3]=0.0
+		var ego_approach_speed := 0.0
+		var ego_lateral_speed := 0.0
+		var speed:=car.speed
+
+		var dist_len := relative_coords.length()
+		if dist_len > 0.0001:
+			var dir_to_hazard := relative_coords / dist_len
+			var perp_dir := Vector2(-dir_to_hazard.y, dir_to_hazard.x)
+
+			var ego_relative_speed := _speed_to_relative(car.speed)
+			ego_approach_speed = ego_relative_speed.dot(dir_to_hazard)
+			ego_lateral_speed = ego_relative_speed.dot(perp_dir)
+			vectorized[offset+4] = clamp(
+					ego_approach_speed / max_speed[1], -1.0, 1.0
+					)
+			vectorized[offset+5] = clamp(
+					ego_lateral_speed / max_speed[1], -1.0, 1.0
+					) 
+		else:
+			vectorized[offset+4] = 0.0
+			vectorized[offset+5] = 0.0
+		if hazard.is_in_group('bs'):
+			vectorized[offset+6]=1.0
+			var bs:=hazard as BsInMap
+			vectorized[offset+9]=1-(float(bs.currtick)/bs.lifetimeticks)
+		elif hazard.is_in_group('mine'):
+			vectorized[offset+7]=1.0
+			vectorized[offset+9]=1
+		elif hazard.is_in_group('honeymine'):
+			vectorized[offset+8]=1.0
+			vectorized[offset+9]=1
+			
+		offset+=10
 
 ## convert global speed to relative speed
 func _speed_to_relative(speed:Vector2)->Vector2:
@@ -434,7 +566,7 @@ func _draw() -> void:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
 		car_state=_get_opponent_state(GameData.PlayersArr[1].car)
-		var indexes:=[34,35]
+		var indexes:=[34,35,36,37]
 		for i:int in indexes:
 			text_val = "%.1f" % (car_state[i])
 			draw_string(
