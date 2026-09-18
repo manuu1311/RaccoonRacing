@@ -341,16 +341,41 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	
 	return vectorized
 
-## Computes and returns the flattened observation array for 
-## hazards in the map (bs, mines, props, missile, ..).
+
+## Computes and returns the flattened observation array for all events
+## in map.
 ## [br]
-## Returns a [PackedFloat32Array] 
+## Returns a [PackedFloat32Array] containing 104 normalized feature elements, 
+## structured into the following observation groups:
+## [br]
+## [b]Static hazards (Indices 0–39)[/b]
+## [br]
+## [b]Missiles (Indices 40-63)[/b]
+## [br]
+## [b]Furballs (Indices 64-78)[/b]
+## [br]
+## [b]Ice trail (Indices 79-88)[/b]
+## [br]
+## [b]Prop boxes (Indices 89-108)[/b]
+## [br]
+## [b] Jump and Speed Pads (Indices 109-124)[/b]
+## @return PackedFloat32Array containing flattened float features.
 func _get_hazards_state()->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(40)
+	vectorized.resize(125)
 	var offset:=0
 	_get_static_hazards(vectorized,offset)
 	offset+=40
+	_get_missiles(vectorized,offset)
+	offset+=24
+	_get_furballs(vectorized,offset)
+	offset+=15
+	_get_icetrail(vectorized,offset)
+	offset+=10
+	_get_prop_boxes(vectorized,offset)
+	offset+=20
+	_get_map_pads(vectorized,offset)
+	offset+=16
 	return vectorized
 
 
@@ -602,8 +627,8 @@ func _get_icetrail(vectorized:PackedFloat32Array,offset:int)->void:
 ## Takes a [PackedFloat32Array] as input, 
 ## to which it will write [code]10 * buffer_size[/code]
 ## the values, starting from an offset position
-# TODO: optionally give isactive as flag
 func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
+	# TODO: optionally give isactive as flag
 	var hazards:=_get_nearest_in_group(
 			'static_hazard',static_hazard_buffer_length
 		)
