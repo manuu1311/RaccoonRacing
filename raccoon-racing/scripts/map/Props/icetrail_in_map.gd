@@ -274,3 +274,39 @@ func _get_car_from_body(body: Area2D) -> Car:
 	if body and body.get_parent() and body.get_parent().get_parent():
 		return body.get_parent().get_parent() as Car
 	return null
+
+## helper function for rl agent observation. returns 
+## start, mid, end point for the ice trail
+func get_trail_points(global_space: bool = true) -> Array[Vector2]:
+	var total_points: int = center_by_point.size()
+	
+	if total_points == 0:
+		var fallback_pos: Vector2 = global_position if global_space else Vector2.ZERO
+		return [fallback_pos, fallback_pos, fallback_pos]
+
+	var keys: Array = center_by_point.keys()
+	keys.sort() # Ensure points are in chronological sequence
+
+	var start_local: Vector2 = center_by_point[keys.front()]
+	var end_local: Vector2 = center_by_point[keys.back()]
+	var mid_local: Vector2 = Vector2.ZERO
+
+	if total_points == 1:
+		mid_local = start_local
+	elif total_points == 2:
+		mid_local = start_local.lerp(end_local, 0.5)
+	else:
+		# Calculate the precise center point index along the recorded path
+		var mid_index_float: float = float(total_points - 1) / 2.0
+		var idx_lower: int = int(floor(mid_index_float))
+		var idx_upper: int = int(ceil(mid_index_float))
+		var weight: float = mid_index_float - idx_lower
+
+		var p_lower: Vector2 = center_by_point[keys[idx_lower]]
+		var p_upper: Vector2 = center_by_point[keys[idx_upper]]
+		mid_local = p_lower.lerp(p_upper, weight)
+
+	if global_space:
+		return [to_global(start_local), to_global(mid_local), to_global(end_local)]
+	
+	return [start_local, mid_local, end_local]

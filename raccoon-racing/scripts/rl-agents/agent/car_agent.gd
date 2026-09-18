@@ -415,7 +415,7 @@ func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
 			vectorized[offset+6]=(
 				float(missile.AimPlayer.OrderId - car.player.OrderId)/(3))
 			offset+=7
-		
+
 
 ## Computes and returns the flattened observation array for prop boxes  
 ## in the map.
@@ -493,6 +493,120 @@ func _get_map_pads(vectorized:PackedFloat32Array,offset:int)->void:
 						ego_approach_speed / max_speed[1], -1.0, 1.0
 						)
 			offset+=5
+
+## Computes and returns the flattened observation array for furballs  
+## hazards in the map.
+## [br]
+## For each hazard: [code]0[/code]: present or not ([code]1/0[/code]),
+## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]3,4,5[/code]: scalar distance and speed (lateral, perpendicular)
+## [br]
+## Takes a [PackedFloat32Array] as input, 
+## to which it will write [code]5 * 3[/code]
+## values, starting from an offset position
+func _get_furballs(vectorized:PackedFloat32Array,offset:int)->void:
+	var hazards:=_get_nearest_in_group(
+			'furball',3
+		)
+	for hazard in hazards:
+		# prop is present
+		vectorized[offset]=1.0
+		var relative_coords:=_position_to_relative(hazard.global_position)
+		vectorized[offset+1]=_normalize_dist(
+				relative_coords[0],static_hazard_detection_range,0,false
+				)
+		vectorized[offset+2]=_normalize_dist(
+				relative_coords[1],static_hazard_detection_range,0,false
+				)
+		vectorized[offset+3]=_normalize_dist(
+				relative_coords.length(),static_hazard_detection_range,
+				0,true
+				)
+		var target_relative_pos := car.global_position - hazard.global_position
+		var target_relative_vel := (hazard as FurballsInMap).speed - car.speed
+		var target_lateral_vel := 0.0
+		var closing_speed_to_target :=0.0
+		vectorized[offset+3]=_normalize_dist(
+				target_relative_pos.length(),static_hazard_detection_range,
+				0,true
+				)
+
+		var target_dist := target_relative_pos.length()
+		if target_dist > 0.0001:
+			var dir_to_hazard := target_relative_pos / target_dist
+			var perp_dir := Vector2(-dir_to_hazard.y, dir_to_hazard.x)
+			closing_speed_to_target = target_relative_vel.dot(dir_to_hazard)
+			target_lateral_vel = target_relative_vel.dot(perp_dir)
+			vectorized[offset+4] = clamp(
+					closing_speed_to_target / max_speed[1], -1.0, 1.0
+					)
+			vectorized[offset+5] = clamp(
+					target_lateral_vel / max_speed[1], -1.0, 1.0
+					) 
+		else:
+			vectorized[offset+4] = 0.0
+			vectorized[offset+5] = 0.0
+		
+	offset+=6
+
+## Computes and returns the flattened observation array for icetrail   
+## in the map.
+## [br]
+## For the icetrail: [code]0[/code]: present or not ([code]1/0[/code]),
+## [code]1,2,3,4,5,6,7,8,9[/code]: normalised (x,y) and scalar
+## distance to agent for each point (start, mid, end) 
+## [br]
+## [code]10[/code]: normalised (x,y) and scalar
+## distance to agent for each point (start, mid, end) 
+## [br]
+## Takes a [PackedFloat32Array] as input, 
+## to which it will write [code]5 * 3[/code]
+## values, starting from an offset position
+func _get_icetrail(vectorized:PackedFloat32Array,offset:int)->void:
+	var hazards:=_get_nearest_in_group(
+			'furball',3
+		)
+	for hazard in hazards:
+		# prop is present
+		vectorized[offset]=1.0
+		var relative_coords:=_position_to_relative(hazard.global_position)
+		vectorized[offset+1]=_normalize_dist(
+				relative_coords[0],static_hazard_detection_range,0,false
+				)
+		vectorized[offset+2]=_normalize_dist(
+				relative_coords[1],static_hazard_detection_range,0,false
+				)
+		vectorized[offset+3]=_normalize_dist(
+				relative_coords.length(),static_hazard_detection_range,
+				0,true
+				)
+		var target_relative_pos := car.global_position - hazard.global_position
+		var target_relative_vel := (hazard as FurballsInMap).speed - car.speed
+		var target_lateral_vel := 0.0
+		var closing_speed_to_target :=0.0
+		vectorized[offset+3]=_normalize_dist(
+				target_relative_pos.length(),static_hazard_detection_range,
+				0,true
+				)
+
+		var target_dist := target_relative_pos.length()
+		if target_dist > 0.0001:
+			var dir_to_hazard := target_relative_pos / target_dist
+			var perp_dir := Vector2(-dir_to_hazard.y, dir_to_hazard.x)
+			closing_speed_to_target = target_relative_vel.dot(dir_to_hazard)
+			target_lateral_vel = target_relative_vel.dot(perp_dir)
+			vectorized[offset+4] = clamp(
+					closing_speed_to_target / max_speed[1], -1.0, 1.0
+					)
+			vectorized[offset+5] = clamp(
+					target_lateral_vel / max_speed[1], -1.0, 1.0
+					) 
+		else:
+			vectorized[offset+4] = 0.0
+			vectorized[offset+5] = 0.0
+		
+	offset+=10
+
 
 ## Computes and returns the flattened observation array for static 
 ## hazards in the map (bs, mines, honey bombs).
