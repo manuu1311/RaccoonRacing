@@ -67,7 +67,7 @@ _data = {
 &"cube": SubResource("Animation_8avk0")
 }
 
-[node name="PropInMap" type="Node2D" unique_id=1147383761]
+[node name="PropInMap" type="Node2D" unique_id=1147383761 groups=["propbox"]]
 script = ExtResource("1_vt37a")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=101901993]
@@ -82,7 +82,7 @@ autoplay = &"cube"
 wait_time = 3.0
 one_shot = true
 
-[node name="StateSynchronizer" type="Node" parent="." unique_id=1705374642 node_paths=PackedStringArray("root") groups=["prop"]]
+[node name="StateSynchronizer" type="Node" parent="." unique_id=1705374642 node_paths=PackedStringArray("root")]
 script = ExtResource("3_8avk0")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://3lbngqcexe0l"

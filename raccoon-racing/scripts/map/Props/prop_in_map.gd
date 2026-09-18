@@ -1,4 +1,5 @@
 extends EventInMap
+class_name PropInMap
 
 @onready var timer: Timer = $Timer
 @onready var state_synchronizer: StateSynchronizer = $StateSynchronizer

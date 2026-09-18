@@ -18,7 +18,10 @@ class_name CarAgent
 #@export var car_detection_offset:=60
 ## buffer size for static hazards
 @export var static_hazard_buffer_length:=4
+## maximum static hazard detection range (after which observation is saturated)
 @export var static_hazard_detection_range:=1000
+## prop box buffer size
+@export var prop_box_buffer_length:=5
 ## max jump height
 @export var max_jump_height:=30.0
 @export_group("Debug Settings")
@@ -351,6 +354,21 @@ func _get_hazards_state()->PackedFloat32Array:
 	return vectorized
 
 
+## Computes and returns the flattened observation array for missiles  
+## in the map (blue and red).
+## [br]
+## For each missile: [code]0[/code]: present or not ([code]1/0[/code]),
+## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]3,4[/code]: scalar distance and closing speed, 
+## relative to the aimed player
+## [code]5[/code]: is targeting me flag, 
+## [br]
+## [code]6[/code]: which player the missile is aimed at, as 
+## a difference between orderid of the agent and the aimed car
+## [br]
+## Takes a [PackedFloat32Array] as input, 
+## to which it will write [code]6 * buffer_size (2+2)[/code]
+## the values, starting from an offset position
 func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
 	for group:String in ['missile','missilekn']:
 		var missiles:=_get_nearest_in_group(
@@ -398,7 +416,43 @@ func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
 				float(missile.AimPlayer.OrderId - car.player.OrderId)/(3))
 			offset+=7
 		
-		
+
+## Computes and returns the flattened observation array for prop boxes  
+## in the map.
+## [br]
+## For each propbox: [code]0[/code]: present or not ([code]1/0[/code]),
+## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]3[/code]: is active flag, 
+## [code]4[/code]: how long until is active (0: just got inactive, 
+## 1: will be active soon)
+## [br]
+## Takes a [PackedFloat32Array] as input, 
+## to which it will write [code]4 * buffer_size[/code] 
+## values, starting from an offset position
+func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
+	var boxes:=_get_nearest_in_group('propbox',prop_box_buffer_length)
+	for instance:Node in boxes:
+		var box:=instance as PropInMap
+		# is present flag
+		vectorized[offset]=1.0
+		var relative_coords:=_position_to_relative(box.global_position)
+		vectorized[offset+1]=_normalize_dist(
+				relative_coords[0],static_hazard_detection_range,0,false
+				)
+		vectorized[offset+2]=_normalize_dist(
+				relative_coords[1],static_hazard_detection_range,0,false
+				)
+		if box.IsActivated:
+			vectorized[offset+3]=1.0
+			vectorized[offset+4]=1.0
+		else:
+			vectorized[offset+3]=0.0
+			vectorized[offset+4]=float(
+				box.hide_tick-NetworkTime.tick
+				)/box.respawn_ticks
+		offset+=4
+
+
 ## Computes and returns the flattened observation array for static 
 ## hazards in the map (bs, mines, honey bombs).
 ## [br]
