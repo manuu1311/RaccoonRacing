@@ -450,8 +450,49 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 			vectorized[offset+4]=float(
 				box.hide_tick-NetworkTime.tick
 				)/box.respawn_ticks
-		offset+=4
+		offset+=5
 
+## Computes and returns the flattened observation array for pads   
+## in the map (speed pad, jump pad). Two different buffers of size 2 each.
+## [br]
+## For each pad: [code]0[/code]: present or not ([code]1/0[/code]),
+## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]3,4[/code]: scalar distance, closing speed 
+## [br]
+## Takes a [PackedFloat32Array] as input, 
+## to which it will write [code]4 * buffer_size(4)[/code] 
+## values, starting from an offset position
+func _get_map_pads(vectorized:PackedFloat32Array,offset:int)->void:
+	for group:String in ['speed_pad','jump_pad']:
+		var instances:=_get_nearest_in_group('propbox',prop_box_buffer_length)
+		for instance:Node in instances:
+			var pad:=instance as Node2D
+			# is present flag
+			vectorized[offset]=1.0
+			var relative_coords:=_position_to_relative(pad.global_position)
+			vectorized[offset+1]=_normalize_dist(
+					relative_coords[0],static_hazard_detection_range,0,false
+					)
+			vectorized[offset+2]=_normalize_dist(
+					relative_coords[1],static_hazard_detection_range,0,false
+					)
+			vectorized[offset+3]=_normalize_dist(
+				relative_coords.length(),static_hazard_detection_range,
+				0,true
+				)
+			var ego_approach_speed := 0.0
+			var speed:=car.speed
+
+			var dist_len := relative_coords.length()
+			if dist_len > 0.0001:
+				var dir_to_hazard := relative_coords / dist_len
+				var ego_relative_speed := _speed_to_relative(car.speed)
+				#closing speed
+				ego_approach_speed = ego_relative_speed.dot(dir_to_hazard)
+				vectorized[offset+4] = clamp(
+						ego_approach_speed / max_speed[1], -1.0, 1.0
+						)
+			offset+=5
 
 ## Computes and returns the flattened observation array for static 
 ## hazards in the map (bs, mines, honey bombs).
@@ -499,6 +540,7 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 			var perp_dir := Vector2(-dir_to_hazard.y, dir_to_hazard.x)
 
 			var ego_relative_speed := _speed_to_relative(car.speed)
+			#closing speed
 			ego_approach_speed = ego_relative_speed.dot(dir_to_hazard)
 			ego_lateral_speed = ego_relative_speed.dot(perp_dir)
 			vectorized[offset+4] = clamp(
