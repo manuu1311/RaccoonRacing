@@ -556,57 +556,38 @@ func _get_furballs(vectorized:PackedFloat32Array,offset:int)->void:
 ## [code]1,2,3,4,5,6,7,8,9[/code]: normalised (x,y) and scalar
 ## distance to agent for each point (start, mid, end) 
 ## [br]
-## [code]10[/code]: normalised (x,y) and scalar
-## distance to agent for each point (start, mid, end) 
+## [code]10[/code]: how much time left for it to disappear 
+## (1: maximum time, 0: about to disappear)
 ## [br]
 ## Takes a [PackedFloat32Array] as input, 
-## to which it will write [code]5 * 3[/code]
+## to which it will write [code]10[/code]
 ## values, starting from an offset position
 func _get_icetrail(vectorized:PackedFloat32Array,offset:int)->void:
-	var hazards:=_get_nearest_in_group(
-			'furball',3
+	var icetrails:=_get_nearest_in_group(
+			'icetrail',1
 		)
-	for hazard in hazards:
+	for prop in icetrails:
+		var icetrail:=prop as IceTrailInMap
 		# prop is present
 		vectorized[offset]=1.0
-		var relative_coords:=_position_to_relative(hazard.global_position)
-		vectorized[offset+1]=_normalize_dist(
-				relative_coords[0],static_hazard_detection_range,0,false
-				)
-		vectorized[offset+2]=_normalize_dist(
-				relative_coords[1],static_hazard_detection_range,0,false
-				)
-		vectorized[offset+3]=_normalize_dist(
-				relative_coords.length(),static_hazard_detection_range,
-				0,true
-				)
-		var target_relative_pos := car.global_position - hazard.global_position
-		var target_relative_vel := (hazard as FurballsInMap).speed - car.speed
-		var target_lateral_vel := 0.0
-		var closing_speed_to_target :=0.0
-		vectorized[offset+3]=_normalize_dist(
-				target_relative_pos.length(),static_hazard_detection_range,
-				0,true
-				)
-
-		var target_dist := target_relative_pos.length()
-		if target_dist > 0.0001:
-			var dir_to_hazard := target_relative_pos / target_dist
-			var perp_dir := Vector2(-dir_to_hazard.y, dir_to_hazard.x)
-			closing_speed_to_target = target_relative_vel.dot(dir_to_hazard)
-			target_lateral_vel = target_relative_vel.dot(perp_dir)
-			vectorized[offset+4] = clamp(
-					closing_speed_to_target / max_speed[1], -1.0, 1.0
+		var points:=icetrail.get_trail_points()
+		for point in points:
+			var relative_coords:=_position_to_relative(point)
+			vectorized[offset+1]=_normalize_dist(
+					relative_coords[0],static_hazard_detection_range,0,false
 					)
-			vectorized[offset+5] = clamp(
-					target_lateral_vel / max_speed[1], -1.0, 1.0
-					) 
-		else:
-			vectorized[offset+4] = 0.0
-			vectorized[offset+5] = 0.0
-		
-	offset+=10
-
+			vectorized[offset+2]=_normalize_dist(
+					relative_coords[1],static_hazard_detection_range,0,false
+					)
+			vectorized[offset+3]=_normalize_dist(
+					relative_coords.length(),static_hazard_detection_range,
+					0,true
+					)
+			offset+=3
+		# remaining duration
+		vectorized[offset+1]=float(
+				icetrail.fadetick-NetworkTime.tick
+				)/icetrail.lifetime
 
 ## Computes and returns the flattened observation array for static 
 ## hazards in the map (bs, mines, honey bombs).
