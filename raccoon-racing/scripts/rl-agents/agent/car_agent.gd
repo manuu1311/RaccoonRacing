@@ -32,6 +32,7 @@ class_name CarAgent
 @export var debug_ray_width:int=2
 @export var debug_stats_flag:bool=true
 @export var debug_opponent_flag:bool=true
+@export var debug_map_events_flag:bool=false
 #endregion
 
 #region agent input variables
@@ -46,6 +47,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	sensor_output=sensors.get_observation()
 	car_state=_get_internal_state(car)
+	_get_hazards_state()
 	if debug_rays_flag or debug_stats_flag:
 		queue_redraw()
 
@@ -362,7 +364,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 ## @return PackedFloat32Array containing flattened float features.
 func _get_hazards_state()->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(125)
+	vectorized.resize(129)
 	var offset:=0
 	_get_static_hazards(vectorized,offset)
 	offset+=40
@@ -375,7 +377,7 @@ func _get_hazards_state()->PackedFloat32Array:
 	_get_prop_boxes(vectorized,offset)
 	offset+=20
 	_get_map_pads(vectorized,offset)
-	offset+=16
+	offset+=20
 	return vectorized
 
 
@@ -476,6 +478,7 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 				box.hide_tick-NetworkTime.tick
 				)/box.respawn_ticks
 		offset+=5
+	print('final value of propboxes:',str(offset))
 
 ## Computes and returns the flattened observation array for pads   
 ## in the map (speed pad, jump pad). Two different buffers of size 2 each.
@@ -485,11 +488,11 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 ## [code]3,4[/code]: scalar distance, closing speed 
 ## [br]
 ## Takes a [PackedFloat32Array] as input, 
-## to which it will write [code]4 * buffer_size(4)[/code] 
+## to which it will write [code]5 * buffer_size(4)[/code] 
 ## values, starting from an offset position
 func _get_map_pads(vectorized:PackedFloat32Array,offset:int)->void:
 	for group:String in ['speed_pad','jump_pad']:
-		var instances:=_get_nearest_in_group('propbox',prop_box_buffer_length)
+		var instances:=_get_nearest_in_group(group,2)
 		for instance:Node in instances:
 			var pad:=instance as Node2D
 			# is present flag
@@ -572,7 +575,9 @@ func _get_furballs(vectorized:PackedFloat32Array,offset:int)->void:
 			vectorized[offset+4] = 0.0
 			vectorized[offset+5] = 0.0
 		
-	offset+=6
+		offset+=6
+	print('final value of furballs:',str(offset))
+	
 
 ## Computes and returns the flattened observation array for icetrail   
 ## in the map.
@@ -613,6 +618,7 @@ func _get_icetrail(vectorized:PackedFloat32Array,offset:int)->void:
 		vectorized[offset+1]=float(
 				icetrail.fadetick-NetworkTime.tick
 				)/icetrail.lifetime
+	print('final value of icetrail:',str(offset))
 
 ## Computes and returns the flattened observation array for static 
 ## hazards in the map (bs, mines, honey bombs).
@@ -684,6 +690,7 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 			vectorized[offset+9]=1
 			
 		offset+=10
+	print('final value of static:',str(offset))
 
 ## convert global speed to relative speed
 func _speed_to_relative(speed:Vector2)->Vector2:
@@ -730,8 +737,7 @@ func _get_nearest_in_group(group: String, n: int) -> Array[Node2D]:
 			idx -= 1
 		best_dist[idx] = d
 		best_node[idx] = h
-
-	return best_node
+	return best_node.filter(func(node:Node)->bool: return node != null)
 
 #endregion
 
@@ -821,6 +827,10 @@ func _draw() -> void:
 			font, text_pos, "Opponent", HORIZONTAL_ALIGNMENT_LEFT, 
 			-1, font_size, Color.BLACK
 			)
+	
+	if debug_map_events_flag:
+		pass
+	
 	var jump_pads: Array[Node2D] = []
 	jump_pads.assign(get_tree().get_nodes_in_group("jump_pad"))
 	for pad in jump_pads:
@@ -843,6 +853,8 @@ func _draw() -> void:
 		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 		
 			
+func _draw_static_hazards()->void:
+	pass
 			
 func _draw_arrow(start: Vector2, end: Vector2, color: Color, width: float = 2.0) -> void:
 	# Main vector line
