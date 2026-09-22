@@ -36,8 +36,10 @@ class_name CarAgent
 #endregion
 
 #region agent input variables
-var sensor_output:PackedFloat32Array
-var car_state:PackedFloat32Array
+# input observation
+var observation_vector:PackedFloat32Array
+# current target opponent
+var target_player:int=-1
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -45,8 +47,13 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _process(_delta: float) -> void:
-	sensor_output=sensors.get_observation()
-	car_state=_get_internal_state(car)
+	observation_vector.clear()
+	# general game info
+	observation_vector.append_array(_get_game_observation())
+	# raycast sensors observation
+	observation_vector.append_array(sensors.get_observation())
+	# own car observation
+	observation_vector.append_array(_get_internal_state(car))
 	#_get_hazards_state()
 	if debug_rays_flag or debug_stats_flag:
 		queue_redraw()
@@ -123,7 +130,7 @@ func _get_game_observation()->PackedFloat32Array:
 
 ## Computes and returns the flattened observation array for the opponent kart.
 ## [br]
-## Returns a [PackedFloat32Array] containing 44 normalized feature elements, 
+## Returns a [PackedFloat32Array] containing 46 normalized feature elements, 
 ## structured into the following observation groups:
 ## [br]
 ## [b]Speed & Physics (Indices 0–2)[/b]
@@ -166,10 +173,17 @@ func _get_game_observation()->PackedFloat32Array:
 ## [b]Character id (indices 38-43)[/b]
 ## • [code][38..43][/code]: one hot encoding for the character id
 ## [br]
-## @return PackedFloat32Array of size 44, containing flattened float features.
+## [b]Current position (indices 44)[/b]
+## • [code][44][/code]: current order defined as [code](order-1)/3[/code]
+## [br]
+## [b]Is this car a target (indices 46)[/b]
+## • [code][45][/code]: boolean value: whether agent will get reward
+## targeting this car
+## [br]
+## @return PackedFloat32Array of size 46, containing flattened float features.
 func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(44)
+	vectorized.resize(46)
 	var speed:=_speed_to_relative(car_inst.speed)
 	# since opponent can move at maximum speed in any axis, relative to own car
 	vectorized[0]=speed.x/max_speed[1]
@@ -272,14 +286,22 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 		vectorized[35] = 0.0
 		vectorized[36] = 0.0
 		vectorized[37] = 0.0
-	# one hot encoding for character id
+	# one hot encoding for character id, 38-43
 	vectorized[37+car.CharID]=1.0
+	
+	# current lap, 44
+	vectorized[44]=float(car_inst.player.Laps)/GameData.currentLaps
+	# boolean car target, 45
+	if car_inst.playerID==target_player:
+		vectorized[45]=1.0
+	else:
+		vectorized[45]=0.0
 	
 	return vectorized
 
 ## Computes and returns the flattened observation array for the agent kart.
 ## [br]
-## Returns a [PackedFloat32Array] containing 42 normalized feature elements, 
+## Returns a [PackedFloat32Array] containing 49 normalized feature elements, 
 ## structured into the following observation groups:
 ## [br]
 ## [b]Speed & Physics (Indices 0–2)[/b]
@@ -306,10 +328,17 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 ## • [code][27][/code]: Can use prop flag
 ## [br]
 ## [b]One hot encoding of all possible props (Indices 28-41)[/b]
-## @return PackedFloat32Array containing 42 flattened float features.
+## [br]
+## [b]Character id (indices 42-47)[/b]
+## • [code][42..47][/code]: one hot encoding for the character id
+## [br]
+## [b]Current position (indices 48)[/b]
+## • [code][48][/code]: current order defined as [code](order-1)/3[/code]
+## [br]
+## @return PackedFloat32Array containing 49 flattened float features.
 func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(42)
+	vectorized.resize(49)
 	var speed:=_speed_to_relative(car_inst.speed)
 	vectorized[0]=speed.x/max_speed[0]
 	# moving backwards
@@ -378,6 +407,12 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 		if id==9:
 			id+=car_inst.CharID-1
 		vectorized[27+id]=1.0
+	
+	# char id
+	vectorized[42+car.CharID] = 1.0
+	
+	# current lap, 48
+	vectorized[48]=float(car_inst.player.Laps)/GameData.currentLaps
 	
 	return vectorized
 
@@ -810,6 +845,7 @@ func _get_nearest_in_group(group: String, n: int) -> Array[Node2D]:
 func _draw() -> void:
 	var font: Font = ThemeDB.fallback_font
 	var font_size: int = 12
+	var sensor_output:=sensors.get_observation()
 	if debug_rays_flag:
 		for i in range(0, sensor_output.size(), 5):
 			var is_colliding: float = sensor_output[i]
@@ -852,7 +888,7 @@ func _draw() -> void:
 	if debug_stats_flag:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
-		car_state=_get_opponent_state(car)
+		var car_state:=_get_opponent_state(car)
 		var indexes:=[]
 		for i:int in indexes:
 			text_val = "%.1f" % (car_state[i])
@@ -869,7 +905,7 @@ func _draw() -> void:
 			if player.car==car:
 				continue
 			# draw rectangle
-			car_state=_get_opponent_state(player.car)
+			var car_state:=_get_opponent_state(player.car)
 			# x and y distance
 			var raw_x: float = _denormalize_dist(
 				car_state[30], car_detection_range, car_detection_offset, true
