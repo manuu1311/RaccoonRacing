@@ -399,50 +399,59 @@ func _get_hazards_state()->PackedFloat32Array:
 ## to which it will write [code]7 * buffer_size (2+2)[/code]
 ## the values, starting from an offset position
 func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
-	for group:String in ['missile','missilekn']:
+	for group:String in ['missile','missile_kn']:
 		var missiles:=_get_nearest_in_group(
 			group,2
 		)
-		for instance in missiles:
-			var missile:MissileInMap=instance as MissileInMap
-			# missile is present
-			vectorized[offset]=1.0
-			var relative_coords:=_position_to_relative(missile.global_position)
-			vectorized[offset+1]=_normalize_dist(
-					relative_coords[0],static_hazard_detection_range,0,true
-					)
-			vectorized[offset+2]=_normalize_dist(
-					relative_coords[1],static_hazard_detection_range,0,true
-					)
-
-			# for missile, only closing speed is relevant (impossible to dodge)
-			var target_car :Car= GameData.PlayersArr[(missile.AimPlayer.PlayerID)].car
-			var target_relative_pos := target_car.global_position - missile.global_position
-			var target_relative_vel := missile.speed - target_car.speed
-			var closing_speed_to_target :=0.0
-			vectorized[offset+3]=_normalize_dist(
-					target_relative_pos.length(),static_hazard_detection_range,
-					0,true
-					)
-
-			var target_dist := target_relative_pos.length()
-			if target_dist > 0.0001:
-				var dir_to_hazard := target_relative_pos / target_dist
-				closing_speed_to_target = target_relative_vel.dot(dir_to_hazard)
-				vectorized[offset+4] = clamp(
-						closing_speed_to_target / max_speed[1], -1.0, 1.0
+		for i in range(2):
+			if i<missiles.size():
+				var missile:MissileInMap=missiles[i] as MissileInMap
+				# missile is present
+				vectorized[offset]=1.0
+				var relative_coords:=_position_to_relative(missile.global_position)
+				vectorized[offset+1]=_normalize_dist(
+						relative_coords[0],static_hazard_detection_range,0,true
 						)
+				vectorized[offset+2]=_normalize_dist(
+						relative_coords[1],static_hazard_detection_range,0,true
+						)
+
+				# for missile, only closing speed is relevant (impossible to dodge)
+				var target_car :Car= GameData.PlayersArr[(missile.AimPlayer.PlayerID)].car
+				var target_relative_pos := target_car.global_position - missile.global_position
+				var target_relative_vel := missile.speed - target_car.speed
+				var closing_speed_to_target :=0.0
+				vectorized[offset+3]=_normalize_dist(
+						target_relative_pos.length(),static_hazard_detection_range,
+						0,true
+						)
+
+				var target_dist := target_relative_pos.length()
+				if target_dist > 0.0001:
+					var dir_to_hazard := target_relative_pos / target_dist
+					closing_speed_to_target = target_relative_vel.dot(dir_to_hazard)
+					vectorized[offset+4] = clamp(
+							closing_speed_to_target / max_speed[1], -1.0, 1.0
+							)
+				else:
+					vectorized[offset+4] = 0.0
+				# is it targeting me
+				if missile.AimPlayer.PlayerID==car.playerID:
+					vectorized[offset+5]=1.0
+				else:
+					vectorized[offset+5]=0.0
+				# which player is it targeting
+				# always consider 4 racers
+				vectorized[offset+6]=(
+					float(missile.AimPlayer.OrderId - car.player.OrderId)/(3))
 			else:
-				vectorized[offset+4] = 0.0
-			# is it targeting me
-			if missile.AimPlayer.PlayerID==car.playerID:
-				vectorized[offset+5]=1.0
-			else:
+				vectorized[offset+0]=0.0
+				vectorized[offset+1]=0.0
+				vectorized[offset+2]=0.0
+				vectorized[offset+3]=0.0
+				vectorized[offset+4]=0.0
 				vectorized[offset+5]=0.0
-			# which player is it targeting
-			# always consider 4 racers
-			vectorized[offset+6]=(
-				float(missile.AimPlayer.OrderId - car.player.OrderId)/(3))
+				vectorized[offset+6]=0.0
 			offset+=7
 
 
@@ -807,8 +816,8 @@ func _draw() -> void:
 	if debug_stats_flag:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
-		car_state=_get_opponent_state(GameData.PlayersArr[1].car)
-		var indexes:=[34,35,36,37]
+		car_state=_get_opponent_state(car)
+		var indexes:=[]
 		for i:int in indexes:
 			text_val = "%.1f" % (car_state[i])
 			draw_string(
@@ -820,33 +829,36 @@ func _draw() -> void:
 			
 			
 	if debug_opponent_flag:
-		# draw rectangle
-		car_state=_get_opponent_state(GameData.PlayersArr[1].car)
-		# x and y distance
-		var raw_x: float = _denormalize_dist(
-			car_state[30], car_detection_range, car_detection_offset, true
-			)
-		var raw_y: float = _denormalize_dist(
-			car_state[31], car_detection_range, car_detection_offset, true
-			)
-		var dist:=Vector2(raw_x,raw_y).rotated(car.rotation)
-		var rect_pos: Vector2 = car.position + dist - Vector2(25, 25)
-		var rect: Rect2 = Rect2(rect_pos, Vector2(50, 50))
-		draw_rect(rect, Color.GOLD, false, 2.0)
-		# draw arrow
-		# x and y velocity
-		#var vel:=Vector2(
-			#car_state[0],-car_state[1]).rotated(car.rotation
-			#)*max_speed[1]*15
-		#_draw_arrow(
-			#car.position+dist,car.position+dist+vel,Color.CRIMSON
-		#)
-		# draw string
-		var text_pos: Vector2 = Vector2(rect_pos.x, rect_pos.y - 8)
-		draw_string(
-			font, text_pos, "Opponent", HORIZONTAL_ALIGNMENT_LEFT, 
-			-1, font_size, Color.BLACK
-			)
+		for player:Player in GameData.PlayersArr:
+			if player.car==car:
+				continue
+			# draw rectangle
+			car_state=_get_opponent_state(player.car)
+			# x and y distance
+			var raw_x: float = _denormalize_dist(
+				car_state[30], car_detection_range, car_detection_offset, true
+				)
+			var raw_y: float = _denormalize_dist(
+				car_state[31], car_detection_range, car_detection_offset, true
+				)
+			var dist:=Vector2(raw_x,raw_y).rotated(car.rotation)
+			var rect_pos: Vector2 = car.position + dist - Vector2(25, 25)
+			var rect: Rect2 = Rect2(rect_pos, Vector2(50, 50))
+			draw_rect(rect, Color.GOLD, false, 2.0)
+			# draw arrow
+			# x and y velocity
+			#var vel:=Vector2(
+				#car_state[0],-car_state[1]).rotated(car.rotation
+				#)*max_speed[1]*15
+			#_draw_arrow(
+				#car.position+dist,car.position+dist+vel,Color.CRIMSON
+			#)
+			# draw string
+			var text_pos: Vector2 = Vector2(rect_pos.x, rect_pos.y - 8)
+			draw_string(
+				font, text_pos, "Opponent", HORIZONTAL_ALIGNMENT_LEFT, 
+				-1, font_size, Color.BLACK
+				)
 	
 	if debug_map_events_flag:
 		_draw_map_events(font)
@@ -946,7 +958,7 @@ func _draw_missiles(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 			var local_rect: Rect2 = Rect2(Vector2(-50, -50), Vector2(100, 100))
 			draw_rect(local_rect, color, false, 2.0)
 			draw_string(
-				font, Vector2(-25, -56), "Missile, %0.1f" % vectorized[i+6], 
+				font, Vector2(-25, -56), "Missile %0.1f" % vectorized[i+6], 
 				HORIZONTAL_ALIGNMENT_LEFT, 
 				-1, 12, Color.BLACK
 				)
