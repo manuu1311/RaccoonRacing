@@ -18,7 +18,7 @@ animations = [{
 "speed": 35.0
 }]
 
-[node name="SpeedInMap" type="Node2D" unique_id=306184605]
+[node name="SpeedInMap" type="Node2D" unique_id=306184605 groups=["speed_pad"]]
 script = ExtResource("1_uhu0p")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1960846486]

@@ -132,7 +132,7 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 ## • [code][36,37][/code]: Scalar velocity of agent to the opponent, 
 ## lateral and perpendicular (am i approaching/dodging opponent?)
 ## [br]
-## @return PackedFloat32Array containing flattened float features.
+## @return PackedFloat32Array of size 38, containing flattened float features.
 func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
 	vectorized.resize(38)
@@ -269,7 +269,7 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 ## [br]
 ## • [code][27][/code]: Can use prop flag
 ## [br]
-## [b]One hot encoding of all possible props (Indices 28-41[/b]
+## [b]One hot encoding of all possible props (Indices 28-41)[/b]
 ## @return PackedFloat32Array containing 33 flattened float features.
 func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
@@ -366,7 +366,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 ## @return PackedFloat32Array containing flattened float features.
 func _get_hazards_state()->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(142)
+	vectorized.resize(150)
 	var offset:=0
 	_get_static_hazards(vectorized,offset)
 	offset+=40
@@ -379,7 +379,7 @@ func _get_hazards_state()->PackedFloat32Array:
 	_get_prop_boxes(vectorized,offset)
 	offset+=25
 	_get_map_pads(vectorized,offset)
-	offset+=20
+	offset+=28
 	return vectorized
 
 
@@ -488,41 +488,58 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 ## For each pad: [code]0[/code]: present or not ([code]1/0[/code]),
 ## [code]1,2[/code]: normalised distance to agent (x,y), 
 ## [code]3,4[/code]: scalar distance, closing speed 
+## [code]5,6[/code]: sin, cos of angle relative to agent orientation 
 ## [br]
 ## Takes a [PackedFloat32Array] as input, 
-## to which it will write [code]5 * buffer_size(4)[/code] 
+## to which it will write [code]7 * buffer_size(4)[/code] 
 ## values, starting from an offset position
 func _get_map_pads(vectorized:PackedFloat32Array,offset:int)->void:
 	for group:String in ['speed_pad','jump_pad']:
 		var instances:=_get_nearest_in_group(group,2)
-		for instance:Node in instances:
-			var pad:=instance as Node2D
-			# is present flag
-			vectorized[offset]=1.0
-			var relative_coords:=_position_to_relative(pad.global_position)
-			vectorized[offset+1]=_normalize_dist(
-					relative_coords[0],static_hazard_detection_range,0,false
-					)
-			vectorized[offset+2]=_normalize_dist(
-					relative_coords[1],static_hazard_detection_range,0,false
-					)
-			vectorized[offset+3]=_normalize_dist(
-				relative_coords.length(),static_hazard_detection_range,
-				0,true
-				)
-			var ego_approach_speed := 0.0
-			var speed:=car.speed
-
-			var dist_len := relative_coords.length()
-			if dist_len > 0.0001:
-				var dir_to_hazard := relative_coords / dist_len
-				var ego_relative_speed := _speed_to_relative(car.speed)
-				#closing speed
-				ego_approach_speed = ego_relative_speed.dot(dir_to_hazard)
-				vectorized[offset+4] = clamp(
-						ego_approach_speed / max_speed[1], -1.0, 1.0
+		for i in range(2):
+			if i<instances.size():
+				var pad:=instances[i] as Node2D
+				# is present flag
+				vectorized[offset]=1.0
+				var relative_coords:=_position_to_relative(pad.global_position)
+				vectorized[offset+1]=_normalize_dist(
+						relative_coords[0],static_hazard_detection_range,0,true
 						)
-			offset+=5
+				vectorized[offset+2]=_normalize_dist(
+						relative_coords[1],static_hazard_detection_range,0,true
+						)
+				vectorized[offset+3]=_normalize_dist(
+					relative_coords.length(),static_hazard_detection_range,
+					0,true
+					)
+				var ego_approach_speed := 0.0
+				var speed:=car.speed
+
+				var dist_len := relative_coords.length()
+				if dist_len > 0.0001:
+					var dir_to_hazard := relative_coords / dist_len
+					var ego_relative_speed := _speed_to_relative(car.speed)
+					#closing speed
+					ego_approach_speed = ego_relative_speed.dot(dir_to_hazard)
+					vectorized[offset+4] = clamp(
+							ego_approach_speed / max_speed[1], -1.0, 1.0
+							)
+				# angle
+				var relative_rotation := wrapf(
+					pad.global_rotation - global_rotation, -PI, PI
+					)
+				vectorized[offset+5] = sin(relative_rotation)
+				vectorized[offset+6] = cos(relative_rotation)
+			else:
+				# pad slot with default zeros if fewer than 2 pads exist
+				vectorized[offset] = 0.0 
+				vectorized[offset+1] = 0.0
+				vectorized[offset+2] = 0.0
+				vectorized[offset+3] = 0.0
+				vectorized[offset+4] = 0.0
+				vectorized[offset+5] = 0.0
+				vectorized[offset+6] = 0.0
+			offset+=7
 
 ## Computes and returns the flattened observation array for furballs  
 ## hazards in the map.
@@ -643,10 +660,10 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 		vectorized[offset]=1.0
 		var relative_coords:=_position_to_relative(hazard.global_position)
 		vectorized[offset+1]=_normalize_dist(
-				relative_coords[0],static_hazard_detection_range,0,false
+				relative_coords[0],static_hazard_detection_range,0,true
 				)
 		vectorized[offset+2]=_normalize_dist(
-				relative_coords[1],static_hazard_detection_range,0,false
+				relative_coords[1],static_hazard_detection_range,0,true
 				)
 		vectorized[offset+3]=_normalize_dist(
 				relative_coords.length(),static_hazard_detection_range,
@@ -681,7 +698,10 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 		if hazard.is_in_group('bs'):
 			vectorized[offset+6]=1.0
 			var bs:=hazard as BsInMap
-			vectorized[offset+9]=1-(float(bs.currtick)/bs.lifetimeticks)
+			if bs.lifetimeticks!=0:
+				vectorized[offset+9]=1-(float(bs.currtick)/bs.lifetimeticks)
+			else:
+				vectorized[offset+9]=1
 		elif hazard.is_in_group('mine'):
 			vectorized[offset+7]=1.0
 			vectorized[offset+9]=1
@@ -864,18 +884,49 @@ func _draw_map_events(font:Font)->void:
 
 
 func _draw_hazard_detection_range()->void:
-	pass
-
-	
-func _draw_static_hazards(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
-	pass
-
-func _draw_missiles(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	draw_set_transform(car.position, 0, Vector2.ONE)
 	draw_circle(
 		Vector2.ZERO,static_hazard_detection_range,Color.CADET_BLUE,false,10
 		)
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+
+	
+func _draw_static_hazards(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
+	for i in range(offset,offset+(10*static_hazard_buffer_length),10):
+		#if prop is present
+		if vectorized[i]>0.5:
+			var pos:=Vector2(
+				_denormalize_dist(
+					vectorized[i+1],static_hazard_detection_range,0,true
+					),
+				_denormalize_dist(
+					vectorized[i+2],static_hazard_detection_range,0,true
+					),
+				).rotated(car.rotation)#+car.global_position
+			draw_set_transform(pos+car.position, 0, Vector2.ONE)
+			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
+			var local_rect: Rect2 = Rect2(Vector2(-35, -35), Vector2(70, 70))
+			draw_rect(local_rect, Color.AQUAMARINE, false, 2.0)
+			# get name of hazard
+			var label:=_get_hazard_name(vectorized,i)
+			# draw label
+			draw_string(
+				font, Vector2(-35, -40), label, HORIZONTAL_ALIGNMENT_LEFT, 
+				-1, 12, Color.BLACK
+				)
+			draw_string(
+				font, Vector2(0, -38), 
+				"%0.1f, %0.1f, %0.1f" % [
+					vectorized[i+4], vectorized[i+5], vectorized[i+9],
+					], 
+				HORIZONTAL_ALIGNMENT_LEFT, -1, 8, Color.BLACK
+			)
+
+			# reset transform so other draw calls aren't affected
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+
+func _draw_missiles(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
+	pass
 
 func _draw_prop_boxes(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	for i in range(offset,offset+25,5):
@@ -915,7 +966,37 @@ func _draw_icetrail(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	pass
 
 func _draw_pads(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
-	pass
+	# swap between speed and jump pad
+	var index:=0
+	for i in range(offset,offset+28,7):
+		#if prop is present
+		if vectorized[i]>0.5:
+			var pos:=Vector2(
+				_denormalize_dist(
+					vectorized[i+1],static_hazard_detection_range,0,true
+					),
+				_denormalize_dist(
+					vectorized[i+2],static_hazard_detection_range,0,true
+					),
+				).rotated(car.rotation)#+car.global_position
+			var angle_radians := atan2(vectorized[i+5], vectorized[i+6])
+			draw_set_transform(
+				pos+car.global_position, angle_radians-3.14/2, 
+				Vector2.ONE
+				)
+			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
+			var local_rect: Rect2 = Rect2(Vector2(-50, -50), Vector2(100, 100))
+			draw_rect(local_rect, Color.AQUAMARINE, false, 2.0)
+			var label:='Speed pad'
+			if index>=14:
+				label='Jump pad'
+			draw_string(
+				font, Vector2(-20, -56), label, HORIZONTAL_ALIGNMENT_LEFT, 
+				-1, 12, Color.BLACK
+				)
+			# reset transform so other draw calls aren't affected
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+		index+=7
 
 func _draw_arrow(start: Vector2, end: Vector2, color: Color, width: float = 2.0) -> void:
 	# Main vector line
@@ -957,4 +1038,15 @@ func _denormalize_dist(norm_val: float, max_dist: float, offset: int, zero_range
 		# reverse offset
 		var dist: float = clamped_dist + offset
 		return dist
+
+func _get_hazard_name(vectorized:PackedFloat32Array,offset:int)->String:
+	if vectorized[offset+6]>0.5:
+		return 'Bs'
+	elif vectorized[offset+7]>0.5:
+		return 'Mine'
+	elif vectorized[offset+8]>0.5:
+		return 'HMine'
+	else:
+		return 'ERROR'
+
 #endregion
