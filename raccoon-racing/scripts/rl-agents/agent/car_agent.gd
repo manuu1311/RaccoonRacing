@@ -409,10 +409,10 @@ func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
 			vectorized[offset]=1.0
 			var relative_coords:=_position_to_relative(missile.global_position)
 			vectorized[offset+1]=_normalize_dist(
-					relative_coords[0],static_hazard_detection_range,0,false
+					relative_coords[0],static_hazard_detection_range,0,true
 					)
 			vectorized[offset+2]=_normalize_dist(
-					relative_coords[1],static_hazard_detection_range,0,false
+					relative_coords[1],static_hazard_detection_range,0,true
 					)
 
 			# for missile, only closing speed is relevant (impossible to dodge)
@@ -560,10 +560,10 @@ func _get_furballs(vectorized:PackedFloat32Array,offset:int)->void:
 		vectorized[offset]=1.0
 		var relative_coords:=_position_to_relative(hazard.global_position)
 		vectorized[offset+1]=_normalize_dist(
-				relative_coords[0],static_hazard_detection_range,0,false
+				relative_coords[0],static_hazard_detection_range,0,true
 				)
 		vectorized[offset+2]=_normalize_dist(
-				relative_coords[1],static_hazard_detection_range,0,false
+				relative_coords[1],static_hazard_detection_range,0,true
 				)
 		vectorized[offset+3]=_normalize_dist(
 				relative_coords.length(),static_hazard_detection_range,
@@ -622,10 +622,10 @@ func _get_icetrail(vectorized:PackedFloat32Array,offset:int)->void:
 		for point in points:
 			var relative_coords:=_position_to_relative(point)
 			vectorized[offset+1]=_normalize_dist(
-					relative_coords[0],static_hazard_detection_range,0,false
+					relative_coords[0],static_hazard_detection_range,0,true
 					)
 			vectorized[offset+2]=_normalize_dist(
-					relative_coords[1],static_hazard_detection_range,0,false
+					relative_coords[1],static_hazard_detection_range,0,true
 					)
 			vectorized[offset+3]=_normalize_dist(
 					relative_coords.length(),static_hazard_detection_range,
@@ -927,7 +927,31 @@ func _draw_static_hazards(vectorized:PackedFloat32Array,offset:int,font:Font)->v
 			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 func _draw_missiles(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
-	pass
+	for i in range(offset,offset+28,7):
+		#if prop is present
+		if vectorized[i]>0.5:
+			var pos:=Vector2(
+				_denormalize_dist(
+					vectorized[i+1],static_hazard_detection_range,0,true
+					),
+				_denormalize_dist(
+					vectorized[i+2],static_hazard_detection_range,0,true
+					),
+				).rotated(car.rotation)#+car.global_position
+			draw_set_transform(pos+car.position, 0, Vector2.ONE)
+			var color:=Color.DARK_GREEN
+			if vectorized[i+5]>0.5:
+				color=Color.ORANGE_RED
+			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
+			var local_rect: Rect2 = Rect2(Vector2(-50, -50), Vector2(100, 100))
+			draw_rect(local_rect, color, false, 2.0)
+			draw_string(
+				font, Vector2(-25, -56), "Missile, %0.1f" % vectorized[i+6], 
+				HORIZONTAL_ALIGNMENT_LEFT, 
+				-1, 12, Color.BLACK
+				)
+			# reset transform so other draw calls aren't affected
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 func _draw_prop_boxes(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	for i in range(offset,offset+25,5):
