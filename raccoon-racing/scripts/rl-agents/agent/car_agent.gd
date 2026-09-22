@@ -47,6 +47,11 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _process(_delta: float) -> void:
+	if debug_rays_flag or debug_stats_flag:
+		queue_redraw()
+
+#region API
+func get_observation()->PackedFloat32Array:
 	observation_vector.clear()
 	# general game info
 	observation_vector.append_array(_get_game_observation())
@@ -54,10 +59,9 @@ func _process(_delta: float) -> void:
 	observation_vector.append_array(sensors.get_observation())
 	# own car observation
 	observation_vector.append_array(_get_internal_state(car))
-	#_get_hazards_state()
-	if debug_rays_flag or debug_stats_flag:
-		queue_redraw()
-
+	# opponent car observation
+	return observation_vector
+#endregion
 
 #region Observation
 
@@ -95,6 +99,28 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 		clamped_dist = clampf(dist-offset, 0.0, max_dist)
 		log_0_to_1 = log(1.0 + clamped_dist) / log(1.0 + max_dist)
 		return (log_0_to_1 * 2.0) - 1.0
+
+func _get_opponent_aggregate(vectorized: PackedFloat32Array) -> void:
+	var players:= GameData.PlayersArr.duplicate()
+	var my_pos: Vector2 = car.global_position
+	
+	# Sort players by squared distance from own car
+	players.sort_custom(func(a:Player, b:Player)->bool:
+		var dist_a: float = my_pos.distance_squared_to(a.car.global_position)
+		var dist_b: float = my_pos.distance_squared_to(b.car.global_position)
+		return dist_a < dist_b
+	)
+	
+	for player:Player in players:
+		if player.car != car:
+			vectorized.append_array(_get_opponent_state(player.car))
+			
+	# Pad for missing players up to 4 total players (3 opponents)
+	if players.size() < 4:
+		var missing_count: int = 4 - players.size()
+		var empty_vec := PackedFloat32Array()
+		empty_vec.resize(46 * missing_count)
+		vectorized.append_array(empty_vec)
 
 ## Computes and returns the flattened observation array for the game state.
 ## [br]

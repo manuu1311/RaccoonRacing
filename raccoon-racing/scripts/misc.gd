@@ -2,4 +2,6 @@
 extends EditorScript
 
 func _run() -> void:
-	print(InputMap.action_get_events('Brake'))
+	var vectorized:=PackedFloat32Array()
+	vectorized.resize(10)
+	print(vectorized)
