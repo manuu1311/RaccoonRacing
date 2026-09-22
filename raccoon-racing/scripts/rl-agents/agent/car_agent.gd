@@ -89,10 +89,41 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 		log_0_to_1 = log(1.0 + clamped_dist) / log(1.0 + max_dist)
 		return (log_0_to_1 * 2.0) - 1.0
 
+## Computes and returns the flattened observation array for the game state.
+## [br]
+## Returns a [PackedFloat32Array] containing 6 normalized feature elements, 
+## structured into the following observation groups:
+## [br]
+## [b]Map (one hot encoding, 4 elements) (Indices 0–3)[/b]
+## [br]
+## [b]Game mode (one hot encoding, car/hovercraft) (Indices 4-5)[/b]
+## [br]
+## [b]Lap progress (0-1) (Indices 6)[/b]
+## • [code][6][/code]: (current lap)/(total laps) + (current lap progress)
+## [br]
+## @return PackedFloat32Array of size 6, containing flattened float features.
+func _get_game_observation()->PackedFloat32Array:
+	var vectorized:=PackedFloat32Array()
+	vectorized.resize(6)
+	
+	# current map goes from 1-6 -> set corresponding value to 1
+	vectorized[GameData.currentMap-1] = 1.0
+	
+	# game mode
+	if car.isHovercraft():
+		vectorized[5]=1.0
+	else:
+		vectorized[4]=1.0
+		
+	# lap progress
+	# TODO: incorporate lap progression into the value
+	vectorized[6] = float(car.player.Laps)/GameData.currentLaps
+		
+	return vectorized
 
 ## Computes and returns the flattened observation array for the opponent kart.
 ## [br]
-## Returns a [PackedFloat32Array] containing 42 normalized feature elements, 
+## Returns a [PackedFloat32Array] containing 44 normalized feature elements, 
 ## structured into the following observation groups:
 ## [br]
 ## [b]Speed & Physics (Indices 0–2)[/b]
@@ -132,10 +163,13 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 ## • [code][36,37][/code]: Scalar velocity of agent to the opponent, 
 ## lateral and perpendicular (am i approaching/dodging opponent?)
 ## [br]
-## @return PackedFloat32Array of size 38, containing flattened float features.
+## [b]Character id (indices 38-43)[/b]
+## • [code][38..43][/code]: one hot encoding for the character id
+## [br]
+## @return PackedFloat32Array of size 44, containing flattened float features.
 func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(38)
+	vectorized.resize(44)
 	var speed:=_speed_to_relative(car_inst.speed)
 	# since opponent can move at maximum speed in any axis, relative to own car
 	vectorized[0]=speed.x/max_speed[1]
@@ -238,6 +272,8 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 		vectorized[35] = 0.0
 		vectorized[36] = 0.0
 		vectorized[37] = 0.0
+	# one hot encoding for character id
+	vectorized[37+car.CharID]=1.0
 	
 	return vectorized
 
@@ -270,7 +306,7 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 ## • [code][27][/code]: Can use prop flag
 ## [br]
 ## [b]One hot encoding of all possible props (Indices 28-41)[/b]
-## @return PackedFloat32Array containing 33 flattened float features.
+## @return PackedFloat32Array containing 42 flattened float features.
 func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
 	vectorized.resize(42)
@@ -865,26 +901,8 @@ func _draw() -> void:
 	
 	var jump_pads: Array[Node2D] = []
 	jump_pads.assign(get_tree().get_nodes_in_group("jump_pad"))
-	#for pad in jump_pads:
-		#var pad_center: Vector2 = to_local(pad.global_position)
-#
-		## move canvas origin to the pad center and apply pad's rotation
-		#draw_set_transform(pad_center, pad.global_rotation, Vector2.ONE)
-#
-		## draw a 100x100 box centered at (0, 0) relative to the new canvas origin
-		#var local_rect: Rect2 = Rect2(Vector2(-50, -50), Vector2(100, 100))
-		#draw_rect(local_rect, Color.AQUAMARINE, false, 2.0)
-		#
-		#draw_set_transform(pad_center, pad.global_rotation-3.14/2, Vector2.ONE)
-		#draw_string(
-			#font, Vector2(-50, -58), "Jump Pad", HORIZONTAL_ALIGNMENT_LEFT, 
-			#-1, font_size, Color.BLACK
-			#)
-		## reset transform so other draw calls aren't affected
-		#draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
-		
-			
+
 func _draw_map_events(font:Font)->void:
 	_draw_hazard_detection_range()
 	var vectorized:=_get_hazards_state()
