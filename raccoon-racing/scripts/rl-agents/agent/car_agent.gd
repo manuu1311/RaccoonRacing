@@ -290,7 +290,7 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	vectorized[37+car.CharID]=1.0
 	
 	# current lap, 44
-	vectorized[44]=float(car_inst.player.Laps)/GameData.currentLaps
+	vectorized[44]=_process_lap_state(car_inst.player)
 	# boolean car target, 45
 	if car_inst.playerID==target_player:
 		vectorized[45]=1.0
@@ -412,7 +412,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	vectorized[42+car.CharID] = 1.0
 	
 	# current lap, 48
-	vectorized[48]=float(car_inst.player.Laps)/GameData.currentLaps
+	vectorized[48]=_process_lap_state(car.player)
 	
 	return vectorized
 
@@ -838,6 +838,13 @@ func _get_nearest_in_group(group: String, n: int) -> Array[Node2D]:
 		best_dist[idx] = d
 		best_node[idx] = h
 	return best_node.filter(func(node:Node)->bool: return node != null)
+
+## Return observation about track progress (current lap + progression over 
+## current lap
+func _process_lap_state(player:Player)->float:
+	# TODO: incorporate current lap progression
+	return float(player.Laps)/GameData.currentLaps
+	
 
 #endregion
 
