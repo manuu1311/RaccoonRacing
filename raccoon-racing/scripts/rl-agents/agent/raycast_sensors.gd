@@ -166,7 +166,7 @@ func _spawn_nodes()->void:
 ## [br]
 ## - [b]Ray angle:[/b] Angle of the ray cast wrt the origin.
 ## [br]
-## Returns a [PackedFloat32Array].
+## Returns a [PackedFloat32Array] of size 5 * num_rays (23 total rays).
 func get_observation() -> PackedFloat32Array:
 	return self.calculate_raycasts()
 
@@ -190,29 +190,3 @@ func _update_ray_group(ray_arr: Array[RayCast2D], base_index: int) -> void:
 		else:
 			_obs_buffer[offset] = 0.0
 			_obs_buffer[offset + 1] = _obs_buffer[offset + 2]
-
-
-#func _calculate_ray_arrays(ray_arr:Array[RayCast2D],angles:Array[float],layer:float)->PackedFloat32Array:
-	#var result:= PackedFloat32Array()
-	#result.resize(len(ray_arr)*5)
-	#var offset:int
-	#var max_dist: float
-	#for i: int in (len(ray_arr)):
-		#var ray: RayCast2D = ray_arr[i]
-		#ray.force_raycast_update()
-		#offset = i * 5
-		#max_dist = ray.target_position.length()
-		#result[offset + 2] = max_dist
-		#result[offset+4]=angles[i]
-		#
-		#if ray.is_colliding():
-			#var hit_point: Vector2 = ray.get_collision_point()
-			#
-			#result[offset] = 1.0 # True
-			#result[offset + 1] = ray.global_position.distance_to(hit_point)
-			#result[offset + 3] = layer
-		#else:
-			#result[offset] = 0.0 # False
-			#result[offset + 1] = max_dist
-			#result[offset + 3] = 0.0
-	#return result

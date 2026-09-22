@@ -47,10 +47,25 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _process(_delta: float) -> void:
+	get_observation()
 	if debug_rays_flag or debug_stats_flag:
 		queue_redraw()
 
 #region API
+## Computes and returns the observation vector for the agent.
+## [br]
+## Returns a [code][PackedFloat32Array][/code] of size [b]449[/b]
+## structured into the following observation groups:
+## [br]
+## •[b]General game state (Indices 0–6, size 7)[/b]
+## [br]
+## •[b]Raycast sensors (Indices 7-111, size 105)[/b]
+## [br]
+## •[b]Internal state (Indices 112-160, size 49)[/b]
+## [br]
+## •[b]Opponent state (Indices 161-298, size 138 (46*3)[/b]
+## [br]
+## •[b]Opponent state (Indices 299-448, size 150[/b]
 func get_observation()->PackedFloat32Array:
 	observation_vector.clear()
 	# general game info
@@ -59,7 +74,10 @@ func get_observation()->PackedFloat32Array:
 	observation_vector.append_array(sensors.get_observation())
 	# own car observation
 	observation_vector.append_array(_get_internal_state(car))
-	# opponent car observation
+	# opponent aggregate observation, appends in function
+	_get_opponent_aggregate(observation_vector)
+	# events in map
+	observation_vector.append_array(_get_hazards_state())
 	return observation_vector
 #endregion
 
@@ -100,6 +118,8 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 		log_0_to_1 = log(1.0 + clamped_dist) / log(1.0 + max_dist)
 		return (log_0_to_1 * 2.0) - 1.0
 
+## Computes and appends the flattened observation array for the opponents
+## Appends a [PackedFloat32Array] of size [b]138 (46*3)[/b]
 func _get_opponent_aggregate(vectorized: PackedFloat32Array) -> void:
 	var players:= GameData.PlayersArr.duplicate()
 	var my_pos: Vector2 = car.global_position
@@ -124,7 +144,7 @@ func _get_opponent_aggregate(vectorized: PackedFloat32Array) -> void:
 
 ## Computes and returns the flattened observation array for the game state.
 ## [br]
-## Returns a [PackedFloat32Array] containing 6 normalized feature elements, 
+## Returns a [PackedFloat32Array] containing 7 normalized feature elements, 
 ## structured into the following observation groups:
 ## [br]
 ## [b]Map (one hot encoding, 4 elements) (Indices 0–3)[/b]
@@ -134,10 +154,10 @@ func _get_opponent_aggregate(vectorized: PackedFloat32Array) -> void:
 ## [b]Lap progress (0-1) (Indices 6)[/b]
 ## • [code][6][/code]: (current lap)/(total laps) + (current lap progress)
 ## [br]
-## @return PackedFloat32Array of size 6, containing flattened float features.
+## @return PackedFloat32Array of size 7, containing flattened float features.
 func _get_game_observation()->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(6)
+	vectorized.resize(7)
 	
 	# current map goes from 1-6 -> set corresponding value to 1
 	vectorized[GameData.currentMap-1] = 1.0
@@ -446,7 +466,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 ## Computes and returns the flattened observation array for all events
 ## in map.
 ## [br]
-## Returns a [PackedFloat32Array] containing 104 normalized feature elements, 
+## Returns a [PackedFloat32Array] containing [b]150[/b] normalized feature elements, 
 ## structured into the following observation groups:
 ## [br]
 ## [b]Static hazards (Indices 0–39)[/b]
@@ -459,7 +479,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 ## [br]
 ## [b]Prop boxes (Indices 97-121)[/b]
 ## [br]
-## [b] Jump and Speed Pads (Indices 122-141)[/b]
+## [b] Jump and Speed Pads (Indices 122-149)[/b]
 ## @return PackedFloat32Array containing flattened float features.
 func _get_hazards_state()->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
