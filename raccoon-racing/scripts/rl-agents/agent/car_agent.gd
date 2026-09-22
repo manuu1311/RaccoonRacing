@@ -699,7 +699,8 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 			vectorized[offset+6]=1.0
 			var bs:=hazard as BsInMap
 			if bs.lifetimeticks!=0:
-				vectorized[offset+9]=1-(float(bs.currtick)/bs.lifetimeticks)
+				vectorized[offset+9]=1-wrapf(
+					(float(bs.currtick)/bs.lifetimeticks),0,1)
 			else:
 				vectorized[offset+9]=1
 		elif hazard.is_in_group('mine'):
