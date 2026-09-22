@@ -996,28 +996,49 @@ func _draw_prop_boxes(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 			# reset transform so other draw calls aren't affected
 			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
-func _draw_furballs(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
-		for i in range(offset,offset+18,6):
-			#if prop is present
-			if vectorized[i]>0.5:
-				var pos:=Vector2(
-					_denormalize_dist(
-						vectorized[i+1],static_hazard_detection_range,0,true
-						),
-					_denormalize_dist(
-						vectorized[i+2],static_hazard_detection_range,0,true
-						),
-					).rotated(car.rotation)#+car.global_position
-				draw_set_transform(pos+car.position, 0, Vector2.ONE)
-				# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
-				var local_rect: Rect2 = Rect2(Vector2(-15, -15), Vector2(25, 25))
-				draw_rect(local_rect, Color.DEEP_PINK, false, 2.0)
-				
-				# reset transform so other draw calls aren't affected
-				draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+func _draw_furballs(vectorized:PackedFloat32Array,offset:int,_font:Font)->void:
+	for i in range(offset,offset+18,6):
+		#if prop is present
+		if vectorized[i]>0.5:
+			var pos:=Vector2(
+				_denormalize_dist(
+					vectorized[i+1],static_hazard_detection_range,0,true
+					),
+				_denormalize_dist(
+					vectorized[i+2],static_hazard_detection_range,0,true
+					),
+				).rotated(car.rotation)#+car.global_position
+			draw_set_transform(pos+car.position, 0, Vector2.ONE)
+			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
+			var local_rect: Rect2 = Rect2(Vector2(-15, -15), Vector2(25, 25))
+			draw_rect(local_rect, Color.DEEP_PINK, false, 2.0)
+			
+			# reset transform so other draw calls aren't affected
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 func _draw_icetrail(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
-	pass
+	#if prop is present
+	if vectorized[offset]>0.5:
+		for i in range(offset,offset+9,3):
+			var pos:=Vector2(
+				_denormalize_dist(
+					vectorized[i+1],static_hazard_detection_range,0,true
+					),
+				_denormalize_dist(
+					vectorized[i+2],static_hazard_detection_range,0,true
+					),
+				).rotated(car.rotation)#+car.global_position
+			draw_set_transform(pos+car.position, 0, Vector2.ONE)
+			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
+			var local_rect: Rect2 = Rect2(Vector2(-50, -50), Vector2(100, 100))
+			draw_rect(local_rect, Color.ALICE_BLUE, false, 2.0)
+			draw_string(
+				font, Vector2(0, -56), "%0.1f" % vectorized[offset+10], 
+				HORIZONTAL_ALIGNMENT_LEFT, -1, 6, Color.BLACK
+			)
+			# reset transform so other draw calls aren't affected
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+
 
 func _draw_pads(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	# swap between speed and jump pad
