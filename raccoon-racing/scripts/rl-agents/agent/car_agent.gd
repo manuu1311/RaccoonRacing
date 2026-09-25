@@ -70,8 +70,8 @@ func get_observation()->PackedFloat32Array:
 	observation_vector.clear()
 	# general game info
 	observation_vector.append_array(_get_game_observation())
-	# raycast sensors observation
-	observation_vector.append_array(sensors.get_observation())
+	# raycast sensors observation, appends in function
+	_get_raycast_sensor_aggregate(observation_vector)
 	# own car observation
 	observation_vector.append_array(_get_internal_state(car))
 	# opponent aggregate observation, appends in function
@@ -142,6 +142,26 @@ func _get_opponent_aggregate(vectorized: PackedFloat32Array) -> void:
 		empty_vec.resize(46 * missing_count)
 		vectorized.append_array(empty_vec)
 
+## Computes and appends the flattened observation array for the raycast 
+## sensors. One float for each: 18 for solid walls, 3 for jump walls
+## [br]
+## Appends a [PackedFloat32Array] of size [b]21(number of raycasts)[/b]
+func _get_raycast_sensor_aggregate(vectorized:PackedFloat32Array)->void:
+	var sensor_output:=sensors.get_observation()
+	var to_append:=PackedFloat32Array()
+	@warning_ignore("integer_division")
+	to_append.resize(sensor_output.size()/5)
+	for i in range(0, sensor_output.size(), 5):
+		var hit_distance: float = sensor_output[i + 1]
+		var ray_length: float = sensor_output[i + 2]
+		var processed_distance:float=0.0
+		processed_distance=_normalize_raycast(
+					hit_distance,ray_length,raycast_sensors_offset,true,true
+					)
+		@warning_ignore("integer_division")
+		to_append[i/5]=processed_distance
+	vectorized.append_array(to_append)
+
 ## Computes and returns the flattened observation array for the game state.
 ## [br]
 ## Returns a [PackedFloat32Array] containing 7 normalized feature elements, 
@@ -159,7 +179,7 @@ func _get_game_observation()->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
 	vectorized.resize(7)
 	
-	# current map goes from 1-6 -> set corresponding value to 1
+	# current map goes from 1-4 -> set corresponding value to 1
 	vectorized[GameData.currentMap-1] = 1.0
 	
 	# game mode
@@ -333,10 +353,10 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 		vectorized[36] = 0.0
 		vectorized[37] = 0.0
 	# one hot encoding for character id, 38-43
-	vectorized[37+car.CharID]=1.0
+	vectorized[37+car_inst.CharID]=1.0
 	
-	# current lap, 44
-	vectorized[44]=_process_lap_state(car_inst.player)
+	# current order
+	vectorized[44]=float(car_inst.player.OrderId)/(len(GameData.PlayersArr)-1)
 	# boolean car target, 45
 	if car_inst.playerID==target_player:
 		vectorized[45]=1.0
@@ -404,7 +424,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 		
 	if car_inst.bs:
 		vectorized[5]=1.0
-		vectorized[6]=1.0 if car_inst.bsf else -1.0
+		vectorized[6]=1.0 if car_inst.bsf else 0.0
 	else:
 		vectorized[5]=0.0
 		vectorized[6]=0.0
@@ -455,7 +475,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 		vectorized[27+id]=1.0
 	
 	# char id
-	vectorized[42+car.CharID] = 1.0
+	vectorized[41+car.CharID] = 1.0
 	
 	# current lap, 48
 	vectorized[48]=_process_lap_state(car.player)
@@ -797,7 +817,7 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 				)
 		# saturated
 		if (abs(relative_coords.x) > car_detection_range or 
-				abs(relative_coords.y) > car_detection_range):
+				abs(relative_coords.y) > static_hazard_detection_range):
 			vectorized[offset+3]=0.0
 		var ego_approach_speed := 0.0
 		var ego_lateral_speed := 0.0
@@ -837,6 +857,16 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 			vectorized[offset+9]=1
 			
 		offset+=10
+
+## Computes and returns the flattened observation array for checkpoint 
+## information in the map. Contains information relative to the next 2 
+## checkpoints: scalar distance (linearly scaled with the given range), 
+## sin,cos of the relative angle, sin,cos of the angle between the two 
+## checkpoints (useful for choosing racing line).
+## [br]
+## [b]Returns an array of size [code]7[/code][/b]
+func _get_checkpoint_state(vectorized:PackedFloat32Array,offset:int)->void:
+	pass
 
 ## convert global speed to relative speed
 func _speed_to_relative(speed:Vector2)->Vector2:
