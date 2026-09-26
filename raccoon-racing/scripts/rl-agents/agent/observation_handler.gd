@@ -25,6 +25,7 @@ class_name ObservationHandler
 ## max jump height
 @export var max_jump_height:=30.0
 @export_group("Debug Settings")
+@export var debug:bool=true
 @export var debug_rays_flag:bool=true
 @export var debug_wall_color:Color=Color.RED
 @export var debug_jumpwall_color:Color=Color.YELLOW
@@ -44,8 +45,8 @@ var target_player:int=-1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
-	#set_process(false)
+	if not debug:
+		set_process(false)
 
 func _process(_delta: float) -> void:
 	get_observation()
