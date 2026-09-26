@@ -1,7 +1,5 @@
-extends Node2D
-class_name CarAgent
+extends Node
 
-@export var car:Car
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

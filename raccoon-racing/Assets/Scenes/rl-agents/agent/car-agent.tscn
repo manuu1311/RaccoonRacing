@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://b4mhxh5swjgla"]
 
-[ext_resource type="Script" uid="uid://bsdti71kqa6nt" path="res://scripts/rl-agents/agent/car_agent.gd" id="1_yw8w0"]
+[ext_resource type="Script" uid="uid://dpldllr2qa2fm" path="res://scripts/rl-agents/agent/car_agent.gd" id="1_yw8w0"]
 [ext_resource type="PackedScene" uid="uid://dxs80hju0etfw" path="res://Assets/Scenes/Screens/Car.tscn" id="2_xlth5"]
 [ext_resource type="PackedScene" uid="uid://cdj0edy5ut4sl" path="res://Assets/Scenes/rl-agents/agent/raycast_sensors.tscn" id="3_xlth5"]
+[ext_resource type="Script" uid="uid://bsdti71kqa6nt" path="res://scripts/rl-agents/agent/observation_handler.gd" id="4_redoq"]
+[ext_resource type="Script" uid="uid://bsy8a3vrknaar" path="res://scripts/rl-agents/agent/reward_handler.gd" id="5_aby4m"]
 
-[node name="CarAgent" type="Node2D" unique_id=4230303 node_paths=PackedStringArray("car", "sensors")]
+[node name="CarAgent" type="Node2D" unique_id=4230303 node_paths=PackedStringArray("car")]
 script = ExtResource("1_yw8w0")
 car = NodePath("Car")
-sensors = NodePath("Car/RaycastSensors")
 
 [node name="Car" parent="." unique_id=694736785 instance=ExtResource("2_xlth5")]
 
@@ -18,5 +19,15 @@ collision_layer = 0
 visible = false
 collision_mask = 2
 ray_length = 400
+
+[node name="RLManager" type="Node2D" parent="." unique_id=826723578]
+
+[node name="ObservationHandler" type="Node2D" parent="RLManager" unique_id=771940931 node_paths=PackedStringArray("car", "sensors")]
+script = ExtResource("4_redoq")
+car = NodePath("../../Car")
+sensors = NodePath("../../Car/RaycastSensors")
+
+[node name="RewardHandler" type="Node" parent="RLManager" unique_id=517271365]
+script = ExtResource("5_aby4m")
 
 [editable path="Car"]
