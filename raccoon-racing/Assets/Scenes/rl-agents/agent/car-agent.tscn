@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cdj0edy5ut4sl" path="res://Assets/Scenes/rl-agents/agent/raycast_sensors.tscn" id="3_xlth5"]
 [ext_resource type="Script" uid="uid://bsdti71kqa6nt" path="res://scripts/rl-agents/agent/observation_handler.gd" id="4_redoq"]
 [ext_resource type="Script" uid="uid://bsy8a3vrknaar" path="res://scripts/rl-agents/agent/reward_handler.gd" id="5_aby4m"]
+[ext_resource type="Script" uid="uid://cv1f2fowaexa3" path="res://scripts/rl-agents/agent/rl_controller.gd" id="6_aby4m"]
 
 [node name="CarAgent" type="Node2D" unique_id=4230303 node_paths=PackedStringArray("car")]
 script = ExtResource("1_yw8w0")
@@ -29,5 +30,9 @@ sensors = NodePath("../../Car/RaycastSensors")
 
 [node name="RewardHandler" type="Node" parent="RLManager" unique_id=517271365]
 script = ExtResource("5_aby4m")
+
+[node name="AIController2D" type="Node2D" parent="RLManager" unique_id=399962448]
+script = ExtResource("6_aby4m")
+metadata/_custom_type_script = "uid://cv4dsfd1xqyj2"
 
 [editable path="Car"]

@@ -19,6 +19,7 @@ var LapsTotal:int
 var LinePointArr:Array[int]
 var PointNum:int
 var Points:Array[Vector2]
+var ai_points:Array[Vector2]
 var PropPointArr:Array[int]
 var StartPosArr:Array[Vector2]
 var StartPosArrRot:Array[float]
@@ -340,6 +341,14 @@ func InitPoints()->void:
 	Points = []
 	var ipoint:int = 0
 	var point:Marker2D
+	while(ipoint < PointNum+1):
+		point = get_node_or_null(PointsPath+"/Points/point"+str(ipoint))
+		if(point!=null):
+			Points.append(point.global_position)
+		ipoint +=1
+	# find ai points
+	ai_points=[]
+	ipoint=0
 	while(ipoint < PointNum+1):
 		point = get_node_or_null(PointsPath+"/Points/point"+str(ipoint))
 		if(point!=null):
