@@ -352,7 +352,7 @@ func InitPoints()->void:
 	while(ipoint < PointNum+1):
 		point = get_node_or_null(PointsPath+"/Points/point"+str(ipoint))
 		if(point!=null):
-			Points.append(point.global_position)
+			ai_points.append(point.global_position)
 		ipoint +=1
 
 	

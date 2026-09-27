@@ -24,6 +24,8 @@ class_name ObservationHandler
 @export var prop_box_buffer_length:=5
 ## max jump height
 @export var max_jump_height:=30.0
+## next checkpoints range
+@export var checkpoints_detection_range:int
 @export_group("Debug Settings")
 @export var debug:bool=true
 @export var debug_rays_flag:bool=true
@@ -42,9 +44,11 @@ var observation_vector:PackedFloat32Array
 # current target opponent
 var target_player:int=-1
 #endregion
+var rl_player:RLPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	rl_player=car.player as RLPlayer
 	if not debug:
 		set_process(false)
 
@@ -866,9 +870,28 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 ## sin,cos of the relative angle, sin,cos of the angle between the two 
 ## checkpoints (useful for choosing racing line).
 ## [br]
-## [b]Returns an array of size [code]7[/code][/b]
+## [b]Returns an array of size [code]8[/code][/b]
 func _get_checkpoint_state(vectorized:PackedFloat32Array,offset:int)->void:
-	pass
+	var currpoint:Vector2=rl_player.ai_points[rl_player.current_point_id]
+	var nextpoint:Vector2=rl_player.ai_points[rl_player.next_point_id]
+	var distance:Vector2
+	var angle:float
+	# checkpoint distance and angle
+	for point:Vector2 in [currpoint,nextpoint]:
+		distance=_position_to_relative(point)
+		vectorized[offset]=clampf(
+			distance.length()/checkpoints_detection_range,
+			-1,1
+			)
+		angle=distance.angle()
+		vectorized[offset+1]=sin(angle)
+		vectorized[offset+2]=cos(angle)
+		offset+=3
+	# angle between the two checkpoints
+	distance=(nextpoint-currpoint).rotated(-car.rotation)
+	angle=distance.angle()
+	vectorized[offset]=sin(angle)
+	vectorized[offset+1]=cos(angle)
 
 ## convert global speed to relative speed
 func _speed_to_relative(speed:Vector2)->Vector2:
