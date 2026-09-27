@@ -25,7 +25,7 @@ class_name ObservationHandler
 ## max jump height
 @export var max_jump_height:=30.0
 ## next checkpoints range
-@export var checkpoints_detection_range:int
+@export var checkpoints_detection_range:=2000
 @export_group("Debug Settings")
 @export var debug:bool=true
 @export var debug_rays_flag:bool=true
@@ -71,7 +71,9 @@ func _process(_delta: float) -> void:
 ## [br]
 ## •[b]Opponent state (Indices 161-298, size 138 (46*3)[/b]
 ## [br]
-## •[b]Opponent state (Indices 299-448, size 150[/b]
+## •[b]Events in map (Indices 299-448, size 150[/b]
+## [br]
+## •[b]Checkpoint information (Indices 449-456, size 8[/b]
 func get_observation()->PackedFloat32Array:
 	observation_vector.clear()
 	# general game info
@@ -84,6 +86,7 @@ func get_observation()->PackedFloat32Array:
 	_get_opponent_aggregate(observation_vector)
 	# events in map
 	observation_vector.append_array(_get_hazards_state())
+	observation_vector.append_array(_get_checkpoint_observation())
 	return observation_vector
 #endregion
 
@@ -170,7 +173,7 @@ func _get_raycast_sensor_aggregate(vectorized:PackedFloat32Array)->void:
 
 ## Computes and returns the flattened observation array for the game state.
 ## [br]
-## Returns a [PackedFloat32Array] containing 7 normalized feature elements, 
+## Returns a [PackedFloat32Array] containing 15 normalized feature elements, 
 ## structured into the following observation groups:
 ## [br]
 ## [b]Map (one hot encoding, 4 elements) (Indices 0–3)[/b]
@@ -198,6 +201,18 @@ func _get_game_observation()->PackedFloat32Array:
 	# TODO: incorporate lap progression into the value
 	vectorized[6] = float(car.player.Laps)/GameData.currentLaps
 		
+	return vectorized
+
+## [b]Next 2 checkpoints (0-1) (Indices 7-14)[/b]
+## • [code][7-12][/code]: scalar distance, sin,cos of angle between 
+## agent and next checkpoint
+## [br]
+## • [code][13-14][/code]: sin,cos of angle between the two checkpoints
+func _get_checkpoint_observation()->PackedFloat32Array:
+	# TODO: function can be removed once observations are edited in place
+	var vectorized:=PackedFloat32Array()
+	vectorized.resize(8)
+	_get_checkpoint_state(vectorized,0)
 	return vectorized
 
 ## Computes and returns the flattened observation array for the opponent kart.
@@ -1056,6 +1071,7 @@ func _draw_map_events(font:Font)->void:
 	_draw_icetrail(vectorized,86,font)
 	_draw_prop_boxes(vectorized,97,font)
 	_draw_pads(vectorized,122,font)
+	_draw_checkpoints(_get_checkpoint_observation(),0,font)
 
 
 func _draw_hazard_detection_range()->void:
@@ -1065,7 +1081,31 @@ func _draw_hazard_detection_range()->void:
 		)
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
-	
+func _draw_checkpoints(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
+	# for each checkpoint
+	for i in range(offset,offset+6,3):
+		# get original distance
+		var scalar_distance:=vectorized[i]*checkpoints_detection_range
+		# get original angle
+		var dir := Vector2(
+			vectorized[i+2], vectorized[i+1]
+			).rotated(car.global_rotation)
+		var pos:=dir*scalar_distance
+		draw_set_transform(
+			pos+car.global_position, 0,Vector2.ONE
+			)
+			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
+		var local_rect: Rect2 = Rect2(Vector2(-20, -20), Vector2(40, 40))
+		draw_rect(local_rect, Color.AQUAMARINE, false, 2.0)
+		var label:='Checkpoint'
+		draw_string(
+			font, Vector2(-50, -23), label, HORIZONTAL_ALIGNMENT_LEFT, 
+			-1, 12, Color.BLACK
+			)
+		# reset transform so other draw calls aren't affected
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+
+
 func _draw_static_hazards(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	for i in range(offset,offset+(10*static_hazard_buffer_length),10):
 		#if prop is present

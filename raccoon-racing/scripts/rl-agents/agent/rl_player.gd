@@ -4,7 +4,7 @@ class_name RLPlayer
 var ai_points:Array[Vector2]
 var current_point_id:int
 var next_point_id:int
-var point_update_range:int=250
+var point_update_range:int=200
 var point_update_range_squared:int
 
 # Called when the node enters the scene tree for the first time.
