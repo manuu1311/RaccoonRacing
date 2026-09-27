@@ -150,6 +150,7 @@ texture = ExtResource("5_p4phl")
 [node name="Art" type="Node2D" parent="Visuals" unique_id=483314928]
 
 [node name="PointsCar" type="Node2D" parent="." unique_id=229521120]
+visible = false
 
 [node name="Flags" type="Node2D" parent="PointsCar" unique_id=2001153467]
 position = Vector2(-275.72, 33.16)
@@ -934,8 +935,63 @@ position = Vector2(-2029.7769, -1588.3789)
 [node name="GroupGrass46" type="Marker2D" parent="PointsCar/GroupGrass1" unique_id=899891193]
 position = Vector2(-2071.8396, -1431.8259)
 
+[node name="AIPoints" type="Node2D" parent="PointsCar" unique_id=133357912]
+
+[node name="Point0" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1016830996]
+position = Vector2(-2186.2207, -1381.4106)
+
+[node name="Point1" type="Marker2D" parent="PointsCar/AIPoints" unique_id=429031512]
+position = Vector2(-1465.9763, -2168.5347)
+
+[node name="Point2" type="Marker2D" parent="PointsCar/AIPoints" unique_id=614764356]
+position = Vector2(-601.6824, -1652.362)
+
+[node name="Point3" type="Marker2D" parent="PointsCar/AIPoints" unique_id=219498346]
+position = Vector2(739.3466, -1458.5825)
+
+[node name="Point4" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1337815193]
+position = Vector2(1596.7822, -1722.6704)
+
+[node name="Point5" type="Marker2D" parent="PointsCar/AIPoints" unique_id=415072552]
+position = Vector2(1960.335, -1388.2712)
+
+[node name="Point6" type="Marker2D" parent="PointsCar/AIPoints" unique_id=2115805877]
+position = Vector2(1980.9136, -782.9218)
+
+[node name="Point7" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1886230348]
+position = Vector2(1550.481, -407.365)
+
+[node name="Point8" type="Marker2D" parent="PointsCar/AIPoints" unique_id=320645443]
+position = Vector2(859.3877, -398.79126)
+
+[node name="Point9" type="Marker2D" parent="PointsCar/AIPoints" unique_id=641803789]
+position = Vector2(523.27295, -31.808777)
+
+[node name="Point10" type="Marker2D" parent="PointsCar/AIPoints" unique_id=2072221791]
+position = Vector2(518.12836, 966.2466)
+
+[node name="Point11" type="Marker2D" parent="PointsCar/AIPoints" unique_id=933481385]
+position = Vector2(1008.58154, 1346.948)
+
+[node name="Point12" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1509863228]
+position = Vector2(1890.0253, 1599.0334)
+
+[node name="Point13" type="Marker2D" parent="PointsCar/AIPoints" unique_id=787226419]
+position = Vector2(1415.0059, 1969.4456)
+
+[node name="Point14" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1718517219]
+position = Vector2(459.8225, 1928.2885)
+
+[node name="Point15" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1136976415]
+position = Vector2(-401.04285, 1338.373)
+
+[node name="Point16" type="Marker2D" parent="PointsCar/AIPoints" unique_id=2071471758]
+position = Vector2(-1488.2695, 1130.8743)
+
+[node name="Point17" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1237551842]
+position = Vector2(-2079.8936, 446.6402)
+
 [node name="PointsHC" type="Node2D" parent="." unique_id=797467020]
-visible = false
 
 [node name="Flags" type="Node2D" parent="PointsHC" unique_id=2124886775]
 
@@ -1469,3 +1525,56 @@ position = Vector2(-1500.4541, 451.6595)
 
 [node name="point22" type="Marker2D" parent="PointsHC/Points" unique_id=2124777531]
 position = Vector2(-1879.2466, 16.17749)
+
+[node name="AIPoints" type="Node2D" parent="PointsHC" unique_id=1410983150]
+
+[node name="Point0" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1479675484]
+position = Vector2(-1890.1954, -1313.1526)
+
+[node name="Point1" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1425780311]
+position = Vector2(-1355.5055, -1872.1443)
+
+[node name="Point2" type="Marker2D" parent="PointsHC/AIPoints" unique_id=487529949]
+position = Vector2(-553.47363, -1304.0385)
+
+[node name="Point3" type="Marker2D" parent="PointsHC/AIPoints" unique_id=94671279]
+position = Vector2(965.52625, -1215.9358)
+
+[node name="Point4" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1566304650]
+position = Vector2(1737.1781, -1082.2638)
+
+[node name="Point5" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1895442557]
+position = Vector2(1257.1742, -669.0958)
+
+[node name="Point6" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1676873552]
+position = Vector2(-1221.8337, -666.0575)
+
+[node name="Point7" type="Marker2D" parent="PointsHC/AIPoints" unique_id=358702797]
+position = Vector2(-1519.558, -295.4215)
+
+[node name="Point8" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1936548572]
+position = Vector2(-1151.9601, 44.83435)
+
+[node name="Point9" type="Marker2D" parent="PointsHC/AIPoints" unique_id=414316984]
+position = Vector2(919.9562, 35.720215)
+
+[node name="Point10" type="Marker2D" parent="PointsHC/AIPoints" unique_id=211272364]
+position = Vector2(1594.392, 451.9264)
+
+[node name="Point11" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1276798754]
+position = Vector2(1855.6599, 1481.8082)
+
+[node name="Point12" type="Marker2D" parent="PointsHC/AIPoints" unique_id=14273834]
+position = Vector2(1445.5299, 1964.8502)
+
+[node name="Point13" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1037662524]
+position = Vector2(564.51, 1955.7362)
+
+[node name="Point14" type="Marker2D" parent="PointsHC/AIPoints" unique_id=755419637]
+position = Vector2(-173.72394, 1193.1982)
+
+[node name="Point15" type="Marker2D" parent="PointsHC/AIPoints" unique_id=200654872]
+position = Vector2(-963.6039, 582.56006)
+
+[node name="Point16" type="Marker2D" parent="PointsHC/AIPoints" unique_id=138063316]
+position = Vector2(-1823.3578, 260.5321)
