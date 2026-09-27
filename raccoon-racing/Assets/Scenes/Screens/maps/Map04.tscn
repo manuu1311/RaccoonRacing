@@ -165,6 +165,7 @@ tile_set = SubResource("TileSet_l1ysb")
 [node name="Top1" type="Node2D" parent="Visuals/Ground" unique_id=23995456]
 
 [node name="Top2" type="Node2D" parent="Visuals/Ground" unique_id=1950009038]
+visible = false
 z_index = 15
 position = Vector2(398.36, -76.935)
 
@@ -904,6 +905,41 @@ position = Vector2(-2026.7375, 545.81866)
 [node name="point17" type="Marker2D" parent="PointsCar/Points" unique_id=1926752814]
 position = Vector2(-982.2256, 871.7859)
 
+[node name="AIPoints" type="Node2D" parent="PointsCar" unique_id=100428048]
+
+[node name="Point0" type="Marker2D" parent="PointsCar/AIPoints" unique_id=2019368624]
+position = Vector2(19.881592, 324.04047)
+
+[node name="Point1" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1590793779]
+position = Vector2(545.552, 285.3882)
+
+[node name="Point2" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1070012493]
+position = Vector2(1127.9126, 573.9916)
+
+[node name="Point3" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1235261608]
+position = Vector2(887.6747, -533.54956)
+
+[node name="Point4" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1264660034]
+position = Vector2(470.89124, -279.96442)
+
+[node name="Point5" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1294274223]
+position = Vector2(51.597046, -425.58752)
+
+[node name="Point6" type="Marker2D" parent="PointsCar/AIPoints" unique_id=196569800]
+position = Vector2(-445.5298, -536.0603)
+
+[node name="Point7" type="Marker2D" parent="PointsCar/AIPoints" unique_id=1032153198]
+position = Vector2(-1931.8895, -179.53473)
+
+[node name="Point8" type="Marker2D" parent="PointsCar/AIPoints" unique_id=563618288]
+position = Vector2(-2185.4746, 300.01733)
+
+[node name="Point9" type="Marker2D" parent="PointsCar/AIPoints" unique_id=2057742993]
+position = Vector2(-1781.2449, 616.371)
+
+[node name="Point10" type="Marker2D" parent="PointsCar/AIPoints" unique_id=797036762]
+position = Vector2(-814.609, 862.42365)
+
 [node name="PointsHC" type="Node2D" parent="." unique_id=1943385044]
 visible = false
 
@@ -1575,6 +1611,47 @@ position = Vector2(139.83606, 1026.001)
 
 [node name="point22" type="Marker2D" parent="PointsHC/Points" unique_id=1052153836]
 position = Vector2(-57.635864, 852.72894)
+
+[node name="AIPoints" type="Node2D" parent="PointsHC" unique_id=1790355902]
+
+[node name="Point0" type="Marker2D" parent="PointsHC/AIPoints" unique_id=536232875]
+position = Vector2(-8.563477, 124.04547)
+
+[node name="Point1" type="Marker2D" parent="PointsHC/AIPoints" unique_id=385459839]
+position = Vector2(-404.8874, 1.6207886)
+
+[node name="Point2" type="Marker2D" parent="PointsHC/AIPoints" unique_id=639754306]
+position = Vector2(-1707.9851, 381.34467)
+
+[node name="Point3" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1355430225]
+position = Vector2(-1836.6348, 61.79547)
+
+[node name="Point4" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1178402854]
+position = Vector2(-1324.1116, -71.00415)
+
+[node name="Point5" type="Marker2D" parent="PointsHC/AIPoints" unique_id=227990135]
+position = Vector2(-1083.4121, -531.6527)
+
+[node name="Point6" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1363079404]
+position = Vector2(-1315.8114, -954.95166)
+
+[node name="Point7" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1240456930]
+position = Vector2(-956.838, -1218.4752)
+
+[node name="Point8" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1194188989]
+position = Vector2(140.8341, -1465.3997)
+
+[node name="Point9" type="Marker2D" parent="PointsHC/AIPoints" unique_id=280514052]
+position = Vector2(582.808, -1380.3248)
+
+[node name="Point10" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1841000391]
+position = Vector2(539.2328, -1010.97614)
+
+[node name="Point11" type="Marker2D" parent="PointsHC/AIPoints" unique_id=1968592515]
+position = Vector2(779.9323, -620.8773)
+
+[node name="Point12" type="Marker2D" parent="PointsHC/AIPoints" unique_id=173857417]
+position = Vector2(-15.070801, 999.272)
 
 [editable path="Visuals/Art/Seagull3"]
 [editable path="Visuals/Art/Seagull4"]
