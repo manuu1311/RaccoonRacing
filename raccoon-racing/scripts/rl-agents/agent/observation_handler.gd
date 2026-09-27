@@ -1096,7 +1096,7 @@ func _draw_checkpoints(vectorized:PackedFloat32Array,offset:int,font:Font)->void
 			)
 			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
 		var local_rect: Rect2 = Rect2(Vector2(-20, -20), Vector2(40, 40))
-		draw_rect(local_rect, Color.AQUAMARINE, false, 2.0)
+		draw_rect(local_rect, Color.GREEN_YELLOW, false, 2.0)
 		var label:='Checkpoint'
 		draw_string(
 			font, Vector2(-50, -23), label, HORIZONTAL_ALIGNMENT_LEFT, 
