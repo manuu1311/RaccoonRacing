@@ -60,7 +60,7 @@ func _process(_delta: float) -> void:
 #region API
 ## Computes and returns the observation vector for the agent.
 ## [br]
-## Returns a [code][PackedFloat32Array][/code] of size [b]449[/b]
+## Returns a [code][PackedFloat32Array][/code] of size [b]457[/b]
 ## structured into the following observation groups:
 ## [br]
 ## •[b]General game state (Indices 0–6, size 7)[/b]
@@ -86,6 +86,7 @@ func get_observation()->PackedFloat32Array:
 	_get_opponent_aggregate(observation_vector)
 	# events in map
 	observation_vector.append_array(_get_hazards_state())
+	# checkpoint observation
 	observation_vector.append_array(_get_checkpoint_observation())
 	return observation_vector
 #endregion
@@ -198,8 +199,10 @@ func _get_game_observation()->PackedFloat32Array:
 		vectorized[4]=1.0
 		
 	# lap progress
-	# TODO: incorporate lap progression into the value
-	vectorized[6] = float(car.player.Laps)/GameData.currentLaps
+	var current_lap_progress:=float(
+		rl_player.current_point_id
+		)/(rl_player.ai_points.size()-1)
+	vectorized[6] = (car.player.Laps+current_lap_progress)/GameData.currentLaps
 		
 	return vectorized
 
@@ -499,7 +502,8 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	vectorized[41+car.CharID] = 1.0
 	
 	# current lap, 48
-	vectorized[48]=_process_lap_state(car.player)
+	vectorized[48]=float(car.player.OrderId)/(GameData.PlayersArr.size()-1)
+
 	
 	return vectorized
 
@@ -955,12 +959,6 @@ func _get_nearest_in_group(group: String, n: int) -> Array[Node2D]:
 		best_node[idx] = h
 	return best_node.filter(func(node:Node)->bool: return node != null)
 
-## Return observation about track progress (current lap + progression over 
-## current lap
-func _process_lap_state(player:Player)->float:
-	# TODO: incorporate current lap progression
-	return float(player.Laps)/GameData.currentLaps
-	
 
 #endregion
 
