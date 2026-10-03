@@ -518,7 +518,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 ## Computes and returns the flattened observation array for all events
 ## in map.
 ## [br]
-## Returns a [PackedFloat32Array] containing [b]150[/b] normalized feature elements, 
+## Returns a [PackedFloat32Array] containing [b]155[/b] normalized feature elements, 
 ## structured into the following observation groups:
 ## [br]
 ## [b]Static hazards (Indices 0–39)[/b]
@@ -529,13 +529,13 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 ## [br]
 ## [b]Ice trail (Indices 86-96)[/b]
 ## [br]
-## [b]Prop boxes (Indices 97-121)[/b]
+## [b]Prop boxes (Indices 97-126)[/b]
 ## [br]
-## [b] Jump and Speed Pads (Indices 122-149)[/b]
+## [b] Jump and Speed Pads (Indices 127-154)[/b]
 ## @return PackedFloat32Array containing flattened float features.
 func _get_hazards_state()->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(150)
+	vectorized.resize(155)
 	var offset:=0
 	_get_static_hazards(vectorized,offset)
 	offset+=40
@@ -660,11 +660,11 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 			relative_coords.length(),static_hazard_detection_range,0,true
 		)
 		if box.IsActivated:
-			vectorized[offset+3]=1.0
 			vectorized[offset+4]=1.0
+			vectorized[offset+5]=1.0
 		else:
-			vectorized[offset+3]=0.0
-			vectorized[offset+4]=1-clampf(float(
+			vectorized[offset+4]=0.0
+			vectorized[offset+5]=1-clampf(float(
 				box.hide_tick-NetworkTime.tick
 				)/box.respawn_ticks,0,1)
 		offset+=6
@@ -675,7 +675,8 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 ## For each pad: [code]0[/code]: present or not ([code]1/0[/code]),
 ## [code]1,2[/code]: relative cos,sin, 
 ## [code]3,4[/code]: scalar distance, closing speed 
-## [code]5,6[/code]: sin, cos of angle relative to agent orientation 
+## [code]5,6[/code]: sin, cos of angle between to agent orientation 
+## and the pad effect orientation
 ## [br]
 ## Takes a [PackedFloat32Array] as input, 
 ## to which it will write [code]7 * buffer_size(4)[/code] 
@@ -1055,14 +1056,13 @@ func _draw() -> void:
 				continue
 			# draw rectangle
 			var car_state:=_get_opponent_state(player.car)
-			# x and y distance
-			var raw_x: float = _denormalize_dist(
-				car_state[30], car_detection_range, car_detection_offset, true
+			var sin_b: float = car_state[30]
+			var cos_b: float = car_state[31]
+			var raw_dist: float = _denormalize_dist(
+				car_state[32], car_detection_range, car_detection_offset, true
 				)
-			var raw_y: float = _denormalize_dist(
-				car_state[31], car_detection_range, car_detection_offset, true
-				)
-			var dist:=Vector2(raw_x,raw_y).rotated(car.rotation)
+			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
+			var dist: Vector2 = relative_coords.rotated(car.rotation)
 			var rect_pos: Vector2 = car.position + dist - Vector2(25, 25)
 			var rect: Rect2 = Rect2(rect_pos, Vector2(50, 50))
 			draw_rect(rect, Color.GOLD, false, 2.0)
@@ -1096,7 +1096,7 @@ func _draw_map_events(font:Font)->void:
 	_draw_furballs(vectorized,68,font)
 	_draw_icetrail(vectorized,86,font)
 	_draw_prop_boxes(vectorized,97,font)
-	_draw_pads(vectorized,122,font)
+	_draw_pads(vectorized,127,font)
 	_draw_checkpoints(_get_checkpoint_observation(),0,font)
 
 
@@ -1136,14 +1136,13 @@ func _draw_static_hazards(vectorized:PackedFloat32Array,offset:int,font:Font)->v
 	for i in range(offset,offset+(10*static_hazard_buffer_length),10):
 		#if prop is present
 		if vectorized[i]>0.5:
-			var pos:=Vector2(
-				_denormalize_dist(
-					vectorized[i+1],static_hazard_detection_range,0,true
-					),
-				_denormalize_dist(
-					vectorized[i+2],static_hazard_detection_range,0,true
-					),
-				).rotated(car.rotation)#+car.global_position
+			var cos_b: float = vectorized[i+1]
+			var sin_b: float = vectorized[i+2]
+			var raw_dist: float = _denormalize_dist(
+				vectorized[i+3], static_hazard_detection_range, 0, true
+				)
+			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
+			var pos: Vector2 = relative_coords.rotated(car.rotation)
 			draw_set_transform(pos+car.position, 0, Vector2.ONE)
 			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
 			var local_rect: Rect2 = Rect2(Vector2(-35, -35), Vector2(70, 70))
@@ -1170,14 +1169,13 @@ func _draw_missiles(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	for i in range(offset,offset+28,7):
 		#if prop is present
 		if vectorized[i]>0.5:
-			var pos:=Vector2(
-				_denormalize_dist(
-					vectorized[i+1],static_hazard_detection_range,0,true
-					),
-				_denormalize_dist(
-					vectorized[i+2],static_hazard_detection_range,0,true
-					),
-				).rotated(car.rotation)#+car.global_position
+			var cos_b: float = vectorized[i+1]
+			var sin_b: float = vectorized[i+2]
+			var raw_dist: float = _denormalize_dist(
+				vectorized[i+3], static_hazard_detection_range, 0, true
+				)
+			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
+			var pos: Vector2 = relative_coords.rotated(car.rotation)
 			draw_set_transform(pos+car.position, 0, Vector2.ONE)
 			var color:=Color.DARK_GREEN
 			if vectorized[i+5]>0.5:
@@ -1194,17 +1192,16 @@ func _draw_missiles(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 func _draw_prop_boxes(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
-	for i in range(offset,offset+25,5):
+	for i in range(offset,offset+30,6):
 		#if prop is present
 		if vectorized[i]>0.5:
-			var pos:=Vector2(
-				_denormalize_dist(
-					vectorized[i+1],static_hazard_detection_range,0,true
-					),
-				_denormalize_dist(
-					vectorized[i+2],static_hazard_detection_range,0,true
-					),
-				).rotated(car.rotation)#+car.global_position
+			var cos_b: float = vectorized[i+1]
+			var sin_b: float = vectorized[i+2]
+			var raw_dist: float = _denormalize_dist(
+				vectorized[i+3], static_hazard_detection_range, 0, true
+				)
+			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
+			var pos: Vector2 = relative_coords.rotated(car.rotation)
 			draw_set_transform(pos+car.position, 0, Vector2.ONE)
 			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
 			var local_rect: Rect2 = Rect2(Vector2(-25, -25), Vector2(50, 50))
@@ -1214,11 +1211,11 @@ func _draw_prop_boxes(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 				-1, 6, Color.BLACK
 				)
 			draw_string(
-				font, Vector2(0, -28), "%0.1f" % vectorized[i+3], HORIZONTAL_ALIGNMENT_LEFT, 
+				font, Vector2(0, -28), "%0.1f" % vectorized[i+4], HORIZONTAL_ALIGNMENT_LEFT, 
 				-1, 6, Color.BLACK
 			)
 			draw_string(
-				font, Vector2(17, -28), "%0.1f" % vectorized[i+4], HORIZONTAL_ALIGNMENT_LEFT, 
+				font, Vector2(17, -28), "%0.1f" % vectorized[i+5], HORIZONTAL_ALIGNMENT_LEFT, 
 				-1, 6, Color.BLACK
 			)
 			# reset transform so other draw calls aren't affected
@@ -1228,14 +1225,13 @@ func _draw_furballs(vectorized:PackedFloat32Array,offset:int,_font:Font)->void:
 	for i in range(offset,offset+18,6):
 		#if prop is present
 		if vectorized[i]>0.5:
-			var pos:=Vector2(
-				_denormalize_dist(
-					vectorized[i+1],static_hazard_detection_range,0,true
-					),
-				_denormalize_dist(
-					vectorized[i+2],static_hazard_detection_range,0,true
-					),
-				).rotated(car.rotation)#+car.global_position
+			var cos_b: float = vectorized[i+1]
+			var sin_b: float = vectorized[i+2]
+			var raw_dist: float = _denormalize_dist(
+				vectorized[i+3], static_hazard_detection_range, 0, true
+				)
+			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
+			var pos: Vector2 = relative_coords.rotated(car.rotation)
 			draw_set_transform(pos+car.position, 0, Vector2.ONE)
 			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
 			var local_rect: Rect2 = Rect2(Vector2(-15, -15), Vector2(25, 25))
@@ -1248,14 +1244,13 @@ func _draw_icetrail(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	#if prop is present
 	if vectorized[offset]>0.5:
 		for i in range(offset,offset+9,3):
-			var pos:=Vector2(
-				_denormalize_dist(
-					vectorized[i+1],static_hazard_detection_range,0,true
-					),
-				_denormalize_dist(
-					vectorized[i+2],static_hazard_detection_range,0,true
-					),
-				).rotated(car.rotation)#+car.global_position
+			var cos_b: float = vectorized[i+1]
+			var sin_b: float = vectorized[i+2]
+			var raw_dist: float = _denormalize_dist(
+				vectorized[i+3], static_hazard_detection_range, 0, true
+				)
+			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
+			var pos: Vector2 = relative_coords.rotated(car.rotation)
 			draw_set_transform(pos+car.position, 0, Vector2.ONE)
 			# draw a 100x100 box centered at (0, 0) relative to the new canvas origin
 			var local_rect: Rect2 = Rect2(Vector2(-50, -50), Vector2(100, 100))
@@ -1274,15 +1269,16 @@ func _draw_pads(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	for i in range(offset,offset+28,7):
 		#if prop is present
 		if vectorized[i]>0.5:
-			var pos:=Vector2(
-				_denormalize_dist(
-					vectorized[i+1],static_hazard_detection_range,0,true
-					),
-				_denormalize_dist(
-					vectorized[i+2],static_hazard_detection_range,0,true
-					),
-				).rotated(car.rotation)#+car.global_position
-			var angle_radians := atan2(vectorized[i+5], vectorized[i+6])
+			var cos_b: float = vectorized[i+1]
+			var sin_b: float = vectorized[i+2]
+			var raw_dist: float = _denormalize_dist(
+				vectorized[i+3], static_hazard_detection_range, 0, true
+				)
+			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
+			var pos: Vector2 = relative_coords.rotated(car.rotation)
+			var angle_radians := atan2(
+					vectorized[i+5], vectorized[i+6]
+					)+car.global_rotation
 			draw_set_transform(
 				pos+car.global_position, angle_radians-3.14/2, 
 				Vector2.ONE
