@@ -556,7 +556,7 @@ func _get_hazards_state()->PackedFloat32Array:
 ## in the map (blue and red).
 ## [br]
 ## For each missile: [code]0[/code]: present or not ([code]1/0[/code]),
-## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]1,2[/code]: relative cos,sin, 
 ## [code]3,4[/code]: scalar distance and closing speed, 
 ## relative to the aimed player
 ## [code]5[/code]: is targeting me flag, 
@@ -631,7 +631,7 @@ func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
 ## in the map.
 ## [br]
 ## For each propbox: [code]0[/code]: present or not ([code]1/0[/code]),
-## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]1,2[/code]: relative cos,sin, 
 ## [code]3[/code]: scalar distance
 ## [code]4[/code]: is active flag, 
 ## [code]5[/code]: how long until is active (0: just got inactive, 
@@ -673,7 +673,7 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 ## in the map (speed pad, jump pad). Two different buffers of size 2 each.
 ## [br]
 ## For each pad: [code]0[/code]: present or not ([code]1/0[/code]),
-## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]1,2[/code]: relative cos,sin, 
 ## [code]3,4[/code]: scalar distance, closing speed 
 ## [code]5,6[/code]: sin, cos of angle relative to agent orientation 
 ## [br]
@@ -735,7 +735,7 @@ func _get_map_pads(vectorized:PackedFloat32Array,offset:int)->void:
 ## hazards in the map.
 ## [br]
 ## For each hazard: [code]0[/code]: present or not ([code]1/0[/code]),
-## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]1,2[/code]: relative cos,sin, 
 ## [code]3,4,5[/code]: scalar distance and speed (lateral, perpendicular)
 ## [br]
 ## Takes a [PackedFloat32Array] as input, 
@@ -794,7 +794,7 @@ func _get_furballs(vectorized:PackedFloat32Array,offset:int)->void:
 ## in the map.
 ## [br]
 ## For the icetrail: [code]0[/code]: present or not ([code]1/0[/code]),
-## [code]1,2,3,4,5,6,7,8,9[/code]: normalised (x,y) and scalar
+## [code]1,2,3,4,5,6,7,8,9[/code]: relative cos,sin and scalar
 ## distance to agent for each point (start, mid, end) 
 ## [br]
 ## [code]10[/code]: how much time left for it to disappear 
@@ -837,7 +837,7 @@ func _get_icetrail(vectorized:PackedFloat32Array,offset:int)->void:
 ## hazards in the map (bs, mines, honey bombs).
 ## [br]
 ## For each hazard: [code]0[/code]: present or not ([code]1/0[/code]),
-## [code]1,2[/code]: normalised distance to agent (x,y), 
+## [code]1,2[/code]: relative cos,sin, 
 ## [code]3,4,5[/code]: scalar distance and speed (lateral, perpendicular), 
 ## [code]6,7,8[/code]: type (bs,mine,honey mine), 
 ## [br]
