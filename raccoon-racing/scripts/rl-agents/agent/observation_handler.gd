@@ -546,7 +546,7 @@ func _get_hazards_state()->PackedFloat32Array:
 	_get_icetrail(vectorized,offset)
 	offset+=11
 	_get_prop_boxes(vectorized,offset)
-	offset+=25
+	offset+=30
 	_get_map_pads(vectorized,offset)
 	offset+=28
 	return vectorized
@@ -632,12 +632,13 @@ func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
 ## [br]
 ## For each propbox: [code]0[/code]: present or not ([code]1/0[/code]),
 ## [code]1,2[/code]: normalised distance to agent (x,y), 
-## [code]3[/code]: is active flag, 
-## [code]4[/code]: how long until is active (0: just got inactive, 
+## [code]3[/code]: scalar distance
+## [code]4[/code]: is active flag, 
+## [code]5[/code]: how long until is active (0: just got inactive, 
 ## 1: will be active soon)
 ## [br]
 ## Takes a [PackedFloat32Array] as input, 
-## to which it will write [code]5 * buffer_size[/code] 
+## to which it will write [code]6 * buffer_size[/code] 
 ## values, starting from an offset position
 func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 	var boxes:=_get_nearest_in_group('propbox',prop_box_buffer_length)
@@ -646,13 +647,18 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 		# is present flag
 		vectorized[offset]=1.0
 		var relative_coords:=_position_to_relative(box.global_position)
-		
-		vectorized[offset+1]=_normalize_dist(
-				relative_coords[0],static_hazard_detection_range,0,true
-				)
-		vectorized[offset+2]=_normalize_dist(
-				relative_coords[1],static_hazard_detection_range,0,true
-				)
+		var bearing := atan2(relative_coords[1], relative_coords[0])
+		vectorized[offset+1] = sin(bearing)
+		vectorized[offset+2] = cos(bearing)
+		#vectorized[offset+1]=_normalize_dist(
+				#relative_coords[0],static_hazard_detection_range,0,true
+				#)
+		#vectorized[offset+2]=_normalize_dist(
+				#relative_coords[1],static_hazard_detection_range,0,true
+				#)
+		vectorized[offset+3]=_normalize_dist(
+			relative_coords.length(),static_hazard_detection_range,0,true
+		)
 		if box.IsActivated:
 			vectorized[offset+3]=1.0
 			vectorized[offset+4]=1.0
@@ -661,7 +667,7 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 			vectorized[offset+4]=1-clampf(float(
 				box.hide_tick-NetworkTime.tick
 				)/box.respawn_ticks,0,1)
-		offset+=5
+		offset+=6
 
 ## Computes and returns the flattened observation array for pads   
 ## in the map (speed pad, jump pad). Two different buffers of size 2 each.
@@ -683,12 +689,15 @@ func _get_map_pads(vectorized:PackedFloat32Array,offset:int)->void:
 				# is present flag
 				vectorized[offset]=1.0
 				var relative_coords:=_position_to_relative(pad.global_position)
-				vectorized[offset+1]=_normalize_dist(
-						relative_coords[0],static_hazard_detection_range,0,true
-						)
-				vectorized[offset+2]=_normalize_dist(
-						relative_coords[1],static_hazard_detection_range,0,true
-						)
+				var bearing := atan2(relative_coords[1], relative_coords[0])
+				vectorized[offset+1] = sin(bearing)
+				vectorized[offset+2] = cos(bearing)
+				#vectorized[offset+1]=_normalize_dist(
+						#relative_coords[0],static_hazard_detection_range,0,true
+						#)
+				#vectorized[offset+2]=_normalize_dist(
+						#relative_coords[1],static_hazard_detection_range,0,true
+						#)
 				vectorized[offset+3]=_normalize_dist(
 					relative_coords.length(),static_hazard_detection_range,
 					0,true
