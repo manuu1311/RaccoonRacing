@@ -136,6 +136,10 @@ func _get_opponent_aggregate(vectorized: PackedFloat32Array) -> void:
 	
 	# Sort players by squared distance from own car
 	players.sort_custom(func(a:Player, b:Player)->bool:
+		if a.PlayerID==target_player:
+			return true
+		if b.PlayerID==target_player:
+			return false
 		var dist_a: float = my_pos.distance_squared_to(a.car.global_position)
 		var dist_b: float = my_pos.distance_squared_to(b.car.global_position)
 		return dist_a < dist_b
@@ -248,7 +252,7 @@ func _get_checkpoint_observation()->PackedFloat32Array:
 ## [br]
 ## • [code][28,29][/code]: Relative rotation (sin, cos)
 ## [br]
-## • [code][30,31][/code]: Relative distance
+## • [code][30,31][/code]: Relative sin,cos
 ## [br]
 ## • [code][32][/code]: Relative scalar distance
 ## [br]
@@ -334,12 +338,15 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	# with magnitude, i have to calculate a square root (length calculation)
 	var relative_coords : Vector2 = _position_to_relative(
 				car_inst.global_position)
-	vectorized[30] = _normalize_dist(
-				relative_coords[0],car_detection_range,car_detection_offset,true
-				)
-	vectorized[31] = _normalize_dist(
-				relative_coords[1],car_detection_range,car_detection_offset,true
-				)
+	var bearing := atan2(relative_coords[1], relative_coords[0])
+	vectorized[30] = sin(bearing)
+	vectorized[31] = cos(bearing)
+	#vectorized[30] = _normalize_dist(
+				#relative_coords[0],car_detection_range,car_detection_offset,true
+				#)
+	#vectorized[31] = _normalize_dist(
+				#relative_coords[1],car_detection_range,car_detection_offset,true
+				#)
 	# scalar distance
 	vectorized[32]=_normalize_dist(
 				relative_coords.length(),car_detection_range,
@@ -571,12 +578,15 @@ func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
 				# missile is present
 				vectorized[offset]=1.0
 				var relative_coords:=_position_to_relative(missile.global_position)
-				vectorized[offset+1]=_normalize_dist(
-						relative_coords[0],static_hazard_detection_range,0,true
-						)
-				vectorized[offset+2]=_normalize_dist(
-						relative_coords[1],static_hazard_detection_range,0,true
-						)
+				var bearing := atan2(relative_coords[1], relative_coords[0])
+				vectorized[offset+1] = sin(bearing)
+				vectorized[offset+2] = cos(bearing)
+				#vectorized[offset+1]=_normalize_dist(
+						#relative_coords[0],static_hazard_detection_range,0,true
+						#)
+				#vectorized[offset+2]=_normalize_dist(
+						#relative_coords[1],static_hazard_detection_range,0,true
+						#)
 
 				# for missile, only closing speed is relevant (impossible to dodge)
 				var target_car :Car= GameData.PlayersArr[(missile.AimPlayer.PlayerID)].car
@@ -697,7 +707,7 @@ func _get_map_pads(vectorized:PackedFloat32Array,offset:int)->void:
 							)
 				# angle
 				var relative_rotation := wrapf(
-					pad.global_rotation - global_rotation, -PI, PI
+					pad.global_rotation - car.global_rotation, -PI, PI
 					)
 				vectorized[offset+5] = sin(relative_rotation)
 				vectorized[offset+6] = cos(relative_rotation)
@@ -730,12 +740,15 @@ func _get_furballs(vectorized:PackedFloat32Array,offset:int)->void:
 		# prop is present
 		vectorized[offset]=1.0
 		var relative_coords:=_position_to_relative(hazard.global_position)
-		vectorized[offset+1]=_normalize_dist(
-				relative_coords[0],static_hazard_detection_range,0,true
-				)
-		vectorized[offset+2]=_normalize_dist(
-				relative_coords[1],static_hazard_detection_range,0,true
-				)
+		var bearing := atan2(relative_coords[1], relative_coords[0])
+		vectorized[offset+1] = sin(bearing)
+		vectorized[offset+2] = cos(bearing)
+		#vectorized[offset+1]=_normalize_dist(
+				#relative_coords[0],static_hazard_detection_range,0,true
+				#)
+		#vectorized[offset+2]=_normalize_dist(
+				#relative_coords[1],static_hazard_detection_range,0,true
+				#)
 		vectorized[offset+3]=_normalize_dist(
 				relative_coords.length(),static_hazard_detection_range,
 				0,true
@@ -792,12 +805,15 @@ func _get_icetrail(vectorized:PackedFloat32Array,offset:int)->void:
 		var points:=icetrail.get_trail_points()
 		for point in points:
 			var relative_coords:=_position_to_relative(point)
-			vectorized[offset+1]=_normalize_dist(
-					relative_coords[0],static_hazard_detection_range,0,true
-					)
-			vectorized[offset+2]=_normalize_dist(
-					relative_coords[1],static_hazard_detection_range,0,true
-					)
+			var bearing := atan2(relative_coords[1], relative_coords[0])
+			vectorized[offset+1] = sin(bearing)
+			vectorized[offset+2] = cos(bearing)
+			#vectorized[offset+1]=_normalize_dist(
+					#relative_coords[0],static_hazard_detection_range,0,true
+					#)
+			#vectorized[offset+2]=_normalize_dist(
+					#relative_coords[1],static_hazard_detection_range,0,true
+					#)
 			vectorized[offset+3]=_normalize_dist(
 					relative_coords.length(),static_hazard_detection_range,
 					0,true
@@ -830,18 +846,21 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 		# prop is present
 		vectorized[offset]=1.0
 		var relative_coords:=_position_to_relative(hazard.global_position)
-		vectorized[offset+1]=_normalize_dist(
-				relative_coords[0],static_hazard_detection_range,0,true
-				)
-		vectorized[offset+2]=_normalize_dist(
-				relative_coords[1],static_hazard_detection_range,0,true
-				)
+		var bearing := atan2(relative_coords[1], relative_coords[0])
+		vectorized[offset+1] = sin(bearing)
+		vectorized[offset+2] = cos(bearing)
+		#vectorized[offset+1]=_normalize_dist(
+				#relative_coords[0],static_hazard_detection_range,0,true
+				#)
+		#vectorized[offset+2]=_normalize_dist(
+				#relative_coords[1],static_hazard_detection_range,0,true
+				#)
 		vectorized[offset+3]=_normalize_dist(
 				relative_coords.length(),static_hazard_detection_range,
 				0,true
 				)
 		# saturated
-		if (abs(relative_coords.x) > car_detection_range or 
+		if (abs(relative_coords.x) > static_hazard_detection_range or 
 				abs(relative_coords.y) > static_hazard_detection_range):
 			vectorized[offset+3]=0.0
 		var ego_approach_speed := 0.0
