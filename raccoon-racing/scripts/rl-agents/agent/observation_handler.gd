@@ -218,7 +218,7 @@ func _get_game_observation()->PackedFloat32Array:
 func _get_checkpoint_observation()->PackedFloat32Array:
 	# TODO: function can be removed once observations are edited in place
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(8)
+	vectorized.resize(13)
 	_get_checkpoint_state(vectorized,0)
 	return vectorized
 
@@ -913,19 +913,20 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 		offset+=10
 
 ## Computes and returns the flattened observation array for checkpoint 
-## information in the map. Contains information relative to the next 2 
+## information in the map. Contains information relative to the next 3 
 ## checkpoints: scalar distance (linearly scaled with the given range), 
 ## sin,cos of the relative angle, sin,cos of the angle between the two 
-## checkpoints (useful for choosing racing line).
+## consecutive checkpoints (useful for choosing racing line).
 ## [br]
-## [b]Returns an array of size [code]8[/code][/b]
+## [b]Returns an array of size [code]13[/code][/b]
 func _get_checkpoint_state(vectorized:PackedFloat32Array,offset:int)->void:
 	var currpoint:Vector2=rl_player.ai_points[rl_player.current_point_id]
 	var nextpoint:Vector2=rl_player.ai_points[rl_player.next_point_id]
+	var nextpoint_2:Vector2=rl_player.ai_points[rl_player.next_point_id_2]
 	var distance:Vector2
 	var angle:float
 	# checkpoint distance and angle
-	for point:Vector2 in [currpoint,nextpoint]:
+	for point:Vector2 in [currpoint,nextpoint,nextpoint_2]:
 		distance=_position_to_relative(point)
 		vectorized[offset]=clampf(
 			distance.length()/checkpoints_detection_range,
@@ -935,11 +936,16 @@ func _get_checkpoint_state(vectorized:PackedFloat32Array,offset:int)->void:
 		vectorized[offset+1]=sin(angle)
 		vectorized[offset+2]=cos(angle)
 		offset+=3
-	# angle between the two checkpoints
+	# angle between the first two checkpoints
 	distance=(nextpoint-currpoint).rotated(-car.rotation)
 	angle=distance.angle()
-	vectorized[offset]=sin(angle)
+	vectorized[offset+0]=sin(angle)
 	vectorized[offset+1]=cos(angle)
+	#angle between checkpoint 2-3
+	distance=(nextpoint_2-nextpoint).rotated(-car.rotation)
+	angle=distance.angle()
+	vectorized[offset+2]=sin(angle)
+	vectorized[offset+3]=cos(angle)
 
 ## convert global speed to relative speed
 func _speed_to_relative(speed:Vector2)->Vector2:
@@ -1109,7 +1115,7 @@ func _draw_hazard_detection_range()->void:
 
 func _draw_checkpoints(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 	# for each checkpoint
-	for i in range(offset,offset+6,3):
+	for i in range(offset,offset+9,3):
 		# get original distance
 		var scalar_distance:=vectorized[i]*checkpoints_detection_range
 		# get original angle
