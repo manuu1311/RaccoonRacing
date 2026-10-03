@@ -339,8 +339,8 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	var relative_coords : Vector2 = _position_to_relative(
 				car_inst.global_position)
 	var bearing := atan2(relative_coords[1], relative_coords[0])
-	vectorized[30] = sin(bearing)
-	vectorized[31] = cos(bearing)
+	vectorized[30] = cos(bearing)
+	vectorized[31] = sin(bearing)
 	#vectorized[30] = _normalize_dist(
 				#relative_coords[0],car_detection_range,car_detection_offset,true
 				#)
@@ -579,8 +579,8 @@ func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
 				vectorized[offset]=1.0
 				var relative_coords:=_position_to_relative(missile.global_position)
 				var bearing := atan2(relative_coords[1], relative_coords[0])
-				vectorized[offset+1] = sin(bearing)
-				vectorized[offset+2] = cos(bearing)
+				vectorized[offset+1] = cos(bearing)
+				vectorized[offset+2] = sin(bearing)
 				#vectorized[offset+1]=_normalize_dist(
 						#relative_coords[0],static_hazard_detection_range,0,true
 						#)
@@ -648,8 +648,8 @@ func _get_prop_boxes(vectorized:PackedFloat32Array,offset:int)->void:
 		vectorized[offset]=1.0
 		var relative_coords:=_position_to_relative(box.global_position)
 		var bearing := atan2(relative_coords[1], relative_coords[0])
-		vectorized[offset+1] = sin(bearing)
-		vectorized[offset+2] = cos(bearing)
+		vectorized[offset+1] = cos(bearing)
+		vectorized[offset+2] = sin(bearing)
 		#vectorized[offset+1]=_normalize_dist(
 				#relative_coords[0],static_hazard_detection_range,0,true
 				#)
@@ -690,8 +690,8 @@ func _get_map_pads(vectorized:PackedFloat32Array,offset:int)->void:
 				vectorized[offset]=1.0
 				var relative_coords:=_position_to_relative(pad.global_position)
 				var bearing := atan2(relative_coords[1], relative_coords[0])
-				vectorized[offset+1] = sin(bearing)
-				vectorized[offset+2] = cos(bearing)
+				vectorized[offset+1] = cos(bearing)
+				vectorized[offset+2] = sin(bearing)
 				#vectorized[offset+1]=_normalize_dist(
 						#relative_coords[0],static_hazard_detection_range,0,true
 						#)
@@ -750,8 +750,8 @@ func _get_furballs(vectorized:PackedFloat32Array,offset:int)->void:
 		vectorized[offset]=1.0
 		var relative_coords:=_position_to_relative(hazard.global_position)
 		var bearing := atan2(relative_coords[1], relative_coords[0])
-		vectorized[offset+1] = sin(bearing)
-		vectorized[offset+2] = cos(bearing)
+		vectorized[offset+1] = cos(bearing)
+		vectorized[offset+2] = sin(bearing)
 		#vectorized[offset+1]=_normalize_dist(
 				#relative_coords[0],static_hazard_detection_range,0,true
 				#)
@@ -815,8 +815,8 @@ func _get_icetrail(vectorized:PackedFloat32Array,offset:int)->void:
 		for point in points:
 			var relative_coords:=_position_to_relative(point)
 			var bearing := atan2(relative_coords[1], relative_coords[0])
-			vectorized[offset+1] = sin(bearing)
-			vectorized[offset+2] = cos(bearing)
+			vectorized[offset+1] = cos(bearing)
+			vectorized[offset+2] = sin(bearing)
 			#vectorized[offset+1]=_normalize_dist(
 					#relative_coords[0],static_hazard_detection_range,0,true
 					#)
@@ -856,8 +856,8 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 		vectorized[offset]=1.0
 		var relative_coords:=_position_to_relative(hazard.global_position)
 		var bearing := atan2(relative_coords[1], relative_coords[0])
-		vectorized[offset+1] = sin(bearing)
-		vectorized[offset+2] = cos(bearing)
+		vectorized[offset+1] = cos(bearing)
+		vectorized[offset+2] = sin(bearing)
 		#vectorized[offset+1]=_normalize_dist(
 				#relative_coords[0],static_hazard_detection_range,0,true
 				#)
