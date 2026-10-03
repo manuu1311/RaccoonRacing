@@ -73,7 +73,7 @@ func _process(_delta: float) -> void:
 ## [br]
 ## •[b]Events in map (Indices 299-448, size 150[/b]
 ## [br]
-## •[b]Checkpoint information (Indices 449-456, size 8[/b]
+## •[b]Checkpoint information (Indices 449-461, size 8[/b]
 func get_observation()->PackedFloat32Array:
 	observation_vector.clear()
 	# general game info
@@ -928,7 +928,7 @@ func _get_checkpoint_state(vectorized:PackedFloat32Array,offset:int)->void:
 	# checkpoint distance and angle
 	for point:Vector2 in [currpoint,nextpoint,nextpoint_2]:
 		distance=_position_to_relative(point)
-		vectorized[offset]=clampf(
+		vectorized[offset]=1-clampf(
 			distance.length()/checkpoints_detection_range,
 			-1,1
 			)
@@ -1062,8 +1062,8 @@ func _draw() -> void:
 				continue
 			# draw rectangle
 			var car_state:=_get_opponent_state(player.car)
-			var sin_b: float = car_state[30]
-			var cos_b: float = car_state[31]
+			var cos_b: float = car_state[30]
+			var sin_b: float = car_state[31]
 			var raw_dist: float = _denormalize_dist(
 				car_state[32], car_detection_range, car_detection_offset, true
 				)
@@ -1117,7 +1117,9 @@ func _draw_checkpoints(vectorized:PackedFloat32Array,offset:int,font:Font)->void
 	# for each checkpoint
 	for i in range(offset,offset+9,3):
 		# get original distance
-		var scalar_distance:=vectorized[i]*checkpoints_detection_range
+		var scalar_distance := (
+				1.0 - vectorized[i]
+				) * checkpoints_detection_range
 		# get original angle
 		var dir := Vector2(
 			vectorized[i+2], vectorized[i+1]
