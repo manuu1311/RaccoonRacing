@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name RewardHandler
 
 var rl_player:RLPlayer
@@ -7,7 +7,7 @@ var rl_player:RLPlayer
 @export var progress_reward_multiplier:float=0.05
 @export var checkpoint_reward_bonus:float=10.0
 @export var disruptor_reward_multiplier:float=0.0
-
+@export var debug:bool=true
 var current_checkpoint_id:int
 var current_distance:float
 
@@ -20,7 +20,7 @@ func reset()->void:
 	current_checkpoint_id = rl_player.current_point_id
 	current_distance = _get_distance_to_checkpoint()
 
-func get_reward() -> float:
+func get_reward(delta:float) -> float:
 	var rew:=0.0
 	# agent reached a new checkpoint -> give distance reward as well as 
 	# bonus reward
@@ -34,11 +34,14 @@ func get_reward() -> float:
 			rl_player.ai_points[rl_player.current_point_id]).length()
 		# update point id 
 		current_checkpoint_id = rl_player.current_point_id
-
+	
+	print('rew first:',rew)
 	# check for agent progress
 	rew+=_get_progress_reward()
+	print('rew second:',rew)
 	# passive reward
-	rew -= passive_penalty
+	rew -= passive_penalty*delta
+	print('rew third:',rew)
 	return rew
 
 func _get_progress_reward()->float:

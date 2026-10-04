@@ -28,11 +28,16 @@ script = ExtResource("4_redoq")
 car = NodePath("../../Car")
 sensors = NodePath("../../Car/RaycastSensors")
 
-[node name="RewardHandler" type="Node" parent="RLManager" unique_id=517271365]
+[node name="RewardHandler" type="Node2D" parent="RLManager" unique_id=1180500172 node_paths=PackedStringArray("car")]
 script = ExtResource("5_aby4m")
+car = NodePath("../../Car")
+passive_penalty = 0.1
 
-[node name="AIController2D" type="Node2D" parent="RLManager" unique_id=399962448]
+[node name="AIController2D" type="Node2D" parent="RLManager" unique_id=399962448 node_paths=PackedStringArray("reward_handler", "observation_handler", "car")]
 script = ExtResource("6_aby4m")
+reward_handler = NodePath("../RewardHandler")
+observation_handler = NodePath("../ObservationHandler")
+car = NodePath("../../Car")
 metadata/_custom_type_script = "uid://cv4dsfd1xqyj2"
 
 [editable path="Car"]

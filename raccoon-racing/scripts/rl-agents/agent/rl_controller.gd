@@ -1,5 +1,9 @@
 extends AIController2D
 
+@export var reward_handler:RewardHandler
+@export var observation_handler:ObservationHandler
+@export var car:Car
+@export var debug_reward_flag:bool=true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,7 +12,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	reward+=reward_handler.get_reward(delta)
+	if debug_reward_flag:
+		queue_redraw()
 
 
 #-- Methods that need implementing using the "extend script" option in Godot --#
@@ -33,6 +39,25 @@ func get_action_space() -> Dictionary:
 		},
 		}
 	
-func set_action(action) -> void:	
+func set_action(action) -> void:
 	assert(false, "the get set_action method is not implemented when extending from ai_controller") 	
 # -----------------------------------------------------------------------------#
+
+# debug total reward
+func _draw() -> void:
+	var font: Font = ThemeDB.fallback_font
+	var font_size: int = ThemeDB.fallback_font_size
+
+	var text_position := car.position+Vector2(-10, -150) 
+
+	var debug_text := "Reward: %.2f" % [reward]
+
+	draw_string(
+		font,
+		text_position,
+		debug_text,
+		HORIZONTAL_ALIGNMENT_LEFT,
+		-1,
+		font_size,
+		Color.GREEN
+	)
