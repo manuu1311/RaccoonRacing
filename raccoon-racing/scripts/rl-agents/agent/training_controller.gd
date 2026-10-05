@@ -13,8 +13,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	reward+=reward_handler.get_reward(delta)
+func _process(_delta: float) -> void:
 	if debug_reward_flag:
 		queue_redraw()
 
@@ -24,30 +23,38 @@ func get_obs() -> Dictionary:
 	return {"obs":observation_handler.get_observation()}
 
 func get_reward() -> float:
+	reward+=reward_handler.get_reward()
 	return reward
 	
 func get_action_space() -> Dictionary:
 	return {
-			"throttle" : {
-				"size": 2,
-				"action_type": "discrete"
-			},
-			"steer" : {
-				"size": 2,
-				"action_type": "discrete"
-			},
-			"special" : {
-				"size": 1,
-				"action_type": "discrete"
-			},
+		# 0 neutral, 1 accelerate, 2 brake
+		"throttle": {
+			"size": 3, "action_type": "discrete"
+			}, 
+		# 0 neutral, 1 left, 2 right
+		"steer":    {
+			"size": 3, "action_type": "discrete"
+			}, 
+		# 0 off, 1 on
+		"special":  {
+			"size": 2, "action_type": "discrete"
+			}, 
 			}
 	
 func set_action(action:Dictionary) -> void:
-	input_action=action['throttle'][0]
-	input_action=action['throttle'][1]
-	input_action=action['steer'][0]
-	input_action=action['steer'][1]
-	input_action=action['special'][0]
+	var throttle := int(action["throttle"])
+	var steer := int(action["steer"])
+	var special := int(action["special"])
+
+	# accelerate, brake, left, right, special
+	input_action = [
+		throttle == 1,
+		throttle == 2,
+		steer == 1,
+		steer == 2,
+		special == 1,
+	]
 
 func reset()->void:
 	done=true

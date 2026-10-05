@@ -10,6 +10,8 @@ var rl_player:RLPlayer
 @export var debug:bool=true
 var current_checkpoint_id:int
 var current_distance:float
+# delta for passive reward
+var _last_physics_frame := Engine.get_physics_frames()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,7 +22,11 @@ func reset()->void:
 	current_checkpoint_id = rl_player.current_point_id
 	current_distance = _get_distance_to_checkpoint()
 
-func get_reward(delta:float) -> float:
+func get_reward() -> float:
+	# update delta time
+	var frames := Engine.get_physics_frames() - _last_physics_frame
+	_last_physics_frame = Engine.get_physics_frames()
+	var dt := frames / float(Engine.physics_ticks_per_second)
 	var rew:=0.0
 	# agent reached a new checkpoint -> give distance reward as well as 
 	# bonus reward
@@ -39,7 +45,7 @@ func get_reward(delta:float) -> float:
 	# check for agent progress
 	rew+=_get_progress_reward()
 	# passive reward
-	rew -= passive_penalty*delta
+	rew -= passive_penalty*dt
 	return rew
 
 func _get_progress_reward()->float:
