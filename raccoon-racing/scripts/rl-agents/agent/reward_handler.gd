@@ -35,13 +35,11 @@ func get_reward(delta:float) -> float:
 		# update point id 
 		current_checkpoint_id = rl_player.current_point_id
 	
-	print('rew first:',rew)
+
 	# check for agent progress
 	rew+=_get_progress_reward()
-	print('rew second:',rew)
 	# passive reward
 	rew -= passive_penalty*delta
-	print('rew third:',rew)
 	return rew
 
 func _get_progress_reward()->float:
