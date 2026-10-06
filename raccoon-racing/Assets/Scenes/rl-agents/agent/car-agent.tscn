@@ -7,9 +7,12 @@
 [ext_resource type="Script" uid="uid://bsy8a3vrknaar" path="res://scripts/rl-agents/agent/reward_handler.gd" id="5_aby4m"]
 [ext_resource type="Script" uid="uid://cv1f2fowaexa3" path="res://scripts/rl-agents/agent/training_controller.gd" id="6_aby4m"]
 
-[node name="CarAgent" type="Node2D" unique_id=4230303 node_paths=PackedStringArray("car")]
+[node name="CarAgent" type="Node2D" unique_id=4230303 node_paths=PackedStringArray("car", "observation_handler", "reward_handler", "training_controller")]
 script = ExtResource("1_yw8w0")
 car = NodePath("Car")
+observation_handler = NodePath("RLManager/ObservationHandler")
+reward_handler = NodePath("RLManager/RewardHandler")
+training_controller = NodePath("RLManager/TrainingController2D")
 
 [node name="Car" parent="." unique_id=694736785 instance=ExtResource("2_xlth5")]
 
