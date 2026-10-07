@@ -7,7 +7,6 @@ var rl_player:RLPlayer
 @export var progress_reward_multiplier:float=0.05
 @export var checkpoint_reward_bonus:float=10.0
 @export var disruptor_reward_multiplier:float=0.0
-@export var debug:bool=true
 var current_checkpoint_id:int
 var current_distance:float
 # delta for passive reward

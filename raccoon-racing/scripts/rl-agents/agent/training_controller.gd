@@ -6,6 +6,8 @@ class_name TrainingController
 @export var car:Car
 @export var debug_reward_flag:bool=true
 var input_action:Array[bool]
+var finished: bool = false
+var last_obs: PackedFloat32Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,9 +22,14 @@ func _process(_delta: float) -> void:
 
 #-- Methods that need implementing using the "extend script" option in Godot --#
 func get_obs() -> Dictionary:
-	return {"obs":observation_handler.get_observation()}
+	if finished:
+		return {"obs": last_obs}
+	last_obs = observation_handler.get_observation()
+	return {"obs": last_obs}
 
 func get_reward() -> float:
+	if finished:
+		return 0.0
 	reward+=reward_handler.get_reward()
 	return reward
 	
@@ -56,8 +63,12 @@ func set_action(action:Dictionary) -> void:
 		special == 1,
 	]
 
-func reset()->void:
+func end_episode()->void:
 	done=true
+	finished=false
+
+func _end_race(_id:int)->void:
+	finished=true
 
 # debug total reward
 func _draw() -> void:
