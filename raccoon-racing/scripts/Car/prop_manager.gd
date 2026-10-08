@@ -108,7 +108,7 @@ func UseProp()->void:
 								if(dist < min_dist):
 									if dist<min_dist:
 										found_player=newplayer
-										min_dist=dist
+										min_dist=int(dist)
 					if found_player!=null:
 						found_player.prop.propArr.append(ShrinkProp.new(found_player,player.car))
 						ClearPropBox();

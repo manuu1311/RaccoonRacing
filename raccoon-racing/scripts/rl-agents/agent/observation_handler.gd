@@ -63,17 +63,17 @@ func _process(_delta: float) -> void:
 ## Returns a [code][PackedFloat32Array][/code] of size [b]457[/b]
 ## structured into the following observation groups:
 ## [br]
-## •[b]General game state (Indices 0–6, size 7)[/b]
+## •[b]General game state (Indices 0–7, size 8)[/b]
 ## [br]
-## •[b]Raycast sensors (Indices 7-111, size 105)[/b]
+## •[b]Raycast sensors (Indices 8-28, size 21)[/b]
 ## [br]
-## •[b]Internal state (Indices 112-160, size 49)[/b]
+## •[b]Internal state (Indices 29-77, size 49)[/b]
 ## [br]
-## •[b]Opponent state (Indices 161-298, size 138 (46*3)[/b]
+## •[b]Opponent state (Indices 78-215, size 138 (46*3)[/b]
 ## [br]
-## •[b]Events in map (Indices 299-448, size 150[/b]
+## •[b]Events in map (Indices 216-373, size 155)[/b]
 ## [br]
-## •[b]Checkpoint information (Indices 449-461, size 8[/b]
+## •[b]Checkpoint information (Indices 374-383, size 13)[/b]
 func get_observation()->PackedFloat32Array:
 	observation_vector.clear()
 	# general game info
@@ -178,7 +178,7 @@ func _get_raycast_sensor_aggregate(vectorized:PackedFloat32Array)->void:
 
 ## Computes and returns the flattened observation array for the game state.
 ## [br]
-## Returns a [PackedFloat32Array] containing 15 normalized feature elements, 
+## Returns a [PackedFloat32Array] containing 8 normalized feature elements, 
 ## structured into the following observation groups:
 ## [br]
 ## [b]Map (one hot encoding, 4 elements) (Indices 0–3)[/b]
@@ -188,10 +188,14 @@ func _get_raycast_sensor_aggregate(vectorized:PackedFloat32Array)->void:
 ## [b]Lap progress (0-1) (Indices 6)[/b]
 ## • [code][6][/code]: (current lap)/(total laps) + (current lap progress)
 ## [br]
-## @return PackedFloat32Array of size 7, containing flattened float features.
+## [b]Is car playering (0-1) (Indices 7)[/b]
+## Useful for when an agent finished the race and is waiting for other
+## agents to finish
+## [br]
+## @return PackedFloat32Array of size 8, containing flattened float features.
 func _get_game_observation()->PackedFloat32Array:
 	var vectorized:=PackedFloat32Array()
-	vectorized.resize(7)
+	vectorized.resize(8)
 	
 	# current map goes from 1-4 -> set corresponding value to 1
 	vectorized[GameData.currentMap-1] = 1.0
@@ -207,7 +211,10 @@ func _get_game_observation()->PackedFloat32Array:
 		rl_player.current_point_id
 		)/(rl_player.ai_points.size()-1)
 	vectorized[6] = (car.player.Laps+current_lap_progress)/GameData.currentLaps
-		
+	if car.player.IsPlayering():
+		vectorized[7] = 1.0
+	else:
+		vectorized[7]=0.0
 	return vectorized
 
 ## [b]Next 2 checkpoints (0-1) (Indices 7-14)[/b]

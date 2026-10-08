@@ -30,6 +30,7 @@ ray_length = 400
 script = ExtResource("4_redoq")
 car = NodePath("../../Car")
 sensors = NodePath("../../Car/RaycastSensors")
+debug = false
 
 [node name="RewardHandler" type="Node2D" parent="RLManager" unique_id=1180500172 node_paths=PackedStringArray("car")]
 script = ExtResource("5_aby4m")
@@ -38,7 +39,7 @@ passive_penalty = 0.2
 progress_reward_multiplier = 0.001
 checkpoint_reward_bonus = 1.0
 
-[node name="TrainingController2D" type="Node2D" parent="RLManager" unique_id=399962448 node_paths=PackedStringArray("reward_handler", "observation_handler", "car")]
+[node name="TrainingController2D" type="Node2D" parent="RLManager" unique_id=399962448 node_paths=PackedStringArray("reward_handler", "observation_handler", "car") groups=["AGENT"]]
 script = ExtResource("6_aby4m")
 reward_handler = NodePath("../RewardHandler")
 observation_handler = NodePath("../ObservationHandler")

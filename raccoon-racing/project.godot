@@ -92,6 +92,7 @@ missile_kn=""
 speed_pad=""
 static_hazard=""
 propbox=""
+AGENT=""
 
 [input]
 
