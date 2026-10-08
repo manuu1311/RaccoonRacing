@@ -17,6 +17,7 @@ export_presets.cfg
 
 # Logs
 *.log
+logs/
 
 # Temporary files
 *.tmp
