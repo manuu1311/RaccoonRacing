@@ -8,7 +8,7 @@
 
 A full reimplementation of the nostalgic Flash racing game, rebuilt from scratch in Godot 4, with online/LAN multiplayer, 4-player split-screen, controller and mobile support, and (in progress) two competing reinforcement-learning agents.
 
-Free. Open source. Not affiliated with the original.  
+Free, open source, not affiliated with the original.  
 All original trademarks, characters, and copyrighted material related to the original Raccoon Racing belong to their respective owners.  
 Download it 👉[**here**](https://manuu1311.itch.io/raccoon-racing)👈  
 Play the original 👉[**here**](https://www.flashgames.it/raccoon.racing.html)👈
