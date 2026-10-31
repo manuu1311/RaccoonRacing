@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b36q67kjg7hmq"]
 
-[ext_resource type="Script" uid="uid://dm757s5r2sa7b" path="res://scripts/rl-agents/env/trainingenv_controller.gd" id="1_326vr"]
-[ext_resource type="Script" uid="uid://b3bufgre3qh5n" path="res://scripts/rl-agents/env/camera.gd" id="2_sb145"]
+[ext_resource type="Script" uid="uid://dm757s5r2sa7b" path="res://scripts/rl-agents/training-env/trainingenv_controller.gd" id="1_mbx5o"]
+[ext_resource type="Script" uid="uid://b3bufgre3qh5n" path="res://scripts/rl-agents/training-env/camera.gd" id="2_fkg4n"]
 
 [node name="TrainingEnv" type="Node2D" unique_id=1939950298]
-script = ExtResource("1_326vr")
+script = ExtResource("1_mbx5o")
 number_of_laps = 2
 number_of_ai_learning = 0
 char_id = 2
@@ -12,7 +12,7 @@ speed_up = 8.0
 timer_duration = 50
 
 [node name="Camera" type="Node2D" parent="." unique_id=1833851744 node_paths=PackedStringArray("camera", "game_manager")]
-script = ExtResource("2_sb145")
+script = ExtResource("2_fkg4n")
 camera = NodePath("Camera2D")
 game_manager = NodePath("..")
 
