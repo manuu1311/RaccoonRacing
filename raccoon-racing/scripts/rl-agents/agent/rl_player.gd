@@ -18,12 +18,14 @@ func SetCar(carinst:Car)->void:
 	super(carinst)
 	ai_points=car.map.ai_points
 	current_point_id=0
-	next_point_id=0
-	next_point_id_2=0
+	next_point_id=1
+	next_point_id_2=2
 
 func ResetPlayer(order:int)->void:
 	super(order)
 	current_point_id=0
+	next_point_id=1
+	next_point_id_2=2
 
 func UpdatePoint() -> void:
 	if !IsPlayering():

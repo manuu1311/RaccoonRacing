@@ -452,6 +452,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	# moving forward
 	else:
 		vectorized[1]=-speed.y/max_speed[0]
+	vectorized[1]=clamp(vectorized[1],-1,1)
 	vectorized[2]=clamp(car_inst.jumpCurrheight/max_jump_height,-1,1)
 	vectorized[3]=clamp(car_inst.jumpPrevheight/max_jump_height,-1,1)
 	# STATUS FLAGS
