@@ -515,9 +515,8 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	# char id
 	vectorized[41+car.CharID] = 1.0
 	
-	# current lap, 48
-	vectorized[48]=float(car.player.OrderId)/(GameData.PlayersArr.size()-1)
-
+	# current order, 48
+	vectorized[48]=float(car.player.OrderId)/max((GameData.PlayersArr.size()-1),1)
 	
 	return vectorized
 

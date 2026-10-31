@@ -18,6 +18,7 @@ func SetCar(carinst:Car)->void:
 	super(carinst)
 	ai_points=car.map.ai_points
 	current_point_id=0
+	AIPlayer
 
 
 func UpdatePoint() -> void:
@@ -35,3 +36,24 @@ func UpdatePoint() -> void:
 		else:
 			next_point_id_2=0
 		
+
+func RunPropBox(x:float,y:float)->void:
+	if hud==null:
+		await car.get_tree().create_timer(1.5).timeout
+		car.HasProp=true
+		car.CanUseProp=true
+		var id:int=GetPropPer()
+		GetProp(id)
+		return
+	if not car.playering:
+		return
+	if hud!=null:
+		car.sounds.GetProp()
+		if not hud.PropItemReady():
+			hud.propmove(x,y)
+	if car.NowPorpId!=0:
+		return
+	GetProp(GetPropPer())
+	car.CanUseProp=true
+	if hud!=null and car:
+		hud.StartPropBox(1.5,car.NowPorpId)

@@ -31,6 +31,10 @@ script = ExtResource("4_redoq")
 car = NodePath("../../Car")
 sensors = NodePath("../../Car/RaycastSensors")
 debug = false
+debug_rays_flag = false
+debug_stats_flag = false
+debug_opponent_flag = false
+debug_map_events_flag = false
 
 [node name="RewardHandler" type="Node2D" parent="RLManager" unique_id=1180500172 node_paths=PackedStringArray("car")]
 script = ExtResource("5_aby4m")

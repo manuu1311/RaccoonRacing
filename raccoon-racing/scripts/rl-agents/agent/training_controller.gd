@@ -63,7 +63,7 @@ func set_action(action:Dictionary) -> void:
 		special == 1,
 	]
 
-func end_episode()->void:
+func _end_episode()->void:
 	done=true
 	finished=false
 
@@ -72,19 +72,20 @@ func _end_race(_id:int)->void:
 
 # debug total reward
 func _draw() -> void:
-	var font: Font = ThemeDB.fallback_font
-	var font_size: int = ThemeDB.fallback_font_size
+	if debug_reward_flag:
+		var font: Font = ThemeDB.fallback_font
+		var font_size: int = ThemeDB.fallback_font_size
 
-	var text_position := car.position+Vector2(-10, -150) 
+		var text_position := car.position+Vector2(-10, -150) 
 
-	var debug_text := "Reward: %.2f" % [reward]
+		var debug_text := "Reward: %.2f" % [reward]
 
-	draw_string(
-		font,
-		text_position,
-		debug_text,
-		HORIZONTAL_ALIGNMENT_LEFT,
-		-1,
-		font_size,
-		Color.GREEN
-	)
+		draw_string(
+			font,
+			text_position,
+			debug_text,
+			HORIZONTAL_ALIGNMENT_LEFT,
+			-1,
+			font_size,
+			Color.GREEN
+		)
