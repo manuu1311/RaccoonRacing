@@ -196,8 +196,7 @@ func _reset_env()->void:
 		var player:=temp_players[idx]
 		player.car.global_position=map.StartPosArr[idx]
 		player.car.rotation=map.StartPosArrRot[idx]
-		player.Laps=0
-		player.LapsLock=false
+		player.ResetPlayer(idx)
 		var newcharid:int=character_ids.pick_random()
 		character_ids.erase(newcharid)
 		player.charid=newcharid

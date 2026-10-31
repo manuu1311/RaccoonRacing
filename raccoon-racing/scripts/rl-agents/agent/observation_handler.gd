@@ -88,6 +88,7 @@ func get_observation()->PackedFloat32Array:
 	observation_vector.append_array(_get_hazards_state())
 	# checkpoint observation
 	observation_vector.append_array(_get_checkpoint_observation())
+	_normalisation_filter(observation_vector)
 	return observation_vector
 #endregion
 
@@ -451,8 +452,8 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	# moving forward
 	else:
 		vectorized[1]=-speed.y/max_speed[0]
-	vectorized[2]=car_inst.jumpCurrheight/max_jump_height
-	vectorized[3]=(car_inst.jumpPrevheight/max_jump_height)
+	vectorized[2]=clamp(car_inst.jumpCurrheight/max_jump_height,-1,1)
+	vectorized[3]=clamp(car_inst.jumpPrevheight/max_jump_height,-1,1)
 	# STATUS FLAGS
 	# is jumping flag
 	if car_inst.jumpCurrheight>1:
@@ -1004,6 +1005,13 @@ func _get_nearest_in_group(group: String, n: int) -> Array[Node2D]:
 #endregion
 
 #region debug
+func _normalisation_filter(observation:PackedFloat32Array)->void:
+	for i in range(len(observation)):
+		var obs:=observation[i]
+		if obs>1 or obs<-1:
+			printerr('------------PROBLEM----------')
+			print('observation',str(i), 'was out of range')
+
 func _draw() -> void:
 	var font: Font = ThemeDB.fallback_font
 	var font_size: int = 12
