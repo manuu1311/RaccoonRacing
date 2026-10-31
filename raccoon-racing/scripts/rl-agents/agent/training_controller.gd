@@ -11,6 +11,7 @@ var last_obs: PackedFloat32Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	reset_after=9999999
 	input_action=[0,0,0,0,0]
 
 
@@ -67,8 +68,10 @@ func _end_episode()->void:
 	done=true
 	finished=false
 
-func _end_race(_id:int)->void:
+func _end_race(id:int)->void:
 	finished=true
+	if id==car.playerID:
+		reward+=reward_handler.add_win_reward()
 
 # debug total reward
 func _draw() -> void:

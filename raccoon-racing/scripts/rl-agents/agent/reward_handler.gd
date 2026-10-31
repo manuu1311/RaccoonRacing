@@ -6,6 +6,7 @@ var rl_player:RLPlayer
 @export var passive_penalty:float
 @export var progress_reward_multiplier:float=0.05
 @export var checkpoint_reward_bonus:float=10.0
+@export var win_reward_bonus:float=50.0
 @export var disruptor_reward_multiplier:float=0.0
 var current_checkpoint_id:int
 var current_distance:float
@@ -54,6 +55,9 @@ func _get_progress_reward()->float:
 	)*progress_reward_multiplier
 	current_distance=min(new_distance,current_distance)
 	return rew
+
+func add_win_reward()->float:
+	return win_reward_bonus
 
 func _get_distance_to_checkpoint()->float:
 	return (

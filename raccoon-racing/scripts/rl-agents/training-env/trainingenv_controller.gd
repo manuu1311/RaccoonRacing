@@ -28,6 +28,7 @@ signal setup_ready_signal
 signal reset_signal
 var timer:Timer
 var needs_reset:=false
+var training_controllers: Array[TrainingController] = []
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -104,6 +105,7 @@ func SetupPlayers()->void:
 		newplayer.SetCar(caragent.car)
 		newplayer.ResetPlayer(idx)
 		map.add_child(caragent)
+		training_controllers.append(caragent.training_controller)
 		idx+=1
 	for i in range(number_of_ai_learning):
 		var newcar:Car=(load('res://Assets/Scenes/Screens/Car.tscn') as PackedScene).instantiate()
@@ -204,7 +206,15 @@ func _reset_env()->void:
 	_clear_map()
 	# restart cars
 	_start_players()
+	# reset agents
+	_reset_agents()
 	timer.start(timer_duration)
+
+func _reset_agents()->void:
+	for tc in training_controllers:
+		tc.finished = false
+		tc.reward = 0.0
+		tc.reward_handler.reset()
 
 # remove all props from players and map
 func _clear_map()->void:
