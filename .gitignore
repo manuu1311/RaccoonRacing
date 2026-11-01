@@ -38,6 +38,10 @@ __pycache__/
 .venv/
 venv/
 env/
+*.kate-swp
+*.swp
+*~
+.directory
 
 # Jupyter notebooks
 .ipynb_checkpoints/
