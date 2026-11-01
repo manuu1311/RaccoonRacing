@@ -4,23 +4,26 @@ from godot_rl.wrappers.sample_factory_wrapper import sample_factory_enjoy, sampl
 
 # USAGE
 '''
-python curriculum_sf.py --save_model_path=curriculum_sf
---experiment_name=my_run \
---learning_rate=0.0003 \
---gamma=0.995 \
---batch_size=1024 \
---num_epochs=1 \
---rollout=32 \
---train_for_env_steps=5000000 \
---encoder_mlp_layers 256 256 \
---nonlinearity relu \
---use_rnn=True \
---rnn_type=lstm \
---rnn_size=256
---decoder_mlp_layers 128 \
---env_path=builds/MyGame.x86_64 \
---num_workers=8 \
---num_envs_per_worker=2 \
+python curriculum_sf.py \
+    --experiment_name=my_run \
+    --experiment_dir=logs/sf \
+    --speedup=1 \
+    --learning_rate=0.0003 \
+    --gamma=0.995 \
+    --batch_size=1024 \
+    --num_epochs=1 \
+    --rollout=32 \
+    --train_for_env_steps=5000000 \
+    --encoder_mlp_layers 256 256 \
+    --nonlinearity=relu \
+    --env_path=builds/MyGame.x86_64 \
+    --use_rnn=True \
+    --rnn_type=lstm \
+    --rnn_size=256 \
+    --decoder_mlp_layers 128 \
+    --num_workers=8 \
+    --num_envs_per_worker=2 \
+    --init_checkpoint_path=logs/sf/stage1/checkpoint_p0/checkpoint_XXXX.pth
 '''
 
 def get_args():
