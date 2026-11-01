@@ -62,6 +62,7 @@ var CupTimes:Array[Array]=[
 	[0,0,0],[0,0,0],
 	[0,0,0],[0,0,0],
 ]
+
 var OnlinePlayersCount:int=1
 var AICanUseProp:bool=true
 
