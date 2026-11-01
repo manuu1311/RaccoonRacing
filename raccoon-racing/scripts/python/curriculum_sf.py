@@ -26,7 +26,8 @@ python curriculum_sf.py \
         --rollout=32 \
         --train_for_env_steps=50000 \
         --encoder_mlp_layers 256 256 \
-        --nonlinearity=relu
+        --nonlinearity=relu \
+        --viz
 
 general
 
