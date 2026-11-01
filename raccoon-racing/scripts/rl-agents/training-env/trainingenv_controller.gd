@@ -87,7 +87,7 @@ func SetupPlayers()->void:
 	var idx:=0
 	for i in range(number_of_rl_learning):
 		var caragent:CarAgent=(load('res://Assets/Scenes/rl-agents/agent/car-agent.tscn') as PackedScene).instantiate()
-		var newplayer:Player=RLPlayer.new(0,Player.control_type.RLTRAINING)
+		var newplayer:Player=RLPlayer.new(idx,Player.control_type.RLTRAINING)
 		newplayer.charid=char_id
 		newplayer.racefinished.connect(_race_over)
 		GameData.PlayersArr.append(newplayer)
@@ -109,7 +109,7 @@ func SetupPlayers()->void:
 		idx+=1
 	for i in range(number_of_ai_learning):
 		var newcar:Car=(load('res://Assets/Scenes/Screens/Car.tscn') as PackedScene).instantiate()
-		var newplayer:AIPlayer=AIPlayer.new(1,Player.control_type.AI)
+		var newplayer:AIPlayer=AIPlayer.new(idx,Player.control_type.AI)
 		newplayer.AiReflect=10
 		newplayer.charid=char_id
 		newplayer.racefinished.connect(_race_over)
@@ -212,7 +212,6 @@ func _reset_env()->void:
 func _reset_agents()->void:
 	for tc in training_controllers:
 		tc.finished = false
-		tc.reward = 0.0
 		tc.reward_handler.reset()
 
 # remove all props from players and map

@@ -3,7 +3,7 @@ class_name RewardHandler
 
 var rl_player:RLPlayer
 @export var car:Car
-@export var passive_penalty:float
+@export var passive_penalty:float=0.2
 @export var progress_reward_multiplier:float=0.05
 @export var checkpoint_reward_bonus:float=10.0
 @export var win_reward_bonus:float=50.0
@@ -20,6 +20,7 @@ func _ready() -> void:
 
 func reset()->void:
 	current_checkpoint_id = rl_player.current_point_id
+	_last_physics_frame = Engine.get_physics_frames()
 	current_distance = _get_distance_to_checkpoint()
 
 func get_reward() -> float:

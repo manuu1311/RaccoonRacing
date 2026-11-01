@@ -288,10 +288,10 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	vectorized.resize(46)
 	var speed:=_speed_to_relative(car_inst.speed)
 	# since opponent can move at maximum speed in any axis, relative to own car
-	vectorized[0]=speed.x/max_speed[1]
-	vectorized[1]=-speed.y/max_speed[1]
-	vectorized[2]=car_inst.jumpCurrheight/max_jump_height
-	vectorized[3]=car_inst.jumpPrevheight/max_jump_height
+	vectorized[0]=clamp(speed.x/max_speed[1],-1,1)
+	vectorized[1]=clamp(-speed.y/max_speed[1],-1,1)
+	vectorized[2]=clamp(car_inst.jumpCurrheight/max_jump_height,-1,1)
+	vectorized[3]=clamp(car_inst.jumpPrevheight/max_jump_height,-1,1)
 	# is jumping flag
 	if car_inst.jumpCurrheight>1:
 		vectorized[4]=1.0

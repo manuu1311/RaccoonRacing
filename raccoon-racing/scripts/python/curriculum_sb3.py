@@ -4,7 +4,7 @@ import pathlib
 from typing import Callable
 
 # USAGE
-# python curriculum_sb3.py --save_model_path=curriculum --timesteps=50000
+# python curriculum_sb3.py --save_model_path=curriculum --timesteps=500000
 
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import CheckpointCallback

@@ -8,6 +8,8 @@ class_name TrainingController
 var input_action:Array[bool]
 var finished: bool = false
 var last_obs: PackedFloat32Array
+var should_add_win_bonus:bool=false
+var total_reward_debug:float=0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,14 +26,19 @@ func _process(_delta: float) -> void:
 #-- Methods that need implementing using the "extend script" option in Godot --#
 func get_obs() -> Dictionary:
 	if finished:
+		print('noo it finished..')
 		return {"obs": last_obs}
 	last_obs = observation_handler.get_observation()
 	return {"obs": last_obs}
 
 func get_reward() -> float:
 	if finished:
+		if should_add_win_bonus:
+			should_add_win_bonus=false
+			return reward_handler.add_win_reward()
 		return 0.0
 	reward+=reward_handler.get_reward()
+	total_reward_debug+=reward
 	return reward
 	
 func get_action_space() -> Dictionary:
@@ -65,13 +72,14 @@ func set_action(action:Dictionary) -> void:
 	]
 
 func _end_episode()->void:
+	total_reward_debug=0.0
 	done=true
 	finished=false
 
 func _end_race(id:int)->void:
 	finished=true
 	if id==car.playerID:
-		reward+=reward_handler.add_win_reward()
+		should_add_win_bonus=true
 
 # debug total reward
 func _draw() -> void:
@@ -81,7 +89,7 @@ func _draw() -> void:
 
 		var text_position := car.position+Vector2(-10, -150) 
 
-		var debug_text := "Reward: %.2f" % [reward]
+		var debug_text := "Reward: %.2f" % [total_reward_debug]
 
 		draw_string(
 			font,
