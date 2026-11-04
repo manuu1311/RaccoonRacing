@@ -288,10 +288,10 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 	vectorized.resize(46)
 	var speed:=_speed_to_relative(car_inst.speed)
 	# since opponent can move at maximum speed in any axis, relative to own car
-	vectorized[0]=clamp(speed.x/max_speed[1],-1,1)
-	vectorized[1]=clamp(-speed.y/max_speed[1],-1,1)
-	vectorized[2]=clamp(car_inst.jumpCurrheight/max_jump_height,-1,1)
-	vectorized[3]=clamp(car_inst.jumpPrevheight/max_jump_height,-1,1)
+	vectorized[0]=clampf(speed.x/max_speed[1],-1,1)
+	vectorized[1]=clampf(-speed.y/max_speed[1],-1,1)
+	vectorized[2]=clampf(car_inst.jumpCurrheight/max_jump_height,-1,1)
+	vectorized[3]=clampf(car_inst.jumpPrevheight/max_jump_height,-1,1)
 	# is jumping flag
 	if car_inst.jumpCurrheight>1:
 		vectorized[4]=1.0
@@ -378,14 +378,14 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 
 		closing_speed = -speed.dot(dir_to_opponent)
 		lateral_speed = speed.dot(perp_dir)
-		vectorized[34] = clamp(closing_speed / max_speed[1], -1.0, 1.0)
-		vectorized[36] = clamp(lateral_speed / max_speed[1], -1.0, 1.0)
+		vectorized[34] = clampf(closing_speed / max_speed[1], -1.0, 1.0)
+		vectorized[36] = clampf(lateral_speed / max_speed[1], -1.0, 1.0)
 
 		var ego_relative_speed := _speed_to_relative(car.speed)
 		ego_approach_speed = ego_relative_speed.dot(dir_to_opponent)
 		ego_lateral_speed = ego_relative_speed.dot(perp_dir)
-		vectorized[35] = clamp(ego_approach_speed / max_speed[1], -1.0, 1.0)
-		vectorized[37] = clamp(ego_lateral_speed / max_speed[1], -1.0, 1.0) 
+		vectorized[35] = clampf(ego_approach_speed / max_speed[1], -1.0, 1.0)
+		vectorized[37] = clampf(ego_lateral_speed / max_speed[1], -1.0, 1.0) 
 	else:
 		vectorized[34] = 0.0
 		vectorized[35] = 0.0
@@ -452,9 +452,9 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	# moving forward
 	else:
 		vectorized[1]=-speed.y/max_speed[0]
-	vectorized[1]=clamp(vectorized[1],-1,1)
-	vectorized[2]=clamp(car_inst.jumpCurrheight/max_jump_height,-1,1)
-	vectorized[3]=clamp(car_inst.jumpPrevheight/max_jump_height,-1,1)
+	vectorized[1]=clampf(vectorized[1],-1,1)
+	vectorized[2]=clampf(car_inst.jumpCurrheight/max_jump_height,-1,1)
+	vectorized[3]=clampf(car_inst.jumpPrevheight/max_jump_height,-1,1)
 	# STATUS FLAGS
 	# is jumping flag
 	if car_inst.jumpCurrheight>1:
@@ -610,7 +610,7 @@ func _get_missiles(vectorized:PackedFloat32Array,offset:int)->void:
 				if target_dist > 0.0001:
 					var dir_to_hazard := target_relative_pos / target_dist
 					closing_speed_to_target = target_relative_vel.dot(dir_to_hazard)
-					vectorized[offset+4] = clamp(
+					vectorized[offset+4] = clampf(
 							closing_speed_to_target / max_speed[1], -1.0, 1.0
 							)
 				else:
@@ -720,7 +720,7 @@ func _get_map_pads(vectorized:PackedFloat32Array,offset:int)->void:
 					var ego_relative_speed := _speed_to_relative(car.speed)
 					#closing speed
 					ego_approach_speed = ego_relative_speed.dot(dir_to_hazard)
-					vectorized[offset+4] = clamp(
+					vectorized[offset+4] = clampf(
 							ego_approach_speed / max_speed[1], -1.0, 1.0
 							)
 				# angle
@@ -786,10 +786,10 @@ func _get_furballs(vectorized:PackedFloat32Array,offset:int)->void:
 			var perp_dir := Vector2(-dir_to_hazard.y, dir_to_hazard.x)
 			closing_speed_to_target = target_relative_vel.dot(dir_to_hazard)
 			target_lateral_vel = target_relative_vel.dot(perp_dir)
-			vectorized[offset+4] = clamp(
+			vectorized[offset+4] = clampf(
 					closing_speed_to_target / max_speed[1], -1.0, 1.0
 					)
-			vectorized[offset+5] = clamp(
+			vectorized[offset+5] = clampf(
 					target_lateral_vel / max_speed[1], -1.0, 1.0
 					) 
 		else:
@@ -894,10 +894,10 @@ func _get_static_hazards(vectorized:PackedFloat32Array,offset:int)->void:
 			#closing speed
 			ego_approach_speed = ego_relative_speed.dot(dir_to_hazard)
 			ego_lateral_speed = ego_relative_speed.dot(perp_dir)
-			vectorized[offset+4] = clamp(
+			vectorized[offset+4] = clampf(
 					ego_approach_speed / max_speed[1], -1.0, 1.0
 					)
-			vectorized[offset+5] = clamp(
+			vectorized[offset+5] = clampf(
 					ego_lateral_speed / max_speed[1], -1.0, 1.0
 					) 
 		else:
@@ -1003,16 +1003,12 @@ func _get_nearest_in_group(group: String, n: int) -> Array[Node2D]:
 	return best_node.filter(func(node:Node)->bool: return node != null)
 
 
+func _normalisation_filter(observation:PackedFloat32Array)->void:
+	for i in range(len(observation)):
+		observation[i]=clampf(observation[i],-1,1)
 #endregion
 
 #region debug
-func _normalisation_filter(observation:PackedFloat32Array)->void:
-	for i in range(len(observation)):
-		var obs:=observation[i]
-		if obs>1 or obs<-1:
-			printerr('------------PROBLEM----------')
-			print('observation',str(i), 'was out of range')
-
 func _draw() -> void:
 	var font: Font = ThemeDB.fallback_font
 	var font_size: int = 12

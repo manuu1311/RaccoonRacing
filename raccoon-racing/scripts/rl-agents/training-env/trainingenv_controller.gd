@@ -1,9 +1,6 @@
 extends Node2D
 class_name EnvManager 
 
-# TODO: rl agents share props for some reason, they dont have cooldown
-# TODO: ai players do not reset pointid after race over
-# props not correctly reset: agents sometimes have residual prop from last run
 # observation 29 out of bounds
 # prop effects not correctly reset, like shrink that persists even in new reset, as well as bs/bsex values
 
