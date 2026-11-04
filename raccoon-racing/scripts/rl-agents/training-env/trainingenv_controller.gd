@@ -1,8 +1,6 @@
 extends Node2D
 class_name EnvManager 
 
-# prop effects not correctly reset, like shrink that persists even in new reset, 
-# as well as bs/bsex values
 
 #region export variables
 @export_group("General Settings")
