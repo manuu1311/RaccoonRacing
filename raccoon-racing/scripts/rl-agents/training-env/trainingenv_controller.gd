@@ -51,6 +51,8 @@ func _ready() -> void:
 	Engine.physics_ticks_per_second = int(35 * speed_up)
 	Engine.time_scale = speed_up
 	Engine.max_physics_steps_per_frame = int(35 * speed_up)
+	Engine.max_fps = int(35 * speed_up)
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	_reset_env()
 
 func _process(_delta: float) -> void:
