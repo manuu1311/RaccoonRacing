@@ -17,7 +17,10 @@ func handle_input()->void:
 		brake=inputArr[1]
 		left=inputArr[2]
 		right=inputArr[3]
-		special=inputArr[4]
+		if GameData.AICanUseProp:
+			special=inputArr[4]
+		else:
+			special=false
 		cancelturn=not left and not right
 	else:
 		forward=false
