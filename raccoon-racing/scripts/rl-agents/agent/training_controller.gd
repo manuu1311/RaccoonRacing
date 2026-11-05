@@ -12,7 +12,7 @@ var should_add_win_bonus:bool=false
 var total_reward_debug:float=0.0
 var mode:String
 var timer:Timer
-var idle_timer_duration:=20
+var idle_timer_duration:=60
 signal car_idled()
 
 # Called when the node enters the scene tree for the first time.

@@ -34,6 +34,7 @@ var mode:String='curriculum'
 func _ready() -> void:
 	## TODO: currently disabling ai props
 	GameData.AICanUseProp=false
+	apply_mode()
 	timer=Timer.new()
 	add_child(timer)
 	timer.timeout.connect(_handle_reset_sequence)

@@ -6,11 +6,10 @@
 [node name="TrainingEnv" type="Node2D" unique_id=1939950298]
 script = ExtResource("1_mbx5o")
 number_of_laps = 2
-number_of_rl_learning = 2
 number_of_ai_learning = 0
 char_id = 2
-speed_up = 12.0
-timer_duration = 60
+speed_up = 2.0
+timer_duration = 300
 
 [node name="Camera" type="Node2D" parent="." unique_id=1833851744 node_paths=PackedStringArray("camera", "game_manager")]
 script = ExtResource("2_fkg4n")
