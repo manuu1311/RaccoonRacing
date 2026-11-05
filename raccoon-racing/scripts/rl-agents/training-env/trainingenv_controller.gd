@@ -27,6 +27,7 @@ signal reset_signal
 var timer:Timer
 var needs_reset:=false
 var training_controllers: Array[TrainingController] = []
+var mode:String='curriculum'
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -55,6 +56,13 @@ func _ready() -> void:
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	_reset_env()
 
+func apply_mode()->void:
+	match(mode):
+		'curriculum':
+			print('curriculum mode applied')
+		_:
+			print('no mode selected. default values applied')
+
 func _process(_delta: float) -> void:
 	# reset env
 	if needs_reset:
@@ -65,6 +73,10 @@ func GameStart()->void:
 	_start_players()
 	NetworkTime.start()
 	map.PlayersReadySignalEmit()
+	for tc in training_controllers:
+		tc.set_mode(mode)
+		if mode=='curriculum':
+			tc.car_idled.connect(_handle_reset_sequence)
 
 
 func _start_players()->void:
