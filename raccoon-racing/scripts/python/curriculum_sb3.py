@@ -137,9 +137,10 @@ parser.add_argument(
     type=float,
     help="The clipping range (default 0.2). This limits the policy changes per update",
 )
+parser.add_argument("--training_mode", default="curriculum", help="Modes between curriculum, early, competitive, adversarial")
 
 args, extras = parser.parse_known_args()
-
+os.environ["GODOT_MODE"]=args.training_mode
 
 def handle_onnx_export():
     # Enforce the extension of onnx and zip when saving model to avoid potential conflicts in case of same name
