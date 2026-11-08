@@ -27,13 +27,12 @@ signal reset_signal
 var timer:Timer
 var needs_reset:=false
 var training_controllers: Array[TrainingController] = []
-var mode:String='curriculum'
+var mode:String
 #endregion
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	## TODO: currently disabling ai props
-	GameData.AICanUseProp=false
+	read_args()
 	apply_mode()
 	timer=Timer.new()
 	add_child(timer)
@@ -57,9 +56,21 @@ func _ready() -> void:
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	_reset_env()
 
+
+func read_args()->void:
+	var read_mode := (OS.get_environment("GODOT_MODE"))
+	if read_mode:
+		mode=read_mode
+		print('Read mode '+mode+' from system.')
+	else:
+		mode='curriculum'
+		print('No system value read or mistyped. Defaulting to curriculum.')
+
+
 func apply_mode()->void:
 	match(mode):
 		'curriculum':
+			GameData.AICanUseProp=false
 			print('curriculum mode applied')
 		_:
 			print('no mode selected. default values applied')
