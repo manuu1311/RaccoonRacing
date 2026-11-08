@@ -1,11 +1,6 @@
 extends Node2D
 class_name EnvManager 
 
-# TODO: rl agents share props for some reason, they dont have cooldown
-# TODO: ai players do not reset pointid after race over
-# props not correctly reset: agents sometimes have residual prop from last run
-# observation 29 out of bounds
-# prop effects not correctly reset, like shrink that persists even in new reset, as well as bs/bsex values
 
 #region export variables
 @export_group("General Settings")
@@ -32,12 +27,14 @@ signal reset_signal
 var timer:Timer
 var needs_reset:=false
 var training_controllers: Array[TrainingController] = []
+var mode:String='curriculum'
 #endregion
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	## TODO: currently disabling ai props
 	GameData.AICanUseProp=false
+	apply_mode()
 	timer=Timer.new()
 	add_child(timer)
 	timer.timeout.connect(_handle_reset_sequence)
@@ -56,7 +53,16 @@ func _ready() -> void:
 	Engine.physics_ticks_per_second = int(35 * speed_up)
 	Engine.time_scale = speed_up
 	Engine.max_physics_steps_per_frame = int(35 * speed_up)
+	Engine.max_fps = int(35 * speed_up)
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	_reset_env()
+
+func apply_mode()->void:
+	match(mode):
+		'curriculum':
+			print('curriculum mode applied')
+		_:
+			print('no mode selected. default values applied')
 
 func _process(_delta: float) -> void:
 	# reset env
@@ -68,6 +74,10 @@ func GameStart()->void:
 	_start_players()
 	NetworkTime.start()
 	map.PlayersReadySignalEmit()
+	for tc in training_controllers:
+		tc.set_mode(mode)
+		if mode=='curriculum':
+			tc.car_idled.connect(_handle_reset_sequence)
 
 
 func _start_players()->void:

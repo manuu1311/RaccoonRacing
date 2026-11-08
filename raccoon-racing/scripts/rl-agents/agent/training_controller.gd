@@ -10,12 +10,33 @@ var finished: bool = false
 var last_obs: PackedFloat32Array
 var should_add_win_bonus:bool=false
 var total_reward_debug:float=0.0
+var mode:String
+var timer:Timer
+var idle_timer_duration:=60
+signal car_idled()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	reset_after=9999999
 	input_action=[0,0,0,0,0]
 
+func set_mode(new_mode:String)->void:
+	mode=new_mode
+	apply_mode()
+
+func apply_mode()->void:
+	if mode=='curriculum':
+		if timer == null:
+			timer = Timer.new()
+			timer.one_shot = true
+			add_child(timer)
+			timer.timeout.connect(idle_finish)
+			var player := car.player as RLPlayer
+			player.new_point_reached.connect(timer_restart)
+		timer.start(idle_timer_duration)
+
+func timer_restart()->void:
+	timer.start(idle_timer_duration)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -71,15 +92,25 @@ func set_action(action:Dictionary) -> void:
 		special == 1,
 	]
 
+# episode ended
 func _end_episode()->void:
 	total_reward_debug=0.0
 	done=true
 	finished=false
+	if mode == 'curriculum':
+		timer.start(idle_timer_duration)
 
+# race ended
 func _end_race(id:int)->void:
 	finished=true
 	if id==car.playerID:
 		should_add_win_bonus=true
+
+# finish by idle timer
+func idle_finish()->void:
+	timer.stop()
+	reward+=reward_handler.idle_reward_penalty
+	car_idled.emit()
 
 # debug total reward
 func _draw() -> void:

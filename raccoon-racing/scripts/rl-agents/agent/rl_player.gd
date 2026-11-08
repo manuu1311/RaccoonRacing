@@ -7,6 +7,7 @@ var next_point_id:int
 var next_point_id_2:int
 var point_update_range:int=200
 var point_update_range_squared:int
+signal new_point_reached()
 
 # Called when the node enters the scene tree for the first time.
 func _init(id:int,control:control_type) -> void:
@@ -41,6 +42,7 @@ func UpdatePoint() -> void:
 			next_point_id_2+=1
 		else:
 			next_point_id_2=0
+		new_point_reached.emit()
 		
 
 func RunPropBox(x:float,y:float)->void:

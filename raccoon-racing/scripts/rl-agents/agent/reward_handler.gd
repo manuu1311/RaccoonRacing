@@ -7,6 +7,7 @@ var rl_player:RLPlayer
 @export var progress_reward_multiplier:float=0.05
 @export var checkpoint_reward_bonus:float=10.0
 @export var win_reward_bonus:float=50.0
+@export var idle_reward_penalty:float=-10
 @export var disruptor_reward_multiplier:float=0.0
 var current_checkpoint_id:int
 var current_distance:float
