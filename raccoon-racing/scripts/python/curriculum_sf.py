@@ -67,6 +67,7 @@ def get_args():
     parser.add_argument("--seed", default=0, type=int, help="environment seed")
     parser.add_argument("--export", default=False, action="store_true", help="whether to export the model")
     parser.add_argument("--viz", default=False, action="store_true", help="Whether to visualize one process")
+    parser.add_argument("--training_mode", default="curriculum", help="Modes between curriculum, early, competitive, adversarial")
     parser.add_argument(
         "--experiment_dir",
         default="logs/sf",
@@ -85,6 +86,7 @@ def get_args():
 
 def main():
     args, extras = get_args()
+    os.environ["GODOT_MODE"]=args.training_mode
     if args.eval:
         sample_factory_enjoy(args, extras)
     else:

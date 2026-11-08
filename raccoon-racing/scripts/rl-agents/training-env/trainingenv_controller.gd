@@ -66,8 +66,9 @@ func read_args()->void:
 		mode='curriculum'
 		print('No system value read or mistyped. Defaulting to curriculum.')
 	var current_port:=_get_port()
-	map_id=current_port%4
-	is_hovercraft=(current_port%2==0)
+	var slot := current_port % 8
+	map_id = slot % 4
+	is_hovercraft = slot < 4
 	print(
 		'Environment port: '+str(current_port)+', map selected: '+str(map_id)+', is hovercraft: '+str(is_hovercraft)
 		)
