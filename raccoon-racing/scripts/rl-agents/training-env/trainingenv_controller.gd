@@ -56,16 +56,21 @@ func _ready() -> void:
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	_reset_env()
 
-
+# read training mode and maps port to map/mode
 func read_args()->void:
 	var read_mode := (OS.get_environment("GODOT_MODE"))
-	if read_mode:
+	if read_mode and read_mode in ['curriculum','early','competitive','adversarial']:
 		mode=read_mode
 		print('Read mode '+mode+' from system.')
 	else:
 		mode='curriculum'
 		print('No system value read or mistyped. Defaulting to curriculum.')
-
+	var current_port:=_get_port()
+	map_id=current_port%4
+	is_hovercraft=(current_port%2==0)
+	print(
+		'Environment port: '+str(current_port)+', map selected: '+str(map_id)+', is hovercraft: '+str(is_hovercraft)
+		)
 
 func apply_mode()->void:
 	match(mode):
@@ -74,6 +79,14 @@ func apply_mode()->void:
 			print('curriculum mode applied')
 		_:
 			print('no mode selected. default values applied')
+
+
+
+func _get_port() -> int:
+	for arg in OS.get_cmdline_args():
+		if arg.begins_with("--port="):
+			return int(arg.split("=")[1])
+	return 11008
 
 func _process(_delta: float) -> void:
 	# reset env
