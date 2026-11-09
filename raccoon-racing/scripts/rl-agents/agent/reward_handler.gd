@@ -24,7 +24,7 @@ func reset()->void:
 	_last_physics_frame = Engine.get_physics_frames()
 	current_distance = _get_distance_to_checkpoint()
 
-func get_reward() -> float:
+func get_reward(mode:String) -> float:
 	# update delta time
 	var frames := Engine.get_physics_frames() - _last_physics_frame
 	_last_physics_frame = Engine.get_physics_frames()
@@ -47,9 +47,20 @@ func get_reward() -> float:
 	# check for agent progress
 	rew+=_get_progress_reward()
 	# passive reward
-	rew -= passive_penalty*dt
+	rew+=_get_passive_reward(dt,mode)
 	return rew
 
+func _get_passive_reward(dt:float,mode:String)->float:
+	var rew:=0.0
+	if mode=='curriculum':
+		# constant passive penalty
+		rew -= passive_penalty*dt
+	elif mode=='early' or mode=='competitive':
+		# passive penalty scaled by track position 
+		# 0 for first player, 3x for last player
+		rew-=passive_penalty*dt*car.player.OrderId
+	return rew
+	
 func _get_progress_reward()->float:
 	var new_distance:=_get_distance_to_checkpoint()
 	var rew:float=max(

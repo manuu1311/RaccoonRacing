@@ -54,7 +54,6 @@ func _process(_delta: float) -> void:
 #-- Methods that need implementing using the "extend script" option in Godot --#
 func get_obs() -> Dictionary:
 	if finished:
-		print('noo it finished..')
 		return {"obs": last_obs}
 	last_obs = observation_handler.get_observation()
 	return {"obs": last_obs}
