@@ -77,7 +77,22 @@ func apply_mode()->void:
 	match(mode):
 		'curriculum':
 			GameData.AICanUseProp=false
+			number_of_rl_learning=1
+			number_of_ai_learning=0
 			print('curriculum mode applied')
+		'early':
+			GameData.AICanUseProp=false
+			number_of_rl_learning=2
+			number_of_ai_learning=2
+			print('early mode applied')
+		'competitive':
+			GameData.AICanUseProp=true
+			number_of_rl_learning=2
+			number_of_ai_learning=2
+			print('competitive mode applied')
+		'adversarial':
+			GameData.AICanUseProp=false
+			print('adversarial mode still not ready')
 		_:
 			print('no mode selected. default values applied')
 

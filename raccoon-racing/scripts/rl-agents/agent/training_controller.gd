@@ -26,6 +26,7 @@ func set_mode(new_mode:String)->void:
 
 func apply_mode()->void:
 	if mode=='curriculum':
+		reward_handler.passive_penalty=0.2
 		if timer == null:
 			timer = Timer.new()
 			timer.one_shot = true
@@ -34,6 +35,12 @@ func apply_mode()->void:
 			var player := car.player as RLPlayer
 			player.new_point_reached.connect(timer_restart)
 		timer.start(idle_timer_duration)
+	elif mode=='early':
+		pass
+	elif mode=='competitive':
+		pass
+	elif mode=='adversarial':
+		pass
 
 func timer_restart()->void:
 	timer.start(idle_timer_duration)
