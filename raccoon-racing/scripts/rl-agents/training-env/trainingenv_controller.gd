@@ -66,9 +66,9 @@ func read_args()->void:
 		mode='curriculum'
 		print('No system value read or mistyped. Defaulting to curriculum.')
 	var current_port:=_get_port()
-	var slot := current_port % 8
-	map_id = slot % 4
-	is_hovercraft = slot < 4
+	var slot := (current_port-1) % 8
+	map_id = slot % 4+1
+	is_hovercraft = slot > 4
 	print(
 		'Environment port: '+str(current_port)+', map selected: '+str(map_id)+', is hovercraft: '+str(is_hovercraft)
 		)
@@ -209,12 +209,11 @@ func LoadMap(map_num:int) -> void:
 	var is_car: bool = (GameData.current_vehicle == GameData.VehicleType.CAR)
 	var suffix: String = "1" if is_car else "2"
 
-	# 3. Format the minimap path
 	# Map 1 uses 01/02, Map 2 uses 11/12, Map 3 uses 21/22, etc.
 	var minimap_index: int = map_num - 1
 	var minimap_path: String = "res://Assets/Scenes/Screens/maps/Minimap%d%s.tscn" % [minimap_index, suffix]
 
-	# 4. Instantiate and attach the minimap
+	# Instantiate and attach the minimap
 	@warning_ignore("unsafe_method_access")
 	var minimap: SubViewport = load(minimap_path).instantiate() as SubViewport
 	minimap.name = "Minimap"
