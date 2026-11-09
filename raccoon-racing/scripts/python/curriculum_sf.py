@@ -51,6 +51,11 @@ def get_args():
         default="curriculum",
         help="Modes between curriculum, early, competitive, adversarial",
     )
+    parser.add_argument(
+        "--env_speedup",
+        default="8",
+        help="Environment speedup on Godot side",
+    )
     return parser.parse_known_args()
 
 
@@ -77,6 +82,7 @@ sfw.make_godot_env_func = _patched_make
 def main():
     args, extras = get_args()
     os.environ["GODOT_MODE"] = args.training_mode
+    os.environ["GODOT_SPEEDUP"] = args.env_speedup
     if args.eval:
         sample_factory_enjoy(args, extras)
     else:

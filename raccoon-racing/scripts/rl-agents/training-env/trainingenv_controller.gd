@@ -65,6 +65,9 @@ func read_args()->void:
 	else:
 		mode='curriculum'
 		print('No system value read or mistyped. Defaulting to curriculum.')
+	var env_speedup := int(OS.get_environment("GODOT_SPEEDUP"))
+	if env_speedup:
+		speed_up=env_speedup
 	var current_port:=_get_port()
 	var slot := (current_port-1) % 8
 	map_id = slot % 4+1
