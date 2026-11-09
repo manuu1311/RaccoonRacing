@@ -92,11 +92,6 @@ def get_args():
         help="Whether to visualize one process",
     )
     parser.add_argument(
-        "--training_mode",
-        default="curriculum",
-        help="Modes between curriculum, early, competitive, adversarial",
-    )
-    parser.add_argument(
         "--experiment_dir",
         default="logs/sf",
         type=str,
@@ -108,7 +103,11 @@ def get_args():
         type=str,
         help="The name of the experiment, which will be displayed in tensorboard. ",
     )
-
+    parser.add_argument(
+            "--training_mode",
+            default="curriculum",
+            help="Modes between curriculum, early, competitive, adversarial",
+        )
     return parser.parse_known_args()
 
 
