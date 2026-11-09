@@ -64,7 +64,7 @@ func get_reward() -> float:
 			should_add_win_bonus=false
 			return reward_handler.add_win_reward()
 		return 0.0
-	reward+=reward_handler.get_reward()
+	reward+=reward_handler.get_reward(mode)
 	total_reward_debug+=reward
 	return reward
 	

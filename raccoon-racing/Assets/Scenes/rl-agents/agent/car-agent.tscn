@@ -49,12 +49,6 @@ reward_handler = NodePath("../RewardHandler")
 observation_handler = NodePath("../ObservationHandler")
 car = NodePath("../../Car")
 debug_reward_flag = false
-control_mode = null
-onnx_model_path = null
-reset_after = null
-expert_demo_save_path = null
-action_repeat = null
-policy_name = null
 metadata/_custom_type_script = "uid://cv4dsfd1xqyj2"
 
 [editable path="Car"]
