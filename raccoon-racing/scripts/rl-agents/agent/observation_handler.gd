@@ -45,10 +45,20 @@ var observation_vector:PackedFloat32Array
 var target_player:int=-1
 #endregion
 var rl_player:RLPlayer
+const OPP_SIZE := 46
+const MAX_OPPONENTS := 3
+const GAME_OFFSET := 0
+const RAY_OFFSET := GAME_OFFSET + 8
+const INTERNAL_OFFSET := RAY_OFFSET + 21
+const OPP_OFFSET := INTERNAL_OFFSET + 49
+const HAZARD_OFFSET := OPP_OFFSET + OPP_SIZE * MAX_OPPONENTS
+const CHECKPOINT_OFFSET := HAZARD_OFFSET + 155
+const OBS_SIZE := CHECKPOINT_OFFSET + 13
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rl_player=car.player as RLPlayer
+	observation_vector.resize(OBS_SIZE)
 	if not debug:
 		set_process(false)
 
@@ -71,23 +81,23 @@ func _process(_delta: float) -> void:
 ## [br]
 ## •[b]Opponent state (Indices 78-215, size 138 (46*3)[/b]
 ## [br]
-## •[b]Events in map (Indices 216-373, size 155)[/b]
+## •[b]Events in map (Indices 216-371, size 155)[/b]
 ## [br]
-## •[b]Checkpoint information (Indices 374-383, size 13)[/b]
+## •[b]Checkpoint information (Indices 372-383, size 13)[/b]
 func get_observation()->PackedFloat32Array:
-	observation_vector.clear()
+	observation_vector.fill(0.0) 
 	# general game info
-	observation_vector.append_array(_get_game_observation())
+	_get_game_observation(observation_vector,GAME_OFFSET)
 	# raycast sensors observation, appends in function
-	_get_raycast_sensor_aggregate(observation_vector)
+	_get_raycast_sensor_aggregate(observation_vector,RAY_OFFSET)
 	# own car observation
-	observation_vector.append_array(_get_internal_state(car))
+	_get_internal_state(observation_vector, INTERNAL_OFFSET, car)
 	# opponent aggregate observation, appends in function
-	_get_opponent_aggregate(observation_vector)
+	_get_opponent_aggregate(observation_vector,OPP_OFFSET)
 	# events in map
-	observation_vector.append_array(_get_hazards_state())
+	_get_hazards_state(observation_vector,HAZARD_OFFSET)
 	# checkpoint observation
-	observation_vector.append_array(_get_checkpoint_observation())
+	_get_checkpoint_state(observation_vector, CHECKPOINT_OFFSET)
 	_normalisation_filter(observation_vector)
 	return observation_vector
 #endregion
@@ -131,7 +141,7 @@ func _normalize_raycast(dist: float, max_dist: float,offset:int,zero_range:bool,
 
 ## Computes and appends the flattened observation array for the opponents
 ## Appends a [PackedFloat32Array] of size [b]138 (46*3)[/b]
-func _get_opponent_aggregate(vectorized: PackedFloat32Array) -> void:
+func _get_opponent_aggregate(vectorized: PackedFloat32Array,offset:int) -> void:
 	var players:= GameData.PlayersArr.duplicate()
 	var my_pos: Vector2 = car.global_position
 	
@@ -148,24 +158,16 @@ func _get_opponent_aggregate(vectorized: PackedFloat32Array) -> void:
 	
 	for player:Player in players:
 		if player.car != car:
-			vectorized.append_array(_get_opponent_state(player.car))
-			
-	# Pad for missing players up to 4 total players (3 opponents)
-	if players.size() < 4:
-		var missing_count: int = 4 - players.size()
-		var empty_vec := PackedFloat32Array()
-		empty_vec.resize(46 * missing_count)
-		vectorized.append_array(empty_vec)
+			_get_opponent_state(vectorized,offset,player.car)
+			offset+=OPP_SIZE
+
 
 ## Computes and appends the flattened observation array for the raycast 
 ## sensors. One float for each: 18 for solid walls, 3 for jump walls
 ## [br]
 ## Appends a [PackedFloat32Array] of size [b]21(number of raycasts)[/b]
-func _get_raycast_sensor_aggregate(vectorized:PackedFloat32Array)->void:
+func _get_raycast_sensor_aggregate(vectorized:PackedFloat32Array,offset:int)->void:
 	var sensor_output:=sensors.get_observation()
-	var to_append:=PackedFloat32Array()
-	@warning_ignore("integer_division")
-	to_append.resize(sensor_output.size()/5)
 	for i in range(0, sensor_output.size(), 5):
 		var hit_distance: float = sensor_output[i + 1]
 		var ray_length: float = sensor_output[i + 2]
@@ -174,8 +176,7 @@ func _get_raycast_sensor_aggregate(vectorized:PackedFloat32Array)->void:
 					hit_distance,ray_length,raycast_sensors_offset,true,true
 					)
 		@warning_ignore("integer_division")
-		to_append[i/5]=processed_distance
-	vectorized.append_array(to_append)
+		vectorized[offset+i/5]=processed_distance
 
 ## Computes and returns the flattened observation array for the game state.
 ## [br]
@@ -194,41 +195,26 @@ func _get_raycast_sensor_aggregate(vectorized:PackedFloat32Array)->void:
 ## agents to finish
 ## [br]
 ## @return PackedFloat32Array of size 8, containing flattened float features.
-func _get_game_observation()->PackedFloat32Array:
-	var vectorized:=PackedFloat32Array()
-	vectorized.resize(8)
+func _get_game_observation(vectorized:PackedFloat32Array,offset:int)->void:
 	
 	# current map goes from 1-4 -> set corresponding value to 1
-	vectorized[GameData.currentMap-1] = 1.0
+	vectorized[offset+GameData.currentMap-1] = 1.0
 	
 	# game mode
 	if car.isHovercraft():
-		vectorized[5]=1.0
+		vectorized[offset+5]=1.0
 	else:
-		vectorized[4]=1.0
+		vectorized[offset+4]=1.0
 		
 	# lap progress
 	var current_lap_progress:=float(
 		rl_player.current_point_id
 		)/(rl_player.ai_points.size()-1)
-	vectorized[6] = (car.player.Laps+current_lap_progress)/GameData.currentLaps
+	vectorized[offset+6] = (car.player.Laps+current_lap_progress)/GameData.currentLaps
 	if car.player.IsPlayering():
-		vectorized[7] = 1.0
+		vectorized[offset+7] = 1.0
 	else:
-		vectorized[7]=0.0
-	return vectorized
-
-## [b]Next 2 checkpoints (0-1) (Indices 7-14)[/b]
-## • [code][7-12][/code]: scalar distance, sin,cos of angle between 
-## agent and next checkpoint
-## [br]
-## • [code][13-14][/code]: sin,cos of angle between the two checkpoints
-func _get_checkpoint_observation()->PackedFloat32Array:
-	# TODO: function can be removed once observations are edited in place
-	var vectorized:=PackedFloat32Array()
-	vectorized.resize(13)
-	_get_checkpoint_state(vectorized,0)
-	return vectorized
+		vectorized[offset+7]=0.0
 
 ## Computes and returns the flattened observation array for the opponent kart.
 ## [br]
@@ -283,72 +269,70 @@ func _get_checkpoint_observation()->PackedFloat32Array:
 ## targeting this car
 ## [br]
 ## @return PackedFloat32Array of size 46, containing flattened float features.
-func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
-	var vectorized:=PackedFloat32Array()
-	vectorized.resize(46)
+func _get_opponent_state(vectorized:PackedFloat32Array,offset:int,car_inst:Car)->void:
 	var speed:=_speed_to_relative(car_inst.speed)
 	# since opponent can move at maximum speed in any axis, relative to own car
-	vectorized[0]=clampf(speed.x/max_speed[1],-1,1)
-	vectorized[1]=clampf(-speed.y/max_speed[1],-1,1)
-	vectorized[2]=clampf(car_inst.jumpCurrheight/max_jump_height,-1,1)
-	vectorized[3]=clampf(car_inst.jumpPrevheight/max_jump_height,-1,1)
+	vectorized[offset+0]=clampf(speed.x/max_speed[1],-1,1)
+	vectorized[offset+1]=clampf(-speed.y/max_speed[1],-1,1)
+	vectorized[offset+2]=clampf(car_inst.jumpCurrheight/max_jump_height,-1,1)
+	vectorized[offset+3]=clampf(car_inst.jumpPrevheight/max_jump_height,-1,1)
 	# is jumping flag
 	if car_inst.jumpCurrheight>1:
-		vectorized[4]=1.0
+		vectorized[offset+4]=1.0
 	else:
-		vectorized[4]=0.0
+		vectorized[offset+4]=0.0
 	if car_inst.bs:
-		vectorized[5]=1.0
-		vectorized[6]=1.0 if car_inst.bsf else 0.0
+		vectorized[offset+5]=1.0
+		vectorized[offset+6]=1.0 if car_inst.bsf else 0.0
 	else:
-		vectorized[5]=0.0
-		vectorized[6]=0.0
+		vectorized[offset+5]=0.0
+		vectorized[offset+6]=0.0
 	if car_inst.bsex>0:
-		vectorized[7]=1.0
-		vectorized[8]=car_inst.bsex/100.0
+		vectorized[offset+7]=1.0
+		vectorized[offset+8]=car_inst.bsex/100.0
 	else:
-		vectorized[7]=0.0
-		vectorized[8]=0.0
+		vectorized[offset+7]=0.0
+		vectorized[offset+8]=0.0
 	if car_inst.isAtIce:
-		vectorized[9]=1.0
+		vectorized[offset+9]=1.0
 	else:
-		vectorized[9]=0.0
+		vectorized[offset+9]=0.0
 	# car friction
-	vectorized[10]=car_inst.friction/90
+	vectorized[offset+10]=car_inst.friction/90
 	# sleep
-	_process_prop(vectorized,11,car_inst.player.prop.get_prop_by_type(2))
+	_process_prop(vectorized,offset+11,car_inst.player.prop.get_prop_by_type(2))
 	# boost
-	_process_prop(vectorized,13,car_inst.player.prop.get_prop_by_type(8))
+	_process_prop(vectorized,offset+13,car_inst.player.prop.get_prop_by_type(8))
 	# invincibility star
-	_process_prop(vectorized,15,car_inst.player.prop.get_prop_by_type(1))
+	_process_prop(vectorized,offset+15,car_inst.player.prop.get_prop_by_type(1))
 	# shield
-	_process_prop(vectorized,17,car_inst.player.prop.get_prop_by_type(3))
+	_process_prop(vectorized,offset+17,car_inst.player.prop.get_prop_by_type(3))
 	# laser small state
-	_process_prop(vectorized,19,car_inst.player.prop.get_prop_by_type(10))
+	_process_prop(vectorized,offset+19,car_inst.player.prop.get_prop_by_type(10))
 	# ice trail state
-	_process_prop(vectorized,21,car_inst.player.prop.get_prop_by_type(12))
+	_process_prop(vectorized,offset+21,car_inst.player.prop.get_prop_by_type(12))
 	# bone state
-	if _process_prop(vectorized,23,car_inst.player.prop.get_prop_by_type(11)):
+	if _process_prop(vectorized,offset+23,car_inst.player.prop.get_prop_by_type(11)):
 		#give bone rotation
-		vectorized[25]=sin(car_inst.prop_effector.bone_wrapper.rotation)
-		vectorized[26]=cos(car_inst.prop_effector.bone_wrapper.rotation)
+		vectorized[offset+25]=sin(car_inst.prop_effector.bone_wrapper.rotation)
+		vectorized[offset+26]=cos(car_inst.prop_effector.bone_wrapper.rotation)
 	else:
-		vectorized[25]=0.0
-		vectorized[26]=0.0
+		vectorized[offset+25]=0.0
+		vectorized[offset+26]=0.0
 	
 	# can use prop flag
-	vectorized[27]=1.0 if car_inst.player.can_use_prop_check() else 0.0
+	vectorized[offset+27]=1.0 if car_inst.player.can_use_prop_check() else 0.0
 	
 	# rotation relative to own car 
-	vectorized[28]=sin(car_inst.global_rotation-car.global_rotation)
-	vectorized[29]=cos(car_inst.global_rotation-car.global_rotation)
+	vectorized[offset+28]=sin(car_inst.global_rotation-car.global_rotation)
+	vectorized[offset+29]=cos(car_inst.global_rotation-car.global_rotation)
 	# are relative coordinates better, or direction and magnitude?
 	# with magnitude, i have to calculate a square root (length calculation)
 	var relative_coords : Vector2 = _position_to_relative(
 				car_inst.global_position)
 	var bearing := atan2(relative_coords[1], relative_coords[0])
-	vectorized[30] = cos(bearing)
-	vectorized[31] = sin(bearing)
+	vectorized[offset+30] = cos(bearing)
+	vectorized[offset+31] = sin(bearing)
 	#vectorized[30] = _normalize_dist(
 				#relative_coords[0],car_detection_range,car_detection_offset,true
 				#)
@@ -356,16 +340,16 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 				#relative_coords[1],car_detection_range,car_detection_offset,true
 				#)
 	# scalar distance
-	vectorized[32]=_normalize_dist(
+	vectorized[offset+32]=_normalize_dist(
 				relative_coords.length(),car_detection_range,
 				car_detection_offset,true
 				)
 	# one axis out of range: car not present in range (saturated signal)
 	if abs(relative_coords.x) > car_detection_range or abs(relative_coords.y) > car_detection_range:
-		vectorized[33]=0.0
+		vectorized[offset+33]=0.0
 	# car present in range
 	else:
-		vectorized[33]=1.0
+		vectorized[offset+33]=1.0
 	var closing_speed := 0.0
 	var lateral_speed := 0.0
 	var ego_approach_speed := 0.0
@@ -378,31 +362,29 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 
 		closing_speed = -speed.dot(dir_to_opponent)
 		lateral_speed = speed.dot(perp_dir)
-		vectorized[34] = clampf(closing_speed / max_speed[1], -1.0, 1.0)
-		vectorized[36] = clampf(lateral_speed / max_speed[1], -1.0, 1.0)
+		vectorized[offset+34] = clampf(closing_speed / max_speed[1], -1.0, 1.0)
+		vectorized[offset+36] = clampf(lateral_speed / max_speed[1], -1.0, 1.0)
 
 		var ego_relative_speed := _speed_to_relative(car.speed)
 		ego_approach_speed = ego_relative_speed.dot(dir_to_opponent)
 		ego_lateral_speed = ego_relative_speed.dot(perp_dir)
-		vectorized[35] = clampf(ego_approach_speed / max_speed[1], -1.0, 1.0)
-		vectorized[37] = clampf(ego_lateral_speed / max_speed[1], -1.0, 1.0) 
+		vectorized[offset+35] = clampf(ego_approach_speed / max_speed[1], -1.0, 1.0)
+		vectorized[offset+37] = clampf(ego_lateral_speed / max_speed[1], -1.0, 1.0) 
 	else:
-		vectorized[34] = 0.0
-		vectorized[35] = 0.0
-		vectorized[36] = 0.0
-		vectorized[37] = 0.0
+		vectorized[offset+34] = 0.0
+		vectorized[offset+35] = 0.0
+		vectorized[offset+36] = 0.0
+		vectorized[offset+37] = 0.0
 	# one hot encoding for character id, 38-43
-	vectorized[37+car_inst.CharID]=1.0
+	vectorized[offset+37+car_inst.CharID]=1.0
 	
 	# current order
-	vectorized[44]=float(car_inst.player.OrderId)/(len(GameData.PlayersArr)-1)
+	vectorized[offset+44]=float(car_inst.player.OrderId)/(len(GameData.PlayersArr)-1)
 	# boolean car target, 45
 	if car_inst.playerID==target_player:
-		vectorized[45]=1.0
+		vectorized[offset+45]=1.0
 	else:
-		vectorized[45]=0.0
-	
-	return vectorized
+		vectorized[offset+45]=0.0
 
 ## Computes and returns the flattened observation array for the agent kart.
 ## [br]
@@ -441,69 +423,67 @@ func _get_opponent_state(car_inst:Car)->PackedFloat32Array:
 ## • [code][48][/code]: current order defined as [code](order-1)/3[/code]
 ## [br]
 ## @return PackedFloat32Array containing 49 flattened float features.
-func _get_internal_state(car_inst:Car)->PackedFloat32Array:
-	var vectorized:=PackedFloat32Array()
-	vectorized.resize(49)
+func _get_internal_state(vectorized:PackedFloat32Array,offset:int,car_inst:Car)->void:
 	var speed:=_speed_to_relative(car_inst.speed)
-	vectorized[0]=speed.x/max_speed[0]
+	vectorized[offset+0]=speed.x/max_speed[0]
 	# moving backwards
 	if speed.y>0:
-		vectorized[1]=-speed.y/max_speed_reverse
+		vectorized[offset+1]=-speed.y/max_speed_reverse
 	# moving forward
 	else:
-		vectorized[1]=-speed.y/max_speed[0]
-	vectorized[1]=clampf(vectorized[1],-1,1)
-	vectorized[2]=clampf(car_inst.jumpCurrheight/max_jump_height,-1,1)
-	vectorized[3]=clampf(car_inst.jumpPrevheight/max_jump_height,-1,1)
+		vectorized[offset+1]=-speed.y/max_speed[0]
+	vectorized[offset+1]=clampf(vectorized[offset+1],-1,1)
+	vectorized[offset+2]=clampf(car_inst.jumpCurrheight/max_jump_height,-1,1)
+	vectorized[offset+3]=clampf(car_inst.jumpPrevheight/max_jump_height,-1,1)
 	# STATUS FLAGS
 	# is jumping flag
 	if car_inst.jumpCurrheight>1:
-		vectorized[4]=1.0
+		vectorized[offset+4]=1.0
 	else:
-		vectorized[4]=0.0
+		vectorized[offset+4]=0.0
 		
 	if car_inst.bs:
-		vectorized[5]=1.0
-		vectorized[6]=1.0 if car_inst.bsf else 0.0
+		vectorized[offset+5]=1.0
+		vectorized[offset+6]=1.0 if car_inst.bsf else 0.0
 	else:
-		vectorized[5]=0.0
-		vectorized[6]=0.0
+		vectorized[offset+5]=0.0
+		vectorized[offset+6]=0.0
 	if car_inst.bsex>0:
-		vectorized[7]=1.0
-		vectorized[8]=car_inst.bsex/100.0
+		vectorized[offset+7]=1.0
+		vectorized[offset+8]=car_inst.bsex/100.0
 	else:
-		vectorized[7]=0.0
-		vectorized[8]=0.0
+		vectorized[offset+7]=0.0
+		vectorized[offset+8]=0.0
 	if car_inst.isAtIce:
-		vectorized[9]=1.0
+		vectorized[offset+9]=1.0
 	else:
-		vectorized[9]=0.0
+		vectorized[offset+9]=0.0
 	# car friction
-	vectorized[10]=car_inst.friction/90
+	vectorized[offset+10]=car_inst.friction/90
 	# sleep
-	_process_prop(vectorized,11,car_inst.player.prop.get_prop_by_type(2))
+	_process_prop(vectorized,offset+11,car_inst.player.prop.get_prop_by_type(2))
 	# boost
-	_process_prop(vectorized,13,car_inst.player.prop.get_prop_by_type(8))
+	_process_prop(vectorized,offset+13,car_inst.player.prop.get_prop_by_type(8))
 	# invincibility star
-	_process_prop(vectorized,15,car_inst.player.prop.get_prop_by_type(1))
+	_process_prop(vectorized,offset+15,car_inst.player.prop.get_prop_by_type(1))
 	# shield
-	_process_prop(vectorized,17,car_inst.player.prop.get_prop_by_type(3))
+	_process_prop(vectorized,offset+17,car_inst.player.prop.get_prop_by_type(3))
 	# laser small state
-	_process_prop(vectorized,19,car_inst.player.prop.get_prop_by_type(10))
+	_process_prop(vectorized,offset+19,car_inst.player.prop.get_prop_by_type(10))
 	# ice trail state
-	_process_prop(vectorized,21,car_inst.player.prop.get_prop_by_type(12))
+	_process_prop(vectorized,offset+21,car_inst.player.prop.get_prop_by_type(12))
 	# bone state
-	if _process_prop(vectorized,23,car_inst.player.prop.get_prop_by_type(11)):
+	if _process_prop(vectorized,offset+23,car_inst.player.prop.get_prop_by_type(11)):
 		#give bone rotation
-		vectorized[25]=sin(car_inst.prop_effector.bone_wrapper.rotation)
-		vectorized[26]=cos(car_inst.prop_effector.bone_wrapper.rotation)
+		vectorized[offset+25]=sin(car_inst.prop_effector.bone_wrapper.rotation)
+		vectorized[offset+26]=cos(car_inst.prop_effector.bone_wrapper.rotation)
 	else:
-		vectorized[25]=0.0
-		vectorized[26]=0.0
+		vectorized[offset+25]=0.0
+		vectorized[offset+26]=0.0
 	
 	
 	# can use prop flag
-	vectorized[27]=1.0 if car_inst.player.can_use_prop_check() else 0.0
+	vectorized[offset+27]=1.0 if car_inst.player.can_use_prop_check() else 0.0
 	# vectorized 28 - 41: which prop am i holding?
 	# 14 available props: 8 base props + 6 special props (1 for each char)
 	# is it faster to change values individually, or create an array of 0s?
@@ -512,15 +492,14 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 	if id!=0:
 		if id==9:
 			id+=car_inst.CharID-1
-		vectorized[27+id]=1.0
+		vectorized[offset+27+id]=1.0
 	
 	# char id
-	vectorized[41+car.CharID] = 1.0
+	vectorized[offset+41+car.CharID] = 1.0
 	
 	# current order, 48
-	vectorized[48]=float(car.player.OrderId)/max((GameData.PlayersArr.size()-1),1)
-	
-	return vectorized
+	vectorized[offset+48]=float(car.player.OrderId)/max((GameData.PlayersArr.size()-1),1)
+
 
 
 ## Computes and returns the flattened observation array for all events
@@ -541,10 +520,7 @@ func _get_internal_state(car_inst:Car)->PackedFloat32Array:
 ## [br]
 ## [b] Jump and Speed Pads (Indices 127-154)[/b]
 ## @return PackedFloat32Array containing flattened float features.
-func _get_hazards_state()->PackedFloat32Array:
-	var vectorized:=PackedFloat32Array()
-	vectorized.resize(155)
-	var offset:=0
+func _get_hazards_state(vectorized:PackedFloat32Array,offset:int)->void:
 	_get_static_hazards(vectorized,offset)
 	offset+=40
 	_get_missiles(vectorized,offset)
@@ -557,7 +533,6 @@ func _get_hazards_state()->PackedFloat32Array:
 	offset+=30
 	_get_map_pads(vectorized,offset)
 	offset+=28
-	return vectorized
 
 
 ## Computes and returns the flattened observation array for missiles  
@@ -1055,66 +1030,67 @@ func _draw() -> void:
 	if debug_stats_flag:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
-		var car_state:=_get_opponent_state(car)
-		var indexes:=[]
-		for i:int in indexes:
-			text_val = "%.1f" % (car_state[i])
-			draw_string(
-					font, text_position, text_val, 
-					HORIZONTAL_ALIGNMENT_CENTER, -1, font_size,
-					Color.BLUE
-					)
-			text_position+=Vector2(0,-15)
+		#var car_state:=_get_opponent_state(observation_vector,0,car)
+		#var indexes:=[]
+		#for i:int in indexes:
+			#text_val = "%.1f" % (car_state[i])
+			#draw_string(
+					#font, text_position, text_val, 
+					#HORIZONTAL_ALIGNMENT_CENTER, -1, font_size,
+					#Color.BLUE
+					#)
+			#text_position+=Vector2(0,-15)
 			
 			
 	if debug_opponent_flag:
 		for player:Player in GameData.PlayersArr:
 			if player.car==car:
 				continue
-			# draw rectangle
-			var car_state:=_get_opponent_state(player.car)
-			var cos_b: float = car_state[30]
-			var sin_b: float = car_state[31]
-			var raw_dist: float = _denormalize_dist(
-				car_state[32], car_detection_range, car_detection_offset, true
-				)
-			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
-			var dist: Vector2 = relative_coords.rotated(car.rotation)
-			var rect_pos: Vector2 = car.position + dist - Vector2(25, 25)
-			var rect: Rect2 = Rect2(rect_pos, Vector2(50, 50))
-			draw_rect(rect, Color.GOLD, false, 2.0)
-			# draw arrow
-			# x and y velocity
-			#var vel:=Vector2(
-				#car_state[0],-car_state[1]).rotated(car.rotation
-				#)*max_speed[1]*15
-			#_draw_arrow(
-				#car.position+dist,car.position+dist+vel,Color.CRIMSON
-			#)
-			# draw string
-			var text_pos: Vector2 = Vector2(rect_pos.x, rect_pos.y - 8)
-			draw_string(
-				font, text_pos, "Opponent", HORIZONTAL_ALIGNMENT_LEFT, 
-				-1, font_size, Color.BLACK
-				)
+			## draw rectangle
+			#var car_state:=_get_opponent_state(player.car)
+			#var cos_b: float = car_state[30]
+			#var sin_b: float = car_state[31]
+			#var raw_dist: float = _denormalize_dist(
+				#car_state[32], car_detection_range, car_detection_offset, true
+				#)
+			#var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
+			#var dist: Vector2 = relative_coords.rotated(car.rotation)
+			#var rect_pos: Vector2 = car.position + dist - Vector2(25, 25)
+			#var rect: Rect2 = Rect2(rect_pos, Vector2(50, 50))
+			#draw_rect(rect, Color.GOLD, false, 2.0)
+			## draw arrow
+			## x and y velocity
+			##var vel:=Vector2(
+				##car_state[0],-car_state[1]).rotated(car.rotation
+				##)*max_speed[1]*15
+			##_draw_arrow(
+				##car.position+dist,car.position+dist+vel,Color.CRIMSON
+			##)
+			## draw string
+			#var text_pos: Vector2 = Vector2(rect_pos.x, rect_pos.y - 8)
+			#draw_string(
+				#font, text_pos, "Opponent", HORIZONTAL_ALIGNMENT_LEFT, 
+				#-1, font_size, Color.BLACK
+				#)
 	
 	if debug_map_events_flag:
-		_draw_map_events(font)
+		pass
+		#_draw_map_events(font)
 	
 	var jump_pads: Array[Node2D] = []
 	jump_pads.assign(get_tree().get_nodes_in_group("jump_pad"))
 
 
-func _draw_map_events(font:Font)->void:
-	_draw_hazard_detection_range()
-	var vectorized:=_get_hazards_state()
-	_draw_static_hazards(vectorized,0,font)
-	_draw_missiles(vectorized,40,font)
-	_draw_furballs(vectorized,68,font)
-	_draw_icetrail(vectorized,86,font)
-	_draw_prop_boxes(vectorized,97,font)
-	_draw_pads(vectorized,127,font)
-	_draw_checkpoints(_get_checkpoint_observation(),0,font)
+#func _draw_map_events(font:Font)->void:
+	#_draw_hazard_detection_range()
+	#var vectorized:=_get_hazards_state()
+	#_draw_static_hazards(vectorized,0,font)
+	#_draw_missiles(vectorized,40,font)
+	#_draw_furballs(vectorized,68,font)
+	#_draw_icetrail(vectorized,86,font)
+	#_draw_prop_boxes(vectorized,97,font)
+	#_draw_pads(vectorized,127,font)
+	#_draw_checkpoints(_get_checkpoint_observation(),0,font)
 
 
 func _draw_hazard_detection_range()->void:
