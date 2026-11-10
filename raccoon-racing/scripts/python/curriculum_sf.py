@@ -1,5 +1,13 @@
 import argparse
 import os
+import numpy as np
+import torch
+
+_orig_torch_load = torch.load
+def _torch_load(*args, **kwargs):
+    kwargs["weights_only"] = False
+    return _orig_torch_load(*args, **kwargs)
+torch.load = _torch_load
 
 from godot_rl.wrappers.sample_factory_wrapper import (
     sample_factory_enjoy,

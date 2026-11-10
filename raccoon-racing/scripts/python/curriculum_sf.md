@@ -39,7 +39,7 @@ python curriculum_sf.py \
         --env=gdrl \
         --env_path=/mnt/dump/dump-projects/Godot/RaccoonRacing/github-data/misc/tmp/rl-training.x86_64 \
         --experiment_name=curriculum \
-        --experiment_dir=logs/sf \
+        --train_dir=train \
         --speedup=1 \
         --device=cpu \
         --learning_rate=0.0003 \
@@ -52,7 +52,6 @@ python curriculum_sf.py \
         --worker_num_splits=1 \
         --serial_mode=False \
         --async_rl=True \
-        --restart_behavior=resume \
         --use_rnn=True \
         --rnn_type=lstm \
         --rnn_size=128 \
@@ -62,8 +61,9 @@ python curriculum_sf.py \
         --num_envs_per_worker=1 \
         --viz \
         --env_speedup=10 \
+        --normalize_input=False \
         --training_mode=curriculum \
-        --train_for_env_steps=3000000
+        --train_for_env_steps=30000
 ```
 
 ---
@@ -98,8 +98,9 @@ python curriculum_sf.py \
         --num_workers=16 \
         --num_envs_per_worker=1 \
         --viz \
-        --init_checkpoint_path=logs/sf/curriculum/checkpoint_p0/checkpoint_XXXXXXXX_YYYYYYY.pth \
+        --init_checkpoint_path=/mnt/dump/dump-projects/Godot/RaccoonRacing/raccoon-racing/scripts/python/logs/sf/curriculum/checkpoint_p0/checkpoint_000002936_3006464.pth \
         --env_speedup=10 \
+        --normalize_input=False \
         --training_mode=early \
         --train_for_env_steps=3000000
 ```
