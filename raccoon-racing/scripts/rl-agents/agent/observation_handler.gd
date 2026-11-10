@@ -1030,16 +1030,16 @@ func _draw() -> void:
 	if debug_stats_flag:
 		var text_position: Vector2 = car.position+Vector2(5,-25)
 		var text_val:String
-		#var car_state:=_get_opponent_state(observation_vector,0,car)
-		#var indexes:=[]
-		#for i:int in indexes:
-			#text_val = "%.1f" % (car_state[i])
-			#draw_string(
-					#font, text_position, text_val, 
-					#HORIZONTAL_ALIGNMENT_CENTER, -1, font_size,
-					#Color.BLUE
-					#)
-			#text_position+=Vector2(0,-15)
+		var car_state := observation_vector.slice(INTERNAL_OFFSET, INTERNAL_OFFSET+49)
+		var indexes:=[]
+		for i:int in indexes:
+			text_val = "%.1f" % (car_state[i])
+			draw_string(
+					font, text_position, text_val, 
+					HORIZONTAL_ALIGNMENT_CENTER, -1, font_size,
+					Color.BLUE
+					)
+			text_position+=Vector2(0,-15)
 			
 			
 	if debug_opponent_flag:
@@ -1047,50 +1047,49 @@ func _draw() -> void:
 			if player.car==car:
 				continue
 			## draw rectangle
-			#var car_state:=_get_opponent_state(player.car)
-			#var cos_b: float = car_state[30]
-			#var sin_b: float = car_state[31]
-			#var raw_dist: float = _denormalize_dist(
-				#car_state[32], car_detection_range, car_detection_offset, true
-				#)
-			#var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
-			#var dist: Vector2 = relative_coords.rotated(car.rotation)
-			#var rect_pos: Vector2 = car.position + dist - Vector2(25, 25)
-			#var rect: Rect2 = Rect2(rect_pos, Vector2(50, 50))
-			#draw_rect(rect, Color.GOLD, false, 2.0)
-			## draw arrow
-			## x and y velocity
-			##var vel:=Vector2(
-				##car_state[0],-car_state[1]).rotated(car.rotation
-				##)*max_speed[1]*15
-			##_draw_arrow(
-				##car.position+dist,car.position+dist+vel,Color.CRIMSON
-			##)
-			## draw string
-			#var text_pos: Vector2 = Vector2(rect_pos.x, rect_pos.y - 8)
-			#draw_string(
-				#font, text_pos, "Opponent", HORIZONTAL_ALIGNMENT_LEFT, 
-				#-1, font_size, Color.BLACK
-				#)
+			var car_state:=observation_vector.slice(OPP_OFFSET, OPP_OFFSET + OPP_SIZE * MAX_OPPONENTS)
+			var cos_b: float = car_state[30]
+			var sin_b: float = car_state[31]
+			var raw_dist: float = _denormalize_dist(
+				car_state[32], car_detection_range, car_detection_offset, true
+				)
+			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
+			var dist: Vector2 = relative_coords.rotated(car.rotation)
+			var rect_pos: Vector2 = car.position + dist - Vector2(25, 25)
+			var rect: Rect2 = Rect2(rect_pos, Vector2(50, 50))
+			draw_rect(rect, Color.GOLD, false, 2.0)
+			# draw arrow
+			# x and y velocity
+			var vel:=Vector2(
+				car_state[0],-car_state[1]).rotated(car.rotation
+				)*max_speed[1]*15
+			_draw_arrow(
+				car.position+dist,car.position+dist+vel,Color.CRIMSON
+			)
+			# draw string
+			var text_pos: Vector2 = Vector2(rect_pos.x, rect_pos.y - 8)
+			draw_string(
+				font, text_pos, "Opponent", HORIZONTAL_ALIGNMENT_LEFT, 
+				-1, font_size, Color.BLACK
+				)
 	
 	if debug_map_events_flag:
-		pass
-		#_draw_map_events(font)
+		_draw_map_events(font)
 	
 	var jump_pads: Array[Node2D] = []
 	jump_pads.assign(get_tree().get_nodes_in_group("jump_pad"))
 
 
-#func _draw_map_events(font:Font)->void:
-	#_draw_hazard_detection_range()
-	#var vectorized:=_get_hazards_state()
-	#_draw_static_hazards(vectorized,0,font)
-	#_draw_missiles(vectorized,40,font)
-	#_draw_furballs(vectorized,68,font)
-	#_draw_icetrail(vectorized,86,font)
-	#_draw_prop_boxes(vectorized,97,font)
-	#_draw_pads(vectorized,127,font)
-	#_draw_checkpoints(_get_checkpoint_observation(),0,font)
+func _draw_map_events(font:Font)->void:
+	_draw_hazard_detection_range()
+	var vectorized:=observation_vector.slice(HAZARD_OFFSET, CHECKPOINT_OFFSET)
+	_draw_static_hazards(vectorized,0,font)
+	_draw_missiles(vectorized,40,font)
+	_draw_furballs(vectorized,68,font)
+	_draw_icetrail(vectorized,86,font)
+	_draw_prop_boxes(vectorized,97,font)
+	_draw_pads(vectorized,127,font)
+	_draw_checkpoints(observation_vector.slice(CHECKPOINT_OFFSET, OBS_SIZE),0,font)
 
 
 func _draw_hazard_detection_range()->void:
