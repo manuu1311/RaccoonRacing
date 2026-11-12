@@ -174,7 +174,7 @@ func CoolEffects()->void:
 	
 	
 func UpdateOrderResult() -> void:
-	# 1. Sort the players by distance descending
+	# sort the players by distance descending
 	var sorted_players: Array[Player] = GameData.PlayersArr.duplicate()
 	sorted_players.sort_custom(func(a: Player, b: Player) -> bool: 
 		if a.alldistance == b.alldistance:
@@ -182,13 +182,13 @@ func UpdateOrderResult() -> void:
 		return a.alldistance > b.alldistance
 	)
 	
-	# 2. Keep a snapshot of the old ID order to check for overtakes
+	# keep a snapshot of the old ID order to check for overtakes
 	var old_order: Array = GameData.OrderInfo.duplicate()
 	
 	# Ensure OrderInfo is resized to fit all players
 	GameData.OrderInfo.resize(sorted_players.size())
 	
-	# 3. Assign new ranks and detect overtakes
+	# assign new ranks and detect overtakes
 	for i in range(sorted_players.size()):
 		var player: Player = sorted_players[i]
 		player.OrderId = i

@@ -12,7 +12,7 @@ var should_add_win_bonus:bool=false
 var total_reward_debug:float=0.0
 var mode:String
 var timer:Timer
-var idle_timer_duration:=20
+var idle_timer_duration:=40
 signal car_idled()
 
 # Called when the node enters the scene tree for the first time.
@@ -36,9 +36,11 @@ func apply_mode()->void:
 			player.new_point_reached.connect(timer_restart)
 		timer.start(idle_timer_duration)
 	elif mode=='early':
-		pass
+		reward_handler.progress_reward_multiplier=0.001
+		reward_handler.checkpoint_reward_bonus=0.5
 	elif mode=='competitive':
-		pass
+		reward_handler.progress_reward_multiplier=0.001
+		reward_handler.checkpoint_reward_bonus=0.5
 	elif mode=='adversarial':
 		pass
 

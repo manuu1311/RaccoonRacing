@@ -7,6 +7,7 @@ var next_point_id:int
 var next_point_id_2:int
 var point_update_range:int=200
 var point_update_range_squared:int
+var turbo_start_probability:=0.9
 signal new_point_reached()
 
 # Called when the node enters the scene tree for the first time.
@@ -46,6 +47,10 @@ func UpdatePoint() -> void:
 		
 
 func RunPropBox(x:float,y:float)->void:
+	if not car.playering:
+		return
+	if car.NowPorpId!=0 or car.HasProp:
+		return
 	if hud==null:
 		await car.get_tree().create_timer(1.5).timeout
 		car.HasProp=true
@@ -65,3 +70,9 @@ func RunPropBox(x:float,y:float)->void:
 	car.CanUseProp=true
 	if hud!=null and car:
 		hud.StartPropBox(1.5,car.NowPorpId)
+		
+func StartRace()->void:
+	super()
+	if randf() < turbo_start_probability:
+		PropValidated=true
+		car.StartBoost()

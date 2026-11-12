@@ -15,9 +15,9 @@ class_name EnvManager
 @export_range(1, 6) var char_id: int = 1
 @export_group("Training Settings")
 @export var control_mode: SyncNode.ControlModes = SyncNode.ControlModes.TRAINING
-@export_range(1, 10, 1, "or_greater") var action_repeat := 8
+@export_range(1, 10, 1, "or_greater") var action_repeat := 5
 @export_range(0, 10, 0.1, "or_greater") var speed_up := 1.0
-@export_range(50, 1000, 5, "or_greater") var timer_duration := 600
+@export_range(50, 1000, 5, "or_greater") var timer_duration := 180
 #endregion
 
 #region class internal variables
@@ -79,9 +79,9 @@ func read_args()->void:
 func apply_mode()->void:
 	match(mode):
 		'curriculum':
-			GameData.AICanUseProp=false
-			number_of_rl_learning=1
-			number_of_ai_learning=0
+			GameData.AICanUseProp=true
+			number_of_rl_learning=2
+			number_of_ai_learning=2
 			print('curriculum mode applied')
 		'early':
 			GameData.AICanUseProp=false
@@ -108,6 +108,7 @@ func _get_port() -> int:
 	return 11008
 
 func _process(_delta: float) -> void:
+	UpdateOrderResult()
 	# reset env
 	if needs_reset:
 		_reset_env()
@@ -126,6 +127,27 @@ func GameStart()->void:
 func _start_players()->void:
 	for player:Player in GameData.PlayersArr:
 		player.StartRace()
+
+func UpdateOrderResult() -> void:
+	# sort the players by distance descending
+	var sorted_players: Array[Player] = GameData.PlayersArr.duplicate()
+	sorted_players.sort_custom(func(a: Player, b: Player) -> bool: 
+		if a.alldistance == b.alldistance:
+			return a.PlayerID < b.PlayerID
+		return a.alldistance > b.alldistance
+	)
+	
+	# Ensure OrderInfo is resized to fit all players
+	GameData.OrderInfo.resize(sorted_players.size())
+	
+	# assign new ranks and detect overtakes
+	for i in range(sorted_players.size()):
+		var player: Player = sorted_players[i]
+		player.OrderId = i
+		
+		# Store the new order AFTER checking old_index so we don't pollute the check
+		GameData.OrderInfo[i] = player.PlayerID
+		
 
 ##setup players for training env
 func SetupPlayers()->void:
@@ -187,6 +209,8 @@ func SetupPlayers()->void:
 	for i in range(number_of_ai_learning+number_of_rl_learning):
 		GameData.OrderInfo.append(i)
 	GameData.Ranking=GameData.OrderInfo
+	for player:Player in GameData.PlayersArr:
+		print(player.PlayerID)
 
 ## Set global GameData variables
 func SetVars(mapid:int,numlaps:int,ishovercraft:bool)->void:
