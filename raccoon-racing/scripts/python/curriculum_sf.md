@@ -138,5 +138,5 @@ python curriculum_sf.py \
         --viz \
         --env_speedup=1 \
         --training_mode=competitive \
-        --train_for_env_steps=15_000_000
+        --train_for_env_steps=12_000_000
 ```

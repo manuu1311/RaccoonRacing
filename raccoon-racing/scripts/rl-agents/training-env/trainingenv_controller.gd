@@ -80,9 +80,9 @@ func read_args()->void:
 func apply_mode()->void:
 	match(mode):
 		'curriculum':
-			GameData.AICanUseProp=true
-			number_of_rl_learning=2
-			number_of_ai_learning=2
+			GameData.AICanUseProp=false
+			number_of_rl_learning=1
+			number_of_ai_learning=0
 			print('curriculum mode applied')
 		'early':
 			GameData.AICanUseProp=false
@@ -165,22 +165,26 @@ func SetupPlayers()->void:
 	'''
 	var idx:=0
 	if human_mode:
-		var newplayer:Player=Player.new(idx,Player.control_type.HUMAN)
+		var caragent:CarAgent=(load('res://Assets/Scenes/rl-agents/agent/car-agent.tscn') as PackedScene).instantiate()
+		var newplayer:Player=RLPlayer.new(idx,Player.control_type.RLTRAINING)
 		newplayer.charid=char_id
+		newplayer.racefinished.connect(_race_over)
 		GameData.PlayersArr.append(newplayer)
-		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
-		carinstance.setup(map,newplayer.PlayerID,true,newplayer)
+		caragent.car.setup(map,newplayer.PlayerID,true,newplayer)
+		caragent.car.CharID=newplayer.charid
 		var controller:CarController=HumanCarController.new(newplayer)
-		carinstance.add_child(controller)
-		carinstance.controller=controller
-		carinstance.CharID=char_id
-		carinstance.CharID=GameData.currentCharacter[newplayer.PlayerID]
-		newplayer.charid=GameData.currentCharacter[newplayer.PlayerID]
-		carinstance.global_position=map.StartPosArr[idx]
-		carinstance.rotation=map.StartPosArrRot[idx]
-		newplayer.SetCar(carinstance)
+		#var controller:CarController=HumanCarController.new(newplayer)
+		caragent.car.add_child(controller)
+		caragent.car.controller=controller
+		caragent.car.global_position=map.StartPosArr[idx]
+		caragent.car.rotation=map.StartPosArrRot[idx]
+		# connect signal
+		reset_signal.connect(caragent.training_controller._end_episode)
+		newplayer.racefinished.connect(caragent.training_controller._end_race)
+		newplayer.SetCar(caragent.car)
 		newplayer.ResetPlayer(idx)
-		map.add_child(carinstance)
+		map.add_child(caragent)
+		training_controllers.append(caragent.training_controller)
 		number_of_rl_learning-=1
 		idx+=1
 	for i in range(number_of_rl_learning):

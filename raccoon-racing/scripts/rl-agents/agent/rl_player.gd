@@ -47,7 +47,7 @@ func UpdatePoint() -> void:
 		
 
 func RunPropBox(x:float,y:float)->void:
-	if not car.playering:
+	if not IsPlayering():
 		return
 	if car.NowPorpId!=0 or car.HasProp:
 		return
@@ -70,7 +70,8 @@ func RunPropBox(x:float,y:float)->void:
 	car.CanUseProp=true
 	if hud!=null and car:
 		hud.StartPropBox(1.5,car.NowPorpId)
-		
+
+	
 func StartRace()->void:
 	super()
 	if randf() < turbo_start_probability:

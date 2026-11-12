@@ -193,7 +193,7 @@ func ValidatePropBox(x:float,y:float)->void:
 	PropValidated=true
 
 func RunPropBox(x:float,y:float)->void:
-	if not car.playering:
+	if not IsPlayering():
 		return
 	if hud!=null:
 		car.sounds.GetProp()
@@ -256,6 +256,7 @@ func UseProp()->void:
 			car.RequestProp.rpc_id(1,NetworkID,PlayerID,car.position,car.rotation,car.NowPorpId)
 		prop.UseProp()
 		car.CanUseProp=false
+		car.HasProp=false
 		PropValidated=false
 
 
