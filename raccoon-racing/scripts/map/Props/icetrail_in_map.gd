@@ -12,8 +12,8 @@ var car: Car
 var rng := RandomNumberGenerator.new()
 
 # --- timing -----------------------------------------------------------
-var usetime: int = NetworkTime.seconds_to_ticks(2.0)
-var lifetime: int = NetworkTime.seconds_to_ticks(20.0)
+var usetime: int = NetworkTime.seconds_to_ticks(2.0/Engine.time_scale)
+var lifetime: int = NetworkTime.seconds_to_ticks(20.0/Engine.time_scale)
 var growtick: int
 var fadetick: int
 var spawntick: int

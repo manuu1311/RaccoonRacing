@@ -9,7 +9,7 @@ func _init(playerinst:Player)->void:
 	player.prop.del_prop_by_type(11)
 	player.car.prop_effector.PlayBone()
 	player.car.prop_effector.bonehit.connect(_on_bone_hit)
-	tick_end = NetworkTime.tick + int(NetworkTime.tickrate * use_time)
+	tick_end = NetworkTime.tick + int(NetworkTime.tickrate * use_time/Engine.time_scale)
 
 func _on_bone_hit(caropp:Car) -> void:
 	ClearBone(caropp)

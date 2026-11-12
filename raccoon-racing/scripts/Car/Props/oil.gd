@@ -4,7 +4,7 @@ class_name OilProp
 
 var bs_in_map:EventInMap
 var lifetime:int=30
-var tickactivate:int=int(0.3*NetworkTime.tickrate)
+var tickactivate:int=int(0.3*NetworkTime.tickrate/Engine.time_scale)
 
 func _init(playerinst:Player)->void:
 	super(playerinst);

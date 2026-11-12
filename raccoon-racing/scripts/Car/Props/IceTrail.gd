@@ -16,7 +16,7 @@ func _init(playerinst: Player) -> void:
 	player.car.sounds.playIceSound()
 	_spawn_trail()
 	use_time=2
-	tick_end = NetworkTime.tick + int(NetworkTime.tickrate * use_time)
+	tick_end = NetworkTime.tick + int(NetworkTime.tickrate * use_time/Engine.time_scale)
 	
 	
 func run_tick() -> void:

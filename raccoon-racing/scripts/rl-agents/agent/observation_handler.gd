@@ -944,7 +944,7 @@ func _process_prop(vectorized:PackedFloat32Array, offset:int, prop:Prop)->bool:
 		vectorized[offset]=1.0
 		# time until reset
 		vectorized[offset+1]=(float(prop.tick_end-NetworkTime.tick)/
-				NetworkTime.seconds_to_ticks(prop.use_time))
+				NetworkTime.seconds_to_ticks(prop.use_time/Engine.time_scale))
 		return true
 	else:
 		# reset flag

@@ -4,7 +4,7 @@ class_name HoneyProp
 
 var bomb_in_map1:EventInMap;
 var bomb_in_map2:EventInMap;
-var tickactivate:int=int(0.1*NetworkTime.tickrate)
+var tickactivate:int=int(0.1*NetworkTime.tickrate/Engine.time_scale)
 
 func _init(playerinst: Player) -> void:
 	super(playerinst)

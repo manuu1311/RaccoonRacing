@@ -12,7 +12,7 @@ func _init(playerinst:Player) -> void:
 	player.prop.del_prop_by_type(proptype);
 	player.car.sounds.playPetroSound();
 	player.car.IsUsingProp=true
-	tick_end = NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time)
+	tick_end = NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time/Engine.time_scale)
 	
 func run_tick() -> void:
 	if NetworkTime.tick<tick_end:

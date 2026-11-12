@@ -21,7 +21,7 @@ func _init(player_inst: Player, attacker_car: Car) -> void:
 	player.car.sounds.playPandaSSound()
 	# Fire immediately — no need to wait for run() to pick it up
 	effect_started = true
-	tick_end=NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time)
+	tick_end=NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time/Engine.time_scale)
 	_apply_shrink_effect()
 	create_beam()
 

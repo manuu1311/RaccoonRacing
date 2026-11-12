@@ -9,7 +9,7 @@ func _init(playerinst:Player)->void:
 	use_time=8
 	proptype = 3
 	player.prop.del_prop_by_type(proptype);
-	tick_end = NetworkTime.tick + NetworkTime.seconds_to_ticks(use_time)
+	tick_end = NetworkTime.tick + NetworkTime.seconds_to_ticks(use_time/Engine.time_scale)
 	player.AddShield()
 	
 func run_tick() -> void:

@@ -14,7 +14,7 @@ func _init(playerinst:Player)->void:
 	player.car.isInvincible = true
 	player.car.prop_effector.AddInvincible(1.5)
 	player.car.IsUsingProp=true
-	tick_end=NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time)
+	tick_end=NetworkTime.tick+NetworkTime.seconds_to_ticks(use_time/Engine.time_scale)
 
 
 func run_tick() -> void:

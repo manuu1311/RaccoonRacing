@@ -9,7 +9,7 @@ func setup(mapinst:Map, xinst:float, yinst:float, widthinst:float, heightinst:fl
 	map.SpawnProp("Bs",id,self)
 	global_position=Vector2(x,y)
 	rotation=angle
-	lifetimeticks=NetworkTime.seconds_to_ticks(lifetime)
+	lifetimeticks=NetworkTime.seconds_to_ticks(lifetime/Engine.time_scale)
 	delme()
 	
 	

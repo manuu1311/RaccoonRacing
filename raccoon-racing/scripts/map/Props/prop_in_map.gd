@@ -3,7 +3,7 @@ class_name PropInMap
 
 @onready var timer: Timer = $Timer
 @onready var state_synchronizer: StateSynchronizer = $StateSynchronizer
-@export var respawn_ticks: int = NetworkTime.tickrate*3
+@export var respawn_ticks: int = NetworkTime.tickrate*3/Engine.time_scale
 var hide_tick:int=0
 ##predict prop hidden after local collision
 var predictingtick:int=0
@@ -29,7 +29,7 @@ func GetHitEventStatus(PlayerId:int,_unsynced:bool)->void:
 		NotifyPlayer.rpc(PlayerId,hide_tick)
 	else:
 		#hide it temporarily
-		predictingtick=NetworkTime.tick+NetworkTime.seconds_to_ticks(1)
+		predictingtick=NetworkTime.tick+NetworkTime.seconds_to_ticks(1/Engine.time_scale)
 		GameData.PlayersArr[PlayerId].RunPropBox(global_position.x,global_position.y)
 
 @rpc('call_local','reliable')

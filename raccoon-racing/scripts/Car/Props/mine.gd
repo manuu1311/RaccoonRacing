@@ -3,7 +3,7 @@ class_name MineProp
 
 
 var bomb_in_map:EventInMap;
-var tickactivate:int=int(0.3*NetworkTime.tickrate)
+var tickactivate:int=int(0.3*NetworkTime.tickrate/Engine.time_scale)
 
 func _init(playerinst:Player)->void:
 	super(playerinst);
