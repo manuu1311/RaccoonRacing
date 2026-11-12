@@ -28,6 +28,7 @@ var timer:Timer
 var needs_reset:=false
 var training_controllers: Array[TrainingController] = []
 var mode:String
+@export var human_mode:bool=false
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -163,6 +164,25 @@ func SetupPlayers()->void:
 	player.ResetPlayer(i)
 	'''
 	var idx:=0
+	if human_mode:
+		var newplayer:Player=Player.new(idx,Player.control_type.HUMAN)
+		newplayer.charid=char_id
+		GameData.PlayersArr.append(newplayer)
+		var carinstance:Car = preload("res://Assets/Scenes/Screens/Car.tscn").instantiate()
+		carinstance.setup(map,newplayer.PlayerID,true,newplayer)
+		var controller:CarController=HumanCarController.new(newplayer)
+		carinstance.add_child(controller)
+		carinstance.controller=controller
+		carinstance.CharID=char_id
+		carinstance.CharID=GameData.currentCharacter[newplayer.PlayerID]
+		newplayer.charid=GameData.currentCharacter[newplayer.PlayerID]
+		carinstance.global_position=map.StartPosArr[idx]
+		carinstance.rotation=map.StartPosArrRot[idx]
+		newplayer.SetCar(carinstance)
+		newplayer.ResetPlayer(idx)
+		map.add_child(carinstance)
+		number_of_rl_learning-=1
+		idx+=1
 	for i in range(number_of_rl_learning):
 		var caragent:CarAgent=(load('res://Assets/Scenes/rl-agents/agent/car-agent.tscn') as PackedScene).instantiate()
 		var newplayer:Player=RLPlayer.new(idx,Player.control_type.RLTRAINING)
