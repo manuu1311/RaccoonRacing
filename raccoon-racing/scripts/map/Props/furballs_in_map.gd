@@ -115,7 +115,7 @@ func ApplyCarEffect(Whoid:int)->void:
 	del()
 	
 @rpc('call_local','reliable')
-func RemoveShield(Whoid:Car)->void:
+func RemoveShield(Whoid:int)->void:
 	var Who:Car=GameData.PlayersArr[Whoid].car
 	Who.player.RemoveShield();
 	if not exploded:

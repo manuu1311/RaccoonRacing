@@ -184,8 +184,8 @@ func SetupPlayers()->void:
 		reset_signal.connect(caragent.training_controller._end_episode)
 		newplayer.racefinished.connect(caragent.training_controller._end_race)
 		newplayer.SetCar(caragent.car)
-		newplayer.ResetPlayer(idx)
 		map.add_child(caragent)
+		newplayer.ResetPlayer(idx)
 		training_controllers.append(caragent.training_controller)
 		number_of_rl_learning-=1
 		idx+=1
@@ -207,8 +207,8 @@ func SetupPlayers()->void:
 		reset_signal.connect(caragent.training_controller._end_episode)
 		newplayer.racefinished.connect(caragent.training_controller._end_race)
 		newplayer.SetCar(caragent.car)
-		newplayer.ResetPlayer(idx)
 		map.add_child(caragent)
+		newplayer.ResetPlayer(idx)
 		training_controllers.append(caragent.training_controller)
 		idx+=1
 	for i in range(number_of_ai_learning):
@@ -226,8 +226,8 @@ func SetupPlayers()->void:
 		newcar.global_position=map.StartPosArr[idx]
 		newcar.rotation=map.StartPosArrRot[idx]
 		newplayer.SetCar(newcar)
-		newplayer.ResetPlayer(idx)
 		map.add_child(newcar)
+		newplayer.ResetPlayer(idx)
 		idx+=1
 		
 	# add tracking info in game data
