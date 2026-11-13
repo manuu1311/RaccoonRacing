@@ -245,7 +245,7 @@ func _apply_stamped_texture(poly: Polygon2D, pts: PackedVector2Array) -> void:
 	poly.uv = uvs
 
 
-func Despawn() -> void:
+func _exit_tree() -> void:
 	for shape: CollisionPolygon2D in collision_shapes.values():
 		if is_instance_valid(shape):
 			shape.disabled = true

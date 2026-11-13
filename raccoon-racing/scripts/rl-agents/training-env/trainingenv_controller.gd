@@ -323,7 +323,7 @@ func _reset_agents()->void:
 func _clear_map()->void:
 	# delete player status effects
 	for player:Player in GameData.PlayersArr:
-		for i in range(10):
+		for i in range(13):
 			player.prop.del_prop_by_type(i)
 		# reset all player variables
 		player.RemoveShield()
