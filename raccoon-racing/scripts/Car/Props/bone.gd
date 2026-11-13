@@ -41,5 +41,6 @@ func _expire() -> void:
 func del()->void:
 	player.car.sounds.StopdogSSound()
 	player.car.prop_effector.StopBone()
-	player.car.prop_effector.bonehit.disconnect(_on_bone_hit)
+	if player.car.prop_effector.bonehit.is_connected(_on_bone_hit):
+		player.car.prop_effector.bonehit.disconnect(_on_bone_hit)
 	queue_free()
