@@ -136,7 +136,7 @@ python curriculum_sf.py \
         --num_workers=16 \
         --num_envs_per_worker=1 \
         --viz \
-        --env_speedup=1 \
+        --env_speedup=10 \
         --training_mode=competitive \
         --train_for_env_steps=12_000_000
 ```

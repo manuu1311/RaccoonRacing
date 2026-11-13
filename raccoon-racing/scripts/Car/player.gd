@@ -170,6 +170,7 @@ func ResetPlayer(order:int)->void:
 	car.jumpPrevheight=0
 	OrderId=order
 	alldistance=-OrderId
+	car.ResetState()
 	
 func FinishRace()->void:
 	alldistance = 100000000 * (GameData.PlayersArr.size() - OrderId);

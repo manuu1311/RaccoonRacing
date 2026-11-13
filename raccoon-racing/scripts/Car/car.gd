@@ -631,6 +631,20 @@ func Reset(newpos:Vector2,newangle:float)->void:
 	jumpPrevheight=0
 	Update();
 
+func ResetState() -> void:
+	horse = carhorse
+	isSleep = false
+	isInvincible = false
+	isSmallState = false
+	isResetting = false
+	isBack = false
+	shrinkscale = 1.0
+	friction = 0
+	moveAngCar = 0
+	bsf = false
+	OutOfIce() 
+	visual.scale = Vector2.ONE
+
 func SetOnIce()->void:
 	if isInvincible:
 		return
