@@ -5,7 +5,9 @@
 
 [node name="TrainingEnv" type="Node2D" unique_id=1939950298]
 script = ExtResource("1_mbx5o")
-number_of_ai_learning = 0
+number_of_rl_learning = 2
+number_of_ai_learning = 2
+timer_duration = 50
 
 [node name="Camera" type="Node2D" parent="." unique_id=1833851744 node_paths=PackedStringArray("camera", "game_manager")]
 script = ExtResource("2_fkg4n")

@@ -158,6 +158,7 @@ func WinJudge() -> void:
 
 func ResetPlayer(order:int)->void:
 	car.CanUseProp=false
+	car.HasProp=false
 	car.IsUsingProp=false
 	LapsLock=true
 	Laps=1
