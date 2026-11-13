@@ -5,11 +5,11 @@ const RAY_SCENE: PackedScene = preload("res://Assets/Scenes/Screens/maps/Props/S
 
 var add_horse: float = 0.5
 var small_scale: float = 1.0 / 3.0
-var original_horse:float
 
 var attacker: Car = null  # renamed: this is who fired the ray
 var active_ray: ShrinkInMap = null
 var effect_started: bool = false
+var applied := false
 
 func _init(player_inst: Player, attacker_car: Car) -> void:
 	super(player_inst)
@@ -47,8 +47,8 @@ func _apply_shrink_effect() -> void:
 		return
 
 	# Shrink player (the victim), not the attacker
-	original_horse = player.car.horse
-	player.car.horse *= add_horse
+	applied=true
+	player.car.horse = player.car.carhorse*add_horse
 	player.car.isSmallState = true
 	if player.car.IsUseShield:
 		player.RemoveShield()
@@ -64,10 +64,10 @@ func delme()->void:
 	player.prop.Delprop(self)
 	
 func del()->void:
-	if not is_instance_valid(player):
+	if not is_instance_valid(player) or not applied:
 		return
 
-	player.car.horse = original_horse
+	player.car.horse = player.car.carhorse
 	player.car.isSmallState = false
 
 	var restore_tween: Tween = player.car.create_tween()
