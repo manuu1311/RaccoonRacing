@@ -88,9 +88,19 @@ func apply_mode()->void:
 			print('curriculum mode applied')
 		'early':
 			GameData.AICanUseProp=false
-			number_of_rl_learning=2
-			number_of_ai_learning=2
+			number_of_rl_learning=4
+			number_of_ai_learning=0
 			print('early mode applied')
+		'mid':
+			GameData.AICanUseProp=false
+			number_of_rl_learning=3
+			number_of_ai_learning=1
+			print('mid mode applied')
+		'proppy':
+			GameData.AICanUseProp=true
+			number_of_rl_learning=4
+			number_of_ai_learning=0
+			print('proppy mode applied')
 		'competitive':
 			GameData.AICanUseProp=true
 			number_of_rl_learning=2

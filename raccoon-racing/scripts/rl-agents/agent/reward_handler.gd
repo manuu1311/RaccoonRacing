@@ -55,7 +55,7 @@ func _get_passive_reward(dt:float,mode:String)->float:
 	if mode=='curriculum':
 		# constant passive penalty
 		rew -= passive_penalty*dt
-	elif mode=='early' or mode=='competitive':
+	elif mode in ['early','mid','proppy','competitive']:
 		# passive penalty scaled by track position 
 		# 0 for first player, 3x for last player
 		rew-=passive_penalty*dt*car.player.OrderId*3

@@ -26,7 +26,7 @@ func set_mode(new_mode:String)->void:
 
 func apply_mode()->void:
 	if mode=='curriculum':
-		reward_handler.passive_penalty=0.2
+		reward_handler.passive_penalty=0.5
 		if timer == null:
 			timer = Timer.new()
 			timer.one_shot = true
@@ -38,9 +38,19 @@ func apply_mode()->void:
 	elif mode=='early':
 		reward_handler.progress_reward_multiplier=0.001
 		reward_handler.checkpoint_reward_bonus=0.5
+		reward_handler.passive_penalty=0.8
+	elif mode=='mid':
+		reward_handler.progress_reward_multiplier=0.001
+		reward_handler.checkpoint_reward_bonus=0.5
+		reward_handler.passive_penalty=1
+	elif mode=='proppy':
+		reward_handler.progress_reward_multiplier=0.001
+		reward_handler.checkpoint_reward_bonus=0.5
+		reward_handler.passive_penalty=1.2
 	elif mode=='competitive':
 		reward_handler.progress_reward_multiplier=0.001
 		reward_handler.checkpoint_reward_bonus=0.5
+		reward_handler.passive_penalty=1.2
 	elif mode=='adversarial':
 		pass
 
