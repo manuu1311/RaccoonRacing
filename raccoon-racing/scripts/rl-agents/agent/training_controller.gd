@@ -14,7 +14,12 @@ var mode:String
 var timer:Timer
 var idle_timer_duration:=40
 signal car_idled()
-
+# --------overtake reward-----------
+var streak:=0
+var confirmed_rank:=3
+var candidate_rank:=3
+var streak_length:=7
+var overtake_reward:=0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	reset_after=9999999
@@ -53,6 +58,7 @@ func apply_mode()->void:
 		reward_handler.passive_penalty=1.2
 	elif mode=='adversarial':
 		pass
+	overtake_reward=reward_handler.passive_penalty*7
 
 func timer_restart()->void:
 	timer.start(idle_timer_duration)
@@ -77,9 +83,27 @@ func get_reward() -> float:
 			return reward_handler.add_win_reward()
 		return 0.0
 	reward+=reward_handler.get_reward(mode)
+	reward+=_overtake_reward()
 	total_reward_debug+=reward
 	return reward
-	
+
+func _overtake_reward() -> float:
+	var raw_rank: int = car.player.OrderId
+	if raw_rank == confirmed_rank:
+		streak = 0
+		return 0.0
+	if raw_rank == candidate_rank:
+		streak += 1
+	else:
+		candidate_rank = raw_rank
+		streak = 1
+	if streak >= streak_length:
+		var gained := confirmed_rank - raw_rank  # positive = moved up
+		confirmed_rank = raw_rank
+		streak = 0
+		return overtake_reward * gained
+	return 0.0
+
 func get_action_space() -> Dictionary:
 	return {
 		# 0 neutral, 1 accelerate, 2 brake
@@ -113,6 +137,8 @@ func set_action(action:Dictionary) -> void:
 # episode ended
 func _end_episode()->void:
 	total_reward_debug=0.0
+	confirmed_rank=3
+	candidate_rank=3
 	done=true
 	finished=false
 	if mode == 'curriculum':

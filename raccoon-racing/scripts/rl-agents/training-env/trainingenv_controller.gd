@@ -62,7 +62,7 @@ func read_args()->void:
 	if human_mode:
 		return
 	var read_mode := (OS.get_environment("GODOT_MODE"))
-	if read_mode and read_mode in ['curriculum','early','competitive','adversarial']:
+	if read_mode and read_mode in ['curriculum','early','mid','proppy','competitive','adversarial']:
 		mode=read_mode
 		print('Read mode '+mode+' from system.')
 	else:
