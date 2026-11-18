@@ -244,11 +244,11 @@ python curriculum_sf.py \
         --learning_rate=0.0001 \
         --lr_schedule=kl_adaptive_minibatch \
         --lr_adaptive_min=0.000001 \
-        --lr_adaptive_max=0.001 \
-        --exploration_loss_coeff=0.003 \
+        --lr_adaptive_max=0.0002 \
+        --exploration_loss_coeff=0.001 \
         --gamma=0.995 \
-        --batch_size=2048 \
-        --num_epochs=2 \
+        --batch_size=4096 \
+        --num_epochs=3 \
         --rollout=64 \
         --encoder_mlp_layers 256 256 \
         --nonlinearity=relu \
@@ -266,5 +266,5 @@ python curriculum_sf.py \
         --viz \
         --env_speedup=5 \
         --training_mode=competitive \
-        --train_for_env_steps=85_000_000
+        --train_for_env_steps=97_000_000
 ```

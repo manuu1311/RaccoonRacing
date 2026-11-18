@@ -54,9 +54,9 @@ func apply_mode()->void:
 	elif mode=='adversarial':
 		pass
 	reward_handler.overtake_reward_bonus=reward_handler.passive_penalty*7
-	reward_handler.state_penalty=4
-	reward_handler.propbox_reward=0.75
-	reward_handler.wallhit_penalty=5
+	reward_handler.state_penalty=5
+	reward_handler.propbox_reward=1
+	reward_handler.wallhit_penalty=4
 
 func timer_restart()->void:
 	timer.start(idle_timer_duration)

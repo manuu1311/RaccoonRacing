@@ -29,6 +29,7 @@ var needs_reset:=false
 var training_controllers: Array[TrainingController] = []
 var mode:String
 @export var human_mode:bool=false
+@export var testing_mode:bool=false
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -62,6 +63,10 @@ func read_args()->void:
 	if human_mode:
 		mode='competitive'
 		return
+	if testing_mode:
+		mode='competitive'
+		Game.is_training=false
+		return
 	var read_mode := (OS.get_environment("GODOT_MODE"))
 	if read_mode and read_mode in ['curriculum','early','mid','proppy','competitive','adversarial']:
 		mode=read_mode
@@ -81,6 +86,8 @@ func read_args()->void:
 		)
 
 func apply_mode()->void:
+	if not Game.is_training:
+		return
 	match(mode):
 		'curriculum':
 			GameData.AICanUseProp=false
