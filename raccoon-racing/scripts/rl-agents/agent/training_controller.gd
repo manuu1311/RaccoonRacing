@@ -26,7 +26,7 @@ func set_mode(new_mode:String)->void:
 
 func apply_mode()->void:
 	if mode=='curriculum':
-		reward_handler.passive_penalty=0.5
+		reward_handler.passive_penalty=0.5/35*5
 		if timer == null:
 			timer = Timer.new()
 			timer.one_shot = true
@@ -36,27 +36,28 @@ func apply_mode()->void:
 			player.new_point_reached.connect(timer_restart)
 		timer.start(idle_timer_duration)
 	elif mode=='early':
-		reward_handler.progress_reward_multiplier=0.001
-		reward_handler.checkpoint_reward_bonus=0.5
-		reward_handler.passive_penalty=0.8
+		reward_handler.progress_reward_multiplier=0.0025
+		reward_handler.checkpoint_reward_bonus=1
+		reward_handler.passive_penalty=0.8/35*5
 	elif mode=='mid':
-		reward_handler.progress_reward_multiplier=0.001
-		reward_handler.checkpoint_reward_bonus=0.5
+		reward_handler.progress_reward_multiplier=0.0025
+		reward_handler.checkpoint_reward_bonus=1
 		reward_handler.passive_penalty=1
 	elif mode=='proppy':
-		reward_handler.progress_reward_multiplier=0.001
-		reward_handler.checkpoint_reward_bonus=0.5
-		reward_handler.passive_penalty=1.2
+		reward_handler.progress_reward_multiplier=0.0025
+		reward_handler.checkpoint_reward_bonus=1
+		reward_handler.passive_penalty=1.2/35*5
 	elif mode=='competitive':
-		reward_handler.progress_reward_multiplier=0.001
-		reward_handler.checkpoint_reward_bonus=0.5
-		reward_handler.passive_penalty=1.2
+		reward_handler.progress_reward_multiplier=0.0025
+		reward_handler.checkpoint_reward_bonus=1
+		reward_handler.passive_penalty=1.2/35*5
 	elif mode=='adversarial':
 		pass
-	reward_handler.overtake_reward_bonus=reward_handler.passive_penalty*7
-	reward_handler.state_penalty=5
-	reward_handler.propbox_reward=1
-	reward_handler.wallhit_penalty=4
+	reward_handler.overtake_reward_bonus=reward_handler.passive_penalty*7*7
+	reward_handler.state_penalty=4
+	reward_handler.propbox_reward=1.2
+	reward_handler.wallhit_penalty=1.5
+	reward_handler.speed_bonus=0.05
 
 func timer_restart()->void:
 	timer.start(idle_timer_duration)

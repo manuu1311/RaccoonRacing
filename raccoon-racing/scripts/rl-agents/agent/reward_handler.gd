@@ -13,12 +13,10 @@ var rl_player:RLPlayer
 @export var state_penalty:float=0.0
 @export var propbox_reward:float=0.0
 @export var wallhit_penalty:float=0.0
-
+@export var speed_bonus:float=0.0
 
 var current_checkpoint_id:int
 var current_distance:float
-# delta for passive reward
-var _last_physics_frame := Engine.get_physics_frames()
 # --------overtake reward-----------
 var streak:=0
 var confirmed_rank:=3
@@ -38,7 +36,6 @@ func _ready() -> void:
 
 func reset()->void:
 	current_checkpoint_id = rl_player.current_point_id
-	_last_physics_frame = Engine.get_physics_frames()
 	current_distance = _get_distance_to_checkpoint()
 	confirmed_rank=3
 	candidate_rank=3
@@ -49,10 +46,6 @@ func reset()->void:
 	wallhit_accumulated_rew=0.0
 
 func get_reward(mode:String) -> float:
-	# update delta time
-	var frames := Engine.get_physics_frames() - _last_physics_frame
-	_last_physics_frame = Engine.get_physics_frames()
-	var dt := frames / float(Engine.physics_ticks_per_second)
 	var rew:=0.0
 	# agent reached a new checkpoint -> give distance reward as well as 
 	# bonus reward
@@ -71,22 +64,24 @@ func get_reward(mode:String) -> float:
 	# check for agent progress
 	rew+=_get_progress_reward()
 	# passive reward
-	rew+=_get_passive_reward(dt,mode)
+	rew+=_get_passive_reward(mode)
 	rew+=get_wall_penalty()
 	rew+=get_state_penalty()
 	rew+=get_propbox_shaping()
 	rew+=overtake_reward()
+	# reward speed
+	rew += speed_bonus * clampf(car.speed.length() / 20, 0.0, 1.0)
 	return rew
 
-func _get_passive_reward(dt:float,mode:String)->float:
+func _get_passive_reward(mode:String)->float:
 	var rew:=0.0
 	if mode=='curriculum':
 		# constant passive penalty
-		rew -= passive_penalty*dt
+		rew -= passive_penalty
 	elif mode in ['early','mid','proppy','competitive']:
 		# passive penalty scaled by track position 
 		# 0 for first player, 3x for last player
-		rew-=passive_penalty*dt*car.player.OrderId*3
+		rew-=passive_penalty*(1.0 + 0.25 * car.player.OrderId)
 	return rew
 	
 func _get_progress_reward()->float:
