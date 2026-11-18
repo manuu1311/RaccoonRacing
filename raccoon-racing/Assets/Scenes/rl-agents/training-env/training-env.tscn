@@ -7,6 +7,9 @@
 script = ExtResource("1_mbx5o")
 number_of_rl_learning = 2
 number_of_ai_learning = 2
+char_id = 5
+timer_duration = 240
+human_mode = true
 
 [node name="Camera" type="Node2D" parent="." unique_id=1833851744 node_paths=PackedStringArray("camera", "game_manager")]
 script = ExtResource("2_fkg4n")

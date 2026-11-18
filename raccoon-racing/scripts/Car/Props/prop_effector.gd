@@ -120,7 +120,7 @@ func OnAreaEntered(body:Area2D)->void:
 	
 #bone hit logic
 func _on_bone_hit(caropp:Car) -> void:
-	if NetworkManager.is_host:
+	if not GameData.IsMultiplayer or NetworkManager.is_host:
 		if caropp.isInvincible:
 			BoneInvincible.rpc(caropp.playerID)
 		else:

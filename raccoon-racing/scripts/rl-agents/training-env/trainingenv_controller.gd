@@ -60,6 +60,7 @@ func _ready() -> void:
 # read training mode and maps port to map/mode
 func read_args()->void:
 	if human_mode:
+		mode='competitive'
 		return
 	var read_mode := (OS.get_environment("GODOT_MODE"))
 	if read_mode and read_mode in ['curriculum','early','mid','proppy','competitive','adversarial']:

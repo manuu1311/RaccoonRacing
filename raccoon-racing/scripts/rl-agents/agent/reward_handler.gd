@@ -9,20 +9,44 @@ var rl_player:RLPlayer
 @export var win_reward_bonus:float=50.0
 @export var idle_reward_penalty:float=-10
 @export var disruptor_reward_multiplier:float=0.0
+@export var overtake_reward_bonus:float=0.0
+@export var state_penalty:float=0.0
+@export var propbox_reward:float=0.0
+@export var wallhit_penalty:float=0.0
+
+
 var current_checkpoint_id:int
 var current_distance:float
 # delta for passive reward
 var _last_physics_frame := Engine.get_physics_frames()
+# --------overtake reward-----------
+var streak:=0
+var confirmed_rank:=3
+var candidate_rank:=3
+var streak_length:=7
+# --------state reward-----------
+var bs_prev:=false
+var bsex_prev:=0
+var propid_prev:=0
+var wallhit_accumulated_rew:=0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rl_player=car.player as RLPlayer
+	car.WallBump.connect(_on_wall_hit)
 
 
 func reset()->void:
 	current_checkpoint_id = rl_player.current_point_id
 	_last_physics_frame = Engine.get_physics_frames()
 	current_distance = _get_distance_to_checkpoint()
+	confirmed_rank=3
+	candidate_rank=3
+	streak=0
+	bs_prev=false
+	bsex_prev=0
+	propid_prev=0
+	wallhit_accumulated_rew=0.0
 
 func get_reward(mode:String) -> float:
 	# update delta time
@@ -48,6 +72,10 @@ func get_reward(mode:String) -> float:
 	rew+=_get_progress_reward()
 	# passive reward
 	rew+=_get_passive_reward(dt,mode)
+	rew+=get_wall_penalty()
+	rew+=get_state_penalty()
+	rew+=get_propbox_shaping()
+	rew+=overtake_reward()
 	return rew
 
 func _get_passive_reward(dt:float,mode:String)->float:
@@ -68,6 +96,52 @@ func _get_progress_reward()->float:
 	)*progress_reward_multiplier
 	current_distance=min(new_distance,current_distance)
 	return rew
+
+
+func overtake_reward() -> float:
+	var raw_rank: int = car.player.OrderId
+	if raw_rank == confirmed_rank:
+		streak = 0
+		return 0.0
+	if raw_rank == candidate_rank:
+		streak += 1
+	else:
+		candidate_rank = raw_rank
+		streak = 1
+	if streak >= streak_length:
+		var gained := confirmed_rank - raw_rank  # positive = moved up
+		confirmed_rank = raw_rank
+		streak = 0
+		return overtake_reward_bonus * gained
+	return 0.0
+
+func get_state_penalty()->float:
+	var rew:=0.0
+	# penalise car spin after mine or missile hit, bsex between 0 and 100
+	rew-=maxf(0,(car.bsex-bsex_prev)/100.0)*state_penalty
+	# penalise new bs effect, binary
+	if not bs_prev and car.bs:
+		# divide by 2
+		rew-=state_penalty*0.5
+	bsex_prev=car.bsex
+	bs_prev=car.bs
+	return rew
+
+func get_propbox_shaping()->float:
+	var rew:=0.0
+	# if inventory was empty and now has an item
+	if propid_prev==0 and car.NowPorpId!=0:
+		rew+= propbox_reward * (1.0 + 0.5 * car.player.OrderId)
+	propid_prev=car.NowPorpId
+	return rew
+
+func get_wall_penalty()->float:
+	var rew:=wallhit_accumulated_rew
+	wallhit_accumulated_rew=0.0
+	return rew
+	
+func _on_wall_hit(speed_lost:float)->void:
+	wallhit_accumulated_rew-=clampf(abs(speed_lost) / 15.0, 0.0, 1.0)*wallhit_penalty
 
 func add_win_reward()->float:
 	return win_reward_bonus

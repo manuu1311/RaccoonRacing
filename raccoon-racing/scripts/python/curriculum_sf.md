@@ -244,12 +244,12 @@ python curriculum_sf.py \
         --learning_rate=0.0001 \
         --lr_schedule=kl_adaptive_minibatch \
         --lr_adaptive_min=0.000001 \
-        --lr_adaptive_max=0.0005 \
+        --lr_adaptive_max=0.001 \
         --exploration_loss_coeff=0.003 \
         --gamma=0.995 \
         --batch_size=2048 \
         --num_epochs=2 \
-        --rollout=32 \
+        --rollout=64 \
         --encoder_mlp_layers 256 256 \
         --nonlinearity=relu \
         --worker_num_splits=1 \
@@ -259,12 +259,12 @@ python curriculum_sf.py \
         --use_rnn=True \
         --rnn_type=lstm \
         --rnn_size=128 \
-        --recurrence=32 \
+        --recurrence=64 \
         --decoder_mlp_layers 128 \
         --num_workers=16 \
         --num_envs_per_worker=1 \
         --viz \
-        --env_speedup=4 \
+        --env_speedup=5 \
         --training_mode=competitive \
-        --train_for_env_steps=80_000_000
+        --train_for_env_steps=85_000_000
 ```
