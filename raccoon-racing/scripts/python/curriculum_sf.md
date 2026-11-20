@@ -245,7 +245,7 @@ python curriculum_sf.py \
         --lr_schedule=kl_adaptive_minibatch \
         --lr_adaptive_min=0.000001 \
         --lr_adaptive_max=1e-4 \
-        --exploration_loss_coeff=0.001 \
+        --exploration_loss_coeff=0.003 \
         --gamma=0.995 \
         --batch_size=4096 \
         --num_epochs=3 \
@@ -266,5 +266,5 @@ python curriculum_sf.py \
         --viz \
         --env_speedup=3 \
         --training_mode=competitive \
-        --train_for_env_steps=155_000_000
+        --train_for_env_steps=165_000_000
 ```

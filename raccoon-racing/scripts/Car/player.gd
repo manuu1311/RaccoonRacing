@@ -28,6 +28,7 @@ var input_device_type: String = ""
 ##device number (for joypad)
 var input_device_id: int = -1
 var input_device_key: String = "" 
+signal prop_used()
 
 '''
 1:become invincible
@@ -252,6 +253,7 @@ func ResetUse()->void:
 
 func UseProp()->void:
 	if(IsPlayering() and can_use_prop_check()):
+		prop_used.emit()
 		if not GameData.IsMultiplayer or NetworkManager.is_host:
 			car.RequestProp(NetworkID,PlayerID,car.position,car.rotation,car.NowPorpId)
 		else:

@@ -603,20 +603,20 @@ func BeAttacked(who: Car)->void:
 	var pushvector:Vector2 = dist*spring
 	#if enemy is invincible and im not: massive knockback
 	if(not isInvincibletemp and enemyInvincible):
-		ResolveAttackedCollisions.rpc(playerID,enemySpeed+pushvector*40,true)
+		ResolveAttackedCollisions.rpc(playerID,who.playerID,enemySpeed+pushvector*40,true)
 	#if im invincible and enemy is not: give massive knockback
 	elif(isInvincibletemp and not enemyInvincible):
-		who.ResolveAttackedCollisions.rpc(who.playerID,enemySpeed-pushvector*40,true)
+		who.ResolveAttackedCollisions.rpc(who.playerID,playerID,enemySpeed-pushvector*40,true)
 	#no one is invincible
 	else:
-		ResolveAttackedCollisions.rpc(playerID,enemySpeed+pushvector,false)
-		who.ResolveAttackedCollisions.rpc(who.playerID,mySpeed-pushvector,false)
+		ResolveAttackedCollisions.rpc(playerID,who.playerID,enemySpeed+pushvector,false)
+		who.ResolveAttackedCollisions.rpc(who.playerID,playerID,mySpeed-pushvector,false)
 
 @rpc('any_peer','call_local','unreliable')
-func ResolveAttackedCollisions(_id:int, newspeed:Vector2,newbs:bool)->void:
+func ResolveAttackedCollisions(_own_id:int, other_id:int,newspeed:Vector2,newbs:bool)->void:
 	sounds.playbumpsound()
 	if is_multiplayer_authority() or NetworkManager.is_host:
-		KartBump.emit((newspeed-speed).length())
+		KartBump.emit((newspeed-speed).length(),other_id)
 		speed=newspeed
 		bs=newbs
 	if bs:

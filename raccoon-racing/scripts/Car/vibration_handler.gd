@@ -143,7 +143,7 @@ func OnWallBump(knockback: float) -> void:
 	knockback /= wall_bump_max_lost_speed
 	bump_weak_val = max(bump_weak_val, clamp(knockback, 0.0, 1.0) * bump_weak_pulse)
 
-func OnKartBump(knockback: float) -> void:
+func OnKartBump(knockback: float, _other_id:int) -> void:
 	knockback /= kart_bump_max_lost_speed
 	bump_strong_val = max(bump_strong_val, clamp(knockback, 0.0, 1.0) * bump_strong_pulse)
 	bump_weak_val = max(bump_weak_val, clamp(knockback, 0.0, 1.0) * bump_weak_pulse * 0.5)
