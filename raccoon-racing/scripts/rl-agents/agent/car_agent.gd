@@ -5,7 +5,6 @@ class_name CarAgent
 @export var observation_handler: ObservationHandler
 @export var reward_handler: RewardHandler
 @export var training_controller: TrainingController
-@export var is_adversarial_agent := false
 
 const ACTION_REPEAT := 5
 const RACING_AGENT_PATH := "res://Assets/agents/racing_agent.bin"
@@ -16,7 +15,13 @@ var frames_left := 0
 var input_action: Array[bool] = [false, false, false, false, false]
 
 func _ready() -> void:
-	var path := ADVERSARIAL_AGENT_PATH if is_adversarial_agent else RACING_AGENT_PATH
+	var player:RLPlayer=car.player as RLPlayer
+	var path:String
+	if player.is_adversarial_agent():
+		observation_handler.target_player=player.disruptor_target
+		path = ADVERSARIAL_AGENT_PATH 
+	else:
+		path = RACING_AGENT_PATH
 	if not policy.load_weights(path):
 		push_error("Failed to load policy %s" % path)
 	reset_agent()

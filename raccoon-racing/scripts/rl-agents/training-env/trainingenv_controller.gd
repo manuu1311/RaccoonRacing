@@ -211,11 +211,15 @@ func SetupPlayers()->void:
 		training_controllers.append(caragent.training_controller)
 		number_of_rl_learning-=1
 		idx+=1
+	# rl agent car setup
 	for i in range(number_of_rl_learning):
 		var caragent:CarAgent=(load('res://Assets/Scenes/rl-agents/agent/car-agent.tscn') as PackedScene).instantiate()
-		var newplayer:Player=RLPlayer.new(idx,Player.control_type.RLTRAINING)
+		var newplayer:RLPlayer=RLPlayer.new(idx,Player.control_type.RLTRAINING)
 		newplayer.charid=char_id
 		newplayer.racefinished.connect(_race_over)
+		if mode in ['transition','adversarial']:
+			# not needed in real game use
+			newplayer.disruptor_target=1
 		GameData.PlayersArr.append(newplayer)
 		caragent.car.setup(map,newplayer.PlayerID,true,newplayer)
 		caragent.car.CharID=newplayer.charid
@@ -225,6 +229,7 @@ func SetupPlayers()->void:
 		caragent.car.controller=controller
 		caragent.car.global_position=map.StartPosArr[idx]
 		caragent.car.rotation=map.StartPosArrRot[idx]
+		caragent.is_adversarial_agent=newplayer.is_adversarial_agent()
 		# connect signal
 		reset_signal.connect(caragent.training_controller._end_episode)
 		newplayer.racefinished.connect(caragent.training_controller._end_race)

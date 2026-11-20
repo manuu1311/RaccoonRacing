@@ -1,6 +1,7 @@
 extends Player
 class_name RLPlayer
 
+var agent:CarAgent
 var ai_points:Array[Vector2]
 var current_point_id:int
 var next_point_id:int
@@ -10,12 +11,15 @@ var point_update_range_squared:int
 var turbo_start_probability:=0.9
 signal new_point_reached()
 var box_pending := false
+var disruptor_target:=-1
 
 # Called when the node enters the scene tree for the first time.
 func _init(id:int,control:control_type) -> void:
 	super(id,control)
 	point_update_range_squared=point_update_range**2
 
+func is_adversarial_agent()->bool:
+	return disruptor_target!=-1
 
 func SetCar(carinst:Car)->void:
 	super(carinst)
@@ -24,9 +28,11 @@ func SetCar(carinst:Car)->void:
 	next_point_id=1
 	next_point_id_2=2
 	box_pending=false
+	agent=(carinst.get_parent() as CarAgent)
 
 func ResetPlayer(order:int)->void:
 	super(order)
+	agent.reset_agent()
 	current_point_id=0
 	next_point_id=1
 	next_point_id_2=2
