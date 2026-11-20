@@ -575,6 +575,7 @@ position = Vector2(-1051, 111)
 position = Vector2(-21, 0)
 
 [node name="Flags" type="Node2D" parent="PointsHC" unique_id=1390894091]
+visible = false
 
 [node name="WinPos" type="Marker2D" parent="PointsHC/Flags" unique_id=455083381]
 position = Vector2(-1813, -333)
@@ -597,6 +598,7 @@ position = Vector2(-1758, -208)
 gizmo_extents = 101.0
 
 [node name="Walls0" type="Node2D" parent="PointsHC" unique_id=1231072560]
+visible = false
 
 [node name="wall0" type="Marker2D" parent="PointsHC/Walls0" unique_id=285969527]
 position = Vector2(-1926.9452, -70.69409)
@@ -731,6 +733,7 @@ position = Vector2(-1936.598, 343.60553)
 position = Vector2(-1930.7914, 138.38956)
 
 [node name="Walls1" type="Node2D" parent="PointsHC" unique_id=582524623]
+visible = false
 
 [node name="wall0" type="Marker2D" parent="PointsHC/Walls1" unique_id=1524377582]
 position = Vector2(-1713.4905, -694.30725)

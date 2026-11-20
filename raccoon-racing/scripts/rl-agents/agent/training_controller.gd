@@ -25,6 +25,13 @@ func set_mode(new_mode:String)->void:
 	apply_mode()
 
 func apply_mode()->void:
+	reward_handler.racing_reward_coefficient=1.0
+	reward_handler.disruptor_reward_coefficient=0.0
+	reward_handler.overtake_reward_bonus=reward_handler.passive_penalty*7*7
+	reward_handler.state_penalty=4
+	reward_handler.propbox_reward=1.2
+	reward_handler.wallhit_penalty=1.5
+	reward_handler.speed_bonus=0.02
 	if mode=='curriculum':
 		reward_handler.passive_penalty=0.5/35*5
 		if timer == null:
@@ -51,13 +58,12 @@ func apply_mode()->void:
 		reward_handler.progress_reward_multiplier=0.0025
 		reward_handler.checkpoint_reward_bonus=1
 		reward_handler.passive_penalty=1.2/35*5
+	elif mode=='introduction':
+		reward_handler.racing_reward_coefficient=0.5
+		reward_handler.disruptor_reward_coefficient=0.5
 	elif mode=='adversarial':
-		pass
-	reward_handler.overtake_reward_bonus=reward_handler.passive_penalty*7*7
-	reward_handler.state_penalty=4
-	reward_handler.propbox_reward=1.2
-	reward_handler.wallhit_penalty=1.5
-	reward_handler.speed_bonus=0.02
+		reward_handler.racing_reward_coefficient=0.0
+		reward_handler.disruptor_reward_coefficient=1.0
 
 func timer_restart()->void:
 	timer.start(idle_timer_duration)

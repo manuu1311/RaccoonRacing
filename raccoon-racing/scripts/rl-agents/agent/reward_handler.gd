@@ -3,12 +3,13 @@ class_name RewardHandler
 
 var rl_player:RLPlayer
 @export var car:Car
+@export var racing_reward_coefficient:float=1.0
+@export var disruptor_reward_coefficient:float=0.0
 @export var passive_penalty:float=0.2
 @export var progress_reward_multiplier:float=0.05
 @export var checkpoint_reward_bonus:float=10.0
 @export var win_reward_bonus:float=50.0
 @export var idle_reward_penalty:float=-10
-@export var disruptor_reward_multiplier:float=0.0
 @export var overtake_reward_bonus:float=0.0
 @export var state_penalty:float=0.0
 @export var propbox_reward:float=0.0
@@ -46,6 +47,15 @@ func reset()->void:
 	wallhit_accumulated_rew=0.0
 
 func get_reward(mode:String) -> float:
+	var rew:=0.0
+	rew+=racing_reward_coefficient*_get_racing_reward(mode)
+	rew+=racing_reward_coefficient*_get_disruptor_reward(mode)
+	return rew
+
+func _get_disruptor_reward(_mode:String)->float:
+	return 0.0
+
+func _get_racing_reward(mode:String)->float:
 	var rew:=0.0
 	# agent reached a new checkpoint -> give distance reward as well as 
 	# bonus reward

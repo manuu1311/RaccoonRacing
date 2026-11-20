@@ -36,6 +36,8 @@ class_name ObservationHandler
 @export var debug_stats_flag:bool=true
 @export var debug_opponent_flag:bool=true
 @export var debug_map_events_flag:bool=true
+@export var debug_refresh_observation:bool=true
+@export var debug_internal_indexes:PackedInt32Array=[0, 1]
 #endregion
 
 #region agent input variables
@@ -52,7 +54,13 @@ const RAY_OFFSET := GAME_OFFSET + 8
 const INTERNAL_OFFSET := RAY_OFFSET + 21
 const OPP_OFFSET := INTERNAL_OFFSET + 49
 const HAZARD_OFFSET := OPP_OFFSET + OPP_SIZE * MAX_OPPONENTS
-const CHECKPOINT_OFFSET := HAZARD_OFFSET + 155
+const STATIC_OFFSET := HAZARD_OFFSET
+const MISSILE_OFFSET := STATIC_OFFSET + 40
+const FURBALL_OFFSET := MISSILE_OFFSET + 28
+const ICETRAIL_OFFSET := FURBALL_OFFSET + 18
+const PROPBOX_OFFSET := ICETRAIL_OFFSET + 11
+const PAD_OFFSET := PROPBOX_OFFSET + 30
+const CHECKPOINT_OFFSET := PAD_OFFSET + 28
 const OBS_SIZE := CHECKPOINT_OFFSET + 13
 
 # Called when the node enters the scene tree for the first time.
@@ -63,7 +71,8 @@ func _ready() -> void:
 		set_process(false)
 
 func _process(_delta: float) -> void:
-	get_observation()
+	if debug_refresh_observation:
+		get_observation()
 	if debug_rays_flag or debug_stats_flag:
 		queue_redraw()
 
@@ -169,14 +178,18 @@ func _get_opponent_aggregate(vectorized: PackedFloat32Array,offset:int) -> void:
 func _get_raycast_sensor_aggregate(vectorized:PackedFloat32Array,offset:int)->void:
 	var sensor_output:=sensors.get_observation()
 	for i in range(0, sensor_output.size(), 5):
-		var hit_distance: float = sensor_output[i + 1]
-		var ray_length: float = sensor_output[i + 2]
-		var processed_distance:float=0.0
-		processed_distance=_normalize_raycast(
-					hit_distance,ray_length,raycast_sensors_offset,true,true
-					)
 		@warning_ignore("integer_division")
-		vectorized[offset+i/5]=processed_distance
+		var slot:int = offset + i / 5
+		if slot >= INTERNAL_OFFSET:
+			push_error("More rays than slots in the RAY block")
+			break
+		if sensor_output[i] < 0.5:  # no hit
+			vectorized[slot] = 0.0
+			continue
+		vectorized[slot] = _normalize_raycast(
+			sensor_output[i + 1], sensor_output[i + 2],
+			raycast_sensors_offset, true, true
+		)
 
 ## Computes and returns the flattened observation array for the game state.
 ## [br]
@@ -520,19 +533,13 @@ func _get_internal_state(vectorized:PackedFloat32Array,offset:int,car_inst:Car)-
 ## [br]
 ## [b] Jump and Speed Pads (Indices 127-154)[/b]
 ## @return PackedFloat32Array containing flattened float features.
-func _get_hazards_state(vectorized:PackedFloat32Array,offset:int)->void:
-	_get_static_hazards(vectorized,offset)
-	offset+=40
-	_get_missiles(vectorized,offset)
-	offset+=28
-	_get_furballs(vectorized,offset)
-	offset+=18
-	_get_icetrail(vectorized,offset)
-	offset+=11
-	_get_prop_boxes(vectorized,offset)
-	offset+=30
-	_get_map_pads(vectorized,offset)
-	offset+=28
+func _get_hazards_state(vectorized:PackedFloat32Array, _offset:int)->void:
+	_get_static_hazards(vectorized, STATIC_OFFSET)
+	_get_missiles(vectorized, MISSILE_OFFSET)
+	_get_furballs(vectorized, FURBALL_OFFSET)
+	_get_icetrail(vectorized, ICETRAIL_OFFSET)
+	_get_prop_boxes(vectorized, PROPBOX_OFFSET)
+	_get_map_pads(vectorized, PAD_OFFSET)
 
 
 ## Computes and returns the flattened observation array for missiles  
@@ -985,111 +992,90 @@ func _normalisation_filter(observation:PackedFloat32Array)->void:
 
 #region debug
 func _draw() -> void:
+	if not debug:
+		return
 	var font: Font = ThemeDB.fallback_font
 	var font_size: int = 12
-	var sensor_output:=sensors.get_observation()
 	if debug_rays_flag:
-		for i in range(0, sensor_output.size(), 5):
-			var is_colliding: float = sensor_output[i]
-			var hit_distance: float = sensor_output[i + 1]
-			var ray_length: float = sensor_output[i + 2]
-			var collision_type: float = sensor_output[i + 3]
-			var ray_angle: float = sensor_output[i + 4]-90
-			var processed_distance:float=0.0
-
-			var dir: Vector2 = Vector2.RIGHT.rotated(
-						car.global_rotation + deg_to_rad(ray_angle)
-						)
-			
-			var end_point: Vector2
-			var text_val: String
-			var line_color: Color
-			
-			if is_colliding < 0.5:
-				if collision_type >= 0.5:
-					# skip non-colliding jumpwalls
-					continue
-				end_point = car.position + dir * ray_length
-				line_color = debug_empty_color
-				text_val = ''
-			else:
-				end_point = car.position + dir * hit_distance
-				line_color = debug_jumpwall_color if collision_type >= 0.5 else debug_wall_color
-				#text_val = "%.1f" % (hit_distance/ray_length)
-				processed_distance=_normalize_raycast(
-							hit_distance,ray_length,raycast_sensors_offset,true,true
-							)
-				text_val = "%.2f" % (processed_distance)
-				
-			# Draw the ray line
-			draw_line(car.position, end_point, line_color, debug_ray_width)
-			
-			var text_position: Vector2 = end_point + dir * 8.0
-			draw_string(font, text_position, text_val, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, line_color)
-	
+		_draw_raycasts(font, font_size)
 	if debug_stats_flag:
-		var text_position: Vector2 = car.position+Vector2(5,-25)
-		var text_val:String
-		var car_state := observation_vector.slice(INTERNAL_OFFSET, INTERNAL_OFFSET+49)
-		var indexes:=[]
-		for i:int in indexes:
-			text_val = "%.1f" % (car_state[i])
-			draw_string(
-					font, text_position, text_val, 
-					HORIZONTAL_ALIGNMENT_CENTER, -1, font_size,
-					Color.BLUE
-					)
-			text_position+=Vector2(0,-15)
-			
-			
+		_draw_internal_stats(font, font_size)
 	if debug_opponent_flag:
-		for player:Player in GameData.PlayersArr:
-			if player.car==car:
-				continue
-			## draw rectangle
-			var car_state:=observation_vector.slice(OPP_OFFSET, OPP_OFFSET + OPP_SIZE * MAX_OPPONENTS)
-			var cos_b: float = car_state[30]
-			var sin_b: float = car_state[31]
-			var raw_dist: float = _denormalize_dist(
-				car_state[32], car_detection_range, car_detection_offset, true
-				)
-			var relative_coords: Vector2 = Vector2(cos_b, sin_b) * raw_dist
-			var dist: Vector2 = relative_coords.rotated(car.rotation)
-			var rect_pos: Vector2 = car.position + dist - Vector2(25, 25)
-			var rect: Rect2 = Rect2(rect_pos, Vector2(50, 50))
-			draw_rect(rect, Color.GOLD, false, 2.0)
-			# draw arrow
-			# x and y velocity
-			var vel:=Vector2(
-				car_state[0],-car_state[1]).rotated(car.rotation
-				)*max_speed[1]*15
-			_draw_arrow(
-				car.position+dist,car.position+dist+vel,Color.CRIMSON
-			)
-			# draw string
-			var text_pos: Vector2 = Vector2(rect_pos.x, rect_pos.y - 8)
-			draw_string(
-				font, text_pos, "Opponent", HORIZONTAL_ALIGNMENT_LEFT, 
-				-1, font_size, Color.BLACK
-				)
-	
+		_draw_opponents(font, font_size)
 	if debug_map_events_flag:
 		_draw_map_events(font)
-	
-	var jump_pads: Array[Node2D] = []
-	jump_pads.assign(get_tree().get_nodes_in_group("jump_pad"))
+
+func _draw_internal_stats(font: Font, font_size: int) -> void:
+	var text_position := car.position + Vector2(5, -25)
+	for i in debug_internal_indexes:
+		var text_val := "[%d] %.2f" % [i, observation_vector[INTERNAL_OFFSET + i]]
+		draw_string(font, text_position, text_val,
+				HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.BLUE)
+		text_position += Vector2(0, -15)
+
+func _draw_opponents(font: Font, font_size: int) -> void:
+	var count := mini(GameData.PlayersArr.size() - 1, MAX_OPPONENTS)
+	for slot in count:
+		var base := OPP_OFFSET + slot * OPP_SIZE
+		var raw_dist := _denormalize_dist(
+			observation_vector[base + 32], car_detection_range,
+			car_detection_offset, true
+		)
+		var rel := Vector2(
+			observation_vector[base + 30], observation_vector[base + 31]
+		) * raw_dist
+		var center := car.position + rel.rotated(car.rotation)
+		var is_target := observation_vector[base + 45] > 0.5
+		var in_range := observation_vector[base + 33] > 0.5
+		var color := Color.GOLD if in_range else Color.GRAY
+		if is_target:
+			color = Color.RED
+		draw_rect(Rect2(center - Vector2(25, 25), Vector2(50, 50)), color, false, 2.0)
+		var vel := Vector2(
+			observation_vector[base + 0], -observation_vector[base + 1]
+		).rotated(car.rotation) * max_speed[1] * 15
+		_draw_arrow(center, center + vel, Color.CRIMSON)
+		draw_string(font, center + Vector2(-25, -33),
+				"Opp %d%s" % [slot, " (target)" if is_target else ""],
+				HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.BLACK)
+
+func _draw_raycasts(font: Font, font_size: int) -> void:
+	# order matches the sensor buffer: walls first, then jump rays
+	var ray_nodes: Array = sensors.rays + sensors.jump_rays
+	var angles: Array = sensors.rays_angles + sensors.rays_jump_angles
+	var wall_count := sensors.rays.size()
+	for i in ray_nodes.size():
+		var slot := RAY_OFFSET + i
+		if slot >= INTERNAL_OFFSET:
+			break # this ray is not in the vector
+		var value := observation_vector[slot]
+		var is_jump := i >= wall_count
+		var ray_len: float = (ray_nodes[i] as RayCast2D).target_position.length()
+		var dir := Vector2.RIGHT.rotated(
+			car.global_rotation + deg_to_rad(float(angles[i]) - 90.0)
+		)
+		if value <= 0.0:
+			if not is_jump:
+				draw_line(car.position, car.position + dir * ray_len,
+						debug_empty_color, debug_ray_width)
+			continue
+		var dist := _denormalize_raycast(value, ray_len, raycast_sensors_offset)
+		var end_point := car.position + dir * dist
+		var color := debug_jumpwall_color if is_jump else debug_wall_color
+		draw_line(car.position, end_point, color, debug_ray_width)
+		draw_string(font, end_point + dir * 8.0, "%.2f" % value,
+				HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, color)
 
 
 func _draw_map_events(font:Font)->void:
 	_draw_hazard_detection_range()
-	var vectorized:=observation_vector.slice(HAZARD_OFFSET, CHECKPOINT_OFFSET)
-	_draw_static_hazards(vectorized,0,font)
-	_draw_missiles(vectorized,40,font)
-	_draw_furballs(vectorized,68,font)
-	_draw_icetrail(vectorized,86,font)
-	_draw_prop_boxes(vectorized,97,font)
-	_draw_pads(vectorized,127,font)
-	_draw_checkpoints(observation_vector.slice(CHECKPOINT_OFFSET, OBS_SIZE),0,font)
+	_draw_static_hazards(observation_vector, STATIC_OFFSET, font)
+	_draw_missiles(observation_vector, MISSILE_OFFSET, font)
+	_draw_furballs(observation_vector, FURBALL_OFFSET, font)
+	_draw_icetrail(observation_vector, ICETRAIL_OFFSET, font)
+	_draw_prop_boxes(observation_vector, PROPBOX_OFFSET, font)
+	_draw_pads(observation_vector, PAD_OFFSET, font)
+	_draw_checkpoints(observation_vector, CHECKPOINT_OFFSET, font)
 
 
 func _draw_hazard_detection_range()->void:
@@ -1288,7 +1274,7 @@ func _draw_pads(vectorized:PackedFloat32Array,offset:int,font:Font)->void:
 				-1, 12, Color.BLACK
 				)
 			# reset transform so other draw calls aren't affected
-			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+			draw_set_transform(pos + car.position, angle_radians - 3.14/2, Vector2.ONE)
 		index+=7
 
 func _draw_arrow(start: Vector2, end: Vector2, color: Color, width: float = 2.0) -> void:
@@ -1304,6 +1290,9 @@ func _draw_arrow(start: Vector2, end: Vector2, color: Color, width: float = 2.0)
 	draw_line(end, left_wing, color, width)
 	draw_line(end, right_wing, color, width)
 
+func _denormalize_raycast(value: float, max_dist: float, offset: int) -> float:
+	# inverse of _normalize_raycast(zero_range=true, inverse=true)
+	return exp((1.0 - value) * log(1.0 + max_dist)) - 1.0 + offset
 
 func _denormalize_dist(norm_val: float, max_dist: float, offset: int, zero_range: bool, inverse: bool = true) -> float:
 	if zero_range:

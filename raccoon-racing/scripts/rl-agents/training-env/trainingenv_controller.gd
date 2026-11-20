@@ -61,14 +61,13 @@ func _ready() -> void:
 # read training mode and maps port to map/mode
 func read_args()->void:
 	if human_mode:
-		mode='competitive'
 		return
 	if testing_mode:
 		mode='competitive'
 		Game.is_training=false
 		return
 	var read_mode := (OS.get_environment("GODOT_MODE"))
-	if read_mode and read_mode in ['curriculum','early','mid','proppy','competitive','adversarial']:
+	if read_mode and read_mode in ['curriculum','early','mid','proppy','competitive','adversarial','transition']:
 		mode=read_mode
 		print('Read mode '+mode+' from system.')
 	else:
@@ -114,9 +113,14 @@ func apply_mode()->void:
 			number_of_rl_learning=2
 			number_of_ai_learning=2
 			print('competitive mode applied')
+		'introduction':
+			GameData.AICanUseProp=true
+			number_of_rl_learning=1
+			number_of_ai_learning=3
 		'adversarial':
-			GameData.AICanUseProp=false
-			print('adversarial mode still not ready')
+			GameData.AICanUseProp=true
+			number_of_rl_learning=1
+			number_of_ai_learning=3
 		_:
 			print('no mode selected. default values applied')
 
