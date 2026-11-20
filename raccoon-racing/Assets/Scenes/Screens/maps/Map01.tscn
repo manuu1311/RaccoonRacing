@@ -873,36 +873,36 @@ position = Vector2(-1689.6245, -1073.7369)
 [node name="wall46" type="Marker2D" parent="PointsHC/Walls1" unique_id=1580022523]
 position = Vector2(-1718.6646, -902.13684)
 
-[node name="Jumpwalls0" type="Node2D" parent="PointsHC" unique_id=257797609]
+[node name="Walls3" type="Node2D" parent="PointsHC" unique_id=257797609]
 
-[node name="jumpwall0" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=976420690]
+[node name="wall0" type="Marker2D" parent="PointsHC/Walls3" unique_id=976420690]
 position = Vector2(564.77637, -1030.7177)
 
-[node name="jumpwall1" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1967161107]
+[node name="wall1" type="Marker2D" parent="PointsHC/Walls3" unique_id=1967161107]
 position = Vector2(351.81638, -1039.4297)
 
-[node name="jumpwall2" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1372694371]
+[node name="wall2" type="Marker2D" parent="PointsHC/Walls3" unique_id=1372694371]
 position = Vector2(202.74437, -1017.16565)
 
-[node name="jumpwall3" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=2036114842]
+[node name="wall3" type="Marker2D" parent="PointsHC/Walls3" unique_id=2036114842]
 position = Vector2(186.28838, -914.5569)
 
-[node name="jumpwall4" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=365855800]
+[node name="wall4" type="Marker2D" parent="PointsHC/Walls3" unique_id=365855800]
 position = Vector2(339.2324, -822.5969)
 
-[node name="jumpwall5" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=620704401]
+[node name="wall5" type="Marker2D" parent="PointsHC/Walls3" unique_id=620704401]
 position = Vector2(508.6324, -817.7569)
 
-[node name="jumpwall6" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1248302237]
+[node name="wall6" type="Marker2D" parent="PointsHC/Walls3" unique_id=1248302237]
 position = Vector2(645.1204, -828.4049)
 
-[node name="jumpwall7" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=848111372]
+[node name="wall7" type="Marker2D" parent="PointsHC/Walls3" unique_id=848111372]
 position = Vector2(809.6804, -801.3009)
 
-[node name="jumpwall8" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=1918504703]
+[node name="wall8" type="Marker2D" parent="PointsHC/Walls3" unique_id=1918504703]
 position = Vector2(903.5764, -832.27686)
 
-[node name="jumpwall9" type="Marker2D" parent="PointsHC/Jumpwalls0" unique_id=355869330]
+[node name="wall9" type="Marker2D" parent="PointsHC/Walls3" unique_id=355869330]
 position = Vector2(898.73645, -932.94885)
 
 [node name="Jumpwalls2" type="Node2D" parent="PointsHC" unique_id=1860615659]
