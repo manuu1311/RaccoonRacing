@@ -8,18 +8,24 @@ import gymnasium as gym
 from sample_factory.model.actor_critic import create_actor_critic
 from sample_factory.utils.attr_dict import AttrDict
 
-CKPT = "/mnt/dump/dump-projects/Godot/RaccoonRacing/raccoon-racing/scripts/python/train/competitive/RaccoonRacing/checkpoint_p0/checkpoint_000086364_100032512.pth"
+CKPT = "/mnt/dump/dump-projects/Godot/RaccoonRacing/raccoon-racing/scripts/python/train/competitive/RaccoonRacing/checkpoint_p0/checkpoint_000122976_150020096.pth"
 BIN = "agent.bin"
 TOL = 1e-4
 STEPS = 40
-RESET_AT = 20          # simulate an episode reset mid-sequence
-SPLITS = [3, 3, 2]     # throttle, steer, special
+RESET_AT = 20
+SPLITS = [3, 3, 2]
+NORM_EPS = 1e-5
 
 OBS, H, HID, DEC, OUT = 384, 256, 128, 128, 8
 
 # ---------- Sample Factory reference ----------
 exp_dir = Path(CKPT).parent.parent
 cfg = AttrDict(json.load(open(exp_dir / "config.json")))
+
+# sanity-check the architecture assumptions
+print("rnn_type:", cfg.get("rnn_type"), "| rnn_size:", cfg.get("rnn_size"),
+      "| normalize_input:", cfg.get("normalize_input"))
+assert cfg.get("rnn_type") == "lstm" and cfg.get("rnn_size") == HID
 
 obs_space = gym.spaces.Dict(
     {"obs": gym.spaces.Box(-np.inf, np.inf, shape=(OBS,), dtype=np.float32)}
@@ -32,6 +38,47 @@ model = create_actor_critic(cfg, obs_space, action_space)
 ckpt = torch.load(CKPT, map_location="cpu", weights_only=False)
 model.load_state_dict(ckpt["model"])
 model.eval()
+
+# ---------- Export agent.bin ----------
+sd = {k: v.detach().cpu().numpy() for k, v in model.state_dict().items()}
+
+def get(contains, ends, shape):
+    m = [k for k in sd if contains in k and k.endswith(ends) and sd[k].shape == tuple(shape)]
+    assert len(m) == 1, f"expected 1 tensor ({contains}, {ends}, {shape}), got {m}"
+    return sd[m[0]].astype(np.float64)
+
+def exact(key, shape):
+    assert key in sd, f"missing {key}; available: {[k for k in sd if k.startswith('encoder')]}"
+    assert sd[key].shape == tuple(shape), f"{key}: {sd[key].shape} != {shape}"
+    return sd[key].astype(np.float64)
+
+p = "encoder.encoders.obs.mlp_head."
+w0, b0 = exact(p + "0.weight", (H, OBS)), exact(p + "0.bias", (H,))
+w1, b1 = exact(p + "2.weight", (H, H)),   exact(p + "2.bias", (H,))
+w_ih = get("core", "weight_ih_l0", (4 * HID, H))
+w_hh = get("core", "weight_hh_l0", (4 * HID, HID))
+b_ih = get("core", "bias_ih_l0", (4 * HID,))
+b_hh = get("core", "bias_hh_l0", (4 * HID,))
+wd, bd = get("decoder", "weight", (DEC, HID)), get("decoder", "bias", (DEC,))
+wa, ba = get("action_parameterization", "weight", (OUT, DEC)), \
+         get("action_parameterization", "bias", (OUT,))
+
+# the second encoder bias/weight lookup above is only unique if H != OBS, which holds.
+# fold the observation normalizer into layer 0
+mean_keys = [k for k in sd if "running_mean" in k and sd[k].shape == (OBS,)]
+var_keys = [k for k in sd if "running_var" in k and sd[k].shape == (OBS,)]
+if cfg.get("normalize_input", True):
+    assert len(mean_keys) == 1 and len(var_keys) == 1, (mean_keys, var_keys)
+    mean = sd[mean_keys[0]].astype(np.float64)
+    std = np.sqrt(sd[var_keys[0]].astype(np.float64) + NORM_EPS)
+    b0 = b0 - w0 @ (mean / std)
+    w0 = w0 / std[None, :]
+    print("folded obs normalizer into layer 0")
+
+order = [w0, b0, w1, b1, w_ih, w_hh, b_ih, b_hh, wd, bd, wa, ba]
+flat = np.concatenate([a.astype("<f4").ravel() for a in order])
+flat.tofile(BIN)
+print(f"wrote {BIN}: {flat.size} floats ({flat.size * 4} bytes)")
 
 # ---------- Manual implementation (same as the GDScript) ----------
 raw = np.fromfile(BIN, dtype="<f4")
@@ -77,13 +124,14 @@ def heads_argmax(logits):
 rng = np.random.default_rng(0)
 obs_seq = rng.normal(0, 0.5, size=(STEPS, OBS)).astype(np.float32)
 
-rnn = torch.zeros(1, 2 * HID)           # SF layout: [h, c]
+rnn = torch.zeros(1, 2 * HID)
 h = np.zeros(HID, np.float32)
 c = np.zeros(HID, np.float32)
 
 max_logit_err = max_state_err = 0.0
 action_mismatch = 0
 ref_logits_all = []
+max_abs_z = 0.0
 
 with torch.no_grad():
     for t in range(STEPS):
@@ -94,6 +142,7 @@ with torch.no_grad():
 
         obs_t = torch.from_numpy(obs_seq[t]).unsqueeze(0)
         nobs = model.normalize_obs({"obs": obs_t})
+        max_abs_z = max(max_abs_z, float(nobs["obs"].abs().max()))
         out = model(nobs, rnn)
         ref_logits = out["action_logits"][0].numpy()
         rnn = out["new_rnn_states"]
@@ -112,12 +161,13 @@ with torch.no_grad():
 print(f"max logit error : {max_logit_err:.3e}")
 print(f"max state error : {max_state_err:.3e}")
 print(f"argmax mismatches: {action_mismatch}/{STEPS}")
+print(f"max |normalized obs| in test: {max_abs_z:.2f} (clamp is at 5.0; if this is "
+      f"near 5, folding won't match)")
 
 if max_logit_err < TOL and max_state_err < TOL and action_mismatch == 0:
     print("ok")
 else:
     print("error")
 
-# Optional: dump the same sequence for testing the GDScript port
 json.dump({"obs": obs_seq.tolist(), "logits": ref_logits_all, "reset_at": RESET_AT},
           open("test.json", "w"))

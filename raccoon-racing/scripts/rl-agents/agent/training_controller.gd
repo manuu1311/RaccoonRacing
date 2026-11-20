@@ -57,7 +57,7 @@ func apply_mode()->void:
 	reward_handler.state_penalty=4
 	reward_handler.propbox_reward=1.2
 	reward_handler.wallhit_penalty=1.5
-	reward_handler.speed_bonus=0.05
+	reward_handler.speed_bonus=0.02
 
 func timer_restart()->void:
 	timer.start(idle_timer_duration)

@@ -241,10 +241,10 @@ python curriculum_sf.py \
         --train_dir=train/competitive \
         --speedup=1 \
         --device=cpu \
-        --learning_rate=0.0001 \
+        --learning_rate=1e-4 \
         --lr_schedule=kl_adaptive_minibatch \
         --lr_adaptive_min=0.000001 \
-        --lr_adaptive_max=0.0002 \
+        --lr_adaptive_max=1e-4 \
         --exploration_loss_coeff=0.001 \
         --gamma=0.995 \
         --batch_size=4096 \
@@ -264,7 +264,7 @@ python curriculum_sf.py \
         --num_workers=16 \
         --num_envs_per_worker=1 \
         --viz \
-        --env_speedup=5 \
+        --env_speedup=3 \
         --training_mode=competitive \
-        --train_for_env_steps=100_000_000
+        --train_for_env_steps=155_000_000
 ```

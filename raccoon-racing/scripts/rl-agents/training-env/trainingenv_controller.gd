@@ -80,7 +80,7 @@ func read_args()->void:
 	var current_port:=_get_port()
 	var slot := (current_port-1) % 8
 	map_id = slot % 4+1
-	is_hovercraft = slot > 4
+	is_hovercraft = slot < 4
 	print(
 		'Environment port: '+str(current_port)+', map selected: '+str(map_id)+', is hovercraft: '+str(is_hovercraft)
 		)
@@ -331,6 +331,12 @@ func _reset_env()->void:
 	# reset agents
 	_reset_agents()
 	timer.start(timer_duration)
+	# randomly enable or disable props in competitive
+	if mode=='competitive':
+		if randf()>0.3:
+			GameData.AICanUseProp=true
+		else:
+			GameData.AICanUseProp=false
 
 func _reset_agents()->void:
 	for tc in training_controllers:
