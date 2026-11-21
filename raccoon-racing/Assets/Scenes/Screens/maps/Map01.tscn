@@ -310,7 +310,7 @@ position = Vector2(-417.5, -437.5)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Visuals/Ground/Track" unique_id=199325507]
 scale = Vector2(0.959, 0.959)
-tile_map_data = PackedByteArray("AAD+//7/CAAAAAAAAAD+////CAAAAAEAAAD+/wAACAAAAAIAAAD+/wEACAAAAAMAAAD+/wIACAAAAAQAAAD///7/CAABAAAAAAD/////CAABAAEAAAD//wAACAABAAIAAAD//wEACAABAAMAAAD//wIACAABAAQAAAAAAP7/CAACAAAAAAAAAP//CAACAAEAAAAAAAAACAACAAIAAAAAAAEACAACAAMAAAAAAAIACAACAAQAAAABAP7/CAADAAAAAAABAP//CAADAAEAAAABAAAACAADAAIAAAABAAEACAADAAMAAAABAAIACAADAAQAAAACAP7/CAAEAAAAAAACAP//CAAEAAEAAAACAAAACAAEAAIAAAACAAEACAAEAAMAAAACAAIACAAEAAQAAAA=")
+tile_map_data = PackedByteArray("AAD+//7/CAAAAAAAAAD+////CAAAAAEAAAD+/wAACAAAAAIAAAD+/wEACAAAAAMAAAD+/wIACAAAAAQAAAD///7/CAABAAAAAAD//wAACAABAAIAAAD//wEACAABAAMAAAD//wIACAABAAQAAAAAAP7/CAACAAAAAAAAAAAACAACAAIAAAAAAAEACAACAAMAAAAAAAIACAACAAQAAAABAP7/CAADAAAAAAABAP//CAADAAEAAAABAAAACAADAAIAAAABAAEACAADAAMAAAABAAIACAADAAQAAAACAP7/CAAEAAAAAAACAP//CAAEAAEAAAACAAAACAAEAAIAAAACAAEACAAEAAMAAAACAAIACAAEAAQAAAD/////CAABAAEAAAAAAP//CAACAAEAAAA=")
 tile_set = SubResource("TileSet_pf3fu")
 
 [node name="Field" type="Sprite2D" parent="Visuals/Ground/Track" unique_id=636503582]
@@ -877,6 +877,7 @@ position = Vector2(-1689.6245, -1073.7369)
 position = Vector2(-1718.6646, -902.13684)
 
 [node name="Walls3" type="Node2D" parent="PointsHC" unique_id=257797609]
+visible = false
 
 [node name="wall0" type="Marker2D" parent="PointsHC/Walls3" unique_id=976420690]
 position = Vector2(564.77637, -1030.7177)
@@ -909,6 +910,7 @@ position = Vector2(903.5764, -832.27686)
 position = Vector2(898.73645, -932.94885)
 
 [node name="Jumpwalls2" type="Node2D" parent="PointsHC" unique_id=1860615659]
+visible = false
 
 [node name="jumpwall0" type="Marker2D" parent="PointsHC/Jumpwalls2" unique_id=741274081]
 position = Vector2(632.01953, 962.258)
@@ -923,6 +925,7 @@ position = Vector2(11.697266, 1236.9764)
 position = Vector2(565.3933, 1377.53)
 
 [node name="Points" type="Node2D" parent="PointsHC" unique_id=2029648220]
+visible = false
 
 [node name="point0" type="Marker2D" parent="PointsHC/Points" unique_id=403549798]
 position = Vector2(-1856.0862, -881.96844)
@@ -1000,6 +1003,7 @@ position = Vector2(-1221.8013, 800.83264)
 position = Vector2(-1769.0103, 267.60083)
 
 [node name="Propbox" type="Node2D" parent="PointsHC" unique_id=142206546]
+visible = false
 
 [node name="propbox0" type="Marker2D" parent="PointsHC/Propbox" unique_id=464185273]
 position = Vector2(542.09796, -616.75354)
@@ -1082,6 +1086,7 @@ position = Vector2(-1639.9999, -1303)
 rotation = 1.7453293
 
 [node name="Props" type="Node2D" parent="PointsHC" unique_id=378289777]
+visible = false
 position = Vector2(-1, 0)
 
 [node name="jump0" type="Marker2D" parent="PointsHC/Props" unique_id=820888492]
@@ -1105,6 +1110,7 @@ position = Vector2(1391, 524)
 rotation = -2.7750735
 
 [node name="Walls2" type="Node2D" parent="PointsHC" unique_id=893217316]
+visible = false
 
 [node name="wall0" type="Marker2D" parent="PointsHC/Walls2" unique_id=1890516060]
 position = Vector2(-264.91797, 386.2027)
@@ -1154,10 +1160,10 @@ position = Vector2(-1796.1614, -863.61835)
 position = Vector2(-1280.7971, -1257.8713)
 
 [node name="Point2" type="Marker2D" parent="PointsHC/AIPoints" unique_id=969395173]
-position = Vector2(-198.53436, -987.3049)
+position = Vector2(-435, -1046)
 
 [node name="Point3" type="Marker2D" parent="PointsHC/AIPoints" unique_id=36338243]
-position = Vector2(1422.2834, -716.7377)
+position = Vector2(1448, -661)
 
 [node name="Point4" type="Marker2D" parent="PointsHC/AIPoints" unique_id=748856958]
 position = Vector2(1736.6553, -216.83508)

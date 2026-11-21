@@ -178,7 +178,13 @@ func _get_distance_to_checkpoint()->float:
 		).length()
 
 func _get_disruptor_reward(_mode:String)->float:
-	return 0.0
+	var rew:=0.0
+	rew+=_get_target_progress_reward()
+	rew+=_get_target_state_reward()
+	rew+=_get_accumulated_collision_reward()
+	rew+=_get_accumulated_prop_reward()
+	rew+=get_disruptor_propbox_shaping()
+	return rew
 # reward if target progress has not advanced
 func _get_target_progress_reward()->float:
 	return 0.0

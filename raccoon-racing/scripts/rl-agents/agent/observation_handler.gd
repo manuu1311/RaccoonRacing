@@ -28,16 +28,16 @@ class_name ObservationHandler
 @export var checkpoints_detection_range:=2000
 @export_group("Debug Settings")
 @export var debug:bool=true
-@export var debug_rays_flag:bool=true
+@export var debug_refresh_observation:bool=true
 @export var debug_wall_color:Color=Color.RED
 @export var debug_jumpwall_color:Color=Color.YELLOW
 @export var debug_empty_color:Color=Color.GREEN
 @export var debug_ray_width:int=2
+@export var debug_rays_flag:bool=true
 @export var debug_stats_flag:bool=true
 @export var debug_opponent_flag:bool=true
 @export var debug_map_events_flag:bool=true
-@export var debug_refresh_observation:bool=true
-@export var debug_internal_indexes:PackedInt32Array=[0, 1]
+@export var debug_internal_indexes:PackedInt32Array=[]
 #endregion
 
 #region agent input variables

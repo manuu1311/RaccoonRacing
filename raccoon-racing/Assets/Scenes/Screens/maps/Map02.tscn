@@ -782,7 +782,6 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("96_yuxi8")
 
 [node name="PointsHC" type="Node2D" parent="." unique_id=1232163257]
-visible = false
 position = Vector2(-485.5, -469)
 
 [node name="Flags" type="Node2D" parent="PointsHC" unique_id=1158699843]
@@ -1719,6 +1718,20 @@ position = Vector2(804.3645, 2583.5188)
 
 [node name="Point20" type="Marker2D" parent="PointsHC/AIPoints" unique_id=846555963]
 position = Vector2(1615.4987, 2458.333)
+
+[node name="Walls2" type="Node2D" parent="PointsHC" unique_id=613823864]
+
+[node name="wall0" type="Marker2D" parent="PointsHC/Walls2" unique_id=1548780614]
+position = Vector2(1068.5, -224)
+
+[node name="wall1" type="Marker2D" parent="PointsHC/Walls2" unique_id=925084087]
+position = Vector2(811.5, -15)
+
+[node name="wall2" type="Marker2D" parent="PointsHC/Walls2" unique_id=347955337]
+position = Vector2(893.5, 54)
+
+[node name="wall3" type="Marker2D" parent="PointsHC/Walls2" unique_id=1495496341]
+position = Vector2(1175.5, -139)
 
 [node name="PointsCar" type="Node2D" parent="." unique_id=10362549]
 position = Vector2(-485.5, -469)

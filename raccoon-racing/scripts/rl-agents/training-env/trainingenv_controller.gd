@@ -77,7 +77,7 @@ func read_args()->void:
 	if env_speedup:
 		speed_up=env_speedup
 	var current_port:=_get_port()
-	var slot := (current_port-1) % 8
+	var slot := (current_port) % 8
 	map_id = slot % 4+1
 	is_hovercraft = slot < 4
 	print(
@@ -229,7 +229,6 @@ func SetupPlayers()->void:
 		caragent.car.controller=controller
 		caragent.car.global_position=map.StartPosArr[idx]
 		caragent.car.rotation=map.StartPosArrRot[idx]
-		caragent.is_adversarial_agent=newplayer.is_adversarial_agent()
 		# connect signal
 		reset_signal.connect(caragent.training_controller._end_episode)
 		newplayer.racefinished.connect(caragent.training_controller._end_race)
@@ -342,7 +341,7 @@ func _reset_env()->void:
 	timer.start(timer_duration)
 	# randomly enable or disable props in competitive
 	if mode=='competitive':
-		if randf()>0.3:
+		if randf()>0.5:
 			GameData.AICanUseProp=true
 		else:
 			GameData.AICanUseProp=false

@@ -12,6 +12,8 @@ var turbo_start_probability:=0.9
 signal new_point_reached()
 var box_pending := false
 var disruptor_target:=-1
+var reset_enabled:=true
+var ResetTimer:Timer
 
 # Called when the node enters the scene tree for the first time.
 func _init(id:int,control:control_type) -> void:
@@ -45,6 +47,8 @@ func UpdatePoint() -> void:
 	# go to next point
 	if (ai_points[current_point_id].distance_squared_to(car.global_position)
 				<point_update_range_squared):
+		if reset_enabled:
+			ResetTimer.start()
 		current_point_id=next_point_id
 		next_point_id=next_point_id_2
 		if next_point_id_2 + 1 < ai_points.size():
@@ -81,9 +85,29 @@ func RunPropBox(x:float,y:float)->void:
 	if hud!=null and car:
 		hud.StartPropBox(1.5,car.NowPorpId)
 
+func Stoprace()->void:
+	super()
+	if reset_enabled:
+		ResetTimer.stop()
 
 func StartRace()->void:
 	super()
 	if randf() < turbo_start_probability:
 		PropValidated=true
 		car.StartBoost()
+	if reset_enabled:
+		if not ResetTimer:
+			ResetTimer=Timer.new()
+			car.add_child(ResetTimer)
+			ResetTimer.one_shot=true
+			ResetTimer.wait_time=20		
+			ResetTimer.timeout.connect(_reset_car)
+		ResetTimer.start()
+
+
+func _reset_car()->void:
+	if reset_enabled:
+		var newpos:Vector2 = ai_points[current_point_id - 1];
+		car.Reset(newpos,0)
+		car.speed=Vector2(0,0)
+		ResetTimer.start()
